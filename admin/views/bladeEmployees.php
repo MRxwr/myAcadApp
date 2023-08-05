@@ -1,19 +1,19 @@
 <?php 
 if( isset($_GET["hide"]) && !empty($_GET["hide"]) ){
 	if( updateDB('employees',array('hidden'=> '2'),"`id` = '{$_GET["hide"]}'") ){
-		header("LOCATION: ?v={$_GET["v"]}.php");
+		header("LOCATION: ?v={$_GET["v"]}");
 	}
 }
 
 if( isset($_GET["show"]) && !empty($_GET["show"]) ){
 	if( updateDB('employees',array('hidden'=> '0'),"`id` = '{$_GET["show"]}'") ){
-		header("LOCATION: ?v={$_GET["v"]}.php");
+		header("LOCATION: ?v={$_GET["v"]}");
 	}
 }
 
 if( isset($_GET["delId"]) && !empty($_GET["delId"]) ){
 	if( updateDB('employees',array('status'=> '1'),"`id` = '{$_GET["delId"]}'") ){
-		header("LOCATION: ?v={$_GET["v"]}.php");
+		header("LOCATION: ?v={$_GET["v"]}");
 	}
 }
 
@@ -23,7 +23,7 @@ if( isset($_POST["fullName"]) ){
 	if ( $id == 0 ){
 		$_POST["password"] = sha1($_POST["password"]);
 		if( insertDB("employees", $_POST) ){
-			header("LOCATION: ?v={$_GET["v"]}.php");
+			header("LOCATION: ?v={$_GET["v"]}");
 		}else{
 		?>
 		<script>
@@ -39,7 +39,7 @@ if( isset($_POST["fullName"]) ){
 			$_POST["password"] = $password[0]["password"];
 		}
 		if( updateDB("employees", $_POST, "`id` = '{$id}'") ){
-			header("LOCATION: ?v={$_GET["v"]}.php");
+			header("LOCATION: ?v={$_GET["v"]}");
 		}else{
 		?>
 		<script>
