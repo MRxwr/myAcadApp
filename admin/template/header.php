@@ -59,3 +59,35 @@ require ("payment.php");
 	<!-- Custom CSS -->
 	<link href="dist/css/style.css" rel="stylesheet" type="text/css">
 </head>
+
+<body>
+	<!-- Preloader -->
+	<div class="preloader-it">
+		<div class="la-anim-1"></div>
+	</div>
+	<!-- /Preloader -->
+    <div class="wrapper  theme-1-active pimary-color-green">
+		<!-- Top Menu Items -->
+		<?php require ("template/navbar.php") ?>
+		<!-- /Top Menu Items -->
+		
+		<!-- Left Sidebar Menu -->
+		<?php require("template/leftSideBar.php") ?>
+		<!-- /Left Sidebar Menu -->
+		
+		<!-- Right Sidebar Menu -->
+		<div class="fixed-sidebar-right">
+		</div>
+		<!-- /Right Sidebar Menu -->
+		
+		
+		
+		<!-- Right Sidebar Backdrop -->
+		<div class="right-sidebar-backdrop"></div>
+		<!-- /Right Sidebar Backdrop -->
+
+        <!-- Main Content -->
+		<div class="page-wrapper">
+            <div class="container-fluid pt-25">
+				<!-- Row -->
+				<div class="row">
