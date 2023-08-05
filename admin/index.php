@@ -1,6 +1,6 @@
 <?php 
 require_once("template/header.php");
-
+var_dump($_POST["setDefaultPrice"]);die();
 if ( isset($_GET["hide"]) || isset($_GET["show"]) || isset($_GET["delId"]) || isset($_POST["update"]) || isset($_POST["order"]) ){
 	$table = strtolower($_GET["v"]);
 	if( isset($_GET["hide"]) && !empty($_GET["hide"]) && updateDB("{$table}",array('hidden'=> '1'),"`id` = '{$_GET["hide"]}'") ){
@@ -9,7 +9,7 @@ if ( isset($_GET["hide"]) || isset($_GET["show"]) || isset($_GET["delId"]) || is
 	}elseif( isset($_POST["setDefaultPrice"]) && !empty($_POST["setDefaultPrice"]) ){
        
         if( updateDB("{$table}",array('charges'=> $_POST["setDefaultPrice"]),"`id` != '0'") ){}
-        var_dump($_POST["setDefaultPrice"]);die();
+        
     }elseif( isset($_POST["update"]) ){
 		$id = $_POST["update"];
 		unset($_POST["update"]);
