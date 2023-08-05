@@ -1,4 +1,5 @@
 <?php 
+/*
 if( isset($_GET["hide"]) && !empty($_GET["hide"]) ){
 	if( updateDB('employees',array('hidden'=> '2'),"`id` = '{$_GET["hide"]}'") ){
 		header("LOCATION: ?v={$_GET["v"]}");
@@ -49,6 +50,7 @@ if( isset($_POST["fullName"]) ){
 		}
 	}
 }
+*/
 ?>
 				
 <div class="col-sm-12">
