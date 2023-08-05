@@ -160,12 +160,10 @@ if( isset($_POST["fullName"]) ){
 					$hide = direction("Lock","قفل الحساب");
 				}
 				
-				if ( $employees[$i]["empType"] == 0 ){
-					$type = "Admin";
-				}elseif( $employees[$i]["empType"] == 1 ){
-					$type = "Employee";
-				}elseif( $employees[$i]["empType"] == 2 ){
-					$type = "POS";
+				if ( $role = selectDB("roles","`id` = '{$employees[$i]["empType"]}'") ){
+					$type = direction($role[0]["enTitle"],$role[0]["arTitle"]);
+				}else{
+					$type = "Error";
 				}
 				
 				if( $shop = selectDB("shops","`id` = '{$employees[$i]["shopId"]}'") ){
