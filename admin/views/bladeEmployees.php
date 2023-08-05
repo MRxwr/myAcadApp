@@ -152,7 +152,7 @@ if( isset($_POST["fullName"]) ){
 		if( $employees = selectDB("employees","`status` = '0' AND `hidden` != '2'") ){
 			for( $i = 0; $i < sizeof($employees); $i++ ){
 				$counter = $i + 1;
-				if ( $employees[$i]["hidden"] == 2 ){
+				if ( $employees[$i]["hidden"] == 1 ){
 					$icon = "fa fa-unlock";
 					$link = "?v={$_GET["v"]}&show={$employees[$i]["id"]}";
 					$hide = direction("Unlock","فتح الحساب");
