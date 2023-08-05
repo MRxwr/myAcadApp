@@ -1,19 +1,19 @@
 <?php 
 if( isset($_GET["hide"]) && !empty($_GET["hide"]) ){
 	if( updateDB('employees',array('hidden'=> '2'),"`id` = '{$_GET["hide"]}'") ){
-		header("LOCATION: listOfEmployees.php");
+		header("LOCATION: ?v={$_GET["v"]}.php");
 	}
 }
 
 if( isset($_GET["show"]) && !empty($_GET["show"]) ){
 	if( updateDB('employees',array('hidden'=> '0'),"`id` = '{$_GET["show"]}'") ){
-		header("LOCATION: listOfEmployees.php");
+		header("LOCATION: ?v={$_GET["v"]}.php");
 	}
 }
 
 if( isset($_GET["delId"]) && !empty($_GET["delId"]) ){
 	if( updateDB('employees',array('status'=> '1'),"`id` = '{$_GET["delId"]}'") ){
-		header("LOCATION: listOfEmployees.php");
+		header("LOCATION: ?v={$_GET["v"]}.php");
 	}
 }
 
@@ -23,7 +23,7 @@ if( isset($_POST["fullName"]) ){
 	if ( $id == 0 ){
 		$_POST["password"] = sha1($_POST["password"]);
 		if( insertDB("employees", $_POST) ){
-			header("LOCATION: listOfEmployees.php");
+			header("LOCATION: ?v={$_GET["v"]}.php");
 		}else{
 		?>
 		<script>
@@ -39,7 +39,7 @@ if( isset($_POST["fullName"]) ){
 			$_POST["password"] = $password[0]["password"];
 		}
 		if( updateDB("employees", $_POST, "`id` = '{$id}'") ){
-			header("LOCATION: listOfEmployees.php");
+			header("LOCATION: ?v={$_GET["v"]}.php");
 		}else{
 		?>
 		<script>
@@ -61,7 +61,7 @@ if( isset($_POST["fullName"]) ){
 </div>
 <div class="panel-wrapper collapse in">
 <div class="panel-body">
-	<form class="" method="POST" action="" enctype="multipart/form-data">
+	<form class="" method="POST" action="?v=<?php echo $_GET["v"] ?>" enctype="multipart/form-data">
 		<div class="row m-0">
 			<div class="col-md-6">
 			<label><?php echo direction("Name","الإسم") ?></label>
