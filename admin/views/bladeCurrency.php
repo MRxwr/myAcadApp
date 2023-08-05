@@ -100,11 +100,11 @@ if( $currList = getCurr() ){
 		$counter = $i + 1;
 		if ( $categories[$i]["hidden"] == 1 ){
 		$icon = "fa fa-eye";
-		$link = "?show={$categories[$i]["id"]}";
+		$link = "&show={$categories[$i]["id"]}";
 		$hide = "Show";
 		}else{
 		$icon = "fa fa-eye-slash";
-		$link = "?hide={$categories[$i]["id"]}";
+		$link = "&hide={$categories[$i]["id"]}";
 		$hide = "Hide";
 		}
 		?>
