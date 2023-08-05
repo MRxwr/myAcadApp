@@ -152,11 +152,11 @@ if( isset($_POST["fullName"]) ){
 				$counter = $i + 1;
 				if ( $employees[$i]["hidden"] == 2 ){
 					$icon = "fa fa-unlock";
-					$link = "?show={$employees[$i]["id"]}";
+					$link = "?v={$_GET["v"]}&show={$employees[$i]["id"]}";
 					$hide = direction("Unlock","فتح الحساب");
 				}else{
 					$icon = "fa fa-lock";
-					$link = "?hide={$employees[$i]["id"]}";
+					$link = "?v={$_GET["v"]}&hide={$employees[$i]["id"]}";
 					$hide = direction("Lock","قفل الحساب");
 				}
 				
@@ -187,7 +187,7 @@ if( isset($_POST["fullName"]) ){
 				</a>
 				<a href="<?php echo $link ?>" class="mr-25" data-toggle="tooltip" data-original-title="<?php echo $hide ?>"> <i class="<?php echo $icon ?> text-inverse m-r-10"></i>
 				</a>
-				<a href="?delId=<?php echo $employees[$i]["id"] ?>" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-close text-danger"></i>
+				<a href="<?php echo "?v={$_GET["v"]}&delId=" . $employees[$i]["id"] ?>" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-close text-danger"></i>
 				</a>
 				<div style="display:none">
 					<label id="type<?php echo $employees[$i]["id"]?>"><?php echo $employees[$i]["empType"] ?></label>
