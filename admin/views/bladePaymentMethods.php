@@ -72,8 +72,8 @@
 		<tr>
 		<th>#</th>
 		<th><?php echo direction("Payment ID","رمز الدفع") ?></th>
-		<th><?php echo $English_Title ?></th>
-		<th><?php echo $Arabic_Title ?></th>
+		<th><?php echo direction("English Title","العنوان بالإنجليزي") ?></th>
+		<th><?php echo direction("Arabic Title","العنوان بالعربي") ?></th>
 		<th><?php echo direction("Icon","الأيقونه") ?></th>
 		<th><?php echo direction("Status","الحالة") ?></th>
 		<th class="text-nowrap"><?php echo $Action ?></th>
