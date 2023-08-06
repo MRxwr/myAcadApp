@@ -12,6 +12,27 @@ if ( isset($_GET["hide"]) || isset($_GET["show"]) || isset($_GET["delId"]) || is
 		$id = $_POST["update"];
 		unset($_POST["update"]);
 		if ( $id == 0 ){
+            if( isset($_FILES['imageurl']) && is_uploaded_file($_FILES['imageurl']['tmp_name']) ){
+                $directory = "../logos/";
+                $originalfile = $directory . date("d-m-y") . time() .  round(microtime(true)). "." . getFileExtension($_FILES["imageurl"]["name"]);
+                move_uploaded_file($_FILES["imageurl"]["tmp_name"], $originalfile);
+                $_POST["imageurl"] = str_replace("../logos/",'',$originalfile);
+            }else{
+                if ( isset($_FILES['imageurl']) ){
+                    $_POST["imageurl"] = "";
+                }
+            }
+            
+            if( isset($_FILES['header']) && is_uploaded_file($_FILES['header']['tmp_name']) ){
+                $directory = "../logos/";
+                $originalfile1 = $directory . date("d-m-y") . time() .  round(microtime(true)). "h." . getFileExtension($_FILES["header"]["name"]);
+                move_uploaded_file($_FILES["header"]["tmp_name"], $originalfile1);
+                $_POST["header"] = str_replace("../logos/",'',$originalfile1);
+            }else{
+                if ( isset($_FILES['header']) ){
+                    $_POST["header"] = "";
+                }
+            }
 			if( insertDB("{$table}", $_POST) ){
 			}else{
 			?>
@@ -21,6 +42,29 @@ if ( isset($_GET["hide"]) || isset($_GET["show"]) || isset($_GET["delId"]) || is
 			<?php
 			}
 		}else{
+            if( isset($_FILES['imageurl']) && is_uploaded_file($_FILES['imageurl']['tmp_name']) ){
+                $directory = "../logos/";
+                $originalfile = $directory . date("d-m-y") . time() .  round(microtime(true)). "." . getFileExtension($_FILES["imageurl"]["name"]);
+                move_uploaded_file($_FILES["imageurl"]["tmp_name"], $originalfile);
+                $_POST["imageurl"] = str_replace("../logos/",'',$originalfile);
+            }else{
+                if( isset($_FILES['imageurl']) ){
+                    $imageurl = selectDB("{$table}","`id` = '{$id}'");
+                    $_POST["imageurl"] = $imageurl[0]["imageurl"];
+                }
+            }
+            
+            if( isset($_FILES['header']) && is_uploaded_file($_FILES['header']['tmp_name']) ){
+                $directory = "../logos/";
+                $originalfile1 = $directory . date("d-m-y") . time() .  round(microtime(true)). "h." . getFileExtension($_FILES["header"]["name"]);
+                move_uploaded_file($_FILES["header"]["tmp_name"], $originalfile1);
+                $_POST["header"] = str_replace("../logos/",'',$originalfile1);
+            }else{
+                if( isset($_FILES['header']) ){
+                    $header = selectDB("{$table}","`id` = '{$id}'");
+                    $_POST["header"] = $header[0]["header"];
+                }
+            }
 			if( updateDB("{$table}", $_POST, "`id` = '{$id}'") ){
 			}else{
 			?>
