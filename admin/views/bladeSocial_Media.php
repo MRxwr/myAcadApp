@@ -27,7 +27,7 @@ for( $i =0; $i < sizeof($array); $i++ ){
 ?>
 <div class="col-md-12 text-center">
 <div class="form-group">
-<button type="submit" class="btn btn-primary w-25"><?php echo $save ?></button>
+<button type="submit" class="btn btn-primary w-25"><?php echo direction("Update","تعديل") ?></button>
 <input type="hidden" name="update" class="form-control" value="1"  >
 </div>
 </div>
