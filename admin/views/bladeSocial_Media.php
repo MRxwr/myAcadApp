@@ -18,16 +18,16 @@ for( $i =0; $i < sizeof($array); $i++ ){
 ?>
 	<div class="col-md-6">
 	<div class="form-group">
-	<label class="control-label mb-10"><?php echo strtoupper($array[0]) ?></label>
-	<input type="text" name="<?php echo strtolower($array[0]) ?>" class="form-control" value="<?php echo $social_media[0][$array[0]] ?>"  >
+	<label class="control-label mb-10"><?php echo strtoupper($array[$i]) ?></label>
+	<input type="text" name="<?php echo strtolower($array[$i]) ?>" class="form-control" value="<?php echo $social_media[0][$array[$i]] ?>"  >
 	</div>
 	</div>
 <?php
 }
 ?>
-<div class="col-md-6">
+<div class="col-md-12 text-center">
 <div class="form-group">
-<button type="submit" class="btn btn-success  mr-10"><?php echo $save ?></button>
+<button type="submit" class="btn btn-primary w-25"><?php echo $save ?></button>
 <input type="hidden" name="update" class="form-control" value="1"  >
 </div>
 </div>
