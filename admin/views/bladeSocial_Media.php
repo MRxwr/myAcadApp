@@ -8,7 +8,7 @@ if ( $social_media = selectDB("social_media","`id` = '1'") ){
 <form action="?update=1" method="POST">
 <div class="form-body">
 <h6 class="txt-dark capitalize-font">
-<i class="zmdi zmdi-account mr-10"></i><?php echo $sMediaText ?>
+<i class="zmdi zmdi-account mr-10"></i><?php echo direction("Social Media Accounts", "حسابات السوشال ميديا") ?>
 </h6>
 <hr class="light-grey-hr"/>
 <div class="row">
@@ -25,9 +25,9 @@ for( $i =0; $i < sizeof($array); $i++ ){
 <?php
 }
 ?>
-<div class="col-md-12 text-center">
+<div class="col-md-12">
 <div class="form-group">
-<button type="submit" class="btn btn-primary w-25"><?php echo direction("Update","تعديل") ?></button>
+<button type="submit" class="btn btn-primary w-50"><?php echo direction("Update","تعديل") ?></button>
 <input type="hidden" name="update" class="form-control" value="1"  >
 </div>
 </div>
