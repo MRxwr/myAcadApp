@@ -2,7 +2,7 @@
 if( isset($_POST["update1"]) ){
     $pages = json_encode($_POST["pages"]);
     if( updateDB("roles", array("pages" => $pages), "`id` = '{$_POST["update1"]}'") ){
-        header("LOCATION: ?v=rolesEdit&id={$_GET["id"]}");
+        header("LOCATION: ?v=RolesEdit&id={$_GET["id"]}");
     }
 }
 if( isset($_GET["id"]) && !empty($_GET["id"]) && $role = selectDB("roles","`id` = '{$_GET["id"]}'")){
