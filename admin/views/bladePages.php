@@ -79,6 +79,7 @@
 	<table class="table display responsive product-overview mb-30" id="myTable">
 		<thead>
 		<tr>
+		<th><?php echo direction("Rank","الترتيب") ?></th>
 		<th><?php echo direction("Section","العنوان") ?></th>
 		<th><?php echo direction("English Title","العنوان") ?></th>
 		<th><?php echo direction("Arabic Title","الرابط") ?></th>
