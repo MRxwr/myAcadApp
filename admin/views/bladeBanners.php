@@ -84,7 +84,7 @@
 		
 		<tbody>
 		<?php 
-		if( $banners = selectDB("banner","`status` = '0' ORDER BY `order` ASC") ){
+		if( $banners = selectDB("banners","`status` = '0' ORDER BY `order` ASC") ){
 		for( $i = 0; $i < sizeof($banners); $i++ ){
 		$counter = $i + 1;
 		if ( $banners[$i]["hidden"] == 1 ){
