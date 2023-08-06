@@ -76,7 +76,7 @@
 		<th><?php echo direction("Arabic Title","العنوان بالعربي") ?></th>
 		<th><?php echo direction("Icon","الأيقونه") ?></th>
 		<th><?php echo direction("Status","الحالة") ?></th>
-		<th class="text-nowrap"><?php echo $Action ?></th>
+		<th class="text-nowrap"><?php echo direction("Actions","الخيارات") ?></th>
 		</tr>
 		</thead>
 		
@@ -97,7 +97,7 @@
 		?>
 		<tr>
 		<td>
-            <input name="order[]" class="form-control" type="number" value="<?php echo $pMehtods[$i]["rank"] ?>">
+            <input name="order[]" class="form-control" type="number" value="<?php echo $pMehtods[$i]["order"] ?>">
             <input name="id[]" class="form-control" type="hidden" value="<?php echo $pMehtods[$i]["id"] ?>">
 		</td>
 		<td id="payId<?php echo $pMehtods[$i]["id"]?>" ><?php echo $pMehtods[$i]["paymentId"] ?></td>

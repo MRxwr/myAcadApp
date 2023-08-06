@@ -105,7 +105,7 @@
 		?>
 		<tr>
 		<td>
-		<input name="order[]" class="form-control" type="number" value="<?php echo $counter ?>">
+		<input name="order[]" class="form-control" type="number" value="<?php echo $categories[$i]["order"] ?>">
 		<input name="id[]" class="form-control" type="hidden" value="<?php echo $categories[$i]["id"] ?>">
 		</td>
 		<td id="enTitle<?php echo $categories[$i]["id"]?>" ><?php echo $categories[$i]["enTitle"] ?></td>
