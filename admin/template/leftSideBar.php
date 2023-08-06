@@ -13,13 +13,12 @@ if( $pages = selectDB("pages","`status` = '0' AND `section` = '0' ORDER BY `orde
 	}
 	for( $i = 0; $i < sizeof($pages); $i++ ){
 		$active = ( isset($_GET["v"]) && strtolower($pages[$i]["enTitle"]) == strtolower($_GET["v"]) ) ? "active" : "";
-		print_r($pages[$i]["enTitle"] . " - " . $_GET["v"]);
 		if ( $userType == '0' || in_array($pages[$i]["id"],$list) ){
 			if( $sections = selectDB("pages","`section` = '{$pages[$i]["id"]}' AND `status` != '1'") ){
 				$anchor = "href='javascript:void(0);' data-toggle='collapse' data-target='#".str_replace(" ","_",$pages[$i]["enTitle"])."' class='collapsed {$active}' aria-expanded='false'";
 				$arrowDown = "<i class='zmdi zmdi-caret-down'></i>";
 			}else{
-				$anchor = "href='{$pages[$i]["fileName"]}'";
+				$anchor = "href='{$pages[$i]["fileName"]}' class='{$active}'";
 				$arrowDown = '';
 			}
 			?>
@@ -41,10 +40,9 @@ if( $pages = selectDB("pages","`status` = '0' AND `section` = '0' ORDER BY `orde
 				<?php
 				for( $y = 0; $y < sizeof($subSections); $y++ ){
 					$active = ( isset($_GET["v"]) && strtolower($subSections[$i]["enTitle"]) == strtolower($_GET["v"]) ) ? "active" : "";
-					print_r($pages[$i]["enTitle"] . " - " . $_GET["v"]);
 					?>
 						<li>
-							<a href="<?php echo $subSections[$y]["fileName"] ?>" >
+							<a href="<?php echo $subSections[$y]["fileName"] ?>" class="<?php echo $active ?>">
 								<div class="pull-left">
 									<i class="<?php echo $subSections[$y]["icon"] ?> mr-20"></i>
 									<span class="right-nav-text"><?php echo direction($subSections[$y]["enTitle"],$subSections[$y]["arTitle"]) ?></span>
