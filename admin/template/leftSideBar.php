@@ -5,7 +5,7 @@
 			<i class="zmdi zmdi-more"></i>
 		</li>
 <?php 
-if( $pages = selectDB("pages","`status` = '0' AND `section` = '0'") ){
+if( $pages = selectDB("pages","`status` = '0' AND `section` = '0' ORDER BY `order` ASC") ){
 	if( $roles = selectDB("roles","`id` = '{$userType}'") ){
 		$list = json_decode($roles[0]["pages"],true);
 	}else{
@@ -33,7 +33,7 @@ if( $pages = selectDB("pages","`status` = '0' AND `section` = '0'") ){
 					<div class="clearfix"></div>
 				</a>
 			<?php
-			if ( $subSections = selectDB("pages","`section` = '{$pages[$i]["id"]}' AND `status` != '1'") ){
+			if ( $subSections = selectDB("pages","`section` = '{$pages[$i]["id"]}' AND `status` != '1' ORDER BY `order` ASC") ){
 				?>
 				<ul id="<?php echo str_replace(" ","_",$pages[$i]["enTitle"]) ?>" class="collapse-level-1 collapse" aria-expanded="true">
 				<?php
