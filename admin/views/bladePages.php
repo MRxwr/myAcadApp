@@ -59,6 +59,8 @@
 </div>
 				
 				<!-- Bordered Table -->
+<form method="post" action="">
+<input name="updateRank" type="hidden" value="1">
 <div class="col-sm-12">
 <div class="panel panel-default card-view">
 <div class="panel-heading">
@@ -85,7 +87,7 @@
 		
 		<tbody>
 		<?php 
-		if( $pages = selectDB("pages","`status` = '0' ORDER BY `section` ASC") ){
+		if( $pages = selectDB("pages","`status` = '0' ORDER BY `order` ASC") ){
 		for( $i = 0; $i < sizeof($pages); $i++ ){
             if ($section = selectDB("pages","`id` = '{$pages[$i]["section"]}'") ){
             }else{
@@ -103,6 +105,10 @@
             }
 		?>
 		<tr>
+		<td>
+            <input name="order[]" class="form-control" type="number" value="<?php echo $pages[$i]["order"] ?>">
+            <input name="id[]" class="form-control" type="hidden" value="<?php echo $pages[$i]["id"] ?>">
+		</td>
 		<td id="section<?php echo $pages[$i]["id"]?>" ><?php echo direction($section[0]["enTitle"],$section[0]["arTitle"]) ?><label id="sectionHidden<?php echo $pages[$i]["id"]?>" style="display:none"><?php echo $pages[$i]["section"]?></label></td>
 		<td id="enTitle<?php echo $pages[$i]["id"]?>" ><?php echo $pages[$i]["enTitle"] ?></td>
 		<td id="arTitle<?php echo $pages[$i]["id"]?>" ><?php echo $pages[$i]["arTitle"] ?></td>
@@ -131,6 +137,7 @@
 </div>
 </div>
 </div>
+</form>
 	
 	<script>
 		$(document).on("click",".edit", function(){
