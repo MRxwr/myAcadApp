@@ -56,7 +56,7 @@
 		<?php 
 		if( $roles = selectDB("roles","`status` = '0' ORDER BY `id` ASC") ){
 		for( $i = 0; $i < sizeof($roles); $i++ ){
-            if ( $roles[$i]["hidden"] == 2 ){
+            if ( $roles[$i]["hidden"] == 1 ){
                 $icon = "fa fa-eye";
                 $link = "?show={$roles[$i]["id"]}";
                 $hide = direction("Show","إظهار");
