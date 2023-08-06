@@ -22,7 +22,7 @@ if( isset($_GET["id"]) && !empty($_GET["id"]) && $role = selectDB("roles","`id` 
 </div>
 <div class="panel-wrapper collapse in">
 <div class="panel-body">
-	<form class="?v=rolesEdit&id=<?php echo $_GET["id"] ?>" method="POST" action="" enctype="multipart/form-data">
+	<form class="?v=RolesEdit&id=<?php echo $_GET["id"] ?>" method="POST" action="" enctype="multipart/form-data">
 		<div class="row m-0">
             <?php
             if( $pages = selectDB("pages","`status` = '0' AND `hidden` = '1'") ){
