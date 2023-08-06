@@ -8,7 +8,7 @@ if( isset($_POST["update1"]) ){
 if( isset($_GET["id"]) && !empty($_GET["id"]) && $role = selectDB("roles","`id` = '{$_GET["id"]}'")){
 
 }else{
-    $role = "";
+    header("LOCATION: ?v=Roles");
 }
 ?>
 				
