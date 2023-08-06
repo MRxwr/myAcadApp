@@ -5,6 +5,11 @@ if( isset($_POST["update1"]) ){
         header("LOCATION: ?v=rolesEdit&id={$_GET["id"]}");
     }
 }
+if( isset($_GET["id"]) && !empty($_GET["id"]) && $role = selectDB("roles","`id` = '{$_GET["id"]}'")){
+
+}else{
+    $role = "";
+}
 ?>
 				
 <div class="col-sm-12">
