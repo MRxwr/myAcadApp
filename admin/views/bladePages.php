@@ -141,7 +141,7 @@
 			var section = $("#sectionHidden"+id).html();
 			var icon = $("#iconHidden"+id).html();
 			var fileName = $("#fileName"+id).html();
-			$("input[name=enTitle]").val(enTitle);
+			$("input[name=enTitle]").val(enTitle).focus();
 			$("input[name=arTitle]").val(arTitle);
 			$("input[name=icon]").val(icon);
 			$("input[name=fileName]").val(fileName);
