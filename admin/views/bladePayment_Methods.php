@@ -33,8 +33,8 @@
 			<div class="col-md-4">
 			<label><?php echo direction("Enable Payment Method","تفعيل طريقة الدفع") ?></label>
 			<select name="hidden" class="form-control">
-				<option value="1">Yes</option>
-				<option value="2">No</option>
+				<option value="0">Yes</option>
+				<option value="1">No</option>
 			</select>
 			</div>
 			
