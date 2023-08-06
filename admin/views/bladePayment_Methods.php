@@ -82,7 +82,7 @@
 		
 		<tbody>
 		<?php 
-		if( $pMehtods = selectDB("paymentMethods","`status` = '0' ORDER BY `order` ASC") ){
+		if( $pMehtods = selectDB("payment_methods","`status` = '0' ORDER BY `order` ASC") ){
 		for( $i = 0; $i < sizeof($pMehtods); $i++ ){
 		    $hidden = $pMehtods[$i]["hidden"] == "1" ? direction("Active","مفعل") : direction("Disabled","معطل");
             if ( $pMehtods[$i]["hidden"] == 2 ){
