@@ -82,9 +82,9 @@
 		<thead>
 		<tr>
 		<th>#</th>
-		<th><?php echo $English_Title ?></th>
-		<th><?php echo $Arabic_Title ?></th>
-		<th class="text-nowrap"><?php echo $Action ?></th>
+		<th><?php echo direction("English Title","العنوان بالإنجليزي") ?></th>
+		<th><?php echo direction("Arabic Title","العنوان بالعربي") ?></th>
+		<th class="text-nowrap"><?php echo direction("Actions","الخيارات") ?></th>
 		</tr>
 		</thead>
 		
