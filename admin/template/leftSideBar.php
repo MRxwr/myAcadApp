@@ -12,9 +12,10 @@ if( $pages = selectDB("pages","`status` = '0' AND `section` = '0' ORDER BY `orde
 		$list = array();
 	}
 	for( $i = 0; $i < sizeof($pages); $i++ ){
+		$active = ( strtolower($pages[$i]["enTitle"]) == strtolower($_GET["v"]) ) ? "active" : "";
 		if ( $userType == '0' || in_array($pages[$i]["id"],$list) ){
 			if( $sections = selectDB("pages","`section` = '{$pages[$i]["id"]}' AND `status` != '1'") ){
-				$anchor = "href='javascript:void(0);' data-toggle='collapse' data-target='#".str_replace(" ","_",$pages[$i]["enTitle"])."' class='collapsed' aria-expanded='false'";
+				$anchor = "href='javascript:void(0);' data-toggle='collapse' data-target='#".str_replace(" ","_",$pages[$i]["enTitle"])."' class='collapsed {$active}' aria-expanded='false'";
 				$arrowDown = "<i class='zmdi zmdi-caret-down'></i>";
 			}else{
 				$anchor = "href='{$pages[$i]["fileName"]}'";
@@ -38,6 +39,7 @@ if( $pages = selectDB("pages","`status` = '0' AND `section` = '0' ORDER BY `orde
 				<ul id="<?php echo str_replace(" ","_",$pages[$i]["enTitle"]) ?>" class="collapse-level-1 collapse" aria-expanded="true">
 				<?php
 				for( $y = 0; $y < sizeof($subSections); $y++ ){
+					$active = ( strtolower($subSections[$i]["enTitle"]) == strtolower($_GET["v"]) ) ? "active" : "";
 					?>
 						<li>
 							<a href="<?php echo $subSections[$y]["fileName"] ?>" >
