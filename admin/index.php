@@ -33,6 +33,11 @@ if ( isset($_GET["hide"]) || isset($_GET["show"]) || isset($_GET["delId"]) || is
                     $_POST["header"] = "";
                 }
             }
+			
+			if( isset($_POST["password"]) && !empty($_POST["password"]) ){
+				$_POST["password"] = sha1($_POST["password"]);
+			}
+			
 			if( insertDB("{$table}", $_POST) ){
 			}else{
 			?>
@@ -65,6 +70,11 @@ if ( isset($_GET["hide"]) || isset($_GET["show"]) || isset($_GET["delId"]) || is
                     $_POST["header"] = $header[0]["header"];
                 }
             }
+			
+			if( isset($_POST["password"]) && !empty($_POST["password"]) ){
+				$_POST["password"] = sha1($_POST["password"]);
+			}
+			
 			if( updateDB("{$table}", $_POST, "`id` = '{$id}'") ){
 			}else{
 			?>
