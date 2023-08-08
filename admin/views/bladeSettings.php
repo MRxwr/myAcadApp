@@ -15,13 +15,6 @@ if (isset($_POST["title"])) {
 	$bill = str_replace($color[0]["headerButton"], $_POST["headerButton"], $bill);
 	file_put_contents('../templates/bill.php', $bill);
 	// update db \\
-	$sql = "UPDATE `social_media` 
-	SET
-	`theme` = '" . $_POST["theme"] . "'
-	WHERE
-	`id` LIKE '3'
-	";
-	$result = $dbconnect->query($sql);
 
 	$sql = "UPDATE `settings` 
 	SET 
@@ -109,11 +102,6 @@ $google = urldecode($row["google"]);
 $pixil = urldecode($row["pixil"]);
 $whatsappNoti = json_decode($row["whatsappNoti"],true);
 //$paymentMethods = json_decode($row["paymentMethods"],true);
-
-$sql = "SELECT * FROM `social_media` WHERE `id` LIKE '3'";
-$result = $dbconnect->query($sql);
-$row = $result->fetch_assoc();
-$theme = $row["theme"];
 
 if ($currList = getCurr()) {
 foreach ($currList as $key => $value) {
