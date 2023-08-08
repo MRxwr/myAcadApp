@@ -68,12 +68,12 @@ if ( isset($_GET["hide"]) || isset($_GET["show"]) || isset($_GET["delId"]) || is
                 if( isset($_FILES['header']) ){
                     $header = selectDB("{$table}","`id` = '{$id}'");
                     $_POST["header"] = $header[0]["header"];
-                }
+                } 
             }
 			
 			if( isset($_POST["password"]) && !empty($_POST["password"]) ){
 				$_POST["password"] = sha1($_POST["password"]);
-			}else{
+			}elseif( isset($_POST["password"]) && empty($_POST["password"]) ){
 				if( $user = selectDB("{$table}","`id` = '{$id}'") ){
 					$_POST["password"] = $user[0]["password"];
 				}
