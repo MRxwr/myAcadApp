@@ -1,10 +1,10 @@
 <?php
 if ( isset($_GET['idon']) ){
 	updateDB("cities",array("status"=>"1"),"`CountryCode` LIKE '{$_GET['idon']}'");
-	header("LOCATION: countries.php");
+	header("LOCATION: ?v={$_GET["v"]}");
 }elseif ( isset($_GET['idoff']) ){
 	updateDB("cities",array("status"=>"0"),"`CountryCode` LIKE '{$_GET['idoff']}'");
-	header("LOCATION: countries.php");
+	header("LOCATION: ?v={$_GET["v"]}");
 }
 ?>
 <div class="col-sm-12">
@@ -24,7 +24,7 @@ if ( isset($_GET['idon']) ){
 	</thead>
 	<tbody>
 	<?php
-	if( $countries = selectDB("cities","`id` != '0' GROUP BY `CountryCode` ORDER BY `CountryName` ASC") ){
+	if( $countries = selectDB("countries","`id` != '0' GROUP BY `CountryCode` ORDER BY `CountryName` ASC") ){
 		for( $i = 0; $i < sizeof($countries); $i++){
 			if ( $countries[$i]["status"] == '0' ){
 				$link = "?idon={$countries[$i]["CountryCode"]}";
