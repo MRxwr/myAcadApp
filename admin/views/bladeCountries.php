@@ -17,9 +17,9 @@ if ( isset($_GET['idon']) ){
 	<thead>
 	<tr>
 	<th>#</th>
-	<th><?php echo $countriesText ?></th>
-	<th><?php echo $Status ?></th>
-	<th><?php echo $Actions ?></th>
+	<th><?php echo direction("Country","البلد") ?></th>
+	<th><?php echo direction("Status","الحالة") ?></th>
+	<th><?php echo direction("Actions", "الخيارات") ?></th>
 	</tr>
 	</thead>
 	<tbody>
@@ -40,7 +40,7 @@ if ( isset($_GET['idon']) ){
 			<td class="txt-dark"><?php echo str_pad($i,3,"0",STR_PAD_LEFT) ?></td>
 			<td><?php echo $countries[$i]["CountryName"]; ?></td>
 			<td><?php if ( $countries[$i]["status"] == '1' ){ echo direction("On","تفعيل");}else{ echo direction("Off","إيقاف");} ?></td>
-			<td><a href="<?php echo $link; ?>" class="btn <?php echo $button; ?> rounded"><?php echo $title; ?></a>
+			<td><a href="<?php echo $link . "&v={$_GET["v"]}"; ?>" class="btn <?php echo $button; ?> rounded"><?php echo $title; ?></a>
 			</td>
 			</tr>
 			<?php
