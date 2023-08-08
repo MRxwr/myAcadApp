@@ -2,7 +2,7 @@
 <div class="panel panel-default card-view">
 <div class="panel-heading">
 <div class="pull-left">
-	<h6 class="panel-title txt-dark"><?php echo direction("Employee Details","تفاصيل الموظف") ?></h6>
+	<h6 class="panel-title txt-dark"><?php echo direction("User Details","تفاصيل العضو") ?></h6>
 </div>
 	<div class="clearfix"></div>
 </div>
@@ -10,55 +10,27 @@
 <div class="panel-body">
 	<form class="" method="POST" action="?v=<?php echo $_GET["v"] ?>" enctype="multipart/form-data">
 		<div class="row m-0">
-			<div class="col-md-6">
+			<div class="col-md-3">
 			<label><?php echo direction("Name","الإسم") ?></label>
 			<input type="text" name="fullName" class="form-control" required>
 			</div>
 			
-			<div class="col-md-6">
+			<div class="col-md-3">
 			<label><?php echo direction("Email","البريد الإلكتروني") ?></label>
 			<input type="text" name="email" class="form-control" required>
 			</div>
 			
-			<div class="col-md-6">
+			<div class="col-md-3">
 			<label><?php echo direction("Password","كلمة المرور") ?></label>
 			<input type="text" name="password" class="form-control" required>
 			</div>
 			
-			<div class="col-md-6">
+			<div class="col-md-3">
 			<label><?php echo direction("Mobile","الهاتف") ?></label>
 			<input type="number" min="0" maxlength="8" name="phone" class="form-control" required>
 			</div>
 			
-			<div class="col-md-6">
-			<label><?php echo direction("Type","النوع") ?></label>
-			<select name="empType" class="form-control">
-				<?php 
-				if( $roles = selectDB("roles","`status` = '0' AND `hidden` = '0'") ){
-					for( $i = 0; $i < sizeof($roles); $i++ ){
-						$title = direction($roles[$i]["enTitle"],$roles[$i]["arTitle"]);
-						echo "<option value='{$roles[$i]["id"]}'>{$title}</option>";
-					}
-				}
-				?>
-			</select>
-			</div>
-			
-			<div class="col-md-6">
-			<label><?php echo direction("Shop","المحل") ?></label>
-			<select name="shopId" class="form-control">
-				<?php
-				if( $shop = selectDB("shops","`status` = '0'") ){
-					for( $i = 0; $i < sizeof($shop); $i++ ){
-						$shopTitle = direction($shop[$i]["enTitle"],$shop[$i]["arTitle"]);
-						echo "<option value='{$shop[$i]["id"]}'>{$shopTitle}</option>";
-					}
-				}
-				?>
-			</select>
-			</div>
-			
-			<div class="col-md-6" style="margin-top:10px">
+			<div class="col-md-12" style="margin-top:10px">
 			<input type="submit" class="btn btn-primary" value="<?php echo direction("Submit","أرسل") ?>">
 			<input type="hidden" name="update" value="0">
 			</div>
@@ -73,7 +45,7 @@
 <div class="col-sm-12">
 <div class="panel panel-default card-view">
 <div class="panel-heading">
-	<div class="pull-left"><h6 class="panel-title txt-dark"><?php echo direction("List of Employees","قائمة الموظفين") ?></h6></div>
+	<div class="pull-left"><h6 class="panel-title txt-dark"><?php echo direction("List of Users","قائمة الأعضاء") ?></h6></div>
 	<div class="clearfix"></div>
 </div>
 <div class="panel-wrapper collapse in">
@@ -86,15 +58,13 @@
 		<th><?php echo direction("Name","الإسم") ?></th>
 		<th><?php echo direction("Email","الإيميل") ?></th>
 		<th><?php echo direction("Mobile","الهاتف") ?></th>
-		<th><?php echo direction("Type","النوع") ?></th>
-		<th><?php echo direction("Shop","المحل") ?></th>
 		<th class="text-nowrap"><?php echo direction("Actions","الخيارات") ?></th>
 		</tr>
 		</thead>
 		
 		<tbody>
 		<?php 
-		if( $employees = selectDB("employees","`status` = '0' AND `hidden` != '2'") ){
+		if( $employees = selectDB("users","`status` = '0' AND `hidden` != '2'") ){
 			for( $i = 0; $i < sizeof($employees); $i++ ){
 				$counter = $i + 1;
 				if ( $employees[$i]["hidden"] == 1 ){
@@ -107,36 +77,18 @@
 					$hide = direction("Lock","قفل الحساب");
 				}
 				
-				if ( $role = selectDB("roles","`id` = '{$employees[$i]["empType"]}'") ){
-					$type = direction($role[0]["enTitle"],$role[0]["arTitle"]);
-				}else{
-					$type = "Error";
-				}
-				
-				if( $shop = selectDB("shops","`id` = '{$employees[$i]["shopId"]}'") ){
-					$shop = direction($shop[0]["enTitle"],$shop[0]["arTitle"]);
-				}else{
-					$shop = "";
-				}
-				
 				?>
 				<tr>
 				<td id="name<?php echo $employees[$i]["id"]?>" ><?php echo $employees[$i]["fullName"] ?></td>
 				<td id="email<?php echo $employees[$i]["id"]?>" ><?php echo $employees[$i]["email"] ?></td>
 				<td id="mobile<?php echo $employees[$i]["id"]?>" ><?php echo $employees[$i]["phone"] ?></td>
-				<td><?php echo $type ?></td>
-				<td><?php echo $shop ?></td>
 				<td class="text-nowrap">
-				
 				<a id="<?php echo $employees[$i]["id"] ?>" class="mr-25 edit" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i>
 				</a>
 				<a href="<?php echo $link ?>" class="mr-25" data-toggle="tooltip" data-original-title="<?php echo $hide ?>"> <i class="<?php echo $icon ?> text-inverse m-r-10"></i>
 				</a>
 				<a href="<?php echo "?v={$_GET["v"]}&delId=" . $employees[$i]["id"] ?>" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-close text-danger"></i>
-				</a>
-				<div style="display:none">
-					<label id="type<?php echo $employees[$i]["id"]?>"><?php echo $employees[$i]["empType"] ?></label>
-					<label id="shop<?php echo $employees[$i]["id"]?>"><?php echo $employees[$i]["shopId"] ?></label></div>				
+				</a>			
 				</td>
 				</tr>
 				<?php
@@ -158,17 +110,12 @@
 		var email = $("#email"+id).html();
 		var name = $("#name"+id).html();
 		var mobile = $("#mobile"+id).html();
-		var type = $("#type"+id).html();
-		var shop = $("#shop"+id).html();
-		var logo = $("#logo"+id).html();
 		$("input[name=password]").prop("required",false);
 		$("input[name=email]").val(email);
 		$("input[name=phone]").val(mobile);
 		$("input[name=update]").val(id);
 		$("input[name=fullName]").val(name);
 		$("input[name=fullName]").focus();
-		$("select[name=empType]").val(type);
-		$("select[name=shopId]").val(shop);
 	})
 </script>
 
