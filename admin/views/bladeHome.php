@@ -183,10 +183,10 @@ for ( $y =0; $y < 3; $y++){
 						</label>
 						<thead>
 						<tr>
-						<th><?php echo $DateTime ?></th>
-						<th><?php echo $OrderID ?></th>
-						<th><?php echo $Price ?></th>
-						<th><?php echo $Actions ?></th>
+						<th><?php echo direction("Date","التاريخ") ?></th>
+						<th><?php echo direction("#","#") ?></th>
+						<th><?php echo direction("Price","المجموع") ?></th>
+						<th><?php echo direction("Actions","الخيارات") ?></th>
 						</tr>
 						</thead>
 						<tbody>
