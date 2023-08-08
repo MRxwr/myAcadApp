@@ -1,9 +1,9 @@
 <?php
 if ( isset($_GET['idon']) ){
-	updateDB("cities",array("status"=>"1"),"`CountryCode` LIKE '{$_GET['idon']}'");
+	updateDB(strtolower($_GET["v"]),array("status"=>"1"),"`CountryCode` LIKE '{$_GET['idon']}'");
 	header("LOCATION: ?v={$_GET["v"]}");
 }elseif ( isset($_GET['idoff']) ){
-	updateDB("cities",array("status"=>"0"),"`CountryCode` LIKE '{$_GET['idoff']}'");
+	updateDB(strtolower($_GET["v"]),array("status"=>"0"),"`CountryCode` LIKE '{$_GET['idoff']}'");
 	header("LOCATION: ?v={$_GET["v"]}");
 }
 ?>
