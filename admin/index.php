@@ -78,6 +78,7 @@ if ( isset($_GET["hide"]) || isset($_GET["show"]) || isset($_GET["delId"]) || is
 					$_POST["password"] = sha1($user[0]["password"]);
 				}
 			}
+			var_dump($user);die();
 			
 			if( updateDB("{$table}", $_POST, "`id` = '{$id}'") ){
 			}else{
