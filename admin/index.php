@@ -73,6 +73,10 @@ if ( isset($_GET["hide"]) || isset($_GET["show"]) || isset($_GET["delId"]) || is
 			
 			if( isset($_POST["password"]) && !empty($_POST["password"]) ){
 				$_POST["password"] = sha1($_POST["password"]);
+			}else{
+				if( $user = selectDB("{$table}","`id` = '{$id}'") ){
+					$_POST["password"] = sha1($user[0]["password"]);
+				}
 			}
 			
 			if( updateDB("{$table}", $_POST, "`id` = '{$id}'") ){
