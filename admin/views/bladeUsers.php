@@ -10,27 +10,27 @@
 <div class="panel-body">
 	<form class="" method="POST" action="?v=<?php echo $_GET["v"] ?>" enctype="multipart/form-data">
 		<div class="row m-0">
-			<div class="col-md-3">
+			<div class="col-md-6">
 			<label><?php echo direction("First Name","الإسم الأول") ?></label>
 			<input type="text" name="firstName" class="form-control" required>
 			</div>
 
-			<div class="col-md-3">
+			<div class="col-md-6">
 			<label><?php echo direction("Last Name","الإسم الأخير") ?></label>
 			<input type="text" name="lastName" class="form-control" required>
 			</div>
 			
-			<div class="col-md-3">
+			<div class="col-md-4">
 			<label><?php echo direction("Email","البريد الإلكتروني") ?></label>
 			<input type="text" name="email" class="form-control" required>
 			</div>
 			
-			<div class="col-md-3">
+			<div class="col-md-4">
 			<label><?php echo direction("Password","كلمة المرور") ?></label>
 			<input type="text" name="password" class="form-control" required>
 			</div>
 			
-			<div class="col-md-3">
+			<div class="col-md-4">
 			<label><?php echo direction("Mobile","الهاتف") ?></label>
 			<input type="number" min="0" maxlength="8" name="phone" class="form-control" required>
 			</div>
