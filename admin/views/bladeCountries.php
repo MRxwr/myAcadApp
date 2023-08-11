@@ -19,7 +19,7 @@ if ( isset($_GET['idon']) ){
 <div class="panel-body row">
 <div class="table-wrap">
 <div class="table-responsive">
-<table class="table display responsive product-overview mb-30" id="myTable">
+<table class="table display responsive product-overview mb-30" id="myTable1">
 	<thead>
 	<tr>
 	<th>#</th>

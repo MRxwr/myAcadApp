@@ -11,3 +11,17 @@ $(document).ready(function () {
   });
   $("#datable_2").DataTable({ lengthChange: false });
 });
+
+/*DataTable Init*/
+
+"use strict";
+
+$(document).ready(function () {
+  "use strict";
+
+  $("#myTable1").DataTable({
+    columnDefs: [{ targets: 0, type: "date-euro" }],
+    order: [0, "asc"],
+  });
+  $("#datable_2").DataTable({ lengthChange: false });
+});
