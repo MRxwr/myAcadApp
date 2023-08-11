@@ -21,7 +21,8 @@
 <script src="../vendors/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
 <!-- Data table JavaScript -->
-<script src="../../vendors/bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
+<script src="dist/js/dataTables-data.js"></script>
+<script src="../vendors/bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
 <script src="../vendors/bower_components/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
 <script src="../vendors/bower_components/datatables.net-buttons/js/buttons.flash.min.js"></script>
 <script src="../vendors/bower_components/jszip/dist/jszip.min.js"></script>
