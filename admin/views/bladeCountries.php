@@ -9,6 +9,13 @@ if ( isset($_GET['idon']) ){
 ?>
 <div class="col-sm-12">
 <div class="panel panel-default card-view">
+<div class="panel-heading">
+<div class="pull-left">
+<h6 class="panel-title txt-dark"><?php echo direction("List of Countiries","قائمة الدول") ?></h6>
+</div>
+<div class="clearfix"></div>
+</div>
+<div class="panel panel-default card-view">
 <div class="panel-wrapper collapse in">
 <div class="panel-body row">
 <div class="table-wrap">
@@ -29,18 +36,18 @@ if ( isset($_GET['idon']) ){
 			if ( $countries[$i]["status"] == '0' ){
 				$link = "?idon={$countries[$i]["CountryCode"]}";
 				$button = "btn-success";
-				$title = direction("On","تفعيل");
+				$action = direction("On","تفعيل");
 			}else{
 				$link = "?idoff={$countries[$i]["CountryCode"]}";
 				$button = "btn-danger";
-				$title = direction("Off","إيقاف");
+				$action = direction("Off","إيقاف");
 			}
 			?>
 			<tr>
 			<td class="txt-dark"><?php echo str_pad($i,3,"0",STR_PAD_LEFT) ?></td>
 			<td><?php echo $countries[$i]["CountryName"]; ?></td>
 			<td><?php if ( $countries[$i]["status"] == '1' ){ echo direction("On","تفعيل");}else{ echo direction("Off","إيقاف");} ?></td>
-			<td><a href="<?php echo $link . "&v={$_GET["v"]}"; ?>" class="btn <?php echo $button; ?> rounded"><?php echo $title; ?></a>
+			<td><a href="<?php echo $link . "&v={$_GET["v"]}"; ?>" class="btn <?php echo $button; ?> rounded"><?php echo $action; ?></a>
 			</td>
 			</tr>
 			<?php
