@@ -15,7 +15,6 @@ if ( isset($_GET['idon']) ){
 </div>
 <div class="clearfix"></div>
 </div>
-<div class="panel panel-default card-view">
 <div class="panel-wrapper collapse in">
 <div class="panel-body row">
 <div class="table-wrap">
@@ -59,6 +58,5 @@ if ( isset($_GET['idon']) ){
 </div>
 </div>	
 </div>	
-</div>
 </div>
 </div>
