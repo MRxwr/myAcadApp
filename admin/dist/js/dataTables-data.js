@@ -1,27 +1,19 @@
-/*DataTable Init*/
+/* DataTable Initialization */
 
 "use strict";
 
 $(document).ready(function () {
-  "use strict";
-
+  // Initialize DataTable for table with ID "myTable"
   $("#myTable").DataTable({
     columnDefs: [{ targets: 0, type: "date-euro" }],
     order: [0, "desc"],
+    lengthChange: false, // Disable length change
   });
-  $("#datable_2").DataTable({ lengthChange: false });
-});
 
-/*DataTable Init*/
-
-"use strict";
-
-$(document).ready(function () {
-  "use strict";
-
+  // Initialize DataTable for table with ID "myTable1"
   $("#myTable1").DataTable({
     columnDefs: [{ targets: 0, type: "date-euro" }],
     order: [0, "asc"],
+    lengthChange: false, // Disable length change
   });
-  $("#datable_2").DataTable({ lengthChange: false });
 });
