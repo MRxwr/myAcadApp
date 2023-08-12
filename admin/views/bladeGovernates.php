@@ -57,17 +57,17 @@
 		<tbody>
 		<?php 
 		$orderBy = direction("enTitle","arTitle");
-		if( $areas = selectDB("governates","`status` = '0' ORDER BY `{$orderBy}` ASC") ){
-			for( $i = 0; $i < sizeof($areas); $i++ ){
+		if( $governates = selectDB("governates","`status` = '0' ORDER BY `{$orderBy}` ASC") ){
+			for( $i = 0; $i < sizeof($governates); $i++ ){
 				$counter = $i + 1;
 				?>
 				<tr>
-				<td id="enTitle<?php echo $areas[$i]["id"]?>" ><?php echo $areas[$i]["enTitle"] ?></td>
-				<td id="arTitle<?php echo $areas[$i]["id"]?>" ><?php echo $areas[$i]["arTitle"] ?></td>
+				<td id="enTitle<?php echo $governates[$i]["id"]?>" ><?php echo $governates[$i]["enTitle"] ?></td>
+				<td id="arTitle<?php echo $governates[$i]["id"]?>" ><?php echo $governates[$i]["arTitle"] ?></td>
 				<td class="text-nowrap">
-					<a id="<?php echo $areas[$i]["id"] ?>" class="mr-25 edit" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i>
+					<a id="<?php echo $governates[$i]["id"] ?>" class="mr-25 edit" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i>
 					</a>
-					<a href="?delId=<?php echo $areas[$i]["id"] ?>" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-close text-danger"></i>
+					<a href="?delId=<?php echo $governates[$i]["id"] ?>" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-close text-danger"></i>
 					</a>			
 				</td>
 				</tr>

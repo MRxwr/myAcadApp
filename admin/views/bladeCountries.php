@@ -52,6 +52,7 @@ if ( isset($_GET['idon']) ){
 			<td>
 				<a href="<?php echo $link . "&v={$_GET["v"]}"; ?>" class="btn <?php echo $button; ?> rounded"><?php echo $action; ?></a>
 				<a href="?v=Governates&code=<?php echo $countries[$i]["countryCode"];?>" class="btn btn-info rounded"><?php echo direction("Governates","المحافظات"); ?></a>
+				<a href="?v=Areas&code=<?php echo $countries[$i]["countryCode"];?>" class="btn btn-warning rounded"><?php echo direction("Areas","المناطق"); ?></a>
 			</td>
 			</tr>
 			<?php
