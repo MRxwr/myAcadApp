@@ -8,7 +8,7 @@
 </div>
 <div class="panel-wrapper collapse in">
 <div class="panel-body">
-	<form class="?v=Governates&code=<?php echo $_GET["code"] ?>" method="POST" action="" enctype="multipart/form-data">
+	<form class="" method="POST" action="" enctype="multipart/form-data">
 		<div class="row m-0">
 			<div class="col-md-6">
 			<label><?php echo direction("English Title","العنوان بالإنجليزي") ?></label>
