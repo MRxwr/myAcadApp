@@ -89,8 +89,8 @@ if( $country = selectDB("countries","`countryCode` LIKE '{$_GET["code"]}' LIMIT 
 				$governateTitle = direction($governate[0]["enTitle"],$governate[0]["arTitle"]);
 				?>
 				<tr>
-				<td id="enTitle<?php echo $areas[$i]["id"]?>" ><?php echo $areas[$i]["enTitle"] ?></td>
-				<td id="arTitle<?php echo $areas[$i]["id"]?>" ><?php echo $areas[$i]["arTitle"] ?></td>
+				<td id="enTitle<?php echo $areas[$i]["id"]?>" ><?php echo $areas[$i]["areaEnTitle"] ?></td>
+				<td id="arTitle<?php echo $areas[$i]["id"]?>" ><?php echo $areas[$i]["areaArTitle"] ?></td>
 				<td><?php echo $governateTitle ?><label id="governateId" style="display:none"><?php echo $areas[$i]["governateId"] ?></label></td>
 				<td class="text-nowrap">
 					<a id="<?php echo $areas[$i]["id"] ?>" class="mr-25 edit" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i>
