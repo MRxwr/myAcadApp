@@ -125,10 +125,10 @@ if( $country = selectDB("countries","`countryCode` LIKE '{$_GET["code"]}' LIMIT 
 			var enTitle = $("#enTitle"+id).html();
 			var arTitle = $("#arTitle"+id).html();
 			var governateId = $("#governateId"+id).html();
-			$("input[name=enTitle]").val(enTitle);
+			$("input[name=areaEnTitle]").val(enTitle);
 			$("select[name=governateId]").val(governateId);
 			$("input[name=update]").val(id);
-			$("input[name=arTitle]").val(arTitle);
-			$("input[name=enTitle]").focus()
+			$("input[name=areaArTitle]").val(arTitle);
+			$("input[name=areaEnTitle]").focus()
 		})
 	</script>
