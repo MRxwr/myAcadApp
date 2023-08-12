@@ -10,12 +10,12 @@
 <div class="panel-body">
 	<form class="" method="POST" action="?v=<?php echo $_GET["v"] ?>" enctype="multipart/form-data">
 		<div class="row m-0">
-			<div class="col-md-6">
+			<div class="col-md-4">
 			<label><?php echo direction("First Name","الإسم الأول") ?></label>
 			<input type="text" name="firstName" class="form-control" required>
 			</div>
 
-			<div class="col-md-6">
+			<div class="col-md-4">
 			<label><?php echo direction("Last Name","الإسم الأخير") ?></label>
 			<input type="text" name="lastName" class="form-control" required>
 			</div>
@@ -28,6 +28,22 @@
 			<div class="col-md-4">
 			<label><?php echo direction("Password","كلمة المرور") ?></label>
 			<input type="text" name="password" class="form-control" required>
+			</div>
+			</div>
+			
+			<div class="col-md-4">
+			<label><?php echo direction("Gender","الجنس") ?></label>
+			<select name="gender" class="form-control">
+				<?php
+				$gender = [direction("Male","ذكر"),direction("Female","أنثى")];
+				$genderValue = [1,2];
+				for( $i = 0; $i < sizeof($genderValue); $i++){
+					echo "<option value='{$genderValue[$i]}'>{$gender[$i]}</option>";
+				?>
+				<?php
+				}
+				?>
+			</select>
 			</div>
 			
 			<div class="col-md-4">
