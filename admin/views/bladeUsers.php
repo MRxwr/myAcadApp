@@ -79,6 +79,7 @@
 		<th><?php echo direction("Last Name","الإسم الأخير") ?></th>
 		<th><?php echo direction("Email","الإيميل") ?></th>
 		<th><?php echo direction("Mobile","الهاتف") ?></th>
+		<th><?php echo direction("Gender","الجنس") ?></th>
 		<th class="text-nowrap"><?php echo direction("Actions","الخيارات") ?></th>
 		</tr>
 		</thead>
@@ -97,6 +98,8 @@
 					$link = "?v={$_GET["v"]}&hide={$users[$i]["id"]}";
 					$hide = direction("Lock","قفل الحساب");
 				}
+
+				$userGender = ( $users[$i]["gender"] == 1 ) ? direction("Male","ذكر") : ( ( $users[$i]["gender"] == 2 ) ? direction("Female","أنثى") : direction("Not submitted","لا يوجد") );
 				
 				?>
 				<tr>
@@ -104,6 +107,7 @@
 				<td id="lastName<?php echo $users[$i]["id"]?>" ><?php echo $users[$i]["lastName"] ?></td>
 				<td id="email<?php echo $users[$i]["id"]?>" ><?php echo $users[$i]["email"] ?></td>
 				<td id="mobile<?php echo $users[$i]["id"]?>" ><?php echo $users[$i]["phone"] ?></td>
+				<td><?php echo $userGender ?><label id="gender<?php echo $users[$i]["id"]?>" style="display:none"><?php echo $users[$i]["gender"] ?></label></td>
 				<td class="text-nowrap">
 				<a id="<?php echo $users[$i]["id"] ?>" class="mr-25 edit" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i>
 				</a>
@@ -133,13 +137,15 @@
 		var fName = $("#firstName"+id).html();
 		var lName = $("#lastName"+id).html();
 		var mobile = $("#mobile"+id).html();
+		var gender = $("#gender"+id).html();
 		$("input[name=password]").prop("required",false);
 		$("input[name=email]").val(email);
 		$("input[name=phone]").val(mobile);
+		$("select[name=gender]").val(gender);
 		$("input[name=update]").val(id);
 		$("input[name=firstName]").val(fName);
+		$("input[name=firstName]").focus();
 		$("input[name=lastName]").val(lName);
-		$("input[name=fullName]").focus();
 	})
 </script>
 
