@@ -29,7 +29,6 @@
 			<label><?php echo direction("Password","كلمة المرور") ?></label>
 			<input type="text" name="password" class="form-control" required>
 			</div>
-			</div>
 			
 			<div class="col-md-4">
 			<label><?php echo direction("Gender","الجنس") ?></label>
