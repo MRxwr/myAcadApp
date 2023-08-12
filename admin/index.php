@@ -93,9 +93,14 @@ if ( isset($_GET["hide"]) || isset($_GET["show"]) || isset($_GET["delId"]) || is
 			updateDB("{$table}",array("order"=>$_POST["order"][$i]),"`id` = '{$_POST["id"][$i]}'");
 		}
 	}
+	if( isset($_GET["code"]) && !empty($_GET["code"]) ){
+		$countryCode = "&code={$_GET["code"]}";
+	}else{
+		$countryCode = "";
+	}
 	?>
 	<script>
-		window.location.replace("<?php echo "?v={$_GET["v"]}" ?>");
+		window.location.replace("<?php echo "?v={$_GET["v"]}{$countryCode}" ?>");
 	</script>
 	<?php
 }
