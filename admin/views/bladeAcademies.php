@@ -2,7 +2,7 @@
 <div class="panel panel-default card-view">
 <div class="panel-heading">
 <div class="pull-left">
-	<h6 class="panel-title txt-dark"><?php echo direction("Shop Details","تفاصيل المحل") ?></h6>
+	<h6 class="panel-title txt-dark"><?php echo direction("Academy Details","تفاصيل الأكادمية") ?></h6>
 </div>
 	<div class="clearfix"></div>
 </div>
@@ -36,7 +36,7 @@
 <div class="panel panel-default card-view">
 <div class="panel-heading">
 <div class="pull-left">
-<h6 class="panel-title txt-dark"><?php echo direction("List of Shops","قائمة المحلات") ?></h6>
+<h6 class="panel-title txt-dark"><?php echo direction("List of Academies","قائمة الأكاديمات") ?></h6>
 </div>
 <div class="clearfix"></div>
 </div>
@@ -55,18 +55,18 @@
 		
 		<tbody>
 		<?php 
-		if( $shops = selectDB("shops","`status` = '0'") ){
-			for( $i = 0; $i < sizeof($shops); $i++ ){
+		if( $academies = selectDB("academies","`status` = '0'") ){
+			for( $i = 0; $i < sizeof($academies); $i++ ){
 				?>
 				<tr>
-				<td id="enTitle<?php echo $shops[$i]["id"]?>" ><?php echo $shops[$i]["enTitle"] ?></td>
-				<td id="arTitle<?php echo $shops[$i]["id"]?>" ><?php echo $shops[$i]["arTitle"] ?></td>
+				<td id="enTitle<?php echo $academies[$i]["id"]?>" ><?php echo $academies[$i]["enTitle"] ?></td>
+				<td id="arTitle<?php echo $academies[$i]["id"]?>" ><?php echo $academies[$i]["arTitle"] ?></td>
 				<td class="text-nowrap">
 				
-				<a id="<?php echo $shops[$i]["id"] ?>" class="mr-25 edit" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i>
+				<a id="<?php echo $academies[$i]["id"] ?>" class="mr-25 edit" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i>
 				</a>
 
-				<a href="?delId=<?php echo $shops[$i]["id"] . "&v={$_GET["v"]}" ?>" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-close text-danger"></i>
+				<a href="?delId=<?php echo $academies[$i]["id"] . "&v={$_GET["v"]}" ?>" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-close text-danger"></i>
 				</a>
 				
 				</td>
