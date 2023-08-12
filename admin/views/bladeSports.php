@@ -2,7 +2,7 @@
 <div class="panel panel-default card-view">
 <div class="panel-heading">
 <div class="pull-left">
-	<h6 class="panel-title txt-dark"><?php echo direction("Category Details","تفاصيل القسم") ?></h6>
+	<h6 class="panel-title txt-dark"><?php echo direction("Sport Details","تفاصيل الرياضة") ?></h6>
 </div>
 	<div class="clearfix"></div>
 </div>
@@ -10,22 +10,14 @@
 <div class="panel-body">
 	<form class="" method="POST" action="" enctype="multipart/form-data">
 		<div class="row m-0">
-			<div class="col-md-4">
+			<div class="col-md-6">
 			<label><?php echo direction("Arabic Title","العنوان بالعربي") ?></label>
 			<input type="text" name="arTitle" class="form-control" required>
 			</div>
 			
-			<div class="col-md-4">
+			<div class="col-md-6">
 			<label><?php echo direction("English Title","العنوان بالإنجليزي") ?></label>
 			<input type="text" name="enTitle" class="form-control" required>
-			</div>
-			
-			<div class="col-md-4">
-			<label><?php echo direction("Hide Category","أخفي القسم") ?></label>
-			<select name="hidden" class="form-control">
-				<option value="1">No</option>
-				<option value="2">Yes</option>
-			</select>
 			</div>
 			
 			<div class="col-md-6">
@@ -33,21 +25,11 @@
 			<input type="file" name="imageurl" class="form-control" required>
 			</div>
 			
-			<div class="col-md-6">
-			<label><?php echo direction("Header","الصورة الكبيرة") ?></label>
-			<input type="file" name="header" class="form-control" required>
-			</div>
-			
 			<div id="images" style="margin-top: 10px; display:none">
 				<div class="col-md-6">
 				<img id="logoImg" src="" style="width:250px;height:250px">
 				</div>
-				
-				<div class="col-md-6">
-				<img id="headerImg" src="" style="width:250px;height:250px">
-				</div>
 			</div>
-			
 			
 			<div class="col-md-6" style="margin-top:10px">
 			<input type="submit" class="btn btn-primary" value="<?php echo direction("Submit","أرسل") ?>">
@@ -67,7 +49,7 @@
 <div class="panel panel-default card-view">
 <div class="panel-heading">
 <div class="pull-left">
-<h6 class="panel-title txt-dark"><?php echo direction("List of categories", "قائمة الأقسام") ?></h6>
+<h6 class="panel-title txt-dark"><?php echo direction("List of Sports", "قائمة الرياضات") ?></h6>
 </div>
 <div class="clearfix"></div>
 </div>
@@ -90,38 +72,36 @@
 		
 		<tbody>
 		<?php 
-		if( $categories = selectDB("categories","`status` = '0' ORDER BY `order` ASC") ){
-		for( $i = 0; $i < sizeof($categories); $i++ ){
+		if( $sports = selectDB("sports","`status` = '0' ORDER BY `order` ASC") ){
+		for( $i = 0; $i < sizeof($sports); $i++ ){
 		$counter = $i + 1;
-		if ( $categories[$i]["hidden"] == 1 ){
+		if ( $sports[$i]["hidden"] == 1 ){
 		$icon = "fa fa-eye";
-		$link = "?show={$categories[$i]["id"]}";
+		$link = "?show={$sports[$i]["id"]}";
 		$hide = "Show";
 		}else{
 		$icon = "fa fa-eye-slash";
-		$link = "?hide={$categories[$i]["id"]}";
+		$link = "?hide={$sports[$i]["id"]}";
 		$hide = "Hide";
 		}
 		?>
 		<tr>
 		<td>
-		<input name="order[]" class="form-control" type="number" value="<?php echo $categories[$i]["order"] ?>">
-		<input name="id[]" class="form-control" type="hidden" value="<?php echo $categories[$i]["id"] ?>">
+		<input name="order[]" class="form-control" type="number" value="<?php echo $sports[$i]["order"] ?>">
+		<input name="id[]" class="form-control" type="hidden" value="<?php echo $sports[$i]["id"] ?>">
 		</td>
-		<td id="enTitle<?php echo $categories[$i]["id"]?>" ><?php echo $categories[$i]["enTitle"] ?></td>
-		<td id="arTitle<?php echo $categories[$i]["id"]?>" ><?php echo $categories[$i]["arTitle"] ?></td>
+		<td id="enTitle<?php echo $sports[$i]["id"]?>" ><?php echo $sports[$i]["enTitle"] ?></td>
+		<td id="arTitle<?php echo $sports[$i]["id"]?>" ><?php echo $sports[$i]["arTitle"] ?></td>
 		<td class="text-nowrap">
 		
-		<a id="<?php echo $categories[$i]["id"] ?>" class="mr-25 edit" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i>
+		<a id="<?php echo $sports[$i]["id"] ?>" class="mr-25 edit" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i>
 		</a>
 		<a href="<?php echo $link . "&v={$_GET["v"]}" ?>" class="mr-25" data-toggle="tooltip" data-original-title="<?php echo $hide ?>"> <i class="<?php echo $icon ?> text-inverse m-r-10"></i>
 		</a>
-		<a href="?delId=<?php echo $categories[$i]["id"] . "&v={$_GET["v"]}" ?>" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-close text-danger"></i>
+		<a href="?delId=<?php echo $sports[$i]["id"] . "&v={$_GET["v"]}" ?>" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-close text-danger"></i>
 		</a>
-		<div style="display:none"><label id="hidden<?php echo $categories[$i]["id"]?>"><?php echo $categories[$i]["hidden"] ?></label></div>
-		<div style="display:none"><label id="logo<?php echo $categories[$i]["id"]?>"><?php echo $categories[$i]["imageurl"] ?></label></div>
-		<div style="display:none"><label id="header<?php echo $categories[$i]["id"]?>"><?php echo $categories[$i]["header"] ?></label></div>
-		
+		<div style="display:none"><label id="hidden<?php echo $sports[$i]["id"]?>"><?php echo $sports[$i]["hidden"] ?></label></div>
+		<div style="display:none"><label id="logo<?php echo $sports[$i]["id"]?>"><?php echo $sports[$i]["imageurl"] ?></label></div>		
 		</td>
 		</tr>
 		<?php
@@ -146,13 +126,11 @@
 			var enTitle = $("#enTitle"+id).html();
 			var hidden = $("#hidden"+id).html();
 			var logo = $("#logo"+id).html();
-			var header = $("#header"+id).html();
 			$("input[type=file]").prop("required",false);
 			$("input[name=arTitle]").val(arTitle).focus();
 			$("input[name=update]").val(id);
 			$("input[name=enTitle]").val(enTitle);
 			$("select[name=hidden]").val(hidden);
-			$("#headerImg").attr("src","../logos/"+header);
 			$("#logoImg").attr("src","../logos/"+logo);
 			$("#images").attr("style","margin-top:10px;display:block");
 		})
