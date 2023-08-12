@@ -85,8 +85,12 @@ if( $country = selectDB("countries","`countryCode` LIKE '{$_GET["code"]}' LIMIT 
 		$orderBy = direction("areaEnTitle","areaArTitle");
 		if( $areas = selectDB("countries","`status` = '0' AND `countryCode` LIKE '{$_GET["code"]}' ORDER BY `{$orderBy}` ASC") ){
 			for( $i = 0; $i < sizeof($areas); $i++ ){
-				$governate = selectDB("governates","`id` = '{$areas[$i]["governateId"]}'");
-				$governateTitle = direction($governate[0]["enTitle"],$governate[0]["arTitle"]);
+				if( $governate = selectDB("governates","`id` = '{$areas[$i]["governateId"]}'") ){
+					$governateTitle = direction($governate[0]["enTitle"],$governate[0]["arTitle"]);
+				}else{
+					$governateTitle = "";
+				}
+				
 				?>
 				<tr>
 				<td id="enTitle<?php echo $areas[$i]["id"]?>" ><?php echo $areas[$i]["areaEnTitle"] ?></td>
