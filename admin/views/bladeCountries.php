@@ -51,7 +51,7 @@ if ( isset($_GET['idon']) ){
 			<td><?php if ( $countries[$i]["status"] == '1' ){ echo direction("On","تفعيل");}else{ echo direction("Off","إيقاف");} ?></td>
 			<td>
 				<a href="<?php echo $link . "&v={$_GET["v"]}"; ?>" class="btn <?php echo $button; ?> rounded"><?php echo $action; ?></a>
-				<a href="?v=Governates&code=<?php $countries[$i]["countryCode"];?>" class="btn btn-info rounded"><?php echo direction("Governates","المحافظات"); ?></a>
+				<a href="?v=Governates&code=<?php echo $countries[$i]["countryCode"];?>" class="btn btn-info rounded"><?php echo direction("Governates","المحافظات"); ?></a>
 			</td>
 			</tr>
 			<?php
