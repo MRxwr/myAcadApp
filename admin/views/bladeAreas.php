@@ -19,7 +19,7 @@ if( $country = selectDB("countries","`countryCode` LIKE '{$_GET["code"]}' LIMIT 
 	<form class="" method="POST" action="" enctype="multipart/form-data">
 		<div class="row m-0">
 			
-			<div class="col-md-6">
+			<div class="col-md-4">
 			<label><?php echo direction("Governate","المحافظة") ?></label>
 			<select name="governateId" class="form-control" required>
 				<?php
@@ -33,17 +33,17 @@ if( $country = selectDB("countries","`countryCode` LIKE '{$_GET["code"]}' LIMIT 
 			</select>
 			</div>
 			
-			<div class="col-md-6">
+			<div class="col-md-4">
 			<label><?php echo direction("English Title","العنوان بالإنجليزي") ?></label>
 			<input type="text" name="areaEnTitle" class="form-control" required>
 			</div>
 			
-			<div class="col-md-6">
+			<div class="col-md-4">
 			<label><?php echo direction("Arabic Title","العنوان بالعربي") ?></label>
 			<input type="text" name="areaArTitle" class="form-control" required>
 			</div>
 			
-			<div class="col-md-6" style="margin-top:10px">
+			<div class="col-md-12" style="margin-top:10px">
 			<input type="submit" class="btn btn-primary" value="<?php echo direction("Submit","أرسل") ?>">
 			<input type="hidden" name="update" value="0">
 			<input type="hidden" name="countryCode" value="<?php echo $country[0]["countryCode"] ?>">
