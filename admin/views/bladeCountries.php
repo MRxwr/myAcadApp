@@ -62,7 +62,7 @@ if( isset($_POST["updateCountryTitle"]) && !empty($_POST["updateCountryTitle"]) 
 <div class="panel-body row">
 <div class="table-wrap">
 <div class="table-responsive">
-<table class="table display responsive product-overview mb-30" id="myTable1">
+<table class="table display responsive product-overview mb-30" id="myTable">
 	<thead>
 	<tr>
 	<th>#</th>
