@@ -90,9 +90,10 @@ if( isset($_POST["updateCountryTitle"]) && !empty($_POST["updateCountryTitle"]) 
 			<tr>
 			<td class="txt-dark"><?php echo str_pad($i,3,"0",STR_PAD_LEFT) ?></td>
 			<td id="enTitle<?php echo $countries[$i]["id"] ?>"><?php echo $countries[$i]["countryEnTitle"]; ?></td>
-			<td id="arTitle<?php echo $countries[$i]["id"] ?>"><?php echo $countries[$i]["countryArTitle"]; ?><label style="display:none" id="countryCode<?php echo $countries[$i]["id"] ?>"><?php echo $countries[$i]["countryCode"] ?></label></td>
+			<td id="arTitle<?php echo $countries[$i]["id"] ?>"><?php echo $countries[$i]["countryArTitle"]; ?></td>
 			<td><?php if ( $countries[$i]["status"] == '1' ){ echo direction("On","تفعيل");}else{ echo direction("Off","إيقاف");} ?></td>
 			<td>
+				<label style="display:none" id="countryCode<?php echo $countries[$i]["id"] ?>"><?php echo $countries[$i]["countryCode"] ?></label>
 				<a id="<?php echo $countries[$i]["id"] ?>" class="btn btn-default rounded edit" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil text-inverse m-r-10"></i></a>
 				<a href="<?php echo $link . "&v={$_GET["v"]}"; ?>" class="btn <?php echo $button; ?> rounded"><?php echo $action; ?></a>
 				<a href="?v=Governates&code=<?php echo $countries[$i]["countryCode"];?>" class="btn btn-info rounded"><?php echo direction("Governates","المحافظات"); ?></a>
