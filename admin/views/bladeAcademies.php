@@ -51,7 +51,7 @@
 			<label><?php echo direction("Areas","المناطق") ?></label>
 			<select id="mySelect2" name="areasList" class="form-control" multiple required>
 				<?php
-				if( $areas = selectDB("countries","`countryEnTitle` LIKE 'KUWAIT' GROUP BY `countryCode` ORDER BY `areaEnTitle` ASC") ){
+				if( $areas = selectDB("countries","`countryEnTitle` LIKE 'KUWAIT' ORDER BY `areaEnTitle` ASC") ){
 					for( $i =0; $i < sizeof($areas); $i++ ){
 						echo "<option value='{$areas[$i]["id"]}'>{$areas[$i]["areaEnTitle"]}</option>";
 					}
