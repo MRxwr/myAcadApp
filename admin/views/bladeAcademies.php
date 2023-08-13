@@ -23,8 +23,9 @@
 			<div class="col-md-6">
 			<label><?php echo direction("Country","البلد") ?></label>
 			<select id="mySelect" name="country" class="form-control" required>
+				<option value='KUWAIT'>KUWAIT</option>
 				<?php
-				if( $countries = selectDB("countries","`id` != '0' GROUP BY `countryCode` ORDER BY `countryEnTitle`") ){
+				if( $countries = selectDB("countries","`id` != '0' AND `countryEnTitle` NOT LIKE 'KUWAIT' GROUP BY `countryCode` ORDER BY `countryEnTitle`") ){
 					for( $i =0; $i < sizeof($countries); $i++ ){
 						echo "<option value='{$countries[$i]["countryEnTitle"]}'>{$countries[$i]["countryEnTitle"]}</option>";
 					}
