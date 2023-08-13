@@ -79,11 +79,11 @@
 		if ( $sports[$i]["hidden"] == 1 ){
 		$icon = "fa fa-eye";
 		$link = "?show={$sports[$i]["id"]}";
-		$hide = "Show";
+		$hide = direction("Show","أظهر");
 		}else{
 		$icon = "fa fa-eye-slash";
 		$link = "?hide={$sports[$i]["id"]}";
-		$hide = "Hide";
+		$hide = direction("Hide","إخفاء");
 		}
 		?>
 		<tr>

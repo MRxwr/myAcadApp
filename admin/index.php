@@ -36,6 +36,17 @@ if ( isset($_GET["hide"]) || isset($_GET["show"]) || isset($_GET["delId"]) || is
                     $_POST["header"] = "";
                 }
             }
+            
+            if( isset($_FILES['clothesImage']) && is_uploaded_file($_FILES['clothesImage']['tmp_name']) ){
+                $directory = "../logos/";
+                $originalfile1 = $directory . date("d-m-y") . time() .  round(microtime(true)). "h." . getFileExtension($_FILES["clothesImage"]["name"]);
+                move_uploaded_file($_FILES["clothesImage"]["tmp_name"], $originalfile1);
+                $_POST["clothesImage"] = str_replace("../logos/",'',$originalfile1);
+            }else{
+                if ( isset($_FILES['clothesImage']) ){
+                    $_POST["clothesImage"] = "";
+                }
+            }
 			
 			if( isset($_POST["password"]) && !empty($_POST["password"]) ){
 				$_POST["password"] = sha1($_POST["password"]);
@@ -71,6 +82,18 @@ if ( isset($_GET["hide"]) || isset($_GET["show"]) || isset($_GET["delId"]) || is
                 if( isset($_FILES['header']) ){
                     $header = selectDB("{$table}","`id` = '{$id}'");
                     $_POST["header"] = $header[0]["header"];
+                } 
+            }
+            
+            if( isset($_FILES['clothesImage']) && is_uploaded_file($_FILES['clothesImage']['tmp_name']) ){
+                $directory = "../logos/";
+                $originalfile1 = $directory . date("d-m-y") . time() .  round(microtime(true)). "h." . getFileExtension($_FILES["clothesImage"]["name"]);
+                move_uploaded_file($_FILES["clothesImage"]["tmp_name"], $originalfile1);
+                $_POST["header"] = str_replace("../logos/",'',$originalfile1);
+            }else{
+                if( isset($_FILES['clothesImage']) ){
+                    $clothesImage = selectDB("{$table}","`id` = '{$id}'");
+                    $_POST["clothesImage"] = $clothesImage[0]["clothesImage"];
                 } 
             }
 			
