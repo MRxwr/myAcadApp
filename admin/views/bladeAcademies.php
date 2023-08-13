@@ -213,6 +213,8 @@
 	<script>
 		$(document).ready(function() {
 			$('#mySelect').select2();
+			$('#mySelect1').select2();
+			$('#mySelect2').select2();
 		});
 
 		$(document).on("click",".edit", function(){
