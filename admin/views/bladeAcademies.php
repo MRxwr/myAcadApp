@@ -40,7 +40,7 @@
 			
 			<div class="col-md-6">
 			<label><?php echo direction("Costume Price","سعر الملابس") ?></label>
-			<input type="float" name="clothesPrice" class="form-control" required>
+			<input type="number" step="any" name="clothesPrice" class="form-control" required>
 			</div>
 			
 			<div class="col-md-4">
