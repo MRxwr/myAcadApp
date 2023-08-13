@@ -10,14 +10,15 @@
 <div class="panel-body">
 	<form class="" method="POST" action="" enctype="multipart/form-data">
 		<div class="row m-0">
-			<div class="col-md-6">
-			<label><?php echo direction("Arabic Title","العنوان بالعربي") ?></label>
-			<input type="text" name="arTitle" class="form-control" required>
-			</div>
 			
 			<div class="col-md-6">
 			<label><?php echo direction("English Title","العنوان بالإنجليزي") ?></label>
 			<input type="text" name="enTitle" class="form-control" required>
+			</div>
+
+			<div class="col-md-6">
+			<label><?php echo direction("Arabic Title","العنوان بالعربي") ?></label>
+			<input type="text" name="arTitle" class="form-control" required>
 			</div>
 			
 			<div class="col-md-6">
@@ -130,7 +131,6 @@
 			$("input[name=arTitle]").val(arTitle).focus();
 			$("input[name=update]").val(id);
 			$("input[name=enTitle]").val(enTitle);
-			$("select[name=hidden]").val(hidden);
 			$("#logoImg").attr("src","../logos/"+logo);
 			$("#images").attr("style","margin-top:10px;display:block");
 		})
