@@ -138,9 +138,9 @@
 					<a href="<?php echo $link . "&v={$_GET["v"]}" ?>" class="mr-25" data-toggle="tooltip" data-original-title="<?php echo $hide ?>"> <i class="<?php echo $icon ?> text-inverse m-r-10"></i></a>
 					<a href="?delId=<?php echo $academies[$i]["id"] . "&v={$_GET["v"]}" ?>" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-close text-danger"></i>
 					</a>
-					<div style="display:none"><label id="clothes<?php echo $sports[$i]["id"]?>"><?php echo $sports[$i]["clothesImage"] ?></label></div>
-					<div style="display:none"><label id="logo<?php echo $sports[$i]["id"]?>"><?php echo $sports[$i]["imageurl"] ?></label></div>
-					<div style="display:none"><label id="header<?php echo $sports[$i]["id"]?>"><?php echo $sports[$i]["header"] ?></label></div>
+					<div style="display:none"><label id="clothes<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["clothesImage"] ?></label></div>
+					<div style="display:none"><label id="logo<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["imageurl"] ?></label></div>
+					<div style="display:none"><label id="header<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["header"] ?></label></div>
 				</td>
 				</tr>
 				<?php
