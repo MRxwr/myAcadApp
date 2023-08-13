@@ -1,6 +1,6 @@
 <?php 
 require_once("template/header.php");
-
+print_r($_POST);die();
 if ( isset($_GET["hide"]) || isset($_GET["show"]) || isset($_GET["delId"]) || isset($_POST["update"]) || isset($_POST["order"]) || isset($_POST["setDefaultPrice"]) ){
 	$table = strtolower($_GET["v"]);
 	if( strtolower($_GET["v"]) == "areas" ){
