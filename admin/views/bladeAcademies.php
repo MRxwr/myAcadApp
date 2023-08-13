@@ -45,17 +45,17 @@
 			
 			<div class="col-md-4">
 			<label><?php echo direction("Logo","الشعار") ?></label>
-			<input type="file" name="imageurl" class="form-control" required>
+			<input type="file" name="imageurl" class="form-control" >
 			</div>
 
 			<div class="col-md-4">
 			<label><?php echo direction("Header","الصورة الكبيرة") ?></label>
-			<input type="file" name="header" class="form-control" required>
+			<input type="file" name="header" class="form-control" >
 			</div>
 
 			<div class="col-md-4">
 			<label><?php echo direction("Costume Image","صورة الملابس") ?></label>
-			<input type="file" name="clothesImage" class="form-control" required>
+			<input type="file" name="clothesImage" class="form-control" >
 			</div>
 
 			<div id="images" style="margin-top: 10px; display:none">
