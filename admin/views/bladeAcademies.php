@@ -206,7 +206,7 @@
 			$("input[name=video]").val(video);
 			$("input[name=promotion]").val(promotion);
 			$("select[name=gender]").val(gender);
-			$("select[name=country]").val(country);
+			$("select[name=country]").val(country).trigger('change');
 			$("select[name=isClothes]").val(isClothes);
 			$("input[name=clothesPrice]").val(clothesPrice);
 			$("#logoImg").attr("src","../logos/"+logo);
