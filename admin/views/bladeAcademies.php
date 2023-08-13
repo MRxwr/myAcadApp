@@ -22,11 +22,11 @@
 
 			<div class="col-md-6">
 			<label><?php echo direction("Country","البلد") ?></label>
-			<select id="countrySelect" name="country" class="form-control" required>
+			<select id="mySelect" name="country" class="form-control" required>
 				<?php
 				if( $countries = selectDB("countries","`id` != '0' GROUP BY `countryCode` ORDER BY `countryEnTitle`") ){
 					for( $i =0; $i < sizeof($countries); $i++ ){
-						echo "<option value='{$countries[$i]["countryCode"]}'>{$countries[$i]["countryEnTitle"]}</option>";
+						echo "<option value='{$countries[$i]["countryEnTitle"]}'>{$countries[$i]["countryEnTitle"]}</option>";
 					}
 				}
 			?>
@@ -123,6 +123,7 @@
 		<tr>
 		<th><?php echo direction("English Title","الإسم الإنجليزي") ?></th>
 		<th><?php echo direction("Arabic Title","الإسم العربي") ?></th>
+		<th><?php echo direction("Country","البلد") ?></th>
 		<th><?php echo direction("Gender","الجنس") ?></th>
 		<th><?php echo direction("Video","الفيديو") ?></th>
 		<th><?php echo direction("Promotion","العرض") ?></th>
@@ -152,6 +153,7 @@
 				<tr>
 				<td id="enTitle<?php echo $academies[$i]["id"]?>" ><?php echo $academies[$i]["enTitle"] ?></td>
 				<td id="arTitle<?php echo $academies[$i]["id"]?>" ><?php echo $academies[$i]["arTitle"] ?></td>
+				<td id="country<?php echo $academies[$i]["id"]?>" ><?php echo $academies[$i]["country"] ?></td>
 				<td><?php echo $genderText ?><label style="display:none" id="gender<?php echo $academies[$i]["id"]?>"  ><?php echo $academies[$i]["gender"] ?></label></td>
 				<td><a href="<?php echo $academies[$i]["video"] ?>" target="_blank"><?php echo $videoText ?></a><label id="video<?php echo $academies[$i]["id"]?>" style="display:none" ><?php echo $academies[$i]["video"] ?></label></td>
 				<td><span  id="promotion<?php echo $academies[$i]["id"]?>" ><?php echo $academies[$i]["promotion"] ?></span>%</td>
@@ -183,7 +185,7 @@
 </div>
 	<script>
 		$(document).ready(function() {
-			$('#countrySelect').select2();
+			$('#mySelect').select2();
 		});
 
 		$(document).on("click",".edit", function(){
@@ -193,6 +195,7 @@
 			var video = $("#video"+id).html();
 			var promotion = $("#promotion"+id).html();
 			var gender = $("#gender"+id).html();
+			var country = $("#country"+id).html();
 			var isClothes = $("#isClothes"+id).html();
 			var clothesPrice = $("#clothesPrice"+id).html();
 			var logo = $("#logo"+id).html();
@@ -203,6 +206,7 @@
 			$("input[name=video]").val(video);
 			$("input[name=promotion]").val(promotion);
 			$("select[name=gender]").val(gender);
+			$("select[name=country]").val(country);
 			$("select[name=isClothes]").val(isClothes);
 			$("input[name=clothesPrice]").val(clothesPrice);
 			$("#logoImg").attr("src","../logos/"+logo);
