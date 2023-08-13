@@ -101,6 +101,10 @@
 		<tr>
 		<th><?php echo direction("English Title","الإسم الإنجليزي") ?></th>
 		<th><?php echo direction("Arabic Title","الإسم العربي") ?></th>
+		<th><?php echo direction("Video","الفيديو") ?></th>
+		<th><?php echo direction("Promotion","العرض") ?></th>
+		<th><?php echo direction("Costume? ","ملابس؟") ?></th>
+		<th><?php echo direction("Costume Price","سعر الملابس") ?></th>
 		<th class="text-nowrap"><?php echo direction("Actions","الخيارات") ?></th>
 		</tr>
 		</thead>
