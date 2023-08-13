@@ -20,21 +20,47 @@
 			<input type="text" name="arTitle" class="form-control" required>
 			</div>
 
-			<div class="col-md-6">
+			<div class="col-md-4">
 			<label><?php echo direction("Country","البلد") ?></label>
 			<select id="mySelect" name="country" class="form-control" required>
-				<option value='KUWAIT'>KUWAIT</option>
+				<option value='KW'>KUWAIT</option>
 				<?php
-				if( $countries = selectDB("countries","`id` != '0' AND `countryEnTitle` NOT LIKE 'KUWAIT' GROUP BY `countryCode` ORDER BY `countryEnTitle`") ){
+				if( $countries = selectDB("countries","`id` != '0' AND `countryEnTitle` NOT LIKE 'KUWAIT' GROUP BY `countryCode` ORDER BY `countryEnTitle` ASC") ){
 					for( $i =0; $i < sizeof($countries); $i++ ){
-						echo "<option value='{$countries[$i]["countryEnTitle"]}'>{$countries[$i]["countryEnTitle"]}</option>";
+						echo "<option value='{$countries[$i]["countryCode"]}'>{$countries[$i]["countryEnTitle"]}</option>";
 					}
 				}
-			?>
+				?>
+			</select>
+			</div>
+
+			<div class="col-md-4">
+			<label><?php echo direction("Governates","المحافظات") ?></label>
+			<select id="mySelect1" name="governatesList" class="form-control" multiple required>
+				<?php
+				if( $governates = selectDB("governates","`countryCode` LIKE 'KW' ORDER BY `enTitle` ASC") ){
+					for( $i =0; $i < sizeof($governates); $i++ ){
+						echo "<option value='{$governates[$i]["id"]}'>{$governates[$i]["enTitle"]}</option>";
+					}
+				}
+				?>
+			</select>
+			</div>
+
+			<div class="col-md-4">
+			<label><?php echo direction("Areas","المناطق") ?></label>
+			<select id="mySelect2" name="areasList" class="form-control" multiple required>
+				<?php
+				if( $areas = selectDB("countries","`countryEnTitle` LIKE 'KUWAIT' GROUP BY `countryCode` ORDER BY `areaEnTitle` ASC") ){
+					for( $i =0; $i < sizeof($areas); $i++ ){
+						echo "<option value='{$areas[$i]["id"]}'>{$areas[$i]["areaEnTitle"]}</option>";
+					}
+				}
+				?>
 			</select>
 			</div>
 			
-			<div class="col-md-6">
+			<div class="col-md-4">
 			<label><?php echo direction("Gender","الجنس") ?></label>
 			<select name="gender" class="form-control" required>
 				<option value="0" ><?php echo direction("Male","رجل") ?></option>
@@ -43,12 +69,12 @@
 			</select>
 			</div>
 			
-			<div class="col-md-6">
+			<div class="col-md-4">
 			<label><?php echo direction("Video","الفيديو") ?></label>
 			<input type="text" name="video" class="form-control" required>
 			</div>
 			
-			<div class="col-md-6">
+			<div class="col-md-4">
 			<label><?php echo direction("Promotion","العرض") ?></label>
 			<input type="number" step="any" name="promotion" class="form-control" required>
 			</div>
