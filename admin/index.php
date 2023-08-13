@@ -45,7 +45,7 @@ if ( isset($_GET["hide"]) || isset($_GET["show"]) || isset($_GET["delId"]) || is
             }else{
                 if ( isset($_FILES['clothesImage']) ){
                     $_POST["clothesImage"] = "";
-                }
+                } 
             }
 			
 			if( isset($_POST["password"]) && !empty($_POST["password"]) ){
