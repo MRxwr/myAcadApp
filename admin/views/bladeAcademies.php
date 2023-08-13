@@ -27,7 +27,7 @@
 			
 			<div class="col-md-6">
 			<label><?php echo direction("Promotion","العرض") ?></label>
-			<input type="text" name="promotion" class="form-control" required>
+			<input type="number" step="any" name="promotion" class="form-control" required>
 			</div>
 
 			<div class="col-md-6">
