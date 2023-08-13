@@ -19,6 +19,20 @@
 			<label><?php echo direction("Arabic Title","الإسم العربي") ?></label>
 			<input type="text" name="arTitle" class="form-control" required>
 			</div>
+
+			<div class="col-md-6">
+			<label><?php echo direction("Country","البلد") ?></label>
+			<input type="text" name="enTitle" class="form-control" required>
+			</div>
+			
+			<div class="col-md-6">
+			<label><?php echo direction("Gender","الجنس") ?></label>
+			<select name="gender" class="form-control" required>
+				<option value="0" ><?php echo direction("Male","رجل") ?></option>
+				<option value="1" ><?php echo direction("Female","أنثى") ?></option>
+				<option value="2" ><?php echo direction("Both","الكل") ?></option>
+			</select>
+			</div>
 			
 			<div class="col-md-6">
 			<label><?php echo direction("Video","الفيديو") ?></label>
@@ -101,6 +115,7 @@
 		<tr>
 		<th><?php echo direction("English Title","الإسم الإنجليزي") ?></th>
 		<th><?php echo direction("Arabic Title","الإسم العربي") ?></th>
+		<th><?php echo direction("Gender","الجنس") ?></th>
 		<th><?php echo direction("Video","الفيديو") ?></th>
 		<th><?php echo direction("Promotion","العرض") ?></th>
 		<th><?php echo direction("Costume? ","ملابس؟") ?></th>
@@ -115,6 +130,7 @@
 			for( $i = 0; $i < sizeof($academies); $i++ ){
 				$videoText = ( !empty($academies[$i]["video"]) ) ? direction("Watch","شاهد") : "";
 				$isClothesText = ( empty($academies[$i]["isClothes"]) )? direction("No","لا") : direction("Yes","نعم");
+				$genderText = ( empty($academies[$i]["gender"]) )? direction("Male","رجل") : ( ( $academies[$i]["gender"] == 1 ) ? direction("Female","أنثى") : direction("Both","الكل") ) ;
 				if ( $academies[$i]["hidden"] == 1 ){
 					$icon = "fa fa-eye";
 					$link = "?show={$academies[$i]["id"]}";
@@ -128,6 +144,7 @@
 				<tr>
 				<td id="enTitle<?php echo $academies[$i]["id"]?>" ><?php echo $academies[$i]["enTitle"] ?></td>
 				<td id="arTitle<?php echo $academies[$i]["id"]?>" ><?php echo $academies[$i]["arTitle"] ?></td>
+				<td><?php echo $genderText ?><label style="display:none" id="gender<?php echo $academies[$i]["id"]?>"  ><?php echo $academies[$i]["gender"] ?></label></td>
 				<td><a href="<?php echo $academies[$i]["video"] ?>" target="_blank"><?php echo $videoText ?></a><label id="video<?php echo $academies[$i]["id"]?>" style="display:none" ><?php echo $academies[$i]["video"] ?></label></td>
 				<td><span  id="promotion<?php echo $academies[$i]["id"]?>" ><?php echo $academies[$i]["promotion"] ?></span>%</td>
 				<td><?php echo $isClothesText ?><label style="display:none" id="isClothes<?php echo $academies[$i]["id"]?>"  ><?php echo $academies[$i]["isClothes"] ?></label></td>
@@ -163,6 +180,7 @@
 			var arTitle = $("#arTitle"+id).html();
 			var video = $("#video"+id).html();
 			var promotion = $("#promotion"+id).html();
+			var gender = $("#gender"+id).html();
 			var isClothes = $("#isClothes"+id).html();
 			var clothesPrice = $("#clothesPrice"+id).html();
 			var logo = $("#logo"+id).html();
@@ -172,6 +190,7 @@
 			$("input[name=arTitle]").val(arTitle);
 			$("input[name=video]").val(video);
 			$("input[name=promotion]").val(promotion);
+			$("select[name=gender]").val(gender);
 			$("select[name=isClothes]").val(isClothes);
 			$("input[name=clothesPrice]").val(clothesPrice);
 			$("#logoImg").attr("src","../logos/"+logo);
