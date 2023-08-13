@@ -22,7 +22,7 @@
 
 			<div class="col-md-6">
 			<label><?php echo direction("Country","البلد") ?></label>
-			<select id="myMultiSelect" name="country" class="form-control" required>
+			<select id="mySelect" name="country" class="form-control" multiple required>
 				<?php
 				if( $countries = selectDB("countries","`id` != '0' GROUP BY `countryCode` ORDER BY `countryEnTitle`") ){
 					for( $i =0; $i < sizeof($countries); $i++ ){
@@ -185,7 +185,7 @@
 </div>
 	<script>
 		$(document).ready(function() {
-			$('#myMultiSelect').select2();
+			$('#mySelect').select2();
 		});
 
 		$(document).on("click",".edit", function(){
