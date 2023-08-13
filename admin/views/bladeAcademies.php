@@ -22,7 +22,15 @@
 
 			<div class="col-md-6">
 			<label><?php echo direction("Country","البلد") ?></label>
-			<input type="text" name="enTitle" class="form-control" required>
+			<select id="countrySelect" name="country" class="form-control" required>
+				<?php
+				if( $countries = selectDB("countries","`id` != '0' GROUP BY `countryCode` ORDER BY `countryEnTitle`") ){
+					for( $i =0; $i < sizeof($countries); $i++ ){
+						echo "<option value='{$countries[$i]["countryCode"]}'>{$countries[$i]["countryEnTitle"]}</option>";
+					}
+				}
+			?>
+			</select>
 			</div>
 			
 			<div class="col-md-6">
@@ -174,6 +182,10 @@
 </div>
 </div>
 	<script>
+		$(document).ready(function() {
+			$('#countrySelect').select2();
+		});
+
 		$(document).on("click",".edit", function(){
 			var id = $(this).attr("id");
 			var enTitle = $("#enTitle"+id).html();
