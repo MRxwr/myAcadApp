@@ -51,6 +51,9 @@
 <!-- Init JavaScript -->
 <script src="dist/js/init.js"></script>
 
+<!-- Include Select2 JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
 			<!-- /Footer -->
 			
 			</div>
