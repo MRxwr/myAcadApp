@@ -229,6 +229,8 @@
 			var country = $("#country"+id).html();
 			var governatesList = $("#governatesList"+id).html();
 			var areasList = $("#areasList"+id).html();
+			console.log(governatesList);
+			console.log(areasList);
 			var isClothes = $("#isClothes"+id).html();
 			var clothesPrice = $("#clothesPrice"+id).html();
 			var logo = $("#logo"+id).html();
@@ -240,7 +242,7 @@
 			$("input[name=promotion]").val(promotion);
 			$("select[name=gender]").val(gender);
 			$("select[name=country]").val(country).trigger('change');
-			$("select[name=governatesList]").val(governatesList).trigger('change');
+			$("#mySelect1").val(governatesList).trigger('change');
 			$("select[name=areasList]").val(areasList).trigger('change');
 			$("select[name=isClothes]").val(isClothes);
 			$("input[name=clothesPrice]").val(clothesPrice);
