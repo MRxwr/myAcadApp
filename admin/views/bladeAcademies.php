@@ -170,15 +170,12 @@
 	<table class="table display responsive product-overview mb-30" id="myTable">
 		<thead>
 		<tr>
-		<th><?php echo direction("English Title","الإسم الإنجليزي") ?></th>
-		<th><?php echo direction("Arabic Title","الإسم العربي") ?></th>
+		<th>#</th>
+		<th><?php echo direction("Title","العنوان") ?></th>
 		<th><?php echo direction("Country","البلد") ?></th>
-		<th><?php echo direction("Location","الموقع") ?></th>
 		<th><?php echo direction("Gender","الجنس") ?></th>
-		<th><?php echo direction("Video","الفيديو") ?></th>
 		<th><?php echo direction("Promotion","العرض") ?></th>
 		<th><?php echo direction("Clothes? ","ملابس؟") ?></th>
-		<th><?php echo direction("Clothes Price","سعر الملابس") ?></th>
 		<th class="text-nowrap"><?php echo direction("Actions","الخيارات") ?></th>
 		</tr>
 		</thead>
@@ -187,6 +184,7 @@
 		<?php 
 		if( $academies = selectDB("academies","`status` = '0'") ){
 			for( $i = 0; $i < sizeof($academies); $i++ ){
+				$academyTitle = direction($academies[$i]["enTitle"],$academies[$i]["arTitle"]);
 				$videoText = ( !empty($academies[$i]["video"]) ) ? direction("Watch","شاهد") : "";
 				$locationText = ( !empty($academies[$i]["location"]) ) ? direction("View","إعرض") : "";
 				$isClothesText = ( empty($academies[$i]["isClothes"]) )? direction("No","لا") : direction("Yes","نعم");
@@ -203,15 +201,12 @@
 				}
 				?>
 				<tr>
-				<td id="enTitle<?php echo $academies[$i]["id"]?>" ><?php echo $academies[$i]["enTitle"] ?></td>
-				<td id="arTitle<?php echo $academies[$i]["id"]?>" ><?php echo $academies[$i]["arTitle"] ?></td>
+				<td><?php echo $counter = 1 + $i ?></td>
+				<td><?php echo $academyTitle ?></td>
 				<td id="country<?php echo $academies[$i]["id"]?>" ><?php echo $academies[$i]["country"] ?></td>
-				<td><a href="<?php echo $academies[$i]["location"] ?>" target="_blank"><?php echo $locationText ?></a><label id="location<?php echo $academies[$i]["id"]?>" style="display:none" ><?php echo $academies[$i]["location"] ?></label></td>
 				<td><?php echo $genderText ?><label style="display:none" id="gender<?php echo $academies[$i]["id"]?>"  ><?php echo $academies[$i]["gender"] ?></label></td>
-				<td><a href="<?php echo $academies[$i]["video"] ?>" target="_blank"><?php echo $videoText ?></a><label id="video<?php echo $academies[$i]["id"]?>" style="display:none" ><?php echo $academies[$i]["video"] ?></label></td>
 				<td><?php echo $isPromotionText ?><label style="display:none" id="isPromotion<?php echo $academies[$i]["id"]?>"  ><?php echo $academies[$i]["isPromotion"] ?></label></td>
 				<td><?php echo $isClothesText ?><label style="display:none" id="isClothes<?php echo $academies[$i]["id"]?>"  ><?php echo $academies[$i]["isClothes"] ?></label></td>
-				<td><span  id="clothesPrice<?php echo $academies[$i]["id"]?>" ><?php echo $academies[$i]["clothesPrice"] ?></span>KD</td>
 				<td class="text-nowrap">
 					<a href="?v=Sessions&code=<?php echo $academies[$i]["id"] ?>" class="btn btn-primary"><?php echo direction("Sessions","المحاضرات") ?></a>
 					<a href="?v=subscriptions&code=<?php echo $academies[$i]["id"] ?>" class="btn btn-success"><?php echo direction("Subscriptions","الإشتراكات") ?></a>
@@ -226,6 +221,11 @@
 					<div style="display:none"><label id="governate<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["governate"] ?></label></div>
 					<div style="display:none"><label id="area<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["area"] ?></label></div>
 					<div style="display:none"><label id="sport<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["sport"] ?></label></div>
+					<div style="display:none"><label id="enTitle<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["enTitle"] ?></label></div>
+					<div style="display:none"><label id="arTitle<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["arTitle"] ?></label></div>
+					<div style="display:none"><label id="location<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["location"] ?></label></div>
+					<div style="display:none"><label id="video<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["video"] ?></label></div>
+					<div style="display:none"><label id="clothesPrice<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["clothesPrice"] ?></label></div>
 				</td>
 				</tr>
 				<?php
