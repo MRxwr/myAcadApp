@@ -227,7 +227,7 @@
 			var promotion = $("#promotion"+id).html();
 			var gender = $("#gender"+id).html();
 			var country = $("#country"+id).html();
-			var governatesList = $("#governatesList"+id).html();
+			var governatesList = JSON.parse($("#governatesList"+id).html());
 			var areasList = JSON.parse($("#areasList"+id).html());
 			console.log(governatesList);
 			console.log(areasList);
