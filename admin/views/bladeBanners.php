@@ -10,9 +10,17 @@
 <div class="panel-body">
 	<form class="" method="POST" action="" enctype="multipart/form-data">
 		<div class="row m-0">
-			<div class="col-md-6">
+			<div class="col-md-12">
 			<label><?php echo direction("Title","العنوان") ?></label>
 			<input type="text" name="title" class="form-control" required>
+			</div>
+
+			<div class="col-md-6">
+			<label><?php echo direction("Type","النوع") ?></label>
+			<select name="type" class="form-control" required>
+				<option value="0"><?php echo direction("Photo","صورة") ?></option>
+				<option value="1"><?php echo direction("Video","فيديو") ?></option>
+			</select>
 			</div>
 			
 			<div class="col-md-6">
@@ -76,6 +84,7 @@
 		<tr>
 		<th>#</th>
 		<th><?php echo direction("Title","العنوان") ?></th>
+		<th><?php echo direction("Type","النوع") ?></th>
 		<th><?php echo direction("Link","الرابط") ?></th>
 		<th><?php echo direction("Banner","الصورة") ?></th>
 		<th class="text-nowrap"><?php echo direction("الخيارات","Actions") ?></th>
@@ -87,6 +96,7 @@
 		if( $banners = selectDB("banners","`status` = '0' ORDER BY `order` ASC") ){
 		for( $i = 0; $i < sizeof($banners); $i++ ){
 		$counter = $i + 1;
+		$typeText = ( empty($banners[$i]["type"]) ) ? direction("Photo","صورة") : direction("Video","فيديو") ;
 		if ( $banners[$i]["hidden"] == 1 ){
 			$icon = "fa fa-eye";
 			$link = "?show={$banners[$i]["id"]}";
@@ -103,6 +113,7 @@
 		<input name="id[]" class="form-control" type="hidden" value="<?php echo $banners[$i]["id"] ?>">
 		</td>
 		<td id="title<?php echo $banners[$i]["id"]?>" ><?php echo $banners[$i]["title"] ?></td>
+		<td><?php echo $typeText ?><label id="type<?php echo $banners[$i]["id"]?>" style="display:none"><?php echo $banners[$i]["type"] ?></label></td>
 		<td id="link<?php echo $banners[$i]["id"]?>" ><?php echo $banners[$i]["link"] ?></td>
 		<td><img src="../logos/<?php echo $banners[$i]["imageurl"] ?>" style="width:150px"></td>
 		<td class="text-nowrap">
@@ -139,12 +150,14 @@
 			var link = $("#link"+id).html();
 			var title = $("#title"+id).html();
 			var hidden = $("#hidden"+id).html();
+			var type = $("#type"+id).html();
 			var logo = $("#logo"+id).html();
 			$("input[type=file]").prop("required",false);
 			$("input[name=link]").val(link);
 			$("input[name=update]").val(id);
 			$("input[name=title]").val(title);
 			$("select[name=hidden]").val(hidden);
+			$("select[name=type]").val(type);
 			$("#logoImg").attr("src","../logos/"+logo);
 			$("#images").attr("style","margin-top:10px;display:block");
 		})
