@@ -118,7 +118,7 @@
 			var arTitle = $("#arTitle"+id).html();
 			var governateId = $("#governateId"+id).html();
 			$("input[name=areaEnTitle]").val(enTitle);
-			$("select[name=governateId]").val(governateId);
+			$("select[name=governateId]").val(governateId).trigger();
 			$("input[name=update]").val(id);
 			$("input[name=areaArTitle]").val(arTitle);
 			$("input[name=areaEnTitle]").focus()
