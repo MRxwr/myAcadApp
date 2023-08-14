@@ -81,9 +81,10 @@
 			<div class="col-md-4">
 			<label><?php echo direction("Gender","الجنس") ?></label>
 			<select name="gender" class="form-control" required>
-				<option value="0" ><?php echo direction("Male","رجل") ?></option>
-				<option value="1" ><?php echo direction("Female","أنثى") ?></option>
-				<option value="2" ><?php echo direction("Both","الكل") ?></option>
+				<option value="0" ><?php echo direction("Man","رجل") ?></option>
+				<option value="1" ><?php echo direction("Woman","أنثى") ?></option>
+				<option value="2" ><?php echo direction("Boy","ولد") ?></option>
+				<option value="3" ><?php echo direction("Girl","بنت") ?></option>
 			</select>
 			</div>
 			
@@ -91,10 +92,13 @@
 			<label><?php echo direction("Video","الفيديو") ?></label>
 			<input type="text" name="video" class="form-control" required>
 			</div>
-			
-			<div class="col-md-4">
-			<label><?php echo direction("Promotion","العرض") ?></label>
-			<input type="number" step="any" name="promotion" class="form-control" required>
+
+			<div class="col-md-6">
+			<label><?php echo direction("Promotion?","العرض؟") ?></label>
+			<select name="isPromotion" class="form-control" required>
+				<option value="0" ><?php echo direction("No","لا") ?></option>
+				<option value="1" ><?php echo direction("Yes","نعم") ?></option>
+			</select>
 			</div>
 
 			<div class="col-md-6">
@@ -173,8 +177,8 @@
 		<th><?php echo direction("Gender","الجنس") ?></th>
 		<th><?php echo direction("Video","الفيديو") ?></th>
 		<th><?php echo direction("Promotion","العرض") ?></th>
-		<th><?php echo direction("Costume? ","ملابس؟") ?></th>
-		<th><?php echo direction("Costume Price","سعر الملابس") ?></th>
+		<th><?php echo direction("Clothes? ","ملابس؟") ?></th>
+		<th><?php echo direction("Clothes Price","سعر الملابس") ?></th>
 		<th class="text-nowrap"><?php echo direction("Actions","الخيارات") ?></th>
 		</tr>
 		</thead>
@@ -186,7 +190,8 @@
 				$videoText = ( !empty($academies[$i]["video"]) ) ? direction("Watch","شاهد") : "";
 				$locationText = ( !empty($academies[$i]["location"]) ) ? direction("View","إعرض") : "";
 				$isClothesText = ( empty($academies[$i]["isClothes"]) )? direction("No","لا") : direction("Yes","نعم");
-				$genderText = ( empty($academies[$i]["gender"]) )? direction("Male","رجل") : ( ( $academies[$i]["gender"] == 1 ) ? direction("Female","أنثى") : direction("Both","الكل") ) ;
+				$isPromotionText = ( empty($academies[$i]["isPromotion"]) )? direction("No","لا") : direction("Yes","نعم");
+				$genderText = ( empty($academies[$i]["gender"]) )? direction("Man","رجل") : ( ( $academies[$i]["gender"] == 1 ) ? direction("Woman","إمرأه") : ( ( $academies[$i]["gender"] == 2 ) ? direction("Boy","ولد") : direction("Girl","بنت") ) ) ;
 				if ( $academies[$i]["hidden"] == 1 ){
 					$icon = "fa fa-eye";
 					$link = "?show={$academies[$i]["id"]}";
@@ -204,7 +209,7 @@
 				<td><a href="<?php echo $academies[$i]["location"] ?>" target="_blank"><?php echo $locationText ?></a><label id="location<?php echo $academies[$i]["id"]?>" style="display:none" ><?php echo $academies[$i]["location"] ?></label></td>
 				<td><?php echo $genderText ?><label style="display:none" id="gender<?php echo $academies[$i]["id"]?>"  ><?php echo $academies[$i]["gender"] ?></label></td>
 				<td><a href="<?php echo $academies[$i]["video"] ?>" target="_blank"><?php echo $videoText ?></a><label id="video<?php echo $academies[$i]["id"]?>" style="display:none" ><?php echo $academies[$i]["video"] ?></label></td>
-				<td><span  id="promotion<?php echo $academies[$i]["id"]?>" ><?php echo $academies[$i]["promotion"] ?></span>%</td>
+				<td><?php echo $isPromotionText ?><label style="display:none" id="isPromotion<?php echo $academies[$i]["id"]?>"  ><?php echo $academies[$i]["isPromotion"] ?></label></td>
 				<td><?php echo $isClothesText ?><label style="display:none" id="isClothes<?php echo $academies[$i]["id"]?>"  ><?php echo $academies[$i]["isClothes"] ?></label></td>
 				<td><span  id="clothesPrice<?php echo $academies[$i]["id"]?>" ><?php echo $academies[$i]["clothesPrice"] ?></span>KD</td>
 				<td class="text-nowrap">
@@ -249,13 +254,13 @@
 			var enTitle = $("#enTitle"+id).html();
 			var arTitle = $("#arTitle"+id).html();
 			var video = $("#video"+id).html();
-			var promotion = $("#promotion"+id).html();
 			var gender = $("#gender"+id).html();
 			var country = $("#country"+id).html();
 			var governate = $("#governate"+id).html();
 			var area = $("#area"+id).html();
 			var sport = JSON.parse($("#sport"+id).html());
 			var isClothes = $("#isClothes"+id).html();
+			var isPromotion = $("#isPromotion"+id).html();
 			var clothesPrice = $("#clothesPrice"+id).html();
 			var location = $("#location"+id).html();
 			var logo = $("#logo"+id).html();
@@ -264,13 +269,13 @@
 			$("input[name=enTitle]").val(enTitle).focus();
 			$("input[name=arTitle]").val(arTitle);
 			$("input[name=video]").val(video);
-			$("input[name=promotion]").val(promotion);
 			$("select[name=gender]").val(gender);
 			$("select[name=country]").val(country).trigger('change');
 			$("select[name=governate]").val(governate).trigger('change');
 			$("select[name=area]").val(area).trigger('change');
 			$("select[name=sport]").val(sport).trigger('change');
 			$("select[name=isClothes]").val(isClothes);
+			$("select[name=isPromotion]").val(isPromotion);
 			$("input[name=clothesPrice]").val(clothesPrice);
 			$("input[name=location]").val(location);
 			$("#logoImg").attr("src","../logos/"+logo);
