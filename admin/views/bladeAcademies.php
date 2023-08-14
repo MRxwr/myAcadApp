@@ -12,7 +12,7 @@
 		<div class="row m-0">
 			<div class="col-md-12">
 			<label><?php echo direction("Sports","الرياضات") ?></label>
-			<select id="mySelect3" name="sportsList[]" class="form-control" multiple required>
+			<select id="mySelect3" name="sport" class="form-control" required>
 				<?php
 				if( $sportsList = selectDB("sports","`status` = '0' AND `hidden` = '0' ORDER BY `enTitle` ASC") ){
 					for( $i =0; $i < sizeof($sportsList); $i++ ){
@@ -209,7 +209,7 @@
 				<td><span  id="clothesPrice<?php echo $academies[$i]["id"]?>" ><?php echo $academies[$i]["clothesPrice"] ?></span>KD</td>
 				<td class="text-nowrap">
 					<a href="?v=Sessions&code=<?php echo $academies[$i]["id"] ?>" class="btn btn-info"><?php echo direction("Sessions","المحاضرات") ?></a>
-					<a href="?v=subscribtions&code=<?php echo $academies[$i]["id"] ?>" class="btn btn-warning"><?php echo direction("Subscribtions","الإشتراكات") ?></a>
+					<a href="?v=subscriptions&code=<?php echo $academies[$i]["id"] ?>" class="btn btn-warning"><?php echo direction("Subscriptions","الإشتراكات") ?></a>
 					<a id="<?php echo $academies[$i]["id"] ?>" class="mr-25 edit" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i>
 					</a>
 					<a href="<?php echo $link . "&v={$_GET["v"]}" ?>" class="mr-25" data-toggle="tooltip" data-original-title="<?php echo $hide ?>"> <i class="<?php echo $icon ?> text-inverse m-r-10"></i></a>
@@ -220,7 +220,7 @@
 					<div style="display:none"><label id="header<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["header"] ?></label></div>
 					<div style="display:none"><label id="governate<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["governate"] ?></label></div>
 					<div style="display:none"><label id="area<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["area"] ?></label></div>
-					<div style="display:none"><label id="sportsList<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["sportsList"] ?></label></div>
+					<div style="display:none"><label id="sport<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["sport"] ?></label></div>
 				</td>
 				</tr>
 				<?php
@@ -254,7 +254,7 @@
 			var country = $("#country"+id).html();
 			var governate = $("#governate"+id).html();
 			var area = $("#area"+id).html();
-			var sportsList = JSON.parse($("#sportsList"+id).html());
+			var sport = JSON.parse($("#sport"+id).html());
 			var isClothes = $("#isClothes"+id).html();
 			var clothesPrice = $("#clothesPrice"+id).html();
 			var location = $("#location"+id).html();
@@ -269,7 +269,7 @@
 			$("select[name=country]").val(country).trigger('change');
 			$("select[name=governate]").val(governate).trigger('change');
 			$("select[name=area]").val(area).trigger('change');
-			$("#mySelect3").val(sportsList).trigger('change');
+			$("select[name=sport]").val(sport).trigger('change');
 			$("select[name=isClothes]").val(isClothes);
 			$("input[name=clothesPrice]").val(clothesPrice);
 			$("input[name=location]").val(location);
