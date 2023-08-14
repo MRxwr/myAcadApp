@@ -183,6 +183,7 @@
 		if( $academies = selectDB("academies","`status` = '0'") ){
 			for( $i = 0; $i < sizeof($academies); $i++ ){
 				$videoText = ( !empty($academies[$i]["video"]) ) ? direction("Watch","شاهد") : "";
+				$locationText = ( !empty($academies[$i]["location"]) ) ? direction("View","إعرض") : "";
 				$isClothesText = ( empty($academies[$i]["isClothes"]) )? direction("No","لا") : direction("Yes","نعم");
 				$genderText = ( empty($academies[$i]["gender"]) )? direction("Male","رجل") : ( ( $academies[$i]["gender"] == 1 ) ? direction("Female","أنثى") : direction("Both","الكل") ) ;
 				if ( $academies[$i]["hidden"] == 1 ){
@@ -199,6 +200,7 @@
 				<td id="enTitle<?php echo $academies[$i]["id"]?>" ><?php echo $academies[$i]["enTitle"] ?></td>
 				<td id="arTitle<?php echo $academies[$i]["id"]?>" ><?php echo $academies[$i]["arTitle"] ?></td>
 				<td id="country<?php echo $academies[$i]["id"]?>" ><?php echo $academies[$i]["country"] ?></td>
+				<td><a href="<?php echo $academies[$i]["location"] ?>" target="_blank"><?php echo $locationText ?></a><label id="location<?php echo $academies[$i]["id"]?>" style="display:none" ><?php echo $academies[$i]["location"] ?></label></td>
 				<td><?php echo $genderText ?><label style="display:none" id="gender<?php echo $academies[$i]["id"]?>"  ><?php echo $academies[$i]["gender"] ?></label></td>
 				<td><a href="<?php echo $academies[$i]["video"] ?>" target="_blank"><?php echo $videoText ?></a><label id="video<?php echo $academies[$i]["id"]?>" style="display:none" ><?php echo $academies[$i]["video"] ?></label></td>
 				<td><span  id="promotion<?php echo $academies[$i]["id"]?>" ><?php echo $academies[$i]["promotion"] ?></span>%</td>
