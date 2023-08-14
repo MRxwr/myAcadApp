@@ -28,7 +28,7 @@
 
             <div class="col-md-3">
 			<label><?php echo direction("Price after discount","السعر بعد الخصم") ?></label>
-			<input type="number" step="any" name="PriceAfterDiscount" class="form-control" value="0" required>
+			<input type="number" step="any" name="priceAfterDiscount" class="form-control" value="0" required>
 			</div>
 			
 			<div class="col-md-12" style="margin-top:10px">
@@ -117,11 +117,11 @@
 			var enTitle = $("#enTitle"+id).html();
 			var arTitle = $("#arTitle"+id).html();
 			var price = $("#price"+id).html();
-			var PriceAD = $("#priceAfterDiscount"+id).html();
+			var priceAfterDiscount = $("#priceAfterDiscount"+id).html();
             $("input[name=update]").val(id);
 			$("input[name=enTitle]").val(enTitle).focus();
 			$("input[name=arTitle]").val(arTitle);
 			$("input[name=price]").val(price);
-			$("input[name=priceAfterDiscount]").val(PriceAD);
+			$("input[name=priceAfterDiscount]").val(priceAfterDiscount);
 		})
 	</script>
