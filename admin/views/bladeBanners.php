@@ -118,11 +118,11 @@
 		<td><img src="../logos/<?php echo $banners[$i]["imageurl"] ?>" style="width:150px"></td>
 		<td class="text-nowrap">
 		
-		<a id="<?php echo $banners[$i]["id"] ?>" class="mr-25 edit" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i>
+		<a id="<?php echo $banners[$i]["id"] ?>" class="edit btn btn-warning" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i>
 		</a>
-		<a href="<?php echo $link . "&v={$_GET["v"]}" ?>" class="mr-25" data-toggle="tooltip" data-original-title="<?php echo $hide ?>"> <i class="<?php echo $icon ?> text-inverse m-r-10"></i>
+		<a href="<?php echo $link . "&v={$_GET["v"]}" ?>" class="btn btn-default" data-toggle="tooltip" data-original-title="<?php echo $hide ?>"> <i class="<?php echo $icon ?> text-inverse m-r-10"></i>
 		</a>
-		<a href="?delId=<?php echo $banners[$i]["id"] . "&v={$_GET["v"]}"  ?>" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-close text-danger"></i>
+		<a href="?delId=<?php echo $banners[$i]["id"] . "&v={$_GET["v"]}"  ?>" data-toggle="tooltip" data-original-title="Delete" class="btn btn-danger"><i class="fa fa-close text-inverse"></i>
 		</a>
 		<div style="display:none"><label id="hidden<?php echo $banners[$i]["id"]?>"><?php echo $banners[$i]["hidden"] ?></label></div>
 		<div style="display:none"><label id="logo<?php echo $banners[$i]["id"]?>"><?php echo $banners[$i]["imageurl"] ?></label></div>
