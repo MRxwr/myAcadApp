@@ -88,7 +88,7 @@
 				<tr>
 				<td id="enTitle<?php echo $areas[$i]["id"]?>" ><?php echo $areas[$i]["areaEnTitle"] ?></td>
 				<td id="arTitle<?php echo $areas[$i]["id"]?>" ><?php echo $areas[$i]["areaArTitle"] ?></td>
-				<td><?php echo $governateTitle ?><label id="governateId" style="display:none"><?php echo $areas[$i]["governateId"] ?></label></td>
+				<td><?php echo $governateTitle ?><label id="governateId<?php echo $areas[$i]["id"]?>" style="display:none"><?php echo $areas[$i]["governateId"] ?></label></td>
 				<td class="text-nowrap">
 					<a id="<?php echo $areas[$i]["id"] ?>" class="mr-25 edit" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i>
 					</a>
@@ -118,7 +118,7 @@
 			var arTitle = $("#arTitle"+id).html();
 			var governateId = $("#governateId"+id).html();
 			$("input[name=areaEnTitle]").val(enTitle);
-			$("select[name=governateId]").val(governateId).trigger();
+			$("select[name=governateId]").val(governateId);
 			$("input[name=update]").val(id);
 			$("input[name=areaArTitle]").val(arTitle);
 			$("input[name=areaEnTitle]").focus()
