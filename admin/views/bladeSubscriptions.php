@@ -11,27 +11,27 @@
 	<form class="" method="POST" action="" enctype="multipart/form-data">
 		<div class="row m-0">
 			
-			<div class="col-md-3">
+			<div class="col-md-6">
 			<label><?php echo direction("English Title","العنوان بالإنجليزي") ?></label>
 			<input type="text" name="enTitle" class="form-control" required>
 			</div>
 			
-			<div class="col-md-3">
+			<div class="col-md-6">
 			<label><?php echo direction("Arabic Title","العنوان بالعربي") ?></label>
 			<input type="text" name="arTitle" class="form-control" required>
 			</div>
 
-            <div class="col-md-3">
+            <div class="col-md-4">
 			<label><?php echo direction("Number of Days","عدد الأيام") ?></label>
-			<input type="number" name="price" class="form-control" value="0" required>
+			<input type="number" name="numberOfDays" class="form-control" value="0" required>
 			</div>
 
-            <div class="col-md-3">
+            <div class="col-md-4">
 			<label><?php echo direction("Price","السعر") ?></label>
 			<input type="number" step="any" name="price" class="form-control" value="0" required>
 			</div>
 
-            <div class="col-md-3">
+            <div class="col-md-4">
 			<label><?php echo direction("Price after discount","السعر بعد الخصم") ?></label>
 			<input type="number" step="any" name="priceAfterDiscount" class="form-control" value="0" required>
 			</div>
