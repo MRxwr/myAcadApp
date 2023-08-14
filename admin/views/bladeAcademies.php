@@ -215,9 +215,9 @@
 				<td class="text-nowrap">
 					<a href="?v=Sessions&code=<?php echo $academies[$i]["id"] ?>" class="btn btn-primary"><?php echo direction("Sessions","المحاضرات") ?></a>
 					<a href="?v=subscriptions&code=<?php echo $academies[$i]["id"] ?>" class="btn btn-success"><?php echo direction("Subscriptions","الإشتراكات") ?></a>
-					<a id="<?php echo $academies[$i]["id"] ?>" class="mr-25 edit" data-toggle="tooltip" data-original-title="Edit" class="btn btn-warning"> <i class="fa fa-pencil text-inverse m-r-10"></i>
+					<a id="<?php echo $academies[$i]["id"] ?>" class="edit btn btn-warning" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i>
 					</a>
-					<a href="<?php echo $link . "&v={$_GET["v"]}" ?>" class="mr-25" data-toggle="tooltip" data-original-title="<?php echo $hide ?>" class="btn btn-default"> <i class="<?php echo $icon ?> text-inverse m-r-10"></i></a>
+					<a href="<?php echo $link . "&v={$_GET["v"]}" ?>" class="btn btn-default" data-toggle="tooltip" data-original-title="<?php echo $hide ?>"> <i class="<?php echo $icon ?> text-inverse m-r-10"></i></a>
 					<a href="?delId=<?php echo $academies[$i]["id"] . "&v={$_GET["v"]}" ?>" data-toggle="tooltip" data-original-title="Delete" class="btn btn-danger"><i class="fa fa-close"></i>
 					</a>
 					<div style="display:none"><label id="clothes<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["clothesImage"] ?></label></div>
