@@ -90,13 +90,13 @@ if( $country = selectDB("countries","`countryCode` LIKE '{$_GET["code"]}' LIMIT 
 				}else{
 					$governateTitle = "";
 				}
-				if ( $academies[$i]["hidden"] == 1 ){
+				if ( $areas[$i]["hidden"] == 1 ){
 					$icon = "fa fa-eye";
-					$link = "?show={$academies[$i]["id"]}";
+					$link = "?show={$areas[$i]["id"]}";
 					$hide = direction("Show","أظهر");
 				}else{
 					$icon = "fa fa-eye-slash";
-					$link = "?hide={$academies[$i]["id"]}";
+					$link = "?hide={$areas[$i]["id"]}";
 					$hide = direction("Hide","إخفاء");
 				}
 				?>
