@@ -93,7 +93,7 @@
 			<input type="text" name="video" class="form-control" required>
 			</div>
 
-			<div class="col-md-6">
+			<div class="col-md-4">
 			<label><?php echo direction("Promotion?","العرض؟") ?></label>
 			<select name="isPromotion" class="form-control" required>
 				<option value="0" ><?php echo direction("No","لا") ?></option>
