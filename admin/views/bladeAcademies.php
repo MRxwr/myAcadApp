@@ -33,7 +33,7 @@
 			<input type="text" name="arTitle" class="form-control" required>
 			</div>
 
-			<div class="col-md-4">
+			<div class="col-md-3">
 			<label><?php echo direction("Country","البلد") ?></label>
 			<select id="mySelect" name="country" class="form-control" required>
 				<option value='KW'>KUWAIT</option>
@@ -47,9 +47,9 @@
 			</select>
 			</div>
 
-			<div class="col-md-4">
+			<div class="col-md-3">
 			<label><?php echo direction("Governates","المحافظات") ?></label>
-			<select id="mySelect1" name="governatesList[]" class="form-control" multiple required>
+			<select id="mySelect1" name="governatesList" class="form-control" required>
 				<?php
 				if( $governates = selectDB("governates","`countryCode` LIKE 'KW' ORDER BY `enTitle` ASC") ){
 					for( $i =0; $i < sizeof($governates); $i++ ){
@@ -60,9 +60,9 @@
 			</select>
 			</div>
 
-			<div class="col-md-4">
+			<div class="col-md-3">
 			<label><?php echo direction("Areas","المناطق") ?></label>
-			<select id="mySelect2" name="areasList[]" class="form-control" multiple required>
+			<select id="mySelect2" name="areasList" class="form-control" required>
 				<?php
 				if( $areas = selectDB("countries","`countryEnTitle` LIKE 'KUWAIT' ORDER BY `areaEnTitle` ASC") ){
 					for( $i =0; $i < sizeof($areas); $i++ ){
@@ -71,6 +71,11 @@
 				}
 				?>
 			</select>
+			</div>
+
+			<div class="col-md-3">
+			<label><?php echo direction("Location","الموقع") ?></label>
+			<input type="text" name="location" class="form-control" required>
 			</div>
 			
 			<div class="col-md-4">
@@ -208,8 +213,8 @@
 					<div style="display:none"><label id="clothes<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["clothesImage"] ?></label></div>
 					<div style="display:none"><label id="logo<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["imageurl"] ?></label></div>
 					<div style="display:none"><label id="header<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["header"] ?></label></div>
-					<div style="display:none"><label id="governatesList<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["governatesList"] ?></label></div>
-					<div style="display:none"><label id="areasList<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["areasList"] ?></label></div>
+					<div style="display:none"><label id="governate<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["governate"] ?></label></div>
+					<div style="display:none"><label id="area<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["area"] ?></label></div>
 					<div style="display:none"><label id="sportsList<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["sportsList"] ?></label></div>
 				</td>
 				</tr>
@@ -242,8 +247,8 @@
 			var promotion = $("#promotion"+id).html();
 			var gender = $("#gender"+id).html();
 			var country = $("#country"+id).html();
-			var governatesList = JSON.parse($("#governatesList"+id).html());
-			var areasList = JSON.parse($("#areasList"+id).html());
+			var governate = $("#governatesList"+id).html();
+			var area = $("#areasList"+id).html();
 			var sportsList = JSON.parse($("#sportsList"+id).html());
 			var isClothes = $("#isClothes"+id).html();
 			var clothesPrice = $("#clothesPrice"+id).html();
@@ -256,8 +261,8 @@
 			$("input[name=promotion]").val(promotion);
 			$("select[name=gender]").val(gender);
 			$("select[name=country]").val(country).trigger('change');
-			$("#mySelect1").val(governatesList).trigger('change');
-			$("#mySelect2").val(areasList).trigger('change');
+			$("#mySelect1").val(governate).trigger('change');
+			$("#mySelect2").val(area).trigger('change');
 			$("#mySelect3").val(sportsList).trigger('change');
 			$("select[name=isClothes]").val(isClothes);
 			$("input[name=clothesPrice]").val(clothesPrice);
