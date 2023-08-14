@@ -100,11 +100,11 @@
 		if ( $banners[$i]["hidden"] == 1 ){
 			$icon = "fa fa-eye";
 			$link = "?show={$banners[$i]["id"]}";
-			$hide = "Show";
+			$hide = direction("Show","أظهر");
 		}else{
 			$icon = "fa fa-eye-slash";
 			$link = "?hide={$banners[$i]["id"]}";
-			$hide = "Hide";
+			$hide = direction("Hide","إخفاء");
 		}
 		?>
 		<tr>
