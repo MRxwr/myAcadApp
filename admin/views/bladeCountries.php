@@ -37,7 +37,6 @@ if( isset($_POST["updateCountryTitle"]) && !empty($_POST["updateCountryTitle"]) 
 			<label><?php echo direction("Arabic Title","العنوان بالعربي") ?></label>
 			<input type="text" name="countryArTitle" class="form-control" required>
 			</div>
-			</div>
 			
 			<div class="col-md-4">
 			<label><?php echo direction("Currency","العملة") ?></label>
