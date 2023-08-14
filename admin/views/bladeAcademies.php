@@ -244,7 +244,7 @@
 			var country = $("#country"+id).html();
 			var governatesList = JSON.parse($("#governatesList"+id).html());
 			var areasList = JSON.parse($("#areasList"+id).html());
-			//var sportsList = JSON.parse($("#sportsList"+id).html());
+			var sportsList = JSON.parse($("#sportsList"+id).html());
 			var isClothes = $("#isClothes"+id).html();
 			var clothesPrice = $("#clothesPrice"+id).html();
 			var logo = $("#logo"+id).html();
