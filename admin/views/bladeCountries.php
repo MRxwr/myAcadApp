@@ -94,10 +94,10 @@ if( isset($_POST["updateCountryTitle"]) && !empty($_POST["updateCountryTitle"]) 
 			<td><?php if ( $countries[$i]["status"] == '1' ){ echo direction("On","تفعيل");}else{ echo direction("Off","إيقاف");} ?></td>
 			<td>
 				<label style="display:none" id="countryCode<?php echo $countries[$i]["id"] ?>"><?php echo $countries[$i]["countryCode"] ?></label>
-				<a id="<?php echo $countries[$i]["id"] ?>" class="btn btn-default rounded edit" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil text-inverse m-r-10"></i></a>
+				<a id="<?php echo $countries[$i]["id"] ?>" class="btn btn-warning rounded edit" data-toggle="tooltip" data-original-title="<?php echo direction("Edit","تعديل")  ?>"><i class="fa fa-pencil text-inverse m-r-10"></i></a>
 				<a href="<?php echo $link . "&v={$_GET["v"]}"; ?>" class="btn <?php echo $button; ?> rounded"><?php echo $action; ?></a>
 				<a href="?v=Governates&code=<?php echo $countries[$i]["countryCode"];?>" class="btn btn-info rounded"><?php echo direction("Governates","المحافظات"); ?></a>
-				<a href="?v=Areas&code=<?php echo $countries[$i]["countryCode"];?>" class="btn btn-warning rounded"><?php echo direction("Areas","المناطق"); ?></a>
+				<a href="?v=Areas&code=<?php echo $countries[$i]["countryCode"];?>" class="btn btn-primary rounded"><?php echo direction("Areas","المناطق"); ?></a>
 			</td>
 			</tr>
 			<?php
