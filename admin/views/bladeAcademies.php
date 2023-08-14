@@ -195,6 +195,8 @@
 					<div style="display:none"><label id="clothes<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["clothesImage"] ?></label></div>
 					<div style="display:none"><label id="logo<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["imageurl"] ?></label></div>
 					<div style="display:none"><label id="header<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["header"] ?></label></div>
+					<div style="display:none"><label id="governatesList<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["governatesList"] ?></label></div>
+					<div style="display:none"><label id="areasList<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["areasList"] ?></label></div>
 				</td>
 				</tr>
 				<?php
@@ -225,6 +227,8 @@
 			var promotion = $("#promotion"+id).html();
 			var gender = $("#gender"+id).html();
 			var country = $("#country"+id).html();
+			var governatesList = Object.values($("#governatesList"+id).html());
+			var areasList = Object.values($("#areasList"+id).html());
 			var isClothes = $("#isClothes"+id).html();
 			var clothesPrice = $("#clothesPrice"+id).html();
 			var logo = $("#logo"+id).html();
@@ -236,6 +240,8 @@
 			$("input[name=promotion]").val(promotion);
 			$("select[name=gender]").val(gender);
 			$("select[name=country]").val(country).trigger('change');
+			$("select[name=governatesList]").val(governatesList).trigger('change');
+			$("select[name=areasList]").val(areasList).trigger('change');
 			$("select[name=isClothes]").val(isClothes);
 			$("input[name=clothesPrice]").val(clothesPrice);
 			$("#logoImg").attr("src","../logos/"+logo);
