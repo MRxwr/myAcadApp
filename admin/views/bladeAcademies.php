@@ -258,7 +258,7 @@
 			var country = $("#country"+id).html();
 			var governate = $("#governate"+id).html();
 			var area = $("#area"+id).html();
-			var sport = JSON.parse($("#sport"+id).html());
+			var sport = $("#sport"+id).html();
 			var isClothes = $("#isClothes"+id).html();
 			var isPromotion = $("#isPromotion"+id).html();
 			var clothesPrice = $("#clothesPrice"+id).html();
