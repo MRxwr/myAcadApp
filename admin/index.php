@@ -12,17 +12,6 @@ if ( isset($_GET["hide"]) || isset($_GET["show"]) || isset($_GET["delId"]) || is
         if( updateDB("{$table}",array('charges'=> $_POST["setDefaultPrice"]),"`id` != '0'") ){}
     }elseif( isset($_POST["update"]) ){
 		$id = $_POST["update"];unset($_POST["update"]);
-        /*
-        if( isset($_POST["areasList"]) ){
-            $_POST["areasList"] = json_encode($_POST["areasList"]);
-        }
-        if( isset($_POST["governatesList"]) ){
-            $_POST["governatesList"] = json_encode($_POST["governatesList"]);
-        }
-        */
-        if( isset($_POST["sportsList"]) ){
-            $_POST["sportsList"] = json_encode($_POST["sportsList"]);
-        }
 		if ( $id == 0 ){
             if( isset($_FILES['imageurl']) && is_uploaded_file($_FILES['imageurl']['tmp_name']) ){
                 $directory = "../logos/";
