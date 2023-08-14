@@ -18,6 +18,9 @@ if ( isset($_GET["hide"]) || isset($_GET["show"]) || isset($_GET["delId"]) || is
         if( isset($_POST["governatesList"]) ){
             $_POST["governatesList"] = json_encode($_POST["governatesList"]);
         }
+        if( isset($_POST["sportsList"]) ){
+            $_POST["sportsList"] = json_encode($_POST["sportsList"]);
+        }
 		if ( $id == 0 ){
             if( isset($_FILES['imageurl']) && is_uploaded_file($_FILES['imageurl']['tmp_name']) ){
                 $directory = "../logos/";
