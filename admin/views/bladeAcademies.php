@@ -10,6 +10,19 @@
 <div class="panel-body">
 	<form class="" method="POST" action="" enctype="multipart/form-data">
 		<div class="row m-0">
+			<div class="col-md-12">
+			<label><?php echo direction("Sports","الرياضات") ?></label>
+			<select id="mySelect3" name="sportsList[]" class="form-control" multiple required>
+				<?php
+				if( $sportsList = selectDB("sports","`status` != '0' `enTitle` ASC") ){
+					for( $i =0; $i < sizeof($sportsList); $i++ ){
+						echo "<option value='{$sportsList[$i]["id"]}'>{$sportsList[$i]["enTitle"]}</option>";
+					}
+				}
+				?>
+			</select>
+			</div>
+
 			<div class="col-md-6">
 			<label><?php echo direction("English Title","الإسم الإنجليزي") ?></label>
 			<input type="text" name="enTitle" class="form-control" required>
@@ -197,6 +210,7 @@
 					<div style="display:none"><label id="header<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["header"] ?></label></div>
 					<div style="display:none"><label id="governatesList<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["governatesList"] ?></label></div>
 					<div style="display:none"><label id="areasList<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["areasList"] ?></label></div>
+					<div style="display:none"><label id="sportsList<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["sportsList"] ?></label></div>
 				</td>
 				</tr>
 				<?php
@@ -217,6 +231,7 @@
 			$('#mySelect').select2();
 			$('#mySelect1').select2();
 			$('#mySelect2').select2();
+			$('#mySelect3').select2();
 		});
 
 		$(document).on("click",".edit", function(){
@@ -229,8 +244,7 @@
 			var country = $("#country"+id).html();
 			var governatesList = JSON.parse($("#governatesList"+id).html());
 			var areasList = JSON.parse($("#areasList"+id).html());
-			console.log(governatesList);
-			console.log(areasList);
+			var sportsList = JSON.parse($("#sportsList"+id).html());
 			var isClothes = $("#isClothes"+id).html();
 			var clothesPrice = $("#clothesPrice"+id).html();
 			var logo = $("#logo"+id).html();
@@ -243,7 +257,8 @@
 			$("select[name=gender]").val(gender);
 			$("select[name=country]").val(country).trigger('change');
 			$("#mySelect1").val(governatesList).trigger('change');
-			$("select[name=areasList]").val(areasList).trigger('change');
+			$("#mySelect2").val(areasList).trigger('change');
+			$("#mySelect3").val(sportsList).trigger('change');
 			$("select[name=isClothes]").val(isClothes);
 			$("input[name=clothesPrice]").val(clothesPrice);
 			$("#logoImg").attr("src","../logos/"+logo);
