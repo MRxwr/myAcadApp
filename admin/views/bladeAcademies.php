@@ -49,7 +49,7 @@
 
 			<div class="col-md-3">
 			<label><?php echo direction("Governates","المحافظات") ?></label>
-			<select id="mySelect1" name="governatesList" class="form-control" required>
+			<select id="mySelect1" name="governate" class="form-control" required>
 				<?php
 				if( $governates = selectDB("governates","`countryCode` LIKE 'KW' ORDER BY `enTitle` ASC") ){
 					for( $i =0; $i < sizeof($governates); $i++ ){
@@ -62,7 +62,7 @@
 
 			<div class="col-md-3">
 			<label><?php echo direction("Areas","المناطق") ?></label>
-			<select id="mySelect2" name="areasList" class="form-control" required>
+			<select id="mySelect2" name="area" class="form-control" required>
 				<?php
 				if( $areas = selectDB("countries","`countryEnTitle` LIKE 'KUWAIT' ORDER BY `areaEnTitle` ASC") ){
 					for( $i =0; $i < sizeof($areas); $i++ ){
