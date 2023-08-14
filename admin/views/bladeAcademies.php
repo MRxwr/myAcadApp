@@ -169,6 +169,7 @@
 		<th><?php echo direction("English Title","الإسم الإنجليزي") ?></th>
 		<th><?php echo direction("Arabic Title","الإسم العربي") ?></th>
 		<th><?php echo direction("Country","البلد") ?></th>
+		<th><?php echo direction("Location","الموقع") ?></th>
 		<th><?php echo direction("Gender","الجنس") ?></th>
 		<th><?php echo direction("Video","الفيديو") ?></th>
 		<th><?php echo direction("Promotion","العرض") ?></th>
@@ -254,6 +255,7 @@
 			var sportsList = JSON.parse($("#sportsList"+id).html());
 			var isClothes = $("#isClothes"+id).html();
 			var clothesPrice = $("#clothesPrice"+id).html();
+			var location = $("#location"+id).html();
 			var logo = $("#logo"+id).html();
 			var header = $("#header"+id).html();
 			var clothes = $("#clothes"+id).html();
@@ -268,6 +270,7 @@
 			$("#mySelect3").val(sportsList).trigger('change');
 			$("select[name=isClothes]").val(isClothes);
 			$("input[name=clothesPrice]").val(clothesPrice);
+			$("input[name=location]").val(location);
 			$("#logoImg").attr("src","../logos/"+logo);
 			$("#headerImg").attr("src","../logos/"+header);
 			$("#clothesImg").attr("src","../logos/"+clothes);
