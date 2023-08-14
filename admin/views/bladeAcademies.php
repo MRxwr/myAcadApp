@@ -227,8 +227,8 @@
 			var promotion = $("#promotion"+id).html();
 			var gender = $("#gender"+id).html();
 			var country = $("#country"+id).html();
-			var governatesList = Object.values($("#governatesList"+id).html());
-			var areasList = Object.values($("#areasList"+id).html());
+			var governatesList = $("#governatesList"+id).html();
+			var areasList = $("#areasList"+id).html();
 			var isClothes = $("#isClothes"+id).html();
 			var clothesPrice = $("#clothesPrice"+id).html();
 			var logo = $("#logo"+id).html();
