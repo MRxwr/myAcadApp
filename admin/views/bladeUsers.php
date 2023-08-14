@@ -118,7 +118,7 @@
 				<td class="text-nowrap">
 				<a id="<?php echo $users[$i]["id"] ?>" class="edit btn btn-warning" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i>
 				</a>
-				<a href="<?php echo $link ?>" class="mr-25 btn btn-default" data-toggle="tooltip" data-original-title="<?php echo $hide ?>"> <i class="<?php echo $icon ?> text-inverse m-r-10"></i>
+				<a href="<?php echo $link ?>" class="btn btn-default" data-toggle="tooltip" data-original-title="<?php echo $hide ?>"> <i class="<?php echo $icon ?> text-inverse m-r-10"></i>
 				</a>
 				<a href="<?php echo "?v={$_GET["v"]}&delId=" . $users[$i]["id"] ?>" data-toggle="tooltip" data-original-title="Delete" class="btn btn-danger"><i class="fa fa-close text-inverse"></i>
 				</a>			
