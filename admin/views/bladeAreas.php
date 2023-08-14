@@ -1,3 +1,10 @@
+<?php
+if( $country = selectDB("countries","`countryCode` LIKE '{$_GET["code"]}' LIMIT 1") ){
+	
+}else{
+	$country = array();
+}
+?>
 <div class="col-sm-12">
 <div class="panel panel-default card-view">
 <div class="panel-heading">
