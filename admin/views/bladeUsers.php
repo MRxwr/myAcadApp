@@ -19,17 +19,7 @@
 			<label><?php echo direction("Last Name","الإسم الأخير") ?></label>
 			<input type="text" name="lastName" class="form-control" required>
 			</div>
-			
-			<div class="col-md-4">
-			<label><?php echo direction("Email","البريد الإلكتروني") ?></label>
-			<input type="text" name="email" class="form-control" required>
-			</div>
-			
-			<div class="col-md-4">
-			<label><?php echo direction("Password","كلمة المرور") ?></label>
-			<input type="text" name="password" class="form-control" required>
-			</div>
-			
+
 			<div class="col-md-4">
 			<label><?php echo direction("Gender","الجنس") ?></label>
 			<select name="gender" class="form-control">
@@ -44,10 +34,25 @@
 				?>
 			</select>
 			</div>
-			
-			<div class="col-md-4">
+
+			<div class="col-md-3">
 			<label><?php echo direction("Mobile","الهاتف") ?></label>
 			<input type="number" min="0" maxlength="8" name="phone" class="form-control" required>
+			</div>
+			
+			<div class="col-md-3">
+			<label><?php echo direction("Email","البريد الإلكتروني") ?></label>
+			<input type="text" name="email" class="form-control" required>
+			</div>
+			
+			<div class="col-md-3">
+			<label><?php echo direction("Password","كلمة المرور") ?></label>
+			<input type="text" name="password" class="form-control" required>
+			</div>
+
+			<div class="col-md-3">
+			<label><?php echo direction("Wallet","المحفظة") ?></label>
+			<input type="text" name="wallet" class="form-control" required>
 			</div>
 			
 			<div class="col-md-12" style="margin-top:10px">
@@ -79,6 +84,7 @@
 		<th><?php echo direction("Last Name","الإسم الأخير") ?></th>
 		<th><?php echo direction("Email","الإيميل") ?></th>
 		<th><?php echo direction("Mobile","الهاتف") ?></th>
+		<th><?php echo direction("Wallet","المحفظة") ?></th>
 		<th><?php echo direction("Gender","الجنس") ?></th>
 		<th class="text-nowrap"><?php echo direction("Actions","الخيارات") ?></th>
 		</tr>
@@ -107,6 +113,7 @@
 				<td id="lastName<?php echo $users[$i]["id"]?>" ><?php echo $users[$i]["lastName"] ?></td>
 				<td id="email<?php echo $users[$i]["id"]?>" ><?php echo $users[$i]["email"] ?></td>
 				<td id="mobile<?php echo $users[$i]["id"]?>" ><?php echo $users[$i]["phone"] ?></td>
+				<td id="wallet<?php echo $users[$i]["id"]?>" ><?php echo $users[$i]["wallet"] ?></td>
 				<td><?php echo $userGender ?><label id="gender<?php echo $users[$i]["id"]?>" style="display:none"><?php echo $users[$i]["gender"] ?></label></td>
 				<td class="text-nowrap">
 				<a id="<?php echo $users[$i]["id"] ?>" class="mr-25 edit" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i>
@@ -138,6 +145,7 @@
 		var lName = $("#lastName"+id).html();
 		var mobile = $("#mobile"+id).html();
 		var gender = $("#gender"+id).html();
+		var wallet = $("#wallet"+id).html();
 		$("input[name=password]").prop("required",false);
 		$("input[name=email]").val(email);
 		$("input[name=phone]").val(mobile);
@@ -146,6 +154,7 @@
 		$("input[name=firstName]").val(fName);
 		$("input[name=firstName]").focus();
 		$("input[name=lastName]").val(lName);
+		$("input[name=wallet]").val(wallet);
 	})
 </script>
 
