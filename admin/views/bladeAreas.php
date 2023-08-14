@@ -77,14 +77,14 @@ if( $country = selectDB("countries","`countryCode` LIKE '{$_GET["code"]}' LIMIT 
 		<th><?php echo direction("English Title","العنوان بالإنجليزي") ?></th>
 		<th><?php echo direction("Arabic Title","العنوان بالعربي") ?></th>
 		<th><?php echo direction("Governate","المحافظة") ?></th>
-		<th class="text-nowrap"><?php echo direction("الخيارات","Actions") ?></th>
+		<th class="text-nowrap"><?php echo direction("Actions","الخيارات") ?></th>
 		</tr>
 		</thead>
 		
 		<tbody>
 		<?php 
 		$orderBy = direction("areaEnTitle","areaArTitle");
-		if( $areas = selectDB("countries","`status` = '0' AND `countryCode` LIKE '{$_GET["code"]}' ORDER BY `{$orderBy}` ASC") ){
+		if( $areas = selectDB("countries","`status` = '1' AND `countryCode` LIKE '{$_GET["code"]}' ORDER BY `{$orderBy}` ASC") ){
 			for( $i = 0; $i < sizeof($areas); $i++ ){
 				if( $governate = selectDB("governates","`id` = '{$areas[$i]["governateId"]}'") ){
 					$governateTitle = direction($governate[0]["enTitle"],$governate[0]["arTitle"]);
