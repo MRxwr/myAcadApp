@@ -231,7 +231,7 @@
 			$('#mySelect').select2();
 			$('#mySelect1').select2();
 			$('#mySelect2').select2();
-			//$('#mySelect3').select2();
+			$('#mySelect3').select2();
 		});
 
 		$(document).on("click",".edit", function(){
