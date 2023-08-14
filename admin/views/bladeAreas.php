@@ -90,7 +90,15 @@ if( $country = selectDB("countries","`countryCode` LIKE '{$_GET["code"]}' LIMIT 
 				}else{
 					$governateTitle = "";
 				}
-				
+				if ( $academies[$i]["hidden"] == 1 ){
+					$icon = "fa fa-eye";
+					$link = "?show={$academies[$i]["id"]}";
+					$hide = direction("Show","أظهر");
+				}else{
+					$icon = "fa fa-eye-slash";
+					$link = "?hide={$academies[$i]["id"]}";
+					$hide = direction("Hide","إخفاء");
+				}
 				?>
 				<tr>
 				<td id="enTitle<?php echo $areas[$i]["id"]?>" ><?php echo $areas[$i]["areaEnTitle"] ?></td>
@@ -99,8 +107,7 @@ if( $country = selectDB("countries","`countryCode` LIKE '{$_GET["code"]}' LIMIT 
 				<td class="text-nowrap">
 					<a id="<?php echo $areas[$i]["id"] ?>" class="mr-25 edit" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i>
 					</a>
-					<a href="?delId=<?php echo $areas[$i]["id"] . "&v={$_GET["v"]}&code={$_GET["code"]}" ?>" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-close text-danger"></i>
-					</a>			
+					<a href="<?php echo $link . "&v={$_GET["v"]}&code={$_GET["code"]}" ?>" class="btn btn-default" data-toggle="tooltip" data-original-title="<?php echo $hide ?>"> <i class="<?php echo $icon ?> text-inverse m-r-10"></i></a>			
 				</td>
 				</tr>
 				<?php
