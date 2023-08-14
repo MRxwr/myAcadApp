@@ -45,13 +45,13 @@
 			</div>
 			
 			<div class="col-md-6">
-			<label><?php echo direction("Shop","المحل") ?></label>
-			<select name="shopId" class="form-control">
+			<label><?php echo direction("Academy","الأكادمية") ?></label>
+			<select name="academyId" class="form-control">
 				<?php
-				if( $shop = selectDB("shops","`status` = '0'") ){
-					for( $i = 0; $i < sizeof($shop); $i++ ){
-						$shopTitle = direction($shop[$i]["enTitle"],$shop[$i]["arTitle"]);
-						echo "<option value='{$shop[$i]["id"]}'>{$shopTitle}</option>";
+				if( $academy = selectDB("academies","`status` = '0'") ){
+					for( $i = 0; $i < sizeof($academy); $i++ ){
+						$academyTitle = direction($academy[$i]["enTitle"],$academy[$i]["arTitle"]);
+						echo "<option value='{$academy[$i]["id"]}'>{$academyTitle}</option>";
 					}
 				}
 				?>
@@ -113,10 +113,10 @@
 					$type = "Error";
 				}
 				
-				if( $shop = selectDB("shops","`id` = '{$employees[$i]["shopId"]}'") ){
-					$shop = direction($shop[0]["enTitle"],$shop[0]["arTitle"]);
+				if( $academy = selectDB("academies","`id` = '{$employees[$i]["academyId"]}'") ){
+					$academy = direction($academy[0]["enTitle"],$academy[0]["arTitle"]);
 				}else{
-					$shop = "";
+					$academy = "";
 				}
 				
 				?>
@@ -125,7 +125,7 @@
 				<td id="email<?php echo $employees[$i]["id"]?>" ><?php echo $employees[$i]["email"] ?></td>
 				<td id="mobile<?php echo $employees[$i]["id"]?>" ><?php echo $employees[$i]["phone"] ?></td>
 				<td><?php echo $type ?></td>
-				<td><?php echo $shop ?></td>
+				<td><?php echo $academy ?></td>
 				<td class="text-nowrap">
 				
 				<a id="<?php echo $employees[$i]["id"] ?>" class="mr-25 edit" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i>
@@ -136,7 +136,7 @@
 				</a>
 				<div style="display:none">
 					<label id="type<?php echo $employees[$i]["id"]?>"><?php echo $employees[$i]["empType"] ?></label>
-					<label id="shop<?php echo $employees[$i]["id"]?>"><?php echo $employees[$i]["shopId"] ?></label></div>				
+					<label id="academy<?php echo $employees[$i]["id"]?>"><?php echo $employees[$i]["academyId"] ?></label></div>				
 				</td>
 				</tr>
 				<?php
@@ -159,7 +159,7 @@
 		var name = $("#name"+id).html();
 		var mobile = $("#mobile"+id).html();
 		var type = $("#type"+id).html();
-		var shop = $("#shop"+id).html();
+		var academy = $("#academy"+id).html();
 		var logo = $("#logo"+id).html();
 		$("input[name=password]").prop("required",false);
 		$("input[name=email]").val(email);
@@ -168,7 +168,7 @@
 		$("input[name=fullName]").val(name);
 		$("input[name=fullName]").focus();
 		$("select[name=empType]").val(type);
-		$("select[name=shopId]").val(shop);
+		$("select[name=academyId]").val(academy);
 	})
 </script>
 
