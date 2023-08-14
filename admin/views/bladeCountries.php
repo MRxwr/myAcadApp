@@ -126,11 +126,10 @@ if( isset($_POST["updateCountryTitle"]) && !empty($_POST["updateCountryTitle"]) 
 		var arTitle = $("#arTitle"+id).html();
 		var currencyCode = $("#currencyCode"+id).html();
 		var governateId = $("#countryCode"+id).html();
-		$("input[name=countryEnTitle]").val(enTitle);
+		$("input[name=countryEnTitle]").val(enTitle).focus();
 		$("input[name=countryCode]").val(governateId);
 		$("input[name=updateCountryTitle]").val(id);
 		$("input[name=countryArTitle]").val(arTitle);
 		$("input[name=currencyCode]").val(currencyCode);
-		$("input[name=countryEnTitle]").focus()
 	})
 </script>
