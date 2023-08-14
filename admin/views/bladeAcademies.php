@@ -247,8 +247,8 @@
 			var promotion = $("#promotion"+id).html();
 			var gender = $("#gender"+id).html();
 			var country = $("#country"+id).html();
-			var governate = $("#governatesList"+id).html();
-			var area = $("#areasList"+id).html();
+			var governate = $("#governate"+id).html();
+			var area = $("#area"+id).html();
 			var sportsList = JSON.parse($("#sportsList"+id).html());
 			var isClothes = $("#isClothes"+id).html();
 			var clothesPrice = $("#clothesPrice"+id).html();
