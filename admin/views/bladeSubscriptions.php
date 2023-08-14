@@ -22,6 +22,11 @@
 			</div>
 
             <div class="col-md-3">
+			<label><?php echo direction("Number of Days","عدد الأيام") ?></label>
+			<input type="number" name="price" class="form-control" value="0" required>
+			</div>
+
+            <div class="col-md-3">
 			<label><?php echo direction("Price","السعر") ?></label>
 			<input type="number" step="any" name="price" class="form-control" value="0" required>
 			</div>
@@ -62,6 +67,7 @@
 		<th>#</th>
 		<th><?php echo direction("English Title","العنوان بالإنجليزي") ?></th>
 		<th><?php echo direction("Arabic Title","العنوان بالعربي") ?></th>
+		<th><?php echo direction("Days","الأيام") ?></th>
 		<th><?php echo direction("Price","السعر") ?></th>
 		<th><?php echo direction("Price after discount","السعر بعد الخصم") ?></th>
 		<th class="text-nowrap"><?php echo direction("Actions","الخيارات") ?></th>
@@ -87,6 +93,7 @@
 				<td><?php echo $counter = $i + 1 ?></td>
 				<td id="enTitle<?php echo $subscriptions[$i]["id"]?>" ><?php echo $subscriptions[$i]["enTitle"] ?></td>
 				<td id="arTitle<?php echo $subscriptions[$i]["id"]?>" ><?php echo $subscriptions[$i]["arTitle"] ?></td>
+				<td id="numberOfDays<?php echo $subscriptions[$i]["id"]?>" ><?php echo $subscriptions[$i]["numberOfDays"] ?></td>
 				<td id="price<?php echo $subscriptions[$i]["id"]?>" ><?php echo $subscriptions[$i]["price"] ?></td>
 				<td id="priceAfterDiscount<?php echo $subscriptions[$i]["id"]?>" ><?php echo $subscriptions[$i]["priceAfterDiscount"] ?></td>
 				<td class="text-nowrap">
@@ -116,11 +123,13 @@
 			var id = $(this).attr("id");
 			var enTitle = $("#enTitle"+id).html();
 			var arTitle = $("#arTitle"+id).html();
+			var numberOfDays = $("#numberOfDays"+id).html();
 			var price = $("#price"+id).html();
 			var priceAfterDiscount = $("#priceAfterDiscount"+id).html();
             $("input[name=update]").val(id);
 			$("input[name=enTitle]").val(enTitle).focus();
 			$("input[name=arTitle]").val(arTitle);
+			$("input[name=numberOfDays]").val(numberOfDays);
 			$("input[name=price]").val(price);
 			$("input[name=priceAfterDiscount]").val(priceAfterDiscount);
 		})
