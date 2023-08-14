@@ -28,14 +28,20 @@ if( isset($_POST["updateCountryTitle"]) && !empty($_POST["updateCountryTitle"]) 
 	<form class="" method="POST" action="" enctype="multipart/form-data">
 		<div class="row m-0">
 
-			<div class="col-md-6">
+			<div class="col-md-4">
 			<label><?php echo direction("English Title","العنوان بالإنجليزي") ?></label>
 			<input type="text" name="countryEnTitle" class="form-control" required>
 			</div>
 			
-			<div class="col-md-6">
+			<div class="col-md-4">
 			<label><?php echo direction("Arabic Title","العنوان بالعربي") ?></label>
 			<input type="text" name="countryArTitle" class="form-control" required>
+			</div>
+			</div>
+			
+			<div class="col-md-4">
+			<label><?php echo direction("Currency","العملة") ?></label>
+			<input type="text" name="currencyCode" class="form-control" required>
 			</div>
 			
 			<div class="col-md-12" style="margin-top:10px">
@@ -68,6 +74,7 @@ if( isset($_POST["updateCountryTitle"]) && !empty($_POST["updateCountryTitle"]) 
 	<th>#</th>
 	<th><?php echo direction("Country English","البلد بالإنجليزي") ?></th>
 	<th><?php echo direction("Country Arabic","البلد بالعربي") ?></th>
+	<th><?php echo direction("Currency","العملة") ?></th>
 	<th><?php echo direction("Status","الحالة") ?></th>
 	<th><?php echo direction("Actions", "الخيارات") ?></th>
 	</tr>
@@ -91,6 +98,7 @@ if( isset($_POST["updateCountryTitle"]) && !empty($_POST["updateCountryTitle"]) 
 			<td class="txt-dark"><?php echo str_pad($i,3,"0",STR_PAD_LEFT) ?></td>
 			<td id="enTitle<?php echo $countries[$i]["id"] ?>"><?php echo $countries[$i]["countryEnTitle"]; ?></td>
 			<td id="arTitle<?php echo $countries[$i]["id"] ?>"><?php echo $countries[$i]["countryArTitle"]; ?></td>
+			<td id="currencyCode<?php echo $countries[$i]["id"] ?>"><?php echo $countries[$i]["currencyCode"]; ?></td>
 			<td><?php if ( $countries[$i]["status"] == '1' ){ echo direction("On","تفعيل");}else{ echo direction("Off","إيقاف");} ?></td>
 			<td>
 				<label style="display:none" id="countryCode<?php echo $countries[$i]["id"] ?>"><?php echo $countries[$i]["countryCode"] ?></label>
@@ -117,11 +125,13 @@ if( isset($_POST["updateCountryTitle"]) && !empty($_POST["updateCountryTitle"]) 
 		var id = $(this).attr("id");
 		var enTitle = $("#enTitle"+id).html();
 		var arTitle = $("#arTitle"+id).html();
+		var currencyCode = $("#currencyCode"+id).html();
 		var governateId = $("#countryCode"+id).html();
 		$("input[name=countryEnTitle]").val(enTitle);
 		$("input[name=countryCode]").val(governateId);
 		$("input[name=updateCountryTitle]").val(id);
 		$("input[name=countryArTitle]").val(arTitle);
+		$("input[name=currencyCode]").val(currencyCode);
 		$("input[name=countryEnTitle]").focus()
 	})
 </script>
