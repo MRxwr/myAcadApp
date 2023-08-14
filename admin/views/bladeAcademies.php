@@ -261,8 +261,8 @@
 			$("input[name=promotion]").val(promotion);
 			$("select[name=gender]").val(gender);
 			$("select[name=country]").val(country).trigger('change');
-			$("#mySelect1").val(governate).trigger('change');
-			$("#mySelect2").val(area).trigger('change');
+			$("select[name=governate]").val(governate).trigger('change');
+			$("select[name=area]").val(area).trigger('change');
 			$("#mySelect3").val(sportsList).trigger('change');
 			$("select[name=isClothes]").val(isClothes);
 			$("input[name=clothesPrice]").val(clothesPrice);
