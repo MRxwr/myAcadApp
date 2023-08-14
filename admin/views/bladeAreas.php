@@ -105,7 +105,7 @@ if( $country = selectDB("countries","`countryCode` LIKE '{$_GET["code"]}' LIMIT 
 				<td id="arTitle<?php echo $areas[$i]["id"]?>" ><?php echo $areas[$i]["areaArTitle"] ?></td>
 				<td><?php echo $governateTitle ?><label id="governateId<?php echo $areas[$i]["id"]?>" style="display:none"><?php echo $areas[$i]["governateId"] ?></label></td>
 				<td class="text-nowrap">
-					<a id="<?php echo $areas[$i]["id"] ?>" class="mr-25 edit btn btn-warning" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i>
+					<a id="<?php echo $areas[$i]["id"] ?>" class="edit btn btn-warning" data-toggle="tooltip" data-original-title="<?php echo direction("Edit","تعديل") ?>"> <i class="fa fa-pencil text-inverse m-r-10"></i>
 					</a>
 					<a href="<?php echo $link . "&v={$_GET["v"]}&code={$_GET["code"]}" ?>" class="btn btn-default" data-toggle="tooltip" data-original-title="<?php echo $hide ?>"> <i class="<?php echo $icon ?> text-inverse m-r-10"></i></a>			
 				</td>
