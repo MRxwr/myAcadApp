@@ -102,7 +102,7 @@
 			</div>
 
 			<div class="col-md-6">
-			<label><?php echo direction("Costume? ","ملابس؟") ?></label>
+			<label><?php echo direction("Clothes? ","ملابس؟") ?></label>
 			<select name="isClothes" class="form-control" required>
 				<option value="0" ><?php echo direction("No","لا") ?></option>
 				<option value="1" ><?php echo direction("Yes","نعم") ?></option>
@@ -110,7 +110,7 @@
 			</div>
 			
 			<div class="col-md-6">
-			<label><?php echo direction("Costume Price","سعر الملابس") ?></label>
+			<label><?php echo direction("Clothes Price","سعر الملابس") ?></label>
 			<input type="number" step="any" name="clothesPrice" class="form-control" required>
 			</div>
 			
@@ -125,7 +125,7 @@
 			</div>
 
 			<div class="col-md-4">
-			<label><?php echo direction("Costume Image","صورة الملابس") ?></label>
+			<label><?php echo direction("Clothes Image","صورة الملابس") ?></label>
 			<input type="file" name="clothesImage" class="form-control" >
 			</div>
 
