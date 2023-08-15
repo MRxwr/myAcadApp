@@ -1,4 +1,5 @@
 <?php
+$cookieSession = "myAcad";
 if ( isset($_GET["lang"]) ){
 	$arrayLangs = ["ENG","AR"];
 	if ( in_array($_GET["lang"], $arrayLangs) ){
