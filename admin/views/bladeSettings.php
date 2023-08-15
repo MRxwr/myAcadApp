@@ -56,7 +56,7 @@ if( $settings = selectDB("settings","`id` = '1'")){
 			<div class="panel-wrapper collapse in">
 				<div class="panel-body">
 					<div class="text">
-						<input class="form-control" type="text" name="enTerms" placeholder="1.0.0" value="<?php echo $settings[0]["enTerms"] ?>">
+						<textarea name="enTerms" class="tinymce"><?php echo $settings[0]["enTerms"] ?></textarea>
 					</div>
 				</div>
 			</div>
@@ -75,7 +75,7 @@ if( $settings = selectDB("settings","`id` = '1'")){
 			<div class="panel-wrapper collapse in">
 				<div class="panel-body">
 					<div class="text">
-						<input class="form-control" type="text" name="arTerms" placeholder="1.0.0" value="<?php echo $settings[0]["arTerms"] ?>">
+						<textarea name="arTerms" class="tinymce"><?php echo $settings[0]["arTerms"] ?></textarea>
 					</div>
 				</div>
 			</div>
@@ -94,7 +94,7 @@ if( $settings = selectDB("settings","`id` = '1'")){
 			<div class="panel-wrapper collapse in">
 				<div class="panel-body">
 					<div class="text">
-						<input class="form-control" type="text" name="enPolicy" placeholder="1.0.0" value="<?php echo $settings[0]["enPolicy"] ?>">
+						<textarea name="enPolicy" class="tinymce"><?php echo $settings[0]["enPolicy"] ?></textarea>
 					</div>
 				</div>
 			</div>
@@ -113,7 +113,7 @@ if( $settings = selectDB("settings","`id` = '1'")){
 			<div class="panel-wrapper collapse in">
 				<div class="panel-body">
 					<div class="text">
-						<input class="form-control" type="text" name="arPolicy" placeholder="1.0.0" value="<?php echo $settings[0]["arPolicy"] ?>">
+						<textarea name="arPolicy" class="tinymce"><?php echo $settings[0]["arPolicy"] ?></textarea>
 					</div>
 				</div>
 			</div>
