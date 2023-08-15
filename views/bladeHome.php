@@ -1,3 +1,7 @@
+<?php
+require("template/selectSportModel.php");
+?>
+
 <div class="carousel_area">
     <div class="container">
         <div class="owl-carousel slider1">
