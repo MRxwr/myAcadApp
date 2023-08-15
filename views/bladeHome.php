@@ -1,5 +1,5 @@
 <?php
-require("template/selectSportModel.php");
+require("template/selectSportModal.php");
 ?>
 
 <div class="carousel_area">
