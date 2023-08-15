@@ -1,5 +1,6 @@
 <?php
 require("template/header.php");
+require("template/navbar.php");
 
 // get viewed page from pages folder \\
 if( isset($_GET["v"]) && searchFile("views","blade{$_GET["v"]}.php") ){
