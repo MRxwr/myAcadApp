@@ -59,6 +59,7 @@ if ( isset($_GET["hide"]) || isset($_GET["show"]) || isset($_GET["delId"]) || is
 			<?php
 			}
 		}else{
+            print_r($_POST);die();
             if( isset($_FILES['imageurl']) && is_uploaded_file($_FILES['imageurl']['tmp_name']) ){
                 $directory = "../logos/";
                 $originalfile = $directory . date("d-m-y") . time() .  round(microtime(true)). "L." . getFileExtension($_FILES["imageurl"]["name"]);
