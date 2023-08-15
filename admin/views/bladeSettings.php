@@ -136,8 +136,8 @@ if( $settings = selectDB("settings","`id` = '1'")){
 		<div class="panel-wrapper collapse in">
 			<div class="panel-body">
 				<div class="text">
-					<input class="form-control btn btn-primary txt-light" type="submit" name="submit" value="Update">
 					<input type="hidden" name="update" value="1">
+					<input class="form-control btn btn-primary txt-light" type="submit" value="Update">
 				</div>
 			</div>
 		</div>
