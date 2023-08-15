@@ -1,25 +1,4 @@
 <?php
-$sql = "SELECT * FROM `settings` WHERE `id` LIKE '1'";
-$result = $dbconnect->query($sql);
-$row = $result->fetch_assoc();
-
-$settingsEmail = $row["email"];
-$settingsTitle = $row["title"];
-$settingsImage = $row["bgImage"];
-$settingsDTime = $row["dTime"];
-$settingsDTimeAr = $row["dTimeArabic"];
-$settingslogo = $row["logo"];
-$cookieSession = $row["cookie"];
-$settingsWebsite = $row["website"];
-$PaymentAPIKey = $row["PaymentAPIKey"];
-$settingsOgDescription = $row["OgDescription"];
-$SettingsServiceCharge = $row["serviceCharge"];
-$settingsShippingMethod = $row["shippingMethod"];
-$headerButton = $row["headerButton"];
-$websiteColor = $row["websiteColor"];
-$defaultCountry = $row["country"];
-$settingsLang = (isset($row["language"]) && $row["language"] == "0") ? "ENG" : "AR";
-
 if ( isset($_GET["lang"]) ){
 	$arrayLangs = ["ENG","AR"];
 	if ( in_array($_GET["lang"], $arrayLangs) ){
