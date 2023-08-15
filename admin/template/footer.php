@@ -47,7 +47,13 @@
 
 <!-- Fancy Dropdown JS -->
 <script src="dist/js/dropdown-bootstrap-extended.js"></script>
-	
+
+<!-- Tinymce JavaScript -->
+<script src="../vendors/bower_components/tinymce/tinymce.min.js"></script>
+					
+<!-- Tinymce Wysuhtml5 Init JavaScript -->
+<script src="dist/js/tinymce-data.js"></script>
+
 <!-- Init JavaScript -->
 <script src="dist/js/init.js"></script>
 
