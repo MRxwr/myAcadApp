@@ -12,7 +12,7 @@
                                 <h4>End Date: 18/7/2023</h4>
                             </div>
                             <p>YOU WILL RECIVE A CONFIRMATION EMAIL SOON !<br>THANK YOU FOR USING <span>MY ACAD</span></p>
-                            <a href="#" class="button">HOME</a>
+                            <a href="?v=Home" class="button">HOME</a>
                         </div>
                     </div>
                     <div class="col-lg-5 mt_40">

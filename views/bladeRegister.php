@@ -30,7 +30,7 @@
                 <button class="button mt_40" type="submit">SIGNUP</button>
             </form>
             <ul>
-                <li><a href="login.html">Already have an account? Login.</a></li>
+                <li><a href="?v=Login">Already have an account? Login.</a></li>
             </ul>
         </div>
     </div>
