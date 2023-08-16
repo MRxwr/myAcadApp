@@ -1,3 +1,7 @@
+<?php
+require_once("template/editProfileModal.php");
+?>
+
 <div class="home_area">
     <div class="left_side">
         <div class="profile_area">
