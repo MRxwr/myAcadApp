@@ -10,16 +10,16 @@
                         <div data-lang-code="de-DE" data-src="img/32/Germany.png">Deutsche</div>
                         <div data-lang-code="fr-FR" data-src="img/32/France.png">French</div>
                     </div>
-                    <a href="#" class="button">Login</a>
+                    <a href="?v=Login" class="button">Login</a>
                 </div>
             </div>
             <div class="col-lg-4 col-4 text-center">
-                <a href="index.html" class="logo">
+                <a href="?v=Home" class="logo">
                     <img src="img/logo.png" alt="">
                 </a>
             </div>
             <div class="col-lg-4 col-4 d-flex align-items-center justify-content-end hum_gap">
-                <a href="rtl/index.html" class="button rtl_btn">Ar</a>
+                <a href="?v=<?php echo $_GET["v"] ?>&Lang=AR" class="button rtl_btn">Ar</a>
                 <!-- menu toggler -->
                 <div class="hamburger-menu">
                     <span class="line-top"></span>
@@ -37,16 +37,16 @@
         <div id="menu">
             <ul>
                 <li class="nav-item">
-                    <a href="index.html" class="nav-link active">Home</a>
+                    <a href="?v=Home" class="nav-link active">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a href="subsicription.html" class="nav-link">SUBSICRIPTIONS</a>
+                    <a href="?v=Subscriptions" class="nav-link">SUBSICRIPTIONS</a>
                 </li>
                 <li class="nav-item">
-                    <a href="profile.html" class="nav-link">PROFILE</a>
+                    <a href="?v=Profile" class="nav-link">PROFILE</a>
                 </li>
                 <li class="nav-item">
-                    <a href="contact.html" class="nav-link">Contact us</a>
+                    <a href="?v=Contact" class="nav-link">Contact us</a>
                 </li>
             </ul>
         </div>

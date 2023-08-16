@@ -6,11 +6,11 @@
                 <div class="col-lg-5 col-sm-4 col-6 mt_40">
                     <h3>Site Map</h3>
                     <ul class="site_map">
-                        <li><a href="#">HOME</a></li>
-                        <li><a href="#">SUBSICRIPTIONS</a></li>
-                        <li><a href="#">PROFILE</a></li>
-                        <li><a href="#">PRIVACY POLICY</a></li>
-                        <li><a href="#">TERMS & CONDITIONS</a></li>
+                        <li><a href="?v=Home">HOME</a></li>
+                        <li><a href="?v=Subscriptions">SUBSICRIPTIONS</a></li>
+                        <li><a href="?v=Profile">PROFILE</a></li>
+                        <li><a href="?v=Privacy">PRIVACY POLICY</a></li>
+                        <li><a href="?v=Terms">TERMS & CONDITIONS</a></li>
                     </ul>
                </div>
                 <div class="col-lg-3 col-sm-4 col-6 mt_40">
@@ -24,7 +24,7 @@
                 <div class="col-lg-4 col-sm-4 col-12 mt_40">
                    <div class="foot_wapper">
                        <p>© 2022-23 MY ACAD</p>
-                       <a href="index.html" class="f_logo">
+                       <a href="?v=Home" class="f_logo">
                            <img src="img/logo.png" alt="">
                        </a>
                    </div>
