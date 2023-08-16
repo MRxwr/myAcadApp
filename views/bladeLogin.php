@@ -16,8 +16,8 @@
                 <button class="button" type="submit">LOGIN</button>
             </form>
             <ul>
-                <li><a href="signup.html">Register</a></li>
-                <li><a href="forget_pass.html">Forget Password?</a></li>
+                <li><a href="?v=Register">Register</a></li>
+                <li><a href="?v=ForgetPassword">Forget Password?</a></li>
             </ul>
         </div>
     </div>

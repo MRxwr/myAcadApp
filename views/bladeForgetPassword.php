@@ -10,7 +10,7 @@
                 <button class="button mt_40" type="submit">RESET PASSWORD</button>
             </form>
             <ul>
-                <li><a href="#">Already have an account? Login.</a></li>
+                <li><a href="?v=Login">Already have an account? Login.</a></li>
             </ul>
         </div>
     </div>
