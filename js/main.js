@@ -46,6 +46,8 @@
 		// change the view of select sport
 		$('select[name=governate]').on('change', function (event) {
 			event.preventDefault();
+			var id = $(this).attr("id");
+			$("#governate"+id).attr("style","display:block");
 			$("select[name=area]").prop("disabled",false);
 		});
 
