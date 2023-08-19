@@ -37,24 +37,26 @@ require("template/bannersSlider.php");
                 <img src="img/select_4.svg" alt="">
                 <select class="select_btn select" name="area" disabled>
 					<option selected disabled value="0"><?php echo direction("SELECT AREA","إختر المنظقة") ?></option>
-					<?php
-					if( $areas = selectDB("countries","`status` = '1' AND `hidden` = '0' AND `countryCode` LIKE '{$_COOKIES["myAcad"]["countryCode"]}' ORDER BY `governateId` ASC") ){
-						$governateId = $areas[0]["governateId"];
-						for( $i = 0; $i < sizeof($areas); $i++ ){
-							if( $governateId != $areas[$i]["governateId"] ){
-								echo "<div id='governate{$areas[$i]["governateId"]}' style='display:none'> <option value='{$areas[$i]["id"]}'>".direction($areas[$i]["enTitle"],$areas[$i]["arTitle"])."</option>";
-							}else{
-								echo "<option value='{$areas[$i]["id"]}'>".direction($areas[$i]["enTitle"],$areas[$i]["arTitle"])."</option>";
-							}
-							if( $governateId != $areas[$i]["governateId"] ){
-								echo "<div>";
-							}
-							$governateId = $areas[$i]["governateId"];
-						}
-					}
-					?>
                 </select>
             </div>
+			
+			<?php
+			if( $areas = selectDB("countries","`status` = '1' AND `hidden` = '0' AND `countryCode` LIKE '{$_COOKIES["myAcad"]["countryCode"]}' ORDER BY `governateId` ASC") ){
+				$governateId = $areas[0]["governateId"];
+				for( $i = 0; $i < sizeof($areas); $i++ ){
+					if( $governateId != $areas[$i]["governateId"] ){
+						echo "<div id='governate{$areas[$i]["governateId"]}' style='display:none'> <option value='{$areas[$i]["id"]}'>".direction($areas[$i]["enTitle"],$areas[$i]["arTitle"])."</option>";
+					}else{
+						echo "<option value='{$areas[$i]["id"]}'>".direction($areas[$i]["areaEnTitle"],$areas[$i]["areaArTitle"])."</option>";
+					}
+					if( $governateId != $areas[$i]["governateId"] ){
+						echo "<div>";
+					}
+					$governateId = $areas[$i]["governateId"];
+				}
+			}
+			?>
+			
 			<input type="hidden" name="sport" value="">
             <button type="submit" class="button">SEARCH</button>
         </form>
