@@ -48,7 +48,7 @@ require("template/bannersSlider.php");
 						if ($i != 0) {
 							echo "</div>";
 						}
-						echo "<div class='governate' id='governate{$areas[$i]["governateId"]}' style='display:none'>";
+						echo "<div class='governate' id='governate{$areas[$i]["governateId"]}' style='display:none'><option selected disabled value='0'>".direction("SELECT AREA","إختر المنطقة")."</option>";
 					}
 					echo "<option value='{$areas[$i]["id"]}'>" . direction($areas[$i]["areaEnTitle"], $areas[$i]["areaArTitle"]) . "</option>";
 					$governateId = $areas[$i]["governateId"];
