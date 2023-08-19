@@ -8,7 +8,7 @@ require("template/bannersSlider.php");
     <div class="container">
         <form action="#">
             <h2>SELECT YOUR ACADEMY!</h2>
-            <button class="select_btn mb_20" data-toggle="modal" data-target="#sport"><img src="img/select_1.svg" alt="">SELECT SPORT</button>
+            <button class="select_btn mb_20" data-toggle="modal" data-target="#sport"><img id="sportMainImage" src="img/select_1.svg" alt=""><label id="sportMainTitle">SELECT SPORT<label></button>
             <div class="selet_wapper mb_20">
                 <img src="img/select_2.svg" alt="">
                 <select class="select_btn select">
