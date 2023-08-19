@@ -44,15 +44,21 @@
 		});
 		
 		// change the view of select sport
-		$('select[name=governate]').on('change', function (event) {
-			event.preventDefault();
-			var id = $(this).attr("id");
-			var areas = $("#governate"+id).html();
-			$("select[name=area]").html(areas);
-			$('select[name=area]').trigger('change');
-			$("select[name=area]").prop("disabled",false);
+		$('.governateSelect').on('change', function () {
+			var selectedGovernate = $(this).val();
+			var governateDiv = $('#governate' + selectedGovernate);
+			
+			// Hide all "area" selects first
+			$('.areaSelect').prop('disabled', true);
+			
+			if (governateDiv.length) {
+				var areas = governateDiv.html();
+				$('.areaSelect').html(areas);
+				$('.areaSelect').prop('disabled', false);
+			}
 		});
-
+		
+		
         // Show or hide the sticky footer button
         $(window).on('scroll', function () {
             if ($(this).scrollTop() > 600) {
