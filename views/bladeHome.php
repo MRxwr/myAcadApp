@@ -8,7 +8,7 @@ require("template/bannersSlider.php");
     <div class="container">
         <form action="?v=Listing">
             <h2><?php echo direction("SELECT YOUR ACADEMY!","إختر الأكادمية"); ?></h2>
-            <a class="select_btn mb_20" data-toggle="modal" data-target="#sport"><img id="sportMainImage" src="img/select_1.svg" alt=""><label id="sportMainTitle"><?php echo direction("SELECT SPORT","إختر الرياضة") ?><label></a>
+            <a class="select_btn mb_20" data-toggle="modal" data-target="#sport"><img id="sportMainImage" src="img/select_1.svg" alt=""><label id="sportMainTitle" style="font-weight: bolder;"><?php echo direction("SELECT SPORT","إختر الرياضة") ?><label></a>
             <div class="selet_wapper mb_20">
                 <img src="img/select_2.svg" alt="">
                 <select class="select_btn select" name="gender" disabled>
