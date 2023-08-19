@@ -1,32 +1,44 @@
-<div class="carousel_area">
-    <div class="container">
-        <div class="owl-carousel slider1">
-            <div class="item">
-                <img src="img/ca_1.jpg" alt="">
-            </div>
-            <div class="item">
-                <img src="img/ca_2.jpg" alt="">
-            </div>
-            <div class="item">
-                <div class="play_video">
-                    <a href="https://www.youtube.com/watch?v=D0UnqGm_miA" class="watch_btn"><i class="fal fa-play-circle"></i></a>
-                </div>
-            </div>
-            <div class="item">
-                <img src="img/ca_1.jpg" alt="">
-            </div>
-            <div class="item">
-                <img src="img/ca_2.jpg" alt="">
-            </div>
-            <div class="item">
-                <div class="play_video">
-                    <a href="https://www.youtube.com/watch?v=D0UnqGm_miA" class="watch_btn"><i class="fal fa-play-circle"></i></a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> 
-
+<?php 
+require("template/bannersSlider.php");
+if( isset($_POST) && !empty($_POST) ){
+	$sport = ( isset($_POST["sport"]) && !empty($_POST["sport"]) ) ? $_POST["sport"] : "0" ;
+	$gender = ( isset($_POST["gender"]) && !empty($_POST["gender"]) ) ? $_POST["gender"] : "0" ;
+	$governate = ( isset($_POST["governate"]) && !empty($_POST["governate"]) ) ? $_POST["governate"] : "0" ;
+	$area = ( isset($_POST["area"]) && !empty($_POST["area"]) ) ? $_POST["area"] : "0" ;
+	
+	if( $sports = selectDB("sports","`id` LIKE '{$sport}'") ){
+		$sportTitle = direction($sports[0]["enTitle"],$sports[0]["arTitle"]);
+	}else{
+		$sportTitle = direction("Unknown Sport","رياضة غير معروفة");
+	}
+	
+	if( !empty($gender) ){
+		if( $gender == 1 ){
+			$userGender = direction("Man","رجل");
+		}elseif( $gender == 2 ){
+			$userGender = direction("Woman","أنثى");
+		}elseif( $gender == 3 ){
+			$userGender = direction("Boy","ولد");
+		}elseif( $gender == 4 ){
+			$userGender = direction("Girl","بنت");
+		}
+	}else{
+		$userGender = ("Not submitted","لا يوجد");
+	}
+	
+	if( $governate = selectDB("governates","`id` LIKE '{$governate}'") ){
+		$governate = direction($governate[0]["enTitle"],$governate[0]["arTitle"]);
+	}else{
+		$governate = direction("Unknown Governate","محافظة غير معروفة");
+	}
+	
+	if( $area = selectDB("countries","`id` LIKE '{$area}'") ){
+		$area = direction($area[0]["areaEnTitle"],$area[0]["areaArTitle"]);
+	}else{
+		$area = direction("Unknown Area","مدينة غير معروفة");
+	}
+}
+?>
 <div class="s_football_area">
     <div class="container">
         <h5>FOOTBALL</h5>
