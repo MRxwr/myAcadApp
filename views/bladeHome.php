@@ -44,12 +44,13 @@ require("template/bannersSlider.php");
 			if( $areas = selectDB("countries","`status` = '1' AND `hidden` = '0' AND `countryCode` LIKE '{$_COOKIES["myAcad"]["countryCode"]}' ORDER BY `governateId` ASC") ){
 				$governateId = $areas[0]["governateId"];
 				for( $i = 0; $i < sizeof($areas); $i++ ){
-					if( $governateId != $areas[$i]["governateId"] ){
-						echo "<div id='governate{$areas[$i]["governateId"]}' style='display:none'> <option value='{$areas[$i]["id"]}'>".direction($areas[$i]["areaEnTitle"],$areas[$i]["areaArTitle"])."</option>";
-					}else{
-						echo "<option value='{$areas[$i]["id"]}'>".direction($areas[$i]["areaEnTitle"],$areas[$i]["areaArTitle"])."</option>";
+					if( $i == 0 || $governateId != $areas[$i]["governateId"] ){
+						echo "<div id='governate{$areas[$i]["governateId"]}' style='display:none'>";
 					}
-					if( $governateId != $areas[$i]["governateId"] ){
+					
+					echo "<option value='{$areas[$i]["id"]}'>".direction($areas[$i]["areaEnTitle"],$areas[$i]["areaArTitle"])."</option>";
+					
+					if( $i == 0 || $governateId != $areas[$i]["governateId"] ){
 						echo "<div>";
 					}
 					$governateId = $areas[$i]["governateId"];
