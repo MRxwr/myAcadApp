@@ -30,6 +30,8 @@
 			var id = $(this).attr("id");
 			var sportImage = $("#sportImage"+id).attr("src");
 			var sportTitle = $("#sportTitle"+id).html();
+			$("#sportMainImage").attr("src",sportImage);
+			$("#sportMainTitle").html(sportImage);
 			alert(id+sportImage+sportTitle)
 		});
 
