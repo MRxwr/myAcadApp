@@ -49,6 +49,7 @@
 			var id = $(this).attr("id");
 			var areas = $("#governate"+id).html();
 			$("select[name=area]").html(areas);
+			$('select[name=area]').trigger('change');
 			$("select[name=area]").prop("disabled",false);
 		});
 
