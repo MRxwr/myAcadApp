@@ -40,11 +40,11 @@
 		// change the view of select sport
 		$('select[name=gender]').on('change', function (event) {
 			event.preventDefault();
-			$("select[name=governates]").prop("disabled",false);
+			$("select[name=governate]").prop("disabled",false);
 		});
 		
 		// change the view of select sport
-		$('select[name=governates]').on('change', function (event) {
+		$('select[name=governate]').on('change', function (event) {
 			event.preventDefault();
 			$("select[name=area]").prop("disabled",false);
 		});
