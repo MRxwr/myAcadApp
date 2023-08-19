@@ -32,7 +32,7 @@
 			var sportTitle = $("#sportTitle"+id).html();
 			$("#sportMainImage").attr("src",sportImage);
 			$("#sportMainTitle").html(sportTitle);
-			
+			$('#sport').modal('toggle');
 		});
 
         // Show or hide the sticky footer button
