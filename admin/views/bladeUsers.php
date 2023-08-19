@@ -114,7 +114,7 @@
 				}elseif( $users[$i]["gender"] == 4 ){
 					$userGender = direction("Girl","بنت");
 				}else{
-					$userGender = ("Not submitted","لا يوجد");
+					$userGender = direction("Not submitted","لا يوجد");
 				}
 				
 				?>

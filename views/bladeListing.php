@@ -23,7 +23,7 @@ if( isset($_POST) && !empty($_POST) ){
 			$userGender = direction("Girl","بنت");
 		}
 	}else{
-		$userGender = ("Not submitted","لا يوجد");
+		$userGender = direction("Not submitted","لا يوجد");
 	}
 	
 	if( $governate = selectDB("governates","`id` LIKE '{$governate}'") ){
