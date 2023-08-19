@@ -23,6 +23,13 @@
         }
         sticky_header();
         //===== Back to top
+		
+		// change the view of select sport
+		$('.selectSport').on('click', function (event) {
+			event.preventDefault();
+			var id = $(this).attr("id");
+			alert(id)
+		});
 
         // Show or hide the sticky footer button
         $(window).on('scroll', function () {
