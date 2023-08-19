@@ -9,7 +9,7 @@
                 <div class="extra_scr" data-simplebar>
                     <div class="row">
 					<?php
-					if( $sports = selectDB("sports","`hidden` = '0' AND `status` '0' ORDER BY `order` ASC") ){
+					if( $sports = selectDB("sports","`hidden` = '0' AND `status` = '0' ORDER BY `order` ASC") ){
 						for( $i = 0; $i < sizeof($sports); $i++){
 					?>
                         <div class="col-lg-3 col-sm-4 col-4 mt_30">
