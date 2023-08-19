@@ -45,7 +45,7 @@ require("template/bannersSlider.php");
 				$governateId = $areas[0]["governateId"];
 				for( $i = 0; $i < sizeof($areas); $i++ ){
 					if( $governateId != $areas[$i]["governateId"] ){
-						echo "<div id='governate{$areas[$i]["governateId"]}' style='display:none'> <option value='{$areas[$i]["id"]}'>".direction($areas[$i]["enTitle"],$areas[$i]["arTitle"])."</option>";
+						echo "<div id='governate{$areas[$i]["governateId"]}' style='display:none'> <option value='{$areas[$i]["id"]}'>".direction($areas[$i]["areaEnTitle"],$areas[$i]["areaArTitle"])."</option>";
 					}else{
 						echo "<option value='{$areas[$i]["id"]}'>".direction($areas[$i]["areaEnTitle"],$areas[$i]["areaArTitle"])."</option>";
 					}
