@@ -33,6 +33,7 @@
 			$("#sportMainImage").attr("src",sportImage);
 			$("#sportMainTitle").html(sportTitle);
 			$("input[name=sport]").val(id);
+			$("select[name=gender]").prop("disabled",false);
 			$('#sport').modal('toggle');
 		});
 
