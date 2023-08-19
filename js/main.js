@@ -36,6 +36,18 @@
 			$("select[name=gender]").prop("disabled",false);
 			$('#sport').modal('toggle');
 		});
+		
+		// change the view of select sport
+		$('select[name=gender]').on('change', function (event) {
+			event.preventDefault();
+			$("select[name=governates]").prop("disabled",false);
+		});
+		
+		// change the view of select sport
+		$('select[name=governates]').on('change', function (event) {
+			event.preventDefault();
+			$("select[name=area]").prop("disabled",false);
+		});
 
         // Show or hide the sticky footer button
         $(window).on('scroll', function () {
