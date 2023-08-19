@@ -5,137 +5,25 @@
                 <span aria-hidden="true">&times;</span>
             </button>
             <div class="modal-body text-center">
-                <h2>SELECT SPORT</h2>
+                <h2><?php echo direction("SELECT SPORT","إختر الرياضة") ?></h2>
                 <div class="extra_scr" data-simplebar>
                     <div class="row">
+					<?php
+					if( $sports = selectDB("sports","`hidden` = '0' AND `status` '0' ORDER BY `order` ASC") ){
+						for( $i = 0; $i < sizeof($sports); $i++){
+					?>
                         <div class="col-lg-3 col-sm-4 col-4 mt_30">
                             <a href="#">
                                 <div class="sport_model">
-                                    <img src="img/football.svg" alt="">
+                                    <img src="logos/<?php echo $sports[$i]["imageurl"] ?>" alt="<?php echo $sports[$i]["enTitle"] ?>">
                                 </div>
-                                <h3>FOOTBALL</h3>
+                                <h3><?php echo direction($sports[$i]["enTitle"],$sports[$i]["arTitle"]) ?></h3>
                             </a>
                         </div>
-                        <div class="col-lg-3 col-sm-4 col-4 mt_30">
-                            <a href="#">
-                                <div class="sport_model">
-                                    <img src="img/football.svg" alt="">
-                                </div>
-                                <h3>FOOTBALL</h3>
-                            </a>
-                        </div>
-                        <div class="col-lg-3 col-sm-4 col-4 mt_30">
-                            <a href="#">
-                                <div class="sport_model">
-                                    <img src="img/football.svg" alt="">
-                                </div>
-                                <h3>FOOTBALL</h3>
-                            </a>
-                        </div>
-                        <div class="col-lg-3 col-sm-4 col-4 mt_30">
-                            <a href="#">
-                                <div class="sport_model">
-                                    <img src="img/football.svg" alt="">
-                                </div>
-                                <h3>FOOTBALL</h3>
-                            </a>
-                        </div>
-                        <div class="col-lg-3 col-sm-4 col-4 mt_30">
-                            <a href="#">
-                                <div class="sport_model">
-                                    <img src="img/football.svg" alt="">
-                                </div>
-                                <h3>FOOTBALL</h3>
-                            </a>
-                        </div>
-                        <div class="col-lg-3 col-sm-4 col-4 mt_30">
-                            <a href="#">
-                                <div class="sport_model">
-                                    <img src="img/football.svg" alt="">
-                                </div>
-                                <h3>FOOTBALL</h3>
-                            </a>
-                        </div>
-                        <div class="col-lg-3 col-sm-4 col-4 mt_30">
-                            <a href="#">
-                                <div class="sport_model">
-                                    <img src="img/football.svg" alt="">
-                                </div>
-                                <h3>FOOTBALL</h3>
-                            </a>
-                        </div>
-                        <div class="col-lg-3 col-sm-4 col-4 mt_30">
-                            <a href="#">
-                                <div class="sport_model">
-                                    <img src="img/football.svg" alt="">
-                                </div>
-                                <h3>FOOTBALL</h3>
-                            </a>
-                        </div>
-                        <div class="col-lg-3 col-sm-4 col-4 mt_30">
-                            <a href="#">
-                                <div class="sport_model">
-                                    <img src="img/football.svg" alt="">
-                                </div>
-                                <h3>FOOTBALL</h3>
-                            </a>
-                        </div>
-                        <div class="col-lg-3 col-sm-4 col-4 mt_30">
-                            <a href="#">
-                                <div class="sport_model">
-                                    <img src="img/football.svg" alt="">
-                                </div>
-                                <h3>FOOTBALL</h3>
-                            </a>
-                        </div>
-                        <div class="col-lg-3 col-sm-4 col-4 mt_30">
-                            <a href="#">
-                                <div class="sport_model">
-                                    <img src="img/football.svg" alt="">
-                                </div>
-                                <h3>FOOTBALL</h3>
-                            </a>
-                        </div>
-                        <div class="col-lg-3 col-sm-4 col-4 mt_30">
-                            <a href="#">
-                                <div class="sport_model">
-                                    <img src="img/football.svg" alt="">
-                                </div>
-                                <h3>FOOTBALL</h3>
-                            </a>
-                        </div>
-                        <div class="col-lg-3 col-sm-4 col-4 mt_30">
-                            <a href="#">
-                                <div class="sport_model">
-                                    <img src="img/football.svg" alt="">
-                                </div>
-                                <h3>FOOTBALL</h3>
-                            </a>
-                        </div>
-                        <div class="col-lg-3 col-sm-4 col-4 mt_30">
-                            <a href="#">
-                                <div class="sport_model">
-                                    <img src="img/football.svg" alt="">
-                                </div>
-                                <h3>FOOTBALL</h3>
-                            </a>
-                        </div>
-                        <div class="col-lg-3 col-sm-4 col-4 mt_30">
-                            <a href="#">
-                                <div class="sport_model">
-                                    <img src="img/football.svg" alt="">
-                                </div>
-                                <h3>FOOTBALL</h3>
-                            </a>
-                        </div>
-                        <div class="col-lg-3 col-sm-4 col-4 mt_30">
-                            <a href="#">
-                                <div class="sport_model">
-                                    <img src="img/football.svg" alt="">
-                                </div>
-                                <h3>FOOTBALL</h3>
-                            </a>
-                        </div>
+					<?php
+						}
+					}
+					?>
                     </div>
                 </div>
             </div>
