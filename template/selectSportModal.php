@@ -13,11 +13,11 @@
 						for( $i = 0; $i < sizeof($sports); $i++){
 					?>
                         <div class="col-lg-3 col-sm-4 col-4 mt_30">
-                            <a href="#" id="sport<?php echo $sports[$i]["id"] ?>" class="selectSport">
+                            <a href="#" id="<?php echo $sports[$i]["id"] ?>" class="selectSport">
                                 <div class="sport_model">
-                                    <img src="logos/<?php echo $sports[$i]["imageurl"] ?>" alt="<?php echo $sports[$i]["enTitle"] ?>">
+                                    <img src="logos/<?php echo $sports[$i]["imageurl"] ?>" id="sportImage<?php echo $sports[$i]["id"] ?>" alt="<?php echo $sports[$i]["enTitle"] ?>">
                                 </div>
-                                <h3><?php echo direction($sports[$i]["enTitle"],$sports[$i]["arTitle"]) ?></h3>
+                                <h3 id="sportTitle<?php echo $sports[$i]["id"] ?>"><?php echo direction($sports[$i]["enTitle"],$sports[$i]["arTitle"]) ?></h3>
                             </a>
                         </div>
 					<?php

@@ -28,7 +28,9 @@
 		$('.selectSport').on('click', function (event) {
 			event.preventDefault();
 			var id = $(this).attr("id");
-			alert(id)
+			var sportImage = $("#sportImage"+id).attr("src");
+			var sportTitle = $("#sportTitle"+id).html();
+			alert(id+sportImage+sportTitle)
 		});
 
         // Show or hide the sticky footer button
