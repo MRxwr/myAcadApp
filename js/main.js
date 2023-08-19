@@ -32,6 +32,7 @@
 			var sportTitle = $("#sportTitle"+id).html();
 			$("#sportMainImage").attr("src",sportImage);
 			$("#sportMainTitle").html(sportTitle);
+			$("input[name=sport]").val(id);
 			$('#sport').modal('toggle');
 		});
 
