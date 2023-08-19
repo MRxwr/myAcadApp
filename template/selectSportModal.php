@@ -13,7 +13,7 @@
 						for( $i = 0; $i < sizeof($sports); $i++){
 					?>
                         <div class="col-lg-3 col-sm-4 col-4 mt_30">
-                            <a href="#">
+                            <a href="#" id="sport<?php echo $sports[$i]["id"] ?>" class="selectSport">
                                 <div class="sport_model">
                                     <img src="logos/<?php echo $sports[$i]["imageurl"] ?>" alt="<?php echo $sports[$i]["enTitle"] ?>">
                                 </div>
@@ -30,3 +30,14 @@
         </div>
     </div>
 </div>
+
+<script>
+$(document).ready(function () {
+	// change the view of select sport
+	$('.selectSport').on('click', function (event) {
+		event.preventDefault();
+		var id = $(this).attr("id");
+		alert(id)
+	});
+})
+</script>
