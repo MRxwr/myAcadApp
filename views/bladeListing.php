@@ -41,7 +41,7 @@ if( isset($_POST) && !empty($_POST) ){
 ?>
 <div class="s_football_area">
     <div class="container">
-        <h5>FOOTBALL</h5>
+        <h5><?php echo $sportTitle ?></h5>
         <div class="row">
             <div class="col-lg-4 col-sm-6 mt_50">
                 <div class="foott_box">
