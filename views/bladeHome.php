@@ -41,20 +41,19 @@ require("template/bannersSlider.php");
             </div>
 			
 			<?php
-			if( $areas = selectDB("countries","`status` = '1' AND `hidden` = '0' AND `countryCode` LIKE '{$_COOKIES["myAcad"]["countryCode"]}' ORDER BY `governateId` ASC") ){
+			if ($areas = selectDB("countries", "`status` = '1' AND `hidden` = '0' AND `countryCode` LIKE '{$_COOKIES["myAcad"]["countryCode"]}' ORDER BY `governateId` ASC")) {
 				$governateId = $areas[0]["governateId"];
-				for( $i = 0; $i < sizeof($areas); $i++ ){
-					if( $i == 0 || $governateId != $areas[$i]["governateId"] ){
+				for ($i = 0; $i < sizeof($areas); $i++) {
+					if ($i == 0 || $governateId != $areas[$i]["governateId"]) {
+						if ($i != 0) {
+							echo "</div>";
+						}
 						echo "<div id='governate{$areas[$i]["governateId"]}' style='display:none'>";
 					}
-					
-					echo "<option value='{$areas[$i]["id"]}'>".direction($areas[$i]["areaEnTitle"],$areas[$i]["areaArTitle"])."</option>";
-					
-					if( $i == 0 || $governateId != $areas[$i]["governateId"] ){
-						echo "<div>";
-					}
+					echo "<option value='{$areas[$i]["id"]}'>" . direction($areas[$i]["areaEnTitle"], $areas[$i]["areaArTitle"]) . "</option>";
 					$governateId = $areas[$i]["governateId"];
 				}
+				echo "</div>";
 			}
 			?>
 			
