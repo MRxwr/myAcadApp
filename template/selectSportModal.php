@@ -30,14 +30,3 @@
         </div>
     </div>
 </div>
-
-<script>
-$(document).ready(function () {
-	// change the view of select sport
-	$('.selectSport').on('click', function (event) {
-		event.preventDefault();
-		var id = $(this).attr("id");
-		alert(id)
-	});
-})
-</script>
