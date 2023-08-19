@@ -47,7 +47,7 @@
 		$('select[name=governate]').on('change', function (event) {
 			event.preventDefault();
 			var id = $(this).attr("id");
-			var areas = $("#governate"+id).attr("style","display:block");
+			var areas = $("#governate"+id).html();
 			$("select[name=area]").html(areas);
 			$("select[name=area]").prop("disabled",false);
 		});
