@@ -4,7 +4,7 @@ if( !isset($_GET["academyId"]) || empty($_GET["academyId"]) ){
 	echo outputError($response);die();
 }else{
 	if( $academy = selectDB2("`id`, `imageurl`, `enTitle`, `arTitle`, `area`, `video`, `location`, `isClothes`, `clothesPrice`, `clothesImage`","academies","`hidden` = '0' AND `status` = '0' AND `id` = {$_GET["academyId"]}") ){
-		$response["academy"] = $academy;
+		$response["academy"] = $academy[0];
 		if( $area = selectDB("countries","`id` = '{$academy[0]["area"]}'") ){
 			$response["academy"]["enArea"] = $area[0]["areaEnTitle"];
 			$response["academy"]["arArea"] = $area[0]["areaArTitle"];
@@ -13,14 +13,14 @@ if( !isset($_GET["academyId"]) || empty($_GET["academyId"]) ){
 			$response["academy"]["arArea"] = "";
 		}
 		if( $sessions = selectDB("sessions","`academyId` = '{$academy[0]["id"]}'") ){
-			$response["sessions"] = $sessions;
+			$response["academy"]["sessions"] = $sessions;
 		}else{
-			$response["sessions"] = array();
+			$response["academy"]["sessions"] = array();
 		}
 		if( $subscriptions = selectDB("subscriptions","`academyId` = '{$academy[0]["id"]}'") ){
-			$response["subscriptions"] = $subscriptions;
+			$response["academy"]["subscriptions"] = $subscriptions;
 		}else{
-			$response["subscriptions"] = array();
+			$response["academy"]["subscriptions"] = array();
 		}
 	}else{
 		$response["msg"] = "there is no academy with this id";
