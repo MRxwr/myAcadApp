@@ -12,12 +12,12 @@ if( !isset($_GET["academyId"]) || empty($_GET["academyId"]) ){
 			$response["academy"]["enArea"] = "";
 			$response["academy"]["arArea"] = "";
 		}
-		if( $sessions = selectDB("sessions","`academyId` = '{$academy[0]["id"]}'") ){
+		if( $sessions = selectDB2("`id`, `enTitle`, `arTitle`","sessions","`academyId` = '{$academy[0]["id"]}'") ){
 			$response["academy"]["sessions"] = $sessions;
 		}else{
 			$response["academy"]["sessions"] = array();
 		}
-		if( $subscriptions = selectDB("subscriptions","`academyId` = '{$academy[0]["id"]}'") ){
+		if( $subscriptions = selectDB2("`id`, `enTitle`, `arTitle`, `price`, `priceAfterDiscount`","subscriptions","`academyId` = '{$academy[0]["id"]}'") ){
 			$response["academy"]["subscriptions"] = $subscriptions;
 		}else{
 			$response["academy"]["subscriptions"] = array();
