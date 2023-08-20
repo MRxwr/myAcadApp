@@ -171,7 +171,7 @@ if ( isset($_GET["type"]) && !empty($_GET["type"]) ){
     			$error = array("msg"=>"Please enter phone number");
     			echo outputError($error);die();
     		}
-    		if ( !isset($_POST["gender"]) || empty($_POST["gender"]) ){
+    		if ( !isset($_POST["gender"]) ){
     			$error = array("msg"=>"Please enter gender");
     			echo outputError($error);die();
     		}
