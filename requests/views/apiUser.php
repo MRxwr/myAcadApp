@@ -192,7 +192,7 @@ if ( isset($_GET["type"]) && !empty($_GET["type"]) ){
 				echo outputError($error);die();
 			}
 		}else{
-			if( $user = selectDB("users","`id` = '{$_GET["userId"]}' " ) ){
+			if( $user = selectDB2("`firstName`, `lastName`, `email`, `phone`, `gender`","users","`id` = '{$_GET["userId"]}' " ) ){
 				echo outputData(array("user"=>$user));
 			}else{
 				$error = array("msg"=>"No user with this id");
