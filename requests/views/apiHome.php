@@ -6,6 +6,12 @@ if( $banners = selectDB2("`id`, `type`, `imageurl`, `link`","banners","`hidden` 
     $response["banners"] = array();
 }
 
+if( $sports = selectDB("sports","`hidden` = '0' AND `status` = '0' ORDER BY `order` ASC") ){
+    $response["sports"] = $sports;
+}else{
+    $response["sports"] = array();
+}
+
 $response["genders"] = array(
     "man" => ["Man","رجل"],
     "woman" => ["Woman","إمرأة"],
