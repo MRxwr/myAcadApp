@@ -175,10 +175,6 @@ if ( isset($_GET["type"]) && !empty($_GET["type"]) ){
     			$error = array("msg"=>"Please enter gender");
     			echo outputError($error);die();
     		}
-			if ( !isset($_GET["userId"]) || empty($_GET["userId"]) ){
-				$error = array("msg"=>"Please enter user id.");
-				echo outputError($error);die();
-			}
 			$data = array(
 				"firstName"=>$_POST["firstName"],
 				"lastName"=>$_POST["lastName"],
