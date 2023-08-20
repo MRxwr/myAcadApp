@@ -82,11 +82,11 @@ if ( isset($_GET["type"]) && !empty($_GET["type"]) ){
 			$error = array("msg"=>"please set new password and confrim password correctly.");
 			echo outputError($error);die();
 		}
-		if( $user = selectDB("users","`id` = '{$_POST["userId"]}'" ) ){
+		if( $user = selectDB("users","`id` = '{$_GET["userId"]}'" ) ){
 			$newPass = sha1($_POST["newPassword"]);
 			$oldPass = sha1($_POST["oldPassword"]);
-			if ( $user = selectDB("users","`id` = '{$_POST["userId"]}' AND `password` = '{$oldPass}'" ) ){
-			updateDB('users',array("password"=>$newPass),"`id` = '{$_POST["userId"]}'");
+			if ( $user = selectDB("users","`id` = '{$_GET["userId"]}' AND `password` = '{$oldPass}'" ) ){
+			updateDB('users',array("password"=>$newPass),"`id` = '{$_GET["userId"]}'");
 				echo outputData(array('msg'=>"Password has been changed successfully."));
 			}else{
 				$error = array("msg"=>"Old password is wrong.");
