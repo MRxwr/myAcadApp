@@ -150,6 +150,10 @@ if ( isset($_GET["type"]) && !empty($_GET["type"]) ){
 			echo outputError($error);die();
 		}
 	}elseif( $_GET["type"] == "profile" ){
+		if ( !isset($_GET["userId"]) || empty($_GET["userId"]) ){
+			$error = array("msg"=>"Please enter user id");
+			echo outputError($error);die();
+		}
 		if ( isset($_GET["update"]) && !empty($_GET["update"]) ){
 			if ( !isset($_POST["firstName"]) || empty($_POST["firstName"]) ){
     			$error = array("msg"=>"Please enter first name");
@@ -182,9 +186,9 @@ if ( isset($_GET["type"]) && !empty($_GET["type"]) ){
 				"phone"=>$_POST["phone"],
 				"gender"=>$_POST["gender"]
 			);
-			if( $user = selectDB("users","`id` = '{$_POST["id"]}' " ) ){
-				if ( updateDB("users",$data,"`id` = '{$_POST["id"]}'" ) ){
-					$user = selectDB("users","`id` = '{$_POST["id"]}' " );
+			if( $user = selectDB("users","`id` = '{$_GET["userId"]}' " ) ){
+				if ( updateDB("users",$data,"`id` = '{$_GET["userId"]}'" ) ){
+					$user = selectDB("users","`id` = '{$_GET["userId"]}' " );
 					echo outputData(array('msg'=>"profile has been updated successfully.","user"=>$user));
 				}
 			}else{
