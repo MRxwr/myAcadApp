@@ -130,11 +130,9 @@ if ( isset($_GET["type"]) && !empty($_GET["type"]) ){
 			echo outputError($error);die();
 		}
 	
-		$_POST["type"] = '2';	
 		$_POST["password"] = sha1($_POST["password"]);		
 		unset($_POST["confirmPassword"]);
 		$data = $_POST;
-		print_r($data);
 		if( selectDB('users',"`email` LIKE '".$_POST["email"]."'") ){
 			$error = array("msg"=>"A user with this email is already registred.");
 			echo outputError($error);die();
