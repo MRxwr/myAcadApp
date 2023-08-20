@@ -1,5 +1,4 @@
 <?php
-print_r($_POST);die();
 header("Content-Type: application/json");
 require_once("../admin/includes/config.php");
 require_once("../admin/includes/functions.php");
