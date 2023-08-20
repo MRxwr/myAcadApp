@@ -15,15 +15,15 @@ if( !isset($_GET["sportId"]) || empty($_GET["sportId"]) ){
 	}
 	if( $academies = selectDB2("`id`, `imageurl`, `header`, `enTitle`, `arTitle`, `area`","academies","`hidden` = '0' AND `status` = '0' {$where}") ){
 		for( $i = 0; $i < sizeof($academies); $i++){
+			$response["academies"][$i] = $academies[$i];
 			if( $area = selectDB("countries","`id` = '{$academies[$i]["area"]}'") ){
-				$response["academies"][$i] = $academies[$i];
 				$response["academies"][$i]["enArea"] = $area[0]["areaEnTitle"];
 				$response["academies"][$i]["arArea"] = $area[0]["areaArTitle"];
 			}else{
-				$response["academies"][$i] = $academies[$i];
 				$response["academies"][$i]["enArea"] = "";
 				$response["academies"][$i]["arArea"] = "";
 			}
+			$response["academies"][$i]["rating"] = 0;
 		}
 	}else{
 		$response["academies"] = array();
