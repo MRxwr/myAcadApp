@@ -6,7 +6,7 @@ if(
 ( isset($_POST["message"]) && !empty($_POST["message"]) ) &&
 insertDB("contact_us",$_POST) 
 ){
-	$response["msg"] = "message sent successfully"
+	$response["msg"] = "message sent successfully";
 	echo outputData($response);
 }else{
 	$error = array("msg"=>"Error while sending you message please try again.");
