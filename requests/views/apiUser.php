@@ -184,7 +184,7 @@ if ( isset($_GET["type"]) && !empty($_GET["type"]) ){
 			);
 			if( $user = selectDB("users","`id` = '{$_GET["userId"]}' " ) ){
 				if ( updateDB("users",$data,"`id` = '{$_GET["userId"]}'" ) ){
-					$user = selectDB("users","`id` = '{$_GET["userId"]}' " );
+					$user = selectDB2("`firstName`, `lastName`, `email`, `phone`, `gender`","users","`id` = '{$_GET["userId"]}' " );
 					echo outputData(array('msg'=>"profile has been updated successfully.","user"=>$user));
 				}
 			}else{
