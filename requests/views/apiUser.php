@@ -18,7 +18,7 @@ if ( isset($_GET["type"]) && !empty($_GET["type"]) ){
 				echo outputError($error);die();
 			}else{
 				$data = array("firebase" => "{$_POST["firebase"]}");
-				if( updateUserDB('users',$data,"`id` LIKE '{$user[0]["id"]}'") ){
+				if( updateDB('users',$data,"`id` = '{$user[0]["id"]}'") ){
 					
 				}
 				echo outputData(array('id'=>$user[0]["id"]));
@@ -173,7 +173,7 @@ if ( isset($_GET["type"]) && !empty($_GET["type"]) ){
 				"gender"=>$_POST["gender"],
 			);
 			if( $user = selectDB("users","`id` = '{$_POST["id"]}' " ) ){
-				if ( updateUserDB("users",$data,"`id` = '{$_POST["id"]}'" ) ){
+				if ( updateDB("users",$data,"`id` = '{$_POST["id"]}'" ) ){
 					$user = selectDB("users","`id` = '{$_POST["id"]}' " );
 					echo outputData(array('msg'=>"profile has been updated successfully.","user"=>$user));
 				}
