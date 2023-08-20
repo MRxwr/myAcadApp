@@ -1,5 +1,5 @@
 <?php
-print_r($_POST);
+print_r($_POST);die();
 if ( isset($_GET["type"]) && !empty($_GET["type"]) ){
 	if( isset($_POST["firebase"]) && !empty($_POST["firebase"]) ){
 		$_POST["firebase"] = $_POST["firebase"];
