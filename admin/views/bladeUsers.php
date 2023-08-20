@@ -24,8 +24,8 @@
 			<label><?php echo direction("Gender","الجنس") ?></label>
 			<select name="gender" class="form-control">
 				<?php
-				$gender = [direction("Man","رجل"),direction("Woman","إمرأة"),direction("Boy","ولد"),direction("Girl","بنت")];
-				$genderValue = [1,2,3,4];
+				$gender = [direction("Man","رجل"),direction("Woman","إمرأة")];
+				$genderValue = [0,1];
 				for( $i = 0; $i < sizeof($genderValue); $i++){
 					echo "<option value='{$genderValue[$i]}'>{$gender[$i]}</option>";
 				?>
@@ -105,14 +105,10 @@
 					$hide = direction("Lock","قفل الحساب");
 				}
 				
-				if( $users[$i]["gender"] == 1 ){
+				if( $users[$i]["gender"] == 0 ){
 					$userGender = direction("Man","رجل");
-				}elseif( $users[$i]["gender"] == 2 ){
+				}elseif( $users[$i]["gender"] == 1 ){
 					$userGender = direction("Woman","أنثى");
-				}elseif( $users[$i]["gender"] == 3 ){
-					$userGender = direction("Boy","ولد");
-				}elseif( $users[$i]["gender"] == 4 ){
-					$userGender = direction("Girl","بنت");
 				}else{
 					$userGender = direction("Not submitted","لا يوجد");
 				}
