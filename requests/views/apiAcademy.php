@@ -22,6 +22,7 @@ if( !isset($_GET["academyId"]) || empty($_GET["academyId"]) ){
 		}else{
 			$response["academy"]["subscriptions"] = array();
 		}
+		$response["academy"]["rating"] = 0;
 	}else{
 		$response["msg"] = "there is no academy with this id";
 		echo outputError($response);die();
