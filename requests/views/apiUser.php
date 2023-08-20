@@ -1,8 +1,5 @@
 <?php
 if ( isset($_GET["type"]) && !empty($_GET["type"]) ){
-	if( isset($_POST["firebase"]) && !empty($_POST["firebase"]) ){
-		$_POST["firebase"] = $_POST["firebase"];
-	}
 	if( $_GET["type"] == "login" ){
 		if ( !isset($_POST["email"]) || empty($_POST["email"]) ){
 			$error = array("msg"=>"Please enter email correctly.");
@@ -108,7 +105,7 @@ if ( isset($_GET["type"]) && !empty($_GET["type"]) ){
 			$error = array("msg"=>"Please enter last name");
 			echo outputError($error);die();
 		}
-		if ( !isset($_POST["mobile"]) || empty($_POST["mobile"]) ){
+		if ( !isset($_POST["phone"]) || empty($_POST["phone"]) ){
 			$error = array("msg"=>"Please enter mobile");
 			echo outputError($error);die();
 		}
@@ -136,7 +133,6 @@ if ( isset($_GET["type"]) && !empty($_GET["type"]) ){
 		$_POST["type"] = '2';	
 		$_POST["password"] = sha1($_POST["password"]);		
 		unset($_POST["confirmPassword"]);
-		unset($_POST["action"]);
 		$data = $_POST;
 		if( selectDB('users',"`email` LIKE '".$_POST["email"]."'") ){
 			$error = array("msg"=>"A user with this email is already registred.");
