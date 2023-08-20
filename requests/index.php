@@ -27,6 +27,5 @@ if( isset($_GET["a"]) && searchFile("views","api{$_GET["a"]}.php") ){
 }else{
 	$error = array("msg"=>"Wrong Action Request");
 	echo outputError($error);die();
-} 
-
+}
 ?>
