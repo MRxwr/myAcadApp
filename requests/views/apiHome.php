@@ -6,7 +6,7 @@ if( $banners = selectDB2("`id`, `type`, `imageurl`, `link`","banners","`hidden` 
     $response["banners"] = array();
 }
 
-if( $sports = selectDB("sports","`hidden` = '0' AND `status` = '0' ORDER BY `order` ASC") ){
+if( $sports = selectDB2("`id`, `enTitle`, `arTitle`, `imageurl`","sports","`hidden` = '0' AND `status` = '0' ORDER BY `order` ASC") ){
     $response["sports"] = $sports;
 }else{
     $response["sports"] = array();
