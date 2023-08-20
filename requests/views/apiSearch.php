@@ -1,5 +1,5 @@
 <?php 
-if( !isset($_GET["sportId"]) && empty($_GET["sportId"]) ){
+if( !isset($_GET["sportId"]) || empty($_GET["sportId"]) ){
 	$response = array("msg"=>"Please set sport id");
 	echo outputError($response);die();
 }else{
