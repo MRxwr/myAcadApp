@@ -100,6 +100,7 @@ if ( isset($_GET["type"]) && !empty($_GET["type"]) ){
 			echo outputError($error);die();
 		}
 	}elseif( $_GET["type"] == "register" ){
+		$_POST = json_decode(file_get_contents("php://input"), true);
 		print_r($_POST);
 		if ( !isset($_POST["firstName"]) || empty($_POST["firstName"]) ){
 			$error = array("msg"=>"Please enter first name");
