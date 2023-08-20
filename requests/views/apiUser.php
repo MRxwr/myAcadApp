@@ -159,18 +159,28 @@ if ( isset($_GET["type"]) && !empty($_GET["type"]) ){
     			$error = array("msg"=>"Please enter last name");
     			echo outputError($error);die();
     		}
+			if ( !isset($_POST["email"]) || empty($_POST["email"]) ){
+    			$error = array("msg"=>"Please enter email");
+    			echo outputError($error);die();
+    		}
+			if ( !isset($_POST["phone"]) || empty($_POST["phone"]) ){
+    			$error = array("msg"=>"Please enter phone number");
+    			echo outputError($error);die();
+    		}
     		if ( !isset($_POST["gender"]) || empty($_POST["gender"]) ){
     			$error = array("msg"=>"Please enter gender");
     			echo outputError($error);die();
     		}
-			if ( !isset($_POST["id"]) || empty($_POST["id"]) ){
+			if ( !isset($_GET["userId"]) || empty($_GET["userId"]) ){
 				$error = array("msg"=>"Please enter user id.");
 				echo outputError($error);die();
 			}
 			$data = array(
 				"firstName"=>$_POST["firstName"],
 				"lastName"=>$_POST["lastName"],
-				"gender"=>$_POST["gender"],
+				"email"=>$_POST["email"],
+				"phone"=>$_POST["phone"],
+				"gender"=>$_POST["gender"]
 			);
 			if( $user = selectDB("users","`id` = '{$_POST["id"]}' " ) ){
 				if ( updateDB("users",$data,"`id` = '{$_POST["id"]}'" ) ){
@@ -182,7 +192,7 @@ if ( isset($_GET["type"]) && !empty($_GET["type"]) ){
 				echo outputError($error);die();
 			}
 		}else{
-			if( $user = selectDB("users","`id` = '{$_POST["id"]}' " ) ){
+			if( $user = selectDB("users","`id` = '{$_GET["userId"]}' " ) ){
 				echo outputData(array("user"=>$user));
 			}else{
 				$error = array("msg"=>"No user with this id");

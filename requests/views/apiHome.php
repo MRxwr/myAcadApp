@@ -7,10 +7,10 @@ if( $banners = selectDB2("`id`, `type`, `imageurl`, `link`","banners","`hidden` 
 }
 
 $response["genders"] = array(
-    "man" => ["Man","رجل"],
-    "woman" => ["Woman","إمرأة"],
-    "boy" => ["Boy","ولد"],
-    "girl" => ["Girl","بنت"]
+    1 => ["Man","رجل"],
+    2 => ["Woman","إمرأة"],
+    3 => ["Boy","ولد"],
+    4 => ["Girl","بنت"]
 );
 
 if( isset($_GET["countryCode"]) && $governates = selectDB2("`id`, `enTitle`, `arTitle`","governates","`hidden` = '0' AND `status` = '0' AND `countryCode` LIKE '{$_GET["countryCode"]}' ORDER BY `enTitle` ASC") ){
