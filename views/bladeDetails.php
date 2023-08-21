@@ -1,30 +1,50 @@
+<?php
+$curl = curl_init();
+curl_setopt_array($curl, array(
+  CURLOPT_URL => "https://createkwservers.com/myacad1/requests?a=Academy&academyId={$_GET["id"]}",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => '',
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 0,
+  CURLOPT_FOLLOWLOCATION => true,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => 'GET',
+  CURLOPT_HTTPHEADER => array(
+    'myacadheader: myAcadAppCreate'
+  ),
+));
+$response = curl_exec($curl);
+curl_close($curl);
+$response = json_decode($response,true);
+$academy = $response["data"]["academy"];
+?>
 <div class="jersy_area mt_20">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-10">
                 <div class="row justify-content-between">
                     <div class="col-lg-6 order-lg-2 d-none d-lg-block mt_40">
-                        <iframe width="100%" height="400" src="https://www.youtube.com/embed/BoF5q2YdONo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                        <iframe width="100%" height="400" src="<?php echo $academy["video"] ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                     </div>
                     <div class="col-lg-5 order-lg-1 mt_40">
                         <div class="jersy_top mb_45">
                             <div class="jersy_cont">
-                                <img src="img/dyn.svg" alt="">
+                                <img src="logos/<?php echo $academy["imageurl"] ?>" alt="logo_<?php echo $academy["enTitle"]?>">
                                 <div>
-                                    <h2>Dynamo Kuwait</h2>
-                                    <h3>Sabah Al Salem</h3>
+                                    <h2><?php echo direction($academy["enTitle"],$academy["arTitle"]) ?></h2>
+                                    <h3><?php echo direction($academy["enArea"],$academy["arArea"]) ?></h3>
                                 </div>
                             </div>
                             <div class="jersy_rate">
-                                <h4>Rate</h4>
+                                <h4><?php echo direction("Rate","التقيم") ?></h4>
                                 <div class="star_box">
                                     <img src="img/f_star.svg" alt="">
-                                    <span>5.2</span>
+                                    <span><?php echo $academy["rating"]?></span>
                                 </div>
                             </div>
                         </div>
                         <div class="d-lg-none mt_20 mb_20">
-                            <iframe width="100%" height="400" src="https://www.youtube.com/embed/BoF5q2YdONo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                            <iframe width="100%" height="400" src="<?php echo $academy["video"] ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                         </div>
                         <form action="#" class="cup_area">
                             <h5><img src="img/cup_1.svg" alt="">Select Age & Session Time</h5>
