@@ -20,7 +20,7 @@ $response = curl_exec($curl);
 
 curl_close($curl);
 $response = json_decode($response,true);
-print_r($response);
+echo "https://createkwservers.com/myacad1/requests?a=Search&sportId={$_POST["sport"]}&genderId={$_POST["gender"]}&governateId={$_POST["governate"]}&areaId={$_POST["area"]}";print_r($response);
 
 ?>
 <div class="s_football_area">
