@@ -75,9 +75,9 @@ $academy = $response["data"]["academy"];
 							if( $academy["subscriptions"] > 0 ){
 								for( $s = 0; $s < sizeof($academy["subscriptions"]); $s ++){
 									if( $academy["subscriptions"]["priceAfterDiscount"] > 0 ){
-										echo "<option>".direction($academy["subscriptions"]["enTitle"],$academy["subscriptions"]["arTitle"])." <del>( {$academy["subscriptions"]["price"]} KD )</del> ( {$academy["subscriptions"]["priceAfterDiscount"]} KD )</option>";
+										echo "<option>".direction($academy["subscriptions"][$s]["enTitle"],$academy["subscriptions"][$s]["arTitle"])." <del>( {$academy["subscriptions"][$s]["price"]} KD )</del> ( {$academy["subscriptions"][$s]["priceAfterDiscount"]} KD )</option>";
 									}else{
-										echo "<option>".direction($academy["subscriptions"]["enTitle"],$academy["subscriptions"]["arTitle"])." ( {$academy["subscriptions"]["price"]} KD )</option>";
+										echo "<option>".direction($academy["subscriptions"][$s]["enTitle"],$academy["subscriptions"][$s]["arTitle"])." ( {$academy["subscriptions"][$s]["price"]} KD )</option>";
 									}
 								}
 							}
