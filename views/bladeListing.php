@@ -72,6 +72,12 @@ if( $sportTitle = selectDB("sports","`id` = '{$_POST["sport"]}'") ){
             </div>
         <?php
 			}
+		}else{
+			?>
+			<div class="col-lg-12 col-sm-12">
+				<?php echo direction("No data avaialbe","لا يوجد معلومات") ?>
+			</div>
+			<?php
 		}
 		?>
         </div>
