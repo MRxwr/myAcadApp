@@ -71,6 +71,7 @@ $academy = $response["data"]["academy"];
                             </div>
                             <h5><img src="img/ca.svg" alt="">Select Subsicription Period</h5>
                             <select>
+							 <option>1 Month Supsecrption <del>( 50 KD )</del> ( 30 KD )</option>
 							<?php 
 							if( $academy["subscriptions"] > 0 ){
 								for( $s = 0; $s < sizeof($academy["subscriptions"]); $s ++){
