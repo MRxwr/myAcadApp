@@ -65,7 +65,7 @@ if( $sportTitle = selectDB("sports","`id` = '{$_POST["sport"]}'") ){
                             <h4><?php echo direction("Rate","التقيم") ?></h4>
                             <div class="star_box">
                                 <img src="img/f_star.svg" alt="">
-                                <span><?php echo $academies[$i]["قشفهىل"]?></span>
+                                <span><?php echo $academies[$i]["rating"]?></span>
                             </div>
                         </div>
                     </div>
