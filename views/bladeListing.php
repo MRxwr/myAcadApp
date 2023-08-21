@@ -30,8 +30,7 @@ if( $sportTitle = selectDB("sports","`id` = '{$_POST["sport"]}'") ){
         <h5><?php echo $sportTitle ?></h5>
         <div class="row">
 		<?php
-		$academies = $response["data"]["academies"];
-		if( $academies > 0 ){
+		if( $academies = $response["data"]["academies"] && $academies > 0 ){
 			for( $i = 0; $i < sizeof($academies); $i++ ){
 				$counter = $i + 1;
 				if( $area = selectDB("countries","`id` = '{$academies[$i]["area"]}'") ){
