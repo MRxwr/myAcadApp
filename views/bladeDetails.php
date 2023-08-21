@@ -54,8 +54,8 @@ $academy = $response["data"]["academy"];
 									echo "
 									<div class='radi_wap'>
 										<div class='red_items'>
-											<input type='radio' checked='' name='sty' id='sty_1' value='{$academy["sessions"][$i]["id"]}'>
-											<label for='sty_1'><span></span>".direction($academy["sessions"][$i]["enTitle"],$academy["sessions"][$i]["arTitle"])."</label>
+											<input type='radio' checked='' name='sty' id='sty_{$i}' value='{$academy["sessions"][$i]["id"]}'>
+											<label for='sty_{$i}'><span></span>".direction($academy["sessions"][$i]["enTitle"],$academy["sessions"][$i]["arTitle"])."</label>
 										</div>
 										<input type='number' value='0'>
 									</div>
