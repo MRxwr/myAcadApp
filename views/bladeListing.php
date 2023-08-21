@@ -34,11 +34,7 @@ if( $sportTitle = selectDB("sports","`id` = '{$_POST["sport"]}'") ){
 			$academies = $response["data"]["academies"];
 			for( $i = 0; $i < sizeof($academies); $i++ ){
 				$counter = $i + 1;
-				if( $area = selectDB("countries","`id` = '{$academies[$i]["area"]}'") ){
-					$areaTitle = direction($area[0]["areaEnTitle"],$area[0]["areaArTitle"]);
-				}else{
-					$areaTitle = "";
-				}
+				$areaTitle = direction($academies[$i]["enArea"],$academies[$i]["arArea"]);
 		?>
             <div class="col-lg-4 col-sm-6 mt_50">
                 <div class="foott_box">
