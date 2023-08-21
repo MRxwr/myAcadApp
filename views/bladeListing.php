@@ -1,6 +1,8 @@
 <?php 
 require("template/bannersSlider.php");
 
+var_dump($_POST);
+
 $curl = curl_init();
 curl_setopt_array($curl, array(
   CURLOPT_URL => "https://createkwservers.com/myacad1/requests?a=Search&sportId={$_POST["sport"]}&genderId={$_POST["gender"]}&governateId={$_POST["governate"]}&areaId={$_POST["area"]}",
