@@ -20,7 +20,7 @@ curl_close($curl);
 $response = json_decode($response,true);
 
 if( $sportTitle = selectDB("sports","`id` = '{$_POST["sport"]}'") ){
-	$sportTitle = direction($sportTitle[0]["enTitle"],$sportTitle[0]["arTitle"])
+	$sportTitle = direction($sportTitle[0]["enTitle"],$sportTitle[0]["arTitle"]);
 }else{
 	$sportTitle = "";
 }
