@@ -71,10 +71,17 @@ $academy = $response["data"]["academy"];
                             </div>
                             <h5><img src="img/ca.svg" alt="">Select Subsicription Period</h5>
                             <select>
-                                <option>1 Month Supsecrption <del>( 50 KD )</del> ( 30 KD )</option>
-                                <option>1 Month Supsecrption <del>( 50 KD )</del> ( 30 KD )</option>
-                                <option>1 Month Supsecrption <del>( 50 KD )</del> ( 30 KD )</option>
-                                <option>1 Month Supsecrption <del>( 50 KD )</del> ( 30 KD )</option>
+							<?php 
+							if( $academy["subscriptions"] > 0 ){
+								for( $s = 0; $s < sizeof($academy["subscriptions"]); $s ++){
+									if( $academy["subscriptions"]["priceAfterDiscount"] > 0 ){
+										echo "<option>".direction($academy["subscriptions"]["enTitle"],$academy["subscriptions"]["arTitle"])." <del>( {$academy["subscriptions"]["price"]} KD )</del> ( {$academy["subscriptions"]["priceAfterDiscount"]} KD )</option>";
+									}else{
+										echo "<option>".direction($academy["subscriptions"]["enTitle"],$academy["subscriptions"]["arTitle"])." ( {$academy["subscriptions"]["price"]} KD )</option>";
+									}
+								}
+							}
+							?>
                             </select>
                         </form>
                         <a href="#" class="button mt_55">CHOOSE</a>
