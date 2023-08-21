@@ -47,31 +47,24 @@ $academy = $response["data"]["academy"];
                             <iframe width="100%" height="400" src="<?php echo $academy["video"] ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                         </div>
                         <form action="#" class="cup_area">
-                            <h5><img src="img/cup_1.svg" alt="">Select Age & Session Time</h5>
-                            <div class="radi_wap">
-                                <div class="red_items">
-                                    <input type="radio" checked="" name="sty" id="sty_1">
-                                    <label for="sty_1"><span></span>2001 - 2005, Time</label>
-                                </div>
-                                <input type="number" value="0">
-                            </div>
-                            <div class="radi_wap">
-                                <div class="red_items">
-                                    <input type="radio" name="sty" id="sty_2">
-                                    <label for="sty_2"><span></span>2001 - 2005, Time</label>
-                                </div>
-                                <input type="number" value="0">
-                            </div>
-                            <div class="radi_wap">
-                                <div class="red_items">
-                                    <input type="radio" name="sty" id="sty_3">
-                                    <label for="sty_3"><span></span>2001 - 2005, Time</label>
-                                </div>
-                                <input type="number" value="0">
-                            </div>
-                            <h5><img src="img/ca.svg" alt="">Select Subsicription Period</h5>
+                            <h5><img src="img/cup_1.svg" alt=""><?php echo direction("Select Age & Session Time","إختر العمر و وقت الكلاس") ?></h5>
+							<?php
+							if( $academy["sessions"] > 0 ){
+								for( $i = 0; $i < sizeof($academy["sessions"]); $i++ ){
+									echo "
+									<div class='radi_wap'>
+										<div class='red_items'>
+											<input type='radio' checked='' name='sty' id='sty_1' value='{$academy["sessions"][$i]["id"]}'>
+											<label for='sty_1'><span></span>".direction($academy["sessions"][$i]["enTitle"],$academy["sessions"][$i]["arTitle"])."</label>
+										</div>
+										<input type='number' value='0'>
+									</div>
+									";
+								}
+							}
+							?>
+                            <h5><img src="img/ca.svg" alt=""><?php echo direction("Select Subsicription Period","إختر مدة الإتشراك") ?></h5>
                             <select>
-							 <option>1 Month Supsecrption <del>( 50 KD )</del> ( 30 KD )</option>
 							<?php 
 							if( $academy["subscriptions"] > 0 ){
 								for( $s = 0; $s < sizeof($academy["subscriptions"]); $s ++){
