@@ -13,7 +13,7 @@ if( !isset($_GET["sportId"]) || empty($_GET["sportId"]) ){
 	if( isset($_GET["areaId"]) && !empty($_GET["areaId"]) ){
 		$where .= " AND `area` = '{$_GET["areaId"]}'";
 	}
-	if( $academies = selectDB2("`id`, `imageurl`, `header`, `enTitle`, `arTitle`, `area`","academies","`hidden` = '0' AND `status` = '0' {$where}") ){
+	if( $academies = selectDB2("`id`, `imageurl`, `header`, `enTitle`, `arTitle`, `area`, `isPromotion`","academies","`hidden` = '0' AND `status` = '0' {$where}") ){
 		for( $i = 0; $i < sizeof($academies); $i++){
 			$response["academies"][$i] = $academies[$i];
 			if( $area = selectDB("countries","`id` = '{$academies[$i]["area"]}'") ){
