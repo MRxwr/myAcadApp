@@ -22,5 +22,4 @@ if ( isset($_GET["Lang"]) ){
 	setcookie("CREATEkwLANG","ENG",(86400*30) + time(), "/");
 	$newLang = "AR";
 }
-var_dump($_SERVER);
 ?>
