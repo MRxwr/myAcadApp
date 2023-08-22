@@ -20,7 +20,7 @@ require_once("admin/includes/functions.php");
     <link href="img/favicon.png" type="image/png" rel="icon">
 
     <!-- all css here -->
-    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="css/<?php echo strtolower($directionHTML) ?>bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="css/fontawesome.min.css" rel="stylesheet" type="text/css" />
     <link href="css/owl.carousel.min.css" rel="stylesheet" type="text/css" /> 
     <link href="css/helper.css" rel="stylesheet" type="text/css" />
