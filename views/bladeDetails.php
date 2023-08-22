@@ -54,17 +54,17 @@ $academy = $response["data"]["academy"];
 									echo "
 									<div class='radi_wap'>
 										<div class='red_items'>
-											<input type='radio' checked='' name='sty' id='sty_{$i}' value='{$academy["sessions"][$i]["id"]}'>
+											<input type='radio' checked='' name='session' id='sty_{$i}' value='{$academy["sessions"][$i]["id"]}'>
 											<label for='sty_{$i}'><span></span>".direction($academy["sessions"][$i]["enTitle"],$academy["sessions"][$i]["arTitle"])."</label>
 										</div>
-										<input type='number' value='0'>
+										<input type='number' name='total' value='0'>
 									</div>
 									";
 								}
 							}
 							?>
                             <h5><img src="img/ca.svg" alt=""><?php echo direction("Select Subsicription Period","إختر مدة الإتشراك") ?></h5>
-                            <select>
+                            <select name="subscription">
 							<?php 
 							if( $academy["subscriptions"] > 0 ){
 								for( $s = 0; $s < sizeof($academy["subscriptions"]); $s ++){

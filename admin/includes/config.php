@@ -9,4 +9,5 @@ die("Connection Failed: " .$dbconnect->connect_error );
 }
 $sql = "SET CHARACTER SET utf8";
 $dbconnect->query($sql);
+require("translate.php");
 ?>
