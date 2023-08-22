@@ -17,4 +17,5 @@ if ( isset($_GET["Lang"]) ){
 	$_COOKIE["CREATEkwLANG"] = "ENG";
 	$newLang = "AR";
 }
+var_dump($newLang);
 ?>
