@@ -1,6 +1,6 @@
 <div class="carousel_area">
     <div class="container">
-        <div class="owl-carousel slider1">
+        <div class="owl-carousel <?php echo $sliderDirection ?>">
 		<?php
 		if( $banners = selectDB("banners","`status` = '0' AND `hidden` = '0' ORDER BY `order` ASC") ){
 			for( $i = 0; $i < sizeof($banners) ; $i++ ){

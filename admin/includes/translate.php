@@ -15,14 +15,17 @@ if ( isset($_GET["Lang"]) ){
 	$newLang = "AR";
 	$langDirection = "en";
 	$directionHTML = "";
+	$sliderDirection = "slider1";
 }elseif( isset($_COOKIE["CREATEkwLANG"]) && $_COOKIE["CREATEkwLANG"] == "AR" ){
 	$newLang = "EN";
 	$langDirection = "ar";
 	$directionHTML = "rtl";
+	$sliderDirection = "slider2";
 }else{
 	setcookie("CREATEkwLANG","EN",(86400*30) + time(), "/");
 	$newLang = "AR";
 	$langDirection = "en";
 	$directionHTML = "";
+	$sliderDirection = "slider1";
 }
 ?>
