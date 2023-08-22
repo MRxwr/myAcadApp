@@ -1,5 +1,6 @@
 <?php
 require_once("admin/includes/config.php");
+require_once("admin/includes/translate.php");
 require_once("admin/includes/functions.php");
 ?>
 <!DOCTYPE html>
