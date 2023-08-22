@@ -19,7 +19,7 @@
                 </a>
             </div>
             <div class="col-lg-4 col-4 d-flex align-items-center justify-content-end hum_gap">
-                <a href="?v=<?php echo $_GET["v"] ?>&Lang=AR" class="button rtl_btn">Ar</a>
+                <a href="?v=<?php echo "{$_GET["v"]}&Lang={$newLang}" ?>" class="button rtl_btn">Ar</a>
                 <!-- menu toggler -->
                 <div class="hamburger-menu">
                     <span class="line-top"></span>
