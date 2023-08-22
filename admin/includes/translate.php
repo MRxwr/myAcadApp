@@ -2,7 +2,6 @@
 $cookieSession = "myAcad";
 $settingsTitle = "MY ACAD";
 $settingslogo = "logo.png";
-setcookie("CREATEkwLANG","",(86400*30) - time(), "/");
 if ( isset($_GET["Lang"]) ){
 	$arrayLangs = ["ENG","AR"];
 	if ( in_array($_GET["Lang"], $arrayLangs) ){
@@ -15,6 +14,6 @@ if ( isset($_GET["Lang"]) ){
 		$newLang = "AR";
 	}
 }elseif( !isset($_COOKIE["CREATEkwLANG"]) ){
-	$_COOKIE["CREATEkwLANG"] = "ENG";
+	setcookie("CREATEkwLANG","ENG",(86400*30) + time(), "/");
 }
 ?>
