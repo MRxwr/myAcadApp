@@ -26,6 +26,7 @@ require_once("admin/includes/functions.php");
     <link href="css/helper.css" rel="stylesheet" type="text/css" />
     <link href="css/select2bs.css" rel="stylesheet">
     <link href="css/nice-select.css" rel="stylesheet" type="text/css" />
+	<link href="css/intlTelInput.css" rel="stylesheet" type="text/css" />
     <link href="css/magnific-popup.css" rel="stylesheet" type="text/css" />
     <link href="css/srcollbar.css" rel="stylesheet" type="text/css" />
     <link href="css/style.css" rel="stylesheet" type="text/css" />
