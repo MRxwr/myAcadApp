@@ -78,7 +78,7 @@ $academy = $response["data"]["academy"];
 							?>
                             </select>
                         </form>
-                        <a href="#" class="button mt_55">CHOOSE</a>
+                        <a href="#" class="button mt_55"><?php echo direction("Choose","إختر") ?></a>
                     </div>
                 </div>
             </div>
@@ -90,7 +90,7 @@ $academy = $response["data"]["academy"];
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-10">
-                <h2><img src="img/map.svg" alt="">Location</h2>
+                <h2><img src="img/map.svg" alt=""><?php echo direction("Location","الموقع") ?></h2>
                 <iframe src="<?php echo $academy["location"] ?>"style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
         </div>
