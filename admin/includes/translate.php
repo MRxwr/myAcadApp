@@ -15,5 +15,6 @@ if ( isset($_GET["Lang"]) ){
 	}
 }elseif( !isset($_COOKIE["CREATEkwLANG"]) ){
 	setcookie("CREATEkwLANG","ENG",(86400*30) + time(), "/");
+	$newLang = "AR";
 }
 ?>
