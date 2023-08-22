@@ -37,16 +37,16 @@
         <div id="menu">
             <ul>
                 <li class="nav-item">
-                    <a href="?v=Home" class="nav-link active">Home</a>
+                    <a href="?v=Home" class="nav-link active"><?php echo direction("Home","الرئيسية") ?></a>
                 </li>
                 <li class="nav-item">
-                    <a href="?v=Subscriptions" class="nav-link">SUBSICRIPTIONS</a>
+                    <a href="?v=Subscriptions" class="nav-link"><?php echo direction("Subscriptions","الإشتراكات") ?></a>
                 </li>
                 <li class="nav-item">
-                    <a href="?v=Profile" class="nav-link">PROFILE</a>
+                    <a href="?v=Profile" class="nav-link"><?php echo direction("Profile","الملف الشخصي") ?></a>
                 </li>
                 <li class="nav-item">
-                    <a href="?v=Contact" class="nav-link">Contact us</a>
+                    <a href="?v=Contact" class="nav-link"><?php echo direction("Contact us","إتصل بنا") ?></a>
                 </li>
             </ul>
         </div>
