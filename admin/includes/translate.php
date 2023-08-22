@@ -17,6 +17,7 @@ if ( isset($_GET["Lang"]) ){
 	$newLang = "AR";
 }elseif( isset($_COOKIE["CREATEkwLANG"]) && $_COOKIE["CREATEkwLANG"] == "AR" ){
 	$newLang = "ENG";
+	$directionHTML = "rtl";
 }else{
 	setcookie("CREATEkwLANG","ENG",(86400*30) + time(), "/");
 	$newLang = "AR";
