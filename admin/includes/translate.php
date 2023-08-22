@@ -13,7 +13,9 @@ if ( isset($_GET["Lang"]) ){
 		header("Refresh:0 , url=" . str_replace("?Lang=ENG", "" ,str_replace("&Lang=ENG", "", $_SERVER['REQUEST_URI'])) );
 		$newLang = "AR";
 	}
-}elseif( !isset($_COOKIE["CREATEkwLANG"]) ){
+}elseif( isset($_COOKIE["CREATEkwLANG"]) && $_COOKIE["CREATEkwLANG"] == "ENG" ){
+	$newLang = "AR";
+}else{
 	setcookie("CREATEkwLANG","ENG",(86400*30) + time(), "/");
 	$newLang = "AR";
 }
