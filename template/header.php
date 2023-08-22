@@ -4,7 +4,7 @@ require_once("admin/includes/translate.php");
 require_once("admin/includes/functions.php");
 ?>
 <!DOCTYPE html>
-<html lang="<?php strtolower($newLang) ?>">
+<html lang="<?php echo strtolower($newLang) ?>">
 <head>
     <meta charset="utf-8">
     <meta name="description" content="">
