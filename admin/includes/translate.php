@@ -8,18 +8,23 @@ if ( isset($_GET["Lang"]) ){
 		setcookie("CREATEkwLANG","{$_GET["Lang"]}",(86400*30) + time(), "/");
 		header("Refresh:0 , url=" . str_replace("?Lang={$_GET["Lang"]}", "" ,str_replace("&Lang={$_GET["Lang"]}", "", $_SERVER['REQUEST_URI'])) );
 		$newLang = "EN";
+		$langDirection = "ar";
 	}else{
 		setcookie("CREATEkwLANG","EN",(86400*30) + time(), "/");
 		header("Refresh:0 , url=" . str_replace("?Lang=EN", "" ,str_replace("&Lang=EN", "", $_SERVER['REQUEST_URI'])) );
 		$newLang = "AR";
+		$langDirection = "en";
 	}
 }elseif( isset($_COOKIE["CREATEkwLANG"]) && $_COOKIE["CREATEkwLANG"] == "EN" ){
 	$newLang = "AR";
+	$langDirection = "en";
 }elseif( isset($_COOKIE["CREATEkwLANG"]) && $_COOKIE["CREATEkwLANG"] == "AR" ){
 	$newLang = "EN";
 	$directionHTML = "rtl";
+	$langDirection = "ar";
 }else{
 	setcookie("CREATEkwLANG","EN",(86400*30) + time(), "/");
 	$newLang = "AR";
+	$langDirection = "en";
 }
 ?>
