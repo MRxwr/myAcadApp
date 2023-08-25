@@ -1,4 +1,9 @@
 <?php
+if( isset($_GET["error"]) AND $_GET["error"] == 1 ){
+    ?>
+    <script>alert('<?php echo direction("Could not delete your profile, please try again.","لم يتم حذف حسابك، الرجاء المحاولة مجدداًُ") ?>')</script>
+    <?php
+}
 if( isset($_POST["firstName"]) && !empty($_POST["firstName"]) ){
     if( updateDB("users",$_POST,"`keepMeAlive` LIKE '{$_COOKIE["createmyacad"]}' ") ){
 
