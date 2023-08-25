@@ -6,7 +6,7 @@
             </button>
             <div class="modal-body">
                 <h2><?php echo direction("Personal Information","المعلومات الشخصية") ?></h2>
-                <form action="?v=Profile" class="profile_form">
+                <form action="?v=Profile" method="POST" class="profile_form">
                     <div class="row">
                         <div class="col-lg-6 mt_15">
                             <label for="nam"><?php echo direction("First Name","الإسم الأول") ?></label>
