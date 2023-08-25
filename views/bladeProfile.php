@@ -4,6 +4,15 @@ if ( getLoginStatusResponse() == 0 ){
 }elseif( $user = selectDB("users","`keepMeAlive` LIKE '{$_COOKIE["createmyacad"]}'") ){
 
 }
+if( isset($_POST["firstName"]) && !empty($_POST["firstName"]) ){
+    if( updateDB("users",$_POST,"`keepMeAlive` LIKE '{$_COOKIE["createmyacad"]}' ") ){
+
+    }else{
+        ?>
+        <script>alert('<?php echo direction("Could not update your profile, please try again.","حدث خطأ أثناء محاولة تحديث بياناتك،  الرجاء المحاولة مجدداً") ?>')</script>
+        <?php
+    }
+}
 require_once("template/editProfileModal.php");
 ?>
 
