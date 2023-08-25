@@ -10,6 +10,23 @@ function getLoginStatus(){
 	return $output;
 }
 
+// user login \\
+function userLogin(){
+	if ( isset($_COOKIE["createmyacad"]) && !empty($_COOKIE["createmyacad"]) ){
+		$randomCookie = sha1(rand(000000,999999)+time());
+		setcookie("createmyacad", $randomCookie, time() + (86400*30 ), "/");
+		if( updateDB("users",array('keepMeAlive' => $randomCookie),"`keepMeAlive` LIKE '{$_COOKIE["createmyacad"]}'") ){
+
+		}
+	}else{
+		$randomCookie = sha1(rand(000000,999999)+time());
+		setcookie("createmyacad", $randomCookie, time() + (86400*30 ), "/");
+		if(updateDB("users",array('keepMeAlive' => $randomCookie),"`keepMeAlive` LIKE '{$_COOKIE["createmyacad"]}'") ){
+			
+		}
+	}
+}
+
 // forget password \\ 
 function forgetPass($data){
 	GLOBAL $settingsTitle, $settingslogo, $settingsWebsite, $settingsEmail;
