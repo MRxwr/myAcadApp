@@ -4,8 +4,8 @@
             <div class="col-lg-4 col-4">
                 <div class="header_lang">
                     <div id="JLang" class="lang_flag">
-                        <div data-lang-code="en-GB" data-src="img/32/kuwait.png">English</div>
-                        <div data-lang-code="es-ES" data-src="img/32/spain.png">Español</div>
+                        <div data-lang-code="en-GB" data-src="img/32/Kuwait.png">English</div>
+                        <div data-lang-code="es-ES" data-src="img/32/Spain.png">Español</div>
                         <div data-lang-code="it-IT" data-src="img/32/Italy.png">Italian</div>
                         <div data-lang-code="de-DE" data-src="img/32/Germany.png">Deutsche</div>
                         <div data-lang-code="fr-FR" data-src="img/32/France.png">French</div>
