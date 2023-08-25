@@ -13,11 +13,11 @@ if( isset($_POST["email"]) && !empty($_POST["email"]) ){
             <form action="?v=Login" method="post" class="wapper_form">
                 <div class="input_wapp">
                     <img src="img/img_1.svg" alt="">
-                    <input type="email" placeholder="Email Address">
+                    <input type="email" name="email" placeholder="Email Address">
                 </div>
                 <div class="input_wapp">
                     <img src="img/img_2.svg" alt="">
-                    <input type="password" placeholder="Password">
+                    <input type="password" name="password" placeholder="Password">
                 </div>
                 <button class="button" type="submit">LOGIN</button>
             </form>
