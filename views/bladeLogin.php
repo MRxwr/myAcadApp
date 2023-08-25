@@ -1,5 +1,6 @@
 <?php
 if( isset($_POST["email"]) && !empty($_POST["email"]) ){
+    var_dump($_POST);
     userLogin($_POST);
 }
 ?>
