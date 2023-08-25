@@ -1,14 +1,11 @@
 <?php
 // user \\
 function getLoginStatus(){
-	GLOBAL $dbconnect,$userID,$logoutText,$ProfileText,$orderText,$loginText;
 	$output = "";
-	 if ( isset($userID) && !empty($userID) ){
-	 $output .= "<a href='logout.php'><button class='btn join-btn'>{$logoutText}</button></a>
-		<button class='btn join-btn' data-toggle='modal' data-target='#editProfile_popup'>{$ProfileText}</button>
-		<button class='btn join-btn' data-toggle='modal' data-target='#orders_popup'>{$orderText}</button>";
+	if( isset($_COOKIE["createmyacad"]) && !empty($_COOKIE["createmyacad"]) && $user = selectDB("users","`keepMeAlive` LIKE '{$_COOKIE["createmyacad"]}'") ){
+		$output = "<a href='?v=Logout' class='button'>".direction("Logout","تسجيل الخروج")."</a>";
 	}else{
-		$output .= "<button class='btn join-btn' data-toggle='modal' data-target='#login_popup'>{$loginText}</button>";
+		$output = "<a href='?v=Login' class='button'>".direction("Login","تسجيل الدخول")."</a>";
 	}
 	return $output;
 }

@@ -10,7 +10,7 @@
                         <div data-lang-code="de-DE" data-src="img/32/Germany.png">Deutsche</div>
                         <div data-lang-code="fr-FR" data-src="img/32/France.png">French</div>
                     </div>
-                    <a href="?v=Login" class="button">Login</a>
+                    <?php echo getLoginStatus() ?>
                 </div>
             </div>
             <div class="col-lg-4 col-4 text-center">
