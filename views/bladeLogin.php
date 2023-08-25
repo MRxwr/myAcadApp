@@ -9,7 +9,7 @@ if( isset($_POST["email"]) && !empty($_POST["email"]) ){
             <a href="#" class="hero_logo">
                 <img src="img/hero_logo.png" alt="">
             </a>
-            <form action="#" class="wapper_form">
+            <form action="?v=Login" method="post" class="wapper_form">
                 <div class="input_wapp">
                     <img src="img/img_1.svg" alt="">
                     <input type="email" placeholder="Email Address">
