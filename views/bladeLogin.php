@@ -1,6 +1,6 @@
 <?php
 if( isset($_POST["email"]) && !empty($_POST["email"]) ){
-    userLogin($_POST);
+    userLogin($_POST);die();
 }
 ?>
 <div class="home_area">
