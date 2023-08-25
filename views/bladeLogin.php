@@ -1,3 +1,8 @@
+<?php
+if( isset($_POST["email"]) && !empty($_POST["email"]) ){
+    userLogin($_POST);
+}
+?>
 <div class="home_area">
     <div class="left_side">
         <div class="hero_input">
