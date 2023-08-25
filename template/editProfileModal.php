@@ -10,29 +10,29 @@
                     <div class="row">
                         <div class="col-lg-6 mt_15">
                             <label for="nam"><?php echo direction("First Name","الإسم الأول") ?></label>
-                            <input type="text" name="firstName" id="nam">
+                            <input type="text" name="firstName" id="nam" value="<?php echo $user[0]["firstName"] ?>">
                         </div>
                         <div class="col-lg-6 mt_15">
                             <label for="nam2"><?php echo direction("Email","البريد الإلكتروني") ?></label>
-                            <input type="email" name="email" id="nam2">
+                            <input type="email" name="email" id="nam2" value="<?php echo $user[0]["email"] ?>">
                         </div>
                         <div class="col-lg-6 mt_20">
                             <label for="nam"><?php echo direction("Last Name","الإسم الأخير") ?></label>
-                            <input type="name" name="lastName" id="nam" >
+                            <input type="name" name="lastName" id="nam" value="<?php echo $user[0]["lastName"] ?>">
                         </div>
                         <div class="col-lg-6 mt_20">
                             <label for="nam"><?php echo direction("Phone Number","رقم الهاتف") ?></label>
-                            <input type="tel" name="phone" id="nam">
+                            <input type="tel" name="phone" id="nam" value="<?php echo $user[0]["phone"] ?>">
                         </div>
                         <div class="col-lg-6 mt_20">
                             <label for="nam"><?php echo direction("Gender","الجنس") ?></label>
                             <div class="radio_wapp">
                                 <div class="profile_radio">
-                                    <input type="radio" checked="" value='0' name="gender" id="us7">
+                                    <input type="radio" <?php echo $gender = ($user[0]["gender"] == 0 ) ? "checked=''" : "" ?> value='0' name="gender" id="us7">
                                     <label for="us7"><img src="img/male.svg" alt=""><?php echo direction("Male","ذكر") ?></label>
                                 </div>
                                 <div class="profile_radio">
-                                    <input type="radio" name="gender" value='1' id="us8">
+                                    <input type="radio" <?php echo $gender = ($user[0]["gender"] == 1 ) ? "checked=''" : "" ?> name="gender" value='1' id="us8">
                                     <label for="us8"><img src="img/female.svg" alt=""><?php echo direction("Female","أنثى") ?></label>
                                 </div>
                             </div>
