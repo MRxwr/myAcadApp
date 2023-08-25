@@ -10,6 +10,16 @@ function getLoginStatus(){
 	return $output;
 }
 
+// user login Status Response \\
+function getLoginStatusResponse(){
+	$output = "";
+	if( isset($_COOKIE["createmyacad"]) && !empty($_COOKIE["createmyacad"]) && $user = selectDB("users","`keepMeAlive` LIKE '{$_COOKIE["createmyacad"]}'") ){
+		return 1;
+	}else{
+		return 0;
+	}
+}
+
 // user login \\
 function userLogin($data){
 	if ( $user = selectDB("users","`email` LIKE '{$data["email"]}' AND `password` LIKE '".sha1($data["password"])."' AND `status` = '0' AND `hidden` = '0'") ){
