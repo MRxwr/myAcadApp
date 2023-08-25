@@ -1,6 +1,10 @@
 <?php
 if( isset($_POST["email"]) && !empty($_POST["email"]) ){
-    userLogin($_POST);die();
+    if ( userLogin($_POST) ){
+        header("?v=Home");
+    }else{
+        header("?v=Login&error=1");
+    }
 }
 ?>
 <div class="home_area">
