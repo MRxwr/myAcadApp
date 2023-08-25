@@ -8,9 +8,15 @@ if( isset($_POST["email"]) && !empty($_POST["email"]) ){
     die();
 }
 if( isset($_GET["error"]) && !empty($_GET["error"]) ){
-    ?>
-    <script>alert('<?php echo direction("Wrong email/ password, Please try again!","بريد إلكتروني / كلمة مرور خاطئه ، الرجاء المحاولة مجدداً") ?>')</script>
-    <?php
+    if ( $_GET["error"] == 1 ){
+        ?>
+        <script>alert('<?php echo direction("Wrong email/ password, Please try again!","بريد إلكتروني / كلمة مرور خاطئه ، الرجاء المحاولة مجدداً") ?>')</script>
+        <?php
+    }elseif( $_GET["error"] == 2 ){
+        ?>
+        <script>alert('<?php echo direction("Please login before viewing profile.","الرجاء تسجيل الدخول قبل عرض الملف الشخصي") ?>')</script>
+        <?php
+    }
 }
 ?>
 <div class="home_area">
