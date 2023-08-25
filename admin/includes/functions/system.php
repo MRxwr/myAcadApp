@@ -16,7 +16,12 @@ function userLogin($data){
 		$randomCookie = sha1(rand(000000,999999)+time());
 		setcookie("createmyacad", $randomCookie, time() + (86400*30 ), "/");
 		if( updateDB("users",array('keepMeAlive' => $randomCookie),"`id` = '{$user[0]["id"]}'") ){
+			return 1;
+		}else{
+			return 0;
 		}
+	}else{
+		return 0;
 	}
 }
 
