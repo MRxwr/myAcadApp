@@ -1,6 +1,6 @@
 <?php
 if ( getLoginStatusResponse() == 0 ){
-    header("LOCATION: ?v=Login&=error=2");
+    header("LOCATION: ?v=Login&error=2");
 }
 require_once("template/editProfileModal.php");
 ?>
