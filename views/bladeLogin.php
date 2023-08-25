@@ -5,6 +5,7 @@ if( isset($_POST["email"]) && !empty($_POST["email"]) ){
     }else{
         header("?v=Login&error=1");
     }
+    die();
 }
 ?>
 <div class="home_area">

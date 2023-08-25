@@ -16,10 +16,7 @@ function userLogin($data){
 		$randomCookie = sha1(rand(000000,999999)+time());
 		setcookie("createmyacad", $randomCookie, time() + (86400*30 ), "/");
 		if( updateDB("users",array('keepMeAlive' => $randomCookie),"`id` = '{$user[0]["id"]}'") ){
-			header("?v=Home");
 		}
-	}else{
-		header("?v=Login&error=1");
 	}
 }
 
