@@ -1,8 +1,8 @@
 <?php
-require_once("template/editProfileModal.php");
 if ( getLoginStatusResponse() == 0 ){
     header("LOCATION: ?v=Login");
 }
+require_once("template/editProfileModal.php");
 ?>
 
 <div class="home_area">
