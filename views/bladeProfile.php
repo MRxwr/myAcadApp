@@ -1,9 +1,4 @@
 <?php
-if ( getLoginStatusResponse() == 0 ){
-    header("LOCATION: ?v=Login&error=2");
-}elseif( $user = selectDB("users","`keepMeAlive` LIKE '{$_COOKIE["createmyacad"]}'") ){
-
-}
 if( isset($_POST["firstName"]) && !empty($_POST["firstName"]) ){
     if( updateDB("users",$_POST,"`keepMeAlive` LIKE '{$_COOKIE["createmyacad"]}' ") ){
 
@@ -12,6 +7,11 @@ if( isset($_POST["firstName"]) && !empty($_POST["firstName"]) ){
         <script>alert('<?php echo direction("Could not update your profile, please try again.","حدث خطأ أثناء محاولة تحديث بياناتك،  الرجاء المحاولة مجدداً") ?>')</script>
         <?php
     }
+}
+if ( getLoginStatusResponse() == 0 ){
+    header("LOCATION: ?v=Login&error=2");
+}elseif( $user = selectDB("users","`keepMeAlive` LIKE '{$_COOKIE["createmyacad"]}'") ){
+
 }
 require_once("template/editProfileModal.php");
 ?>
