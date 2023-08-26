@@ -18,15 +18,12 @@ if( isset($_POST["firstName"]) && !empty($_POST["firstName"]) ){
     ));
     $response = curl_exec($curl);
     curl_close($curl);
-    $response = curl_exec($curl);
-
-// Check for cURL errors
-if (curl_errno($curl)) {
-    echo 'cURL Error: ' . curl_error($curl);
-}
-
-// Output the response
-echo "Response: " . $response;
+    // Check for cURL errors
+    if (curl_errno($curl)) {
+        echo 'cURL Error: ' . curl_error($curl);
+    }
+    // Output the response
+    echo "Response: " . $response;
 }
 ?>
 
