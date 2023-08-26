@@ -1,6 +1,5 @@
 <?php
 if( isset($_POST["firstName"]) && !empty($_POST["firstName"]) ){
-    var_dump($_POST);
     $curl = curl_init();
     curl_setopt_array($curl, array(
       CURLOPT_URL => 'https://www.createkwservers.com/myacad1/requests?a=User&type=register',
@@ -22,7 +21,6 @@ if( isset($_POST["firstName"]) && !empty($_POST["firstName"]) ){
     $responseHeaders = curl_getinfo($curl);
     echo "Response Headers: " . print_r($responseHeaders, true) . "\n";
     echo "Response Data: " . $response;
-    var_dump($response);
 }
 ?>
 
