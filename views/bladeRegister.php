@@ -1,6 +1,9 @@
 <?php
 if( isset($_POST["firstName"]) && !empty($_POST["firstName"]) ){
     $curl = curl_init();
+    if ($curl === false) {
+        die('cURL initialization failed');
+    }
     curl_setopt_array($curl, array(
       CURLOPT_URL => 'https://www.createkwservers.com/myacad1/requests?a=User&type=register',
       CURLOPT_RETURNTRANSFER => true,
