@@ -1,3 +1,26 @@
+<?php
+if( isset($_POST["firstName"]) && !empty($_POST["firstName"]) ){
+    $curl = curl_init();
+    curl_setopt_array($curl, array(
+      CURLOPT_URL => 'https://www.createkwservers.com/myacad1/requests?a=User&type=register',
+      CURLOPT_RETURNTRANSFER => true,
+      CURLOPT_ENCODING => '',
+      CURLOPT_MAXREDIRS => 10,
+      CURLOPT_TIMEOUT => 0,
+      CURLOPT_FOLLOWLOCATION => true,
+      CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+      CURLOPT_CUSTOMREQUEST => 'POST',
+      CURLOPT_POSTFIELDS => $_POST,
+      CURLOPT_HTTPHEADER => array(
+        'myacadheader: myAcadAppCreate'
+      ),
+    ));
+    $response = curl_exec($curl);
+    curl_close($curl);
+    var_dump($response);
+}
+?>
+
 <div class="home_area">
     <div class="left_side">
         <div class="hero_input sign_form">
@@ -25,7 +48,7 @@
                 </div>
                 <div class="input_wapp">
                     <img src="img/img_2.svg" alt="">
-                    <input type="password" name="reTypePassword" placeholder="<?php echo direction("Re-Type Password","تأكيد كلمة المرور") ?>">
+                    <input type="password" name="confirmPassword" placeholder="<?php echo direction("Re-Type Password","تأكيد كلمة المرور") ?>">
                 </div>
                 <button class="button mt_40" type="submit"><?php echo direction("SIGNUP","تسجيل") ?></button>
             </form>
