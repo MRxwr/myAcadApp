@@ -24,8 +24,7 @@ if( isset($_POST["firstName"]) && !empty($_POST["firstName"]) ){
         <script>alert("<?php echo $response["data"]["msg"] ?>")</script>
         <?php
     }elseif( $response["error"] == 0 ){
-        ?><script>alert("<?php echo direction("Registerd Successfully.","تم التسجيل بنجاح") ?>")</script><?php
-        header("LOCATION: ?v=Login");die();
+        header("LOCATION: ?v=Login&success=1");die();
     }
 }
 ?>

@@ -18,6 +18,13 @@ if( isset($_GET["error"]) && !empty($_GET["error"]) ){
         <?php
     }
 }
+if( isset($_GET["success"]) && !empty($_GET["success"]) ){
+    if ( $_GET["success"] == 1 ){
+        ?>
+        <script>alert('<?php echo direction("Registerd Successfully.","تم التسجيل بنجاح") ?>')</script>
+        <?php
+    }
+}
 ?>
 <div class="home_area">
     <div class="left_side">
