@@ -1,9 +1,6 @@
 <?php
 if( isset($_POST["firstName"]) && !empty($_POST["firstName"]) ){
     $curl = curl_init();
-    if ($curl === false) {
-        die('cURL initialization failed');
-    }
     curl_setopt_array($curl, array(
       CURLOPT_URL => 'https://www.createkwservers.com/myacad1/requests?a=User&type=register',
       CURLOPT_RETURNTRANSFER => true,
@@ -12,21 +9,13 @@ if( isset($_POST["firstName"]) && !empty($_POST["firstName"]) ){
       CURLOPT_TIMEOUT => 0,
       CURLOPT_FOLLOWLOCATION => true,
       CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-      CURLOPT_CUSTOMREQUEST => 'POST',
-      CURLOPT_POSTFIELDS => array('firstName' => 'anas','lastName' => 'alkandari','phone' => '96556544444','email' => 'ana.kandari@kockw.com','password' => '90949089','confirmPassword' => '90949089','firebase' => '123132132132dsadsadas'),
+      CURLOPT_CUSTOMREQUEST => '',
+      CURLOPT_POSTFIELDS => $_POST,
       CURLOPT_HTTPHEADER => array(
         'myacadheader: myAcadAppCreate'
       ),
     ));
     $response = curl_exec($curl);
-    // Check for cURL errors
-    if (curl_errno($curl)) {
-        echo 'cURL Error: ' . curl_error($curl);
-    }
-    // Output the response
-    echo "Response: " . $response;
-    curl_close($curl);
-    
 }
 ?>
 
