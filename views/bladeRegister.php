@@ -18,9 +18,15 @@ if( isset($_POST["firstName"]) && !empty($_POST["firstName"]) ){
     ));
     $response = curl_exec($curl);
     curl_close($curl);
-    $responseHeaders = curl_getinfo($curl);
-    echo "Response Headers: " . print_r($responseHeaders, true) . "\n";
-    echo "Response Data: " . $response;
+    $response = curl_exec($curl);
+
+// Check for cURL errors
+if (curl_errno($curl)) {
+    echo 'cURL Error: ' . curl_error($curl);
+}
+
+// Output the response
+echo "Response: " . $response;
 }
 ?>
 
