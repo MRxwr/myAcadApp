@@ -2,30 +2,30 @@
     <div class="left_side">
         <div class="hero_input sign_form">
             <h2><?php echo direction("SIGNUP","تسجيل") ?></h2>
-            <form action="#" class="wapper_form">
+            <form action="?v=Register" method="POST" class="wapper_form">
                 <div class="input_wapp">
                     <img src="img/img_3.svg" alt="">
-                    <input type="text" placeholder="<?php echo direction("First Name","الإسم الأول") ?>">
+                    <input type="text" name="firstName" placeholder="<?php echo direction("First Name","الإسم الأول") ?>">
                 </div>
                 <div class="input_wapp">
                     <img src="img/img_3.svg" alt="">
-                    <input type="text" placeholder="<?php echo direction("Last Name","الإسم الأخير") ?>">
+                    <input type="text" name="lastName" placeholder="<?php echo direction("Last Name","الإسم الأخير") ?>">
                 </div>
                 <div class="input_wapp">
                     <img src="img/img_1.svg" alt="">
-                    <input type="email" placeholder="<?php echo direction("Email Address","البريد الإلكتروني") ?>">
+                    <input type="email" name="email" placeholder="<?php echo direction("Email Address","البريد الإلكتروني") ?>">
                 </div>
                 <div class="input_wapp bor_style">
                     <img src="img/img_4.svg" alt="">
-                    <input type="tel" id="phn" value="+965" placeholder="<?php echo direction("Phone Number","رقم الهاتف") ?>">
+                    <input type="tel" id="phn" name="phone" value="+965" placeholder="<?php echo direction("Phone Number","رقم الهاتف") ?>">
                 </div>
                 <div class="input_wapp">
                     <img src="img/img_2.svg" alt="">
-                    <input type="password" placeholder="<?php echo direction("Password","كلمة المرور") ?>">
+                    <input type="password" name="password" placeholder="<?php echo direction("Password","كلمة المرور") ?>">
                 </div>
                 <div class="input_wapp">
                     <img src="img/img_2.svg" alt="">
-                    <input type="password" placeholder="<?php echo direction("Re-Type Password","تأكيد كلمة المرور") ?>">
+                    <input type="password" name="reTypePassword" placeholder="<?php echo direction("Re-Type Password","تأكيد كلمة المرور") ?>">
                 </div>
                 <button class="button mt_40" type="submit"><?php echo direction("SIGNUP","تسجيل") ?></button>
             </form>
@@ -35,6 +35,6 @@
         </div>
     </div>
     <div class="play_spt">
-        <img src="img/play.jpg" alt="" class="w-100">
+        <img src="img/play.jpg" alt="" class="w-100"> 
     </div>
 </div>
