@@ -29,7 +29,7 @@ if( isset($_POST["email"]) AND !empty($_POST["email"]) ){
     <div class="left_side">
         <div class="hero_input sign_form">
             <h2><?php echo direction("FORGET PASSWORD", "نسيان كلمة المرور") ?></h2>
-            <form action="?v=ForgetPassword" class="wapper_form mt_100">
+            <form action="?v=ForgetPassword" method="POST" class="wapper_form mt_100">
                 <div class="input_wapp">
                     <img src="img/img_1.svg" alt="">
                     <input type="email" name="email" placeholder="<?php echo direction("Email Address", "البريد الإلكتروني") ?>">
