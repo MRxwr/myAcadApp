@@ -3,20 +3,21 @@ if( isset($_POST["firstName"]) && !empty($_POST["firstName"]) ){
     var_dump($_POST);
     $curl = curl_init();
     curl_setopt_array($curl, array(
-      CURLOPT_URL => 'https://www.createkwservers.com/myacad1/requests?a=User&type=register',
-      CURLOPT_RETURNTRANSFER => true,
-      CURLOPT_ENCODING => '',
-      CURLOPT_MAXREDIRS => 10,
-      CURLOPT_TIMEOUT => 0,
-      CURLOPT_FOLLOWLOCATION => true,
-      CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-      CURLOPT_CUSTOMREQUEST => 'POST',
-      CURLOPT_POSTFIELDS => $_POST,
-      CURLOPT_HTTPHEADER => array(
-        'myacadheader: myAcadAppCreate'
-      ),
+        CURLOPT_URL => 'https://www.createkwservers.com/myacad1/requests/?a=User&type=register',
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => '',
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => 'POST',
+        CURLOPT_POSTFIELDS => array('firstName' => 'anas','lastName' => 'alkandari','phone' => '96556544444','email' => 'ana.kandarii@kockw.com','password' => '90949089','confirmPassword' => '90949089','firebase' => '123132132132dsadsadas'),
+        CURLOPT_HTTPHEADER => array(
+            'myacadheader: myAcadAppCreate'
+        ),
     ));
     $response = curl_exec($curl);
+    curl_close($curl);
     var_dump($response);
 }
 ?>
