@@ -1,6 +1,6 @@
 <?php
 if( isset($_POST["firstName"]) && !empty($_POST["firstName"]) ){
-    var_dump($_POST);
+    $_POST["firebase"] = "";
     $curl = curl_init();
     curl_setopt_array($curl, array(
         CURLOPT_URL => 'https://www.createkwservers.com/myacad1/requests/?a=User&type=register',
@@ -18,7 +18,15 @@ if( isset($_POST["firstName"]) && !empty($_POST["firstName"]) ){
     ));
     $response = curl_exec($curl);
     curl_close($curl);
-    var_dump($response);
+    $response = json_decode($response,true);
+    if( $response["error"] == 1 ){
+        ?>
+        <script>alert("<?php echo $response["data"]["msg"] ?>")</script>
+        <?php
+    }elseif( $response["error"] == 0 ){
+        ?><script>alert("<?php echo direction("Registerd Successfully.","تم التسجيل بنجاح") ?>")</script><?php
+        header("LOCATION: ?v=Login");die();
+    }
 }
 ?>
 
