@@ -11,7 +11,7 @@ if( isset($_POST["firstName"]) && !empty($_POST["firstName"]) ){
       CURLOPT_FOLLOWLOCATION => true,
       CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
       CURLOPT_CUSTOMREQUEST => 'POST',
-      CURLOPT_POSTFIELDS => $_POST,
+      CURLOPT_POSTFIELDS => array('firstName' => 'anas','lastName' => 'alkandari','phone' => '96556544444','email' => 'ana.kandari@kockw.com','password' => '90949089','confirmPassword' => '90949089','firebase' => '123132132132dsadsadas'),
       CURLOPT_HTTPHEADER => array(
         'myacadheader: myAcadAppCreate'
       ),
