@@ -15,7 +15,6 @@ if( isset($_POST["firstName"]) && !empty($_POST["firstName"]) ){
       CURLOPT_CUSTOMREQUEST => 'POST',
       CURLOPT_POSTFIELDS => array('firstName' => 'anas','lastName' => 'alkandari','phone' => '96556544444','email' => 'ana.kandari@kockw.com','password' => '90949089','confirmPassword' => '90949089','firebase' => '123132132132dsadsadas'),
       CURLOPT_HTTPHEADER => array(
-        'Content-Type: application/json',
         'myacadheader: myAcadAppCreate'
       ),
     ));
