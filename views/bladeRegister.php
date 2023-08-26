@@ -16,6 +16,7 @@ if( isset($_POST["firstName"]) && !empty($_POST["firstName"]) ){
       ),
     ));
     $response = curl_exec($curl);
+    var_dump($response);
 }
 ?>
 
