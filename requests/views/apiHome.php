@@ -12,12 +12,11 @@ if( $sports = selectDB2("`id`, `enTitle`, `arTitle`, `imageurl`","sports","`hidd
     $response["sports"] = array();
 }
 
-$response["genders"] = array(
-    "man" => ["Man","رجل"],
-    "woman" => ["Woman","إمرأة"],
-    "boy" => ["Boy","ولد"],
-    "girl" => ["Girl","بنت"]
-);
+$gendersEn = ["Man","Woman","Boy","Girl"];
+$gendersAr = ["رجل","إمرأة","ولد","بنت"];
+for( $i = 0; $i < sizeof($gendersEn); $i++ ){
+    $response["genders"][] = array("genderEn" => $gendersEn[$i], "genderAr" => $gendersAr[$i]);
+}
 
 if( isset($_GET["countryCode"]) && $governates = selectDB2("`id`, `enTitle`, `arTitle`","governates","`hidden` = '0' AND `status` = '0' AND `countryCode` LIKE '{$_GET["countryCode"]}' ORDER BY `enTitle` ASC") ){
     $response["governates"] = $governates;
