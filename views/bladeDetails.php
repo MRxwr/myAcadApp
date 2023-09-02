@@ -17,6 +17,18 @@ $response = curl_exec($curl);
 curl_close($curl);
 $response = json_decode($response,true);
 $academy = $response["data"]["academy"];
+if( $response["error"] == 1 ){
+	?>
+	<script>
+	$(document).ready(function() {
+		$("#showAlert").click(function() {
+			alert("<?php echo direction("Erorr while loading academy data.","حدث خطأ اثناء تحميل بيانات الأكادمية.") ?>");
+			window.history.back();
+		});
+	});
+	</script>
+	<?php
+}
 ?>
 <div class="jersy_area mt_20">
     <div class="container">
