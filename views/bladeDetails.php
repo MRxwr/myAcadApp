@@ -16,7 +16,6 @@ curl_setopt_array($curl, array(
 $response = curl_exec($curl);
 curl_close($curl);
 $response = json_decode($response,true);
-$academy = $response["data"]["academy"];
 if( $response["error"] == 1 ){
 	?>
 	<script>
@@ -28,6 +27,8 @@ if( $response["error"] == 1 ){
 	});
 	</script>
 	<?php
+}else{
+	$academy = $response["data"]["academy"];
 }
 ?>
 <div class="jersy_area mt_20">
