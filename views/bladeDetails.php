@@ -20,10 +20,8 @@ if( $response["error"] == 1 ){
 	?>
 	<script>
 	$(document).ready(function() {
-		$("#showAlert").click(function() {
-			alert("<?php echo direction("Erorr while loading academy data.","حدث خطأ اثناء تحميل بيانات الأكادمية.") ?>");
-			window.history.back();
-		});
+		alert("<?php echo direction("Erorr while loading academy data.","حدث خطأ اثناء تحميل بيانات الأكادمية.") ?>");
+		window.history.back();
 	});
 	</script>
 	<?php
