@@ -44,10 +44,6 @@ if( $response["error"] == 1 ){
 	input[type="number"] {
 		text-align: center;
 	}
-	del {
-        text-decoration: line-through;
-        color: red;
-    }
 </style>
 
 <div class="jersy_area mt_20">
@@ -78,7 +74,7 @@ if( $response["error"] == 1 ){
                         <div class="d-lg-none mt_20 mb_20">
                             <iframe width="100%" height="400" src="<?php echo $academy["video"] ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                         </div>
-                        <form action="#" class="cup_area">
+                        <form action="Jersy?id=<?php echo $_GET["id"] ?>" class="cup_area">
                             <h5><img src="img/cup_1.svg" alt=""><?php echo direction("Select Age & Session Time","إختر العمر و وقت الكلاس") ?></h5>
 							<?php
 							if( $academy["sessions"] > 0 ){
@@ -110,8 +106,9 @@ if( $response["error"] == 1 ){
 							}
 							?>
                             </select>
+							<input type="hidden" name="id" value="<?php echo $_GET["id"] ?>">
+							<input type="submit" class="button mt_55" value="<?php echo direction("Choose","إختر") ?>">
                         </form>
-                        <a href="#" class="button mt_55"><?php echo direction("Choose","إختر") ?></a>
                     </div>
                 </div>
             </div>
