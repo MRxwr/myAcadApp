@@ -29,6 +29,23 @@ if( $response["error"] == 1 ){
 	$academy = $response["data"]["academy"];
 }
 ?>
+
+<style>
+	input[type="number"]::-webkit-outer-spin-button,
+	input[type="number"]::-webkit-inner-spin-button {
+		-webkit-appearance: none;
+		appearance: none;
+		margin: 0;
+	}
+	input[type="number"] {
+		-moz-appearance: textfield; /* Firefox */
+	}
+	input[type="text"],
+	input[type="number"] {
+		text-align: center;
+	}
+</style>
+
 <div class="jersy_area mt_20">
     <div class="container">
         <div class="row justify-content-center">
