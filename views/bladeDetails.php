@@ -82,10 +82,10 @@ if( $response["error"] == 1 ){
 									echo "
 									<div class='radi_wap'>
 										<div class='red_items'>
-											<input type='radio' checked='' name='session' id='sty_{$i}' value='{$academy["sessions"][$i]["id"]}'>
+											<input type='radio' checked='' name='session[]' id='sty_{$i}' value='{$academy["sessions"][$i]["id"]}'>
 											<label for='sty_{$i}'><span></span>".direction($academy["sessions"][$i]["enTitle"],$academy["sessions"][$i]["arTitle"])."</label>
 										</div>
-										<input type='number' name='total' value='0'>
+										<input type='number' step='1' name='total[]' value='0'>
 									</div>
 									";
 								}
