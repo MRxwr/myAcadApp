@@ -44,6 +44,10 @@ if( $response["error"] == 1 ){
 	input[type="number"] {
 		text-align: center;
 	}
+	del {
+        text-decoration: line-through;
+        color: red;
+    }
 </style>
 
 <div class="jersy_area mt_20">
