@@ -29,7 +29,7 @@ require_once("admin/includes/functions.php");
 	<link href="css/intlTelInput.css" rel="stylesheet" type="text/css" />
     <link href="css/magnific-popup.css" rel="stylesheet" type="text/css" />
     <link href="css/srcollbar.css" rel="stylesheet" type="text/css" />
-    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <link href="css/style.css?<?php echo randLetter() . "=" . rand(0000,9999) ?>" rel="stylesheet" type="text/css" />
     <link href="css/responsive.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
