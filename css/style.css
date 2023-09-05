@@ -567,7 +567,7 @@ footer h3{
 	    -ms-flex-pack: end;
 	        justify-content: flex-end;
 }
-.foot_wapper p{;
+.foot_wapper p{
 	text-transform: uppercase;
 }
 .foot_wapper img{
@@ -1374,7 +1374,7 @@ span.select2-selection.select2-selection--single {
 	border-right: none;
 	border-left: none;
 	font-size: 2.4rem;
-	width: 100%!important;
+	/*width: 100%!important;*/
 }
 .jurs_input{
 	border: 0.1rem solid rgba(112, 112, 112, 0.32);
