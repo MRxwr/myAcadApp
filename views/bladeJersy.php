@@ -90,6 +90,7 @@ if( $response["error"] == 1 ){
                                     $selectedQuantity = $_POST["quantity"][$i];
                                 }
                             }
+                            var_dump($_POST);
                             ?>
                             <input type="number" step="1" name="jersy" value="0">
                             <input type="hidden" name="session" value="<?php echo htmlspecialchars($selectedSession) ?>">
