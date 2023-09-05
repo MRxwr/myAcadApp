@@ -98,9 +98,9 @@ if( $response["error"] == 1 ){
 							if( $academy["subscriptions"] > 0 ){
 								for( $s = 0; $s < sizeof($academy["subscriptions"]); $s ++){
 									if( $academy["subscriptions"][$s]["priceAfterDiscount"] > 0 ){
-										echo "<option>".direction($academy["subscriptions"][$s]["enTitle"],$academy["subscriptions"][$s]["arTitle"])." <del>( {$academy["subscriptions"][$s]["price"]} KD )</del> ( {$academy["subscriptions"][$s]["priceAfterDiscount"]} KD )</option>";
+										echo "<option value='{$academy["subscriptions"][$s][$id]}'>".direction($academy["subscriptions"][$s]["enTitle"],$academy["subscriptions"][$s]["arTitle"])." <del>( {$academy["subscriptions"][$s]["price"]} KD )</del> ( {$academy["subscriptions"][$s]["priceAfterDiscount"]} KD )</option>";
 									}else{
-										echo "<option>".direction($academy["subscriptions"][$s]["enTitle"],$academy["subscriptions"][$s]["arTitle"])." ( {$academy["subscriptions"][$s]["price"]} KD )</option>";
+										echo "<option value='{$academy["subscriptions"][$s][$id]}'>".direction($academy["subscriptions"][$s]["enTitle"],$academy["subscriptions"][$s]["arTitle"])." ( {$academy["subscriptions"][$s]["price"]} KD )</option>";
 									}
 								}
 							}
