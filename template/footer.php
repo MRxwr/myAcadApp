@@ -36,8 +36,8 @@
     <a href="#" class="back-to-top"><i class="fal fa-angle-up"></i></a>
     
     <!-- all js here -->
-    <script src="js/jquery-3.4.1.min.js"></script>
-    <script src="js/plugins.js"></script>
-    <script src="js/main.js"></script>
+    <script src="js/jquery-3.4.1.min.js?<?php echo randLetter() . "=" . rand(0000,9999) ?>"></script>
+    <script src="js/plugins.js?<?php echo randLetter() . "=" . rand(0000,9999) ?>"></script>
+    <script src="js/main.js?<?php echo randLetter() . "=" . rand(0000,9999) ?>"></script>
 </body>
 </html>
