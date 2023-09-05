@@ -86,7 +86,7 @@ if( $response["error"] == 1 ){
 											<input type='radio' {$checked} name='session' id='sty_{$i}' value='{$academy["sessions"][$i]["id"]}'>
 											<label for='sty_{$i}'><span></span>".direction($academy["sessions"][$i]["enTitle"],$academy["sessions"][$i]["arTitle"])."</label>
 										</div>
-										<input type='number' step='1' name='quantity[]' value='0'>
+										<input type='number' step='1' name='quantity[]' value='0'  min='0'>
 									</div>
 									";
 								}
@@ -126,3 +126,9 @@ if( $response["error"] == 1 ){
         </div>
     </div>
 </div>
+
+<script>
+$(document).on("click","input[type=radio]",function(){
+    $("input[type=number]").val(0);
+})
+</script>
