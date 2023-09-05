@@ -82,7 +82,7 @@ if( $response["error"] == 1 ){
                             <span><?php echo $academy["clothesPrice"] . "KD" ?></span>
                         </div>
                         <div class="jurs_input mt_45">
-                            <input type="number" step="1" name="jersy" value="0" style="width: 82% !important;">
+                            <input type="number" step="1" name="jersy" value="0">
                         </div>
                         <a href="#" class="button mt_55"><?php echo direction("Checkout","إدفع") ?></a>
                     </div>

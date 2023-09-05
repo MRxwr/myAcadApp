@@ -1374,7 +1374,7 @@ span.select2-selection.select2-selection--single {
 	border-right: none;
 	border-left: none;
 	font-size: 2.4rem;
-	/*width: 100%!important;*/
+	width: 80%!important;
 }
 .jurs_input{
 	border: 0.1rem solid rgba(112, 112, 112, 0.32);
