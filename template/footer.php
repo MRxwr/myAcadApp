@@ -36,8 +36,5 @@
     <a href="#" class="back-to-top"><i class="fal fa-angle-up"></i></a>
     
     <!-- all js here -->
-    <script src="js/jquery-3.4.1.min.js"></script>
-    <script src="js/plugins.js"></script>
-    <script src="js/main.js"></script>
 </body>
 </html>
