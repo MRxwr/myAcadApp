@@ -106,7 +106,7 @@ if( $response["error"] == 1 ){
 							}
 							?>
                             </select>
-							<input type="hidden" name="id" value="<?php echo $_GET["id"] ?>">
+							<input type="hidden" name="id" value="<?php echo htmlspecialchars($_GET["id"]) ?>">
 							<button class="button mt_55"><?php echo direction("Choose","إختر") ?></button>
                         </form>
                     </div>
