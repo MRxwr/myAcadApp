@@ -84,16 +84,15 @@ if( $response["error"] == 1 ){
                         </div>
                         <div class="jurs_input mt_45">
                             <?php
-                            if (isset($_POST["session"]) && isset($_POST["quantity"])) {
-                                $selectedSession = $_POST["session"];
-                                $quantityArray = $_POST["quantity"];
-                                if (isset($quantityArray[$selectedSession])) {
-                                    $selectedQuantity = $quantityArray[$selectedSession];
+                            for( $i = 0; $i < sizeof($_POST["session"]); $i++){
+                                if( $_POST["quantity"][$i] != 0 ){
+                                    $selectedSession = $_POST["session"][$i];
+                                    $selectedQuantity = $_POST["quantity"][$i];
                                 }
                             }
                             ?>
                             <input type="number" step="1" name="jersy" value="0">
-                            <input type="hidden" name="session" value="<?php $session = array_values($_POST["session"]); echo htmlspecialchars($session[0]) ?>">
+                            <input type="hidden" name="session" value="<?php echo htmlspecialchars($selectedSession) ?>">
                             <input type="hidden" name="quantity" value="<?php echo htmlspecialchars($selectedQuantity) ?>">
                             <input type="hidden" name="subscription" value="<?php echo htmlspecialchars($_POST["subscription"]) ?>">
                             <input type="hidden" name="id" value="<?php echo htmlspecialchars($_GET["id"]) ?>">
