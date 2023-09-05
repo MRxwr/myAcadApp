@@ -76,6 +76,7 @@ if( $response["error"] == 1 ){
                         <div class="detail_img_right d-lg-none mt_20">
                             <a href="logos/<?php echo $academy["clothesImage"] ?>"><img src="logos/<?php echo $academy["clothesImage"] ?>" alt="" class="w-100"></a>
                         </div>
+                        <form action="?v=Checkout" method="POST">
                         <h5><?php direction("CLOTHES","ملابس") ?></h5>
                         <div class="jersy_kd">
                             <p><?php echo direction($academy["enTitle"] . " jersy", "ملابس " . $academy["arTitle"]) ?></p>
@@ -83,8 +84,13 @@ if( $response["error"] == 1 ){
                         </div>
                         <div class="jurs_input mt_45">
                             <input type="number" step="1" name="jersy" value="0">
+                            <input type="hidden" name="session" value="<?php $session = array_values($_POST["session"]); echo $session[0] ?>">
+                            <input type="hidden" name="quantity" value="<?php $quantity = array_values($_POST["quantity"]); echo $quantity[0] ?>">
+                            <input type="hidden" name="subscription" value="<?php echo $_POST["subscription"] ?>">
+                            <input type="hidden" name="id" value="<?php echo $_GET["id"] ?>">
                         </div>
-                        <a href="#" class="button mt_55"><?php echo direction("Checkout","إدفع") ?></a>
+                        <button class="button mt_55"><?php echo direction("Checkout","إدفع") ?></button>
+                    </form>
                     </div>
                 </div>
             </div>
