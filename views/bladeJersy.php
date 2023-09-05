@@ -89,9 +89,8 @@ if( $response["error"] == 1 ){
                                     $selectedQuantity = $_POST["quantity"][$i];
                                 }
                             }
-                            var_dump($_POST);
                             ?>
-                            <input type="number" step="1" name="jersy" value="0">
+                            <input type="number" step="1" name="jersy" value="0" min="0">
                             <input type="hidden" name="session" value="<?php echo htmlspecialchars($_POST["session"]) ?>">
                             <input type="hidden" name="quantity" value="<?php echo htmlspecialchars($selectedQuantity) ?>">
                             <input type="hidden" name="subscription" value="<?php echo htmlspecialchars($_POST["subscription"]) ?>">
