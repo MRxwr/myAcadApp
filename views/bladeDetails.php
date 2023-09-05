@@ -93,7 +93,7 @@ if( $response["error"] == 1 ){
 							}
 							?>
                             <h5><img src="img/ca.svg" alt=""><?php echo direction("Select Subsicription Period","إختر مدة الإتشراك") ?></h5>
-                            <select name="subscription">
+                            <select name="subscription" required>
 							<?php 
 							if( $academy["subscriptions"] > 0 ){
 								for( $s = 0; $s < sizeof($academy["subscriptions"]); $s ++){
