@@ -126,9 +126,3 @@ if( $response["error"] == 1 ){
         </div>
     </div>
 </div>
-
-<script>
-$(document).on("click","input[type=radio]",function(){
-    $("input[type=number]").val(0);
-})
-</script>
