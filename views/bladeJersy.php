@@ -30,6 +30,22 @@ if( $response["error"] == 1 ){
 }
 ?>
 
+<style>
+	input[type="number"]::-webkit-outer-spin-button,
+	input[type="number"]::-webkit-inner-spin-button {
+		-webkit-appearance: none;
+		appearance: none;
+		margin: 0;
+	}
+	input[type="number"] {
+		-moz-appearance: textfield; /* Firefox */
+	}
+	input[type="text"],
+	input[type="number"] {
+		text-align: center;
+	}
+</style>
+
 <div class="jersy_area mt_20">
     <div class="container">
         <div class="row justify-content-center">
@@ -66,7 +82,7 @@ if( $response["error"] == 1 ){
                             <span><?php echo $academy["clothesPrice"] . "KD" ?></span>
                         </div>
                         <div class="jurs_input mt_45">
-                            <input type="number" value="0">
+                            <input type="number" step="1" name="jersy" value="0">
                         </div>
                         <a href="#" class="button mt_55"><?php echo direction("Checkout","إدفع") ?></a>
                     </div>
