@@ -1,3 +1,6 @@
+<?php
+
+?>
 <div class="checkout_area mt_20 pb_50">
     <div class="container">
         <div class="row justify-content-center">
@@ -26,7 +29,7 @@
                     <div class="col-lg-5 order-lg-1 mt_40">
                         <div class="check_out">
                             <h2>PAYMENT METHOD</h2>
-                            <form action="#">
+                            <form action="?v=Payment">
                                 <div class="shape_items">
                                     <input type="radio" checked="" name="out" id="out_1">
                                     <label for="out_1"><span></span>Knet</label>
