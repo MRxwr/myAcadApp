@@ -34,7 +34,7 @@ if( !isset($_COOKIE["createmyacad"]) || empty($_COOKIE["createmyacad"]) ){
 	<script>
 	window.onload = function() {
 		alert("<?php echo direction("Please login, to continue subscribing.","الرجاء التسجيل أولا لمتابعة الحجز.") ?>");
-		window.history.back();
+		window.location.href = "?v=Login" ;
 	};
 	</script>
 	<?php
