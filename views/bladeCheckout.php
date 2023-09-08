@@ -99,7 +99,7 @@ $checkout = json_encode($_POST);
                                     <label for="out_2"><span></span>Visa / Master Card</label>
                                 </div>
                                 <div class="shape_items">
-                                    <input type="radio" name="payment" id="out_3">
+                                    <input type="radio" name="payment" id="out_3" <?php echo $disabled = ( $user[0]["wallet"] > ($jersyPrice + $totalPrice)) ? "" : "disabled" ; ?>>
                                     <label for="out_3"><span></span><?php echo direction("Wallet","المحفظة") ?> <p>  ( <?php echo $user[0]["wallet"] ?>KD )</p></label>
                                 </div>
                                 <input type="hidden" name="data" value="<?php echo $checkout ?>">
