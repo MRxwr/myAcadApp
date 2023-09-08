@@ -70,8 +70,6 @@ $_POST["checkout"]["jersyPrice"] = $jersyPrice;
 $_POST["checkout"]["total"] = $newTotal;
 
 $checkout = json_encode($_POST, JSON_UNESCAPED_UNICODE);
-$checkout1 = json_decode($checkout, true,JSON_UNESCAPED_UNICODE);
-print_r($checkout1);
 ?>
 <div class="checkout_area mt_20 pb_50">
     <div class="container">
