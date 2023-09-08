@@ -89,11 +89,11 @@ for( $i = 0; $i < sizeof($_POST["quantity"]); $i++){
                             <span><?php echo $academy["clothesPrice"] . "KD" ?></span>
                         </div>
                         <div class="jurs_input mt_45">
-                            <input type="number" step="1" name="jersy" value="0" min="0">
-                            <input type="hidden" name="session" value="<?php echo htmlspecialchars($_POST["session"]) ?>">
-                            <input type="hidden" name="quantity" value="<?php echo htmlspecialchars($selectedQuantity) ?>">
-                            <input type="hidden" name="subscription" value="<?php echo htmlspecialchars($_POST["subscription"]) ?>">
-                            <input type="hidden" name="id" value="<?php echo htmlspecialchars($_GET["id"]) ?>">
+                            <input type="number" step="1" name="checkout[jersy]" value="0" min="0">
+                            <input type="hidden" name="checkout[session]" value="<?php echo htmlspecialchars($_POST["session"]) ?>">
+                            <input type="hidden" name="checkout[quantity]" value="<?php echo htmlspecialchars($selectedQuantity) ?>">
+                            <input type="hidden" name="checkout[subscription]" value="<?php echo htmlspecialchars($_POST["subscription"]) ?>">
+                            <input type="hidden" name="checkout[id]" value="<?php echo htmlspecialchars($_GET["id"]) ?>">
                         </div>
                         <button class="button mt_55"><?php echo direction("Checkout","إدفع") ?></button>
                     </form>
