@@ -28,6 +28,12 @@ if( $response["error"] == 1 ){
 }else{
 	$academy = $response["data"]["academy"];
 }
+
+for( $i = 0; $i < sizeof($_POST["quantity"]); $i++){
+    if( $_POST["quantity"][$i] != 0 ){
+        $selectedQuantity = $_POST["quantity"][$i];
+    }
+}
 ?>
 
 <style>
@@ -83,13 +89,6 @@ if( $response["error"] == 1 ){
                             <span><?php echo $academy["clothesPrice"] . "KD" ?></span>
                         </div>
                         <div class="jurs_input mt_45">
-                            <?php
-                            for( $i = 0; $i < sizeof($_POST["quantity"]); $i++){
-                                if( $_POST["quantity"][$i] != 0 ){
-                                    $selectedQuantity = $_POST["quantity"][$i];
-                                }
-                            }
-                            ?>
                             <input type="number" step="1" name="jersy" value="0" min="0">
                             <input type="hidden" name="session" value="<?php echo htmlspecialchars($_POST["session"]) ?>">
                             <input type="hidden" name="quantity" value="<?php echo htmlspecialchars($selectedQuantity) ?>">
