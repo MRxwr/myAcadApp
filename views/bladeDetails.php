@@ -28,6 +28,9 @@ if( $response["error"] == 1 ){
 }else{
 	$academy = $response["data"]["academy"];
 }
+
+$redirect = ($academy["isClothes"] == 1 ) ? "Jersy" : "Checkout" ;
+
 ?>
 
 <style>
@@ -74,7 +77,7 @@ if( $response["error"] == 1 ){
                         <div class="d-lg-none mt_20 mb_20">
                             <iframe width="100%" height="400" src="<?php echo $academy["video"] ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                         </div>
-                        <form action="?v=Jersy&id=<?php echo $_GET["id"] ?>" method="POST" class="cup_area">
+                        <form action="<?php echo "?v={$redirect}&id={$_GET["id"]}" ?>" method="POST" class="cup_area">
                             <h5><img src="img/cup_1.svg" alt=""><?php echo direction("Select Age & Session Time","إختر العمر و وقت الكلاس") ?></h5>
 							<?php
 							if( $academy["sessions"] > 0 ){
