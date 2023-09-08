@@ -28,6 +28,18 @@ if( $response["error"] == 1 ){
 }else{
 	$academy = $response["data"]["academy"];
 }
+
+if( !isset($_COOKIE["createmyacad"]) || empty($_COOKIE["createmyacad"]) ){
+	?>
+	<script>
+	window.onload = function() {
+		alert("<?php echo direction("Please login, to continue subscribing.","الرجاء التسجيل أولا لمتابعة الحجز.") ?>");
+		window.history.back();
+	};
+	</script>
+	<?php
+}
+
 if( !isset($_POST["checkout"]["jersy"]) || empty($_POST["checkout"]["jersy"]) ){
     $_POST["checkout"]["jersy"] = 0;
     $jersyPrice = (float)$academy["clothesPrice"]*(float)$_POST["checkout"]["jersy"];
