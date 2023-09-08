@@ -40,8 +40,8 @@ if( $subscription = selectDB("subscriptions","`id` = '{$_POST["checkout"]["subsc
     $price = ($subscription[0]["priceAfterDiscount"] != 0 ) ? $subscription[0]["priceAfterDiscount"] : $subscription[0]["price"] ;
     $totalPrice = (float)$price*(float)$_POST["checkout"]["quantity"];
 }
-if( $user = selectDB("users","`keepMeAlive` LIKE '{$_COOKIE["createmyacad"]}'") ){ }
-$checkout = json_decode($_POST,true);
+if( isset($_COOKIE["createmyacad"]) && $user = selectDB("users","`keepMeAlive` LIKE '{$_COOKIE["createmyacad"]}'") ){}
+$checkout = json_encode($_POST);
 ?>
 <div class="checkout_area mt_20 pb_50">
     <div class="container">
