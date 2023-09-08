@@ -69,7 +69,7 @@ $_POST["checkout"]["totalPrice"] = $totalPrice;
 $_POST["checkout"]["jersyPrice"] = $jersyPrice;
 $_POST["checkout"]["total"] = $newTotal;
 
-$checkout = json_encode($_POST);
+$checkout = json_encode($_POST, JSON_UNESCAPED_UNICODE);
 ?>
 <div class="checkout_area mt_20 pb_50">
     <div class="container">
@@ -118,7 +118,7 @@ $checkout = json_encode($_POST);
                                     <input type="radio" name="payment" id="out_3" <?php echo $disabled = ( $user[0]["wallet"] > ($jersyPrice + $totalPrice)) ? "" : "disabled" ; ?>>
                                     <label for="out_3"><span></span><?php echo direction("Wallet","المحفظة") ?> <p>  ( <?php echo $user[0]["wallet"] ?>KD )</p></label>
                                 </div>
-                                <input type="hidden" name="data" value="<?php echo $checkout ?>">
+                                <input type="hidden" name="data" value='<?php echo $checkout ?>'>
                                 <div class="d-flex justify-content-between mt_50 extre_h6">
                                     <h6><strong><?php echo direction("Total", "المجموع") ?></strong></h6>
                                     <span><?php echo $newTotal ?>KD</span>
