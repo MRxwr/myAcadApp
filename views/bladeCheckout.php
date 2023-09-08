@@ -1,5 +1,5 @@
 <?php
-
+var_dump($_POST);
 ?>
 <div class="checkout_area mt_20 pb_50">
     <div class="container">
