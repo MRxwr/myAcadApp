@@ -54,7 +54,21 @@ if( $subscription = selectDB("subscriptions","`id` = '{$_POST["checkout"]["subsc
 }else{
     $totalPrice = 0;
 }
+
 if( isset($_COOKIE["createmyacad"]) && $user = selectDB("users","`keepMeAlive` LIKE '{$_COOKIE["createmyacad"]}'") ){}
+
+$newTotal = (float)$jersyPrice+(float)$totalPrice;
+
+$_POST["checkout"]["enAcademy"] = $academy["enTitle"];
+$_POST["checkout"]["arAcademy"] = $academy["arTitle"];
+$_POST["checkout"]["enSession"] = $session[0]["enTitle"];
+$_POST["checkout"]["arSession"] = $session[0]["arTitle"];
+$_POST["checkout"]["enSubscription"] = $subscription[0]["enTitle"];
+$_POST["checkout"]["arSubscription"] = $subscription[0]["arTitle"];
+$_POST["checkout"]["totalPrice"] = $totalPrice;
+$_POST["checkout"]["jersyPrice"] = $jersyPrice;
+$_POST["checkout"]["total"] = $newTotal;
+
 $checkout = json_encode($_POST);
 ?>
 <div class="checkout_area mt_20 pb_50">
@@ -107,7 +121,7 @@ $checkout = json_encode($_POST);
                                 <input type="hidden" name="data" value="<?php echo $checkout ?>">
                                 <div class="d-flex justify-content-between mt_50 extre_h6">
                                     <h6><strong><?php echo direction("Total", "المجموع") ?></strong></h6>
-                                    <span><?php echo $jersyPrice + $totalPrice ?>KD</span>
+                                    <span><?php echo $newTotal ?>KD</span>
                                 </div>
                                 <p>By clicking Pay Now, you agree to our <a href="#">Terms & Conditions</a></p>
                                 <button class="button"><?php echo direction("CHECKOUT","تابع للدفع") ?></button>
