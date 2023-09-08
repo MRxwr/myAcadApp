@@ -40,10 +40,10 @@ if( !isset($_COOKIE["createmyacad"]) || empty($_COOKIE["createmyacad"]) ){
 	<?php
 }
 
-if( !isset($_POST["checkout"]["jersy"]) || empty($_POST["checkout"]["jersy"]) ){
-    $_POST["checkout"]["jersy"] = 0;
+if( isset($_POST["checkout"]["jersy"]) && !empty($_POST["checkout"]["jersy"]) ){
     $jersyPrice = (float)$academy["clothesPrice"]*(float)$_POST["checkout"]["jersy"];
 }else{
+    $_POST["checkout"]["jersy"] = 0;
     $jersyPrice = 0;
 }
 
