@@ -51,6 +51,8 @@ if( $session = selectDB("sessions","`id` = '{$_POST["checkout"]["session"]}'")){
 if( $subscription = selectDB("subscriptions","`id` = '{$_POST["checkout"]["subscription"]}'")){
     $price = ($subscription[0]["priceAfterDiscount"] != 0 ) ? $subscription[0]["priceAfterDiscount"] : $subscription[0]["price"] ;
     $totalPrice = (float)$price*(float)$_POST["checkout"]["quantity"];
+}else{
+    $totalPrice = 0;
 }
 if( isset($_COOKIE["createmyacad"]) && $user = selectDB("users","`keepMeAlive` LIKE '{$_COOKIE["createmyacad"]}'") ){}
 $checkout = json_encode($_POST);
