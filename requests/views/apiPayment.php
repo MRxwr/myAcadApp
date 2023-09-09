@@ -1,5 +1,5 @@
 <?php
-print_r($_REQUEST);
+var_dump($_REQUEST);
 if( !isset($_POST) ){
     $response["msg"] = "Please make sure you send post data before submitting.";
 	echo outputError($response);die();
