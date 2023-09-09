@@ -29,6 +29,7 @@ if( isset($_POST["data"]) && !empty($_POST["data"]) ){
     ));
     $response = curl_exec($curl);
     echo "cURL Error: " . curl_error($curl);
+    echo $httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
     curl_close($curl);
     echo $response;
     if( $response["error"] == 0 ){
