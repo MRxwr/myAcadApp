@@ -10,6 +10,7 @@ if( isset($_POST["data"]) && !empty($_POST["data"]) ){
         'jersyQuantity' => "{$incommingData["jersyQuantity"]}",
         'paymentMethod' => "{$_POST["paymentMethod"]}"
     );
+    print_r($data);
     $curl = curl_init();
     curl_setopt_array($curl, array(
       CURLOPT_URL => 'https://createkwservers.com/myacad1/requests?a=Payment',
@@ -29,6 +30,7 @@ if( isset($_POST["data"]) && !empty($_POST["data"]) ){
     $response = curl_exec($curl);
     curl_close($curl);
     $response = json_decode($response,true);
+    print_r($response);
     if( $response["error"] == 0 ){
         header("LOCATION: {$response["data"]["data"]["paymentURL"]}");
     }else{
