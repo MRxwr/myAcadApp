@@ -56,6 +56,7 @@ if( !isset($_POST) ){
     $_POST["total"] = $newTotal;
     $_POST["paymentMethod"] = $paymentMethod;
 
+    // 0 take charges with 0 commission, 1 take rest with commission
     $apiData = array(
         'endpoint' => 'PaymentRequestExicuteForVendorsTest',
         'apikey' => 'CKW-1623165837-1075',
