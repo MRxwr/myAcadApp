@@ -127,7 +127,7 @@ function insertDB($table, $data){
     $sql .= ") VALUES ({$placeholders})";
     $stmt = $dbconnect->prepare($sql);
     $types = str_repeat('s', count($data));
-    var_dump($stmt->bind_param($types, ...array_values($data)));
+    $stmt->bind_param($types, ...array_values($data));
     if($stmt->execute()){
         return 1;
     }else{
