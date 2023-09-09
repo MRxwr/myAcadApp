@@ -29,6 +29,13 @@ if( isset($_POST["data"]) && !empty($_POST["data"]) ){
     curl_close($curl);
     $response = json_decode($response,true);
     if( $response["error"] == 0 ){
+        ?>
+        <script>
+        window.onload = function() {
+            window.location.href = "<?php echo "{$response["data"]["data"]["paymentURL"]}" ?>";
+        };
+        </script>
+        <?php
         header("LOCATION: {$response["data"]["data"]["paymentURL"]}");
     }else{
         ?>
