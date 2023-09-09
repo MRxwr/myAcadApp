@@ -36,7 +36,6 @@ if( isset($_POST["data"]) && !empty($_POST["data"]) ){
         };
         </script>
         <?php
-        header("LOCATION: {$response["data"]["data"]["paymentURL"]}");
     }else{
         ?>
         <script>
