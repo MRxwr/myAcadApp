@@ -76,16 +76,19 @@ if( !isset($_POST) ){
 
     if( $wallet == 1 ){
         $paymentMethod = 3;
-        $payment = payment($apiData);
+        $response = payment($apiData);
         $_POST["paymentMethod"] = $paymentMethod;
-        $_POST["gatewayId"] = $payment["data"]["InvoiceId"];
-        $_POST["gatewayURL"] = $payment["data"]["paymentURL"];
+        $_POST["gatewayId"] = $response["data"]["InvoiceId"];
+        $_POST["gatewayURL"] = $response["data"]["paymentURL"];
+        $_POST["apiResponse"] = json_encode($response);
         insertDB("orders",$_POST);
+        echo outputData($response);
     }else{
-        $payment = payment($apiData);
+        $response = payment($apiData);
         $_POST["paymentMethod"] = $paymentMethod;
-        $_POST["gatewayId"] = $payment["data"]["InvoiceId"];
-        $_POST["gatewayURL"] = $payment["data"]["paymentURL"];
+        $_POST["gatewayId"] = $response["data"]["InvoiceId"];
+        $_POST["gatewayURL"] = $response["data"]["paymentURL"];
+        $_POST["apiResponse"] = json_encode($response);
         insertDB("orders",$_POST);
     }
 }
