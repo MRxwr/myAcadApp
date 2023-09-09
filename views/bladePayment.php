@@ -22,8 +22,7 @@ if( isset($_POST["data"]) && !empty($_POST["data"]) ){
       CURLOPT_CUSTOMREQUEST => 'POST',
       CURLOPT_POSTFIELDS => $data,
       CURLOPT_HTTPHEADER => array(
-        'myacadheader: myAcadAppCreate',
-        'Cookie: CREATEkwLANG=EN'
+        'myacadheader: myAcadAppCreate'
       ),
     ));
     $response = curl_exec($curl);
