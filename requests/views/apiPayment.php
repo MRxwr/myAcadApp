@@ -43,7 +43,7 @@ if( !isset($_POST) ){
     $_POST["details"]["arSubscription"] = $subscriptionData[0]["arTitle"];
     $_POST["details"]["subscriptionQuantity"] = $_POST["checkout"]["quantity"];
     $_POST["details"]["subscriptionPrice"] = $price;
-    $_POST["details"]["jersyQuantity"] = $_POST["checkout"]["jersy"];
+    $_POST["details"]["jersyQuantity"] = $jersyQuantity;
     $_POST["details"]["jersyPrice"] = $academyData[0]["clothesPrice"];
     $_POST["checkout"]["totalSubscriptionPrice"] = $totalPrice;
     $_POST["checkout"]["jersyPrice"] = $jersyPrice;
