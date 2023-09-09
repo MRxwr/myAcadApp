@@ -23,7 +23,6 @@ if( isset($_POST["data"]) && !empty($_POST["data"]) ){
       CURLOPT_CUSTOMREQUEST => 'POST',
       CURLOPT_POSTFIELDS => $data,
       CURLOPT_HTTPHEADER => array(
-        'Content-Type: application/x-www-form-urlencoded',
         'myacadheader: myAcadAppCreate'
       ),
     ));
