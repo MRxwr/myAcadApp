@@ -155,7 +155,7 @@ function insertDB2($table, $data){
 			$sql .= ", ";
 		}
 	}		
-	$sql .= ")";
+	echo $sql .= ")";
 	if($dbconnect->query($sql)){
 		return 1;
 	}else{
