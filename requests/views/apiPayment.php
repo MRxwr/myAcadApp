@@ -88,7 +88,6 @@ if( !isset($_POST) ){
         $_POST["apiPayload"] = json_encode($apiData);
         $_POST["apiResponse"] = json_encode($response);
         insertDB("orders",$_POST);
-        echo outputData($response);
     }else{
         $response = payment($apiData);
         $_POST["paymentMethod"] = $paymentMethod;
@@ -97,6 +96,11 @@ if( !isset($_POST) ){
         $_POST["apiPayload"] = json_encode($apiData);
         $_POST["apiResponse"] = json_encode($response);
         insertDB("orders",$_POST);
+    }
+    if( isset($response) && !empty($response) ){
+        echo outputData($response);
+    }else{
+        echo outputError($response);
     }
 }
 
