@@ -26,7 +26,7 @@ if( !isset($_POST) ){
         $price = 0;
     }
     if( $paymentMethod == 3 ){
-        $paymentMethod == 1;
+        $paymentMethod = 1;
         $wallet = 1;
     }else{
         $wallet = 0;
