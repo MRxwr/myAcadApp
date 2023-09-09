@@ -183,11 +183,14 @@ function payment($data){
 	$response = curl_exec($curl);
 	curl_close($curl);
 	$response = json_decode($response,true);
-	print_r($data); print_r($response);
-	$array = [
-		"url" => $response["data"]["PaymentURL"],
-		"id" => $response["data"]["InvoiceId"]
-	];
+	if ( isset($response["data"]["PaymentURL"]) ){
+		$array = [
+			"url" => $response["data"]["PaymentURL"],
+			"id" => $response["data"]["InvoiceId"]
+		];
+	}else{
+		$array = $response
+	}
 	return $array;
 }
 
