@@ -51,11 +51,9 @@ if( !isset($_POST) ){
 
     $apiData = array(
         'endpoint' => 'PaymentRequestExicuteForVendors',
-        'apikey' => 'CKW-1659216594-2896',
+        'apikey' => 'CKW-1623165837-1075',
         'PaymentMethodId' => "{$paymentMethod}",
         'CustomerName' => "{$_POST["client"]["name"]}",
-        'DisplayCurrencyIso' => 'KWD',
-        'MobileCountryCode' => '+965',
         'CustomerMobile' => "{$_POST["client"]["phone"]}",
         'CustomerEmail' => "{$_POST["client"]["email"]}",
         'invoiceValue' => "{$newTotal}",
