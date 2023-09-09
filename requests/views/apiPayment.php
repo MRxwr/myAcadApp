@@ -64,7 +64,7 @@ if( !isset($_POST) ){
         'extraMerchantsData[chargeType][0]' => 'fixed',
         'extraMerchantsData[cc_charge][0]' => '0.250',
         'extraMerchantsData[cc_chargetype][0]' => 'fixed',
-        'extraMerchantsData[ibans][0]' => 'KW48GULB0000000000000091424349',
+        'extraMerchantsData[ibans][0]' => 'KW29NBOK0000000000002028193497',
         'extraMerchantsData[amounts][1]' => "{$newTotal}",
         'extraMerchantsData[charges][1]' => "{$academyData[0]["charges"]}",
         'extraMerchantsData[chargeType][1]' => "{$academyData[0]["chargeType"]}",
@@ -75,7 +75,7 @@ if( !isset($_POST) ){
 
     if( $wallet == 1 ){
         payment($apiData);
-        header("LOCATION: https://createkwservers.com/myAcad1/?v=Success");
+        header("LOCATION: https://createkwservers.com/myacad1/?v=Success");
         die();
     }else{
         print_r(payment($apiData));
