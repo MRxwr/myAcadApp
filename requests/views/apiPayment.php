@@ -75,7 +75,7 @@ if( !isset($_POST) ){
 
     if( $wallet == 1 ){
         print_r(payment($apiData));die() ;
-        header("LOCATION: https://createkwservers.com/myacad1/?v=Success");
+        //header("LOCATION: https://createkwservers.com/myacad1/?v=Success");
         die();
     }else{
         print_r(payment($apiData));die();
