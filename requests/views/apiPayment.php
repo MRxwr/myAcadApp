@@ -58,7 +58,7 @@ if( !isset($_POST) ){
         'MobileCountryCode' => '+965',
         'CustomerMobile' => "{$_POST["client"]["phone"]}",
         'CustomerEmail' => "{$_POST["client"]["email"]}",
-        'InvoiceValue' => "{$newTotal}",
+        'invoiceValue' => "{$newTotal}",
         'CallBackUrl' => 'https://createkwservers.com/myAcad1/?v=Success',
         'ErrorUrl' => 'https://createkwservers.com/myAcad1/?v=Fail',
         'extraMerchantsData[amounts][0]' => "{$newTotal}",
