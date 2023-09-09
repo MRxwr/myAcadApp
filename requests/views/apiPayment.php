@@ -64,7 +64,7 @@ if( !isset($_POST) ){
         'extraMerchantsData[chargeType][0]' => 'fixed',
         'extraMerchantsData[cc_charge][0]' => '0.250',
         'extraMerchantsData[cc_chargetype][0]' => 'fixed',
-        'extraMerchantsData[ibans][0]' => 'KW29NBOK0000000000002028193497',
+        'extraMerchantsData[ibans][0]' => 'KW84BBYN0000000000000411888006',
         'extraMerchantsData[amounts][1]' => "{$newTotal}",
         'extraMerchantsData[charges][1]' => "{$academyData[0]["charges"]}",
         'extraMerchantsData[chargeType][1]' => "{$academyData[0]["chargeType"]}",
@@ -78,7 +78,7 @@ if( !isset($_POST) ){
         header("LOCATION: https://createkwservers.com/myacad1/?v=Success");
         die();
     }else{
-        print_r(payment($apiData));
+        payment($apiData);
     }
 }
 
