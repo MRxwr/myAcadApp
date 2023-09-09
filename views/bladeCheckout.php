@@ -78,9 +78,9 @@ $_POST["checkout"]["jersyPrice"] = $jersyPrice;
 $_POST["checkout"]["total"] = $newTotal;
 */
 $_POST["user"] = $user[0]["id"];
-$_POST["academy"] = $user[0]["id"];
-$_POST["session"] = $user[0]["id"];
-$_POST["subscription"] = $user[0]["id"];
+$_POST["academy"] = $academy["id"];
+$_POST["session"] = $session[0]["id"];
+$_POST["subscription"] = $subscription[0]["id"];
 $_POST["subscriptionQuantity"] = $_POST["checkout"]["quantity"];
 $_POST["jersyQuantity"] = $_POST["checkout"]["jersy"];
 
@@ -122,15 +122,15 @@ $checkout = json_encode($_POST, JSON_UNESCAPED_UNICODE);
                             <h2><?php echo direction("PAYMENT METHOD", "طرق الدفع" ) ?></h2>
                             <form action="?v=Payment" method="post" >
                                 <div class="shape_items">
-                                    <input type="radio" checked="" name="payment" id="out_1">
+                                    <input type="radio" checked="" name="paymentMethod" id="out_1" value="1">
                                     <label for="out_1"><span></span>Knet</label>
                                 </div>
                                 <div class="shape_items">
-                                    <input type="radio" name="payment" id="out_2">
+                                    <input type="radio" name="paymentMethod" id="out_2" value="2">
                                     <label for="out_2"><span></span>Visa / Master Card</label>
                                 </div>
                                 <div class="shape_items">
-                                    <input type="radio" name="payment" id="out_3" <?php echo $disabled = ( $user[0]["wallet"] > ($jersyPrice + $totalPrice)) ? "" : "disabled" ; ?>>
+                                    <input type="radio" name="paymentMethod" id="out_3" <?php echo $disabled = ( $user[0]["wallet"] > ($jersyPrice + $totalPrice)) ? "" : "disabled" ; ?> value="3">
                                     <label for="out_3"><span></span><?php echo direction("Wallet","المحفظة") ?> <p>  ( <?php echo $user[0]["wallet"] ?>KD )</p></label>
                                 </div>
                                 <input type="hidden" name="data" value='<?php echo $checkout ?>'>
