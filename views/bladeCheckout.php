@@ -59,7 +59,7 @@ if( $subscription = selectDB("subscriptions","`id` = '{$_POST["checkout"]["subsc
 if( isset($_COOKIE["createmyacad"]) && $user = selectDB("users","`keepMeAlive` LIKE '{$_COOKIE["createmyacad"]}'") ){}
 
 $newTotal = (float)$jersyPrice+(float)$totalPrice;
-
+/*
 $_POST["client"]["name"] = "{$user[0]["firstName"]} {$user[0]["lastName"]}";
 $_POST["client"]["phone"] = "{$user[0]["phone"]}";
 $_POST["client"]["email"] = "{$user[0]["email"]}";
@@ -69,13 +69,20 @@ $_POST["details"]["enSession"] = $session[0]["enTitle"];
 $_POST["details"]["arSession"] = $session[0]["arTitle"];
 $_POST["details"]["enSubscription"] = $subscription[0]["enTitle"];
 $_POST["details"]["arSubscription"] = $subscription[0]["arTitle"];
-$_POST["details"]["quantity"] = $_POST["checkout"]["quantity"];
+$_POST["details"]["subscriptionQuantity"] = $_POST["checkout"]["quantity"];
 $_POST["details"]["subscriptionPrice"] = $price;
-$_POST["details"]["jersy"] = $_POST["checkout"]["jersy"];
+$_POST["details"]["jersyQuantity"] = $_POST["checkout"]["jersy"];
 $_POST["details"]["jersyPrice"] = $academy["clothesPrice"];
 $_POST["checkout"]["totalSubscriptionPrice"] = $totalPrice;
 $_POST["checkout"]["jersyPrice"] = $jersyPrice;
 $_POST["checkout"]["total"] = $newTotal;
+*/
+$_POST["user"] = $user[0]["id"];
+$_POST["academy"] = $user[0]["id"];
+$_POST["session"] = $user[0]["id"];
+$_POST["subscription"] = $user[0]["id"];
+$_POST["subscriptionQuantity"] = $_POST["checkout"]["quantity"];
+$_POST["jersyQuantity"] = $_POST["checkout"]["jersy"];
 
 $checkout = json_encode($_POST, JSON_UNESCAPED_UNICODE);
 ?>
