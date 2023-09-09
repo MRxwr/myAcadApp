@@ -5,7 +5,7 @@ if( !isset($_POST) ){
 	echo outputError($response);die();
 }else{
     $data = $_POST;
-    var_dump($_POST);
+    var_dump($_REQUEST);
     unset($_POST);
     $user = $data["user"];
     $academy = $data["academy"];
