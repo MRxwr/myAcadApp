@@ -36,10 +36,14 @@ if( !isset($_POST) ){
     $_POST["name"] = "{$userData[0]["firstName"]} {$userData[0]["lastName"]}";
     $_POST["phone"] = "{$userData[0]["phone"]}";
     $_POST["email"] = "{$userData[0]["email"]}";
+    $_POST["userId"] = "{$userData[0]["id"]}";
+    $_POST["academyId"] = $academyData[0]["id"];
     $_POST["enAcademy"] = $academyData[0]["enTitle"];
     $_POST["arAcademy"] = $academyData[0]["arTitle"];
+    $_POST["sessionId"] = $sessionData[0]["id"];
     $_POST["enSession"] = $sessionData[0]["enTitle"];
     $_POST["arSession"] = $sessionData[0]["arTitle"];
+    $_POST["subscriptionId"] = $subscriptionData[0]["id"];
     $_POST["enSubscription"] = $subscriptionData[0]["enTitle"];
     $_POST["arSubscription"] = $subscriptionData[0]["arTitle"];
     $_POST["subscriptionQuantity"] = $subscriptionQuantity;
@@ -47,7 +51,7 @@ if( !isset($_POST) ){
     $_POST["jersyQuantity"] = $jersyQuantity;
     $_POST["jersyPrice"] = $academyData[0]["clothesPrice"];
     $_POST["totalSubscriptionPrice"] = $totalPrice;
-    $_POST["jersyPrice"] = $jersyPrice;
+    $_POST["totalJersyPrice"] = $jersyPrice;
     $_POST["total"] = $newTotal;
 
     $apiData = array(
