@@ -54,6 +54,7 @@ if( !isset($_POST) ){
     $_POST["totalSubscriptionPrice"] = $totalPrice;
     $_POST["totalJersyPrice"] = $jersyPrice;
     $_POST["total"] = $newTotal;
+    $_POST["paymentMethod"] = $paymentMethod;
 
     $apiData = array(
         'endpoint' => 'PaymentRequestExicuteForVendorsTest',
@@ -79,27 +80,18 @@ if( !isset($_POST) ){
         'extraMerchantsData[ibans][1]' => "{$academyData[0]["iban"]}"
     );
 
-    if( $wallet == 1 ){
-        $paymentMethod = 3;
-        $response = payment($apiData);
-        $_POST["paymentMethod"] = $paymentMethod;
+    if( $response = payment($apiData) ){
         $_POST["gatewayId"] = $response["data"]["InvoiceId"];
         $_POST["gatewayURL"] = $response["data"]["paymentURL"];
         $_POST["apiPayload"] = json_encode($apiData);
         $_POST["apiResponse"] = json_encode($response);
+        $_POST["paymentMethod"] = ( $wallet == 1 ) ? 3 : $paymentMethod;
         insertDB("orders",$_POST);
-    }else{
-        $response = payment($apiData);
-        $_POST["paymentMethod"] = $paymentMethod;
-        $_POST["gatewayId"] = $response["data"]["InvoiceId"];
-        $_POST["gatewayURL"] = $response["data"]["paymentURL"];
-        $_POST["apiPayload"] = json_encode($apiData);
-        $_POST["apiResponse"] = json_encode($response);
-        insertDB("orders",$_POST);
-    }
-    if( isset($response) && !empty($response) ){
         echo outputData($response);
     }else{
+        $response = array(
+            "msg" => 'Error while proccessing payment',
+        );
         echo outputError($response);
     }
 }
