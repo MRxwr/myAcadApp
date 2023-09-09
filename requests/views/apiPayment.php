@@ -78,7 +78,7 @@ if( !isset($_POST) ){
         header("LOCATION: https://createkwservers.com/myacad1/?v=Success");
         die();
     }else{
-        payment($apiData);
+        print_r(payment($apiData));
     }
 }
 
