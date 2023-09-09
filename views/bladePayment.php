@@ -10,7 +10,6 @@ if( isset($_POST["data"]) && !empty($_POST["data"]) ){
         'jersyQuantity' => "{$incommingData["jersyQuantity"]}",
         'paymentMethod' => "{$_POST["paymentMethod"]}"
     );
-    print_r($data);
     $curl = curl_init();
     curl_setopt_array($curl, array(
       CURLOPT_URL => 'https://createkwservers.com/myacad1/requests?a=Payment',
@@ -21,7 +20,7 @@ if( isset($_POST["data"]) && !empty($_POST["data"]) ){
       CURLOPT_FOLLOWLOCATION => true,
       CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
       CURLOPT_CUSTOMREQUEST => 'POST',
-      CURLOPT_POSTFIELDS => $data,
+      CURLOPT_POSTFIELDS => json_encode($data),
       CURLOPT_HTTPHEADER => array(
         'myacadheader: myAcadAppCreate',
         'Cookie: CREATEkwLANG=EN'
