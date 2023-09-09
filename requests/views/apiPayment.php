@@ -95,5 +95,5 @@ if( !isset($_POST) ){
         );
         echo outputError($response);
     }
-
+}
 ?>
