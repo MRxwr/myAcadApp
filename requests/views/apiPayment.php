@@ -5,6 +5,7 @@ if( !isset($_POST) ){
 	echo outputError($response);die();
 }else{
     $data = $_POST;
+    unset($_POST);
     $user = $data["user"];
     $academy = $data["academy"];
     $session = $data["session"];
