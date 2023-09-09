@@ -50,7 +50,7 @@ if( !isset($_POST) ){
     $_POST["checkout"]["total"] = $newTotal;
 
     $apiData = array(
-        'endpoint' => 'PaymentRequestExicuteForVendors',
+        'endpoint' => 'PaymentRequestExicuteForVendorsTest',
         'apikey' => 'CKW-1623165837-1075',
         'PaymentMethodId' => "{$paymentMethod}",
         'CustomerName' => "{$_POST["client"]["name"]}",
