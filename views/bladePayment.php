@@ -10,7 +10,6 @@ if( isset($_POST["data"]) && !empty($_POST["data"]) ){
         'jersyQuantity' => "{$incommingData["jersyQuantity"]}",
         'paymentMethod' => "{$_POST["paymentMethod"]}"
     );
-    $data = http_build_query($data);
     print_r($data);
     $curl = curl_init();
     curl_setopt_array($curl, array(
@@ -29,6 +28,7 @@ if( isset($_POST["data"]) && !empty($_POST["data"]) ){
       ),
     ));
     $response = curl_exec($curl);
+    echo "cURL Error: " . curl_error($curl);
     curl_close($curl);
     echo $response;
     if( $response["error"] == 0 ){
