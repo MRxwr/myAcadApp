@@ -33,30 +33,30 @@ if( !isset($_POST) ){
     }
     $newTotal = (float)$jersyPrice+(float)$totalPrice;
 
-    $_POST["client"]["name"] = "{$userData[0]["firstName"]} {$userData[0]["lastName"]}";
-    $_POST["client"]["phone"] = "{$userData[0]["phone"]}";
-    $_POST["client"]["email"] = "{$userData[0]["email"]}";
-    $_POST["details"]["enAcademy"] = $academyData[0]["enTitle"];
-    $_POST["details"]["arAcademy"] = $academyData[0]["arTitle"];
-    $_POST["details"]["enSession"] = $sessionData[0]["enTitle"];
-    $_POST["details"]["arSession"] = $sessionData[0]["arTitle"];
-    $_POST["details"]["enSubscription"] = $subscriptionData[0]["enTitle"];
-    $_POST["details"]["arSubscription"] = $subscriptionData[0]["arTitle"];
-    $_POST["details"]["subscriptionQuantity"] = $subscriptionQuantity;
-    $_POST["details"]["subscriptionPrice"] = $price;
-    $_POST["details"]["jersyQuantity"] = $jersyQuantity;
-    $_POST["details"]["jersyPrice"] = $academyData[0]["clothesPrice"];
-    $_POST["checkout"]["totalSubscriptionPrice"] = $totalPrice;
-    $_POST["checkout"]["jersyPrice"] = $jersyPrice;
-    $_POST["checkout"]["total"] = $newTotal;
+    $_POST["name"] = "{$userData[0]["firstName"]} {$userData[0]["lastName"]}";
+    $_POST["phone"] = "{$userData[0]["phone"]}";
+    $_POST["email"] = "{$userData[0]["email"]}";
+    $_POST["enAcademy"] = $academyData[0]["enTitle"];
+    $_POST["arAcademy"] = $academyData[0]["arTitle"];
+    $_POST["enSession"] = $sessionData[0]["enTitle"];
+    $_POST["arSession"] = $sessionData[0]["arTitle"];
+    $_POST["enSubscription"] = $subscriptionData[0]["enTitle"];
+    $_POST["arSubscription"] = $subscriptionData[0]["arTitle"];
+    $_POST["subscriptionQuantity"] = $subscriptionQuantity;
+    $_POST["subscriptionPrice"] = $price;
+    $_POST["jersyQuantity"] = $jersyQuantity;
+    $_POST["jersyPrice"] = $academyData[0]["clothesPrice"];
+    $_POST["totalSubscriptionPrice"] = $totalPrice;
+    $_POST["jersyPrice"] = $jersyPrice;
+    $_POST["total"] = $newTotal;
 
     $apiData = array(
         'endpoint' => 'PaymentRequestExicuteForVendorsTest',
         'apikey' => 'CKW-1623165837-1075',
         'PaymentMethodId' => "{$paymentMethod}",
-        'CustomerName' => "{$_POST["client"]["name"]}",
-        'CustomerMobile' => "{$_POST["client"]["phone"]}",
-        'CustomerEmail' => "{$_POST["client"]["email"]}",
+        'CustomerName' => "{$_POST["name"]}",
+        'CustomerMobile' => "{$_POST["phone"]}",
+        'CustomerEmail' => "{$_POST["email"]}",
         'invoiceValue' => "{$newTotal}",
         'CallBackUrl' => 'https://createkwservers.com/myAcad1/?v=Success',
         'ErrorUrl' => 'https://createkwservers.com/myAcad1/?v=Fail',
@@ -75,12 +75,18 @@ if( !isset($_POST) ){
     );
 
     if( $wallet == 1 ){
-        $paymentMethod == 3;
-        print_r(payment($apiData));die() ;
-        //header("LOCATION: https://createkwservers.com/myacad1/?v=Success");
-        die();
+        $paymentMethod = 3;
+        $payment = payment($apiData);
+        $_POST["paymentMethod"] = $paymentMethod;
+        $_POST["gatewayId"] = $payment["data"]["InvoiceId"];
+        $_POST["gatewayURL"] = $payment["data"]["paymentURL"];
+        insertDB("orders",$_POST);
     }else{
-        print_r(payment($apiData));die();
+        $payment = payment($apiData);
+        $_POST["paymentMethod"] = $paymentMethod;
+        $_POST["gatewayId"] = $payment["data"]["InvoiceId"];
+        $_POST["gatewayURL"] = $payment["data"]["paymentURL"];
+        insertDB("orders",$_POST);
     }
 }
 
