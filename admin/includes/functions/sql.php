@@ -136,6 +136,33 @@ function insertDB($table, $data){
     }
 }
 
+function insertDB2($table, $data){
+	GLOBAL $conn;
+	//$check = [';','"',"'"];
+	//$data = str_replace($check,"",$data);
+	$keys = array_keys($data);
+	$sql = "INSERT INTO `".$table."`(";
+	for($i = 0 ; $i < sizeof($keys) ; $i++ ){
+		$sql .= "`".$keys[$i]."`";
+		if ( isset($keys[$i+1]) ){
+			$sql .= ", ";
+		}
+	}
+	$sql .= ")VALUES(";
+	for($i = 0 ; $i < sizeof($data) ; $i++ ){
+		$sql .= "'".$data[$keys[$i]]."'";
+		if ( isset($keys[$i+1]) ){
+			$sql .= ", ";
+		}
+	}		
+	$sql .= ")";
+	if($dbconnect->query($sql)){
+		return 1;
+	}else{
+		return 0;
+	}
+}
+
 function updateDB($table, $data, $where) {
     GLOBAL $dbconnect;
     $check = [';', '"'];
