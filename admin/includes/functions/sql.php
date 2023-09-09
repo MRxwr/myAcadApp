@@ -137,7 +137,7 @@ function insertDB($table, $data){
 }
 
 function insertDB2($table, $data){
-	GLOBAL $conn;
+	GLOBAL $dbconnect;
 	//$check = [';','"',"'"];
 	//$data = str_replace($check,"",$data);
 	$keys = array_keys($data);
