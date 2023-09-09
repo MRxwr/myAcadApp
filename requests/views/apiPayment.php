@@ -80,7 +80,8 @@ if( !isset($_POST) ){
         'extraMerchantsData[ibans][1]' => "{$academyData[0]["iban"]}"
     );
 
-    if( $response = payment($apiData) && isset($response["data"]) ){
+    $response = payment($apiData);
+    if( isset($response["data"]["InvoiceId"]) && !empty($response["data"]["InvoiceId"]) ){
         $_POST["gatewayId"] = $response["data"]["InvoiceId"];
         $_POST["gatewayURL"] = $response["data"]["paymentURL"];
         $_POST["apiPayload"] = json_encode($apiData);
@@ -94,6 +95,5 @@ if( !isset($_POST) ){
         );
         echo outputError($response);
     }
-}
 
 ?>
