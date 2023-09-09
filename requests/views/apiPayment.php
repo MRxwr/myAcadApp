@@ -26,6 +26,7 @@ if( !isset($_POST) ){
         $price = 0;
     }
     if( $paymentMethod == 3 ){
+        $paymentMethod == 1;
         $wallet = 1;
     }else{
         $wallet = 0;
@@ -74,6 +75,7 @@ if( !isset($_POST) ){
     );
 
     if( $wallet == 1 ){
+        $paymentMethod == 3;
         print_r(payment($apiData));die() ;
         //header("LOCATION: https://createkwservers.com/myacad1/?v=Success");
         die();
