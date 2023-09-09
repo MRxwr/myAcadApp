@@ -189,7 +189,7 @@ function payment($data){
 			"id" => $response["data"]["InvoiceId"]
 		];
 	}else{
-		$array = $response
+		$array = $response;
 	}
 	return $array;
 }
