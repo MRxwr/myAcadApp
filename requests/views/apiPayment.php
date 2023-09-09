@@ -84,8 +84,8 @@ if( !isset($_POST) ){
     if( isset($response["data"]["InvoiceId"]) && !empty($response["data"]["InvoiceId"]) ){
         $_POST["gatewayId"] = $response["data"]["InvoiceId"];
         $_POST["gatewayURL"] = $response["data"]["paymentURL"];
-        //$_POST["apiPayload"] = json_encode($apiData);
-        //$_POST["apiResponse"] = json_encode($response);
+        $_POST["apiPayload"] = json_encode($apiData);
+        $_POST["apiResponse"] = json_encode($response);
         $_POST["paymentMethod"] = ( $wallet == 1 ) ? 3 : $paymentMethod;
         insertDB("orders",$_POST);
         echo outputData($response);
