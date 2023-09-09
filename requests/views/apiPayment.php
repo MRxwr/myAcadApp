@@ -5,7 +5,7 @@ if( !isset($_POST) ){
 	echo outputError($response);die();
 }else{
     $data = json_decode($_POST, true);
-    var_dump($data);
+    var_dump($_REQUEST);
     $user = $data["user"];
     $academy = $data["academy"];
     $session = $data["session"];
