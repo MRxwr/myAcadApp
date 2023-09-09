@@ -32,7 +32,7 @@ if( !isset($_POST) ){
     }
     $newTotal = (float)$jersyPrice+(float)$totalPrice;
 
-    $_POST["client"]["name"] = "{$userData[0]["firstName"]} {$user[0]["lastName"]}";
+    $_POST["client"]["name"] = "{$userData[0]["firstName"]} {$userData[0]["lastName"]}";
     $_POST["client"]["phone"] = "{$userData[0]["phone"]}";
     $_POST["client"]["email"] = "{$userData[0]["email"]}";
     $_POST["details"]["enAcademy"] = $academyData[0]["enTitle"];
@@ -41,7 +41,7 @@ if( !isset($_POST) ){
     $_POST["details"]["arSession"] = $sessionData[0]["arTitle"];
     $_POST["details"]["enSubscription"] = $subscriptionData[0]["enTitle"];
     $_POST["details"]["arSubscription"] = $subscriptionData[0]["arTitle"];
-    $_POST["details"]["subscriptionQuantity"] = $_POST["checkout"]["quantity"];
+    $_POST["details"]["subscriptionQuantity"] = $subscriptionQuantity;
     $_POST["details"]["subscriptionPrice"] = $price;
     $_POST["details"]["jersyQuantity"] = $jersyQuantity;
     $_POST["details"]["jersyPrice"] = $academyData[0]["clothesPrice"];
