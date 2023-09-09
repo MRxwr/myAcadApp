@@ -87,7 +87,7 @@ if( !isset($_POST) ){
         $_POST["apiPayload"] = json_encode($apiData);
         $_POST["apiResponse"] = json_encode($response);
         $_POST["paymentMethod"] = ( $wallet == 1 ) ? 3 : $paymentMethod;
-        insertDB("orders",$_POST);
+        insertDB2("orders",$_POST);
         echo outputData($response);
     }else{
         $response = array(
