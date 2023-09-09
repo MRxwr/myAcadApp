@@ -4,8 +4,8 @@ if( !isset($_POST) ){
     $response["msg"] = "Please make sure you send post data before submitting.";
 	echo outputError($response);die();
 }else{
-    $data = json_decode($_POST, true);
-    var_dump($_REQUEST);
+    $data = $_POST;
+    unset($_POST);
     $user = $data["user"];
     $academy = $data["academy"];
     $session = $data["session"];

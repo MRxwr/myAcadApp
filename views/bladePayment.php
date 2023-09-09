@@ -20,17 +20,15 @@ if( isset($_POST["data"]) && !empty($_POST["data"]) ){
       CURLOPT_FOLLOWLOCATION => true,
       CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
       CURLOPT_CUSTOMREQUEST => 'POST',
-      CURLOPT_POSTFIELDS => json_encode($data),
+      CURLOPT_POSTFIELDS => $data,
       CURLOPT_HTTPHEADER => array(
         'myacadheader: myAcadAppCreate',
         'Cookie: CREATEkwLANG=EN'
       ),
     ));
     $response = curl_exec($curl);
-    echo "cURL Error: " . curl_error($curl);
-    echo $httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
     curl_close($curl);
-    echo $response;
+    $response = json_decode($response,true);
     if( $response["error"] == 0 ){
         header("LOCATION: {$response["data"]["data"]["paymentURL"]}");
     }else{
