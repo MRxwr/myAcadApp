@@ -19,7 +19,7 @@ if( !isset($_POST) ){
         $jersyPrice = ( $jersyQuantity != 0 ) ? (float)$academyData[0]["clothesPrice"]*(float)$data["jersyQuantity"] : 0 ;
     }
     if( $subscriptionData = selectDB("subscriptions","`id` = '{$subscription}'")){
-        $price = ($subscription[0]["priceAfterDiscount"] != 0 ) ? $subscription[0]["priceAfterDiscount"] : $subscription[0]["price"] ;
+        $price = ($subscriptionData[0]["priceAfterDiscount"] != 0 ) ? $subscriptionData[0]["priceAfterDiscount"] : $subscriptionData[0]["price"] ;
         $totalPrice = (float)$price*(float)$subscriptionQuantity;
     }else{
         $totalPrice = 0;
