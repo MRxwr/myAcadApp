@@ -120,7 +120,7 @@ $checkout = json_encode($_POST, JSON_UNESCAPED_UNICODE);
                     <div class="col-lg-5 order-lg-1 mt_40">
                         <div class="check_out">
                             <h2><?php echo direction("PAYMENT METHOD", "طرق الدفع" ) ?></h2>
-                            <form action="payment.php" method="post" >
+                            <form action="?v=Payment" method="post" >
                                 <div class="shape_items">
                                     <input type="radio" checked="" name="paymentMethod" id="out_1" value="1">
                                     <label for="out_1"><span></span>Knet</label>
