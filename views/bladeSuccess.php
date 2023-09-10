@@ -72,7 +72,7 @@ if( isset($_GET["OrderID"]) && !empty($_GET["OrderID"]) ){
                                 <div class="suc_item">
                                     <div class="suc_child">
                                         <span><?php echo $order[0]["jersyQuantity"] ?></span>
-                                        <h3><?php echo direction($order[0]["enAcademy"],$order[0]["arAcademy"]) ?></h3>
+                                        <h3><?php echo direction($order[0]["enAcademy"] . " Jersy","ملابس " . $order[0]["arAcademy"]) ?></h3>
                                     </div>
                                     <p><?php echo $order[0]["totalJersyPrice"] ?>KD</p>
                                 </div>
