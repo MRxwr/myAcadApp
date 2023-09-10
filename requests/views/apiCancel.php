@@ -11,7 +11,7 @@ if( !isset($_GET["userId"]) || empty($_GET["userId"]) ){
 	echo outputError($response);die();
 }else{
 	if( $orders = selectDB("orders","`id` = '{$_GET["orderId"]}' AND `userId` = '{$_GET["userId"]}' AND `status` = '1'") ){
-        updateDB("orders",array( `status` => 3),"`id` = '{$_GET["orderId"]}'");
+        updateDB("orders",array("status" => 3),"`id` = '{$_GET["orderId"]}'");
         $response["msg"] = "Order has been refunded successfully.";
     }else{
         $response = array("msg"=>"we could not find any order with provided info.");
