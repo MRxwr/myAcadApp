@@ -25,6 +25,7 @@ if( isset($_GET["OrderID"]) && !empty($_GET["OrderID"]) ){
         };
         </script>
         <?php
+        die();
     }
 }else{
     ?>
@@ -35,6 +36,7 @@ if( isset($_GET["OrderID"]) && !empty($_GET["OrderID"]) ){
     };
     </script>
     <?php
+    die();
 }
 ?>
 <div class="success_area">
