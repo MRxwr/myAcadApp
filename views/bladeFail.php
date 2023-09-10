@@ -2,6 +2,7 @@
 if( isset($_GET["OrderID"]) && !empty($_GET["OrderID"]) ){
     if( $order = selectDB("orders","`gatewayId` = '{$_GET["OrderID"]}'")){
         $academyId = $order[0]["academyId"];
+        updateDB("orders",array("gatewayLink"=>json_encode($_GET)));
     }else{
         $academyId = "";
     }
