@@ -1,4 +1,8 @@
 <?php 
+// 1 live subscriptions
+// 2 cancelled 
+// 3 refunded
+// 4 ended
 if( !isset($_GET["userId"]) || empty($_GET["userId"]) ){
 	$response = array("msg"=>"Please set user id");
 	echo outputError($response);die();
