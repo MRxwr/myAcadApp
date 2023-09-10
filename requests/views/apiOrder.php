@@ -24,6 +24,5 @@ if( !isset($_POST["invoiceId"]) || empty($_POST["invoiceId"]) ){
 	    echo outputError($response);die();
     }
 }
-
 echo outputData($response);
 ?>
