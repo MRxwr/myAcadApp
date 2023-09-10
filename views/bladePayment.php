@@ -56,4 +56,5 @@ if( isset($_POST["data"]) && !empty($_POST["data"]) ){
 	</script>
 	<?php
 }
+die();
 ?>
