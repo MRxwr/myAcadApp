@@ -9,10 +9,11 @@ if( !isset($_POST["invoiceId"]) || empty($_POST["invoiceId"]) ){
     $response = array("msg"=>"Please set status");
 	echo outputError($response);die();
 }else{
-	if( $order = selectDB2("`id`, `date`, `paymentMethod`, `enAcademy`, `arAcademy`, `enSession`, `arSession`, `enSubscription`, `arSubscription`, `subscriptionQuantity`, `jersyQuantity`, `totalSubscriptionPrice`, `totalJersyPrice`, `total`, `status`","orders","`gatewayId` = '{$_POST["invoiceId"]}'") ){
-        if( $order[0]["status"] == 0 ){
+	if( $order = selectDB2("`id`, `date`, `paymentMethod`, `enAcademy`, `arAcademy`, `enSession`, `arSession`, `enSubscription`, `arSubscription`, `subscriptionQuantity`, `jersyQuantity`, `totalSubscriptionPrice`, `totalJersyPrice`, `total`","orders","`gatewayId` = '{$_POST["invoiceId"]}'") ){
+        $order2 = selectDB("orders","`gatewayId` = '{$_POST["invoiceId"]}'");
+        if( $order2[0]["status"] == 0 ){
             updateDB("orders",array("gatewayLink"=>json_encode($_POST["url"]),"status"=>1),"`gatewayId` = '{$_POST["invoiceId"]}'");
-            $subscription = selectDB("subscriptions","`id` = '{$order[0]["subscriptionId"]}'");
+            $subscription = selectDB("subscriptions","`id` = '{$order2[0]["subscriptionId"]}'");
             $order[0]["endDate"] = date("Y-m-d H:i:s", strtotime($order[0]["date"] . " +{$subscription[0]["numberOfDays"]} days"));
             $response = $order;
         }else{
