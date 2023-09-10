@@ -5,7 +5,7 @@ if( !isset($_GET["userId"]) || empty($_GET["userId"]) ){
 }else{
 	if( $orders = selectDB2("`id`,`date`,`academyId`","orders","`userId` = '{$_GET["userId"]}' AND `status` = '1'") ){
         for( $i = 0; $i < sizeof($orders); $i++ ){
-            $academy = selectDB2("`enTitle`,`arTitle`,`imageurl`,`location`","academies","`id` = '{$orders[$i]["academyId"]}'");
+            $academy = selectDB2("`enTitle`,`arTitle`,`imageurl`,`location`,`sport`","academies","`id` = '{$orders[$i]["academyId"]}'");
             $sport = selectDB2("`imageurl`","sports","`id` = '{$academy[0]["sport"]}'");
             $response[] = array(
                 "id" => $orders[$i]["id"],
