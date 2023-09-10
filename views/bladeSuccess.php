@@ -3,7 +3,7 @@ if( isset($_GET["OrderID"]) && !empty($_GET["OrderID"]) ){
     if( $order = selectDB("orders","`gatewayId` = '{$_GET["OrderID"]}'")){
         updateDB("orders",array("gatewayLink"=>json_encode($_GET),"status"=>1),"`gatewayId` = '{$_GET["OrderID"]}'");
         $paymentMethod = (($order[0]["paymentMethod"] == 1 ) ? "Knet" : ($order[0]["paymentMethod"] == 2 )) ? "Visa" : "Cash";
-        $subscription = selectDB("subscriptions","`subscriptionId` = '{$order[0]["subscriptionId"]}'");
+        $subscription = selectDB("subscriptions","`id` = '{$order[0]["subscriptionId"]}'");
     }else{
         ?>
         <script>
