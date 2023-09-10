@@ -1,17 +1,17 @@
 <?php 
-if( !isset($_GET["invoiceId"]) || empty($_GET["invoiceId"]) ){
+if( !isset($_POST["invoiceId"]) || empty($_POST["invoiceId"]) ){
 	$response = array("msg"=>"Please set invoice id");
 	echo outputError($response);die();
-}elseif( !isset($_GET["status"]) || empty($_GET["status"])){
+}elseif( !isset($_POST["status"]) || empty($_POST["status"])){
     $response = array("msg"=>"Please set status");
 	echo outputError($response);die();
-}elseif( !isset($_GET["url"]) || empty($_GET["url"])){
+}elseif( !isset($_POST["url"]) || empty($_POST["url"])){
     $response = array("msg"=>"Please set status");
 	echo outputError($response);die();
 }else{
-	if( $order = selectDB2("`id`, `date`, `paymentMethod`, `enAcademy`, `arAcademy`, `enSession`, `arSession`, `enSubscription`, `arSubscription`, `subscriptionQuantity`, `jersyQuantity`, `totalSubscriptionPrice`, `totalJersyPrice`, `total`","orders","`gatewayId` = '{$_GET["invoiceId"]}'") ){
+	if( $order = selectDB2("`id`, `date`, `paymentMethod`, `enAcademy`, `arAcademy`, `enSession`, `arSession`, `enSubscription`, `arSubscription`, `subscriptionQuantity`, `jersyQuantity`, `totalSubscriptionPrice`, `totalJersyPrice`, `total`","orders","`gatewayId` = '{$_POST["invoiceId"]}'") ){
         if( $order[0]["status"] == 0 ){
-            updateDB("orders",array("gatewayLink"=>json_encode($_GET["url"]),"status"=>1),"`gatewayId` = '{$_GET["invoiceId"]}'");
+            updateDB("orders",array("gatewayLink"=>json_encode($_POST["url"]),"status"=>1),"`gatewayId` = '{$_POST["invoiceId"]}'");
             $subscription = selectDB("subscriptions","`id` = '{$order[0]["subscriptionId"]}'");
             $order[0]["endDate"] = date("Y-m-d H:i:s", strtotime($order[0]["date"] . " +{$subscription[0]["numberOfDays"]} days"));
             $response = $order;
