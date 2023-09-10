@@ -9,7 +9,7 @@ if( !isset($_POST["invoiceId"]) || empty($_POST["invoiceId"]) ){
     $response = array("msg"=>"Please set status");
 	echo outputError($response);die();
 }else{
-	if( $order = selectDB2("`id`, `date`, `paymentMethod`, `enAcademy`, `arAcademy`, `enSession`, `arSession`, `enSubscription`, `arSubscription`, `subscriptionQuantity`, `jersyQuantity`, `totalSubscriptionPrice`, `totalJersyPrice`, `total`","orders","`gatewayId` = '{$_POST["invoiceId"]}'") ){
+	if( $order = selectDB2("`id`, `date`, `paymentMethod`, `enAcademy`, `arAcademy`, `enSession`, `arSession`, `enSubscription`, `arSubscription`, `subscriptionQuantity`, `jersyQuantity`, `totalSubscriptionPrice`, `totalJersyPrice`, `total`, `status`","orders","`gatewayId` = '{$_POST["invoiceId"]}'") ){
         if( $order[0]["status"] == 0 ){
             updateDB("orders",array("gatewayLink"=>json_encode($_POST["url"]),"status"=>1),"`gatewayId` = '{$_POST["invoiceId"]}'");
             $subscription = selectDB("subscriptions","`id` = '{$order[0]["subscriptionId"]}'");
