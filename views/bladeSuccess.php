@@ -1,20 +1,11 @@
 <?php
 if( isset($_GET["OrderID"]) && !empty($_GET["OrderID"]) ){
     if( $order = selectDB("orders","`gatewayId` = '{$_GET["OrderID"]}'") ){
-        if( $order[0]["status"] == 0 ){
+        $order2 = selectDB("orders","`gatewayId` = '{$_GET["OrderID"]}'");
+        if( $order2[0]["status"] == 0 ){
             updateDB("orders",array("gatewayLink"=>json_encode($_GET),"status"=>1),"`gatewayId` = '{$_GET["OrderID"]}'");
             $paymentMethod = (($order[0]["paymentMethod"] == 1 ) ? "Knet" : ($order[0]["paymentMethod"] == 2 )) ? "Visa" : "Cash";
             $subscription = selectDB("subscriptions","`id` = '{$order[0]["subscriptionId"]}'");
-        }else{
-            ?>
-            <script>
-            window.onload = function() {
-                alert("<?php echo direction("Error, Your subscription order could not be completed. Please try again.","خطأ، لم نستطع تأكيد إشتراكك، الرجاء المحاولة مجدداً") ?>");
-                window.location.href = "?v=Home";
-            };
-            </script>
-            <?php
-            die();
         }
     }else{
         ?>
