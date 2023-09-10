@@ -12,6 +12,8 @@ if( !isset($_GET["userId"]) || empty($_GET["userId"]) ){
 }else{
 	if( $orders = selectDB("orders","`id` = '{$_GET["orderId"]}' AND `userId` = '{$_GET["userId"]}' AND `status` = '1'") ){
         updateDB("orders",array("status" => 3),"`id` = '{$_GET["orderId"]}'");
+        $user = selectDB("users","`id` = '{$_GET["userId"]}'");
+        updateDB("users",array("wallet" => ( (float)$user[0]["wallet"]+(float)$orders[0]["total"]) ),"`id` = '{$_GET["userId"]}'");
         $response["msg"] = "Order has been refunded successfully.";
     }else{
         $response = array("msg"=>"we could not find any order with provided info.");
