@@ -1,3 +1,22 @@
+<?php
+$curl = curl_init();
+curl_setopt_array($curl, array(
+  CURLOPT_URL => 'https://createkwservers.com/myacad1/requests?a=Subscriptions&userId=7&type=1',
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => '',
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 0,
+  CURLOPT_FOLLOWLOCATION => true,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => 'GET',
+  CURLOPT_HTTPHEADER => array(
+    'myacadheader: myAcadAppCreate'
+  ),
+));
+$response = curl_exec($curl);
+curl_close($curl);
+echo $response;
+?>
 <div class="subsicription_area">
     <div class="container">
         <div class="row justify-content-center">
