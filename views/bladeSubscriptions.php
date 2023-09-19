@@ -96,6 +96,7 @@ function mySubscriptions($type){
                 </div>
                 <?php
                 }
+                ?>
             
                 </div>
             </div>
