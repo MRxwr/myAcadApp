@@ -49,15 +49,15 @@ function mySubscriptions($type){
                             <div class="col-lg-4 mt_30 col-sm-6">
                                 <div class="subsic_box">
                                 <div class="subsi_wap">
-                                    <img src="logos/<?php echo $result[$i]["academyLogo"] ?>" alt="">
+                                    <img src="logos/<?php echo $result["data"][$i]["academyLogo"] ?>" alt="">
                                     <div class="text-center">
-                                        <h2><?php echo direction($result[$i]["enTitle"],$result[$i]["arTitle"]) ?></h2>
-                                        <h3><?php echo direction($result[$i]["enArea"],$result[$i]["arArea"]) ?></h3>
+                                        <h2><?php echo direction($result["data"][$i]["enTitle"],$result["data"][$i]["arTitle"]) ?></h2>
+                                        <h3><?php echo direction($result["data"][$i]["enArea"],$result["data"][$i]["arArea"]) ?></h3>
                                     </div>
-                                    <img src="logos/<?php echo $result[$i]["sportLogo"] ?>" alt="">
+                                    <img src="logos/<?php echo $result["data"][$i]["sportLogo"] ?>" alt="">
                                 </div>
                                 <div class="subsi_bott">
-                                    <a href="<?php echo $result[$i]["location"] ?>" class="item_sub">
+                                    <a href="<?php echo $result["data"][$i]["location"] ?>" class="item_sub">
                                         <img src="img/loc.svg" alt="">
                                         <h4><?php echo direction("Location","الموقع") ?></h4>
                                     </a>
@@ -65,12 +65,12 @@ function mySubscriptions($type){
                                         <img src="img/sub_4.svg" alt="">
                                         <h4><?php echo direction("Share","مشاركة") ?></h4>
                                     </a>
-                                    <a href="?v=Success&OrderID=<?php echo $result[$i]["orderId"] ?>" class="item_sub">
+                                    <a href="?v=Success&OrderID=<?php echo $result["data"][$i]["orderId"] ?>" class="item_sub">
                                         <img src="img/sub_5.svg" alt="">
                                         <h4><?php echo direction("Invoice","الفاتورة") ?></h4>
                                     </a>
                                     <?php
-                                    if( $result[$i]["date"] < date("Y-m-d H:i:s", strtotime("-2 days")) ){
+                                    if( $result["data"][$i]["date"] < date("Y-m-d H:i:s", strtotime("-2 days")) ){
                                         ?>
                                         <a href="#" class="item_sub">
                                         <img src="img/sub_6.svg" alt="">
