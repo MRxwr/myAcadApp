@@ -21,7 +21,7 @@ require("template/bannersSlider.php");
                     <option value="2" ><?php echo direction("Woman","إمرأة") ?></option>
                     <option value="3" ><?php echo direction("Boy","ولد") ?></option>
                     <option value="4" ><?php echo direction("Girl","بنت") ?></option>
-                </select>
+                </select> 
             </div>
             <div class="selet_wapper mb_20">
 				<img src="img/select_3.svg" alt="">
