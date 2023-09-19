@@ -75,8 +75,8 @@ function mySubscriptions($type){
                                         <h4><?php echo direction("Invoice","الفاتورة") ?></h4>
                                     </a>
                                     <?php
-                                    echo "{$result["data"][$i]["date"]}<br>" . date("Y-m-d H:i:s", strtotime("+2 days", strtotime($result["data"][$i]["date"])));
-                                    if( $result["data"][$i]["date"] < date("Y-m-d H:i:s", strtotime("+2 days", strtotime($result["data"][$i]["date"]))) ){
+                                    echo date("Y-m-d H:i:s") . "<br>" . date("Y-m-d H:i:s", strtotime("+2 days", strtotime($result["data"][$i]["date"])));
+                                    if( date("Y-m-d H:i:s") > date("Y-m-d H:i:s", strtotime("+2 days", strtotime($result["data"][$i]["date"]))) ){
                                         ?>
                                         <a href="#" class="item_sub">
                                         <img src="img/sub_6.svg" alt="">
