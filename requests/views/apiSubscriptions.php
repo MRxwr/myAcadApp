@@ -16,12 +16,15 @@ if( !isset($_GET["userId"]) || empty($_GET["userId"]) ){
         for( $i = 0; $i < sizeof($orders); $i++ ){
             $academy = selectDB2("`enTitle`,`arTitle`,`imageurl`,`location`,`sport`","academies","`id` = '{$orders[$i]["academyId"]}'");
             $sport = selectDB2("`imageurl`","sports","`id` = '{$academy[0]["sport"]}'");
+            $area = selectDB2("","countries","`id` = '{$academy[0]["area"]}'");
             $response[] = array(
                 "id" => $orders[$i]["id"],
                 "date" => $orders[$i]["date"],
                 "enTitle" => $academy[0]["enTitle"],
                 "arTitle" => $academy[0]["arTitle"],
                 "location" => $academy[0]["location"],
+                "enArea" => $area[0]["areaEnTitle"],
+                "arArea" => $area[0]["areaArTitle"],
                 "academyLogo" => $academy[0]["imageurl"],
                 "sportLogo" => $sport[0]["imageurl"],
             );
