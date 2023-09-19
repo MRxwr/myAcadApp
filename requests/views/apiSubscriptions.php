@@ -12,7 +12,7 @@ if( !isset($_GET["userId"]) || empty($_GET["userId"]) ){
     }else{
         $_GET["type"] = $_GET["type"];
     }
-	if( $orders = selectDB2("`id`,`date`,`academyId`","orders","`userId` = '{$_GET["userId"]}' AND `status` = '{$_GET["type"]}'") ){
+	if( $orders = selectDB2("`id`,`date`,`academyId`,`gatewayId`","orders","`userId` = '{$_GET["userId"]}' AND `status` = '{$_GET["type"]}'") ){
         for( $i = 0; $i < sizeof($orders); $i++ ){
             $academy = selectDB2("`area`,`enTitle`,`arTitle`,`imageurl`,`location`,`sport`","academies","`id` = '{$orders[$i]["academyId"]}'");
             $sport = selectDB2("`imageurl`","sports","`id` = '{$academy[0]["sport"]}'");
@@ -20,6 +20,7 @@ if( !isset($_GET["userId"]) || empty($_GET["userId"]) ){
             $response[] = array(
                 "id" => $orders[$i]["id"],
                 "date" => $orders[$i]["date"],
+                "orderId" => $orders[$i]["gatewayId"],
                 "enTitle" => $academy[0]["enTitle"],
                 "arTitle" => $academy[0]["arTitle"],
                 "location" => $academy[0]["location"],
