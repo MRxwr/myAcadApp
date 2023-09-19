@@ -44,7 +44,7 @@ require("template/bannersSlider.php");
 			</div>
 
 			<?php
-			if ($areas = selectDB("countries", "`status` = '1' AND `hidden` = '0' AND `countryCode` LIKE '{$_COOKIES["myAcad"]["countryCode"]}' ORDER BY `governateId` ASC")) {
+			if ($areas = selectDB("countries", "`status` = '1' AND `hidden` = '0' AND `countryCode` LIKE '{$_COOKIE["createmyacadcountry"]}' ORDER BY `governateId` ASC")) {
 				$governateId = $areas[0]["governateId"];
 				for ($i = 0; $i < sizeof($areas); $i++) {
 					if ($i == 0 || $governateId != $areas[$i]["governateId"]) {
