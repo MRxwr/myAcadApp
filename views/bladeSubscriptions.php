@@ -38,10 +38,16 @@ function mySubscriptions($type){
 
                 <div class="tab-content">
 
-                <div class="tab-pane fade show active" id="sub">
+                <?php
+                $TabType = [1,4,3];
+                $TabTitle = ["sub","history","cancelled"];
+                for( $y = 0; $y < sizeof($TabType); $y++ ){
+                    $active = ($y == 0) ? "active" : "" ;
+                ?>
+                <div class="tab-pane fade show <?php echo $active ?>" id="<?php echo $TabTitle[$y] ?>">
                 <div class="row">
                 <?php
-                if( $result = mySubscriptions(1) ){
+                if( $result = mySubscriptions($TabType[$y]) ){
                     if( isset($result["data"][0]) ){
                         for( $i = 0; $i < sizeof($result["data"]); $i++){
                             ?>
@@ -69,7 +75,7 @@ function mySubscriptions($type){
                                         <h4><?php echo direction("Invoice","الفاتورة") ?></h4>
                                     </a>
                                     <?php
-                                    if( $result["data"][$i]["date"] < date("Y-m-d H:i:s", strtotime("-2 days")) ){
+                                    if( $result["data"][$i]["date"] < date("Y-m-d H:i:s", strtotime("-2 days", strtotime($result["data"][$i]["date"]))) ){
                                         ?>
                                         <a href="#" class="item_sub">
                                         <img src="img/sub_6.svg" alt="">
@@ -88,7 +94,9 @@ function mySubscriptions($type){
                 ?>
                 </div>
                 </div>
-
+                <?php
+                }
+            
                 </div>
             </div>
         </div>
