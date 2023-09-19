@@ -17,7 +17,7 @@ function mySubscriptions($type){
     ));
     $response = curl_exec($curl);
     curl_close($curl);
-    return json_decode($response,true);
+    return $response;
 }
 ?>
 <div class="subsicription_area">
