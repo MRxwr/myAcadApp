@@ -19,6 +19,48 @@ function mySubscriptions($type){
     curl_close($curl);
     return json_decode($response,true);
 }
+
+if( isset($_GET["cancel"]) && !empty($_GET["cancel"]) ){
+    $userId = getLoginStatusResponse();
+    $orderId = selectDB2("`id`","orders","`gatewayId` = '{$_GET["cancel"]}'");
+    $curl = curl_init();
+    curl_setopt_array($curl, array(
+    CURLOPT_URL => "https://createkwservers.com/myacad1/requests?a=Cancel&userId={$userId}&orderId={$orderId[0]["id"]}",
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_ENCODING => '',
+    CURLOPT_MAXREDIRS => 10,
+    CURLOPT_TIMEOUT => 0,
+    CURLOPT_FOLLOWLOCATION => true,
+    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+    CURLOPT_CUSTOMREQUEST => 'GET',
+    CURLOPT_HTTPHEADER => array(
+        'myacadheader: myAcadAppCreate',
+        'Cookie: CREATEkwLANG=EN'
+    ),
+    ));
+    $response = curl_exec($curl);
+    curl_close($curl);
+    $response = json_decode($response,true);
+    if( $response["error"] == 1 ){
+        ?>
+        <script>
+        window.onload = function() {
+            alert("<?php echo direction("Error happened while try to cancel your subscription, please try again.","حدث خطأ أثناء محاولة إلغاء حجزك، الرجاء المحاولة مجدداً") ?>");
+            window.location.href = "?v=Subscriptions" ;
+        };
+        </script>
+        <?php
+    }else{
+        ?>
+        <script>
+        window.onload = function() {
+            alert("<?php echo direction("Subscription has been cancelled successfully.","تم إلغاء الإشتراك بنجاح") ?>");
+            window.location.href = "?v=Subscriptions" ;
+        };
+        </script>
+        <?php
+    }
+}
 ?>
 <div class="subsicription_area">
     <div class="container">
@@ -78,7 +120,7 @@ function mySubscriptions($type){
                                     <?php
                                     if( date("Y-m-d H:i:s") < date("Y-m-d H:i:s", strtotime("+2 days", strtotime($result["data"][$i]["date"]))) ){
                                         ?>
-                                        <a href="#" class="item_sub">
+                                        <a href="?v=Subscriptions&id==<?php echo $result["data"][$i]["orderId"] ?>" class="item_sub">
                                         <img src="img/sub_6.svg" alt="">
                                         <h4><?php echo direction("Cancel","إلغاء") ?></h4>
                                         </a>
