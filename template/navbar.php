@@ -18,6 +18,10 @@ if( isset($_GET["country"]) && !empty($_GET["country"]) ){
                             }
                         }
                         ?>
+                        <div data-lang-code="es-ES" data-src="img/32/Spain.png">Español</div>
+                        <div data-lang-code="it-IT" data-src="img/32/Italy.png">Italian</div>
+                        <div data-lang-code="de-DE" data-src="img/32/Germany.png">Deutsche</div>
+                        <div data-lang-code="fr-FR" data-src="img/32/France.png">French</div>
                     </div>
                     <?php echo getLoginStatus() ?>
                 </div>
