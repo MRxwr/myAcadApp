@@ -51,27 +51,33 @@ function mySubscriptions($type){
                                     <img src="logos/<?php echo $result[$i]["academyLogo"] ?>" alt="">
                                     <div class="text-center">
                                         <h2><?php echo direction($result[$i]["enTitle"],$result[$i]["arTitle"]) ?></h2>
-                                        <h3>Sabah Al Salem</h3>
+                                        <h3><?php echo direction($result[$i]["enArea"],$result[$i]["arArea"]) ?></h3>
                                     </div>
                                     <img src="logos/<?php echo $result[$i]["sportLogo"] ?>" alt="">
                                 </div>
                                 <div class="subsi_bott">
-                                    <a href="#" class="item_sub">
+                                    <a href="<?php echo $result[$i]["location"] ?>" class="item_sub">
                                         <img src="img/loc.svg" alt="">
-                                        <h4>Location</h4>
+                                        <h4><?php echo direction("Location","الموقع") ?></h4>
                                     </a>
                                     <a href ="#"  class="item_sub">
                                         <img src="img/sub_4.svg" alt="">
-                                        <h4>Share</h4>
+                                        <h4><?php echo direction("Share","مشاركة") ?></h4>
                                     </a>
-                                    <a href="#" class="item_sub">
+                                    <a href="?v=Success&OrderID=<?php echo $result[$i]["orderId"] ?>" class="item_sub">
                                         <img src="img/sub_5.svg" alt="">
-                                        <h4>Invoice</h4>
+                                        <h4><?php echo direction("Invoice","الفاتورة") ?></h4>
                                     </a>
-                                    <a href="#" class="item_sub">
+                                    <?php
+                                    if( $result[$i]["date"] < date("Y-m-d H:i:s", strtotime("-2 days")) ){
+                                        ?>
+                                        <a href="#" class="item_sub">
                                         <img src="img/sub_6.svg" alt="">
-                                        <h4>Cancel</h4>
-                                    </a>
+                                        <h4><?php echo direction("Cancel","إلغاء") ?></h4>
+                                        </a>
+                                    <?php
+                                    }
+                                    ?>
                                 </div>
                                 </div>
                             </div>
