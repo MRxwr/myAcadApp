@@ -11,6 +11,15 @@ if( isset($_GET["country"]) && !empty($_GET["country"]) ){
             <div class="col-lg-4 col-4">
                 <div class="header_lang">
                     <div id="JLang" class="lang_flag">
+                    <?php
+                    /*
+                    if( $countires = selectDB("countries","`status` = '1' GROUP BY `countryCode`") ){
+                        for( $i = 0; $i < sizeof($countires); $i++ ){
+                            echo "<div data-lang-code='{$countires[$i]["countryCode"]}' data-src='{$countires[$i]["flag"]}'>".direction($countires[$i]["countryEnTitle"],$countires[$i]["countryArTitle"])."</div>";
+                        }
+                    }
+                    */
+                    ?>
                         <div data-lang-code="en-GB" data-src="img/32/Kuwait.png">English</div>
                         <div data-lang-code="es-ES" data-src="img/32/Spain.png">Español</div>
                         <div data-lang-code="it-IT" data-src="img/32/Italy.png">Italian</div>
