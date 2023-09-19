@@ -14,7 +14,7 @@ if( isset($_GET["country"]) && !empty($_GET["country"]) ){
                         <?php
                         if( $countires = selectDB("countries","`status` = '1' GROUP BY `countryCode`") ){
                             for( $i = 0; $i < sizeof($countires); $i++ ){
-                                echo "<div data-lang-code='{$countires[$i]["countryCode"]}' data-src='{$countires[$i]["flag"]}'>".direction($countires[$i]["countryEnTitle"],$countires[$i]["countryArTitle"])."</div>";
+                                echo "<div data-lang-code='{$countires[$i]["countryCode"]}'>".direction($countires[$i]["countryEnTitle"],$countires[$i]["countryArTitle"])."</div>";
                             }
                         }
                         ?>
