@@ -1,8 +1,9 @@
 <?php
-function mySubscriptions($type,$userId){
+function mySubscriptions($type){
+    $userId = getLoginStatusResponse();
     $curl = curl_init();
     curl_setopt_array($curl, array(
-        CURLOPT_URL => 'https://createkwservers.com/myacad1/requests?a=Subscriptions&userId=7&type=1',
+        CURLOPT_URL => "https://createkwservers.com/myacad1/requests?a=Subscriptions&userId={$userId}&type={$type}",
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => '',
         CURLOPT_MAXREDIRS => 10,
@@ -37,17 +38,22 @@ function mySubscriptions($type,$userId){
 
                 <div class="tab-content">
 
-                    <div class="tab-pane fade show active" id="sub">
-                        <div class="row">
+                <div class="tab-pane fade show active" id="sub">
+                <div class="row">
+                <?php
+                if( $result = mySubscriptions(1) ){
+                    if( isset($result["data"][0]) ){
+                        for( $i = 0; $i < sizeof($result["data"]); $i++){
+                            ?>
                             <div class="col-lg-4 mt_30 col-sm-6">
                                 <div class="subsic_box">
                                 <div class="subsi_wap">
-                                    <img src="img/sub_1.png" alt="">
+                                    <img src="logos/<?php echo $result[$i]["academyLogo"] ?>" alt="">
                                     <div class="text-center">
-                                        <h2>Dynamo Kuwait</h2>
+                                        <h2><?php echo direction($result[$i]["enTitle"],$result[$i]["arTitle"]) ?></h2>
                                         <h3>Sabah Al Salem</h3>
                                     </div>
-                                    <img src="img/sub_2.svg" alt="">
+                                    <img src="logos/<?php echo $result[$i]["sportLogo"] ?>" alt="">
                                 </div>
                                 <div class="subsi_bott">
                                     <a href="#" class="item_sub">
@@ -69,8 +75,13 @@ function mySubscriptions($type,$userId){
                                 </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
+                            <?php
+                        }
+                    }
+                }
+                ?>
+                </div>
+                </div>
 
                 </div>
             </div>
