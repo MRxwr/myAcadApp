@@ -42,6 +42,7 @@ function mySubscriptions($type){
                 <div class="row">
                 <?php
                 if( $result = mySubscriptions(1) ){
+                    var_dump($result["data"]);
                     if( isset($result["data"][0]) ){
                         for( $i = 0; $i < sizeof($result["data"]); $i++){
                             ?>
