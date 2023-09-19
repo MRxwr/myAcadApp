@@ -43,6 +43,30 @@
         $(document).on("click","input[type=radio]",function(){
             $("input[type=number]").val(0);
         })
+        $(document).ready(function() {
+            $('.share').on('click', function() {
+                var id = $(this).attr("id");
+                var title = $(".title"+id).html();
+                var invoice = $(".invoice"+id).html();
+                if (navigator.share) {
+                    // Use the Web Share API
+                    navigator.share({
+                        title: 'MY ACAD',
+                        text: title,
+                        url: 'https://createkwservers.com/myacad1/?v=Success&OrderID=' + invoice
+                    })
+                    .then(() => {
+                        console.log('Shared successfully');
+                    })
+                    .catch((error) => {
+                        console.error('Error sharing:', error);
+                    });
+                } else {
+                    // Fallback behavior for browsers that do not support the Web Share API
+                    alert('Sharing is not supported on this device/browser.');
+                }
+            });
+        });
     </script>
 </body>
 </html>

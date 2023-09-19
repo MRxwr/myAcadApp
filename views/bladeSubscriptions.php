@@ -56,7 +56,7 @@ function mySubscriptions($type){
                                 <div class="subsi_wap">
                                     <img src="logos/<?php echo $result["data"][$i]["academyLogo"] ?>" alt="">
                                     <div class="text-center">
-                                        <h2><?php echo direction($result["data"][$i]["enTitle"],$result["data"][$i]["arTitle"]) ?></h2>
+                                        <h2 class="title<?php echo $result["data"][$i]["id"] ?>"><?php echo direction($result["data"][$i]["enTitle"],$result["data"][$i]["arTitle"]) ?></h2>
                                         <h3><?php echo direction($result["data"][$i]["enArea"],$result["data"][$i]["arArea"]) ?></h3>
                                     </div>
                                     <img src="logos/<?php echo $result["data"][$i]["sportLogo"] ?>" alt="">
@@ -66,13 +66,14 @@ function mySubscriptions($type){
                                         <img src="img/loc.svg" alt="">
                                         <h4><?php echo direction("Location","الموقع") ?></h4>
                                     </a>
-                                    <a href ="#"  class="item_sub">
+                                    <a href ="#" id="<?php echo $result["data"][$i]["id"] ?>"  class="share item_sub">
                                         <img src="img/sub_4.svg" alt="">
                                         <h4><?php echo direction("Share","مشاركة") ?></h4>
                                     </a>
                                     <a href="?v=Success&OrderID=<?php echo $result["data"][$i]["orderId"] ?>" class="item_sub">
                                         <img src="img/sub_5.svg" alt="">
                                         <h4><?php echo direction("Invoice","الفاتورة") ?></h4>
+                                        <h4 style="display:none" class="invoice<?php echo $result["data"][$i]["id"] ?>"><?php echo direction("Invoice","الفاتورة") ?></h4>
                                     </a>
                                     <?php
                                     if( date("Y-m-d H:i:s") < date("Y-m-d H:i:s", strtotime("+2 days", strtotime($result["data"][$i]["date"]))) ){
