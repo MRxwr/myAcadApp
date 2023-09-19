@@ -76,7 +76,7 @@ function mySubscriptions($type){
                                     </a>
                                     <?php
                                     echo date("Y-m-d H:i:s") . "<br>" . date("Y-m-d H:i:s", strtotime("+2 days", strtotime($result["data"][$i]["date"])));
-                                    if( date("Y-m-d H:i:s") > date("Y-m-d H:i:s", strtotime("+2 days", strtotime($result["data"][$i]["date"]))) ){
+                                    if( date("Y-m-d H:i:s") < date("Y-m-d H:i:s", strtotime("+2 days", strtotime($result["data"][$i]["date"]))) ){
                                         ?>
                                         <a href="#" class="item_sub">
                                         <img src="img/sub_6.svg" alt="">
