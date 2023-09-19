@@ -1,14 +1,23 @@
+<?php
+if( isset($_GET["country"]) && !empty($_GET["country"]) ){
+    setcookie("createmyacadcountry", $_GET["country"], time() + (86400*30 ), "/");
+}else{
+    setcookie("createmyacadcountry", "KW", time() + (86400*30 ), "/");
+}
+?>
 <header>
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-4 col-4">
                 <div class="header_lang">
                     <div id="JLang" class="lang_flag">
-                        <div data-lang-code="en-GB" data-src="img/32/Kuwait.png">English</div>
-                        <div data-lang-code="es-ES" data-src="img/32/Spain.png">Español</div>
-                        <div data-lang-code="it-IT" data-src="img/32/Italy.png">Italian</div>
-                        <div data-lang-code="de-DE" data-src="img/32/Germany.png">Deutsche</div>
-                        <div data-lang-code="fr-FR" data-src="img/32/France.png">French</div>
+                        <?php
+                        if( $countires = selectDB("countries","`status` = '1' GROUP BY `countryCode`") ){
+                            for( $i = 0; $i < sizeof($countires); $i++ ){
+                                echo "<div data-src='{$countires[$i]["flag"]}'>".direction($countires[$i]["countryEnTitle"],$countires[$i]["countryArTitle"])."</div>";
+                            }
+                        }
+                        ?>
                     </div>
                     <?php echo getLoginStatus() ?>
                 </div>
