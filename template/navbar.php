@@ -16,7 +16,7 @@ if( isset($_GET["country"]) && !empty($_GET["country"]) ){
                     
                     if( $countires = selectDB("countries","`status` = '1' GROUP BY `countryCode`") ){
                         for( $i = 0; $i < sizeof($countires); $i++ ){
-                            $ccode=strtolower($countires[$i]["countryCode"]).'-'.$countires[$i]["countryCode"];
+                            $ccode=$countires[$i]["countryCode"];
                             $cname=ucfirst(strtolower($countires[$i]["countryEnTitle"]));
                             $cimage='img/32/'.ucfirst(strtolower($countires[$i]["countryEnTitle"])).'.png';
                             $clabel=direction($countires[$i]["countryEnTitle"],$countires[$i]["countryArTitle"]);
