@@ -6837,7 +6837,26 @@ class JLang {
                   obj.setCookie(obj.cookieLangName, language, obj.cookieExp);
                   obj.setCookie(obj.cookieLangCode, obj.codes[language], obj.cookieExp);
                   if (obj.reloadPage) {
-                      location.reload();
+                    let currentUrl = window.location.href;
+                    // Parse the current URL to extract query parameters
+                    let urlParams = new URLSearchParams(window.location.search);
+                    // Specify the parameter name and value to add/update
+                    let parameterName = "country";
+                    let parameterValue = obj.codes[language];
+  
+                    // Check if the parameter already exists, and update its value
+                    if (urlParams.has(parameterName)) {
+                        urlParams.set(parameterName, parameterValue);
+                    } else {
+                        // If it doesn't exist, add the parameter
+                        urlParams.append(parameterName, parameterValue);
+                    }
+    
+                    // Construct the updated URL with the modified parameters
+                    let updatedUrl = currentUrl.split('?')[0] + '?' + urlParams.toString();
+                    // Navigate to the updated URL
+                    window.location.href = updatedUrl;
+                      //location.reload();
                   }
               },
               !1
