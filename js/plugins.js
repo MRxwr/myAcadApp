@@ -6698,7 +6698,7 @@ class JLang {
           }
       }
   }
-  getLanguages() {
+  getLanguages() { 
       this.codes = [];
       this.languages = [];
       this.labels = [];

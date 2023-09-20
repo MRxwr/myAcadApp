@@ -5,6 +5,7 @@ if( isset($_GET["country"]) && !empty($_GET["country"]) ){
     setcookie("createmyacadcountry", "KW", time() + (86400*30 ), "/");
 }
 ?>
+
 <header>
     <div class="container">
         <div class="row align-items-center">
@@ -15,9 +16,9 @@ if( isset($_GET["country"]) && !empty($_GET["country"]) ){
                     
                     if( $countires = selectDB("countries","`status` = '1' GROUP BY `countryCode`") ){
                         for( $i = 0; $i < sizeof($countires); $i++ ){
-                            $ccode=strtolower($countires[$i]["countryEnTitle"]).'-'.$countires[$i]["countryEnTitle"];
-                            $cname=ucwords($countires[$i]["countryEnTitle"]);
-                            $cimage='img/32/'.ucwords($countires[$i]["countryEnTitle"]).'.png';
+                            $ccode=strtolower($countires[$i]["countryCode"]).'-'.$countires[$i]["countryCode"];
+                            $cname=ucfirst(strtolower($countires[$i]["countryEnTitle"]));
+                            $cimage='img/32/'.ucfirst(strtolower($countires[$i]["countryEnTitle"])).'.png';
                             $clabel=direction($countires[$i]["countryEnTitle"],$countires[$i]["countryArTitle"]);
                             echo "<div data-lang-code='{$ccode}' data-lang-name='{$cname}' data-src='{$cimage}'>".$clabel."</div>";
                         }

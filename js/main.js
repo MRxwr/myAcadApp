@@ -120,6 +120,7 @@
             initialCountry: "my",
             separateDialCode: true,
         });
+        
         // language
         new JLang({
             id: 'languages',
