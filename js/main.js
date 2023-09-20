@@ -128,7 +128,7 @@
             cookieLangName: 'name',
             cookieLangCode: 'code',
             abbreviation: false,
-            reload: false,
+            reload: true,
             alignment: 'left',
             hover: true
         });

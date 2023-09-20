@@ -12,19 +12,24 @@ if( isset($_GET["country"]) && !empty($_GET["country"]) ){
                 <div class="header_lang">
                     <div id="JLang" class="lang_flag">
                     <?php
-                    /*
+                    
                     if( $countires = selectDB("countries","`status` = '1' GROUP BY `countryCode`") ){
                         for( $i = 0; $i < sizeof($countires); $i++ ){
-                            echo "<div data-lang-code='{$countires[$i]["countryCode"]}' data-src='{$countires[$i]["flag"]}'>".direction($countires[$i]["countryEnTitle"],$countires[$i]["countryArTitle"])."</div>";
+                            $ccode=strtolower($countires[$i]["countryEnTitle"]).'-'.$countires[$i]["countryEnTitle"];
+                            $cname=ucwords($countires[$i]["countryEnTitle"]);
+                            $cimage='img/32/'.ucwords($countires[$i]["countryEnTitle"]).'.png';
+                            $clabel=direction($countires[$i]["countryEnTitle"],$countires[$i]["countryArTitle"]);
+                            echo "<div data-lang-code='{$ccode}' data-lang-name='{$cname}' data-src='{$cimage}'>".$clabel."</div>";
                         }
                     }
-                    */
+                    
                     ?>
-                        <div data-lang-code="en-GB" data-src="img/32/Kuwait.png">English</div>
-                        <div data-lang-code="es-ES" data-src="img/32/Spain.png">Español</div>
-                        <div data-lang-code="it-IT" data-src="img/32/Italy.png">Italian</div>
-                        <div data-lang-code="de-DE" data-src="img/32/Germany.png">Deutsche</div>
-                        <div data-lang-code="fr-FR" data-src="img/32/France.png">French</div>
+                       <!-- <div data-lang-code="en-EN" data-lang-name="English" data-src="img/32/England.png">English</div>
+                        <div data-lang-code="es-ES" data-lang-name="Español" data-src="img/32/Spain.png">Español</div>
+                        <div data-lang-code="it-IT" data-lang-name="Italian" data-src="img/32/Italy.png">Italian</div>
+                        <div data-lang-code="de-DE" data-lang-name="Deutsche" data-src="img/32/Germany.png">Deutsche</div>
+                        <div data-lang-code="fr-FR" data-lang-name="French" data-src="img/32/France.png">French</div>
+                        <div data-lang-code="kw-KW" data-lang-name="Kuwait" data-src="img/32/Kuwait.png">sssss</div>  -->
                     </div>
                     <?php echo getLoginStatus() ?>
                 </div>
