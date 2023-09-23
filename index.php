@@ -1,4 +1,7 @@
 <?php
+// Set headers before any output
+header('Content-Type: text/html; charset=utf-8');
+
 require("template/header.php");
 require("template/navbar.php");
 
