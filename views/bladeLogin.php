@@ -2,10 +2,12 @@
 if( isset($_POST["email"]) && !empty($_POST["email"]) ){
     if ( userLogin($_POST) ){
         header("LOCATION: ?v=Home");
+        exit();
     }else{
         header("LOCATION: ?v=Login&error=1");
+        exit();
     }
-    die();
+    
 }
 if( isset($_GET["error"]) && !empty($_GET["error"]) ){
     if ( $_GET["error"] == 1 ){
