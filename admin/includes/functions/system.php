@@ -230,7 +230,7 @@ function getLogOut(){
 	$user_id = getLoginStatusResponse();
 	if($user_id>0){
 		if( updateDB("users",array('keepMeAlive' => ''),"`id` = '{$user_id}'") ){
-			$CookieTime = time() + 3600;
+			$CookieTime = time() - 1;
 			$cookieVal='';
 			setcookie("createmyacad", $cookieVal, $CookieTime,'/');
 			return 1;
