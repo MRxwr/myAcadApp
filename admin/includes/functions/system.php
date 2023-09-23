@@ -2,6 +2,7 @@
 // user \\
 function getLoginStatus(){
 	$output = "";
+	echo @$_COOKIE["createmyacad"];
 	if( isset($_COOKIE["createmyacad"]) && !empty($_COOKIE["createmyacad"]) && $user = selectDB("users","`keepMeAlive` LIKE '{$_COOKIE["createmyacad"]}'") ){
 		$output = "<a href='?v=Logout' class='button'>".direction("Logout","تسجيل الخروج")."</a>";
 	}else{
