@@ -1,4 +1,6 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
 require_once("admin/includes/config.php");
 require_once("admin/includes/translate.php");
 require_once("admin/includes/functions.php");
