@@ -229,14 +229,15 @@ function getPDF($orderId){
 	return $response;
 }
 function getLogOut(){
-	$user_id = $_COOKIE["loggedin_user_id"];
-	setcookie("loggedin_user_id", $user_id, time() + (86400*30 ), "/");
-	if( updateDB("users",array('keepMeAlive' => ''),"`id` = '{$user_id}'") ){
-		setcookie("createmyacad", '', time() + (86400*30 ), "/");
-	    setcookie("loggedin_user_id",0, time() + (86400*30 ), "/");
-		return 1;
-	}else{
-		return 0;
+	$user_id = getLoginStatusResponse();
+	if($user_id>0){
+		if( updateDB("users",array('keepMeAlive' => ''),"`id` = '{$user_id}'") ){
+			setcookie("createmyacad", '', time() + (86400*30 ), "/");
+			return 1;
+		}else{
+			return 0;
+		}
 	}
+	
 }
 ?>
