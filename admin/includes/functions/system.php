@@ -28,6 +28,8 @@ function userLogin($data){
 	if ( $user = selectDB("users","`email` LIKE '{$data["email"]}' AND `password` LIKE '".sha1($data["password"])."' AND `status` = '0' AND `hidden` = '0'") ){
 		$randomCookie = sha1(rand(000000,999999)+time());
 		setcookie("createmyacad", $randomCookie, time() + (86400*30 ), "/");
+        echo $_COOKIE["createmyacad"];
+		var_dump($user); exit;
 		if( updateDB("users",array('keepMeAlive' => $randomCookie),"`id` = '{$user[0]["id"]}'") ){
 			return 1;
 		}else{
