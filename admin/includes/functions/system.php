@@ -7,8 +7,8 @@ function getLoginStatus(){
 		$output = "<a href='?v=Logout' class='button'>".direction("Logout","تسجيل الخروج")."</a>";
 	}else{
 		$output = "<a href='?v=Login' class='button'>".direction("Login","تسجيل الدخول")."</a>";
-		 setcookie("createmyacad", '', time() + (86400*30 ), "/");
-	     setcookie("loggedin_user_id",0, time() + (86400*30 ), "/");
+		 //setcookie("createmyacad", '', time() + (86400*30 ), "/");
+	     //setcookie("loggedin_user_id",0, time() + (86400*30 ), "/");
 	}
 	return $output;
 }
