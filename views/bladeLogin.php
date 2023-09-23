@@ -2,13 +2,16 @@
 if( isset($_POST["email"]) && !empty($_POST["email"]) ){
     if ( userLogin($_POST) ){
         //header("LOCATION: ?v=Home");
+        echo '<script>window.location.href = "?v=Home";</script>';
         exit();
     }else{
         //header("LOCATION: ?v=Login&error=1");
+        echo '<script>window.location.href = "?v=Login&error=1";</script>';
         exit();
     }
     
 }
+
 if( isset($_GET["error"]) && !empty($_GET["error"]) ){
     if ( $_GET["error"] == 1 ){
         ?>
