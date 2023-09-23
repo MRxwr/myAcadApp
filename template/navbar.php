@@ -59,16 +59,16 @@ if( isset($_GET["country"]) && !empty($_GET["country"]) ){
         <div id="menu">
             <ul>
                 <li class="nav-item">
-                    <a href="?v=Home" class="nav-link active"><?php echo direction("Home","الرئيسية") ?></a>
+                    <a href="?v=Home" class="nav-link active"><?php echo @direction("Home","الرئيسية") ?></a>
                 </li>
                 <li class="nav-item">
-                    <a href="?v=Subscriptions" class="nav-link"><?php echo direction("Subscriptions","الإشتراكات") ?></a>
+                    <a href="?v=Subscriptions" class="nav-link"><?php echo @direction("Subscriptions","الإشتراكات") ?></a>
                 </li>
                 <li class="nav-item">
-                    <a href="?v=Profile" class="nav-link"><?php echo direction("Profile","الملف الشخصي") ?></a>
+                    <a href="?v=Profile" class="nav-link"><?php echo @direction("Profile","الملف الشخصي") ?></a>
                 </li>
                 <li class="nav-item">
-                    <a href="?v=Contact" class="nav-link"><?php echo direction("Contact us","إتصل بنا") ?></a>
+                    <a href="?v=Contact" class="nav-link"><?php echo @direction("Contact us","إتصل بنا") ?></a>
                 </li>
             </ul>
         </div>
