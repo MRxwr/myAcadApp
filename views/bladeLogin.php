@@ -1,10 +1,10 @@
 <?php
 if( isset($_POST["email"]) && !empty($_POST["email"]) ){
     if ( userLogin($_POST) ){
-        header("LOCATION: ?v=Home");
+        //header("LOCATION: ?v=Home");
         exit();
     }else{
-        header("LOCATION: ?v=Login&error=1");
+        //header("LOCATION: ?v=Login&error=1");
         exit();
     }
     
