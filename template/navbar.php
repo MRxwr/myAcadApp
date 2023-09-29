@@ -59,26 +59,32 @@ if( isset($_GET["country"]) && !empty($_GET["country"]) ){
 </header>
 <main class="overflow-hidden">
 
-<div class="menu_area">
-    <div class="container text-center">
-        <div id="menu">
-            <ul>
-                <li class="nav-item">
-                    <a href="?v=Home" class="nav-link active"><?=direction("Home","الرئيسية"); ?></a>
-                </li>
-                <li class="nav-item">
-                    <a href="?v=Subscriptions" class="nav-link"><?=direction("Subscriptions","الإشتراكات"); ?></a>
-                </li>
-                <li class="nav-item">
-                    <a href="?v=Profile" class="nav-link"><?=direction("Profile","الملف الشخصي"); ?></a>
-                </li>
-                <li class="nav-item">
-                    <a href="?v=Contact" class="nav-link"><?=direction("Contact us","إتصل بنا"); ?></a>
-                </li>
-            </ul>
+<?php
+$pageArray = ["Login","Register","ForgetPassword","Profile"];
+if( !in_array($_GET["v"], $pageArray) ){
+    ?>
+    <div class="menu_area">
+        <div class="container text-center">
+            <div id="menu">
+                <ul>
+                    <li class="nav-item">
+                        <a href="?v=Home" class="nav-link active"><?=direction("Home","الرئيسية"); ?></a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="?v=Subscriptions" class="nav-link"><?=direction("Subscriptions","الإشتراكات"); ?></a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="?v=Profile" class="nav-link"><?=direction("Profile","الملف الشخصي"); ?></a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="?v=Contact" class="nav-link"><?=direction("Contact us","إتصل بنا"); ?></a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
-</div>
-
+    <?php
+}
+?>
 <img src="img/shad.png" alt="" class="shad">
 
