@@ -1,6 +1,6 @@
 <?php
 if ( $social_media = selectDB("social_media","`id` = '1'") ){
-	$array = ["whatsapp","snapchat","instagram","location","tiktok","email"];
+	$array = ["youtube","whatsapp","snapchat","instagram","location","tiktok","email"];
 }
 ?>
 <div class="col-sm-12">
