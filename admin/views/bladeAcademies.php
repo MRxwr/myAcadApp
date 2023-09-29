@@ -116,7 +116,7 @@
 
 			<div class="col-md-12">
 			<label><?php echo direction("IBAN","الأيبان") ?></label>
-			<input type="number" step="any" name="iban" class="form-control" required>
+			<input type="text" name="iban" class="form-control" required>
 			</div>
 
 			<div class="col-md-3">
