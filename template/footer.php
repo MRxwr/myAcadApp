@@ -111,9 +111,9 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel" style="font-size: 15px !important;font-weight: 500;"><?php echo direction("PRIVACY POLICY","سياسة الخصوصية") ?></h5>
+        <h5 class="modal-title" id="exampleModalLabel" style="font-size: 15px !important;font-weight: 700;"><?php echo direction("PRIVACY POLICY","سياسة الخصوصية") ?></h5>
       </div>
-      <div class="modal-body" style="font-size: 12px !important;font-weight: 700;">
+      <div class="modal-body" style="font-size: 12px !important;font-weight: 500;">
         <?php echo direction($settings["enPolicy"],$settings["arPolicy"]) ?>
       </div>
       <div class="modal-footer">
