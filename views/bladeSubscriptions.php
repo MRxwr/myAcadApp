@@ -1,5 +1,11 @@
 <?php
 function mySubscriptions($type){
+    if( getLoginStatusResponse() == 0 ){
+        ?>
+        <script>window.location.href = "?v=Login&error=3";</script>
+        <?php
+        die();
+    }
     $userId = getLoginStatusResponse();
     $curl = curl_init();
     curl_setopt_array($curl, array(
