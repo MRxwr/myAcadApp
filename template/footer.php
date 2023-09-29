@@ -95,13 +95,13 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel"><?php echo direction("TERMS & CONDITIONS","الشروط والأحكام") ?></h5>
+        <h5 class="modal-title" id="exampleModalLabel" style="font-size: 15px !important;font-weight: 700;"><?php echo direction("TERMS & CONDITIONS","الشروط والأحكام") ?></h5>
       </div>
-      <div class="modal-body">
+      <div class="modal-body" style="font-size: 12px !important;font-weight: 500;">
         <?php echo direction($settings["enTerms"],$settings["arTerms"]) ?>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal"></button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" style="font-size: 12px !important;font-weight: 700;"><?php echo direction("Close","إغلاق") ?></button>
       </div>
     </div>
   </div>
@@ -111,13 +111,13 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel"><?php echo direction("PRIVACY POLICY","سياسة الخصوصية") ?></h5>
+        <h5 class="modal-title" id="exampleModalLabel" style="font-size: 15px !important;font-weight: 500;"><?php echo direction("PRIVACY POLICY","سياسة الخصوصية") ?></h5>
       </div>
-      <div class="modal-body">
+      <div class="modal-body" style="font-size: 12px !important;font-weight: 700;">
         <?php echo direction($settings["enPolicy"],$settings["arPolicy"]) ?>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal"><?php echo direction("Close","إغلاق") ?></button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" style="font-size: 12px !important;font-weight: 700;"><?php echo direction("Close","إغلاق") ?></button>
       </div>
     </div>
   </div>
