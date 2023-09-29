@@ -31,8 +31,8 @@
                         <li><a href="?v=Home"><?=direction("Home","الرئيسية"); ?></a></li>
                         <li><a href="?v=Subscriptions"><?=direction("Subscriptions","الإشتراكات"); ?></a></li>
                         <li><a href="?v=Profile"><?=direction("Profile","الملف الشخصي"); ?></a></li>
-                        <li><a data-toggle="modal" data-target=".policyModal"><?=direction("PRIVACY POLICY","سياسة الخصوصية"); ?></a></li>
-                        <li><a data-toggle="modal" data-target=".termsModal"><?=direction("TERMS & CONDITIONS","الشروط والأحكام"); ?></a></li>
+                        <li><a data-toggle="modal" data-target="#policyModal"><?=direction("PRIVACY POLICY","سياسة الخصوصية"); ?></a></li>
+                        <li><a data-toggle="modal" data-target="#termsModal"><?=direction("TERMS & CONDITIONS","الشروط والأحكام"); ?></a></li>
                     </ul>
                </div>
                 <div class="col-lg-3 col-sm-4 col-6 mt_40">
@@ -91,16 +91,16 @@
         });
     </script>
 
-<div class="modal fade termsModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+<div class="modal fade" id="termsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
         <div class="modal-content">
             <?php direction($settings["enTerms"],$settings["arTerms"]) ?>
         </div>
     </div>
 </div>
 
-<div class="modal fade policyModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+<div class="modal fade" id="policyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
         <div class="modal-content">
             <?php direction($settings["enPolicy"],$settings["arPolicy"]) ?>
         </div>
