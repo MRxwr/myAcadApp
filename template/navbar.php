@@ -6,6 +6,7 @@ if( isset($_GET["country"]) && !empty($_GET["country"]) ){
     setcookie("createmyacadcountry", "KW", time() + (86400*30 ), "/");
     $_COOKIE["createmyacadcountry"] = "KW";
 }
+var_dump($_COOKIE);
 ?>
 
 <header>
