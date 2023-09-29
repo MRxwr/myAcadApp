@@ -21,7 +21,6 @@ if( isset($_GET["error"]) && !empty($_GET["error"]) ){
         ?>
         <script>alert('<?php echo direction("Please login before viewing profile.","الرجاء تسجيل الدخول قبل عرض الملف الشخصي") ?>')</script>
         <?php
-    }
     }elseif( $_GET["error"] == 3 ){
         ?>
         <script>alert('<?php echo direction("Please login before viewing Subscriptions.","الرجاء تسجيل الدخول قبل عرض الإشتراكات") ?>')</script>
