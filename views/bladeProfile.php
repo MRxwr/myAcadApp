@@ -14,7 +14,10 @@ if( isset($_POST["firstName"]) && !empty($_POST["firstName"]) ){
     }
 }
 if ( getLoginStatusResponse() == 0 ){
-    header("LOCATION: ?v=Login&error=2");
+    ?>
+    <script>window.location.href = "?v=Login&error=2";</script>
+    <?php
+    //header("LOCATION: ?v=Login&error=2");
 }elseif( $user = selectDB("users","`keepMeAlive` LIKE '{$_COOKIE["createmyacad"]}'") ){
 
 }
