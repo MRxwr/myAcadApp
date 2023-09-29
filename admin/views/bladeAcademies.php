@@ -113,6 +113,37 @@
 			<label><?php echo direction("Clothes Price","سعر الملابس") ?></label>
 			<input type="number" step="any" name="clothesPrice" class="form-control" required>
 			</div>
+
+			<div class="col-md-12">
+			<label><?php echo direction("IBAN","الأيبان") ?></label>
+			<input type="number" step="any" name="iban" class="form-control" required>
+			</div>
+
+			<div class="col-md-3">
+			<label><?php echo direction("KNET Charge","عمولة الكي نت") ?></label>
+			<input type="number" step="any" name="charges" class="form-control" required>
+			</div>
+
+			<div class="col-md-3">
+			<label><?php echo direction("KNET charge type","نوع خصم الكي نت") ?></label>
+			<select name="chargeType" class="form-control" required>
+				<option value='fixed'>fixed</option>
+				<option value='percentage'>percentage</option>
+			</select>
+			</div>
+
+			<div class="col-md-3">
+			<label><?php echo direction("Visa Charge","عمولة الفيزا") ?></label>
+			<input type="number" step="any" name="cc_charge" class="form-control" required>
+			</div>
+
+			<div class="col-md-3">
+			<label><?php echo direction("VISA charge type","نوع خصم الفيزا") ?></label>
+			<select name="cc_chargetype" class="form-control" required>
+				<option value='fixed'>fixed</option>
+				<option value='percentage'>percentage</option>
+			</select>
+			</div>
 			
 			<div class="col-md-4">
 			<label><?php echo direction("Logo","الشعار") ?></label>
@@ -226,6 +257,11 @@
 					<div style="display:none"><label id="location<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["location"] ?></label></div>
 					<div style="display:none"><label id="video<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["video"] ?></label></div>
 					<div style="display:none"><label id="clothesPrice<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["clothesPrice"] ?></label></div>
+					<div style="display:none"><label id="charges<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["charges"] ?></label></div>
+					<div style="display:none"><label id="chargeType<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["chargeType"] ?></label></div>
+					<div style="display:none"><label id="cc_charge<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["cc_charge"] ?></label></div>
+					<div style="display:none"><label id="cc_chargetype<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["cc_chargetype"] ?></label></div>
+					<div style="display:none"><label id="iban<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["iban"] ?></label></div>
 				</td>
 				</tr>
 				<?php
@@ -266,6 +302,11 @@
 			var logo = $("#logo"+id).html();
 			var header = $("#header"+id).html();
 			var clothes = $("#clothes"+id).html();
+			var charges = $("#charges"+id).html();
+			var chargeType = $("#chargeType"+id).html();
+			var cc_charge = $("#cc_charge"+id).html();
+			var cc_chargetype = $("#cc_chargetype"+id).html();
+			var iban = $("#iban"+id).html();
 			$("input[name=enTitle]").val(enTitle).focus();
 			$("input[name=arTitle]").val(arTitle);
 			$("input[name=video]").val(video);
@@ -278,6 +319,11 @@
 			$("select[name=isPromotion]").val(isPromotion);
 			$("input[name=clothesPrice]").val(clothesPrice);
 			$("input[name=location]").val(location);
+			$("input[name=charges]").val(charges);
+			$("select[name=chargeType]").val(chargeType);
+			$("input[name=cc_charge]").val(cc_charge);
+			$("select[name=cc_chargetype]").val(cc_chargetype);
+			$("input[name=iban]").val(iban);
 			$("#logoImg").attr("src","../logos/"+logo);
 			$("#headerImg").attr("src","../logos/"+header);
 			$("#clothesImg").attr("src","../logos/"+clothes);
