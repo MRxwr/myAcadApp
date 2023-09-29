@@ -38,6 +38,7 @@ if( !isset($_COOKIE["createmyacad"]) || empty($_COOKIE["createmyacad"]) ){
 	};
 	</script>
 	<?php
+    die();
 }
 
 if( isset($_POST["checkout"]["jersy"]) && !empty($_POST["checkout"]["jersy"]) ){

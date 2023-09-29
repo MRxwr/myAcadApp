@@ -2,7 +2,7 @@
 // user \\
 function getLoginStatus(){
 	$output = "";
-	if( isset($_COOKIE["createmyacad"]) && !empty($_COOKIE["createmyacad"]) && $user = selectDB("users","`keepMeAlive` LIKE '{$_COOKIE["createmyacad"]}'") ){
+	if( isset($_COOKIE["createmyacad"]) && !empty($_COOKIE["createmyacad"]) && $user = selectDB("users","`keepMeAlive` LIKE '{$_COOKIE["createmyacad"]}' AND `status` = '0'") ){
 		$output = "<a href='?v=Logout' class='button'>".direction("Logout","تسجيل الخروج")."</a>";
 	}else{
 		$output = "<a href='?v=Login' class='button'>".direction("Login","تسجيل الدخول")."</a>";
@@ -13,7 +13,7 @@ function getLoginStatus(){
 // user login Status Response \\
 function getLoginStatusResponse(){
 	$output = "";
-	if( isset($_COOKIE["createmyacad"]) && !empty($_COOKIE["createmyacad"]) && $user = selectDB("users","`keepMeAlive` LIKE '{$_COOKIE["createmyacad"]}'") ){
+	if( isset($_COOKIE["createmyacad"]) && !empty($_COOKIE["createmyacad"]) && $user = selectDB("users","`keepMeAlive` LIKE '{$_COOKIE["createmyacad"]}' AND `status` = '0'") ){
 		return $user[0]["id"];
 	}else{
 		return 0;
