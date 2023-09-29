@@ -17,6 +17,7 @@
       ),
     ));
     $response = curl_exec($curl);
+    $response = json_decode($response,true);
     $social = $response["data"]["social"];
     curl_close($curl);
     ?>
