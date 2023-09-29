@@ -12,7 +12,6 @@ function getLoginStatus(){
 
 // user login Status Response \\
 function getLoginStatusResponse(){
-	$output = "";
 	if( isset($_COOKIE["createmyacad"]) && !empty($_COOKIE["createmyacad"]) && $user = selectDB("users","`keepMeAlive` LIKE '{$_COOKIE["createmyacad"]}'") ){
 		return $user[0]["id"];
 	}else{
