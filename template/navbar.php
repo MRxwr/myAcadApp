@@ -61,7 +61,8 @@ if( isset($_GET["country"]) && !empty($_GET["country"]) ){
 
 <?php
 $pageArray = ["Login","Register","ForgetPassword","Profile"];
-if( isset($_GET["v"]) && !empty($_GET["v"]) && !in_array($_GET["v"], $pageArray) ){
+$_GET["v"] = ( !isset($_GET["v"]) ) ? "Home" : $_GET["v"];
+if( !in_array($_GET["v"], $pageArray) ){
     ?>
     <div class="menu_area">
         <div class="container text-center">
