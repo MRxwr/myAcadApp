@@ -43,7 +43,10 @@ if( isset($_GET["country"]) && !empty($_GET["country"]) ){
                 </a>
             </div>
             <div class="col-lg-4 col-4 d-flex align-items-center justify-content-end hum_gap">
-                <a href="<?php echo "{$_SERVER['REQUEST_URI']}&Lang={$newLang}" ?>" class="button rtl_btn"><?php echo $newLang ?></a>
+                <?php
+                $pageView = ( isset($_GET["v"]) && !empty($_GET["v"]) ) ? $_GET["v"] : "Home" ;
+                ?>
+                <a href="<?php echo "?v={$pageView}&Lang={$newLang}" ?>" class="button rtl_btn"><?php echo $newLang ?></a>
                 <!-- menu toggler -->
                 <div class="hamburger-menu">
                     <span class="line-top"></span>
