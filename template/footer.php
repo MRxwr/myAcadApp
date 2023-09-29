@@ -19,6 +19,7 @@
     $response = curl_exec($curl);
     $response = json_decode($response,true);
     $social = $response["data"]["social"];
+    $settings = $response["data"]["settings"];
     curl_close($curl);
     ?>
     <footer>
@@ -30,8 +31,8 @@
                         <li><a href="?v=Home"><?=direction("Home","الرئيسية"); ?></a></li>
                         <li><a href="?v=Subscriptions"><?=direction("Subscriptions","الإشتراكات"); ?></a></li>
                         <li><a href="?v=Profile"><?=direction("Profile","الملف الشخصي"); ?></a></li>
-                        <li><a href="?v=Privacy"><?=direction("PRIVACY POLICY","سياسة الخصوصية"); ?></a></li>
-                        <li><a href="?v=Terms"><?=direction("TERMS & CONDITIONS","الشروط والأحكام"); ?></a></li>
+                        <li><a data-toggle="modal" data-target=".policyModal"><?=direction("PRIVACY POLICY","سياسة الخصوصية"); ?></a></li>
+                        <li><a data-toggle="modal" data-target=".termsModal"><?=direction("TERMS & CONDITIONS","الشروط والأحكام"); ?></a></li>
                     </ul>
                </div>
                 <div class="col-lg-3 col-sm-4 col-6 mt_40">
@@ -89,5 +90,22 @@
             });
         });
     </script>
+
+<div class="modal fade termsModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <?php direction($settings["enTerms"],$settings["arTerms"]) ?>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade policyModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <?php direction($settings["enPolicy"],$settings["arPolicy"]) ?>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>
