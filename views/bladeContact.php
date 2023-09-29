@@ -7,17 +7,17 @@
                         <img src="img/cont_bg.png" alt="">
                     </div>
                     <div class="col-lg-4 order-lg-1">
-                        <h2>Join Us or Contact Us Now</h2>
+                        <h2><?php echo direction("Join Us or Contact Us Now","سجل أو تواصل معنا") ?></h2>
                         <form action="#">
-                            <label for="name">Title</label>
+                            <label for="name"><?php echo direction("Title","العنوان") ?></label>
                             <input id="name" type="text">
-                            <label for="eml">Email</label>
+                            <label for="eml"><?php echo direction("Email","البريد الإلكتروني") ?></label>
                             <input id="eml" type="email">
-                            <label for="tel">Phone Number</label>
+                            <label for="tel"><?php echo direction("Phone Number","رقم الهاتف") ?></label>
                             <input id="tel" type="tel">
-                            <label for="text">Messege</label>
+                            <label for="text"><?php echo direction("Messege","الرسالة") ?></label>
                             <textarea></textarea>
-                            <button type="submit" class="button mt_20">SEND</button>
+                            <button type="submit" class="button mt_20"><?php echo direction("SEND","إرسال") ?></button>
                         </form>
                     </div>
                 </div>
