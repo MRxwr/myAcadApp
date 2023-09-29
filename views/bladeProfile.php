@@ -17,7 +17,6 @@ if ( getLoginStatusResponse() == 0 ){
     ?>
     <script>window.location.href = "?v=Login&error=2";</script>
     <?php
-    //header("LOCATION: ?v=Login&error=2");
 }elseif( $user = selectDB("users","`keepMeAlive` LIKE '{$_COOKIE["createmyacad"]}'") ){
 
 }
