@@ -94,7 +94,7 @@
 <div class="modal fade" id="termsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <?php direction($settings["enTerms"],$settings["arTerms"]) ?>
+            <?php echo direction($settings["enTerms"],$settings["arTerms"]) ?>
         </div>
     </div>
 </div>
@@ -102,7 +102,7 @@
 <div class="modal fade" id="policyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <?php direction($settings["enPolicy"],$settings["arPolicy"]) ?>
+            <?php echo direction($settings["enPolicy"],$settings["arPolicy"]) ?>
         </div>
     </div>
 </div>
