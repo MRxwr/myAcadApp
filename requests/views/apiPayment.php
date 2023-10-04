@@ -88,7 +88,15 @@ if( !isset($_POST) ){
         $_POST["apiResponse"] = json_encode($response);
         $_POST["paymentMethod"] = ( $wallet == 1 ) ? 3 : $paymentMethod;
         insertDB2("orders",$_POST);
-        echo outputData($response);
+        if( $wallet == 1 ){
+            $array = [
+                "url" => "index.php?v=Success&OrderID={$_POST["gatewayId"]}",
+                "id" => $response["data"]["InvoiceId"]
+            ];
+            echo outputData($array);
+        }else{
+            echo outputData($response);
+        }
     }else{
         $response = array(
             "msg" => 'Error while proccessing payment',
