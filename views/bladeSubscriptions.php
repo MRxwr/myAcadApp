@@ -124,7 +124,7 @@ if( isset($_GET["cancel"]) && !empty($_GET["cancel"]) ){
                                         <h4 style="display:none" class="invoice<?php echo $result["data"][$i]["id"] ?>"><?php echo $result["data"][$i]["orderId"] ?></h4>
                                     </a>
                                     <?php
-                                    if( date("Y-m-d H:i:s") < date("Y-m-d H:i:s", strtotime("+2 days", strtotime($result["data"][$i]["date"]))) ){
+                                    if( (date("Y-m-d H:i:s") < date("Y-m-d H:i:s", strtotime("+2 days", strtotime($result["data"][$i]["date"])))) && $TabType != 3 ){
                                         ?>
                                         <a href="?v=Subscriptions&cancel=<?php echo $result["data"][$i]["orderId"] ?>" class="item_sub">
                                         <img src="img/sub_6.svg" alt="">
