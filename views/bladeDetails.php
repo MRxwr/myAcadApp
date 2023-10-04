@@ -41,6 +41,7 @@ $redirect = ($academy["isClothes"] == 1 ) ? "Jersy" : "Checkout" ;
 		margin: 0;
 	}
 	input[type="number"] {
+        appearance: textfield;
 		-moz-appearance: textfield; /* Firefox */
 	}
 	input[type="text"],
