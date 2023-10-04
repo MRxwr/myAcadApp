@@ -20,7 +20,7 @@ if( isset($_GET["country"]) && !empty($_GET["country"]) ){
                         for( $i = 0; $i < sizeof($countires); $i++ ){
                             $ccode=$countires[$i]["countryCode"];
                             $cname=ucfirst(strtolower($countires[$i]["countryEnTitle"]));
-                            $cimage="{$countires[$i]["flag"]}";
+                            $cimage='img/32/'.ucfirst(strtolower($countires[$i]["countryEnTitle"])).'.png';
                             $clabel=direction($countires[$i]["countryEnTitle"],$countires[$i]["countryArTitle"]);
                             echo "<div data-lang-code='{$ccode}' data-lang-name='{$cname}' data-src='{$cimage}'>".$clabel."</div>";
                         }
