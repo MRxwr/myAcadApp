@@ -9,7 +9,7 @@ if( isset($_GET["OrderID"]) && !empty($_GET["OrderID"]) ){
                 updateDB("users",array("wallet" => $newWallet),"`id` = {$order[0]["userId"]}");
             }
         }
-        $paymentMethod = (($order[0]["paymentMethod"] == 1 ) ? "Knet" : ($order[0]["paymentMethod"] == 2 )) ? "Visa" : "Cash";
+        $paymentMethod = (($order[0]["paymentMethod"] == 1 ) ? "Knet" : ($order[0]["paymentMethod"] == 2 )) ? "Visa" : "Wallet";
         $subscription = selectDB("subscriptions","`id` = '{$order[0]["subscriptionId"]}'");
     }else{
         ?>
