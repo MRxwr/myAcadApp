@@ -93,6 +93,10 @@ if( !isset($_POST) ){
                 "paymentURL" => "index.php?v=Success&OrderID={$_POST["gatewayId"]}",
                 "InvoiceId" => $response["data"]["InvoiceId"]
             );
+            if( $user = selectDB("users","`id` = {$_POST["userId"]}") ){
+                $newWallet = $user[0]["wallet"] - $_POST["total"];
+                updateDB("users",array("wallet" => $newWallet),"`id` = {$_POST["userId"]}");
+            }
             echo outputData($array);
         }else{
             echo outputData($response);

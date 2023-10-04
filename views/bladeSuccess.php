@@ -4,10 +4,6 @@ if( isset($_GET["OrderID"]) && !empty($_GET["OrderID"]) ){
         $order2 = selectDB("orders","`gatewayId` = '{$_GET["OrderID"]}'");
         if( $order2[0]["status"] == 0 ){
             updateDB("orders",array("gatewayLink"=>json_encode($_GET),"status"=>1),"`gatewayId` = '{$_GET["OrderID"]}'");
-            if( $order[0]["paymentMethod"] == 3 && $user = selectDB("users","`id` = {$order[0]["userId"]}") ){
-                $newWallet = $user[0]["wallet"] - $order[0]["total"];
-                updateDB("users",array("wallet" => $newWallet),"`id` = {$order[0]["userId"]}");
-            }
         }
         $paymentMethod = (($order[0]["paymentMethod"] == 1 ) ? "Knet" : ($order[0]["paymentMethod"] == 2 )) ? "Visa" : "Wallet";
         $subscription = selectDB("subscriptions","`id` = '{$order[0]["subscriptionId"]}'");
