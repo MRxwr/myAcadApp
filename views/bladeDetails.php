@@ -91,7 +91,7 @@ $redirect = ($academy["isClothes"] == 1 ) ? "Jersy" : "Checkout" ;
 											<input type='radio' {$checked} name='session' id='sty_{$i}' value='{$academy["sessions"][$i]["id"]}'>
 											<label for='sty_{$i}'><span></span>".direction($academy["sessions"][$i]["enTitle"],$academy["sessions"][$i]["arTitle"])."</label>
 										</div>
-										<input type='number' step='1' class='num_{$i}' name='quantity[]' value='{$number}'  min='0' readonly>
+										<input type='number' step='1' class='sty_{$i}' name='quantity[]' value='{$number}'  min='0' readonly>
 									</div>
 									";
 								}
