@@ -44,6 +44,7 @@ for( $i = 0; $i < sizeof($_POST["quantity"]); $i++){
 		margin: 0;
 	}
 	input[type="number"] {
+        appearance: textfield;
 		-moz-appearance: textfield; /* Firefox */
 	}
 	input[type="text"],
