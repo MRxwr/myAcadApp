@@ -63,7 +63,9 @@
     <script src="js/main.js"></script>
     <script>
         $(document).on("click","input[type=radio]",function(){
+            var id = $(this).attr("id");
             $("input[type=number]").val(0);
+            $("."+id).val(1);
         })
         $(document).ready(function() {
             $('.share').on('click', function() {
