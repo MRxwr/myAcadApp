@@ -85,7 +85,8 @@ if( !in_array($_GET["v"], $pageArray) ){
         </div>
     </div>
     <?php
+}else{
+    echo '<img src="img/shad.png" alt="" class="shad">';
 }
 ?>
-<img src="img/shad.png" alt="" class="shad">
 
