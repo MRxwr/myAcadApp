@@ -145,31 +145,40 @@
 			</select>
 			</div>
 			
-			<div class="col-md-4">
+			<div class="col-md-3">
+			<label><?php echo direction("Map View","صورة الخريطة") ?></label>
+			<input type="file" name="locationImage" class="form-control" >
+			</div>
+
+			<div class="col-md-3">
 			<label><?php echo direction("Logo","الشعار") ?></label>
 			<input type="file" name="imageurl" class="form-control" >
 			</div>
 
-			<div class="col-md-4">
+			<div class="col-md-3">
 			<label><?php echo direction("Header","الصورة الكبيرة") ?></label>
 			<input type="file" name="header" class="form-control" >
 			</div>
 
-			<div class="col-md-4">
+			<div class="col-md-3">
 			<label><?php echo direction("Clothes Image","صورة الملابس") ?></label>
 			<input type="file" name="clothesImage" class="form-control" >
 			</div>
 
 			<div id="images" style="margin-top: 10px; display:none">
-				<div class="col-md-4">
+				<div class="col-md-3">
+				<img id="locationImg" src="" style="width:250px;height:250px">
+				</div>
+
+				<div class="col-md-3">
 				<img id="logoImg" src="" style="width:250px;height:250px">
 				</div>
 
-				<div class="col-md-4">
+				<div class="col-md-3">
 				<img id="headerImg" src="" style="width:250px;height:250px">
 				</div>
 
-				<div class="col-md-4">
+				<div class="col-md-3">
 				<img id="clothesImg" src="" style="width:250px;height:250px">
 				</div>
 			</div>
@@ -246,6 +255,7 @@
 					<a href="<?php echo $link . "&v={$_GET["v"]}" ?>" class="btn btn-default" data-toggle="tooltip" data-original-title="<?php echo $hide ?>"> <i class="<?php echo $icon ?> text-inverse m-r-10"></i></a>
 					<a href="?delId=<?php echo $academies[$i]["id"] . "&v={$_GET["v"]}" ?>" data-toggle="tooltip" data-original-title="<?php echo direction("Delete","حذف")  ?>" class="btn btn-danger"><i class="fa fa-close text-inverse"></i>
 					</a>
+					<div style="display:none"><label id="locationImg<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["locationImg"] ?></label></div>
 					<div style="display:none"><label id="clothes<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["clothesImage"] ?></label></div>
 					<div style="display:none"><label id="logo<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["imageurl"] ?></label></div>
 					<div style="display:none"><label id="header<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["header"] ?></label></div>
@@ -302,6 +312,7 @@
 			var logo = $("#logo"+id).html();
 			var header = $("#header"+id).html();
 			var clothes = $("#clothes"+id).html();
+			var locationImg = $("#locationImg"+id).html();
 			var charges = $("#charges"+id).html();
 			var chargeType = $("#chargeType"+id).html();
 			var cc_charge = $("#cc_charge"+id).html();
@@ -327,6 +338,7 @@
 			$("#logoImg").attr("src","../logos/"+logo);
 			$("#headerImg").attr("src","../logos/"+header);
 			$("#clothesImg").attr("src","../logos/"+clothes);
+			$("#locationImg").attr("src","../logos/"+locationImg);
 			$("#images").attr("style","margin-top:10px;display:block");
 			$("input[name=update]").val(id);
 		})
