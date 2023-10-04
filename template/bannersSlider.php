@@ -12,7 +12,6 @@
 			}
 		}
 		?>
-		<div class="carousel-pagination"></div>
         </div>
     </div>
 </div> 
