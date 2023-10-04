@@ -90,7 +90,7 @@
             });
             $("input[type=number]").on("change",function(){
               $("input[type=number]").prop("required",false);
-              $("input[type=number]").prop("required",true);
+              $(this).prop("required",true);
             })
         });
     </script>
