@@ -84,14 +84,13 @@ $redirect = ($academy["isClothes"] == 1 ) ? "Jersy" : "Checkout" ;
 							if( $academy["sessions"] > 0 ){
 								for( $i = 0; $i < sizeof($academy["sessions"]); $i++ ){
 									$checked = ( $i == 0 ) ? "checked=''" : "" ;
-									$required = ( $i == 0 ) ? "required" : "" ;
 									echo "
 									<div class='radi_wap'>
 										<div class='red_items'>
 											<input type='radio' {$checked} name='session' id='sty_{$i}' value='{$academy["sessions"][$i]["id"]}'>
 											<label for='sty_{$i}'><span></span>".direction($academy["sessions"][$i]["enTitle"],$academy["sessions"][$i]["arTitle"])."</label>
 										</div>
-										<input type='number' step='1' name='quantity[]' value='0'  min='0' readonly {$required}>
+										<input type='number' step='1' name='quantity[]' value='0'  min='0'>
 									</div>
 									";
 								}
