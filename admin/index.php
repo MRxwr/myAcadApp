@@ -24,14 +24,14 @@ if ( isset($_GET["hide"]) || isset($_GET["show"]) || isset($_GET["delId"]) || is
                 }
             }
             
-            if( isset($_FILES['locationImg']) && is_uploaded_file($_FILES['locationImg']['tmp_name']) ){
+            if( isset($_FILES['locationImage']) && is_uploaded_file($_FILES['locationImage']['tmp_name']) ){
                 $directory = "../logos/";
                 $originalfile1 = $directory . date("d-m-y") . time() .  round(microtime(true)). "H." . getFileExtension($_FILES["header"]["name"]);
-                move_uploaded_file($_FILES["locationImg"]["tmp_name"], $originalfile1);
-                $_POST["locationImg"] = str_replace("../logos/",'',$originalfile1);
+                move_uploaded_file($_FILES["locationImage"]["tmp_name"], $originalfile1);
+                $_POST["locationImage"] = str_replace("../logos/",'',$originalfile1);
             }else{
-                if ( isset($_FILES['locationImg']) ){
-                    $_POST["locationImg"] = "";
+                if ( isset($_FILES['locationImage']) ){
+                    $_POST["locationImage"] = "";
                 }
             }
 
@@ -82,15 +82,15 @@ if ( isset($_GET["hide"]) || isset($_GET["show"]) || isset($_GET["delId"]) || is
                 }
             }
             
-            if( isset($_FILES['locationImg']) && is_uploaded_file($_FILES['locationImg']['tmp_name']) ){
+            if( isset($_FILES['locationImage']) && is_uploaded_file($_FILES['locationImage']['tmp_name']) ){
                 $directory = "../logos/";
                 $originalfile1 = $directory . date("d-m-y") . time() .  round(microtime(true)). "H." . getFileExtension($_FILES["header"]["name"]);
-                move_uploaded_file($_FILES["locationImg"]["tmp_name"], $originalfile1);
-                $_POST["locationImg"] = str_replace("../logos/",'',$originalfile1);
+                move_uploaded_file($_FILES["locationImage"]["tmp_name"], $originalfile1);
+                $_POST["locationImage"] = str_replace("../logos/",'',$originalfile1);
             }else{
-                if( isset($_FILES['locationImg']) ){
-                    $locationImg = selectDB("{$table}","`id` = '{$id}'");
-                    $_POST["locationImg"] = $locationImg[0]["locationImg"];
+                if( isset($_FILES['locationImage']) ){
+                    $locationImage = selectDB("{$table}","`id` = '{$id}'");
+                    $_POST["locationImage"] = $locationImage[0]["locationImage"];
                 } 
             }
 
