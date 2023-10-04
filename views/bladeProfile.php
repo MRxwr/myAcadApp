@@ -27,12 +27,10 @@ require_once("template/editProfileModal.php");
     <div class="left_side">
         <div class="profile_area">
             <h2><?php echo $user[0]["firstName"] . " " . $user[0]["lastName"] ?></h2>
-            <ul>
-                <li><a href="#"><img src="img/img_5.svg" alt=""><?php echo direction("Wallet amount","قيمة المحفظة") ?> (<span><?php echo $user[0]["wallet"] ?> KD</span>)</a></li>
-                <li><a href="#profile" data-toggle="modal"><img src="img/img_6.svg" alt=""><?php echo direction("Profile","الملف الشخصي") ?></a></li>
-                <li><a href="?v=Logout"><img src="img/img_7.svg" alt=""><?php echo direction("Log Out","تسجيل خروج") ?></a></li>
-                <li><a href="?v=Delete"><img src="img/img_8.svg" alt=""><?php echo direction("Delete my account","حذف حسابي") ?></a></li>
-            </ul>
+            <a href="#"><img src="img/img_5.svg" alt=""><p><?php echo direction("Wallet amount","قيمة المحفظة") ?> (<span><?php echo $user[0]["wallet"] ?> KD</span>)</p></a>
+            <a href="#profile" data-toggle="modal"><img src="img/img_6.svg" alt=""><p><?php echo direction("Profile","الملف الشخصي") ?></p></a>
+            <a href="?v=Logout"><img src="img/img_7.svg" alt=""><p><?php echo direction("Log Out","تسجيل خروج") ?></p></a>
+            <a href="?v=Delete"><img src="img/img_8.svg" alt=""><p><?php echo direction("Delete my account","حذف حسابي") ?></p></a>
         </div>
     </div>
     <div class="play_spt">
