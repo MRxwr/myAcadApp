@@ -89,10 +89,10 @@ if( !isset($_POST) ){
         $_POST["paymentMethod"] = ( $wallet == 1 ) ? 3 : $paymentMethod;
         insertDB2("orders",$_POST);
         if( $wallet == 1 ){
-            $array = [
-                "url" => "index.php?v=Success&OrderID={$_POST["gatewayId"]}",
-                "id" => $response["data"]["InvoiceId"]
-            ];
+            $array["data"] = array(
+                "paymentURL" => "index.php?v=Success&OrderID={$_POST["gatewayId"]}",
+                "InvoiceId" => $response["data"]["InvoiceId"]
+            );
             echo outputData($array);
         }else{
             echo outputData($response);
