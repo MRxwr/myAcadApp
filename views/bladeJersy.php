@@ -109,7 +109,9 @@ for( $i = 0; $i < sizeof($_POST["quantity"]); $i++){
         <div class="row justify-content-center">
             <div class="col-lg-10">
                 <h2><img src="img/map.svg" alt=""><?php echo direction("Location","الموقع") ?></h2>
-                <iframe src="<?php echo $academy["location"] ?>"style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <a href="<?php echo $academy["location"] ?>">
+                    <img src="<?php echo "logos/{$academy["locationImage"]}" ?>" style="width: 100%;height: 250px;" alt="">
+                </a>
             </div>
         </div>
     </div>
