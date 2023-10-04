@@ -1,4 +1,9 @@
 <?php
+if( isset($_GET["RESULT"]) && $_GET["RESULT"] == "CANCELED"){
+	$_GET["v"] = "Fail";
+}elseif( $_GET["RESULT"] == "SUCCESS" ){
+	$_GET["v"] = "Success";
+}
 // Set headers before any output
 header('Content-Type: text/html; charset=utf-8');
 
