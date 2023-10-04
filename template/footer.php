@@ -88,6 +88,10 @@
                     alert('Sharing is not supported on this device/browser.');
                 }
             });
+            $("input[type=number]").on("change",function(){
+              $("input[type=number]").prop("required",false);
+              $("input[type=number]").prop("required",true);
+            })
         });
     </script>
 
