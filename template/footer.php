@@ -39,7 +39,7 @@
                     <h3><?=direction("Social Media","التواصل الإجتماعي"); ?></h3>
                     <ul class="social_media">
                         <li><a href="https://wa.me/<?php echo $social["whatsapp"] ?>"><img src="img/what.svg" alt=""><?=direction("WhatsApp","الوتساب"); ?></a></li>
-                        <li><a href="https://instagram.com/<?php echo $social["instagram"] ?>"><img src="img/ins.svg" alt=""></i><?=direction("Instagram","الانتجرام"); ?></a></li>
+                        <li><a href="https://instagram.com/<?php echo $social["instagram"] ?>"><img src="img/ins.svg" alt=""></i><?=direction("Instagram","الإنستجرام"); ?></a></li>
                         <li><a href="https://youtube.com/<?php echo $social["youtube"] ?>"><img src="img/you.svg" alt=""><?=direction("Youtube","اليوتيوب"); ?></a></li>
                     </ul>
                 </div>
