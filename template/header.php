@@ -13,7 +13,8 @@ require_once("admin/includes/functions.php");
     <meta name="keywords" content="app, landing, corporate, Creative, Html Template, Template">
     <meta name="author" content="web-themes">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
 
     <!-- title -->
     <title>MY ACAD</title>
