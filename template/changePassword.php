@@ -8,15 +8,15 @@
                 <h2><?php echo direction("Change Password","تغيير كلمة المرور") ?></h2>
                 <form action="?v=Profile" method="POST" class="profile_form">
                     <div class="row">
-                        <div class="col-lg-6 mt_15">
+                        <div class="col-lg-12 mt_15">
                             <label for="nam"><?php echo direction("Old Password","كلمة المرور القديمة") ?></label>
                             <input type="password" name="oldPassword" id="nam" value="" required>
                         </div>
-                        <div class="col-lg-6 mt_15">
+                        <div class="col-lg-12 mt_15">
                             <label for="nam2"><?php echo direction("New Password","كلمة المرور الجديدة") ?></label>
                             <input type="password" name="newPassword" id="nam2" value="" required>
                         </div>
-                        <div class="col-lg-6 mt_20">
+                        <div class="col-lg-12 mt_20">
                             <label for="nam3"><?php echo direction("Confirm Password","تأكيد كلمة المرور") ?></label>
                             <input type="password" name="confirmPassword" id="nam3" value="" required>
                         </div>
