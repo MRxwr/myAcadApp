@@ -74,13 +74,13 @@ if( isset($_GET["cancel"]) && !empty($_GET["cancel"]) ){
             <div class="col-lg-10">
                 <ul class="nav nav-tabs" >
                     <li class="nav-item">
-                        <button class="nav-link active" data-toggle="tab" data-target="#sub">My Subsicriptions</button>
+                        <button class="nav-link active" data-toggle="tab" data-target="#sub"><?php echo direction("My Subsicriptions","إشتراكاتي") ?></button>
                     </li>
                     <li class="nav-item" >
-                        <button class="nav-link" data-toggle="tab" data-target="#history" type="button">History</button>
+                        <button class="nav-link" data-toggle="tab" data-target="#history" type="button"><?php echo direction("History","إشتراكاتي القديمة") ?></button>
                     </li>
                     <li class="nav-item">
-                        <button class="nav-link" id="contact-tab" data-toggle="tab" data-target="#cancelled" type="button">Cancelled</button>
+                        <button class="nav-link" id="contact-tab" data-toggle="tab" data-target="#cancelled" type="button"><?php echo direction("Canclled","إشتراكاتي الملغية") ?></button>
                     </li>
                 </ul>
 
