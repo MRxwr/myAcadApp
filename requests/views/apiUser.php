@@ -59,8 +59,8 @@ if ( isset($_GET["type"]) && !empty($_GET["type"]) ){
 			  CURLOPT_POSTFIELDS => array(
 				'site' => '- MyAcad',
 			  	'subject' => 'New Password - MyAcad',
-			  	'body' => "<img src='https://createkwservers.com/myacad1/img/logo.png' style='width:200px;height:200px'>
-				  <p>&nbsp;</p>Your new password is: {$random}<br><br>(Note: Please change your passowrd as soon as you login in app.)",
+			  	'body' => "<div class='text-center'><img src='https://createkwservers.com/myacad1/img/logo.png' style='width:200px;height:200px'>
+				  <p>&nbsp;</p>Your new password is: {$random}<br><br>(Note: Please change your passowrd as soon as you login in app.)</div>",
 			  	'from_email' => 'noreply@myacad.com',
 			  	'to_email' => $_GET["email"]),
 			));
