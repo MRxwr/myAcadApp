@@ -17,6 +17,7 @@ require("template/bannersSlider.php");
                 <img src="img/select_2.svg" alt="">
                 <select class="select_btn select" name="gender" disabled>
                     <option selected disabled value="0"><?php echo direction("SELECT GENDER","إختر الجنس") ?></option>
+                    <option selected disabled value="0"><?php echo direction("Select All","إختر الكل") ?></option>
                     <option value="1" ><?php echo direction("Man","رجل") ?></option>
                     <option value="2" ><?php echo direction("Woman","إمرأة") ?></option>
                     <option value="3" ><?php echo direction("Boy","ولد") ?></option>
@@ -27,6 +28,7 @@ require("template/bannersSlider.php");
 				<img src="img/select_3.svg" alt="">
 				<select class="select_btn select governateSelect" name="governate" disabled>
 					<option selected disabled value="0"><?php echo direction("SELECT GOVERNANT","إختر المحافظة") ?></option>
+					<option selected disabled value="0"><?php echo direction("Select All","إختر الكل") ?></option>
 					<?php
 					if ($governates = selectDB("governates", "`countryCode` LIKE '{$_COOKIE["createmyacadcountry"]}' AND `status` = '0' AND `hidden` = '0'")) {
 						for ($i = 0; $i < sizeof($governates); $i++) {
@@ -40,6 +42,7 @@ require("template/bannersSlider.php");
 				<img src="img/select_4.svg" alt="">
 				<select class="select_btn select areaSelect" name="area" disabled>
 					<option selected disabled value="0"><?php echo direction("SELECT AREA","إختر المنطقة") ?></option>
+					<option selected disabled value="0"><?php echo direction("Select All","إختر الكل") ?></option>
 				</select>
 			</div>
 
@@ -51,7 +54,7 @@ require("template/bannersSlider.php");
 						if ($i != 0) {
 							echo "</div>";
 						}
-						echo "<div class='governate' id='governate{$areas[$i]["governateId"]}' style='display:none'><option selected disabled value='0'>".direction("SELECT AREA","إختر المنطقة")."</option>";
+						echo "<div class='governate' id='governate{$areas[$i]["governateId"]}' style='display:none'><option selected disabled value='0'>".direction("SELECT AREA","إختر المنطقة")."</option><option selected disabled value='0'>".direction("Select All","إختر الكل")."</option>";
 					}
 					echo "<option value='{$areas[$i]["id"]}'>" . direction($areas[$i]["areaEnTitle"], $areas[$i]["areaArTitle"]) . "</option>";
 					$governateId = $areas[$i]["governateId"];
