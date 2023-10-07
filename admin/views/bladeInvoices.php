@@ -45,7 +45,7 @@
                 <td><?php echo $orders[$i]["phone"] ?></td>
                 <td><?php echo direction($orders[$i]["enAcademy"],$orders[$i]["arAcademy"]) ?></td>
                 <td><?php echo $orders[$i]["total"] ?>KD</td>
-                <td><button class="w-100 btn btn-<?php echo $orderBtnColor ?>"><?php echo $orderStatus ?></button></td>
+                <td><button class="btn btn-<?php echo $orderBtnColor ?>" style="width: 100%;"><?php echo $orderStatus ?></button></td>
                 <td class="text-nowrap"></td>
                 </tr>
             <?php
