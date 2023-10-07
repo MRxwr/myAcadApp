@@ -29,6 +29,14 @@
 		<?php 
 		if( $orders = selectDB("orders","`id` != '0' ORDER BY `date` DESC") ){
             for( $i = 0; $i < sizeof($orders); $i++ ){
+                $status = [direction("Pending","إنتظار"),direction("Successful","ناجحه"),direction("Failed","فاشلة"),direction("Cancelled","ملغية"),direction("History","إنتهى")];
+                $statusColor = ["default","success","info","danger","warning"];
+                for( $y = 0; $y < sizeof($status); $y++ ){
+                    if( $orders[$i]["status"] == $y ){
+                        $orderStatus = $status[$y];
+                        $orderBtnColor = $statusColor[$y];
+                    }
+                }
             ?>
                 <tr>
                 <td><?php echo sprintf("%05d", $orders[$i]["id"]) ?></td>
@@ -38,7 +46,7 @@
                 <td><?php echo direction($orders[$i]["enAcademy"],$orders[$i]["arAcademy"]) ?></td>
                 <td><?php echo $orders[$i]["total"] ?>KD</td>
                 <td><?php echo $orders[$i]["status"] ?></td>
-                <td class="text-nowrap"></td>
+                <td class="text-nowrap"><button class="btn btn-<?php echo $orderBtnColor ?>"><?php echo $orderStatus ?></button></td>
                 </tr>
             <?php
             }
