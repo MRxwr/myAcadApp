@@ -45,7 +45,6 @@
 		});
 
 		$('#homeBtnSubmit').on('click', function (event) {
-            alert($("select[name=gender]").val());
 			if( $("select[name=gender]").val() === '' ){
                 alert("Please select Gender");
                 return false;
