@@ -48,6 +48,9 @@ $redirect = ($academy["isClothes"] == 1 ) ? "Jersy" : "Checkout" ;
 	input[type="number"] {
 		text-align: center;
 	}
+    .strike-through {
+        text-decoration: line-through;
+    }
 </style>
 
 <div class="jersy_area mt_20">
@@ -100,16 +103,21 @@ $redirect = ($academy["isClothes"] == 1 ) ? "Jersy" : "Checkout" ;
                             <h5><img src="img/ca.svg" alt=""><?php echo direction("Select Subsicription Period","إختر مدة الإتشراك") ?></h5>
                             <select name="subscription" required>
 							<?php 
-							if( $academy["subscriptions"] > 0 ){
-								for( $s = 0; $s < sizeof($academy["subscriptions"]); $s ++){
-									if( $academy["subscriptions"][$s]["priceAfterDiscount"] > 0 ){
-										echo "<option value='{$academy["subscriptions"][$s]["id"]}'>".direction($academy["subscriptions"][$s]["enTitle"],$academy["subscriptions"][$s]["arTitle"])." <del>( {$academy["subscriptions"][$s]["price"]} KD )</del> ( {$academy["subscriptions"][$s]["priceAfterDiscount"]} KD )</option>";
-									}else{
-										echo "<option value='{$academy["subscriptions"][$s]["id"]}'>".direction($academy["subscriptions"][$s]["enTitle"],$academy["subscriptions"][$s]["arTitle"])." ( {$academy["subscriptions"][$s]["price"]} KD )</option>";
-									}
-								}
-							}
-							?>
+                            if ($academy["subscriptions"] > 0) {
+                                for ($s = 0; $s < sizeof($academy["subscriptions"]); $s++) {
+                                    $subscription = $academy["subscriptions"][$s];
+                                    $title = direction($subscription["enTitle"], $subscription["arTitle"]);
+                                    $price = $subscription["price"];
+                                    $priceAfterDiscount = $subscription["priceAfterDiscount"];
+
+                                    $optionText = $priceAfterDiscount > 0
+                                        ? "<span class='strike-through'>{$price} KD</span> ({$priceAfterDiscount} KD)"
+                                        : "{$price} KD";
+
+                                    echo "<option value='{$subscription["id"]}'>{$title} {$optionText}</option>";
+                                }
+                            }
+                            ?>
                             </select>
 							<input type="hidden" name="id" value="<?php echo htmlspecialchars($_GET["id"]) ?>">
 							<button class="button mt_55"><?php echo direction("Choose","إختر") ?></button>
