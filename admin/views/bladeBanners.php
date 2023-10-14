@@ -31,8 +31,8 @@
 			<div class="col-md-6">
 			<label><?php echo direction("Hide Banner","أخفي البنر") ?></label>
 			<select name="hidden" class="form-control">
-				<option value="1">No</option>
-				<option value="0">Yes</option>
+				<option value="0">No</option>
+				<option value="1">Yes</option>
 			</select>
 			</div>
 			
