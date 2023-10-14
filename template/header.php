@@ -34,6 +34,11 @@ require_once("admin/includes/functions.php");
     <link href="css/srcollbar.css?<?php echo randLetter() . "=" . rand(0000,9999) ?>" rel="stylesheet" type="text/css" />
     <link href="css/style.css?<?php echo randLetter() . "=" . rand(0000,9999) ?>" rel="stylesheet" type="text/css" />
     <link href="css/responsive.css?<?php echo randLetter() . "=" . rand(0000,9999) ?>" rel="stylesheet" type="text/css" />
+    <style>
+        label, span, body{
+            font-weight: 500;
+        }
+    </style>
 </head>
 <body>
 
