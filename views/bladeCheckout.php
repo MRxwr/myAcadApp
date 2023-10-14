@@ -29,7 +29,7 @@ if( $response["error"] == 1 ){
 	$academy = $response["data"]["academy"];
 }
 
-if( !isset($_COOKIE["createmyacad"]) || empty($_COOKIE["createmyacad"]) ){
+if( getLoginStatusResponse() == 0 ){
 	?>
 	<script>
 	window.onload = function() {
