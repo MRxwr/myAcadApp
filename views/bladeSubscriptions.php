@@ -125,7 +125,13 @@ if( isset($_GET["cancel"]) && !empty($_GET["cancel"]) ){
                                     </a>
                                     <?php
                                     if( (date("Y-m-d H:i:s") < date("Y-m-d H:i:s", strtotime("+4 days", strtotime($result["data"][$i]["date"])))) && $TabType[$y] != 3 ){
-                                        $cancelMsg = direction("Are you sure you want to cancel this subscription?","هل انت متأكد من إلغاء إشتراكك؟");
+                                        // Invoice date from $result["data"][$i]["date"]
+                                        $invoiceDate = strtotime($result["data"][$i]["date"]);
+                                        $expirationDate = strtotime("+4 days", $invoiceDate);
+                                        $currentDate = time();
+                                        $remainingTimeInSeconds = $expirationDate - $currentDate;
+                                        $remainingDays = ceil($remainingTimeInSeconds / (60 * 60 * 24));
+                                        $cancelMsg = direction("Are you sure you want to cancel this subscription? you still have {$remainingDays} days left.","هل انت متأكد من إلغاء إشتراكك؟ لا يزال لديك {$remainingDays} يوم متبقي.");
                                         ?>
                                         <a href="?v=Subscriptions&cancel=<?php echo $result["data"][$i]["orderId"] ?>" class="item_sub" onclick="return confirm('<?php echo $cancelMsg ?>')">
                                         <img src="img/sub_6.svg" alt="">
