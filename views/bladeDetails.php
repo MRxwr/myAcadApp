@@ -68,7 +68,7 @@ $redirect = ($academy["isClothes"] == 1 ) ? "Jersy" : "Checkout" ;
             <div class="col-lg-10">
                 <div class="row justify-content-between">
                     <div class="col-lg-6 order-lg-2 d-none d-lg-block mt_40">
-                        <iframe width="100%" height="400" src="<?php echo $academy["video"] ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                        <iframe width="100%" height="400" src="https://www.youtube.com/embed/<?php echo $academy["video"] ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                     </div>
                     <div class="col-lg-5 order-lg-1 mt_40">
                         <div class="jersy_top mb_45">
