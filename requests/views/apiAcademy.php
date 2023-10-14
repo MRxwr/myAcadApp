@@ -5,6 +5,7 @@ if( !isset($_GET["academyId"]) || empty($_GET["academyId"]) ){
 }else{
 	if( $academy = selectDB2("`id`, `imageurl`, `enTitle`, `arTitle`, `area`, `video`, `location`, `isClothes`, `clothesPrice`, `clothesImage`, `locationImage`","academies","`hidden` = '0' AND `status` = '0' AND `id` = {$_GET["academyId"]}") ){
 		$response["academy"] = $academy[0];
+		$response["academy"]["video"] = "https://www.youtube.com/embed/{$academy[0]["video"]}";
 		if( $area = selectDB("countries","`id` = '{$academy[0]["area"]}'") ){
 			$response["academy"]["enArea"] = $area[0]["areaEnTitle"];
 			$response["academy"]["arArea"] = $area[0]["areaArTitle"];
