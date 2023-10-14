@@ -42,7 +42,7 @@
 		$('select[name=gender]').on('change', function (event) {
 			event.preventDefault();
 			$("select[name=governate]").prop("disabled",false);
-			$("#homeBtnSubmit").prop("disabled",false);
+			$("#homeBtnSubmit").prop("disabled",false).attr("style","");
 		});
 		
 		// change the view of select sport
