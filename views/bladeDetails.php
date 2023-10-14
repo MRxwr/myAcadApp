@@ -48,8 +48,17 @@ $redirect = ($academy["isClothes"] == 1 ) ? "Jersy" : "Checkout" ;
 	input[type="number"] {
 		text-align: center;
 	}
-    .strike-through {
+    /* Add strike-through style to Nice Select option text */
+    .nice-select .strike-through {
+        display: block;
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
         text-decoration: line-through;
+    }
+
+    /* Style the non-strikethrough part of the option */
+    .nice-select .strike-through:not([data-display]) {
+        text-decoration: none;
     }
 </style>
 
@@ -111,10 +120,10 @@ $redirect = ($academy["isClothes"] == 1 ) ? "Jersy" : "Checkout" ;
                                     $priceAfterDiscount = $subscription["priceAfterDiscount"];
 
                                     $optionText = $priceAfterDiscount > 0
-                                        ? "<span class='strike-through'>{$price} KD</span> ({$priceAfterDiscount} KD)"
-                                        : "{$price} KD";
+                                        ? "{$title} &lt;del&gt;($price KD)&lt;/del&gt; ($priceAfterDiscount KD)"
+                                        : "{$title} ($price KD)";
 
-                                    echo "<option value='{$subscription["id"]}'>{$title} {$optionText}</option>";
+                                    echo "<option class='strike-through' value='{$subscription["id"]}' data-display='{$optionText}'>{$optionText}</option>";
                                 }
                             }
                             ?>
