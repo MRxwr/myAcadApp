@@ -46,7 +46,7 @@ if( isset($_GET["country"]) && !empty($_GET["country"]) ){
                 <?php
                 $pageView = ( isset($_SERVER["QUERY_STRING"]) && !empty($_SERVER["QUERY_STRING"]) ) ? $_SERVER["QUERY_STRING"] : "Home" ;
                 ?>
-                <a href="<?php echo "?v={$pageView}&Lang={$newLang}" ?>" class="button rtl_btn"><?php echo $newLang ?></a>
+                <a href="<?php echo "?{$pageView}&Lang={$newLang}" ?>" class="button rtl_btn"><?php echo $newLang ?></a>
                 <!-- menu toggler -->
                 <div class="hamburger-menu">
                     <span class="line-top"></span>
