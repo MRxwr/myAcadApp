@@ -27,7 +27,7 @@
 			
 			<div class="col-md-6">
 			<label><?php echo direction("Mobile","الهاتف") ?></label>
-			<input type="number" min="0" maxlength="8" name="phone" class="form-control" required>
+			<input type="number" min="0" name="phone" class="form-control" required oninput="javascript: if (this.value.length > 8) this.value = this.value.slice(0, 8);">
 			</div>
 			
 			<div class="col-md-6">
