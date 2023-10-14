@@ -63,7 +63,7 @@ require("template/bannersSlider.php");
 			?>
 			
 			<input type="hidden" name="sport" value="">
-            <button type="submit" class="button" id="homeBtnSubmit"><?php echo direction("Search","إبحث") ?></button>
+            <button type="submit" class="button" id="homeBtnSubmit" disabled><?php echo direction("Search","إبحث") ?></button>
         </form>
     </div>
 </div>
