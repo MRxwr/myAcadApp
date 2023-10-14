@@ -45,6 +45,7 @@
 		});
 
 		$('#homeBtnSubmit').on('click', function (event) {
+            alert("Please select Gender clicked");
 			if( $("select[name=gender]").val() === '0' ){
                 alert("Please select Gender");
                 return false;
