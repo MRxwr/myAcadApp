@@ -43,6 +43,14 @@
 			event.preventDefault();
 			$("select[name=governate]").prop("disabled",false);
 		});
+
+		$('#homeBtnSubmit').on('click', function (event) {
+			event.preventDefault();
+			if( $("select[name=gender]").val() === 0 ){
+                alert("Please select Gender");
+                return false;
+            };
+		});
 		
 		// change the view of select sport
 		$('.governateSelect').on('change', function () {
