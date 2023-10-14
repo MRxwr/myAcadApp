@@ -125,8 +125,9 @@ if( isset($_GET["cancel"]) && !empty($_GET["cancel"]) ){
                                     </a>
                                     <?php
                                     if( (date("Y-m-d H:i:s") < date("Y-m-d H:i:s", strtotime("+4 days", strtotime($result["data"][$i]["date"])))) && $TabType[$y] != 3 ){
+                                        $cancelMsg = direction("Are you sure you want to cancel this subscription?","هل انت متأكد من إلغاء إشتراكك؟");
                                         ?>
-                                        <a href="?v=Subscriptions&cancel=<?php echo $result["data"][$i]["orderId"] ?>" class="item_sub">
+                                        <a href="?v=Subscriptions&cancel=<?php echo $result["data"][$i]["orderId"] ?>" class="item_sub" onclick="return confirm('<?php echo $cancelMsg ?>')">
                                         <img src="img/sub_6.svg" alt="">
                                         <h4><?php echo direction("Cancel","إلغاء") ?></h4>
                                         </a>
