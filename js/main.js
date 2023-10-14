@@ -49,7 +49,7 @@
 			if( $("select[name=gender]").val() === 0 ){
                 alert("Please select Gender");
                 return false;
-            };
+            }; 
 		});
 		
 		// change the view of select sport
