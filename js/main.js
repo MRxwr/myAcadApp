@@ -115,7 +115,7 @@
         $('.select').select2();
         
         // nice select
-        $('select').niceSelect();
+        //$('select').niceSelect();
 
         // telephone
         $("#phn").intlTelInput({
