@@ -63,7 +63,7 @@ if( !isset($_POST) ){
         'CustomerName' => "{$_POST["name"]}",
         'CustomerMobile' => "{$_POST["phone"]}",
         'CustomerEmail' => "{$_POST["email"]}",
-        'InvoiceValue' => "{$newTotal}",
+        'invoiceValue' => "{$newTotal}",
         'CallBackUrl' => 'https://createkwservers.com/myacad1/index.php',
         'ErrorUrl' => 'https://createkwservers.com/myacad1/index.php',
         'extraMerchantsData[amounts][0]' => "{$newTotal}",
