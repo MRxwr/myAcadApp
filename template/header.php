@@ -45,7 +45,7 @@ require_once("admin/includes/functions.php");
 </div>
 
 <style>
-    label, span, body{
+    label, span, body, h2{
         font-weight: 500 !important;
     }
 </style>
