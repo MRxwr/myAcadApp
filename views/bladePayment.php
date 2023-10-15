@@ -27,13 +27,12 @@ if( isset($_POST["data"]) && !empty($_POST["data"]) ){
     ));
     $response = curl_exec($curl);
     curl_close($curl);
-    print_r($response);
     $response = json_decode($response,true);
     if( $response["error"] == 0 ){
         ?>
         <script>
         window.onload = function() {
-            window.location.href = "<?php echo "{$response["data"]["data"]["paymentURL"]}" ?>";
+            window.location.href = "<?php echo "{$response["data"]["data"]["PaymentURL"]}" ?>";
         };
         </script>
         <?php
