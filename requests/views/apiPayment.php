@@ -83,7 +83,7 @@ if( !isset($_POST) ){
     $response = json_decode(payment($apiData),true);
     if( isset($response["data"]["InvoiceId"]) && !empty($response["data"]["InvoiceId"]) ){
         $_POST["gatewayId"] = $response["data"]["InvoiceId"];
-        $_POST["gatewayURL"] = $response["data"]["paymentURL"];
+        $_POST["gatewayURL"] = $response["data"]["PaymentURL"];
         $_POST["apiPayload"] = json_encode($apiData);
         $_POST["apiResponse"] = json_encode($response);
         $_POST["paymentMethod"] = ( $wallet == 1 ) ? 3 : $paymentMethod;
