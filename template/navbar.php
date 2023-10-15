@@ -47,7 +47,7 @@ if( isset($_GET["country"]) && !empty($_GET["country"]) ){
                 $pageView = ( isset($_SERVER["QUERY_STRING"]) && !empty($_SERVER["QUERY_STRING"]) ) ? $_SERVER["QUERY_STRING"] : "v=Home" ;
                 if( !isset($_GET["v"]) || (isset($_GET["v"]) && $_GET["v"] == "Home") ){
                 ?>
-                <a href="<?php echo "?{$pageView}&Lang={$newLang}" ?>" class="button rtl_btn"><?php echo $newLang ?></a>
+                    <a href="<?php echo "?{$pageView}&Lang={$newLang}" ?>" class="button rtl_btn"><?php echo $newLang ?></a>
                 <?php
                 }
                 ?>
