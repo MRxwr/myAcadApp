@@ -45,8 +45,12 @@ if( isset($_GET["country"]) && !empty($_GET["country"]) ){
             <div class="col-lg-4 col-4 d-flex align-items-center justify-content-end hum_gap">
                 <?php
                 $pageView = ( isset($_SERVER["QUERY_STRING"]) && !empty($_SERVER["QUERY_STRING"]) ) ? $_SERVER["QUERY_STRING"] : "v=Home" ;
+                if( !isset($_GET["v"]) || (isset($_GET["v"]) && $_GET["v"] == "Home") ){
                 ?>
                 <a href="<?php echo "?{$pageView}&Lang={$newLang}" ?>" class="button rtl_btn"><?php echo $newLang ?></a>
+                <?php
+                }
+                ?>
                 <!-- menu toggler -->
                 <div class="hamburger-menu">
                     <span class="line-top"></span>
