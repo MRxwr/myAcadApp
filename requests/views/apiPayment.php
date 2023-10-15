@@ -57,8 +57,8 @@ if( !isset($_POST) ){
 
     // 0 take charges with 0 commission, 1 take rest with commission
     $apiData = array(
-        'endpoint' => 'PaymentRequestExicuteForStore',
-        'apikey' => 'CKW-1640114323-2537',//'CKW-1623165837-1075',
+        'endpoint' => 'PaymentRequestExicuteForVendorsTest',
+        'apikey' => 'CKW-1623165837-1075',
         'PaymentMethodId' => "{$paymentMethod}",
         'CustomerName' => "{$_POST["name"]}",
         'CustomerMobile' => "{$_POST["phone"]}",
@@ -83,7 +83,7 @@ if( !isset($_POST) ){
     $response = json_decode(payment($apiData),true);
     if( isset($response["data"]["InvoiceId"]) && !empty($response["data"]["InvoiceId"]) ){
         $_POST["gatewayId"] = $response["data"]["InvoiceId"];
-        $_POST["gatewayURL"] = $response["data"]["PaymentURL"];
+        $_POST["gatewayURL"] = $response["data"]["paymentURL"];
         $_POST["apiPayload"] = json_encode($apiData);
         $_POST["apiResponse"] = json_encode($response);
         $_POST["paymentMethod"] = ( $wallet == 1 ) ? 3 : $paymentMethod;
