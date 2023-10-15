@@ -57,13 +57,13 @@ if( !isset($_POST) ){
 
     // 0 take charges with 0 commission, 1 take rest with commission
     $apiData = array(
-        'endpoint' => 'PaymentRequestExicuteForVendorsTest',
+        'endpoint' => 'PaymentRequestExicuteForStore',
         'apikey' => 'CKW-1640114323-2537',//'CKW-1623165837-1075',
         'PaymentMethodId' => "{$paymentMethod}",
         'CustomerName' => "{$_POST["name"]}",
         'CustomerMobile' => "{$_POST["phone"]}",
         'CustomerEmail' => "{$_POST["email"]}",
-        'invoiceValue' => "{$newTotal}",
+        'InvoiceValue' => "{$newTotal}",
         'CallBackUrl' => 'https://createkwservers.com/myacad1/index.php',
         'ErrorUrl' => 'https://createkwservers.com/myacad1/index.php',
         'extraMerchantsData[amounts][0]' => "{$newTotal}",
