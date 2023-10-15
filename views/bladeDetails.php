@@ -120,7 +120,7 @@ $redirect = ($academy["isClothes"] == 1 ) ? "Jersy" : "Checkout" ;
                                     $priceAfterDiscount = $subscription["priceAfterDiscount"];
 
                                     $optionText = $priceAfterDiscount > 0
-                                        ? "{$title} &lt;del&gt;({$price}KD)&lt;/del&gt; ({$priceAfterDiscount}KD)"
+                                        ? "{$title} &lt;del&gt;({$price}KD)&lt;/del&gt;({$priceAfterDiscount}KD)"
                                         : "{$title} ({$price}KD)";
 
                                     echo "<option class='strike-through' value='{$subscription["id"]}' data-display='{$optionText}'>{$optionText}</option>";
