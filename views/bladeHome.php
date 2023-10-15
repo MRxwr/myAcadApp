@@ -53,7 +53,7 @@ require("template/bannersSlider.php");
 						if ($i != 0) {
 							echo "</div>";
 						}
-						echo "<div class='governate' id='governate{$areas[$i]["governateId"]}' style='display:none'><option selected disabled value='0'>".direction("SELECT AREA","إختر المنطقة")."</option><option selected disabled value='0'>".direction("Select All","إختر الكل")."</option>";
+						echo "<div class='governate' id='governate{$areas[$i]["governateId"]}' style='display:none'><option selected disabled value='0'>".direction("SELECT AREA","إختر المنطقة")."</option><option selected value='0'>".direction("Select All","إختر الكل")."</option>";
 					}
 					echo "<option value='{$areas[$i]["id"]}'>" . direction($areas[$i]["areaEnTitle"], $areas[$i]["areaArTitle"]) . "</option>";
 					$governateId = $areas[$i]["governateId"];
