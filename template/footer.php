@@ -3,7 +3,7 @@
     <?php
     $curl = curl_init();
     curl_setopt_array($curl, array(
-      CURLOPT_URL => 'https://createkwservers.com/myacad1/requests?a=Settings',
+      CURLOPT_URL => 'https://myacad.app/requests?a=Settings',
       CURLOPT_RETURNTRANSFER => true,
       CURLOPT_ENCODING => '',
       CURLOPT_MAXREDIRS => 10,
@@ -77,7 +77,7 @@
                     navigator.share({
                         title: 'MY ACAD',
                         text: title,
-                        url: 'https://createkwservers.com/myacad1/?v=Success&OrderID=' + invoice
+                        url: 'https://myacad.app/?v=Success&OrderID=' + invoice
                     })
                     .then(() => {
                         console.log('Shared successfully');
