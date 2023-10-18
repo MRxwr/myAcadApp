@@ -77,10 +77,10 @@ if( isset($_GET["cancel"]) && !empty($_GET["cancel"]) ){
                         <button class="nav-link active" data-toggle="tab" data-target="#sub"><?php echo direction("My Subsicriptions","إشتراكاتي") ?></button>
                     </li>
                     <li class="nav-item" >
-                        <button class="nav-link" data-toggle="tab" data-target="#history" type="button"><?php echo direction("History","إشتراكاتي القديمة") ?></button>
+                        <button class="nav-link" data-toggle="tab" data-target="#history" type="button"><?php echo direction("History","القديمة") ?></button>
                     </li>
                     <li class="nav-item">
-                        <button class="nav-link" id="contact-tab" data-toggle="tab" data-target="#cancelled" type="button"><?php echo direction("Canclled","إشتراكاتي الملغية") ?></button>
+                        <button class="nav-link" id="contact-tab" data-toggle="tab" data-target="#cancelled" type="button"><?php echo direction("Canclled","الملغية") ?></button>
                     </li>
                 </ul>
 
