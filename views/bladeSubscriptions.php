@@ -9,7 +9,7 @@ function mySubscriptions($type){
     $userId = getLoginStatusResponse();
     $curl = curl_init();
     curl_setopt_array($curl, array(
-        CURLOPT_URL => "https://createkwservers.com/myacad1/requests?a=Subscriptions&userId={$userId}&type={$type}",
+        CURLOPT_URL => "https://myacad.app/requests?a=Subscriptions&userId={$userId}&type={$type}",
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => '',
         CURLOPT_MAXREDIRS => 10,
@@ -31,7 +31,7 @@ if( isset($_GET["cancel"]) && !empty($_GET["cancel"]) ){
     $orderId = selectDB2("`id`","orders","`gatewayId` = '{$_GET["cancel"]}'");
     $curl = curl_init();
     curl_setopt_array($curl, array(
-    CURLOPT_URL => "https://createkwservers.com/myacad1/requests?a=Cancel&userId={$userId}&orderId={$orderId[0]["id"]}",
+    CURLOPT_URL => "https://myacad.app/requests?a=Cancel&userId={$userId}&orderId={$orderId[0]["id"]}",
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_ENCODING => '',
     CURLOPT_MAXREDIRS => 10,

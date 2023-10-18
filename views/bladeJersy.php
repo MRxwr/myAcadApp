@@ -1,7 +1,7 @@
 <?php
 $curl = curl_init();
 curl_setopt_array($curl, array(
-  CURLOPT_URL => "https://createkwservers.com/myacad1/requests?a=Academy&academyId={$_POST["id"]}",
+  CURLOPT_URL => "https://myacad.app/requests?a=Academy&academyId={$_POST["id"]}",
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => '',
   CURLOPT_MAXREDIRS => 10,
