@@ -36,14 +36,14 @@ require_once("admin/includes/functions.php");
     <link href="css/responsive.css?<?php echo randLetter() . "=" . rand(0000,9999) ?>" rel="stylesheet" type="text/css" />
 </head>
 <body>
-
+<!--
 <div id="preloader">
     <div class="loader3">
         <span></span>
         <span></span>
     </div>
 </div>
-
+-->
 <style>
     label, span, body, h2, h3{
         font-weight: 500 !important;
