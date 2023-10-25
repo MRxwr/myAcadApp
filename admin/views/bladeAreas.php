@@ -4,7 +4,7 @@ if( $country = selectDB("countries","`countryCode` LIKE '{$_GET["code"]}' LIMIT 
 }else{
 	$country = array();
 }
-if( isset($_GET["delIdArea"]) && !empty($_GET["delIdArea"]) && updateDB("{$table}",array('status'=> '0'),"`id` = '{$_GET["delIdArea"]}'") ){
+if( isset($_GET["delIdArea"]) && !empty($_GET["delIdArea"]) && updateDB("countries",array('status'=> '0'),"`id` = '{$_GET["delIdArea"]}'") ){
 
 }
 ?>
