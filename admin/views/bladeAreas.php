@@ -111,7 +111,7 @@ if( isset($_GET["delIdArea"]) && !empty($_GET["delIdArea"]) && updateDB("{$table
 					<a id="<?php echo $areas[$i]["id"] ?>" class="edit btn btn-warning" data-toggle="tooltip" data-original-title="<?php echo direction("Edit","تعديل") ?>"> <i class="fa fa-pencil text-inverse m-r-10"></i>
 					</a>
 					<a href="<?php echo $link . "&v={$_GET["v"]}&code={$_GET["code"]}" ?>" class="btn btn-default" data-toggle="tooltip" data-original-title="<?php echo $hide ?>"> <i class="<?php echo $icon ?> text-inverse m-r-10"></i></a>
-					<a href="?delId=<?php echo $areas[$i]["id"] . "&v={$_GET["v"]}&code={$_GET["code"]}"  ?>" data-toggle="tooltip" data-original-title="<?php echo direction("Delete","حذف")  ?>" class="btn btn-danger"><i class="fa fa-close text-inverse"></i>
+					<a href="?delIdArea=<?php echo $areas[$i]["id"] . "&v={$_GET["v"]}&code={$_GET["code"]}"  ?>" data-toggle="tooltip" data-original-title="<?php echo direction("Delete","حذف")  ?>" class="btn btn-danger"><i class="fa fa-close text-inverse"></i>
 					</a>		
 				</td>
 				</tr>
