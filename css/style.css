@@ -1649,8 +1649,8 @@ html[dir="rtl"] .shad {
 .slider1 img,
 .slider2 img{
 	height: 35rem;
-	-o-object-fit: cover;
-	   object-fit: cover;
+	-o-object-fit: fill;
+	   object-fit: fill;
 }
 .star_box{
 	position: relative;
