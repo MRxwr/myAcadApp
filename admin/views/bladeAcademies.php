@@ -38,7 +38,7 @@
 			<select id="mySelect" name="country" class="form-control" required>
 				<option value='KW'>KUWAIT</option>
 				<?php
-				if( $countries = selectDB("countries","`id` != '0' AND `countryEnTitle` NOT LIKE 'KUWAIT' AND `status` '1' GROUP BY `countryCode` ORDER BY `countryEnTitle` ASC") ){
+				if( $countries = selectDB("countries","`id` != '0' AND `countryEnTitle` NOT LIKE 'KUWAIT' AND `status` = '1' GROUP BY `countryCode` ORDER BY `countryEnTitle` ASC") ){
 					for( $i =0; $i < sizeof($countries); $i++ ){
 						echo "<option value='{$countries[$i]["countryCode"]}'>{$countries[$i]["countryEnTitle"]}</option>";
 					}
