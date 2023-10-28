@@ -85,7 +85,6 @@ if( !isset($_POST) ){
         'extraMerchantsData[ibans][1]' => "{$academyData[0]["iban"]}"
     );
 
-    print_r($apiData);
     $response = json_decode(payment($apiData),true);
     if( isset($response["data"]["InvoiceId"]) && !empty($response["data"]["InvoiceId"]) ){
         $_POST["gatewayId"] = $response["data"]["InvoiceId"];
