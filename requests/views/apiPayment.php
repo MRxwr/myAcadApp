@@ -69,6 +69,9 @@ if( !isset($_POST) ){
     }elseif( $data["paymentMethod"] == 2 ){
         $myacadDeposit = $newTotal * ( $academyData[0]["cc_charge"] / 100 );
         $newTotal = $newTotal - $myacadDeposit;
+    }else{
+        $myacadDeposit = 0;
+        $newTotal = $newTotal - $myacadDeposit;
     }
     /*
     // 0 take charges with 0 commission, 1 take rest with commission
