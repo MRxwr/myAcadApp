@@ -59,14 +59,14 @@ if ( isset($_GET["type"]) && !empty($_GET["type"]) ){
 			  CURLOPT_POSTFIELDS => array(
 				'site' => '- MyAcad',
 			  	'subject' => 'New Password - MyAcad',
-			  	'body' => "<div style='text-align: -webkit-center;'><img src='https://createkwservers.com/myacad1/img/logo.png' style='width:100px;height:100px'>
+			  	'body' => "<div style='text-align: -webkit-center;'><img src='https://myacad.app/img/logo.png' style='width:100px;height:100px'>
 				  <p>&nbsp;</p>Your new password is: {$random}<br><br>(Note: Please change your passowrd as soon as you login in app.)</div>",
 			  	'from_email' => 'noreply@myacad.com',
 			  	'to_email' => $_GET["email"]),
 			));
 			$response = curl_exec($curl);
 			curl_close($curl);
-			echo outputData(array('msg'=>"A new password has been sent to your email."));
+			echo outputData(array('msg'=>json_encode($response)));
 		}else{
 			$error = array("msg"=>"This email is not registred on our app, please enter a correct one.");
 			echo outputError($error);die();
