@@ -10,18 +10,17 @@
 <div class="panel-body">
 	<form class="" method="POST" action="" enctype="multipart/form-data">
 		<div class="row m-0">
-			
-			<div class="col-md-6">
+			<div class="col-md-4">
 			<label><?php echo direction("English Title","العنوان بالإنجليزي") ?></label>
 			<input type="text" name="enTitle" class="form-control" required>
 			</div>
 			
-			<div class="col-md-6">
+			<div class="col-md-4">
 			<label><?php echo direction("Arabic Title","العنوان بالعربي") ?></label>
 			<input type="text" name="arTitle" class="form-control" required>
 			</div>
 			
-			<div class="col-md-6">
+			<div class="col-md-4">
 			<label><?php echo direction("Quantity","الكمية") ?></label>
 			<input type="number" step="1" min="0" name="quantity" class="form-control" required>
 			</div>
