@@ -128,23 +128,22 @@ if( !isset($_POST) ){
 	curl_setopt($ch, CURLOPT_POSTFIELDS,$fields_string);
 	// receive server response ...
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-	echo $server_output = curl_exec($ch);
+	$server_output = curl_exec($ch);
 	curl_close ($ch);
-	$server_output = json_decode($server_output,true);
-    echo json_encode($comon_array);
-    /*
-    $response = json_decode(payment($apiData),true);
-    if( isset($response["data"]["InvoiceId"]) && !empty($response["data"]["InvoiceId"]) ){
-        $_POST["gatewayId"] = $response["data"]["InvoiceId"];
-        $_POST["gatewayURL"] = $response["data"]["paymentURL"];
-        $_POST["apiPayload"] = json_encode($apiData);
+	$response = json_decode($server_output,true);
+        
+    //$response = json_decode(payment($apiData),true);
+    if( $response["status"] == "success" && isset($response["paymentURL"]) && !empty($response["paymentURL"]) ){
+        $_POST["gatewayId"] = $comon_array["order_id"];
+        $_POST["gatewayURL"] = $response["paymentURL"];
+        $_POST["apiPayload"] = json_encode($comon_array);
         $_POST["apiResponse"] = json_encode($response);
         $_POST["paymentMethod"] = ( $wallet == 1 ) ? 3 : $paymentMethod;
         insertDB2("orders",$_POST);
         if( $wallet == 1 ){
             $array["data"] = array(
                 "paymentURL" => "index.php?v=Success&OrderID={$_POST["gatewayId"]}",
-                "InvoiceId" => $response["data"]["InvoiceId"]
+                "InvoiceId" => $comon_array["order_id"]
             );
             if( $user = selectDB("users","`id` = {$_POST["userId"]}") ){
                 $newWallet = $user[0]["wallet"] - $_POST["total"];
@@ -160,6 +159,6 @@ if( !isset($_POST) ){
         );
         echo outputError($response);
     }
-    */
+    
 }
 ?>
