@@ -98,10 +98,10 @@ if( !isset($_POST) ){
     */
     $extraMerchantData =  array(
         'amounts' => array($myacadDeposit,$newTotal),
-        'charges' => array(0.100,0),
+        'charges' => array(0.250,0),
         'chargeType' => array('fixed','fixed'),
-        'cc_charges' => array(0.100,0),
-        'cc_chargeType' => array('percentage','percentage'),
+        'cc_charges' => array(0.250,0),
+        'cc_chargeType' => array('fixed','percentage'),
         'ibans' => array("{$AdminSettings[0]["mainIban"]}","{$academyData[0]["iban"]}")
     );
     $comon_array = array(

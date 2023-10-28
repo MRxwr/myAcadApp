@@ -12,8 +12,8 @@ if( $sports = selectDB2("`id`, `enTitle`, `arTitle`, `imageurl`","sports","`hidd
     $response["sports"] = array();
 }
 
-$gendersEn = ["Man","Woman","Boy","Girl"];
-$gendersAr = ["رجل","إمرأة","ولد","بنت"];
+$gendersEn = ["Select Gender","Man","Woman","Boy","Girl"];
+$gendersAr = ["إختر الجنس","رجل","إمرأة","ولد","بنت"];
 for( $i = 0; $i < sizeof($gendersEn); $i++ ){
     $response["genders"][] = array("genderEn" => $gendersEn[$i], "genderAr" => $gendersAr[$i]);
 }
