@@ -66,7 +66,7 @@ if( !isset($_POST) ){
     if( $data["paymentMethod"] == 1 ){
         $myacadDeposit = $academyData[0]["charges"];
         $newTotal = $newTotal - $myacadDeposit;
-        $paymentGateway = "Knet ";
+        $paymentGateway = "Knet";
     }elseif( $data["paymentMethod"] == 2 ){
         $myacadDeposit = $newTotal * ( $academyData[0]["cc_charge"] / 100 );
         $newTotal = $newTotal - $myacadDeposit;
@@ -74,7 +74,7 @@ if( !isset($_POST) ){
     }else{
         $myacadDeposit = 0;
         $newTotal = $newTotal - $myacadDeposit;
-        $paymentGateway = "Knet ";
+        $paymentGateway = "Knet";
     }
     /*
     // 0 take charges with 0 commission, 1 take rest with commission
