@@ -9,11 +9,16 @@ if( !isset($_POST) ){
     $academy = $data["academy"];
     $session = $data["session"];
     $subscription = $data["subscription"];
-    $subscriptionQuantity = $data["subscriptionQuantity"];
+    $subscriptionQuantity = $data["subscriptionQuantity"]; 
     $jersyQuantity = $data["jersyQuantity"];
     $paymentMethod = $data["paymentMethod"];
 
-    if( $sessionData = selectDB("sessions","`id` = '{$session}'")){}
+    if( $sessionData = selectDB("sessions","`id` = '{$session}' AND `quantity` >= '{$subscriptionQuantity}'")){}else{
+        $response = array(
+            "msg" => 'No sessions available anymore.',
+        );
+        echo outputError($response);
+    }
     if( $userData = selectDB("users","`id` LIKE '{$user}'") ){}
     if( $academyData = selectDB("academies","`id` = '{$academy}'")){
         $jersyPrice = ( $jersyQuantity != 0 ) ? (float)$academyData[0]["clothesPrice"]*(float)$data["jersyQuantity"] : 0 ;
