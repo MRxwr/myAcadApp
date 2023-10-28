@@ -17,7 +17,7 @@ if( !isset($_POST) ){
         $response = array(
             "msg" => 'No sessions available anymore.',
         );
-        echo outputError($response);
+        echo outputError($response);die();
     }
     if( $userData = selectDB("users","`id` LIKE '{$user}'") ){}
     if( $academyData = selectDB("academies","`id` = '{$academy}'")){
