@@ -20,6 +20,7 @@ if( !isset($_POST) ){
         echo outputError($response);die();
     }
     if( $userData = selectDB("users","`id` LIKE '{$user}'") ){}
+    if( $AdminSettings = selectDB("settings","`id` = '1'") ){}
     if( $academyData = selectDB("academies","`id` = '{$academy}'")){
         $jersyPrice = ( $jersyQuantity != 0 ) ? (float)$academyData[0]["clothesPrice"]*(float)$data["jersyQuantity"] : 0 ;
     }
@@ -69,6 +70,7 @@ if( !isset($_POST) ){
         $myacadDeposit = $newTotal * ( $academyData[0]["cc_charge"] / 100 );
         $newTotal = $newTotal - $myacadDeposit;
     }
+    /*
     // 0 take charges with 0 commission, 1 take rest with commission
     $apiData = array(
         'endpoint' => 'PaymentRequestExicuteForVendorsTest',
@@ -93,14 +95,14 @@ if( !isset($_POST) ){
         'extraMerchantsData[cc_chargetype][1]' => "fixed",
         'extraMerchantsData[ibans][1]' => "{$academyData[0]["iban"]}"
     );
-
+    */
     $extraMerchantData =  array(
         'amounts' => array($myacadDeposit,$newTotal),
         'charges' => array(0.100,0),
         'chargeType' => array('fixed','fixed'),
         'cc_charges' => array(0.100,0),
         'cc_chargeType' => array('percentage','percentage'),
-        'ibans' => array('KW63KWIB0000000000262010024008',"{$academyData[0]["iban"]}")
+        'ibans' => array("{$AdminSettings[0]["mainIban"]}","{$academyData[0]["iban"]}")
     );
     $comon_array = array(
         "merchant_id"=> "24072",
@@ -131,7 +133,7 @@ if( !isset($_POST) ){
 	$server_output = curl_exec($ch);
 	curl_close ($ch);
 	$response = json_decode($server_output,true);
-        
+
     //$response = json_decode(payment($apiData),true);
     if( $response["status"] == "success" && isset($response["paymentURL"]) && !empty($response["paymentURL"]) ){
         $_POST["gatewayId"] = $comon_array["order_id"];
