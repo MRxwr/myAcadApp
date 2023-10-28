@@ -104,6 +104,7 @@
                 return true;   
               } else {
                 alert("<?php echo direction("Please choose atleast one session","الرجاء إختيار حصه واحده على الأقل") ?>");
+                return false;
               }
           });
 
