@@ -94,6 +94,45 @@ if( !isset($_POST) ){
         'extraMerchantsData[ibans][1]' => "{$academyData[0]["iban"]}"
     );
 
+    $extraMerchantData =  array(
+        'amounts' => array($myacadDeposit,$newTotal),
+        'charges' => array(0.100,0),
+        'chargeType' => array('fixed'),
+        'cc_charges' => array(0.100,0),
+        'cc_chargeType' => array('percentage'),
+        'ibans' => array('KW63KWIB0000000000262010024008',"{$academyData[0]["iban"]}")
+    );
+    $comon_array = array(
+        "merchant_id"=> "24072",
+        "username"=> "create_lwt",
+        "password"=> stripslashes('sJg@Q9N6ysvP'),
+        "api_key"=> password_hash('afmceR6nHQaIehhpOel036LBhC8hihuB8iNh9ACF',PASSWORD_BCRYPT),
+        "order_id"=> time(),
+        'total_price'=>100,
+        'success_url'=>'https://myacad.app/index.php',
+        'error_url'=>'https://myacad.app/index.php',
+        'notifyURL'=>'https://myacad.app/index.php',
+        'test_mode'=>0,
+        'CurrencyCode'=>'KWD',			
+        'CstFName'=>"{$_POST["name"]}",			
+        'Cstemail'=>"{$_POST["email"]}",
+        'CstMobile'=>"{$_POST["phone"]}",
+        'ExtraMerchantsData'=> json_encode($extraMerchantData),//Optional for multivendor API
+    );
+
+    $fields_string = http_build_query($comon_array);
+	$ch = curl_init();
+	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+	curl_setopt($ch, CURLOPT_URL,"https://api.upayments.com/payment-request");
+	curl_setopt($ch, CURLOPT_POST, 1);
+	curl_setopt($ch, CURLOPT_POSTFIELDS,$fields_string);
+	// receive server response ...
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	echo $server_output = curl_exec($ch);
+	curl_close ($ch);
+	$server_output = json_decode($server_output,true);
+    echo json_encode($comon_array);
+    /*
     $response = json_decode(payment($apiData),true);
     if( isset($response["data"]["InvoiceId"]) && !empty($response["data"]["InvoiceId"]) ){
         $_POST["gatewayId"] = $response["data"]["InvoiceId"];
@@ -121,5 +160,6 @@ if( !isset($_POST) ){
         );
         echo outputError($response);
     }
+    */
 }
 ?>
