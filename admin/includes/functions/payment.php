@@ -180,7 +180,7 @@ function payment($data){
 	  CURLOPT_CUSTOMREQUEST => 'POST',
 	  CURLOPT_POSTFIELDS => json_encode($data),
 	));
-	$response = curl_exec($curl);
+	echo $response = curl_exec($curl);
 	curl_close($curl);
 	if ( isset($response["data"]["PaymentURL"]) ){
 		$response = json_decode($response,true);
