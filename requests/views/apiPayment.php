@@ -72,7 +72,7 @@ if( !isset($_POST) ){
         $newTotal = $newTotal - $myacadDeposit;
         $paymentGateway = "cc";
     }else{
-        $myacadDeposit = 0;
+        $myacadDeposit = 1;
         $newTotal = $newTotal - $myacadDeposit;
         $paymentGateway = "Knet";
     }
