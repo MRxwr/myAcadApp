@@ -37,6 +37,7 @@ if( !isset($_POST) ){
         $wallet = 0;
     }
     $newTotal = (float)$jersyPrice+(float)$totalPrice;
+    $fullAmount = (float)$jersyPrice+(float)$totalPrice;
 
     $_POST["name"] = "{$userData[0]["firstName"]} {$userData[0]["lastName"]}";
     $_POST["phone"] = "{$userData[0]["phone"]}";
@@ -76,7 +77,7 @@ if( !isset($_POST) ){
         'CustomerName' => "{$_POST["name"]}",
         'CustomerMobile' => "{$_POST["phone"]}",
         'CustomerEmail' => "{$_POST["email"]}",
-        'invoiceValue' => "{$newTotal}",
+        'invoiceValue' => "{$fullAmount}",
         'CallBackUrl' => 'https://myacad.app/index.php',
         'ErrorUrl' => 'https://myacad.app/index.php',
         'extraMerchantsData[amounts][0]' => "{$myacadDeposit}",
@@ -84,7 +85,7 @@ if( !isset($_POST) ){
         'extraMerchantsData[chargeType][0]' => 'fixed',
         'extraMerchantsData[cc_charge][0]' => '0.100',
         'extraMerchantsData[cc_chargetype][0]' => 'fixed',
-        'extraMerchantsData[ibans][0]' => 'KW84BBYN0000000000000411888006',
+        'extraMerchantsData[ibans][0]' => 'KW63KWIB0000000000262010024008',
         'extraMerchantsData[amounts][1]' => "{$newTotal}",
         'extraMerchantsData[charges][1]' => "0",
         'extraMerchantsData[chargeType][1]' => "fixed",
