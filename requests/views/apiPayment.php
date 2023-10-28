@@ -60,6 +60,14 @@ if( !isset($_POST) ){
     $_POST["total"] = $newTotal;
     $_POST["paymentMethod"] = $paymentMethod;
 
+    // calculate totals 
+    if( $data["paymentMethod"] == 1 ){
+        $myacadDeposit = $academyData[0]["charges"];
+        $newTotal = $newTotal - $myacadDeposit;
+    }elseif( $data["paymentMethod"] == 2 ){
+        $myacadDeposit = $newTotal * ( $academyData[0]["cc_charge"] / 100 );
+        $newTotal = $newTotal - $myacadDeposit;
+    }
     // 0 take charges with 0 commission, 1 take rest with commission
     $apiData = array(
         'endpoint' => 'PaymentRequestExicuteForVendorsTest',
@@ -71,17 +79,17 @@ if( !isset($_POST) ){
         'invoiceValue' => "{$newTotal}",
         'CallBackUrl' => 'https://myacad.app/index.php',
         'ErrorUrl' => 'https://myacad.app/index.php',
-        'extraMerchantsData[amounts][0]' => "{$newTotal}",
+        'extraMerchantsData[amounts][0]' => "{$myacadDeposit}",
         'extraMerchantsData[charges][0]' => '0.250',
         'extraMerchantsData[chargeType][0]' => 'fixed',
         'extraMerchantsData[cc_charge][0]' => '0.250',
         'extraMerchantsData[cc_chargetype][0]' => 'fixed',
         'extraMerchantsData[ibans][0]' => 'KW84BBYN0000000000000411888006',
         'extraMerchantsData[amounts][1]' => "{$newTotal}",
-        'extraMerchantsData[charges][1]' => "{$academyData[0]["charges"]}",
-        'extraMerchantsData[chargeType][1]' => "{$academyData[0]["chargeType"]}",
-        'extraMerchantsData[cc_charge][1]' => "{$academyData[0]["cc_charge"]}",
-        'extraMerchantsData[cc_chargetype][1]' => "{$academyData[0]["cc_chargetype"]}",
+        'extraMerchantsData[charges][1]' => "0",
+        'extraMerchantsData[chargeType][1]' => "fixed",
+        'extraMerchantsData[cc_charge][1]' => "0",
+        'extraMerchantsData[cc_chargetype][1]' => "fixed",
         'extraMerchantsData[ibans][1]' => "{$academyData[0]["iban"]}"
     );
 
