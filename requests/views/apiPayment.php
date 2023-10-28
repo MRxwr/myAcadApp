@@ -66,12 +66,15 @@ if( !isset($_POST) ){
     if( $data["paymentMethod"] == 1 ){
         $myacadDeposit = $academyData[0]["charges"];
         $newTotal = $newTotal - $myacadDeposit;
+        $paymentGateway = "Knet ";
     }elseif( $data["paymentMethod"] == 2 ){
         $myacadDeposit = $newTotal * ( $academyData[0]["cc_charge"] / 100 );
         $newTotal = $newTotal - $myacadDeposit;
+        $paymentGateway = "cc";
     }else{
         $myacadDeposit = 0;
         $newTotal = $newTotal - $myacadDeposit;
+        $paymentGateway = "Knet ";
     }
     /*
     // 0 take charges with 0 commission, 1 take rest with commission
@@ -112,12 +115,14 @@ if( !isset($_POST) ){
         "username"=> "create_lwt",
         "password"=> stripslashes('sJg@Q9N6ysvP'),
         "api_key"=> password_hash('afmceR6nHQaIehhpOel036LBhC8hihuB8iNh9ACF',PASSWORD_BCRYPT),
+        "payment_gateway" => "{$paymentGateway}",
         "order_id"=> time(),
         'total_price'=>$fullAmount,
         'success_url'=>'https://myacad.app/index.php',
         'error_url'=>'https://myacad.app/index.php',
         'notifyURL'=>'https://myacad.app/index.php',
         'test_mode'=>0,
+        "whitelabled" => 1,
         'CurrencyCode'=>'KWD',			
         'CstFName'=>"{$_POST["name"]}",			
         'Cstemail'=>"{$_POST["email"]}",
