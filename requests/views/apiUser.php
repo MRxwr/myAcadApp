@@ -66,7 +66,7 @@ if ( isset($_GET["type"]) && !empty($_GET["type"]) ){
 			));
 			$response = curl_exec($curl);
 			curl_close($curl);
-			echo outputData(array('msg'=>json_encode($response)));
+			echo outputData(array('msg'=>"A new password has been sent to your email."));
 		}else{
 			$error = array("msg"=>"This email is not registred on our app, please enter a correct one.");
 			echo outputError($error);die();
