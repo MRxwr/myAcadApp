@@ -103,7 +103,7 @@ $redirect = ($academy["isClothes"] == 1 ) ? "Jersy" : "Checkout" ;
 											<input type='radio' {$checked} name='session' id='sty_{$i}' value='{$academy["sessions"][$i]["id"]}'>
 											<label for='sty_{$i}'><span></span>".direction($academy["sessions"][$i]["enTitle"],$academy["sessions"][$i]["arTitle"])."</label>
 										</div>
-										<input type='number' step='1' class='sty_{$i}' name='quantity[]' value='{$number}'  min='0' max='{$academy["sessions"][$i]["quantity"]}' readonly required>
+										<input type='number' step='1' class='sty_{$i}' name='quantity[]' value='{$number}'  min='0' max='{$academy["sessions"][$i]["quantity"]}' readonly>
 									</div>
 									";
 								}
@@ -129,7 +129,7 @@ $redirect = ($academy["isClothes"] == 1 ) ? "Jersy" : "Checkout" ;
                             ?>
                             </select>
 							<input type="hidden" name="id" value="<?php echo htmlspecialchars($_GET["id"]) ?>">
-							<button class="button mt_55"><?php echo direction("Choose","إختر") ?></button>
+							<button class="button mt_55" id="chooseBtn"><?php echo direction("Choose","إختر") ?></button>
                         </form>
                     </div>
                 </div>

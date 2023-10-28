@@ -90,6 +90,23 @@
                     alert('Sharing is not supported on this device/browser.');
                 }
             });
+
+            $("#chooseBtn").click(function () {
+              var allNumberInputs = $("input[type='number']");
+              var passed = false;
+              allNumberInputs.each(function () {
+                  if (parseInt($(this).val()) >= 1) {
+                      passed = true;
+                      return false; // Exit the loop early if a value >= 1 is found
+                  }
+              });
+              if (passed) {
+                return true;   
+              } else {
+                  alert("<?php echo direction("Please choose atleast one session","الرجاء إختيار حصه واحده على الأقل") ?>");
+              }
+          });
+
         });
     </script>
 
