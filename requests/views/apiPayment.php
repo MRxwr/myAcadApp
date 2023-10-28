@@ -150,8 +150,8 @@ if( !isset($_POST) ){
         $_POST["apiResponse"] = json_encode($response);
         $_POST["paymentMethod"] = ( $wallet == 1 ) ? 3 : $paymentMethod;
         $response["data"] = array(
-            "paymentURL" => $response["paymentURL"],
-            "InvoiceId"  => $comon_array["order_id"]
+            "url" => $response["paymentURL"],
+            "id"  => $comon_array["order_id"]
         );
         insertDB2("orders",$_POST);
         if( $wallet == 1 ){
