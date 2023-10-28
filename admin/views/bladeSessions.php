@@ -21,6 +21,11 @@
 			<input type="text" name="arTitle" class="form-control" required>
 			</div>
 			
+			<div class="col-md-6">
+			<label><?php echo direction("Quantity","الكمية") ?></label>
+			<input type="number" step="1" min="0" name="quantity" class="form-control" required>
+			</div>
+			
 			<div class="col-md-12" style="margin-top:10px">
 			<input type="submit" class="btn btn-primary" value="<?php echo direction("Submit","أرسل") ?>">
 			<input type="hidden" name="update" value="0">
@@ -52,6 +57,7 @@
 		<th>#</th>
 		<th><?php echo direction("English Title","العنوان بالإنجليزي") ?></th>
 		<th><?php echo direction("Arabic Title","العنوان بالعربي") ?></th>
+		<th><?php echo direction("Quantity","الكمية") ?></th>
 		<th class="text-nowrap"><?php echo direction("Actions","الخيارات") ?></th>
 		</tr>
 		</thead>
@@ -75,6 +81,7 @@
 				<td><?php echo $counter = $i + 1 ?></td>
 				<td id="enTitle<?php echo $sessions[$i]["id"]?>" ><?php echo $sessions[$i]["enTitle"] ?></td>
 				<td id="arTitle<?php echo $sessions[$i]["id"]?>" ><?php echo $sessions[$i]["arTitle"] ?></td>
+				<td id="quantity<?php echo $sessions[$i]["id"]?>" ><?php echo $sessions[$i]["quantity"] ?></td>
 				<td class="text-nowrap">
 					<a id="<?php echo $sessions[$i]["id"] ?>" class="edit btn btn-warning" data-toggle="tooltip" data-original-title="<?php echo direction("Edit","تعديل") ?>"> <i class="fa fa-pencil text-inverse m-r-10"></i>
 					</a>
@@ -102,8 +109,10 @@
 			var id = $(this).attr("id");
 			var enTitle = $("#enTitle"+id).html();
 			var arTitle = $("#arTitle"+id).html();
+			var quantity = $("#quantity"+id).html();
             $("input[name=update]").val(id);
 			$("input[name=enTitle]").val(enTitle).focus();
 			$("input[name=arTitle]").val(arTitle);
+			$("input[name=quantity]").val(quantity);
 		})
 	</script>
