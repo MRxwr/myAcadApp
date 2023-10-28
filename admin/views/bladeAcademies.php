@@ -81,10 +81,10 @@
 			<div class="col-md-4">
 			<label><?php echo direction("Gender","الجنس") ?></label>
 			<select name="gender" class="form-control" required>
-				<option value="0" ><?php echo direction("Man","رجل") ?></option>
-				<option value="1" ><?php echo direction("Woman","أنثى") ?></option>
-				<option value="2" ><?php echo direction("Boy","ولد") ?></option>
-				<option value="3" ><?php echo direction("Girl","بنت") ?></option>
+				<option value="1" ><?php echo direction("Man","رجل") ?></option>
+				<option value="2" ><?php echo direction("Woman","أنثى") ?></option>
+				<option value="3" ><?php echo direction("Boy","ولد") ?></option>
+				<option value="4" ><?php echo direction("Girl","بنت") ?></option>
 			</select>
 			</div>
 			
