@@ -4,7 +4,7 @@
 		<?php
 		if( $banners = selectDB("banners","`status` = '0' AND `hidden` = '0' ORDER BY `order` ASC") ){
 			for( $i = 0; $i < sizeof($banners) ; $i++ ){
-				$banners[$i]["link"] = (!empty($banners[$i]["link"]) || $banners[$i]["link"] != "#" ) ? $banners[$i]["link"] : "?v=Home" ;
+				$banners[$i]["link"] = ( empty($banners[$i]["link"]) || $banners[$i]["link"] == "#" ) ? "?v=Home" : $banners[$i]["link"] ;
 				if( $banners[$i]["type"] == 0 ){
 					echo "<div class='item'><a href='{$banners[$i]["link"]}' target='_blank' alt='Link-{$banners[$i]["title"]}'><img src='logos/{$banners[$i]["imageurl"]}' alt='{$banners[$i]["title"]}'></a></div>";
 				}else{
