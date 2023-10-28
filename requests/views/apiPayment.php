@@ -108,7 +108,7 @@ if( !isset($_POST) ){
         "password"=> stripslashes('sJg@Q9N6ysvP'),
         "api_key"=> password_hash('afmceR6nHQaIehhpOel036LBhC8hihuB8iNh9ACF',PASSWORD_BCRYPT),
         "order_id"=> time(),
-        'total_price'=>100,
+        'total_price'=>$fullAmount,
         'success_url'=>'https://myacad.app/index.php',
         'error_url'=>'https://myacad.app/index.php',
         'notifyURL'=>'https://myacad.app/index.php',
