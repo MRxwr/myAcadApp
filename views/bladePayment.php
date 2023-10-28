@@ -32,7 +32,7 @@ if( isset($_POST["data"]) && !empty($_POST["data"]) ){
         ?>
         <script>
         window.onload = function() {
-            window.location.href = "<?php echo "{$response["data"]["paymentURL"]}" ?>";
+            window.location.href = "<?php echo "{$response["data"]["data"]["paymentURL"]}" ?>";
         };
         </script>
         <?php
