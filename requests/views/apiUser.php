@@ -48,7 +48,7 @@ if ( isset($_GET["type"]) && !empty($_GET["type"]) ){
 			updateDB('users',array("password"=>sha1($random)),"`email` LIKE '".$_GET["email"]."'");
 			$curl = curl_init();
 			curl_setopt_array($curl, array(
-			  CURLOPT_URL => 'myid.createid.link/api/v1/send/notify',
+			  CURLOPT_URL => 'https://createid.link/api/v1/send/notify',
 			  CURLOPT_RETURNTRANSFER => true,
 			  CURLOPT_ENCODING => '',
 			  CURLOPT_MAXREDIRS => 10,
