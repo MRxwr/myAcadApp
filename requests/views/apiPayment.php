@@ -156,8 +156,8 @@ if( !isset($_POST) ){
         insertDB2("orders",$_POST);
         if( $wallet == 1 ){
             $array["data"] = array(
-                "paymentURL" => "index.php?v=Success&OrderID={$_POST["gatewayId"]}",
-                "InvoiceId" => $comon_array["order_id"]
+                "url" => "index.php?v=Success&OrderID={$_POST["gatewayId"]}",
+                "id" => $comon_array["order_id"]
             );
             if( $user = selectDB("users","`id` = {$_POST["userId"]}") ){
                 $newWallet = $user[0]["wallet"] - $_POST["total"];
