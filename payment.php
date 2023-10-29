@@ -25,14 +25,14 @@ if( isset($_POST["data"]) && !empty($_POST["data"]) ){
         'myacadheader: myAcadAppCreate'
       ),
     ));
-    var_dump($response = curl_exec($curl));
+    $response = curl_exec($curl);
     curl_close($curl);
     $response = json_decode($response,true);
     if( $response["error"] == 0 ){
         ?>
         <script>
         window.onload = function() {
-            window.location.href = "<?php echo "{$response["data"]["paymentURL"]}" ?>";
+            window.location.href = "<?php echo "{$response["data"]["data"]["paymentURL"]}" ?>";
         };
         </script>
         <?php
