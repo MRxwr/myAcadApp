@@ -149,13 +149,13 @@ if( !isset($_POST) ){
         $_POST["apiPayload"] = json_encode($comon_array);
         $_POST["apiResponse"] = json_encode($response);
         $_POST["paymentMethod"] = ( $wallet == 1 ) ? 3 : $paymentMethod;
-        $response["data"] = array(
+        $response = array(
             "paymentURL" => $response["paymentURL"],
             "InvoiceId"  => $comon_array["order_id"]
         );
         insertDB2("orders",$_POST);
         if( $wallet == 1 ){
-            $array["data"] = array(
+            $array = array(
                 "paymentURL" => "index.php?v=Success&OrderID={$_POST["gatewayId"]}",
                 "InvoiceId" => $comon_array["order_id"]
             );
