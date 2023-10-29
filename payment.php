@@ -26,7 +26,7 @@ if( isset($_POST["data"]) && !empty($_POST["data"]) ){
       ),
     ));
     $response = curl_exec($curl);
-    curl_close($curl);
+    echo curl_close($curl);
     $response = json_decode($response,true);
     if( $response["error"] == 0 ){
         ?>
