@@ -122,16 +122,6 @@
 				}else{
 					$academy = "";
 				}
-
-                if( $vouchers[$i]["typeOfVoucher"] == 0 ){
-                    $typeOfVoucher = direction("Invoice Total","مجموع القاتوره");
-                }elseif( $vouchers[$i]["typeOfVoucher"] == 1 ){
-                    $typeOfVoucher = direction("Subscription Only","الإشتراك فقط");
-                }elseif( $vouchers[$i]["typeOfVoucher"] == 2 ){
-                    $typeOfVoucher = direction("Subscription Double Discount Only","الخصم المضاعف للإشتراك فقط");
-                }else{
-                    $typeOfVoucher = direction("Invoice Total Discount","الخصم المضاعف لمجموع الفاتوره");
-                }
 				
 				?>
 				<tr>
@@ -143,7 +133,6 @@
 				<td><?php echo $academy ?></td>
                 <td id="startDate<?php echo $vouchers[$i]["id"]?>" ><?php echo substr($vouchers[$i]["startDate"],0,10) ?></td>
 				<td id="endDate<?php echo $vouchers[$i]["id"]?>" ><?php echo substr($vouchers[$i]["endDate"],0,10) ?></td>
-				<td><?php echo $typeOfVoucher ?></td>
 				<td class="text-nowrap">
 				
 				<a id="<?php echo $vouchers[$i]["id"] ?>" class="edit btn btn-warning" data-toggle="tooltip" data-original-title="<?php echo direction("Edit","تعديل")  ?>"> <i class="fa fa-pencil text-inverse m-r-10"></i>
