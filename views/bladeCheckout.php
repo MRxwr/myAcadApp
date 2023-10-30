@@ -158,3 +158,10 @@ $checkout = json_encode($_POST, JSON_UNESCAPED_UNICODE);
         </div>
     </div>
 </div>
+
+<script>
+    $(document).on("click","#voucherBtn", function(){
+		var voucher = $("input[name=voucher]").val();
+        alert(voucher);
+	})
+</script>
