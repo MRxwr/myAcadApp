@@ -26,7 +26,7 @@ if( !isset($_POST) ){
         }elseif( $voucher[0]["numberOfTimes"] == 0 ){
             $numberOfTimesAvalability = true;
         }elseif( $voucher[0]["numberOfTimes"] != 0 ){
-            if( $orders = selectDB("orders","`voucher` = '{$voucher}'")){
+            if( $orders = selectDB("orders","`voucher` = '{$voucher[0]["id"]}'")){
                 $numberOfUsage = sizeof($orders);
                 if( $voucher[0]["numberOfTimes"] > $numberOfUsage ){
                     $numberOfTimesAvalability = true;
