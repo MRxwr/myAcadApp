@@ -40,9 +40,9 @@ if( isset($_POST["code"]) && !empty($_POST["code"]) && $voucher = selectDB("vouc
     }elseif( $voucher[0]["academyId"] == 0 ){
         $academyAprroved = true;
     }elseif( $numberOfTimesAvalability && $academyAprroved ){
-            $voucherType = ($voucher[0]["type"] == 0) ? 0 : 1;
+            /*$voucherType = ($voucher[0]["type"] == 0) ? 0 : 1;
             $voucherAmount = $voucher[0]["amount"];
-            $newTotal = ( $voucherType == 0 ) ? ($_POST["total"]*(1-($voucherAmount/100))) : $_POST["total"] - $voucherAmount;
+            $newTotal = ( $voucherType == 0 ) ? ($_POST["total"]*(1-($voucherAmount/100))) : $_POST["total"] - $voucherAmount;*/
             $array = array(
                 "msg" => "Voucher has been applied sucessfully",
                 "msgAr" => "تم تطبيق كود الخصم بنجاح",
