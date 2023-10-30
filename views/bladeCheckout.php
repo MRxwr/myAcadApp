@@ -121,10 +121,10 @@ $checkout = json_encode($_POST, JSON_UNESCAPED_UNICODE);
                     <div class="col-lg-5 order-lg-1 mt_40">
                         <div class="row">
                             <div class="col-6">
-                                <input type="text" name="voucher" value=''>
+                                <input type="text" class="form-control" name="voucher" value=''>
                             </div>
                             <div class="col-6">
-                                <div class="button" id="voucherBtn"><?php echo direction("APPLY","أرسل") ?></div>
+                                <div class="btn btn-default" id="voucherBtn"><?php echo direction("APPLY","أرسل") ?></div>
                             </div>
                         </div>
                         <div class="check_out">
