@@ -36,7 +36,7 @@ if( isset($_POST["code"]) && !empty($_POST["code"]) && $voucher = selectDB("vouc
     }
     
     if( $voucher[0]["academyId"] != 0 ){
-        if( $voucher[0]["academyId"] == $academy ){
+        if( $voucher[0]["academyId"] == $_POST["academyId"] ){
             $academyAprroved = true;
         }else{
             $academyAprroved = false;
