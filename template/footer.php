@@ -88,6 +88,7 @@
           $.ajax(settings).done(function (response) {
             var parsedResponse = JSON.parse(response);
             $("#shownTotal").html(parsedResponse.data.newTotal + "KD");
+            $("input[name=voucher]").val(voucher);
             alert(parsedResponse.data.msg);
           });
 
