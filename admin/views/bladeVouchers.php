@@ -114,7 +114,7 @@
 					$link = "?v={$_GET["v"]}&hide={$vouchers[$i]["id"]}";
 					$hide = direction("Lock","قفل الكود");
 				}
-				$type = ( $vouchers[$i]["academyId"] == 0 ) ? direction("Percentage","نسبة مؤوية") : direction("Fixed","قيمة ثابته") ;
+				$type = ( $vouchers[$i]["type"] == 0 ) ? direction("Percentage","نسبة مؤوية") : direction("Fixed","قيمة ثابته") ;
 				if( $academy = selectDB("academies","`id` = '{$vouchers[$i]["academyId"]}'") ){
 					$academy = direction($academy[0]["enTitle"],$academy[0]["arTitle"]);
 				}else{
