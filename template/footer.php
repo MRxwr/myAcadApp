@@ -66,7 +66,7 @@
           var voucher = $("#appliedVoucher").val();
           var total = $("#total").val();
           var academy = $("#academy").val();
-
+          alert(voucher+" "+total+" "+academy);
           var form = new FormData();
           form.append("code", voucher);
           form.append("total", total);
