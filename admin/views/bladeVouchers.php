@@ -165,8 +165,9 @@
 				</a>
 				<div style="display:none">
 					<label id="type<?php echo $vouchers[$i]["id"]?>"><?php echo $vouchers[$i]["type"] ?></label>
-					<label id="academy<?php echo $vouchers[$i]["id"]?>"><?php echo $vouchers[$i]["academyId"] ?></label></div>				
-					<label id="typeOfVoucher<?php echo $vouchers[$i]["id"]?>"><?php echo $vouchers[$i]["typeOfVoucher"] ?></label></div>				
+					<label id="academy<?php echo $vouchers[$i]["id"]?>"><?php echo $vouchers[$i]["academyId"] ?></label>			
+					<label id="typeOfVoucher<?php echo $vouchers[$i]["id"]?>"><?php echo $vouchers[$i]["typeOfVoucher"] ?></label>
+                </div>				
 				</td>
 				</tr>
 				<?php
