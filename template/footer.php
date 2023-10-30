@@ -88,8 +88,6 @@
           $.ajax(settings).done(function (response) {
             console.log(response);
             var data = response.data;
-            $("#shownTotal").html(data.newTotal + "KD");
-            alert(data.msg);
           });
 
         })
