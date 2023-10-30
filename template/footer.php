@@ -86,8 +86,9 @@
           };
 
           $.ajax(settings).done(function (response) {
-            $("#shownTotal").html(response.data.newTotal + "KD");
-            alert(response.data.msg);
+            var data = response.data;
+            $("#shownTotal").html(data.newTotal + "KD");
+            alert(data.msg);
           });
 
         })
