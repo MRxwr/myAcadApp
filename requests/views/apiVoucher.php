@@ -1,9 +1,13 @@
 <?php 
 $numberOfTimesAvalability = false;
 $academyAprroved = false;
+$dateApproved = false;
 if( isset($_POST["code"]) && !empty($_POST["code"]) && $voucher = selectDB("vouchers","`code` = '{$_POST["code"]}' AND `hidden` = '0' AND `status` = '0'")){
-    echo date("Y-m-d");
-    if( (strtotime(substr($voucher[0]["startDate"],0,10)) <= strtotime(date("Y-m-d"))) && (strtotime(substr($voucher[0]["endDate"],0,10)) >= strtotime(date("Y-m-d"))) ){
+    $currentDate = date("Y-m-d");
+    echo $currentDate;
+    if( (substr($voucher[0]["startDate"],0,10) <= $currentDate) && (substr($voucher[0]["endDate"],0,10) >= $currentDate) ){
+        $dateApproved = true;
+    }else{
         $response = array(
             "msg" => 'voucher has been expired.',
             "msgAr" => 'كود خصم منتهي الصلاحية',
@@ -46,7 +50,7 @@ if( isset($_POST["code"]) && !empty($_POST["code"]) && $voucher = selectDB("vouc
         $academyAprroved = true;
     }
     
-    if( $numberOfTimesAvalability && $academyAprroved ){
+    if( $numberOfTimesAvalability && $academyAprroved && $dateApproved ){
             $voucherType = ($voucher[0]["type"] == 0) ? 0 : 1;
             $voucherAmount = $voucher[0]["amount"];
             $newTotal = ( $voucherType == 0 ) ? ($_POST["total"]*(1-($voucherAmount/100))) : $_POST["total"] - $voucherAmount;
