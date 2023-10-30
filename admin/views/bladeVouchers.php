@@ -129,8 +129,8 @@
 				<td id="amount<?php echo $vouchers[$i]["id"]?>" ><?php echo $vouchers[$i]["amount"] ?></td>
 				<td><?php echo $type ?></td>
 				<td><?php echo $academy ?></td>
-                <td id="startDate<?php echo $vouchers[$i]["id"]?>" ><?php echo $vouchers[$i]["startDate"] ?></td>
-				<td id="endDate<?php echo $vouchers[$i]["id"]?>" ><?php echo $vouchers[$i]["endDate"] ?></td>
+                <td id="startDate<?php echo $vouchers[$i]["id"]?>" ><?php echo substr($vouchers[$i]["startDate"],0,10) ?></td>
+				<td id="endDate<?php echo $vouchers[$i]["id"]?>" ><?php echo substr($vouchers[$i]["endDate"],0,10) ?></td>
 				<td class="text-nowrap">
 				
 				<a id="<?php echo $vouchers[$i]["id"] ?>" class="edit btn btn-warning" data-toggle="tooltip" data-original-title="<?php echo direction("Edit","تعديل")  ?>"> <i class="fa fa-pencil text-inverse m-r-10"></i>
