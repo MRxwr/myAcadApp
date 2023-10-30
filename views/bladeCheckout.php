@@ -119,12 +119,12 @@ $checkout = json_encode($_POST, JSON_UNESCAPED_UNICODE);
                         </div>
                     </div>
                     <div class="col-lg-5 order-lg-1 mt_40">
-                        <div class="row">
+                        <div class="row mb-5">
                             <div class="col-6">
-                                <input type="text" class="form-control" name="voucher" value=''>
+                                <input type="text" class="form-control" name="voucher" value='' style="height: 50px;font-size: 20px;font-weight: 600;" placeholder="Voucher Code">
                             </div>
-                            <div class="col-6">
-                                <div class="btn btn-default" id="voucherBtn"><?php echo direction("APPLY","أرسل") ?></div>
+                            <div class="col-6" style="align-self: center;">
+                                <div class="btn btn-default" id="voucherBtn" style="width: 100%;font-size: 25px;font-weight: 600;"><?php echo direction("APPLY","أرسل") ?></div>
                             </div>
                         </div>
                         <div class="check_out">
