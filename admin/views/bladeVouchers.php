@@ -10,6 +10,17 @@
 <div class="panel-body">
 	<form class="" method="POST" action="?v=<?php echo $_GET["v"] ?>" enctype="multipart/form-data">
 		<div class="row m-0">
+
+            <div class="col-md-12">
+			<label><?php echo direction("Type of Voucher","نوع كود الخصم") ?></label>
+			<select name="typeOfVoucher" class="form-control">
+                <option value='0'><?php echo direction("Invoice Total","مجموع القاتوره") ?></option>
+                <option value='1'><?php echo direction("Subscription Only","الإشتراك فقط") ?></option>
+                <option value='2'><?php echo direction("Subscription Double Discount Only","الخصم المضاعف للإشتراك فقط") ?></option>
+                <option value='3'><?php echo direction("Invoice Total Discount","الخصم المضاعف لمجموع الفاتوره") ?></option>
+			</select>
+			</div>
+
 			<div class="col-md-4">
 			<label><?php echo direction("Title","عنوان") ?></label>
 			<input type="text" name="title" class="form-control" required>
