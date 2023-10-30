@@ -12,7 +12,7 @@
 		<div class="row m-0">
 
             <div class="col-md-12">
-			<label><?php echo direction("Type of Voucher","نوع كود الخصم") ?></label>
+			<label><?php echo direction("Voucher Type","نوع كود الخصم") ?></label>
 			<select name="typeOfVoucher" class="form-control">
                 <option value='0'><?php echo direction("Invoice Total","مجموع القاتوره") ?></option>
                 <option value='1'><?php echo direction("Subscription Only","الإشتراك فقط") ?></option>
@@ -107,6 +107,7 @@
 		<th><?php echo direction("Academy","الأكادمية") ?></th>
 		<th><?php echo direction("Start Date","تاريخ البداية") ?></th>
 		<th><?php echo direction("End Date","تاريخ الإنتهاء") ?></th>
+		<th><?php echo direction("Voucher Type","نوع كود الخصم") ?></th>
 		<th class="text-nowrap"><?php echo direction("Actions","الخيارات") ?></th>
 		</tr>
 		</thead>
@@ -115,7 +116,6 @@
 		<?php 
 		if( $vouchers = selectDB("vouchers","`status` = '0' AND `hidden` != '2'") ){
 			for( $i = 0; $i < sizeof($vouchers); $i++ ){
-				$counter = $i + 1;
 				if ( $vouchers[$i]["hidden"] == 1 ){
 					$icon = "fa fa-unlock";
 					$link = "?v={$_GET["v"]}&show={$vouchers[$i]["id"]}";
@@ -125,12 +125,24 @@
 					$link = "?v={$_GET["v"]}&hide={$vouchers[$i]["id"]}";
 					$hide = direction("Lock","قفل الكود");
 				}
+
 				$type = ( $vouchers[$i]["type"] == 0 ) ? direction("Percentage","نسبة مؤوية") : direction("Fixed","قيمة ثابته") ;
+
 				if( $academy = selectDB("academies","`id` = '{$vouchers[$i]["academyId"]}'") ){
 					$academy = direction($academy[0]["enTitle"],$academy[0]["arTitle"]);
 				}else{
 					$academy = "";
 				}
+
+                if( $vouchers[$i]["typeOfVoucher"] == 0 ){
+                    $typeOfVoucher = direction("Invoice Total","مجموع القاتوره");
+                }elseif( $vouchers[$i]["typeOfVoucher"] == 1 ){
+                    $typeOfVoucher = direction("Subscription Only","الإشتراك فقط");
+                }elseif( $vouchers[$i]["typeOfVoucher"] == 2 ){
+                    $typeOfVoucher = direction("Subscription Double Discount Only","الخصم المضاعف للإشتراك فقط");
+                }else{
+                    $typeOfVoucher = direction("Invoice Total Discount","الخصم المضاعف لمجموع الفاتوره");
+                }
 				
 				?>
 				<tr>
@@ -142,6 +154,7 @@
 				<td><?php echo $academy ?></td>
                 <td id="startDate<?php echo $vouchers[$i]["id"]?>" ><?php echo substr($vouchers[$i]["startDate"],0,10) ?></td>
 				<td id="endDate<?php echo $vouchers[$i]["id"]?>" ><?php echo substr($vouchers[$i]["endDate"],0,10) ?></td>
+				<td><?php echo $typeOfVoucher ?></td>
 				<td class="text-nowrap">
 				
 				<a id="<?php echo $vouchers[$i]["id"] ?>" class="edit btn btn-warning" data-toggle="tooltip" data-original-title="<?php echo direction("Edit","تعديل")  ?>"> <i class="fa fa-pencil text-inverse m-r-10"></i>
@@ -153,6 +166,7 @@
 				<div style="display:none">
 					<label id="type<?php echo $vouchers[$i]["id"]?>"><?php echo $vouchers[$i]["type"] ?></label>
 					<label id="academy<?php echo $vouchers[$i]["id"]?>"><?php echo $vouchers[$i]["academyId"] ?></label></div>				
+					<label id="typeOfVoucher<?php echo $vouchers[$i]["id"]?>"><?php echo $vouchers[$i]["typeOfVoucher"] ?></label></div>				
 				</td>
 				</tr>
 				<?php
@@ -185,6 +199,7 @@
 		var amount = $("#amount"+id).html();
 		var type = $("#type"+id).html();
 		var academy = $("#academy"+id).html();
+		var typeOfVoucher = $("#typeOfVoucher"+id).html();
         $("input[name=update]").val(id);
 		$("input[name=code]").val(code);
 		$("input[name=numberOfTimes]").val(numberOfTimes);
@@ -193,6 +208,7 @@
 		$("input[name=endDate]").val(endDate);
 		$("input[name=title]").val(title);
 		$("select[name=type]").val(type);
+		$("select[name=typeOfVoucher]").val(typeOfVoucher);
 		$("select[name=academyId]").val(academy).trigger('change');;
         $("input[name=title]").focus();
 	})
