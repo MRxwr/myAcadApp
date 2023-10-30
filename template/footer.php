@@ -73,7 +73,7 @@
           form.append("academyId", academy);
 
           var settings = {
-            "url": "https://myacad.app/requests?a=Voucher",
+            "url": "https://myacad.app/requests/index.php?a=Voucher",
             "method": "POST",
             "timeout": 0,
             "headers": {
