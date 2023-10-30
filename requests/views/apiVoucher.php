@@ -3,7 +3,7 @@ $numberOfTimesAvalability = false;
 $academyAprroved = false;
 if( isset($_POST["code"]) && !empty($_POST["code"]) && $voucher = selectDB("vouchers","`code` = '{$_POST["code"]}' AND `hidden` = '0' AND `status` = '0'")){
     echo date("Y-m-d");
-    if( (substr($voucher[0]["startDate"],0,10) <= date("Y-m-d")) && (substr($voucher[0]["endDate"],0,10) >= date("Y-m-d")) ){
+    if( (strtotime(substr($voucher[0]["startDate"],0,10)) <= strtotime(date("Y-m-d"))) && (strtotime(substr($voucher[0]["endDate"],0,10)) >= strtotime(date("Y-m-d"))) ){
         $response = array(
             "msg" => 'voucher has been expired.',
             "msgAr" => 'كود خصم منتهي الصلاحية',
