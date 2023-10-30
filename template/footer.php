@@ -86,9 +86,8 @@
           };
 
           $.ajax(settings).done(function (response) {
-            var jsonString = JSON.stringify(response);
-            $("#shownTotal").html(jsonString["data"]["newTotal"]+"KD");
-            alert(jsonString["data"]["msg"]);
+            $("#shownTotal").html(response.data.newTotal + "KD");
+            alert(response.data.msg);
           });
 
         })
