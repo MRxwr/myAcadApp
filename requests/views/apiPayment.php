@@ -12,33 +12,108 @@ if( !isset($_POST) ){
     $subscriptionQuantity = $data["subscriptionQuantity"]; 
     $jersyQuantity = $data["jersyQuantity"];
     $paymentMethod = $data["paymentMethod"];
+    $voucher = $data["voucher"];
+    
+    //checking voucher
+    $numberOfTimesAvalability = false;
+    $academyAprroved = false;
+    if( isset($voucher) && !empty($voucher) && $voucher = selectDB("vouchers","`code` = '{$data["voucher"]}' AND `hidden` = '0' AND `status` = '0'")){
+        if( substr($voucher[0]["endDate"],0,10) > date("Y:m:d") ){
+            $response = array(
+                "msg" => 'voucher has been expired.',
+            );
+            echo outputError($response);die();
+        }elseif( $voucher[0]["numberOfTimes"] == 0 ){
+            $numberOfTimesAvalability = true;
+        }elseif( $voucher[0]["numberOfTimes"] != 0 ){
+            if( $orders = selectDB("orders","`voucher` = '{$voucher}'")){
+                $numberOfUsage = sizeof($orders);
+                if( $voucher[0]["numberOfTimes"] > $numberOfUsage ){
+                    $numberOfTimesAvalability = true;
+                }else{
+                    $numberOfTimesAvalability = false;
+                    $response = array(
+                        "msg" => 'voucher has been fully used.',
+                    );
+                    echo outputError($response);die();
+                }
+            }else{
+                $numberOfTimesAvalability = true;
+            }
+        }elseif( $voucher[0]["academyId"] != 0 ){
+            if( $voucher[0]["academyId"] == $academy ){
+                $academyAprroved = true;
+            }else{
+                $academyAprroved = false;
+                $response = array(
+                    "msg" => 'voucher is not valid for this academy.',
+                );
+                echo outputError($response);die();
+            }
+        }elseif( $voucher[0]["academyId"] == 0 ){
+            $academyAprroved = true;
+        }elseif( $numberOfTimesAvalability && $academyAprroved ){
+                $voucherType = ($voucher[0]["type"] == 0) ? 0 : 1;
+                $voucherAmount = $voucher[0]["amount"];
+        }else{
+            $response = array(
+                "msg" => 'voucher is not valid anymore.',
+            );
+            echo outputError($response);die();
+        }
+    }else{
+        $response = array(
+            "msg" => 'voucher does not exist.',
+        );
+        echo outputError($response);die();
+    }
 
+    //checking session information
     if( $sessionData = selectDB("sessions","`id` = '{$session}' AND `quantity` >= '{$subscriptionQuantity}'")){}else{
         $response = array(
             "msg" => 'No sessions available anymore.',
         );
         echo outputError($response);die();
     }
+
+    // checking user data
     if( $userData = selectDB("users","`id` LIKE '{$user}'") ){}
+
+    //checking adamin settings for main IBAN
     if( $AdminSettings = selectDB("settings","`id` = '1'") ){}
+
+    //checking jersy Inforamtion
     if( $academyData = selectDB("academies","`id` = '{$academy}'")){
         $jersyPrice = ( $jersyQuantity != 0 ) ? (float)$academyData[0]["clothesPrice"]*(float)$data["jersyQuantity"] : 0 ;
     }
+
+    //checking subscription information
     if( $subscriptionData = selectDB("subscriptions","`id` = '{$subscription}'")){
         $price = ($subscriptionData[0]["priceAfterDiscount"] != 0 ) ? $subscriptionData[0]["priceAfterDiscount"] : $subscriptionData[0]["price"] ;
+        if( $numberOfTimesAvalability && $academyAprroved ){
+            $price = $subscriptionData[0]["price"];
+        }
         $totalPrice = (float)$price*(float)$subscriptionQuantity;
     }else{
         $totalPrice = 0;
         $price = 0;
     }
+
+    //checking payment method
     if( $paymentMethod == 3 ){
         $paymentMethod = 1;
         $wallet = 1;
     }else{
         $wallet = 0;
     }
+
+    //calulation of total prices
     $newTotal = (float)$jersyPrice+(float)$totalPrice;
     $fullAmount = (float)$jersyPrice+(float)$totalPrice;
+    if( $numberOfTimesAvalability && $academyAprroved ){
+        $newTotal = ( $voucherType == 0 ) ? ($newTotal*(1-($voucherAmount/100))) : $newTotal - $voucherAmount;
+        $fullAmount = ( $voucherType == 0 ) ? ($fullAmount*(1-($voucherAmount/100))) : $fullAmount - $voucherAmount;
+    }
 
     $_POST["name"] = "{$userData[0]["firstName"]} {$userData[0]["lastName"]}";
     $_POST["phone"] = "{$userData[0]["phone"]}";
@@ -62,7 +137,7 @@ if( !isset($_POST) ){
     $_POST["total"] = $newTotal;
     $_POST["paymentMethod"] = $paymentMethod;
 
-    // calculate totals 
+    //calculate totals prices that should be sent to upayments 
     if( $data["paymentMethod"] == 1 ){
         $myacadDeposit = $academyData[0]["charges"];
         $newTotal = $newTotal - $myacadDeposit;
@@ -76,32 +151,8 @@ if( !isset($_POST) ){
         $newTotal = $newTotal - $myacadDeposit;
         $paymentGateway = "Knet";
     }
-    /*
-    // 0 take charges with 0 commission, 1 take rest with commission
-    $apiData = array(
-        'endpoint' => 'PaymentRequestExicuteForVendorsTest',
-        'apikey' => 'CKW-1623165837-1075',
-        'PaymentMethodId' => "{$paymentMethod}",
-        'CustomerName' => "{$_POST["name"]}",
-        'CustomerMobile' => "{$_POST["phone"]}",
-        'CustomerEmail' => "{$_POST["email"]}",
-        'invoiceValue' => "{$fullAmount}",
-        'CallBackUrl' => 'https://myacad.app/index.php',
-        'ErrorUrl' => 'https://myacad.app/index.php',
-        'extraMerchantsData[amounts][0]' => "{$myacadDeposit}",
-        'extraMerchantsData[charges][0]' => '0.100',
-        'extraMerchantsData[chargeType][0]' => 'fixed',
-        'extraMerchantsData[cc_charge][0]' => '0.100',
-        'extraMerchantsData[cc_chargetype][0]' => 'fixed',
-        'extraMerchantsData[ibans][0]' => 'KW63KWIB0000000000262010024008',
-        'extraMerchantsData[amounts][1]' => "{$newTotal}",
-        'extraMerchantsData[charges][1]' => "0",
-        'extraMerchantsData[chargeType][1]' => "fixed",
-        'extraMerchantsData[cc_charge][1]' => "0",
-        'extraMerchantsData[cc_chargetype][1]' => "fixed",
-        'extraMerchantsData[ibans][1]' => "{$academyData[0]["iban"]}"
-    );
-    */
+
+    //preparing upayment payload
     $extraMerchantData =  array(
         'amounts' => array($myacadDeposit,$newTotal),
         'charges' => array(0.250,0),
@@ -142,7 +193,7 @@ if( !isset($_POST) ){
 	curl_close ($ch);
 	$response = json_decode($server_output,true);
 
-    //$response = json_decode(payment($apiData),true);
+    //saving info and redirecting to payment pages
     if( $response["status"] == "success" && isset($response["paymentURL"]) && !empty($response["paymentURL"]) ){
         $_POST["gatewayId"] = $comon_array["order_id"];
         $_POST["gatewayURL"] = $response["paymentURL"];

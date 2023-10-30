@@ -8,6 +8,7 @@ if( isset($_POST["data"]) && !empty($_POST["data"]) ){
         'subscription' => "{$incommingData["subscription"]}",
         'subscriptionQuantity' => "{$incommingData["subscriptionQuantity"]}",
         'jersyQuantity' => "{$incommingData["jersyQuantity"]}",
+        'voucher' => "{$_POST["voucher"]}",
         'paymentMethod' => "{$_POST["paymentMethod"]}"
     );
     $curl = curl_init();

@@ -11,16 +11,6 @@
 	<form class="" method="POST" action="?v=<?php echo $_GET["v"] ?>" enctype="multipart/form-data">
 		<div class="row m-0">
 
-            <div class="col-md-12">
-			<label><?php echo direction("Voucher Type","نوع كود الخصم") ?></label>
-			<select name="typeOfVoucher" class="form-control">
-                <option value='0'><?php echo direction("Invoice Total","مجموع القاتوره") ?></option>
-                <option value='1'><?php echo direction("Subscription Only","الإشتراك فقط") ?></option>
-                <option value='2'><?php echo direction("Subscription Double Discount Only","الخصم المضاعف للإشتراك فقط") ?></option>
-                <option value='3'><?php echo direction("Invoice Total Discount","الخصم المضاعف لمجموع الفاتوره") ?></option>
-			</select>
-			</div>
-
 			<div class="col-md-4">
 			<label><?php echo direction("Title","عنوان") ?></label>
 			<input type="text" name="title" class="form-control" required>
@@ -107,7 +97,6 @@
 		<th><?php echo direction("Academy","الأكادمية") ?></th>
 		<th><?php echo direction("Start Date","تاريخ البداية") ?></th>
 		<th><?php echo direction("End Date","تاريخ الإنتهاء") ?></th>
-		<th><?php echo direction("Voucher Type","نوع كود الخصم") ?></th>
 		<th class="text-nowrap"><?php echo direction("Actions","الخيارات") ?></th>
 		</tr>
 		</thead>
@@ -166,7 +155,6 @@
 				<div style="display:none">
 					<label id="type<?php echo $vouchers[$i]["id"]?>"><?php echo $vouchers[$i]["type"] ?></label>
 					<label id="academy<?php echo $vouchers[$i]["id"]?>"><?php echo $vouchers[$i]["academyId"] ?></label>			
-					<label id="typeOfVoucher<?php echo $vouchers[$i]["id"]?>"><?php echo $vouchers[$i]["typeOfVoucher"] ?></label>
                 </div>				
 				</td>
 				</tr>
@@ -200,7 +188,6 @@
 		var amount = $("#amount"+id).html();
 		var type = $("#type"+id).html();
 		var academy = $("#academy"+id).html();
-		var typeOfVoucher = $("#typeOfVoucher"+id).html();
         $("input[name=update]").val(id);
 		$("input[name=code]").val(code);
 		$("input[name=numberOfTimes]").val(numberOfTimes);
@@ -209,7 +196,6 @@
 		$("input[name=endDate]").val(endDate);
 		$("input[name=title]").val(title);
 		$("select[name=type]").val(type);
-		$("select[name=typeOfVoucher]").val(typeOfVoucher);
 		$("select[name=academyId]").val(academy).trigger('change');;
         $("input[name=title]").focus();
 	})
