@@ -4,7 +4,6 @@ $academyAprroved = false;
 $dateApproved = false;
 if( isset($_POST["code"]) && !empty($_POST["code"]) && $voucher = selectDB("vouchers","`code` = '{$_POST["code"]}' AND `hidden` = '0' AND `status` = '0'")){
     $currentDate = date("Y-m-d");
-    echo $currentDate;
     if( (substr($voucher[0]["startDate"],0,10) <= $currentDate) && (substr($voucher[0]["endDate"],0,10) >= $currentDate) ){
         $dateApproved = true;
     }else{
