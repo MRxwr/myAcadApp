@@ -170,6 +170,7 @@
 		var numberOfTimes = $("#numberOfTimes"+id).html();
 		var amount = $("#amount"+id).html();
 		var startDate = $("#startDate"+id).html();
+		var endDate = $("#endDate"+id).html();
 		var amount = $("#amount"+id).html();
 		var type = $("#type"+id).html();
 		var academy = $("#academy"+id).html();
