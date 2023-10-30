@@ -86,8 +86,9 @@
           };
 
           $.ajax(settings).done(function (response) {
-            console.log(response);
-            var data = response.data;
+            var parsedResponse = JSON.parse(response);
+            $("#shownTotal").html(parsedResponse.data.newTotal + "KD");
+            alert(parsedResponse.data.msg);
           });
 
         })
