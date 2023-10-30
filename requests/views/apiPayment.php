@@ -17,13 +17,14 @@ if( !isset($_POST) ){
     //checking voucher
     $numberOfTimesAvalability = false;
     $academyAprroved = false;
+    $dateApproved = false;
     if( isset($voucher) && !empty($voucher) && $voucher = selectDB("vouchers","`code` = '{$data["voucher"]}' AND `hidden` = '0' AND `status` = '0'")){
-        if( substr($voucher[0]["endDate"],0,10) > date("Y:m:d") ){
-            $response = array(
-                "msg" => 'voucher has been expired.',
-            );
-            echo outputError($response);die();
-        }elseif( $voucher[0]["numberOfTimes"] == 0 ){
+        $currentDate = date("Y-m-d");
+        if( (substr($voucher[0]["startDate"],0,10) <= $currentDate) && (substr($voucher[0]["endDate"],0,10) >= $currentDate) ){
+            $dateApproved = true;
+        }
+        
+        if( $voucher[0]["numberOfTimes"] == 0 ){
             $numberOfTimesAvalability = true;
         }elseif( $voucher[0]["numberOfTimes"] != 0 ){
             if( $orders = selectDB("orders","`voucher` = '{$voucher[0]["id"]}'")){
@@ -32,40 +33,26 @@ if( !isset($_POST) ){
                     $numberOfTimesAvalability = true;
                 }else{
                     $numberOfTimesAvalability = false;
-                    $response = array(
-                        "msg" => 'voucher has been fully used.',
-                    );
-                    echo outputError($response);die();
                 }
             }else{
                 $numberOfTimesAvalability = true;
             }
-        }elseif( $voucher[0]["academyId"] != 0 ){
+        }
+        
+        if( $voucher[0]["academyId"] != 0 ){
             if( $voucher[0]["academyId"] == $academy ){
                 $academyAprroved = true;
             }else{
                 $academyAprroved = false;
-                $response = array(
-                    "msg" => 'voucher is not valid for this academy.',
-                );
-                echo outputError($response);die();
             }
         }elseif( $voucher[0]["academyId"] == 0 ){
             $academyAprroved = true;
-        }elseif( $numberOfTimesAvalability && $academyAprroved ){
-                $voucherType = ($voucher[0]["type"] == 0) ? 0 : 1;
-                $voucherAmount = $voucher[0]["amount"];
-        }else{
-            $response = array(
-                "msg" => 'voucher is not valid anymore.',
-            );
-            echo outputError($response);die();
         }
-    }else{
-        $response = array(
-            "msg" => 'voucher does not exist.',
-        );
-        echo outputError($response);die();
+        
+        if( $numberOfTimesAvalability && $academyAprroved && $dateApproved){
+            $voucherType = ($voucher[0]["type"] == 0) ? 0 : 1;
+            $voucherAmount = $voucher[0]["amount"];
+        }
     }
 
     //checking session information

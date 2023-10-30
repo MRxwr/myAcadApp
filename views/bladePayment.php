@@ -26,7 +26,6 @@ if( isset($_POST["data"]) && !empty($_POST["data"]) ){
         'myacadheader: myAcadAppCreate'
       ),
     ));
-    print_r($data);
     echo $response = curl_exec($curl);
     curl_close($curl);
     $response = json_decode($response,true);
