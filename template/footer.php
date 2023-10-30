@@ -62,6 +62,10 @@
     <script src="js/plugins.js?<?php echo randLetter() . "=" . rand(0000,9999) ?>"></script>
     <script src="js/main.js?<?php echo randLetter() . "=" . rand(0000,9999) ?>"></script>
     <script>
+        $(document).on("click","#voucherBtn", function(){
+          var voucher = $("#appliedVoucher").val();
+              alert(voucher);
+        })
         $(document).on("click","input[type=radio]",function(){
             var id = $(this).attr("id");
             $("input[type=number]").val(0);
