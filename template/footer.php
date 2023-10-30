@@ -64,7 +64,8 @@
     <script>
         $(document).on("click","#voucherBtn", function(){
           var voucher = $("#appliedVoucher").val();
-              alert(voucher);
+          var total = $("#total").val();
+              alert(voucher+total);
         })
         $(document).on("click","input[type=radio]",function(){
             var id = $(this).attr("id");

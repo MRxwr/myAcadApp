@@ -143,10 +143,11 @@ $checkout = json_encode($_POST, JSON_UNESCAPED_UNICODE);
                                     <label for="out_3"><span></span><?php echo direction("Wallet","المحفظة") ?> <p>  ( <?php echo $user[0]["wallet"] ?>KD )</p></label>
                                 </div>
                                 <input type="hidden" name="data" value='<?php echo $checkout ?>'>
+                                <input type="hidden" id="total" value='<?php echo $newTotal ?>'>
                                 <input type="hidden" name="voucher" value=''>
                                 <div class="d-flex justify-content-between mt_50 extre_h6">
                                     <h6><strong><?php echo direction("Total", "المجموع") ?></strong></h6>
-                                    <span><?php echo $newTotal ?>KD</span>
+                                    <span id="shownTotal"><?php echo $newTotal ?>KD</span>
                                 </div>
                                 <p>By clicking Pay Now, you agree to our <a href="#">Terms & Conditions</a></p>
                                 <button class="button"><?php echo direction("CHECKOUT","تابع للدفع") ?></button>
