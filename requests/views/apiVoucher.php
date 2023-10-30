@@ -9,6 +9,7 @@ if( isset($_POST["code"]) && !empty($_POST["code"]) && $voucher = selectDB("vouc
         );
         echo outputError($response);die();
     }
+    
     if( $voucher[0]["numberOfTimes"] == 0 ){
         $numberOfTimesAvalability = true;
     }elseif( $voucher[0]["numberOfTimes"] != 0 ){
