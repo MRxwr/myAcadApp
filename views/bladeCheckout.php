@@ -119,6 +119,14 @@ $checkout = json_encode($_POST, JSON_UNESCAPED_UNICODE);
                         </div>
                     </div>
                     <div class="col-lg-5 order-lg-1 mt_40">
+                        <div class="row">
+                            <div class="col-6">
+                                <input type="text" name="voucher" value=''>
+                            </div>
+                            <div class="col-6">
+                                <div class="button" id="voucherBtn"><?php echo direction("APPLY","أرسل") ?></div>
+                            </div>
+                        </div>
                         <div class="check_out">
                             <h2><?php echo direction("PAYMENT METHOD", "طرق الدفع" ) ?></h2>
                             <form action="?v=Payment" method="post" >
@@ -134,15 +142,8 @@ $checkout = json_encode($_POST, JSON_UNESCAPED_UNICODE);
                                     <input type="radio" name="paymentMethod" id="out_3" <?php echo $disabled = ( $user[0]["wallet"] > ($jersyPrice + $totalPrice)) ? "" : "disabled" ; ?> value="3">
                                     <label for="out_3"><span></span><?php echo direction("Wallet","المحفظة") ?> <p>  ( <?php echo $user[0]["wallet"] ?>KD )</p></label>
                                 </div>
-                                <div class="row">
-                                    <div class="col-6">
-                                        <input type="text" name="voucher" value=''>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="button" id="voucherBtn"><?php echo direction("APPLY","أرسل") ?></div>
-                                    </div>
-                                </div>
                                 <input type="hidden" name="data" value='<?php echo $checkout ?>'>
+                                <input type="hidden" name="voucher" value=''>
                                 <div class="d-flex justify-content-between mt_50 extre_h6">
                                     <h6><strong><?php echo direction("Total", "المجموع") ?></strong></h6>
                                     <span><?php echo $newTotal ?>KD</span>
