@@ -27,7 +27,7 @@
 			
 			<div class="col-md-4">
 			<label><?php echo direction("Amount","القيمة") ?></label>
-			<input type="text" name="amount" class="form-control" required>
+			<input type="number" name="amount" class="form-control" required>
 			</div>
 			
 			<div class="col-md-4">
@@ -40,7 +40,8 @@
 			
 			<div class="col-md-4">
 			<label><?php echo direction("Academy","الأكادمية") ?></label>
-			<select name="academyId" class="form-control">
+			<select name="academyId" class="form-control" id="mySelect">
+                <option value='0'><?php echo direction("All","الكل") ?></option>
 				<?php
 				if( $academy = selectDB("academies","`status` = '0'") ){
 					for( $i = 0; $i < sizeof($academy); $i++ ){
@@ -157,6 +158,11 @@
 </div>
 </div>
 <script>
+
+        $(document).ready(function() {
+			$('#mySelect').select2();
+		});
+
 	$(document).on("click",".edit", function(){
 		var id = $(this).attr("id");
 		var code = $("#code"+id).html();
