@@ -144,6 +144,7 @@ $checkout = json_encode($_POST, JSON_UNESCAPED_UNICODE);
                                 </div>
                                 <input type="hidden" name="data" value='<?php echo $checkout ?>'>
                                 <input type="hidden" id="total" value='<?php echo $newTotal ?>'>
+                                <input type="hidden" id="academy" value='<?php echo $academy["id"] ?>'>
                                 <input type="hidden" name="voucher" value=''>
                                 <div class="d-flex justify-content-between mt_50 extre_h6">
                                     <h6><strong><?php echo direction("Total", "المجموع") ?></strong></h6>

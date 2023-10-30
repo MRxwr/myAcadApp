@@ -65,7 +65,30 @@
         $(document).on("click","#voucherBtn", function(){
           var voucher = $("#appliedVoucher").val();
           var total = $("#total").val();
-          
+          var academy = $("#academy").val();
+
+          var form = new FormData();
+          form.append("code", voucher);
+          form.append("total", total);
+          form.append("academyId", academy);
+
+          var settings = {
+            "url": "https://myacad.app/requests?a=Voucher",
+            "method": "POST",
+            "timeout": 0,
+            "headers": {
+              "myacadheader": "myAcadAppCreate"
+            },
+            "processData": false,
+            "mimeType": "multipart/form-data",
+            "contentType": false,
+            "data": form
+          };
+
+          $.ajax(settings).done(function (response) {
+            alert(response);
+          });
+
         })
         $(document).on("click","input[type=radio]",function(){
             var id = $(this).attr("id");
