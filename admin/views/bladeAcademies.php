@@ -305,6 +305,16 @@
 			$('#mySelect1').select2();
 			$('#mySelect2').select2();
 			$('#mySelect3').select2();
+			// change the view of select sport
+			$('.governateSelect').on('change', function () {
+				var selectedGovernate = $(this).val();
+				var governateDiv = $('#governate' + selectedGovernate);
+				alert(governateDiv);
+				if (governateDiv.length) {
+					var areas = governateDiv.html();
+					$('.areaSelect').html(areas);
+				}
+			});
 		});
 
 		$(document).on("click",".edit", function(){
@@ -354,15 +364,4 @@
 			$("#images").attr("style","margin-top:10px;display:block");
 			$("input[name=update]").val(id);
 		})
-
-		// change the view of select sport
-		$('.governateSelect').on('change', function () {
-			var selectedGovernate = $(this).val();
-			var governateDiv = $('#governate' + selectedGovernate);
-			alert(governateDiv);
-			if (governateDiv.length) {
-				var areas = governateDiv.html();
-				$('.areaSelect').html(areas);
-			}
-		});
 	</script>
