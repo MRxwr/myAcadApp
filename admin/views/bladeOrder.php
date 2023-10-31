@@ -88,12 +88,17 @@ td{
             
         <tr class='txt-dark'>
             <td><?php echo direction("Voucher","كود الخصم") ?></td>
-            <td><?php echo $order[0]["voucher"] ?></td>
+            <td><?php 
+                if ( !empty($order[0]["voucher"]) && $voucher = selectDB("vouchers","`id` = '{$order[0]["voucher"]}'") ){
+                    echo $voucher[0]["code"];
+                }
+                ?>
+            </td>
         </tr>
 
         <tr class="txt-dark">
             <td><?php echo direction("Payment Method","وسيلة الدفع") ?></td>
-            <td><?php echo $order[0]["paymentMethod"] ?></td>
+            <td><?php $paymentMethod = (($order[0]["paymentMethod"] == 1 ) ? "Knet" : ($order[0]["paymentMethod"] == 2 )) ? "Visa" : "Wallet";echo $paymentMethod ?></td>
         </tr>
             
         <tr class="txt-dark">
