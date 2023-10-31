@@ -13,14 +13,14 @@
 	<div class="col-md-4">
 	<div class="form-group">
 	<label class="control-label mb-10 text-left">Start Date</label>
-	<input type="date" name="startDate" required >
+	<input type="date" name="startDate" class="form-control" required >
 	</div>
 	</div>		
 	
 	<div class="col-md-4">
 	<div class="form-group">
 	<label class="control-label mb-10 text-left">End Date</label>
-	<input type="date" name="endDate" required >
+	<input type="date" name="endDate" class="form-control" required >
 	</div>
 	</div>	
 
