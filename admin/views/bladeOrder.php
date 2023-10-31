@@ -88,11 +88,7 @@ td{
             
         <tr class='txt-dark'>
             <td><?php echo direction("Voucher","كود الخصم") ?></td>
-            <td><?php 
-                if ( !empty($order[0]["voucher"]) && $voucher = selectDB("vouchers","`id` = '{$order[0]["voucher"]}'") ){
-                    echo $voucher[0]["code"];
-                }
-                ?>
+            <td><?php $order[0]["voucher"] ?>
             </td>
         </tr>
 
