@@ -271,7 +271,7 @@
 					<div style="display:none"><label id="clothes<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["clothesImage"] ?></label></div>
 					<div style="display:none"><label id="logo<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["imageurl"] ?></label></div>
 					<div style="display:none"><label id="header<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["header"] ?></label></div>
-					<div style="display:none"><label id="governate<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["governate"] ?></label></div>
+					<div style="display:none"><label id="governates<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["governate"] ?></label></div>
 					<div style="display:none"><label id="area<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["area"] ?></label></div>
 					<div style="display:none"><label id="sport<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["sport"] ?></label></div>
 					<div style="display:none"><label id="enTitle<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["enTitle"] ?></label></div>
@@ -323,7 +323,7 @@
 			var video = $("#video"+id).html();
 			var gender = $("#gender"+id).html();
 			var country = $("#country"+id).html();
-			var governate = $("#governate"+id).html();
+			var governate = $("#governates"+id).html();
 			var area = $("#area"+id).html();
 			var sport = $("#sport"+id).html();
 			var isClothes = $("#isClothes"+id).html();
