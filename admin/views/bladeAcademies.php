@@ -49,11 +49,11 @@
 
 			<div class="col-md-3">
 			<label><?php echo direction("Governates","المحافظات") ?></label>
-			<select id="mySelect1" name="governate" class="form-control" required>
+			<select id="mySelect1" class="form-control governateSelect" name="governate" required>
 				<?php
-				if( $governates = selectDB("governates","`countryCode` LIKE 'KW' ORDER BY `enTitle` ASC") ){
-					for( $i =0; $i < sizeof($governates); $i++ ){
-						echo "<option value='{$governates[$i]["id"]}'>{$governates[$i]["enTitle"]}</option>";
+				if ($governates = selectDB("governates", "`countryCode` LIKE '{$_COOKIE["createmyacadcountry"]}' AND `status` = '0' AND `hidden` = '0'")) {
+					for ($i = 0; $i < sizeof($governates); $i++) {
+						echo "<option value='{$governates[$i]["id"]}'>" . direction($governates[$i]["enTitle"], $governates[$i]["arTitle"]) . "</option>";
 					}
 				}
 				?>
@@ -62,16 +62,26 @@
 
 			<div class="col-md-3">
 			<label><?php echo direction("Areas","المناطق") ?></label>
-			<select id="mySelect2" name="area" class="form-control" required>
-				<?php
-				if( $areas = selectDB("countries","`countryEnTitle` LIKE 'KUWAIT'AND `status` = '1' ORDER BY `areaEnTitle` ASC") ){
-					for( $i =0; $i < sizeof($areas); $i++ ){
-						echo "<option value='{$areas[$i]["id"]}'>{$areas[$i]["areaEnTitle"]}</option>";
-					}
-				}
-				?>
+			<select id="mySelect2" class=" select areaSelect" name="area" required>
 			</select>
 			</div>
+
+			<?php
+			if ($areas = selectDB("countries", "`status` = '1' AND `hidden` = '0' AND `countryCode` LIKE '{$_COOKIE["createmyacadcountry"]}' ORDER BY `governateId` ASC")) {
+				$governateId = $areas[0]["governateId"];
+				for ($i = 0; $i < sizeof($areas); $i++) {
+					if ($i == 0 || $governateId != $areas[$i]["governateId"]) {
+						if ($i != 0) {
+							echo "</div>";
+						}
+						echo "<div class='governate' id='governate{$areas[$i]["governateId"]}' style='display:none'><option selected disabled value='0'>".direction("SELECT AREA","إختر المنطقة")."</option><option selected value='0'>".direction("Select All","إختر الكل")."</option>";
+					}
+					echo "<option value='{$areas[$i]["id"]}'>" . direction($areas[$i]["areaEnTitle"], $areas[$i]["areaArTitle"]) . "</option>";
+					$governateId = $areas[$i]["governateId"];
+				}
+				echo "</div>";
+			}
+			?>
 
 			<div class="col-md-3">
 			<label><?php echo direction("Location","الموقع") ?></label>
@@ -342,4 +352,19 @@
 			$("#images").attr("style","margin-top:10px;display:block");
 			$("input[name=update]").val(id);
 		})
+
+		// change the view of select sport
+		$('.governateSelect').on('change', function () {
+			var selectedGovernate = $(this).val();
+			var governateDiv = $('#governate' + selectedGovernate);
+			
+			// Hide all "area" selects first
+			$('.areaSelect').prop('disabled', true);
+			
+			if (governateDiv.length) {
+				var areas = governateDiv.html();
+				$('.areaSelect').html(areas);
+				$('.areaSelect').prop('disabled', false);
+			}
+		});
 	</script>
