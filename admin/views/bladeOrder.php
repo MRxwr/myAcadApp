@@ -112,7 +112,7 @@ td{
         ?>
         <tr class="txt-dark">
             <td><?php echo direction("Status","الحالة") ?>:</td>
-            <td><?php echo $orderStatus; ?>KD</td>
+            <td><?php echo $orderStatus; ?></td>
         </tr>
     </tbody>
 </table>
