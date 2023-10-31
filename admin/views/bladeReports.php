@@ -47,7 +47,7 @@
 	<label class="control-label mb-10"><?php echo direction("Status","الحالة") ?></label>
 	<select class="form-control" name="status" required>
 		<?php
-			echo "<option selected>".direction("All","الكل")."</option>";
+			echo "<option selected value=''>".direction("All","الكل")."</option>";
             $status = [direction("Pending","إنتظار"),direction("Successful","ناجحه"),direction("Failed","فاشلة"),direction("Cancelled","ملغية"),direction("Ended","إنتهى")];
             for( $y = 0; $y < sizeof($status); $y++ ){
 				echo "<option value='{$y}'>{$status[$y]}</option>";
