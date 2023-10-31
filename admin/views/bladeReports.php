@@ -10,48 +10,32 @@
 <form action="" method="POST">
 <div class="row">
 
-	<div class="col-md-6">
+	<div class="col-md-4">
 	<div class="form-group">
 	<label class="control-label mb-10 text-left">Start Date</label>
 	<input type="date" name="startDate" required >
 	</div>
 	</div>		
 	
-	<div class="col-md-6">
+	<div class="col-md-4">
 	<div class="form-group">
 	<label class="control-label mb-10 text-left">End Date</label>
 	<input type="date" name="endDate" required >
 	</div>
 	</div>	
 
-	<div class="col-md-6">
+	<div class="col-md-4">
 	<div class="form-group">
-	<label class="control-label mb-10">Select Product</label>
-	<select class="selectpicker productId" name="productId" data-style="form-control btn-default btn-outline">
-	<option></option>
-	<?php
-	$dhlBills = 0;
-	$sql = "SELECT * 
-			FROM 
-			`products`
-			WHERE `hidden` != 2";
-	$result = $dbconnect->query($sql);
-	while ( $row = $result->fetch_assoc() )
-	{
-	?>
-	<option value="<?php echo $row["id"] ?>"><?php echo $row["enTitle"] ?></option>
-	<?php
-	}
-	?>
-	</select>
-	</div>	
-	</div>
-
-	<div class="col-md-6">
-	<div class="form-group sizes">
-	<label class="control-label mb-10"><?php echo $selectSubProduct ?></label>
-	<select class="selectpicker" name="" data-style="form-control btn-default btn-outline">
-	<option></option>
+	<label class="control-label mb-10">Select Academy</label>
+	<select class="form-control" name="academyId" required>
+		<option value="0" selected><?php echo direction("All","الكل") ?></option>
+		<?php
+			if( $academies = selectDB("academies","`id` != '0'")){
+				for( $i = 0; $i < sizeof($academies); $i++ ){
+					echo "<option value='{$academies[$i]["id"]}'>".direction($academies[$i]["enTitle"],$academies[$i]["arTitle"])."</option>";
+				}
+			}
+		?>
 	</select>
 	</div>	
 	</div>
@@ -59,15 +43,14 @@
 	<div class="col-md-4">
 	<div class="form-group">
 	<label class="control-label mb-10"><?php echo direction("Status","الحالة") ?></label>
-	<select class="selectpicker" name="status" data-style="form-control btn-default btn-outline">
-		<option></option>
-		<option value="0"><?php echo direction("Pending","انتظار") ?></option>
-		<option value="1"><?php echo direction("Success","ناجح") ?></option>
-		<option value="2"><?php echo direction("Preparing","جاري التجهيز") ?></option>
-		<option value="3"><?php echo direction("On Delivery","جاري التوصيل") ?></option>
-		<option value="4"><?php echo direction("Delivered","تم تسليمها") ?></option>
-		<option value="5"><?php echo direction("Failed","فاشلة") ?></option>
-		<option value="6"><?php echo direction("Returned","مسترجعه") ?></option>
+	<select class="form-control" name="status" required>
+		<?php
+            $status = [direction("Pending","إنتظار"),direction("Successful","ناجحه"),direction("Failed","فاشلة"),direction("Cancelled","ملغية"),direction("Ended","إنتهى")];
+            for( $y = 0; $y < sizeof($status); $y++ ){
+				$selected = ( $y == 1 ) ? "selected" : "" ;
+				echo "<option value='{$y}' {$selected}>{$status[$y]}</option>";
+            }
+        ?>
 	</select>
 	</div>	
 	</div>
@@ -75,11 +58,11 @@
 	<div class="col-md-4">
 	<div class="form-group">
 	<label class="control-label mb-10"><?php echo direction("Payment Method","طريقة الدفع") ?></label>
-	<select class="selectpicker" name="pMethod" data-style="form-control btn-default btn-outline">
-		<option></option>
+	<select class="form-control" name="paymentMethod" required>
+		<option value="0"><?php echo direction("All","الكل") ?></option>
 		<option value="1">K-NET</option>
 		<option value="2">Visa/Master</option>
-		<option value="3">Cash</option>
+		<option value="3">Wallet</option>
 	</select>
 	</div>	
 	</div>
@@ -87,24 +70,15 @@
 	<div class="col-md-4">
 	<div class="form-group">
 	<label class="control-label mb-10">Select Voucher</label>
-	<select class="selectpicker" name="voucher" data-style="form-control btn-default btn-outline">
-	<option></option>
-	<?php
-	$sql = "SELECT *
-			FROM `vouchers`
-			WHERE
-			`hidden` = '0'
-			GROUP BY `voucher`
-			";
-	$result = $dbconnect->query($sql);
-	while ( $row = $result->fetch_assoc() )
-	{
-	?>
-	<option value="<?php echo $row["id"] ?>"><?php echo $row["voucher"] ?></option>
-	<?php
-	}
-	?>
-	?>
+	<select class="form-control" name="voucher" required>
+		<option value="0" selected><?php echo direction("None","لا يوجد") ?></option>
+		<?php
+			if( $vouchers = selectDB("vouchers","`id` != '0'")){
+				for( $i = 0; $i < sizeof($vouchers); $i++ ){
+					echo "<option value='{$vouchers[$i]["code"]}'>{$vouchers[$i]["code"]}</option>";
+				}
+			}
+		?>
 	</select>
 	</div>	
 	</div>
@@ -279,58 +253,3 @@ $totalIntInvoices = 0;
 <?php
 }
 ?>
-<script>
-$(function(){
-	$('.productId').on('change',function(e){
-		e.preventDefault();
-		var mainProduct = $(this).val()
-		$.ajax({
-			type:"POST",
-			url: "../api/functions.php",
-			data: {
-				productValue: mainProduct,
-			},
-			success:function(result){
-				$('.sizes').html(result);
-			}
-		});
-	});
-})
-
-$(function(){
-	$('.printMeNow').on('click',function(e){
-		e.preventDefault();
-		w = window.open();
-		w.document.write($('.printable').html());
-		w.print();
-		w.close();
-	});
-})
-
-</script>
-
-<!--///////////////////-->
-
-<script>
-	 $(document).ready(function(){
-	   $('#myAjaxTable').DataTable({
-		  'processing': true,
-		  'serverSide': true,
-		  'serverMethod': 'post',
-		  'order': [[0, 'desc']],
-		  'ajax': {
-			  'url':'template/ajax/reportAjax.php'
-		  },
-		  'columns': [
-			 { data: 'sl'},
-			 { data: 'date'},
-			 { data: 'ref'},
-			 { data: 'title'},
-			 { data: 'details'},
-			 { data: 'type'},
-			 { data: 'total'},
-			 { data: 'action' }
-		  ]
-	   });
-	});
-</script>
