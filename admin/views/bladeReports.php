@@ -50,8 +50,7 @@
 			echo "<option selected>".direction("All","الكل")."</option>";
             $status = [direction("Pending","إنتظار"),direction("Successful","ناجحه"),direction("Failed","فاشلة"),direction("Cancelled","ملغية"),direction("Ended","إنتهى")];
             for( $y = 0; $y < sizeof($status); $y++ ){
-				$selected = ( $y == 1 ) ? "selected" : "" ;
-				echo "<option value='{$y}' {$selected}>{$status[$y]}</option>";
+				echo "<option value='{$y}'>{$status[$y]}</option>";
             }
         ?>
 	</select>
