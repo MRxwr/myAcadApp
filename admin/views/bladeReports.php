@@ -4,6 +4,7 @@
 <div class="pull-left">
 	<h6 class="panel-title txt-dark"><?php echo direction("Report Details","تفاصيل التقرير") ?></h6>
 </div>
+<div class="clearfix"></div>
 </div>
 <div class="panel-wrapper collapse in">
 <div class="panel-body">
