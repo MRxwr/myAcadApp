@@ -64,7 +64,6 @@
 			<label><?php echo direction("Areas","المناطق") ?></label>
 			<select id="mySelect2" class="select areaSelect" name="area" required>
 				<option selected disabled value="0"><?php echo direction("SELECT AREA","إختر المنطقة") ?></option>
-				<option value="0"><?php echo direction("Select All","إختر الكل") ?></option>
 			</select>
 			</div>
 
@@ -76,7 +75,7 @@
 						if ($i != 0) {
 							echo "</div>";
 						}
-						echo "<div class='governate' id='governate{$areas[$i]["governateId"]}' style='display:none'><option selected disabled value='0'>".direction("SELECT AREA","إختر المنطقة")."</option><option selected value='0'>".direction("Select All","إختر الكل")."</option>";
+						echo "<div class='governate' id='governate{$areas[$i]["governateId"]}' style='display:none'>";
 					}
 					echo "<option value='{$areas[$i]["id"]}'>" . direction($areas[$i]["areaEnTitle"], $areas[$i]["areaArTitle"]) . "</option>";
 					$governateId = $areas[$i]["governateId"];
