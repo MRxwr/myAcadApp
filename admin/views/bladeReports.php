@@ -132,6 +132,7 @@ if ( isset($_POST["endDate"]) && $orders = selectDB("orders",$where) ){
 		<th><?php echo direction("Name","الإسم") ?></th>
 		<th><?php echo direction("Mobile","الهاتف") ?></th>
 		<th><?php echo direction("Academy","الأكادميه") ?></th>
+		<th><?php echo direction("Voucher","كود الخصم") ?></th>
 		<th><?php echo direction("Total","المجموع") ?></th>
 		<th><?php echo direction("Payment","الدفع") ?></th>
 		<th><?php echo direction("Status","الحالة") ?></th>
@@ -162,6 +163,7 @@ if ( isset($_POST["endDate"]) && $orders = selectDB("orders",$where) ){
 	<td><?php echo $orders[$i]["name"] ?></td>
 	<td><?php echo $orders[$i]["phone"] ?></td>
 	<td><?php echo direction($orders[$i]["enAcademy"],$orders[$i]["arAcademy"]) ?></td>
+	<td><?php echo $orders[$i]["voucher"] ?></td>
 	<td><?php echo $orders[$i]["total"] ?>KD</td>
 	<td><?php echo $paymentMethod ?></td>
 	<td><button class="btn btn-<?php echo $orderBtnColor ?>" style="width: 100%;"><?php echo $orderStatus ?></button></td>
