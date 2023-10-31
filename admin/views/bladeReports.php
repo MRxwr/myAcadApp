@@ -32,7 +32,7 @@
 	<select class="form-control" name="academyId" required>
 		<option value="0" selected><?php echo direction("All","الكل") ?></option>
 		<?php
-			if( $academies = selectDB("academies","`id` != '0'")){
+			if( $academies = selectDB("academies","`id` != '0' AND `status` = '0'")){
 				for( $i = 0; $i < sizeof($academies); $i++ ){
 					echo "<option value='{$academies[$i]["id"]}'>".direction($academies[$i]["enTitle"],$academies[$i]["arTitle"])."</option>";
 				}
@@ -75,7 +75,7 @@
 	<select class="form-control" name="voucher" required>
 		<option value="0" selected><?php echo direction("None","لا يوجد") ?></option>
 		<?php
-			if( $vouchers = selectDB("vouchers","`id` != '0'")){
+			if( $vouchers = selectDB("vouchers","`id` != '0' AND `status` = '0'")){
 				for( $i = 0; $i < sizeof($vouchers); $i++ ){
 					echo "<option value='{$vouchers[$i]["code"]}'>{$vouchers[$i]["code"]}</option>";
 				}
