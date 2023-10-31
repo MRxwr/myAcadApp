@@ -36,12 +36,12 @@ td{
 <table style="width:100%">
 	<tr>
 		<td style="text-align: center">
-			<img src="../logos/logo.png" style="width:150px; height:150px">
+			<img src="../img/logo.png" style="width:150px; height:150px">
 		</td>
 	</tr>
 	<tr>
 		<td style="text-align: center" class="txt-dark">
-		<?php echo direction("Order","طلب") ?> #<?php echo $orderId; ?>
+		<?php echo direction("Order","طلب") ?> #<?php echo $order[0]["id"]; ?>
 		</td>
 	</tr>
 </table>
