@@ -105,11 +105,6 @@ td{
 </table>
 </div>
 
-<div class="button-list pull-right">
-    <button type="button" class="btn btn-primary btn-outline btn-icon left-icon"> 
-    <i class="fa fa-print"></i><span> Print</span>
-    </button>
-</div>
 <div class="clearfix"></div>
 </div>
 </div>
