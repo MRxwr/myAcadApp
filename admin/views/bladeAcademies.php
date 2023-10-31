@@ -339,9 +339,6 @@
 			var cc_charge = $("#cc_charge"+id).html();
 			var cc_chargetype = $("#cc_chargetype"+id).html();
 			var iban = $("#iban"+id).html();
-
-			alert(governate);
-			
 			$("input[name=enTitle]").val(enTitle).focus();
 			$("input[name=arTitle]").val(arTitle);
 			$("input[name=video]").val(video);
