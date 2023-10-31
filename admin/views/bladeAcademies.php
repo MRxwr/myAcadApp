@@ -62,7 +62,9 @@
 
 			<div class="col-md-3">
 			<label><?php echo direction("Areas","المناطق") ?></label>
-			<select id="mySelect2" class=" select areaSelect" name="area" required>
+			<select id="mySelect2" class="select areaSelect" name="area" required>
+				<option selected disabled value="0"><?php echo direction("SELECT AREA","إختر المنطقة") ?></option>
+				<option value="0"><?php echo direction("Select All","إختر الكل") ?></option>
 			</select>
 			</div>
 
