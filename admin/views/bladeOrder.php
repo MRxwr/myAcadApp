@@ -94,7 +94,16 @@ td{
 
         <tr class="txt-dark">
             <td><?php echo direction("Payment Method","وسيلة الدفع") ?></td>
-            <td><?php $paymentMethod = (($order[0]["paymentMethod"] == 1 ) ? "Knet" : ($order[0]["paymentMethod"] == 2 )) ? "Visa" : "Wallet";echo $paymentMethod ?></td>
+            <td><?php
+                if( $order[0]["paymentMethod"] == 1 ){
+                    $paymentMethod = "KNET";
+                }elseif( $order[0]["paymentMethod"] == 2 ){
+                    $paymentMethod = "VISA";
+                }else{
+                    $paymentMethod = "Wallet";
+                }
+                echo $paymentMethod ?>
+            </td>
         </tr>
             
         <tr class="txt-dark">
