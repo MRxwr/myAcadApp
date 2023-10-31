@@ -133,6 +133,7 @@ if ( isset($_POST["endDate"]) && $orders = selectDB("orders",$where) ){
 		<th><?php echo direction("Mobile","الهاتف") ?></th>
 		<th><?php echo direction("Academy","الأكادميه") ?></th>
 		<th><?php echo direction("Total","المجموع") ?></th>
+		<th><?php echo direction("Payment","الدفع") ?></th>
 		<th><?php echo direction("Status","الحالة") ?></th>
 		<th class="text-nowrap"><?php echo direction("Actions","الخيارات") ?></th>
 	</tr>
@@ -142,10 +143,16 @@ if ( isset($_POST["endDate"]) && $orders = selectDB("orders",$where) ){
 	for( $i = 0; $i < sizeof($orders); $i++ ){
 		$status = [direction("Pending","إنتظار"),direction("Successful","ناجحه"),direction("Failed","فاشلة"),direction("Cancelled","ملغية"),direction("Ended","إنتهى")];
         $statusColor = ["default","success","info","danger","warning"];
+		$paymentMethods = ["","KNET","VISA","WALLET"];
 		for( $y = 0; $y < sizeof($status); $y++ ){
 			if( $orders[$i]["status"] == $y ){
 				$orderStatus = $status[$y];
 				$orderBtnColor = $statusColor[$y];
+			}
+		}
+		for( $y = 0; $y < sizeof($paymentMethods); $y++ ){
+			if( $orders[$i]["paymentMethod"] == $y ){
+				$paymentMethod = $paymentMethods[$y];
 			}
 		}
 	?>
@@ -156,6 +163,7 @@ if ( isset($_POST["endDate"]) && $orders = selectDB("orders",$where) ){
 	<td><?php echo $orders[$i]["phone"] ?></td>
 	<td><?php echo direction($orders[$i]["enAcademy"],$orders[$i]["arAcademy"]) ?></td>
 	<td><?php echo $orders[$i]["total"] ?>KD</td>
+	<td><?php echo $paymentMethod ?></td>
 	<td><button class="btn btn-<?php echo $orderBtnColor ?>" style="width: 100%;"><?php echo $orderStatus ?></button></td>
 	<td class="text-nowrap">
 		<a class="btn btn-primary" href="?v=Order&id=<?php echo $orders[$i]["id"] ?>" target="_blank"><?php echo direction("View","عرض") ?></a>
