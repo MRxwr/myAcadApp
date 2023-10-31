@@ -47,7 +47,7 @@
                 <td><?php echo $orders[$i]["total"] ?>KD</td>
                 <td><button class="btn btn-<?php echo $orderBtnColor ?>" style="width: 100%;"><?php echo $orderStatus ?></button></td>
                 <td class="text-nowrap">
-                    <button class="btn btn-dark" style="width: 100%;"><?php echo direction("View","عرض") ?></button>
+                    <a class="btn btn-primary"><?php echo direction("View","عرض") ?></a>
                 </td>
                 </tr>
             <?php
