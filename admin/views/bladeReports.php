@@ -29,7 +29,7 @@
 	<div class="col-md-4">
 	<div class="form-group">
 	<label class="control-label mb-10">Select Academy</label>
-	<select class="form-control" name="academyId" required>
+	<select class="form-control" name="academyId">
 		<option value="0" selected><?php echo direction("All","الكل") ?></option>
 		<?php
 			if( $academies = selectDB("academies","`id` != '0' AND `status` = '0'")){
@@ -45,7 +45,7 @@
 	<div class="col-md-4">
 	<div class="form-group">
 	<label class="control-label mb-10"><?php echo direction("Status","الحالة") ?></label>
-	<select class="form-control" name="status" required>
+	<select class="form-control" name="status">
 		<?php
 			echo "<option selected value=''>".direction("All","الكل")."</option>";
             $status = [direction("Pending","إنتظار"),direction("Successful","ناجحه"),direction("Failed","فاشلة"),direction("Cancelled","ملغية"),direction("Ended","إنتهى")];
@@ -60,7 +60,7 @@
 	<div class="col-md-4">
 	<div class="form-group">
 	<label class="control-label mb-10"><?php echo direction("Payment Method","طريقة الدفع") ?></label>
-	<select class="form-control" name="paymentMethod" required>
+	<select class="form-control" name="paymentMethod">
 		<option value="0"><?php echo direction("All","الكل") ?></option>
 		<option value="1">KNET</option>
 		<option value="2">VISA</option>
@@ -72,7 +72,7 @@
 	<div class="col-md-4">
 	<div class="form-group">
 	<label class="control-label mb-10">Select Voucher</label>
-	<select class="form-control" name="voucher" required>
+	<select class="form-control" name="voucher">
 		<option value="0" selected><?php echo direction("None","لا يوجد") ?></option>
 		<?php
 			if( $vouchers = selectDB("vouchers","`id` != '0' AND `status` = '0'")){
