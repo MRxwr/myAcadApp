@@ -309,7 +309,6 @@
 			$('.governateSelect').on('change', function () {
 				var selectedGovernate = $(this).val();
 				var governateDiv = $('#governate' + selectedGovernate);
-				alert(governateDiv);
 				if (governateDiv.length) {
 					var areas = governateDiv.html();
 					$('.areaSelect').html(areas);
