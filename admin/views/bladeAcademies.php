@@ -50,6 +50,7 @@
 			<div class="col-md-3">
 			<label><?php echo direction("Governates","المحافظات") ?></label>
 			<select id="mySelect1" class="form-control governateSelect" name="governate" required>
+				<option selected disabled value="0"><?php echo direction("SELECT GOVERNATE","إختر المحافظة") ?></option>
 				<?php
 				if ($governates = selectDB("governates", "`countryCode` LIKE 'KW' AND `status` = '0' AND `hidden` = '0'")) {
 					for ($i = 0; $i < sizeof($governates); $i++) {
