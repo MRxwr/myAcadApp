@@ -123,6 +123,7 @@ if( !isset($_POST) ){
     $_POST["totalJersyPrice"] = $jersyPrice;
     $_POST["total"] = $newTotal;
     $_POST["paymentMethod"] = $paymentMethod;
+    $_POST["voucher"] = $data["voucher"];
 
     //calculate totals prices that should be sent to upayments 
     if( $data["paymentMethod"] == 1 ){
