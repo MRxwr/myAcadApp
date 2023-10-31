@@ -1,6 +1,6 @@
 <?php
 
-if( $order = selectDB("orders","`orderId` = '{$_GET["id"]}'") ){
+if( $order = selectDB("orders","`id` = '{$_GET["id"]}'") ){
 
 }else{
     ?>
