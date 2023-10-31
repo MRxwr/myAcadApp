@@ -92,29 +92,19 @@
 	</div>
 <?php
 if ( isset($_POST["endDate"]) ){
-	$where = " 
-			`date` BETWEEN '{$_POST["startDate"]}' AND '{$_POST["endDate"]}'
-			";
-			if ( !empty($_POST["voucher"]) ){
-				$where .= " AND JSON_UNQUOTE(JSON_EXTRACT(voucher,'$.id')) LIKE '%{$_POST["voucher"]}%'";
-			}
-			if ( !empty($_POST["productId"]) ){
-				$where .= " AND JSON_UNQUOTE(JSON_EXTRACT(items,'$[*].productId')) LIKE '%{$_POST["productId"]}%'";
-			}
-			if ( !empty($_POST["size"]) ){
-				$where .= " AND JSON_UNQUOTE(JSON_EXTRACT(items,'$[*].subId')) LIKE '%{$_POST["size"]}%'";
-			}
-			if ( !empty($_POST["pMethod"]) ){
-				$where .= " AND `paymentMethod` = '{$_POST["pMethod"]}'";
-			}
-			if ( $_POST["status"] != "" ){
-				$where .= " AND `status` = '{$_POST["status"]}'";
-			}
-	if( $orderIds = selectDB("orders2",$where . " GROUP BY `orderId`") ){
-	}else{
-		$orderIds = array();
+	$where = " `date` BETWEEN '{$_POST["startDate"]}' AND '{$_POST["endDate"]}'";
+	if ( !empty($_POST["voucher"]) ){
+		$where .= " AND `voucher` LIKE '%{$_POST["voucher"]}%'";
 	}
-	$orderIds = array_filter($orderIds);
+	if ( !empty($_POST["academyId"]) ){
+		$where .= " AND `academyId` LIKE '%{$_POST["academyId"]}%'";
+	}
+	if ( !empty($_POST["paymentMethod"]) ){
+		$where .= " AND `paymentMethod` = '{$_POST["paymentMethod"]}'";
+	}
+	if ( !empty($_POST["status"]) ){
+		$where .= " AND `status` = '{$_POST["status"]}'";
+	}
 }
 ?>
 </div>
@@ -125,10 +115,10 @@ if ( isset($_POST["endDate"]) ){
 </div>
 
 <?php
-if ( !empty($orderIds) ){
+if ( isset($_POST["endDate"]) && $orders = selectDB("orders",$where) ){
 ?>
 <div class="row">
-<div class="col-sm-12">
+<div class="col-md-12">
 <div class="panel panel-default card-view">
 <div class="panel-wrapper collapse in">
 <div class="panel-body">
@@ -137,65 +127,39 @@ if ( !empty($orderIds) ){
 <table id="example" class="table table-hover display  pb-30" >
 <thead>
 	<tr>
-		<th><?php echo $DateTime ?></th>
-		<th><?php echo $OrderID ?></th>
-		<th><?php echo $Mobile ?></th>
-		<th><?php echo $Voucher ?></th>
-		<th><?php echo $Discount ?></th>
-		<th><?php echo $deliveryText ?></th>
-		<th><?php echo $paymentMethodText ?></th>
-		<th><?php echo direction("Profit","الأرباح") ?></th>
-		<th><?php echo $Cost ?></th>
-		<th><?php echo $Price ?></th>
-		<th><?php echo direction("Status","الحاله") ?></th>
+	<th>#</th>
+		<th><?php echo direction("Date","التاريخ") ?></th>
+		<th><?php echo direction("Name","الإسم") ?></th>
+		<th><?php echo direction("Mobile","الهاتف") ?></th>
+		<th><?php echo direction("Academy","الأكادميه") ?></th>
+		<th><?php echo direction("Total","المجموع") ?></th>
+		<th><?php echo direction("Status","الحالة") ?></th>
+		<th class="text-nowrap"><?php echo direction("Actions","الخيارات") ?></th>
 	</tr>
 </thead>
 <tbody>
 <?php
-$totalKwInvoices = 0;
-$totalIntInvoices = 0;
-	for( $i = 0; $i < sizeof($orderIds); $i++ ){
-		$info = json_decode($orderIds[$i]["info"],true);
-		$voucher = json_decode($orderIds[$i]["voucher"],true);
-		$address = json_decode($orderIds[$i]["address"],true);
-		$items = json_decode($orderIds[$i]["items"],true);
-		for( $y = 0; $y < sizeof($items); $y++ ){
-			$item = selectDB("attributes_products","`id` = '{$items[$y]["subId"]}'");
-			$cost[] = (isset($item[0]["cost"]) && $item[0]["cost"] != 0) ? $item[0]["cost"]*$items[$y]["quantity"] : 0;
+	for( $i = 0; $i < sizeof($orders); $i++ ){
+		$status = [direction("Pending","إنتظار"),direction("Successful","ناجحه"),direction("Failed","فاشلة"),direction("Cancelled","ملغية"),direction("Ended","إنتهى")];
+        $statusColor = ["default","success","info","danger","warning"];
+		for( $y = 0; $y < sizeof($status); $y++ ){
+			if( $orders[$i]["status"] == $y ){
+				$orderStatus = $status[$y];
+				$orderBtnColor = $statusColor[$y];
+			}
 		}
-		$profit = $orderIds[$i]["price"] - array_sum($cost);
-		$totalPrice[] = $orderIds[$i]["price"];
-		$totalCost[] = array_sum($cost);
-		$totalProfit[] = $profit;
-		if( $address["country"] == "KW" ){
-			$totalDelivery[] = $address["shipping"];
-			$totalShipping[] = 0;
-			$totalKwInvoices++;
-		}else{
-			$totalDelivery[] = 0;
-			$totalShipping[] = $address["shipping"];
-			$totalIntInvoices++;
-		}
-		$statusText = [direction("Pending","انتظار"),direction("Success","ناجح"),direction("Preparing","جاري التجهيز"), direction("On Delivery","جاري التوصيل"), direction("Delivered","تم تسليمها"), direction("Failed","فاشلة"),direction("Returned","مسترجعه")];
 	?>
 	<tr>
-		<td><?php echo $orderIds[$i]["date"] ?></td>
-		<td class="txt-dark"><a href="product-orders.php?info=view&orderId=<?php echo $orderIds[$i]["orderId"] ?>" target="_blank"><?php echo $orderIds[$i]["orderId"] ?></a></td>
-		<td class="txt-dark"><?php echo $info["phone"] ?></td>
-		<td><?php echo $voucher["voucher"] ?></td>
-		<td><?php echo $voucher["percentage"] ?>%</td>
-		<td><?php echo $address["shipping"] ?>KD</td>
-		<td><?php
-		if( $paymentMethod = selectDB("p_methods","`paymentId` = '{$orderIds[$i]["paymentMethod"]}'") ){
-			echo $method = direction($paymentMethod[0]["enTitle"],$paymentMethod[0]["arTitle"]);
-		}else{
-			echo $method = "";
-		}
-		?></td>
-		<td><?php echo numTo3Float($profit) ?>KD</td>
-		<td><?php echo numTo3Float(array_sum($cost)) ?>KD</td>
-		<td><?php echo numTo3Float($orderIds[$i]["price"]) ?>KD</td>
-		<td><?php echo $statusText[$orderIds[$i]["status"]] ?></td>
+	<td><?php echo sprintf("%05d", $orders[$i]["id"]) ?></td>
+	<td><?php echo $orders[$i]["date"] ?></td>
+	<td><?php echo $orders[$i]["name"] ?></td>
+	<td><?php echo $orders[$i]["phone"] ?></td>
+	<td><?php echo direction($orders[$i]["enAcademy"],$orders[$i]["arAcademy"]) ?></td>
+	<td><?php echo $orders[$i]["total"] ?>KD</td>
+	<td><button class="btn btn-<?php echo $orderBtnColor ?>" style="width: 100%;"><?php echo $orderStatus ?></button></td>
+	<td class="text-nowrap">
+		<a class="btn btn-primary" href="?v=Order&id=<?php echo $orders[$i]["id"] ?>" target="_blank"><?php echo direction("View","عرض") ?></a>
+	</td>
 	</tr>
 	<?php
 		unset($cost);
@@ -203,48 +167,6 @@ $totalIntInvoices = 0;
 ?>
 </tbody>
 </table>
-</div>
-</div>
-</div>
-</div>
-</div>	
-</div>
-</div>
-
-<div class="row">
-<div class="col-sm-12">
-<div class="panel panel-default card-view">
-<div class="panel-wrapper collapse in">
-<div class="panel-body">
-<div class="table-wrap">
-<div class="table-responsive">
-<button class="btn btn-primary printMeNow">Print</button>
-<div class="printable">
-<table class="table table-hover display pb-30" >
-<thead>
-	<tr>
-		<th><?php echo "Earned" ?></th>
-		<th><?php echo "Delivery" ?></th>
-		<th><?php echo "Shipping" ?></th>
-		<th><?php echo "Cost" ?></th>
-		<th><?php echo "Profit" ?></th>
-		<th><?php echo "Kuwait Bills" ?></th>
-		<th><?php echo "International Bills" ?></th>
-	</tr>
-</thead>
-<tbody>
-	<tr>
-		<td><?php echo numTo3Float(array_sum($totalPrice)+array_sum($totalShipping)+array_sum($totalDelivery)) ?>KD</td>
-		<td><?php echo numTo3Float(array_sum($totalDelivery)) ?>KD</td>
-		<td><?php echo numTo3Float(array_sum($totalShipping)) ?>KD</td>
-		<td><?php echo numTo3Float(array_sum($totalCost)) ?>KD</td>
-		<td><?php echo numTo3Float(array_sum($totalProfit)) ?>KD</td>
-		<td><?php echo $totalKwInvoices ?></td>
-		<td><?php echo $totalIntInvoices ?></td>
-	</tr>
-</tbody>
-</table>
-</div>
 </div>
 </div>
 </div>
