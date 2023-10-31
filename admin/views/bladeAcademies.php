@@ -359,14 +359,10 @@
 		$('.governateSelect').on('change', function () {
 			var selectedGovernate = $(this).val();
 			var governateDiv = $('#governate' + selectedGovernate);
-			
-			// Hide all "area" selects first
-			$('.areaSelect').prop('disabled', true);
-			
+			alert(governateDiv);
 			if (governateDiv.length) {
 				var areas = governateDiv.html();
 				$('.areaSelect').html(areas);
-				$('.areaSelect').prop('disabled', false);
 			}
 		});
 	</script>
