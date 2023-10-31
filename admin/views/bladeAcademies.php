@@ -51,7 +51,7 @@
 			<label><?php echo direction("Governates","المحافظات") ?></label>
 			<select id="mySelect1" class="form-control governateSelect" name="governate" required>
 				<?php
-				if ($governates = selectDB("governates", "`countryCode` LIKE '{$_COOKIE["createmyacadcountry"]}' AND `status` = '0' AND `hidden` = '0'")) {
+				if ($governates = selectDB("governates", "`countryCode` LIKE 'KW' AND `status` = '0' AND `hidden` = '0'")) {
 					for ($i = 0; $i < sizeof($governates); $i++) {
 						echo "<option value='{$governates[$i]["id"]}'>" . direction($governates[$i]["enTitle"], $governates[$i]["arTitle"]) . "</option>";
 					}
@@ -69,7 +69,7 @@
 			</div>
 
 			<?php
-			if ($areas = selectDB("countries", "`status` = '1' AND `hidden` = '0' AND `countryCode` LIKE '{$_COOKIE["createmyacadcountry"]}' ORDER BY `governateId` ASC")) {
+			if ($areas = selectDB("countries", "`status` = '1' AND `hidden` = '0' AND `countryCode` LIKE 'KW' ORDER BY `governateId` ASC")) {
 				$governateId = $areas[0]["governateId"];
 				for ($i = 0; $i < sizeof($areas); $i++) {
 					if ($i == 0 || $governateId != $areas[$i]["governateId"]) {
@@ -339,6 +339,9 @@
 			var cc_charge = $("#cc_charge"+id).html();
 			var cc_chargetype = $("#cc_chargetype"+id).html();
 			var iban = $("#iban"+id).html();
+
+			alert(governate);
+			
 			$("input[name=enTitle]").val(enTitle).focus();
 			$("input[name=arTitle]").val(arTitle);
 			$("input[name=video]").val(video);
