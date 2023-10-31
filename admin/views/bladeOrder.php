@@ -105,7 +105,7 @@ td{
         <?php
             $status = [direction("Pending","إنتظار"),direction("Successful","ناجحه"),direction("Failed","فاشلة"),direction("Cancelled","ملغية"),direction("Ended","إنتهى")];
             for( $y = 0; $y < sizeof($status); $y++ ){
-                if( $orders[0]["status"] == $y ){
+                if( $order[0]["status"] == $y ){
                     $orderStatus = $status[$y];
                 }
             }
