@@ -47,6 +47,7 @@
 	<label class="control-label mb-10"><?php echo direction("Status","الحالة") ?></label>
 	<select class="form-control" name="status" required>
 		<?php
+			echo "<option selected>".direction("All","الكل")."</option>";
             $status = [direction("Pending","إنتظار"),direction("Successful","ناجحه"),direction("Failed","فاشلة"),direction("Cancelled","ملغية"),direction("Ended","إنتهى")];
             for( $y = 0; $y < sizeof($status); $y++ ){
 				$selected = ( $y == 1 ) ? "selected" : "" ;
@@ -62,9 +63,9 @@
 	<label class="control-label mb-10"><?php echo direction("Payment Method","طريقة الدفع") ?></label>
 	<select class="form-control" name="paymentMethod" required>
 		<option value="0"><?php echo direction("All","الكل") ?></option>
-		<option value="1">K-NET</option>
-		<option value="2">Visa/Master</option>
-		<option value="3">Wallet</option>
+		<option value="1">KNET</option>
+		<option value="2">VISA</option>
+		<option value="3">WALLET</option>
 	</select>
 	</div>	
 	</div>
@@ -102,7 +103,7 @@ if ( isset($_POST["endDate"]) ){
 	if ( !empty($_POST["paymentMethod"]) ){
 		$where .= " AND `paymentMethod` = '{$_POST["paymentMethod"]}'";
 	}
-	if ( !empty($_POST["status"]) ){
+	if ( isset($_POST["status"]) && !empty($_POST["status"]) ){
 		$where .= " AND `status` = '{$_POST["status"]}'";
 	}
 }
