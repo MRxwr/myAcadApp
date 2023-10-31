@@ -88,7 +88,7 @@ td{
             
         <tr class='txt-dark'>
             <td><?php echo direction("Voucher","كود الخصم") ?></td>
-            <td><?php $order[0]["voucher"] ?>
+            <td><?php echo $order[0]["voucher"] ?>
             </td>
         </tr>
 
