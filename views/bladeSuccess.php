@@ -6,7 +6,13 @@ if( isset($_GET["OrderID"]) && !empty($_GET["OrderID"]) ){
             updateDB("orders",array("gatewayLink"=>json_encode($_GET),"status"=>1),"`gatewayId` = '{$_GET["OrderID"]}'");
             updateDB("sessions",array("quantity"=>"`quantity` - {$order2[0]["subscriptionQuantity"]}"),"`id` = '{$order2[0]["sessionId"]}'");
         }
-        $paymentMethod = (($order[0]["paymentMethod"] == 1 ) ? "Knet" : ($order[0]["paymentMethod"] == 2 )) ? "Visa" : "Wallet";
+        if($order[0]["paymentMethod"] == 1 ){
+            $paymentMethod = "Knet";
+        }elseif( $order[0]["paymentMethod"] == 2 ){
+            $paymentMethod = "VISA";
+        }else{
+            $paymentMethod = "WALLET";
+        }
         $subscription = selectDB("subscriptions","`id` = '{$order[0]["subscriptionId"]}'");
     }else{
         ?>
