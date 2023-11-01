@@ -70,6 +70,15 @@ if( isset($_GET["OrderID"]) && !empty($_GET["OrderID"]) ){
                                 </div>
                                 <?php
                             }
+                            if( !empty($order[0]["voucher"]) ){
+                                ?>
+                                <div class="suc_item">
+                                    <div class="suc_child">
+                                        <h3><?php echo $order[0]["voucher"] ?></h3>
+                                    </div>
+                                </div>
+                                <?php
+                            }
                             ?>
                             
                             <h4><?php echo direction("PAYMENT METHOD", "طريقة الدفع" ) ?></h4>
