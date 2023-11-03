@@ -27,7 +27,6 @@
 <script>
 	// Get the canvas element
 var ctx = document.getElementById('chart_6').getContext('2d');
-alert($("#success").val())
 // Define your data
 var data = {
   labels: [$("#successText").val(), $("#failedText").val(), $("#cancelledText").val(),$("#endedText").val()],
