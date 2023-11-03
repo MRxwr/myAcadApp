@@ -71,7 +71,7 @@ td{
     <tbody>
         <tr>
             <td class='txt-dark' style='white-space: break-spaces;'>
-                <?php echo "{$order[0]["subscriptionQuantity"]}x " . direction($order[0]["enSession"],$order[0]["arSession"]) . " / " . direction($order[0]["enSubscription"],$order[0]["arSubscription"])?>;
+                <?php echo "{$order[0]["subscriptionQuantity"]}x " . direction($order[0]["enSession"],$order[0]["arSession"]) . " / " . direction($order[0]["enSubscription"],$order[0]["arSubscription"])?>
             </td>
             <td>
                 <span class='Price txt-dark'><?php echo numTo3Float($order[0]["totalSubscriptionPrice"]) ?>KD</span>
@@ -79,7 +79,7 @@ td{
         </tr>
         <tr>
             <td class='txt-dark' style='white-space: break-spaces;'>
-                <?php echo "{$order[0]["jersyQuantity"]}x Jersy of " . direction($order[0]["enAcademy"],$order[0]["arAcademy"]) ?>;
+                <?php echo "{$order[0]["jersyQuantity"]}x Jersy of " . direction($order[0]["enAcademy"],$order[0]["arAcademy"]) ?>
             </td>
             <td>
                 <span class='Price txt-dark'><?php echo numTo3Float($order[0]["totalJersyPrice"]) ?>KD</span>
