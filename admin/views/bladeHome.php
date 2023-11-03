@@ -196,7 +196,7 @@ for ( $y =0; $y < 3; $y++){
 		</thead>
 			<tbody>
 			<?php
-			if( $orders = selectDB("orders","`id` != '0' ORDER BY `date` DESC") ){
+			if( $orders = selectDB("orders","`id` != '0' ORDER BY `date` DESC LIMIT 5") ){
 				for( $i = 0; $i < sizeof($orders); $i++ ){
 					$status = [direction("Pending","إنتظار"),direction("Successful","ناجحه"),direction("Failed","فاشلة"),direction("Cancelled","ملغية"),direction("Ended","إنتهى")];
 					$statusColor = ["default","success","info","danger","warning"];
