@@ -136,7 +136,7 @@ for ( $y =0; $y < 3; $y++){
 				$size = sizeof($call);
 			}
 			$title = direction("Cancelled","ملغية");
-			$icon = "fa fa-car text-danger";
+			$icon = "fa fa-undo text-danger";
 		}elseif( $i == 3 ){
 			if ($call = selectDB("orders","`status` = '4' {$statsDate[$y]}")){
 				$size = sizeof($call);
