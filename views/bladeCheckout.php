@@ -149,13 +149,13 @@ $checkout = json_encode($_POST, JSON_UNESCAPED_UNICODE);
                                 <input type="hidden" id="total" value='<?php echo $newTotal ?>'>
                                 <input type="hidden" id="academy" value='<?php echo $academy["id"] ?>'>
                                 <input type="hidden" name="voucher" value=''>
-                                </form>
-                                </div>
+                            </form>
+                        </div>
                         <div class="row mb-5">
-                            <div class="col-6">
+                            <div class="col-9">
                                 <input type="text" class="form-control" value='' style="height: 50px;font-size: 20px;font-weight: 600;" id="appliedVoucher" placeholder="Voucher Code">
                             </div>
-                            <div class="col-6" style="align-self: center;">
+                            <div class="col-3 button" style="align-self: center;">
                                 <div class="btn btn-secondary" id="voucherBtn" style="width: 100%;font-size: 25px;font-weight: 600;"><?php echo direction("APPLY","أرسل") ?></div>
                             </div>
                         </div>
