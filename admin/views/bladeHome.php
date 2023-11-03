@@ -271,7 +271,16 @@ if ($call = selectDB("orders","`status` = '4'")){
 }else{
 	$size4 = 0;
 }
-		
+
+$statsDate = [
+	date("Y-m-d"),
+	date("Y-m-d",mktime(0, 0, 0, date("m"), date("d")-1, date("Y"))),
+	date("Y-m-d",mktime(0, 0, 0, date("m"), date("d")-2, date("Y"))),
+	date("Y-m-d",mktime(0, 0, 0, date("m"), date("d")-3, date("Y"))),
+	date("Y-m-d",mktime(0, 0, 0, date("m"), date("d")-4, date("Y"))),
+	date("Y-m-d",mktime(0, 0, 0, date("m"), date("d")-5, date("Y"))),
+	date("Y-m-d",mktime(0, 0, 0, date("m"), date("d")-6, date("Y"))),
+];
 ?>
 <div style="display:none">
 	<input id="success" value="<?php echo $size1 ?>">
@@ -282,4 +291,16 @@ if ($call = selectDB("orders","`status` = '4'")){
 	<input id="cancelledText" value="<?php echo $title3 ?>">
 	<input id="ended" value="<?php echo $size4 ?>">
 	<input id="endedText" value="<?php echo $title4 ?>">
+	<?php
+	for( $i = 0; $i < sizeof($statsDate); $i++){
+		if( $orders = selectDB("orders","`status` = '1' AND `date` LIKE '%{$statsDate[$i]}%'") ){
+			$ordersDate = $statsDate[$i];
+			$ordersTotal = sizeof($orders);
+		}else{
+			$ordersDate = $statsDate[$i];
+			$ordersTotal = 0;
+		}
+		echo "<input id='day{$i}' value='{$ordersTotal}'><input id='day{$i}Text' value='{$ordersDate}'>";
+	}
+	?>
 </div>
