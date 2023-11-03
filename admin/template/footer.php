@@ -27,7 +27,7 @@
 <script>
 	// Get the canvas element
 var ctx = document.getElementById('chart_6').getContext('2d');
-
+alert($("#success").val())
 // Define your data
 var data = {
   labels: ['Label 1', 'Label 2', 'Label 3','Label 3'],
