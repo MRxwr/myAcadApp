@@ -410,28 +410,15 @@ $( document ).ready(function() {
 			}
 		});
 	}
-/*
+
 	if( $('#chart_6').length > 0 ){
 		var ctx6 = document.getElementById("chart_6").getContext("2d");
 		var data6 = {
-			 labels: [
-			"lab 1",
-			"lab 2",
-			"lab 3"
-		],
+			labels: [$("#successText").val(), $("#failedText").val(), $("#cancelledText").val(),$("#endedText").val()],
 		datasets: [
 			{
-				data: [300, 50, 100],
-				backgroundColor: [
-					"rgba(139,195,74,1)",
-					"rgba(248, 179, 45,1)",
-					"rgba(33,150,243,1)"
-				],
-				hoverBackgroundColor: [
-					"rgba(139,195,74,1)",
-					"rgba(248, 179, 45,1)",
-					"rgba(33,150,243,1)"
-				]
+				data: [$("#success").val(), $("#failed").val(), $("#cancelled").val(),$("#ended").val()],
+    			backgroundColor: ['#8bc34a', '#e7368d', '#f33923','#f8b636']
 			}]
 		};
 		
@@ -462,7 +449,7 @@ $( document ).ready(function() {
 			}
 		});
 	}
-*/
+
 	if( $('#chart_7').length > 0 ){
 		var ctx7 = document.getElementById("chart_7").getContext("2d");
 		var data7 = {
