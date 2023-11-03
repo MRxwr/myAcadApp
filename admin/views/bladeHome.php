@@ -139,7 +139,7 @@ for ( $y =0; $y < 3; $y++){
 ?>	
 
 <?php 
-for ( $y = 2; $y < 3; $y++){
+for ( $y = 1; $y < 2; $y++){
 	$statsDate = ["AND `date` LIKE '%".date("Y-m-d")."%'","AND `date` BETWEEN '".date("Y-m-d",mktime(0, 0, 0, date("m")-1, date("d"), date("Y")))."' AND '".date("Y-m-d")."'",""];
 	$statTitle = [direction("Daily Stats","أحصائيات يومية"),direction("Monthly Stats","أحصائيات شهرية"),direction("All time Stats","أحصائيات الكل")];
 ?>
