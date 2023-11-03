@@ -152,10 +152,10 @@ $checkout = json_encode($_POST, JSON_UNESCAPED_UNICODE);
                             </form>
                         </div>
                         <div class="row mb-5">
-                            <div class="col-9">
+                            <div class="col-8">
                                 <input type="text" class="form-control" value='' style="height: 50px;font-size: 20px;font-weight: 600;" id="appliedVoucher" placeholder="Voucher Code">
                             </div>
-                            <div class="col-3 button" style="align-self: center;">
+                            <div class="col-4" style="align-self: center;">
                                 <div class="btn btn-secondary" id="voucherBtn" style="width: 100%;font-size: 25px;font-weight: 600;"><?php echo direction("APPLY","أرسل") ?></div>
                             </div>
                         </div>
