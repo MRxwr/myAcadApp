@@ -26,7 +26,7 @@
 
 <script>
 	// Get the canvas element
-var ctx = document.getElementById('myPieChart').getContext('2d');
+var ctx = document.getElementById('chart_6').getContext('2d');
 
 // Define your data
 var data = {
