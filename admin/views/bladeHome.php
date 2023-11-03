@@ -242,3 +242,45 @@ for ( $y =0; $y < 2; $y++){
 		</div>
 	</div>
 </div>
+
+<?php 
+		if ( $i == 0 ){
+			if ($call = selectDB("orders","`status` = '1' {$statsDate[$y]}")){
+				$size1 = sizeof($call);
+			}else{
+				$size1 = 0;
+			}
+			$title = direction("Success","ناجحه");
+			$icon = "fa fa-money text-success";
+		}elseif( $i == 1 ){
+			if ($call = selectDB("orders","`status` = '2' {$statsDate[$y]}")){
+				$size2 = sizeof($call);
+			}else{
+				$size2 = 0;
+			}
+			$title = direction("Failed","فاشلة");
+			$icon = "fa fa-close text-info";
+		}elseif( $i == 2 ){
+			if ($call = selectDB("orders","`status` = '3' {$statsDate[$y]}")){
+				$size3 = sizeof($call);
+			}else{
+				$size3 = 0;
+			}
+			$title = direction("Cancelled","ملغية");
+			$icon = "fa fa-undo text-danger";
+		}elseif( $i == 3 ){
+			if ($call = selectDB("orders","`status` = '4' {$statsDate[$y]}")){
+				$size4 = sizeof($call);
+			}else{
+				$size4 = 0;
+			}
+			$title = direction("Ended","إنتهى");
+			$icon = "pe-7s-clock text-warning";
+		}
+	?>
+	<div style="display:none">
+		<input id="success" value="<?php echo $size1 ?>">
+		<input id="failed" value="<?php echo $size2 ?>">
+		<input id="cancelled" value="<?php echo $size3 ?>">
+		<input id="ended" value="<?php echo $size4 ?>">
+	</div>
