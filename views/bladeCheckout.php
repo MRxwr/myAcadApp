@@ -150,22 +150,21 @@ $checkout = json_encode($_POST, JSON_UNESCAPED_UNICODE);
                                 <input type="hidden" id="academy" value='<?php echo $academy["id"] ?>'>
                                 <input type="hidden" name="voucher" value=''>
                                 </form>
-                                <div class="row mb-5">
-                                    <div class="col-6">
-                                        <input type="text" class="form-control" value='' style="height: 50px;font-size: 20px;font-weight: 600;" id="appliedVoucher" placeholder="Voucher Code">
-                                    </div>
-                                    <div class="col-6" style="align-self: center;">
-                                        <div class="btn btn-secondary" id="voucherBtn" style="width: 100%;font-size: 25px;font-weight: 600;"><?php echo direction("APPLY","أرسل") ?></div>
-                                    </div>
                                 </div>
-                                <div class="d-flex justify-content-between mt_50 extre_h6">
-                                    <h6><strong><?php echo direction("Total", "المجموع") ?></strong></h6>
-                                    <span id="shownTotal"><?php echo $newTotal ?>KD</span>
-                                </div>
-                                <p>By clicking Pay Now, you agree to our <a href="#">Terms & Conditions</a></p>
-                                <button class="button"><?php echo direction("CHECKOUT","تابع للدفع") ?></button>
-                            
+                        <div class="row mb-5">
+                            <div class="col-6">
+                                <input type="text" class="form-control" value='' style="height: 50px;font-size: 20px;font-weight: 600;" id="appliedVoucher" placeholder="Voucher Code">
+                            </div>
+                            <div class="col-6" style="align-self: center;">
+                                <div class="btn btn-secondary" id="voucherBtn" style="width: 100%;font-size: 25px;font-weight: 600;"><?php echo direction("APPLY","أرسل") ?></div>
+                            </div>
                         </div>
+                        <div class="d-flex justify-content-between mt_50 extre_h6">
+                            <h6><strong><?php echo direction("Total", "المجموع") ?></strong></h6>
+                            <span id="shownTotal"><?php echo $newTotal ?>KD</span>
+                        </div>
+                        <p>By clicking Pay Now, you agree to our <a href="#">Terms & Conditions</a></p>
+                        <button class="button"><?php echo direction("CHECKOUT","تابع للدفع") ?></button>
                     </div>
                 </div>
             </div>
