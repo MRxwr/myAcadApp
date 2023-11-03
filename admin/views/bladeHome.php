@@ -76,7 +76,7 @@
 	<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 text-center statsHeading"><?php echo direction("Earnings","الإيرادات") ?></div>
 <?php 
 
-for ( $y =0; $y < 3; $y++){
+for ( $y =0; $y < 2; $y++){
 	$statsDate = [
 	"AND `date` LIKE '%".date("Y-m-d")."%'",
 	"AND (`date` BETWEEN '".date("Y-m-d",mktime(0, 0, 0, date("m")-1, date("d"), date("Y")))."' AND '".date("Y-m-d",mktime(0, 0, 0, date("m"), date("d")+1, date("Y")))."')",
@@ -93,7 +93,7 @@ for ( $y =0; $y < 3; $y++){
 	$title = $statTitle[$y];
 	$icon = "fa fa-money text-success";
 	?>
-	<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 	<div class="panel panel-default card-view pa-0">
 	<div class="panel-wrapper collapse in">
 	<div class="panel-body pa-0">
