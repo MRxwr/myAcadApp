@@ -68,7 +68,7 @@
 			</div>
 			<div class="panel-wrapper collapse in">
 				<div class="panel-body">
-					<canvas id="chart_6" height="200"></canvas>
+					<canvas id="chart_6" height="600"></canvas>
 				</div>
 			</div>
 		</div>	
