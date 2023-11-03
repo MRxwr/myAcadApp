@@ -55,6 +55,9 @@ require ("includes/checksouthead.php");
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 	
+	<!-- Morris Charts CSS -->
+    <link href="../vendors/bower_components/morris.js/morris.css" rel="stylesheet" type="text/css"/>
+	
 	<!-- Custom CSS -->
 	<link href="dist/css/style.css" rel="stylesheet" type="text/css">
 </head>
