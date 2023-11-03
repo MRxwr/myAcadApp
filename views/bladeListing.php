@@ -48,7 +48,10 @@ if( $sportTitle = selectDB("sports","`id` = '{$_POST["sport"]}'") ){
                     </a>
                     <div class="foott_cont">
                         <div class="kuwat">
-                            <span><?php echo $counter ?></span>
+                            <?php 
+                                $backgorudColor = ( $counter <= 3 ) ? "#FFA300" : "#cacaca";
+                            ?>
+                            <span style="background-color:<?php echo $backgorudColor ?> !important;" ><?php echo $counter ?></span>
                             <div class="kuwat_items">
                                 <img src="logos/<?php echo $academies[$i]["imageurl"] ?>" alt="logo_<?php echo $academies[$i]["enTitle"]?>">
                                 <div>
