@@ -245,28 +245,28 @@ for ( $y =0; $y < 2; $y++){
 
 <?php 
 $title1 = direction("Success","ناجحه");
-if ($call = selectDB("orders","`status` = '1' {$statsDate[$y]}")){
+if ($call = selectDB("orders","`status` = '1'}")){
 	$size1 = sizeof($call);
 }else{
 	$size1 = 0;
 }
 
 $title2 = direction("Failed","فاشلة");
-if ($call = selectDB("orders","`status` = '2' {$statsDate[$y]}")){
+if ($call = selectDB("orders","`status` = '2'}")){
 	$size2 = sizeof($call);
 }else{
 	$size2 = 0;
 }
 
 $title3 = direction("Cancelled","ملغية");
-if ($call = selectDB("orders","`status` = '3' {$statsDate[$y]}")){
+if ($call = selectDB("orders","`status` = '3'}")){
 	$size3 = sizeof($call);
 }else{
 	$size3 = 0;
 }
 
 $title4 = direction("Ended","إنتهى");
-if ($call = selectDB("orders","`status` = '4' {$statsDate[$y]}")){
+if ($call = selectDB("orders","`status` = '4'}")){
 	$size4 = sizeof($call);
 }else{
 	$size4 = 0;
