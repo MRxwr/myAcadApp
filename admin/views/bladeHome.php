@@ -73,13 +73,13 @@ for ( $y =0; $y < 3; $y++){
 	$sql = "SELECT SUM(f.total) as totalPrice FROM ( SELECT * FROM `orders` WHERE `status` = '1' {$statsDate[$y]}) as f;";
 	$result = $dbconnect->query($sql);
 	$row = $result->fetch_assoc();
-	/*
-	if ($call = selectDB2("SUM(price+JSON_UNQUOTE(JSON_EXTRACT(address,'$.shipping'))) as totalPrice","orders2","`status` != '0' AND `status` != '5' {$statsDate[$y]} GROUP BY `orderId` WITH ROLLUP")){
+
+	if ($call = selectDB2("SUM(total) as totalPrice","orders","`status` = '1'{$statsDate[$y]} WITH ROLLUP")){
 		$size = numTo3Float($query["totalPrice"]);
 	}
 	$size = $row["totalPrice"] == '' ?  numTo3Float(0) : numTo3Float($row["totalPrice"]);
 	$title = $statTitle[$y];
-	$icon = "fa fa-money text-success";*/
+	$icon = "fa fa-money text-success";
 	?>
 	<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
 	<div class="panel panel-default card-view pa-0">
