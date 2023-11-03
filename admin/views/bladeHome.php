@@ -130,7 +130,7 @@ for ( $y =0; $y < 3; $y++){
 				$size = sizeof($call);
 			}
 			$title = direction("Failed","فاشلة");
-			$icon = "pe-7s-clock text-info";
+			$icon = "pe-7s-close text-info";
 		}elseif( $i == 2 ){
 			if ($call = selectDB("orders","`status` = '3' {$statsDate[$y]}")){
 				$size = sizeof($call);
@@ -142,7 +142,7 @@ for ( $y =0; $y < 3; $y++){
 				$size = sizeof($call);
 			}
 			$title = direction("Ended","إنتهى");
-			$icon = "fa fa-car text-warning";
+			$icon = "fa fa-clock text-warning";
 		}
 	?>
 	<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
