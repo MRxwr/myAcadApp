@@ -58,7 +58,7 @@
 }
 </style>
 <div class="row" style="padding:16px">
-	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+	<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
 			<div class="panel panel-default card-view">
 			<div class="panel-heading">
 				<div class="pull-left">
@@ -73,7 +73,7 @@
 			</div>
 		</div>	
 	</div>
-	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-center statsHeading"><?php echo direction("Earnings","الإيرادات") ?></div>
+	<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 text-center statsHeading"><?php echo direction("Earnings","الإيرادات") ?></div>
 <?php 
 
 for ( $y =0; $y < 3; $y++){
@@ -93,7 +93,7 @@ for ( $y =0; $y < 3; $y++){
 	$title = $statTitle[$y];
 	$icon = "fa fa-money text-success";
 	?>
-	<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+	<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
 	<div class="panel panel-default card-view pa-0">
 	<div class="panel-wrapper collapse in">
 	<div class="panel-body pa-0">
