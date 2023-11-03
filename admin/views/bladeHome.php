@@ -73,6 +73,22 @@
 			</div>
 		</div>	
 	</div>
+
+	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+		<div class="panel panel-default card-view">
+			<div class="panel-heading">
+				<div class="pull-left">
+					<h6 class="panel-title txt-dark"><?php echo direction("ًWeekley Subscriptions","إشتراكات الإسبوع") ?></h6>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+			<div class="panel-wrapper collapse in">
+				<div class="panel-body">
+					<div id="morris_bar_chart" class="morris-chart"></div>
+				</div>
+			</div>
+		</div>
+	</div>
 	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center statsHeading"><?php echo direction("Earnings","الإيرادات") ?></div>
 <?php 
 

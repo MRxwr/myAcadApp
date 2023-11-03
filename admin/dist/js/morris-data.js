@@ -222,25 +222,36 @@ $(function() {
 	   // Bar Chart
 		Morris.Bar({
 			element: 'morris_bar_chart',
-			data: [{
-				device: 'iPhone',
-				geekbench: 136
-			}, {
-				device: 'iPhone 3G',
-				geekbench: 137
-			}, {
-				device: 'iPhone 3GS',
-				geekbench: 275
-			}, {
-				device: 'iPhone 4',
-				geekbench: 380
-			}, {
-				device: 'iPhone 4S',
-				geekbench: 655
-			}, {
-				device: 'iPhone 5',
-				geekbench: 1571
-			}],
+			data: [
+				{
+					device: $('#day0Text').val(),
+					geekbench: $('#day0').val(),
+				},
+				{
+					device: $('#day1Text').val(),
+					geekbench: $('#day1').val(),
+				},
+				{
+					device: $('#day2Text').val(),
+					geekbench: $('#day2').val(),
+				},
+				{
+					device: $('#day3Text').val(),
+					geekbench: $('#day3').val(),
+				},
+				{
+					device: $('#day4Text').val(),
+					geekbench: $('#day4').val(),
+				},
+				{
+					device: $('#day5Text').val(),
+					geekbench: $('#day5').val(),
+				},
+				{
+					device: $('#day6Text').val(),
+					geekbench: $('#day6').val(),
+				},
+			],
 			xkey: 'device',
 			ykeys: ['geekbench'],
 			labels: ['Geekbench'],
