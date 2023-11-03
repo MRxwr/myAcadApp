@@ -20,6 +20,10 @@
 <!-- Bootstrap Core JavaScript -->
 <script src="../vendors/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
+<!-- ChartJS JavaScript -->
+<script src="../vendors/chart.js/Chart.min.js"></script>
+<script src="dist/js/chartjs-data.js"></script>
+
 <!-- Data table JavaScript -->
 <script src="dist/js/dataTables-data.js"></script>
 <script src="../vendors/bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
