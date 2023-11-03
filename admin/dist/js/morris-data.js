@@ -261,7 +261,7 @@ $(function() {
 			barOpacity: 1,
 			pointStrokeColors:['#8BC34A'],
 			behaveLikeLine: true,
-			grid: true,
+			grid: false,
 			gridTextColor:'#878787',
 			hideHover: 'auto',
 			barColors: ['#8BC34A'],
