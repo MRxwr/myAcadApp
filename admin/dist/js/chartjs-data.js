@@ -412,41 +412,29 @@ $( document ).ready(function() {
 	}
 
 	if( $('#chart_6').length > 0 ){
-		var ctx6 = document.getElementById("chart_6").getContext("2d");
-		var data6 = {
-			labels: [$("#successText").val(), $("#failedText").val(), $("#cancelledText").val(),$("#endedText").val()],
-		datasets: [
-			{
-				data: [$("#success").val(), $("#failed").val(), $("#cancelled").val(),$("#ended").val()],
-    			backgroundColor: ['#8bc34a', '#e7368d', '#f33923','#f8b636']
-			}]
+		// Get the canvas element
+		var ctx = document.getElementById('chart_6').getContext('2d');
+		// Define your data
+		var data = {
+		labels: [$("#successText").val(), $("#failedText").val(), $("#cancelledText").val(),$("#endedText").val()],
+		datasets: [{
+			data: [$("#success").val(), $("#failed").val(), $("#cancelled").val(),$("#ended").val()], // Your data values
+			backgroundColor: ['#8bc34a', '#e7368d', '#f33923','#f8b636'], // Colors for each slice
+		}]
 		};
-		
-		var pieChart  = new Chart(ctx6,{
-			type: 'pie',
-			data: data6,
-			options: {
-				animation: {
-					duration:	3000
-				},
-				responsive: true,
-				legend: {
-					labels: {
-					fontFamily: "Roboto",
-					fontColor:"#878787"
-					}
-				},
-				tooltip: {
-					backgroundColor:'rgba(33,33,33,1)',
-					cornerRadius:0,
-					footerFontFamily:"'Roboto'"
-				},
-				elements: {
-					arc: {
-						borderWidth: 0
-					}
-				}
-			}
+
+		// Define your options
+		var options = {
+		// You can customize various chart options here
+		responsive: true,
+		maintainAspectRatio: false,
+		};
+
+		// Create the pie chart
+		var myPieChart = new Chart(ctx, {
+		type: 'pie',
+		data: data,
+		options: options,
 		});
 	}
 
