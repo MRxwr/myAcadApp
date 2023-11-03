@@ -73,7 +73,7 @@ for ( $y =0; $y < 3; $y++){
 	$sql = "SELECT SUM(f.total) as totalPrice FROM ( SELECT * FROM `orders` WHERE `status` = '1' {$statsDate[$y]}) as f;";
 	$result = $dbconnect->query($sql);
 	$row = $result->fetch_assoc();
-	
+
 	$size = $row["totalPrice"] == '' ?  numTo3Float(0) : numTo3Float($row["totalPrice"]);
 	$title = $statTitle[$y];
 	$icon = "fa fa-money text-success";
@@ -225,5 +225,21 @@ for ( $y =0; $y < 2; $y++){
 		</div>	
 		</div>
 		</div>
+	</div>
+	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+			<div class="panel panel-default card-view">
+			<div class="panel-heading">
+				<div class="pull-left">
+					<h6 class="panel-title txt-dark">pie Chart</h6>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+			<div class="panel-wrapper collapse in">
+				<div class="panel-body">
+					<canvas id="chart_6" height="200"></canvas>
+				</div>
+			</div>
+				
+		</div>	
 	</div>
 </div>
