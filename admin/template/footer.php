@@ -24,6 +24,34 @@
 <script src="../vendors/chart.js/Chart.min.js"></script>
 <script src="dist/js/chartjs-data.js"></script>
 
+<script>
+	// Get the canvas element
+var ctx = document.getElementById('myPieChart').getContext('2d');
+
+// Define your data
+var data = {
+  labels: ['Label 1', 'Label 2', 'Label 3'],
+  datasets: [{
+    data: [30, 40, 30], // Your data values
+    backgroundColor: ['red', 'blue', 'green'], // Colors for each slice
+  }]
+};
+
+// Define your options
+var options = {
+  // You can customize various chart options here
+  responsive: true,
+  maintainAspectRatio: false,
+};
+
+// Create the pie chart
+var myPieChart = new Chart(ctx, {
+  type: 'pie',
+  data: data,
+  options: options,
+});
+</script>
+
 <!-- Data table JavaScript -->
 <script src="dist/js/dataTables-data.js"></script>
 <script src="../vendors/bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
