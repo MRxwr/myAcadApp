@@ -21,7 +21,7 @@
 							</li>
 						<?php
 						$languageText = direction("العربية","English");
-						$languageParam = direction("lang=AR","lang=ENG");
+						$languageParam = direction("Lang=AR","Lang=ENG");
 						?>
 							<li>
 								<a href="<?php echo $_SERVER['REQUEST_URI'] . getSign() . $languageParam ?>"><i class="fa fa-language"></i><span><?php echo $languageText ?></span></a>
