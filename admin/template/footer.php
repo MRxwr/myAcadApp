@@ -30,10 +30,10 @@ var ctx = document.getElementById('chart_6').getContext('2d');
 
 // Define your data
 var data = {
-  labels: ['Label 1', 'Label 2', 'Label 3'],
+  labels: ['Label 1', 'Label 2', 'Label 3','Label 3'],
   datasets: [{
-    data: [30, 40, 30], // Your data values
-    backgroundColor: ['red', 'blue', 'green'], // Colors for each slice
+    data: [50, 20, 20,10], // Your data values
+    backgroundColor: ['#8bc34a', '#e7368d', '#f33923','#f8b636'], // Colors for each slice
   }]
 };
 
