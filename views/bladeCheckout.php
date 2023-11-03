@@ -132,7 +132,7 @@ $checkout = json_encode($_POST, JSON_UNESCAPED_UNICODE);
                         ?>
                         <div class="check_out">
                             <h2><?php echo direction("PAYMENT METHOD", "طرق الدفع" ) ?></h2>
-                            <form action="?v=Payment" method="post" >
+                            <form action="?v=Payment" method="post" id="formSubmit">
                                 <div class="shape_items">
                                     <input type="radio" checked="" name="paymentMethod" id="out_1" value="1">
                                     <label for="out_1"><span></span>Knet</label>
@@ -165,7 +165,7 @@ $checkout = json_encode($_POST, JSON_UNESCAPED_UNICODE);
                                 <span id="shownTotal"><?php echo $newTotal ?>KD</span>
                             </div>
                             <p>By clicking Pay Now, you agree to our <a href="#">Terms & Conditions</a></p>
-                            <button class="button"><?php echo direction("CHECKOUT","تابع للدفع") ?></button>
+                            <button class="button" id="btnSubmit"><?php echo direction("CHECKOUT","تابع للدفع") ?></button>
                         </div>
                     </div>
                 </div>
