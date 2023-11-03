@@ -142,6 +142,14 @@ $checkout = json_encode($_POST, JSON_UNESCAPED_UNICODE);
                                     <input type="radio" name="paymentMethod" id="out_3" <?php echo $disabled = ( $user[0]["wallet"] > ($jersyPrice + $totalPrice)) ? "" : "disabled" ; ?> value="3">
                                     <label for="out_3"><span></span><?php echo direction("Wallet","المحفظة") ?> <p>  ( <?php echo $user[0]["wallet"] ?>KD )</p></label>
                                 </div>
+                                <div class="row mb-5">
+                                    <div class="col-6">
+                                        <input type="text" class="form-control" value='' style="height: 50px;font-size: 20px;font-weight: 600;" id="appliedVoucher" placeholder="Voucher Code">
+                                    </div>
+                                    <div class="col-6" style="align-self: center;">
+                                        <div class="btn btn-secondary" id="voucherBtn" style="width: 100%;font-size: 25px;font-weight: 600;"><?php echo direction("APPLY","أرسل") ?></div>
+                                    </div>
+                                </div>
                                 <input type="hidden" name="data" value='<?php echo $checkout ?>'>
                                 <input type="hidden" id="total" value='<?php echo $newTotal ?>'>
                                 <input type="hidden" id="academy" value='<?php echo $academy["id"] ?>'>
