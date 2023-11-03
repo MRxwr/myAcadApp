@@ -410,7 +410,7 @@ $( document ).ready(function() {
 			}
 		});
 	}
-
+/*
 	if( $('#chart_6').length > 0 ){
 		var ctx6 = document.getElementById("chart_6").getContext("2d");
 		var data6 = {
@@ -462,7 +462,7 @@ $( document ).ready(function() {
 			}
 		});
 	}
-
+*/
 	if( $('#chart_7').length > 0 ){
 		var ctx7 = document.getElementById("chart_7").getContext("2d");
 		var data7 = {
