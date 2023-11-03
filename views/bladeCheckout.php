@@ -159,12 +159,14 @@ $checkout = json_encode($_POST, JSON_UNESCAPED_UNICODE);
                                 <div class="btn btn-secondary" id="voucherBtn" style="width: 100%;font-size: 25px;font-weight: 600;"><?php echo direction("APPLY","أرسل") ?></div>
                             </div>
                         </div>
-                        <div class="d-flex justify-content-between mt_50 extre_h6">
-                            <h6><strong><?php echo direction("Total", "المجموع") ?></strong></h6>
-                            <span id="shownTotal"><?php echo $newTotal ?>KD</span>
+                        <div class="check_out">
+                            <div class="d-flex justify-content-between mt_50 extre_h6">
+                                <h6><strong><?php echo direction("Total", "المجموع") ?></strong></h6>
+                                <span id="shownTotal"><?php echo $newTotal ?>KD</span>
+                            </div>
+                            <p>By clicking Pay Now, you agree to our <a href="#">Terms & Conditions</a></p>
+                            <button class="button"><?php echo direction("CHECKOUT","تابع للدفع") ?></button>
                         </div>
-                        <p>By clicking Pay Now, you agree to our <a href="#">Terms & Conditions</a></p>
-                        <button class="button"><?php echo direction("CHECKOUT","تابع للدفع") ?></button>
                     </div>
                 </div>
             </div>
