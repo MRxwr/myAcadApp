@@ -21,12 +21,12 @@
 <script src="../vendors/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
 <!-- ChartJS JavaScript -->
-<script src="../vendors/chart.js/Chart.min.js"></script>
-<script src="dist/js/chartjs-data.js"></script>
+<script src="../vendors/chart.js/Chart.min.js?<?php echo randLetter() . "=" . rand(0000,9999) ?>"></script>
+<script src="dist/js/chartjs-data.js?<?php echo randLetter() . "=" . rand(0000,9999) ?>"></script>
 <!-- Morris Charts JavaScript -->
-<script src="../vendors/bower_components/raphael/raphael.min.js"></script>
-<script src="../vendors/bower_components/morris.js/morris.min.js"></script>
-<script src="dist/js/morris-data.js"></script>
+<script src="../vendors/bower_components/raphael/raphael.min.js?<?php echo randLetter() . "=" . rand(0000,9999) ?>"></script>
+<script src="../vendors/bower_components/morris.js/morris.min.js?<?php echo randLetter() . "=" . rand(0000,9999) ?>"></script>
+<script src="dist/js/morris-data.js?<?php echo randLetter() . "=" . rand(0000,9999) ?>"></script>
 
 <!-- Data table JavaScript -->
 <script src="dist/js/dataTables-data.js"></script>
