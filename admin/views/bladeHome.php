@@ -124,25 +124,25 @@ for ( $y =0; $y < 3; $y++){
 				$size = sizeof($call);
 			}
 			$title = direction("Success","ناجحه");
-			$icon = "fa fa-money text-primary";
+			$icon = "fa fa-money text-success";
 		}elseif( $i == 1 ){
 			if ($call = selectDB("orders","`status` = '2' {$statsDate[$y]}")){
 				$size = sizeof($call);
 			}
-			$title = direction("Preparing","قيد التجهيز");
-			$icon = "pe-7s-clock text-default";
+			$title = direction("Failed","فاشلة");
+			$icon = "pe-7s-clock text-info";
 		}elseif( $i == 2 ){
 			if ($call = selectDB("orders","`status` = '3' {$statsDate[$y]}")){
 				$size = sizeof($call);
 			}
-			$title = direction("Delivering","جاري التوصيل");
-			$icon = "fa fa-car text-warning";
+			$title = direction("Cancelled","ملغية");
+			$icon = "fa fa-car text-danger";
 		}elseif( $i == 3 ){
 			if ($call = selectDB("orders","`status` = '4' {$statsDate[$y]}")){
 				$size = sizeof($call);
 			}
-			$title = direction("Delivered","تم تسليمها");
-			$icon = "fa fa-car text-success";
+			$title = direction("Ended","إنتهى");
+			$icon = "fa fa-car text-warning";
 		}
 	?>
 	<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
