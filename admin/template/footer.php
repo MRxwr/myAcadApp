@@ -23,33 +23,10 @@
 <!-- ChartJS JavaScript -->
 <script src="../vendors/chart.js/Chart.min.js"></script>
 <script src="dist/js/chartjs-data.js"></script>
-
-<script>
-	// Get the canvas element
-var ctx = document.getElementById('chart_6').getContext('2d');
-// Define your data
-var data = {
-  labels: [$("#successText").val(), $("#failedText").val(), $("#cancelledText").val(),$("#endedText").val()],
-  datasets: [{
-    data: [$("#success").val(), $("#failed").val(), $("#cancelled").val(),$("#ended").val()], // Your data values
-    backgroundColor: ['#8bc34a', '#e7368d', '#f33923','#f8b636'], // Colors for each slice
-  }]
-};
-
-// Define your options
-var options = {
-  // You can customize various chart options here
-  responsive: true,
-  maintainAspectRatio: false,
-};
-
-// Create the pie chart
-var myPieChart = new Chart(ctx, {
-  type: 'pie',
-  data: data,
-  options: options,
-});
-</script>
+<!-- Morris Charts JavaScript -->
+<script src="../vendors/bower_components/raphael/raphael.min.js"></script>
+<script src="../vendors/bower_components/morris.js/morris.min.js"></script>
+<script src="dist/js/morris-data.js"></script>
 
 <!-- Data table JavaScript -->
 <script src="dist/js/dataTables-data.js"></script>
