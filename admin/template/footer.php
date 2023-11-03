@@ -30,7 +30,7 @@ var ctx = document.getElementById('chart_6').getContext('2d');
 alert($("#success").val())
 // Define your data
 var data = {
-  labels: ['Label 1', 'Label 2', 'Label 3','Label 3'],
+  labels: [$("#successText").val(), $("#failedText").val(), $("#cancelledText").val(),$("#endedText").val()],
   datasets: [{
     data: [$("#success").val(), $("#failed").val(), $("#cancelled").val(),$("#ended").val()], // Your data values
     backgroundColor: ['#8bc34a', '#e7368d', '#f33923','#f8b636'], // Colors for each slice
