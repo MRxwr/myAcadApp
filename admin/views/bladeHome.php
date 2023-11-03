@@ -60,7 +60,7 @@
 <div class="row" style="padding:16px">
 	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center statsHeading"><?php echo direction("Earnings","الإيرادات") ?></div>
 <?php 
-/*
+
 for ( $y =0; $y < 3; $y++){
 	$statsDate = [
 	"AND `date` LIKE '%".date("Y-m-d")."%'",
@@ -79,7 +79,7 @@ for ( $y =0; $y < 3; $y++){
 	}
 	$size = $row["totalPrice"] == '' ?  numTo3Float(0) : numTo3Float($row["totalPrice"]);
 	$title = $statTitle[$y];
-	$icon = "fa fa-money text-success";
+	$icon = "fa fa-money text-success";*/
 	?>
 	<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
 	<div class="panel panel-default card-view pa-0">
@@ -107,11 +107,11 @@ for ( $y =0; $y < 3; $y++){
 	<?php
 	$size = 0;
 }
-*/
+
 ?>	
 
 <?php 
-for ( $y =0; $y < 3; $y++){
+for ( $y =0; $y < 2; $y++){
 	$statsDate = ["AND `date` LIKE '%".date("Y-m-d")."%'","AND `date` BETWEEN '".date("Y-m-d",mktime(0, 0, 0, date("m")-1, date("d"), date("Y")))."' AND '".date("Y-m-d")."'",""];
 	$statTitle = [direction("Daily Stats","أحصائيات يومية"),direction("Monthly Stats","أحصائيات شهرية"),direction("All time Stats","أحصائيات الكل")];
 ?>
