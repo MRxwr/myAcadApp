@@ -73,10 +73,10 @@ for ( $y =0; $y < 3; $y++){
 	$sql = "SELECT SUM(f.total) as totalPrice FROM ( SELECT * FROM `orders` WHERE `status` = '1' {$statsDate[$y]}) as f;";
 	$result = $dbconnect->query($sql);
 	$row = $result->fetch_assoc();
-
+	/*
 	if ($call = selectDB2("SUM(total) as totalPrice","orders","`status` = '1'{$statsDate[$y]} WITH ROLLUP")){
 		$size = numTo3Float($query["totalPrice"]);
-	}
+	}*/
 	$size = $row["totalPrice"] == '' ?  numTo3Float(0) : numTo3Float($row["totalPrice"]);
 	$title = $statTitle[$y];
 	$icon = "fa fa-money text-success";
