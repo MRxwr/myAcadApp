@@ -224,37 +224,37 @@ $(function() {
 			element: 'morris_bar_chart',
 			data: [
 				{
-					device: $('#day0Text').val(),
+					date: $('#day0Text').val(),
 					geekbench: $('#day0').val(),
 				},
 				{
-					device: $('#day1Text').val(),
+					date: $('#day1Text').val(),
 					geekbench: $('#day1').val(),
 				},
 				{
-					device: $('#day2Text').val(),
+					date: $('#day2Text').val(),
 					geekbench: $('#day2').val(),
 				},
 				{
-					device: $('#day3Text').val(),
+					date: $('#day3Text').val(),
 					geekbench: $('#day3').val(),
 				},
 				{
-					device: $('#day4Text').val(),
+					date: $('#day4Text').val(),
 					geekbench: $('#day4').val(),
 				},
 				{
-					device: $('#day5Text').val(),
+					date: $('#day5Text').val(),
 					geekbench: $('#day5').val(),
 				},
 				{
-					device: $('#day6Text').val(),
+					date: $('#day6Text').val(),
 					geekbench: $('#day6').val(),
 				},
 			],
-			xkey: 'device',
+			xkey: 'date',
 			ykeys: ['geekbench'],
-			labels: ['Geekbench'],
+			labels: ['Orders'],
 			barRatio: 0.4,
 			xLabelAngle: 35,
 			pointSize: 1,
