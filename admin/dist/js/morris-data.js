@@ -217,7 +217,7 @@ $(function() {
 			resize: true,
 			gridTextFamily:"Roboto"
 		});
-
+/*
 	if($('#morris_bar_chart').length > 0)
 	   // Bar Chart
 		Morris.Bar({
@@ -268,7 +268,7 @@ $(function() {
 			resize: true,
 			gridTextFamily:"Roboto"
 		});
-	
+	*/
 	if($('#morris_extra_line_chart').length > 0)
 		Morris.Line({
         element: 'morris_extra_line_chart',
