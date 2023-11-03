@@ -215,7 +215,7 @@ for ( $y =0; $y < 3; $y++){
 				<td><?php echo direction($orders[$i]["enAcademy"],$orders[$i]["arAcademy"]) ?></td>
 				<td><?php echo $orders[$i]["total"] ?>KD</td>
 				<td><button class="btn btn-<?php echo $orderBtnColor ?>" style="width: 100%;"><?php echo $orderStatus ?></button></td>
-				<td><a href="?v=Order&id=<?php echo $ordersOnline[$i]["id"] ?>">Details</a></td>
+				<td><a href="?v=Order&id=<?php echo $orders[$i]["id"] ?>">Details</a></td>
 			</tr>
 			<?php
 				}
