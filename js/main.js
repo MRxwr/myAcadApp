@@ -60,6 +60,10 @@
 			}
 		});
 		
+
+        $('#btnSubmit').on('click', function (event) {
+			$('#formSubmit').submit();
+		});
 		
         // Show or hide the sticky footer button
         $(window).on('scroll', function () {
