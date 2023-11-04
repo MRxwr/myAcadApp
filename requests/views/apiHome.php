@@ -21,12 +21,12 @@ for( $i = 0; $i < sizeof($gendersEn); $i++ ){
 if( isset($_GET["countryCode"]) && $governates = selectDB2("`id`, `enTitle`, `arTitle`","governates","`hidden` = '0' AND `status` = '0' AND `countryCode` LIKE '{$_GET["countryCode"]}' ORDER BY `enTitle` ASC") ){
     $response["governates"] = $governates;
     $array0 = array(
-        "id" => "-1",
+        "id" => -1,
         "enTitle" => "SELECT GOVERNATE",
         "arTitle" => "إختر المحافظة"
     );
     $array1 = array(
-        "id" => "0",
+        "id" => 0,
         "enTitle" => "SELECT ALL",
         "arTitle" => "إختيار الكل"
     );
