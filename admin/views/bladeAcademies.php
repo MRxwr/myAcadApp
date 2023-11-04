@@ -241,7 +241,7 @@
 				$locationText = ( !empty($academies[$i]["location"]) ) ? direction("View","إعرض") : "";
 				$isClothesText = ( empty($academies[$i]["isClothes"]) )? direction("No","لا") : direction("Yes","نعم");
 				$isPromotionText = ( empty($academies[$i]["isPromotion"]) )? direction("No","لا") : direction("Yes","نعم");
-				$genderText = ( empty($academies[$i]["gender"]) )? direction("Man","رجل") : ( ( $academies[$i]["gender"] == 1 ) ? direction("Woman","إمرأه") : ( ( $academies[$i]["gender"] == 2 ) ? direction("Boy","ولد") : direction("Girl","بنت") ) ) ;
+				$genderText = ( $academies[$i]["gender"] == 1 ) ? direction("Man","رجل") : ( ( $academies[$i]["gender"] == 2 ) ? direction("Woman","إمرأه") : ( ( $academies[$i]["gender"] == 3 ) ? direction("Boy","ولد") : direction("Girl","بنت") ) ) ;
 				if ( $academies[$i]["hidden"] == 1 ){
 					$icon = "fa fa-eye";
 					$link = "?show={$academies[$i]["id"]}";
