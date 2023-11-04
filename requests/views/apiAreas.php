@@ -11,7 +11,7 @@ if( $areas = selectDB2("`id`, `areaEnTitle`,`areaArTitle`","countries","`hidden`
         "areaEnTitle" => "SELECT ALL",
         "areaArTitle" => "إختيار الكل"
     );
-    array_unshift($response["governates"], $array1, $array0);
+    array_unshift($response["areas"], $array1, $array0);
 }else{
     $response["areas"] = array();
     echo outputError($response);die();
