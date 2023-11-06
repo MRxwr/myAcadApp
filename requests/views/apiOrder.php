@@ -13,7 +13,9 @@ if( !isset($_POST["invoiceId"]) || empty($_POST["invoiceId"]) ){
         $order2 = selectDB("orders","`gatewayId` = '{$_POST["invoiceId"]}'");
         if( $order2[0]["status"] == 0 ){
             updateDB("orders",array("gatewayLink"=>json_encode($_POST["url"]),"status"=>1),"`gatewayId` = '{$_POST["invoiceId"]}'");
-            updateDB("sessions",array("quantity"=>"`quantity` - {$order2[0]["subscriptionQuantity"]}"),"`id` = '{$order2[0]["sessionId"]}'");
+            $session = selectDB("sessions","`id` = '{$order2[0]["sessionId"]}'");
+            $quantity = $session[0]["quantity"] - $order2[0]["subscriptionQuantity"];
+            updateDB("sessions",array("quantity"=>$quantity),"`id` = '{$order2[0]["sessionId"]}'");
             $subscription = selectDB("subscriptions","`id` = '{$order2[0]["subscriptionId"]}'");
             $order[0]["endDate"] = date("Y-m-d H:i:s", strtotime($order[0]["date"] . " +{$subscription[0]["numberOfDays"]} days"));
             $response = $order;
