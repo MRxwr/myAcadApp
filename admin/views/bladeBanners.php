@@ -48,10 +48,10 @@
 			
 			<div id="images" style="margin-top: 10px; display:none">
 				<div class="col-md-6">
-				<img id="logo600Img" src="" style="width:250px;height:250px">
+				<img id="logoImg" src="" style="width:250px;height:250px">
 				</div>
 				<div class="col-md-6">
-				<img id="logoImg" src="" style="width:250px;height:250px">
+				<img id="logo600Img" src="" style="width:250px;height:250px">
 				</div>
 			</div>
 			
