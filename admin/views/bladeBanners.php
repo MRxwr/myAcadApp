@@ -10,7 +10,7 @@
 <div class="panel-body">
 	<form class="" method="POST" action="" enctype="multipart/form-data">
 		<div class="row m-0">
-			<div class="col-md-12">
+			<div class="col-md-6">
 			<label><?php echo direction("Title","العنوان") ?></label>
 			<input type="text" name="title" class="form-control" required>
 			</div>
@@ -37,12 +37,18 @@
 			</div>
 			
 			<div class="col-md-6">
-			<label><?php echo direction("Banner","البنر") ?></label>
+			<label><?php echo direction("Banner","البنر") ?> 400x400</label>
 			<input type="file" name="imageurl" class="form-control" required>
+			</div>
+
+			<div class="col-md-6">
+			<label><?php echo direction("Banner","البنر") ?> 600x300</label>
+			<input type="file" name="imageurl600" class="form-control" required>
 			</div>
 			
 			<div id="images" style="margin-top: 10px; display:none">
 				<div class="col-md-6">
+				<img id="logo600Img" src="" style="width:250px;height:250px">
 				</div>
 				<div class="col-md-6">
 				<img id="logoImg" src="" style="width:250px;height:250px">
@@ -126,6 +132,7 @@
 		</a>
 		<div style="display:none"><label id="hidden<?php echo $banners[$i]["id"]?>"><?php echo $banners[$i]["hidden"] ?></label></div>
 		<div style="display:none"><label id="logo<?php echo $banners[$i]["id"]?>"><?php echo $banners[$i]["imageurl"] ?></label></div>
+		<div style="display:none"><label id="logo600<?php echo $banners[$i]["id"]?>"><?php echo $banners[$i]["imageurl600"] ?></label></div>
 		<div style="display:none"><label id="header<?php echo $banners[$i]["id"]?>"><?php echo $banners[$i]["header"] ?></label></div>
 		
 		</td>
@@ -152,6 +159,7 @@
 			var hidden = $("#hidden"+id).html();
 			var type = $("#type"+id).html();
 			var logo = $("#logo"+id).html();
+			var logo600 = $("#logo600"+id).html();
 			$("input[type=file]").prop("required",false);
 			$("input[name=link]").val(link);
 			$("input[name=update]").val(id);
@@ -159,6 +167,7 @@
 			$("select[name=hidden]").val(hidden);
 			$("select[name=type]").val(type);
 			$("#logoImg").attr("src","../logos/"+logo);
+			$("#logo600Img").attr("src","../logos/"+logo600);
 			$("#images").attr("style","margin-top:10px;display:block");
 		})
 	</script>

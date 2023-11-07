@@ -23,6 +23,17 @@ if ( isset($_GET["hide"]) || isset($_GET["show"]) || isset($_GET["delId"]) || is
                     $_POST["imageurl"] = "";
                 }
             }
+
+            if( isset($_FILES['imageurl600']) && is_uploaded_file($_FILES['imageurl600']['tmp_name']) ){
+                $directory = "../logos/";
+                $originalfile = $directory . date("d-m-y") . time() .  round(microtime(true)). "L." . getFileExtension($_FILES["imageurl600"]["name"]);
+                move_uploaded_file($_FILES["imageurl600"]["tmp_name"], $originalfile);
+                $_POST["imageurl600"] = str_replace("../logos/",'',$originalfile);
+            }else{
+                if ( isset($_FILES['imageurl600']) ){
+                    $_POST["imageurl600"] = "";
+                }
+            }
             
             if( isset($_FILES['locationImage']) && is_uploaded_file($_FILES['locationImage']['tmp_name']) ){
                 $directory = "../logos/";
@@ -79,6 +90,18 @@ if ( isset($_GET["hide"]) || isset($_GET["show"]) || isset($_GET["delId"]) || is
                 if( isset($_FILES['imageurl']) ){
                     $imageurl = selectDB("{$table}","`id` = '{$id}'");
                     $_POST["imageurl"] = $imageurl[0]["imageurl"];
+                }
+            }
+
+            if( isset($_FILES['imageurl600']) && is_uploaded_file($_FILES['imageurl600']['tmp_name']) ){
+                $directory = "../logos/";
+                $originalfile = $directory . date("d-m-y") . time() .  round(microtime(true)). "L." . getFileExtension($_FILES["imageurl600"]["name"]);
+                move_uploaded_file($_FILES["imageurl600"]["tmp_name"], $originalfile);
+                $_POST["imageurl600"] = str_replace("../logos/",'',$originalfile);
+            }else{
+                if( isset($_FILES['imageurl600']) ){
+                    $imageurl = selectDB("{$table}","`id` = '{$id}'");
+                    $_POST["imageurl600"] = $imageurl[0]["imageurl600"];
                 }
             }
             
