@@ -86,7 +86,7 @@ for( $i = 0; $i < sizeof($_POST["quantity"]); $i++){
                         <form action="?v=Checkout" method="POST">
                         <h5><?php direction("CLOTHES","ملابس") ?></h5>
                         <div class="jersy_kd">
-                            <p><?php echo direction($academy["enTitle"] . " jersy", "ملابس " . $academy["arTitle"]) ?></p>
+                            <p><?php echo direction($academy["enTitle"] . " jersey", "ملابس " . $academy["arTitle"]) ?></p>
                             <span><?php echo $academy["clothesPrice"] . "KD" ?></span>
                         </div>
                         <div class="jurs_input mt_45">
