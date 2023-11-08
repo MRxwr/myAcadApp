@@ -133,7 +133,7 @@ if ( isset($_GET["hide"]) || isset($_GET["show"]) || isset($_GET["delId"]) || is
                 $directory = "../logos/";
                 $originalfile1 = $directory . date("d-m-y") . time() .  round(microtime(true)). "C." . getFileExtension($_FILES["clothesImage"]["name"]);
                 move_uploaded_file($_FILES["clothesImage"]["tmp_name"], $originalfile1);
-                $_POST["header"] = str_replace("../logos/",'',$originalfile1);
+                $_POST["clothesImage"] = str_replace("../logos/",'',$originalfile1);
             }else{
                 if( isset($_FILES['clothesImage']) ){
                     $clothesImage = selectDB("{$table}","`id` = '{$id}'");
