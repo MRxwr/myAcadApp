@@ -23,14 +23,20 @@
 			</select>
 			</div>
 
-			<div class="col-md-6">
+			<div class="col-md-4">
 			<label><?php echo direction("English Title","الإسم الإنجليزي") ?></label>
 			<input type="text" name="enTitle" class="form-control" required>
 			</div>
 			
-			<div class="col-md-6">
+			<div class="col-md-4">
 			<label><?php echo direction("Arabic Title","الإسم العربي") ?></label>
 			<input type="text" name="arTitle" class="form-control" required>
+			</div>
+			</div>
+			
+			<div class="col-md-4">
+			<label><?php echo direction("Email","البريد الإكتروني") ?></label>
+			<input type="text" name="email" class="form-control" required>
 			</div>
 
 			<div class="col-md-3">
