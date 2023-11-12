@@ -32,7 +32,6 @@
 			<label><?php echo direction("Arabic Title","الإسم العربي") ?></label>
 			<input type="text" name="arTitle" class="form-control" required>
 			</div>
-			</div>
 			
 			<div class="col-md-4">
 			<label><?php echo direction("Email","البريد الإكتروني") ?></label>
