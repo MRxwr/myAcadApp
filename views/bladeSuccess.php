@@ -7,6 +7,11 @@ if( isset($_GET["OrderID"]) && !empty($_GET["OrderID"]) ){
             $quantity = $session[0]["quantity"] - $order2[0]["subscriptionQuantity"];
             updateDB("orders",array("gatewayLink"=>json_encode($_GET),"status"=>1),"`gatewayId` = '{$_GET["OrderID"]}'");
             updateDB("sessions",array("quantity"=>$quantity),"`id` = '{$order2[0]["sessionId"]}'");
+            $academyEmail = selectDB("academies","`id` = '{$order2[0]["academyId"]}'");
+            $settingsEmail = selectDB("settings","`id` = '1'");
+            sendMails($order2,$order2[0]["email"]);
+            sendMails($order2,$academyEmail[0]["email"]);
+            sendMails($order2,$settingsEmail[0]["email"]);
         }
         if($order[0]["paymentMethod"] == 1 ){
             $paymentMethod = "Knet";

@@ -79,7 +79,7 @@ td{
         </tr>
         <tr>
             <td class='txt-dark' style='white-space: break-spaces;'>
-                <?php echo "{$order[0]["jersyQuantity"]}x Jersy of " . direction($order[0]["enAcademy"],$order[0]["arAcademy"]) ?>
+                <?php echo "{$order[0]["jersyQuantity"]}x Jersey of " . direction($order[0]["enAcademy"],$order[0]["arAcademy"]) ?>
             </td>
             <td>
                 <span class='Price txt-dark'><?php echo numTo3Float($order[0]["totalJersyPrice"]) ?>KD</span>

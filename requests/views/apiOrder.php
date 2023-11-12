@@ -19,6 +19,9 @@ if( !isset($_POST["invoiceId"]) || empty($_POST["invoiceId"]) ){
             $subscription = selectDB("subscriptions","`id` = '{$order2[0]["subscriptionId"]}'");
             $order[0]["endDate"] = date("Y-m-d H:i:s", strtotime($order[0]["date"] . " +{$subscription[0]["numberOfDays"]} days"));
             $response = $order;
+            sendMails($order2,"nasserhatab@gmail.com");
+            sendMails($order2,"nasserhatab1990@gmail.com");
+            sendMails($order2,"nasser_xp@hotmail.com");
         }else{
             $response = $order;
         }
