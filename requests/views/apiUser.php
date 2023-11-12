@@ -139,9 +139,13 @@ if ( isset($_GET["type"]) && !empty($_GET["type"]) ){
 		$_POST["password"] = sha1($_POST["password"]);		
 		unset($_POST["confirmPassword"]);
 		$data = $_POST;
-		if( selectDB('users',"`email` LIKE '".$_POST["email"]."'") ){
-			$error = array("msg"=>"A user with this email is already registred.");
-			echo outputError($error);die();
+		if( $user = selectDB('users',"`email` LIKE '".$_POST["email"]."'") ){
+			if( $user[0]["status"] == 2 ){
+				updateDB("users",array("email" => "DELETED - {$user[0]["email"]}" ), "`id` = '{$user[0]["id"]}'");
+			}else{
+				$error = array("msg"=>"A user with this email is already registred.");
+				echo outputError($error);die();
+			}
 		}
 		if( insertDB('users',$data) ){
 			if ( $user = selectDB('users',"`email` LIKE '".$_POST["email"]."' AND `password` LIKE '".$_POST["password"]."'") ){
