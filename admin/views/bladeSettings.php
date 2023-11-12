@@ -45,7 +45,7 @@ if( $settings = selectDB("settings","`id` = '1'")){
 	</div>
 
 	<!-- system main IBAN -->
-	<div class="col-md-12">
+	<div class="col-md-6">
 		<div class="panel panel-default card-view">
 			<div class="panel-heading">
 				<div class="pull-left">
@@ -57,6 +57,25 @@ if( $settings = selectDB("settings","`id` = '1'")){
 				<div class="panel-body">
 					<div class="text">
 						<input class="form-control" type="text" name="mainIban" placeholder="" value="<?php echo $settings[0]["mainIban"] ?>">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- system main IBAN -->
+	<div class="col-md-6">
+		<div class="panel panel-default card-view">
+			<div class="panel-heading">
+				<div class="pull-left">
+					<h6 class="panel-title txt-dark">Subscriptions Email</h6>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+			<div class="panel-wrapper collapse in">
+				<div class="panel-body">
+					<div class="text">
+						<input class="form-control" type="text" name="email" placeholder="" value="<?php echo $settings[0]["email"] ?>">
 					</div>
 				</div>
 			</div>
