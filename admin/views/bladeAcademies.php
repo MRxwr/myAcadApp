@@ -283,6 +283,7 @@
 					<div style="display:none"><label id="arTitle<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["arTitle"] ?></label></div>
 					<div style="display:none"><label id="location<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["location"] ?></label></div>
 					<div style="display:none"><label id="video<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["video"] ?></label></div>
+					<div style="display:none"><label id="email<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["email"] ?></label></div>
 					<div style="display:none"><label id="clothesPrice<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["clothesPrice"] ?></label></div>
 					<div style="display:none"><label id="charges<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["charges"] ?></label></div>
 					<div style="display:none"><label id="chargeType<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["chargeType"] ?></label></div>
@@ -326,6 +327,7 @@
 			var enTitle = $("#enTitle"+id).html();
 			var arTitle = $("#arTitle"+id).html();
 			var video = $("#video"+id).html();
+			var email = $("#email"+id).html();
 			var gender = $("#gender"+id).html();
 			var country = $("#country"+id).html();
 			var governate = $("#governates"+id).html();
@@ -347,6 +349,7 @@
 			$("input[name=enTitle]").val(enTitle).focus();
 			$("input[name=arTitle]").val(arTitle);
 			$("input[name=video]").val(video);
+			$("input[name=email]").val(email);
 			$("select[name=gender]").val(gender);
 			$("select[name=country]").val(country).trigger('change');
 			$("select[name=governate]").val(governate).trigger('change');
