@@ -182,6 +182,8 @@
 			<input type="file" name="clothesImage" class="form-control" >
 			</div>
 
+			بيسبيسبسيب بسييب يسب سيب
+
 			<div id="images" style="margin-top: 10px; display:none">
 				<div class="col-md-3">
 				<img id="locationImg" src="" style="width:250px;height:250px">
