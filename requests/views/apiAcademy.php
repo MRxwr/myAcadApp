@@ -18,7 +18,7 @@ if( !isset($_GET["academyId"]) || empty($_GET["academyId"]) ){
 		}else{
 			$response["academy"]["sessions"] = array();
 		}
-		if( $subscriptions = selectDB2("`id`, `enTitle`, `arTitle`, `price`, `priceAfterDiscount`","subscriptions","`academyId` = '{$academy[0]["id"]}'") ){
+		if( $subscriptions = selectDB2("`id`, `enTitle`, `arTitle`, `price`, `priceAfterDiscount`","subscriptions","`academyId` = '{$academy[0]["id"]}'  AND `status` = '0' ORDER BY `price` ASC") ){
 			$response["academy"]["subscriptions"] = $subscriptions;
 		}else{
 			$response["academy"]["subscriptions"] = array();
