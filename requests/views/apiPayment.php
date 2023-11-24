@@ -95,7 +95,7 @@ if( !isset($_POST) ){
     }
 
     //calulation of total prices
-    $newTotal = (float)$jersyPrice+(float)$totalPrice;
+    $newTotal = (float)$totalPrice;
     $fullAmount = (float)$jersyPrice+(float)$totalPrice;
     if( $numberOfTimesAvalability && $academyAprroved ){
         $newTotal = ( $voucherType == 0 ) ? ($newTotal*(1-($voucherAmount/100))) : $newTotal - $voucherAmount;
@@ -121,7 +121,7 @@ if( !isset($_POST) ){
     $_POST["jersyPrice"] = $academyData[0]["clothesPrice"];
     $_POST["totalSubscriptionPrice"] = $totalPrice;
     $_POST["totalJersyPrice"] = $jersyPrice;
-    $_POST["total"] = $newTotal;
+    $_POST["total"] = $fullAmount;
     $_POST["paymentMethod"] = $paymentMethod;
     $_POST["voucher"] = $data["voucher"];
 
