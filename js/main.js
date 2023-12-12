@@ -39,10 +39,10 @@
                 },
               };
               $.ajax(settings).done(function (response) {
-                console.log(response);
                 var $select = $('select[name=gender]');
                 $select.empty();
                 $.each(response, function(index, item) {
+                    console.log(item);
                     var $option = $('<option>', {
                         value: item.value,
                         text: item.text
