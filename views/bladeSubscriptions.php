@@ -57,6 +57,13 @@ if( isset($_GET["cancel"]) && !empty($_GET["cancel"]) ){
         </script>
         <?php
     }else{
+        if( $order = selectDB("orders","`gatewayId` = '{$_GET["cancel"]}'") ){
+            $academyEmail = selectDB("academies","`id` = '{$order2[0]["academyId"]}'");
+            $settingsEmail = selectDB("settings","`id` = '1'");
+            sendMailsCancel($order,$order[0]["email"]);
+            sendMailsCancel($order,$academyEmail[0]["email"]);
+            sendMailsCancel($order,$settingsEmail[0]["email"]);
+        }
         ?>
         <script>
         window.onload = function() {
