@@ -194,7 +194,7 @@ if( isset($_GET["v"]) && searchFile("views","blade{$_GET["v"]}.php") ){
 	require_once("views/bladeHome.php");
 }
 
-expiredSubscription();
+print_r(expiredSubscription());
 
 require("template/footer.php");
 ?>
