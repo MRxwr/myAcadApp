@@ -33,6 +33,7 @@
             var apiUrl = 'requests/index.php?a=Genders&sportId='+id;
             $.getJSON(apiUrl, function(data) {
                 var $select = $('select[name=gender]');
+                $select.empty();
                 $.each(data, function(index, item) {
                     var $option = $('<option>', {
                         value: item.value,
@@ -40,6 +41,7 @@
                     });
                     $select.append($option);
                 });
+                $select.select2();
             });
 			$("#sportMainImage").attr("src",sportImage);
 			$("#sportMainTitle").html(sportTitle);
