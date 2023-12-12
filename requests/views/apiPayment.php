@@ -144,7 +144,7 @@ if( !isset($_POST) ){
 
     //preparing upayment payload
     $extraMerchantData =  array(
-        'amounts' => array($myacadDeposit,$newTotal),
+        'amounts' => array($myacadDeposit,($newTotal+(float)$jersyPrice)),
         'charges' => array(0.250,0),
         'chargeType' => array('fixed','fixed'),
         'cc_charges' => array(0.250,0),
