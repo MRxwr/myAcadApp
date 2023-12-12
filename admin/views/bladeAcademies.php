@@ -258,7 +258,7 @@
 				}
 				?>
 				<tr>
-				<td><?php echo $counter = 1 + $i ?></td>
+				<td><?php echo str_pad(1 + $i, 3 ,'0', STR_PAD_LEFT) ?></td>
 				<td><?php echo $academyTitle ?></td>
 				<td id="country<?php echo $academies[$i]["id"]?>" ><?php echo $academies[$i]["country"] ?></td>
 				<td><?php echo $genderText ?><label style="display:none" id="gender<?php echo $academies[$i]["id"]?>"  ><?php echo $academies[$i]["gender"] ?></label></td>
