@@ -50,7 +50,7 @@ function expiredSubscription(){
 				"msg" => direction("Your subscription with {$getSubscriptions[$i]["enAcademy"]} Will end soon. Please resubscribe and continue the fun.","سينتهي إشتراك قريبا مع {$getSubscriptions[$i]["arAcademy"]}، الرجاء إعادة الإشتراك لتستمر المتعه."),
 				"firebase" => $user[0]["firebase"]
 			);
-			sendNotification($data);
+			print_r(sendNotification($data));
 		}
 	}
 }
