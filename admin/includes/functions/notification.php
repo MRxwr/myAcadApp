@@ -41,6 +41,20 @@ function sendNotification($data){
 	return $response;
 }
 
+function expiredSubscription(){
+	if ( $getSubscriptions = selectDB2("`userId`,`enAcademy`,`arAcademy`","orders","DATEDIFF( DATE_SUB(DATE_ADD(CURRENT_DATE(), INTERVAL 1 MONTH), INTERVAL 2 DAY), DATE_SUB(DATE_ADD(`date`, INTERVAL 1 MONTH), INTERVAL 2 DAY) ) <= 2") ){
+		for( $i = 0; $i < sizeof($getSubscriptions); $i++ ){
+			$user = selectDB2("firebase","users","`id` = '{$getSubscriptions[$i]["userId"]}'");
+			$data = array(
+				"title" => direction("Subscription End Soon","سينتهي الإشتراك قريبا"),
+				"msg" => direction("Your subscription with {$getSubscriptions[$i]["enAcademy"]} Will end soon. Please resubscribe and continue the fun.","سينتهي إشتراك قريبا مع {$getSubscriptions[$i]["arAcademy"]}، الرجاء إعادة الإشتراك لتستمر المتعه."),
+				"firebase" => $user[0]["firebase"]
+			);
+			sendNotification($data);
+		}
+	}
+}
+
 function emailBody($order){
 	if( $order[0]["paymentMethod"] == 1 ){
 		$method = "KNET";
