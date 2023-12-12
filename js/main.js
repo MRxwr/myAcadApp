@@ -41,7 +41,7 @@
               $.ajax(settings).done(function (response) {
                 var $select = $('select[name=gender]');
                 $select.empty();
-                $.each(response["genders"], function(index, item) {
+                $.each(response, function(index, item) {
                     console.log(item);
                     var $option = $('<option>', {
                         value: item.id,
