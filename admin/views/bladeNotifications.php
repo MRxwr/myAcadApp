@@ -5,7 +5,7 @@ if ( isset($_POST["firebaseTitle"]) ){
         for( $i = 0; $i < sizeof($users); $i++ ){
             $data = array(
                 "title" => $_POST["firebaseTitle"],
-                "message" => $_POST["firebaseMsg"],
+                "msg" => $_POST["firebaseMsg"],
                 "firebase" => $users["firebase"]
             );
             print_r(sendNotification($data));
