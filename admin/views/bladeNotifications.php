@@ -1,10 +1,12 @@
 <?php
 //require('../admin/includes/config.php');
-if ( isset($_POST["title"]) ){
+if ( isset($_POST["firebaseTitle"]) ){
     if( $users = selectDB("users","`id` != '0' GROUP BY `firebase`")){
         for( $i = 0; $i < sizeof($users); $i++ ){
-            $_POST["firebase"] = $users["firebase"] ;
-            sendNotification($_POST);
+            $data["title"] = $_POST["firebaseTitle"];
+            $data["message"] =  $_POST["firebaseMsg"];;
+            $data["firebase"] = $users["firebase"] ;
+            sendNotification($data);
         }
     }
 }
@@ -29,7 +31,7 @@ if ( isset($_POST["title"]) ){
     <label class="control-label mb-10" for="exampleInputuname_1">Title</label>
     <div class="input-group">
     <div class="input-group-addon"><i class="fa fa-file"></i></div>
-    <input type="text" class="form-control" name="title" required>
+    <input type="text" class="form-control" name="firebaseTitle" required>
     </div>
     </div>
     </div>	
@@ -39,7 +41,7 @@ if ( isset($_POST["title"]) ){
     <label class="control-label mb-10" for="exampleInputuname_1">Message</label>
     <div class="input-group">
     <div class="input-group-addon"><i class="fa fa-file"></i></div>
-    <input type="text" class="form-control" name="msg" required>
+    <input type="text" class="form-control" name="firebaseMsg" required>
     </div>
     </div>
     </div>	
