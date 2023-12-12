@@ -41,11 +41,11 @@
               $.ajax(settings).done(function (response) {
                 var $select = $('select[name=gender]');
                 $select.empty();
-                $.each(response, function(index, item) {
-                    console.log(item["genders"]);
+                $.each(response["genders"], function(index, item) {
+                    console.log(item);
                     var $option = $('<option>', {
-                        value: item.value,
-                        text: item.text
+                        value: item.id,
+                        text: item.genderEn
                     });
                     $select.append($option);
                 });
