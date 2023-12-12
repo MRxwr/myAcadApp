@@ -42,7 +42,7 @@
                 var $select = $('select[name=gender]');
                 $select.empty();
                 $.each(response, function(index, item) {
-                    console.log(item);
+                    console.log(response);
                     var $option = $('<option>', {
                         value: item.id,
                         text: item.genderEn
