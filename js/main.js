@@ -34,6 +34,7 @@
             $.getJSON(apiUrl, function(data) {
                 var $select = $('select[name=gender]');
                 $select.empty();
+                console.log(data);
                 $.each(data, function(index, item) {
                     var $option = $('<option>', {
                         value: item.value,
