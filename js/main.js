@@ -30,12 +30,19 @@
 			var id = $(this).attr("id");
 			var sportImage = $("#sportImage"+id).attr("src");
 			var sportTitle = $("#sportTitle"+id).html();
-            var apiUrl = 'requests/index.php?a=Genders&sportId='+id;
-            $.getJSON(apiUrl, function(data) {
+            var settings = {
+                "url": "requests/index.php?a=Genders&sportId="+id,
+                "method": "GET",
+                "timeout": 0,
+                "headers": {
+                  "myacadheader": "myAcadAppCreate"
+                },
+              };
+              $.ajax(settings).done(function (response) {
+                console.log(response);
                 var $select = $('select[name=gender]');
                 $select.empty();
-                console.log(data);
-                $.each(data, function(index, item) {
+                $.each(response, function(index, item) {
                     var $option = $('<option>', {
                         value: item.value,
                         text: item.text
@@ -43,7 +50,7 @@
                     $select.append($option);
                 });
                 $select.select2();
-            });
+              });
 			$("#sportMainImage").attr("src",sportImage);
 			$("#sportMainTitle").html(sportTitle);
 			$("input[name=sport]").val(id);
