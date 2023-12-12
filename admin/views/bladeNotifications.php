@@ -3,9 +3,11 @@
 if ( isset($_POST["firebaseTitle"]) ){
     if( $users = selectDB("users","`id` != '0' GROUP BY `firebase`")){
         for( $i = 0; $i < sizeof($users); $i++ ){
-            $data["title"] = $_POST["firebaseTitle"];
-            $data["message"] =  $_POST["firebaseMsg"];;
-            $data["firebase"] = $users["firebase"] ;
+            $data = array(
+                "title" => $_POST["firebaseTitle"],
+                "message" => $_POST["firebaseMsg"],
+                "firebase" => $users["firebase"]
+            );
             sendNotification($data);
         }
     }
