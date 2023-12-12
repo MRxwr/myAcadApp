@@ -128,6 +128,30 @@ function sendMails($order, $email){
 	curl_close($curl);
 }
 
+function sendMailsCancel($order, $email){
+	$msg = emailBody($order);
+	$curl = curl_init();
+	curl_setopt_array($curl, array(
+		CURLOPT_URL => 'https://createid.link/api/v1/send/notify',
+		CURLOPT_RETURNTRANSFER => true,
+		CURLOPT_ENCODING => '',
+		CURLOPT_MAXREDIRS => 10,
+		CURLOPT_TIMEOUT => 0,
+		CURLOPT_FOLLOWLOCATION => true,
+		CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+		CURLOPT_CUSTOMREQUEST => 'POST',
+		CURLOPT_POSTFIELDS => array(
+			'site' => "MYACAD",
+			'subject' => "CANCLLED SUBSCRIPTION #{$order[0]["id"]}",
+			'body' => $msg,
+			'from_email' => "noreply@mycad.app",
+			'to_email' => $email
+		),
+	));
+	$response = curl_exec($curl);
+	curl_close($curl);
+}
+
 function sendMailsAdmin($orderId, $email){
 	GLOBAL $settingsEmail, $settingsTitle, $settingsWebsite, $settingslogo;
 			$sendEmail = $settingsEmail;
