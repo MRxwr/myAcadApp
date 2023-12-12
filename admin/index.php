@@ -168,6 +168,18 @@ if ( isset($_GET["hide"]) || isset($_GET["show"]) || isset($_GET["delId"]) || is
 	}else{
 		$countryCode = "";
 	}
+    if ( isset($_POST["firebaseTitle"]) && !empty($_POST["firebaseTitle"]) ){
+        if( $users = selectDB("users","`id` != '0' GROUP BY `firebase`")){
+            for( $i = 0; $i < sizeof($users); $i++ ){
+                $data = array(
+                    "title" => $_POST["firebaseTitle"],
+                    "msg" => $_POST["firebaseMsg"],
+                    "firebase" => $users[$i]["firebase"]
+                );
+                sendNotification($data);
+            }
+        }
+    }
 	?>
 	<script>
 		window.location.replace("<?php echo "?v={$_GET["v"]}{$countryCode}" ?>");

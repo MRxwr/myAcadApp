@@ -1,18 +1,3 @@
-<?php
-//require('../admin/includes/config.php');
-if ( isset($_POST["firebaseTitle"]) ){
-    if( $users = selectDB("users","`id` != '0' GROUP BY `firebase`")){
-        for( $i = 0; $i < sizeof($users); $i++ ){
-            $data = array(
-                "title" => $_POST["firebaseTitle"],
-                "msg" => $_POST["firebaseMsg"],
-                "firebase" => $users[$i]["firebase"]
-            );
-            sendNotification($data);
-        }
-    }
-}
-?>
 <div class="col-md-12">
 <div class="panel panel-default card-view">
 <div class="panel-heading">
