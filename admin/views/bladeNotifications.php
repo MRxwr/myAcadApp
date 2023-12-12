@@ -8,7 +8,7 @@ if ( isset($_POST["firebaseTitle"]) ){
                 "message" => $_POST["firebaseMsg"],
                 "firebase" => $users["firebase"]
             );
-            sendNotification($data);
+            print_r(sendNotification($data));
         }
     }
 }
