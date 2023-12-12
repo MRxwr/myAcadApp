@@ -1,33 +1,44 @@
 <?php
-// email \\
-
 //Notification through Create Pay \\
 function sendNotification($data){
-	$curl = curl_init();
-	curl_setopt_array($curl, array(
-	  CURLOPT_URL => 'https://createpay.link/api/CreateInvoice.php',
-	  CURLOPT_RETURNTRANSFER => true,
-	  CURLOPT_ENCODING => '',
-	  CURLOPT_MAXREDIRS => 10,
-	  CURLOPT_TIMEOUT => 0,
-	  CURLOPT_FOLLOWLOCATION => true,
-	  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-	  CURLOPT_CUSTOMREQUEST => 'POST',
-	  CURLOPT_POSTFIELDS => array(
-		'name' => $data["name"],
-		'email' => $data["email"],
-		'mobile' => $data["mobile"],
-		'price' => $data["price"],
-		'details' => $data["details"],
-		'refference' => $data["refference"],
-		'noti' => $data["noti"]
+	$server_key = 'AAAAbnnBXmc:APA91bG-NRW9C4ljOlrTfpyrEfiTP1foDG8EDMjvAUyakHzC2N0kMLhvIZx1WpAehpCCppnY3yIKGh81mk11NV9YNO3xt8khV194ql83RMsOsbui6qo6iO51AwQscjwluoqe3Bk9_qJ6';
+	$url = 'https://fcm.googleapis.com/fcm/send';
+	$headers = array(
+		'Content-Type:application/json',
+		'Authorization:key='.$server_key
+	);
+	$json_data = array(
+		"to" => "{$data["firebase"]}",
+		"notification" => array(
+			"body" => "{$data["msg"]}",
+			"text" => "{$data["msg"]}",
+			"title" => "{$data["title"]}",
+			"sound" => "default",
+			"content_available" => "true",
+			"priority" => "high",
+			"badge" => "1"
 		),
-	  CURLOPT_HTTPHEADER => array(
-		'APPKEY: API123'
-	  ),
-	));
-	$response = curl_exec($curl);
-	curl_close($curl);
+		"data" => array(
+			"body" => "{$data["msg"]}",
+			"title" => "{$data["title"]}",
+			"text" => "{$data["msg"]}",
+			"sound" => "default",
+			"content_available" => "true",
+			"priority" => "high",
+			"badge" => "1"
+		)
+	);
+	$ch = curl_init();
+	curl_setopt($ch, CURLOPT_URL, $url);
+	curl_setopt($ch, CURLOPT_POST, true);
+	curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+	curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($json_data));
+	$response = curl_exec($ch);
+	curl_close($ch);
+	return $response;
 }
 
 function emailBody($order){
