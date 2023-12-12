@@ -44,7 +44,7 @@
                 $.each(response, function(index, item) {
                     console.log(item["genders"]);
                     var $option = $('<option>', {
-                        value: item.value,
+                        value: item["genders"]["id"].value,
                         text: item.text
                     });
                     $select.append($option);
