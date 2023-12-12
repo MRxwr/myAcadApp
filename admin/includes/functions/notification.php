@@ -42,7 +42,7 @@ function sendNotification($data){
 }
 
 function expiredSubscription(){
-	if ( $getSubscriptions = selectDB2("`userId`,`enAcademy`,`arAcademy`","orders","DATEDIFF( DATE_SUB(DATE_ADD(CURRENT_DATE(), INTERVAL 1 MONTH), INTERVAL 2 DAY), DATE_SUB(DATE_ADD(`date`, INTERVAL 1 MONTH), INTERVAL 2 DAY) ) <= 2") ){
+	if ( $getSubscriptions = selectDB2("`userId`,`enAcademy`,`arAcademy`, `id`","orders","DATEDIFF( DATE_SUB(DATE_ADD(CURRENT_DATE(), INTERVAL 1 MONTH), INTERVAL 2 DAY), DATE_SUB(DATE_ADD(`date`, INTERVAL 1 MONTH), INTERVAL 2 DAY) ) <= 2") ){
 		for( $i = 0; $i < sizeof($getSubscriptions); $i++ ){
 			$user = selectDB2("firebase","users","`id` = '{$getSubscriptions[$i]["userId"]}'");
 			$data = array(
@@ -50,7 +50,8 @@ function expiredSubscription(){
 				"msg" => direction("Your subscription with {$getSubscriptions[$i]["enAcademy"]} Will end soon. Please resubscribe and continue the fun.","سينتهي إشتراك قريبا مع {$getSubscriptions[$i]["arAcademy"]}، الرجاء إعادة الإشتراك لتستمر المتعه."),
 				"firebase" => $user[0]["firebase"]
 			);
-			print_r(sendNotification($data));
+			sendNotification($data);
+			updateDB("orders",array("isNotified"=>1),"`id` = '{$getSubscriptions[$i]["id"]}}'");
 		}
 	}
 }
