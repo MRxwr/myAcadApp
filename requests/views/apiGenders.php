@@ -3,11 +3,16 @@ if( $academies = selectDB2("`gender`","academies","`sport` = '{$_GET["sportId"]}
     $gendersEn = ["SELECT GENDER","Man","Woman","Boy","Girl"];
     $gendersAr = ["إختيار الجنس","رجل","إمرأة","ولد","بنت"];
     $response["genders"][0] = array(
+        "id" => 0,
         "genderEn" => $gendersEn[0],
         "genderAr" => $gendersAr[0]
     );
     for( $i = 0; $i < sizeof($academies); $i++ ){
-        $response["genders"][] = array("genderEn" => $gendersEn[$academies[$i]["gender"]], "genderAr" => $gendersAr[$academies[$i]["gender"]]);
+        $response["genders"][] = array(
+            "id" => $academies[$i]["gender"],
+            "genderEn" => $gendersEn[$academies[$i]["gender"]],
+            "genderAr" => $gendersAr[$academies[$i]["gender"]]
+        );
     }
 }else{
     $response["genders"] = array();
