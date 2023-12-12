@@ -42,7 +42,7 @@ function sendNotification($data){
 }
 
 function expiredSubscription(){
-	if ( $getSubscriptions = selectDB2("`userId`,`enAcademy`,`arAcademy`, `id`","orders","DATEDIFF( DATE_SUB(DATE_ADD(CURRENT_DATE(), INTERVAL 1 MONTH), INTERVAL 2 DAY), DATE_SUB(DATE_ADD(`date`, INTERVAL 1 MONTH), INTERVAL 2 DAY) ) <= 2 AND `isNotified = '0'") ){
+	if ( $getSubscriptions = selectDB2("`userId`,`enAcademy`,`arAcademy`, `id`","orders","DATEDIFF( DATE_SUB(DATE_ADD(CURRENT_DATE(), INTERVAL 1 MONTH), INTERVAL 2 DAY), DATE_SUB(DATE_ADD(`date`, INTERVAL 1 MONTH), INTERVAL 2 DAY) ) <= 2 AND `isNotified` = '0'") ){
 		for( $i = 0; $i < sizeof($getSubscriptions); $i++ ){
 			$user = selectDB2("firebase","users","`id` = '{$getSubscriptions[$i]["userId"]}'");
 			$data = array(
