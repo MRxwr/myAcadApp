@@ -1,5 +1,5 @@
 <?php 
-if( $academies = selectDB2("`gender`","academies","`sport` = '{$_GET["sportId"]}' AND `hidden` = '0' AND `status` = '0'") ){
+if( $academies = selectDB2("`gender`","academies","`sport` = '{$_GET["sportId"]}' AND `hidden` = '0' AND `status` = '0' GROUP BY `gender`") ){
     $gendersEn = ["SELECT GENDER","Man","Woman","Boy","Girl"];
     $gendersAr = ["إختيار الجنس","رجل","إمرأة","ولد","بنت"];
     for( $i = 0; $i < sizeof($academies); $i++ ){
