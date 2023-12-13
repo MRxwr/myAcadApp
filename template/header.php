@@ -34,7 +34,6 @@ require_once("admin/includes/functions.php");
     <link href="css/srcollbar.css?<?php echo randLetter() . "=" . rand(0000,9999) ?>" rel="stylesheet" type="text/css" />
     <link href="css/style.css?<?php echo randLetter() . "=" . rand(0000,9999) ?>" rel="stylesheet" type="text/css" />
     <link href="css/responsive.css?<?php echo randLetter() . "=" . rand(0000,9999) ?>" rel="stylesheet" type="text/css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 
 </head>
 <body>
