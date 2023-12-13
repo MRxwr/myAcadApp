@@ -30,6 +30,7 @@
 			var id = $(this).attr("id");
 			var sportImage = $("#sportImage"+id).attr("src");
 			var sportTitle = $("#sportTitle"+id).html();
+            var langCookieValue = $.cookie("CREATEkwLANG");
             var settings = {
                 "url": "requests/index.php?a=Genders&sportId="+id,
                 "method": "GET",
@@ -41,11 +42,11 @@
               $.ajax(settings).done(function (response) {
                 var $select = $('select[name=gender]');
                 $select.empty();
+                var selectedLanguage = (langCookieValue === undefined || langCookieValue === "" || langCookieValue === "EN") ? "genderEn" : "genderAr";
                 $.each(response.data.genders, function(index, item) {
-                    console.log(response.data.genders);
                     var $option = $('<option>', {
                         value: item.id,
-                        text: item.genderEn
+                        text: item[selectedLanguage]
                     });
                     $select.append($option);
                 });
