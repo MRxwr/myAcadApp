@@ -31,8 +31,9 @@ if ( isset($_GET["type"]) && !empty($_GET["type"]) ){
 		if ( !isset($_GET["userId"]) || empty($_GET["userId"]) ){
 			$error = array("msg"=>"Please enter user id");
 			echo outputError($error);die();
-		}elseif( selectDB('users',"`id` = '{$_GET["userId"]}'") ){
-			updateDB('users',array("status"=>"2"),"`id` = '{$_GET["userId"]}'");
+		}elseif( $user = selectDB('users',"`id` = '{$_GET["userId"]}'") ){
+			$email = "DELETED - {$user[0]["email"]}";
+			updateDB('users',array("status"=>"2","email"=>$email),"`id` = '{$_GET["userId"]}'");
 			echo outputData(array('msg'=>"User account has been removed successfully."));
 		}else{
 			$error = array("msg"=>"user id is wrong, please check user id.");
