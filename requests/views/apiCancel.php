@@ -12,7 +12,7 @@ if( !isset($_GET["userId"]) || empty($_GET["userId"]) ){
 }else{
 	if( $orders = selectDB("orders","`id` = '{$_GET["orderId"]}' AND `userId` = '{$_GET["userId"]}' AND `status` = '1'") ){
         updateDB("orders",array("status" => 3),"`id` = '{$_GET["orderId"]}'");
-        $academyEmail = selectDB("academies","`id` = '{$order2[0]["academyId"]}'");
+        $academyEmail = selectDB("academies","`id` = '{$orders[0]["academyId"]}'");
         $settingsEmail = selectDB("settings","`id` = '1'");
         sendMailsCancel($orders,$orders[0]["email"]);
         sendMailsCancel($orders,$academyEmail[0]["email"]);
