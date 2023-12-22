@@ -85,12 +85,11 @@ $_POST["subscription"] = $subscription[0]["id"];
 if( is_array($_POST["checkout"]["quantity"]) ){
     for( $i = 0; $i < sizeof($_POST["checkout"]["quantity"]); $i++){
         if( $_POST["checkout"]["quantity"][$i] != 0 ){
-            $_POST["subscriptionQuantity"] = $_POST["checkout"]["quantity"][$i];
+            $_POST["checkout"]["quantity"] = $_POST["checkout"]["quantity"][$i];
         }
     }
-}else{
-    $_POST["subscriptionQuantity"] = $_POST["checkout"]["quantity"];
 }
+$_POST["subscriptionQuantity"] = $_POST["checkout"]["quantity"];
 $_POST["jersyQuantity"] = $_POST["checkout"]["jersy"];
 
 $checkout = json_encode($_POST, JSON_UNESCAPED_UNICODE);
