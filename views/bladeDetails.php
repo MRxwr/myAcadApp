@@ -100,17 +100,17 @@ $redirect = ($academy["isClothes"] == 1 ) ? "Jersy" : "Checkout" ;
 									echo "
 									<div class='radi_wap'>
 										<div class='red_items'>
-											<input type='radio' {$checked} name='session' id='sty_{$i}' value='{$academy["sessions"][$i]["id"]}'>
+											<input type='radio' {$checked} name='checkout[session]' id='sty_{$i}' value='{$academy["sessions"][$i]["id"]}'>
 											<label for='sty_{$i}'><span></span>".direction($academy["sessions"][$i]["enTitle"],$academy["sessions"][$i]["arTitle"])."</label>
 										</div>
-										<input type='number' step='1' class='sty_{$i}' name='quantity[]' value='{$number}'  min='0' max='{$academy["sessions"][$i]["quantity"]}' readonly>
+										<input type='number' step='1' class='sty_{$i}' name='checkout[quantity][]' value='{$number}'  min='0' max='{$academy["sessions"][$i]["quantity"]}' readonly>
 									</div>
 									";
 								}
 							}
 							?>
                             <h5><img src="img/ca.svg" alt=""><?php echo direction("Select Subsicription Period","إختر مدة الإتشراك") ?></h5>
-                            <select name="subscription" required>
+                            <select name="checkout[subscription]" required>
 							<?php 
                             if ($academy["subscriptions"] > 0) {
                                 for ($s = 0; $s < sizeof($academy["subscriptions"]); $s++) {
@@ -128,7 +128,8 @@ $redirect = ($academy["isClothes"] == 1 ) ? "Jersy" : "Checkout" ;
                             }
                             ?>
                             </select>
-							<input type="hidden" name="id" value="<?php echo htmlspecialchars($_GET["id"]) ?>">
+                            <input type="number" step="1" name="checkout[jersy]" value="0" min="0">
+                            <input type="hidden" name="checkout[id]" value="<?php echo htmlspecialchars($_GET["id"]) ?>">
 							<button class="button mt_55" id="chooseBtn"><?php echo direction("Choose","إختر") ?></button>
                         </form>
                     </div>

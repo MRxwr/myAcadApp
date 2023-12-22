@@ -1,7 +1,7 @@
 <?php
 $curl = curl_init();
 curl_setopt_array($curl, array(
-  CURLOPT_URL => "https://myacad.app/requests?a=Academy&academyId={$_POST["id"]}",
+  CURLOPT_URL => "https://myacad.app/requests?a=Academy&academyId={$_POST["checkout"]["id"]}",
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => '',
   CURLOPT_MAXREDIRS => 10,
@@ -29,9 +29,9 @@ if( $response["error"] == 1 ){
 	$academy = $response["data"]["academy"];
 }
 
-for( $i = 0; $i < sizeof($_POST["quantity"]); $i++){
-    if( $_POST["quantity"][$i] != 0 ){
-        $selectedQuantity = $_POST["quantity"][$i];
+for( $i = 0; $i < sizeof($_POST["checkout"]["quantity"]); $i++){
+    if( $_POST["checkout"]["quantity"][$i] != 0 ){
+        $selectedQuantity = $_POST["checkout"]["quantity"][$i];
     }
 }
 ?>
@@ -91,9 +91,9 @@ for( $i = 0; $i < sizeof($_POST["quantity"]); $i++){
                         </div>
                         <div class="jurs_input mt_45">
                             <input type="number" step="1" name="checkout[jersy]" value="0" min="0">
-                            <input type="hidden" name="checkout[session]" value="<?php echo htmlspecialchars($_POST["session"]) ?>">
+                            <input type="hidden" name="checkout[session]" value="<?php echo htmlspecialchars($_POST["checkout"]["session"]) ?>">
                             <input type="hidden" name="checkout[quantity]" value="<?php echo htmlspecialchars($selectedQuantity) ?>">
-                            <input type="hidden" name="checkout[subscription]" value="<?php echo htmlspecialchars($_POST["subscription"]) ?>">
+                            <input type="hidden" name="checkout[subscription]" value="<?php echo htmlspecialchars($_POST["checkout"]["subscription"]) ?>">
                             <input type="hidden" name="checkout[id]" value="<?php echo htmlspecialchars($_GET["id"]) ?>">
                         </div>
                         <button class="button mt_55"><?php echo direction("Checkout","إدفع") ?></button>
