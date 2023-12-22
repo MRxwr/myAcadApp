@@ -128,7 +128,7 @@ $redirect = ($academy["isClothes"] == 1 ) ? "Jersy" : "Checkout" ;
                             }
                             ?>
                             </select>
-                            <input type="number" step="1" name="checkout[jersy]" value="0" min="0">
+                            <input type="hidden" step="1" name="checkout[jersy]" value="0" min="0">
                             <input type="hidden" name="checkout[id]" value="<?php echo htmlspecialchars($_GET["id"]) ?>">
 							<button class="button mt_55" id="chooseBtn"><?php echo direction("Choose","إختر") ?></button>
                         </form>
