@@ -82,10 +82,13 @@ $_POST["user"] = $user[0]["id"];
 $_POST["academy"] = $academy["id"];
 $_POST["session"] = $session[0]["id"];
 $_POST["subscription"] = $subscription[0]["id"];
-if( is_array($_POST["checkout"]["quantity"]) && !empty($_POST["checkout"]["quantity"]) ){
-    for( $i = 0; $i < sizeof($_POST["checkout"]["quantity"]); $i++){
-        if( $_POST["checkout"]["quantity"][$i] != 0 ){
-            $_POST["checkout"]["quantity"] = $_POST["checkout"]["quantity"][$i];
+if (is_array($_POST["checkout"]["quantity"])) {
+    $quantityArray = $_POST["checkout"]["quantity"];
+    $quantityCount = is_countable($quantityArray) ? count($quantityArray) : 0;
+
+    for ($i = 0; $i < $quantityCount; $i++) {
+        if ($quantityArray[$i] != 0) {
+            $_POST["checkout"]["quantity"] = $quantityArray[$i];
         }
     }
 }
