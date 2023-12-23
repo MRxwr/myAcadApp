@@ -22,7 +22,7 @@ function deleteDB($table, $where){
 function selectDB($table, $where){
     GLOBAL $dbconnect;
     $check = [';', '"'];
-    //$where = str_replace($check, "", $where);
+    $where = str_replace($check, "", $where);
     $sql = "SELECT * FROM `{$table}`";
     if (!empty($where)) {
         $sql .= " WHERE {$where}";
