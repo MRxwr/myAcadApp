@@ -110,7 +110,7 @@ for ( $y =0; $y < 3; $y++){
 	$statTitle = [direction("Daily","يومية"),direction("Monthly","شهرية"),direction("All time Stats","أحصائيات الكل")];
 
 	$size = 0;
-	echo $sql = "SELECT COALESCE(SUM(f.total), 0) as totalPrice FROM ( SELECT * FROM `orders` WHERE `status` = '1' {$id} {$statsDate[$y]}) as f;";
+	$sql = "SELECT COALESCE(SUM(f.total), 0) as totalPrice FROM ( SELECT * FROM `orders` WHERE `status` = '1' {$id} {$statsDate[$y]}) as f;";
 	$result = $dbconnect->query($sql);
 	$row = $result->fetch_assoc();
 
