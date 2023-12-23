@@ -11,8 +11,10 @@ if( $pages = selectDB("pages","`status` = '0' AND `section` = '0' ORDER BY `orde
 		$list = json_decode($roles[0]["pages"],true);
 		for( $i = 0; $i < sizeof($list); $i++ ){
 			$listOfAllowedPages .= "'{$list[$i]}'";
+			if( isset($list[$i+1]) && !empty($list[$i+1]) ){
+				$listOfAllowedPages .= ",";
+			}
 		}
-		echo "`enTitle` LIKE '{$_GET["v"]}' AND `id` IN ({$listOfAllowedPages})";die();
 		if( selectDB("`pages`","`enTitle` LIKE '{$_GET["v"]}' AND `id` IN ({$listOfAllowedPages})") == 0 ){
 			header("LOCATION: ?v=Home");die();
 		}
