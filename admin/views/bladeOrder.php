@@ -1,7 +1,7 @@
 <?php
 $id = "";
 $listOfAcademies = "";
-$count = (is_array($academiesList) && !empty($academiesList)) ? count($academiesList) : 1;
+$count = (is_array($academiesList) && !empty($academiesList)) ? count($academiesList) : 0;
 for( $z = 0; $z < $count; $z++ ){
 	$listOfAcademies .= "'{$academiesList[$z]}'";
 	if( isset($academiesList[$z+1]) && !empty($academiesList[$z+1]) ){
