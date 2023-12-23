@@ -18,6 +18,4 @@ if ( isset ( $_COOKIE[$cookieSession."A"] ) ){
 }elseif( !isset ( $_COOKIE[$cookieSession."A"] ) ){
 	header("Location: login.php");die();
 }
-
-var_dump($academiesList);die();
 ?>
