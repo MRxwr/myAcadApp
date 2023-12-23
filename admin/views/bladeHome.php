@@ -63,6 +63,9 @@ $listOfAcademies = "";
 $count = (is_array($academiesList) && !empty($academiesList)) ? count($academiesList) : 1;
 for( $z = 0; $z < $count; $z++ ){
 	$listOfAcademies .= "'{$academiesList[$z]}'";
+	if( isset($academiesList[$z+1]) && !empty($academiesList[$z+1]) ){
+		$listOfAcademies .= ",";
+	}
 }
 $id .= ( isset($academiesList[0]) && !empty($academiesList[0]) ) ? "AND `academyId` IN ($listOfAcademies)" : "";
 ?>
