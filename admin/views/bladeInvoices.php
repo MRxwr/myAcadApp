@@ -27,32 +27,36 @@
 		
 		<tbody>
 		<?php 
-		if( $orders = selectDB("orders","`id` != '0' ORDER BY `date` DESC") ){
-            for( $i = 0; $i < sizeof($orders); $i++ ){
-                $status = [direction("Pending","إنتظار"),direction("Successful","ناجحه"),direction("Failed","فاشلة"),direction("Cancelled","ملغية"),direction("Ended","إنتهى")];
-                $statusColor = ["default","success","info","danger","warning"];
-                for( $y = 0; $y < sizeof($status); $y++ ){
-                    if( $orders[$i]["status"] == $y ){
-                        $orderStatus = $status[$y];
-                        $orderBtnColor = $statusColor[$y];
+        $count = (is_array($academiesList) && !empty($academiesList)) ? count($academiesList) : 1;
+		for( $z = 0; $z < $count; $z++ ){
+			$id = ( isset($academiesList[$z]) && !empty($academiesList[$z]) ) ? "AND `academyId` = '{$academiesList[$z]}'" : "";
+            if( $orders = selectDB("orders","`id` != '0' {$id} ORDER BY `date` DESC") ){
+                for( $i = 0; $i < sizeof($orders); $i++ ){
+                    $status = [direction("Pending","إنتظار"),direction("Successful","ناجحه"),direction("Failed","فاشلة"),direction("Cancelled","ملغية"),direction("Ended","إنتهى")];
+                    $statusColor = ["default","success","info","danger","warning"];
+                    for( $y = 0; $y < sizeof($status); $y++ ){
+                        if( $orders[$i]["status"] == $y ){
+                            $orderStatus = $status[$y];
+                            $orderBtnColor = $statusColor[$y];
+                        }
                     }
+                ?>
+                    <tr>
+                    <td><?php echo sprintf("%05d", $orders[$i]["id"]) ?></td>
+                    <td><?php echo $orders[$i]["date"] ?></td>
+                    <td><?php echo $orders[$i]["name"] ?></td>
+                    <td><?php echo $orders[$i]["phone"] ?></td>
+                    <td><?php echo direction($orders[$i]["enAcademy"],$orders[$i]["arAcademy"]) ?></td>
+                    <td><?php echo $orders[$i]["total"] ?>KD</td>
+                    <td><button class="btn btn-<?php echo $orderBtnColor ?>" style="width: 100%;"><?php echo $orderStatus ?></button></td>
+                    <td class="text-nowrap">
+                        <a class="btn btn-primary" href="?v=Order&id=<?php echo $orders[$i]["id"] ?>" target="_blank"><?php echo direction("View","عرض") ?></a>
+                    </td>
+                    </tr>
+                <?php
                 }
-            ?>
-                <tr>
-                <td><?php echo sprintf("%05d", $orders[$i]["id"]) ?></td>
-                <td><?php echo $orders[$i]["date"] ?></td>
-                <td><?php echo $orders[$i]["name"] ?></td>
-                <td><?php echo $orders[$i]["phone"] ?></td>
-                <td><?php echo direction($orders[$i]["enAcademy"],$orders[$i]["arAcademy"]) ?></td>
-                <td><?php echo $orders[$i]["total"] ?>KD</td>
-                <td><button class="btn btn-<?php echo $orderBtnColor ?>" style="width: 100%;"><?php echo $orderStatus ?></button></td>
-                <td class="text-nowrap">
-                    <a class="btn btn-primary" href="?v=Order&id=<?php echo $orders[$i]["id"] ?>" target="_blank"><?php echo direction("View","عرض") ?></a>
-                </td>
-                </tr>
-            <?php
             }
-		}
+        }
 		?>
 		</tbody>
 	</table>
