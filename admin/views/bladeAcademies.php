@@ -240,8 +240,8 @@
 		<tbody>
 		<?php 
 		$count = ( sizeof($academiesList) == 0 ) ? 1 : sizeof($academiesList);
-		for( $academyLoop = 0; $academLoop < $count; $academyLoop++ ){
-			$id = ( isset($academiesList[$academyLoop]) && !empty($academiesList[$academyLoop]) ) ? "`id` = '{$academiesList[$academyLoop]}'" : "";
+		for( $z = 0; $z < $count; $z++ ){
+			$id = ( isset($academiesList[$z]) && !empty($academiesList[$z]) ) ? "`id` = '{$academiesList[$z]}'" : "";
 			if( $academies = selectDB("academies","`status` = '0' {$id}") ){
 				for( $i = 0; $i < sizeof($academies); $i++ ){
 					$academyTitle = direction($academies[$i]["enTitle"],$academies[$i]["arTitle"]);
