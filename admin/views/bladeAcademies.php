@@ -239,6 +239,7 @@
 		
 		<tbody>
 		<?php 
+		echo $count; die();
 		$count = ( sizeof($academiesList) == 0 ) ? 1 : sizeof($academiesList);
 		for( $z = 0; $z < $count; $z++ ){
 			$id = ( isset($academiesList[$z]) && !empty($academiesList[$z]) ) ? "`id` = '{$academiesList[$z]}'" : "";
