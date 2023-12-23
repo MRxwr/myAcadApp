@@ -30,8 +30,10 @@
 	<div class="form-group">
 	<label class="control-label mb-10">Select Academy</label>
 	<select class="form-control" name="academyId">
-		<option value="0" selected><?php echo direction("All","الكل") ?></option>
 		<?php
+		if( $userType == 0 ){
+			echo "<option value='0' selected>".direction("All","الكل")."</option>";
+		}
 		$count = (is_array($academiesList) && !empty($academiesList)) ? count($academiesList) : 1;
 		for( $z = 0; $z < $count; $z++ ){
 			$id = ( isset($academiesList[$z]) && !empty($academiesList[$z]) ) ? "AND `id` = '{$academiesList[$z]}'" : "AND `id` != '0'";
