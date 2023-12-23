@@ -162,7 +162,7 @@
 		var name = $("#name"+id).html();
 		var mobile = $("#mobile"+id).html();
 		var type = $("#type"+id).html();
-		var academy = $("#academy"+id).html();
+		var academyList = $("#academy"+id).html();
 		var logo = $("#logo"+id).html();
 		$("input[name=password]").prop("required",false);
 		$("input[name=email]").val(email);
@@ -172,6 +172,20 @@
 		$("input[name=fullName]").focus();
 		$("select[name=empType]").val(type);
 		$("select[name=academyId]").val(academy);
+		$('#academyList').val(null).trigger('change');
+		setSelectedOptions(academyList, "academyList");
 	})
+	function setSelectedOptions(ids, selectId) {
+		var $select = $('#' + selectId);
+		$select.val(null).trigger('change');
+		for (var i = 0; i < ids.length; i++) {
+			var id = ids[i];
+			var $option = $select.find('option[value="' + id + '"]');
+			if ($option.length > 0) {
+				$option.prop('selected', true);
+			}
+		}
+		$select.trigger('change');
+	}
 </script>
 
