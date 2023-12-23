@@ -15,7 +15,7 @@ if( $pages = selectDB("pages","`status` = '0' AND `section` = '0' ORDER BY `orde
 				$listOfAllowedPages .= ",";
 			}
 		}
-		if( $listOfpages = selectDB("`pages`","`enTitle` LIKE '{$_GET["v"]}' AND `id` IN ({$listOfAllowedPages})") == 0 ){
+		if( ($listOfpages = selectDB("`pages`","`enTitle` LIKE '{$_GET["v"]}' AND `id` IN ({$listOfAllowedPages})")) == 0 ){
 			print_r($listOfpages); //header("LOCATION: ?v=Home");die();
 		}
 	}else{
