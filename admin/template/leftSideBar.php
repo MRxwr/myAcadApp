@@ -17,7 +17,7 @@ if( $pages = selectDB("pages","`status` = '0' AND `section` = '0' ORDER BY `orde
 	}
 	for( $i = 0; $i < sizeof($pages); $i++ ){
 		if( selectDB("`pages`","`enTitle` LIKE '{$_GET["v"]}' AND `id` IN ({$listOfAllowedPages})") == 0 ){
-			header("LOCATION: ?v=Home");die();
+			header("LOCATION: ?index.php");die();
 		}
 		$active = ( isset($_GET["v"]) && strtolower($pages[$i]["enTitle"]) == strtolower(str_replace("_"," ",$_GET["v"])) ) ? "active" : "";
 		if ( $userType == '0' || in_array($pages[$i]["id"],$list) ){
