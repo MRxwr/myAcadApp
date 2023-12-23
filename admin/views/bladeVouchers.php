@@ -79,7 +79,7 @@
 <div class="col-sm-12">
 <div class="panel panel-default card-view">
 <div class="panel-heading">
-	<div class="pull-left"><h6 class="panel-title txt-dark"><?php echo direction("List of Vouchers","قائمة أكواد الخصم") ?></h6></div>
+	<div class="pull-left"><h6 class="panel-title txt-dark"><?php echo direction("List of Employees","قائمة الموظفين") ?></h6></div>
 	<div class="clearfix"></div>
 </div>
 <div class="panel-wrapper collapse in">
@@ -103,55 +103,51 @@
 		
 		<tbody>
 		<?php 
-		$count = (is_array($academiesList) && !empty($academiesList)) ? count($academiesList) : 1;
-		for( $z = 0; $z < $count; $z++ ){
-			$id = ( isset($academiesList[$z]) && !empty($academiesList[$z]) ) ? "AND `academyId` = '{$academiesList[$z]}'" : "";
-			if( $vouchers = selectDB("vouchers","`status` = '0' AND `hidden` != '2' {$id}") ){
-				for( $i = 0; $i < sizeof($vouchers); $i++ ){
-					if ( $vouchers[$i]["hidden"] == 1 ){
-						$icon = "fa fa-unlock";
-						$link = "?v={$_GET["v"]}&show={$vouchers[$i]["id"]}";
-						$hide = direction("Unlock","فتح الكود");
-					}else{
-						$icon = "fa fa-lock";
-						$link = "?v={$_GET["v"]}&hide={$vouchers[$i]["id"]}";
-						$hide = direction("Lock","قفل الكود");
-					}
-
-					$type = ( $vouchers[$i]["type"] == 0 ) ? direction("Percentage","نسبة مؤوية") : direction("Fixed","قيمة ثابته") ;
-
-					if( $academy = selectDB("academies","`id` = '{$vouchers[$i]["academyId"]}'") ){
-						$academy = direction($academy[0]["enTitle"],$academy[0]["arTitle"]);
-					}else{
-						$academy = "";
-					}
-					
-					?>
-					<tr>
-					<td id="title<?php echo $vouchers[$i]["id"]?>" ><?php echo $vouchers[$i]["title"] ?></td>
-					<td id="code<?php echo $vouchers[$i]["id"]?>" ><?php echo $vouchers[$i]["code"] ?></td>
-					<td id="numberOfTimes<?php echo $vouchers[$i]["id"]?>" ><?php echo $vouchers[$i]["numberOfTimes"] ?></td>
-					<td id="amount<?php echo $vouchers[$i]["id"]?>" ><?php echo $vouchers[$i]["amount"] ?></td>
-					<td><?php echo $type ?></td>
-					<td><?php echo $academy ?></td>
-					<td id="startDate<?php echo $vouchers[$i]["id"]?>" ><?php echo substr($vouchers[$i]["startDate"],0,10) ?></td>
-					<td id="endDate<?php echo $vouchers[$i]["id"]?>" ><?php echo substr($vouchers[$i]["endDate"],0,10) ?></td>
-					<td class="text-nowrap">
-					
-					<a id="<?php echo $vouchers[$i]["id"] ?>" class="edit btn btn-warning" data-toggle="tooltip" data-original-title="<?php echo direction("Edit","تعديل")  ?>"> <i class="fa fa-pencil text-inverse m-r-10"></i>
-					</a>
-					<a href="<?php echo $link ?>" class="btn btn-default" data-toggle="tooltip" data-original-title="<?php echo $hide ?>"> <i class="<?php echo $icon ?> text-inverse m-r-10"></i>
-					</a>
-					<a href="<?php echo "?v={$_GET["v"]}&delId=" . $vouchers[$i]["id"] ?>" data-toggle="tooltip" data-original-title="<?php echo direction("Delete","حذف")  ?>" class="btn btn-danger"><i class="fa fa-close text-inverse"></i>
-					</a>
-					<div style="display:none">
-						<label id="type<?php echo $vouchers[$i]["id"]?>"><?php echo $vouchers[$i]["type"] ?></label>
-						<label id="academy<?php echo $vouchers[$i]["id"]?>"><?php echo $vouchers[$i]["academyId"] ?></label>			
-					</div>				
-					</td>
-					</tr>
-					<?php
+		if( $vouchers = selectDB("vouchers","`status` = '0' AND `hidden` != '2'") ){
+			for( $i = 0; $i < sizeof($vouchers); $i++ ){
+				if ( $vouchers[$i]["hidden"] == 1 ){
+					$icon = "fa fa-unlock";
+					$link = "?v={$_GET["v"]}&show={$vouchers[$i]["id"]}";
+					$hide = direction("Unlock","فتح الكود");
+				}else{
+					$icon = "fa fa-lock";
+					$link = "?v={$_GET["v"]}&hide={$vouchers[$i]["id"]}";
+					$hide = direction("Lock","قفل الكود");
 				}
+
+				$type = ( $vouchers[$i]["type"] == 0 ) ? direction("Percentage","نسبة مؤوية") : direction("Fixed","قيمة ثابته") ;
+
+				if( $academy = selectDB("academies","`id` = '{$vouchers[$i]["academyId"]}'") ){
+					$academy = direction($academy[0]["enTitle"],$academy[0]["arTitle"]);
+				}else{
+					$academy = "";
+				}
+				
+				?>
+				<tr>
+				<td id="title<?php echo $vouchers[$i]["id"]?>" ><?php echo $vouchers[$i]["title"] ?></td>
+				<td id="code<?php echo $vouchers[$i]["id"]?>" ><?php echo $vouchers[$i]["code"] ?></td>
+				<td id="numberOfTimes<?php echo $vouchers[$i]["id"]?>" ><?php echo $vouchers[$i]["numberOfTimes"] ?></td>
+				<td id="amount<?php echo $vouchers[$i]["id"]?>" ><?php echo $vouchers[$i]["amount"] ?></td>
+				<td><?php echo $type ?></td>
+				<td><?php echo $academy ?></td>
+                <td id="startDate<?php echo $vouchers[$i]["id"]?>" ><?php echo substr($vouchers[$i]["startDate"],0,10) ?></td>
+				<td id="endDate<?php echo $vouchers[$i]["id"]?>" ><?php echo substr($vouchers[$i]["endDate"],0,10) ?></td>
+				<td class="text-nowrap">
+				
+				<a id="<?php echo $vouchers[$i]["id"] ?>" class="edit btn btn-warning" data-toggle="tooltip" data-original-title="<?php echo direction("Edit","تعديل")  ?>"> <i class="fa fa-pencil text-inverse m-r-10"></i>
+				</a>
+				<a href="<?php echo $link ?>" class="btn btn-default" data-toggle="tooltip" data-original-title="<?php echo $hide ?>"> <i class="<?php echo $icon ?> text-inverse m-r-10"></i>
+				</a>
+				<a href="<?php echo "?v={$_GET["v"]}&delId=" . $vouchers[$i]["id"] ?>" data-toggle="tooltip" data-original-title="<?php echo direction("Delete","حذف")  ?>" class="btn btn-danger"><i class="fa fa-close text-inverse"></i>
+				</a>
+				<div style="display:none">
+					<label id="type<?php echo $vouchers[$i]["id"]?>"><?php echo $vouchers[$i]["type"] ?></label>
+					<label id="academy<?php echo $vouchers[$i]["id"]?>"><?php echo $vouchers[$i]["academyId"] ?></label>			
+                </div>				
+				</td>
+				</tr>
+				<?php
 			}
 		}
 		?>
