@@ -106,7 +106,7 @@
 		$count = ( sizeof($academiesList) == 0 ) ? 1 : sizeof($academiesList);
 		for( $z = 0; $z < $count; $z++ ){
 			$id = ( isset($academiesList[$z]) && !empty($academiesList[$z]) ) ? "AND `academyId` = '{$academiesList[$z]}'" : "";
-			if( $vouchers = selectDB("vouchers","`status` = '0' AND `hidden` != '2' ") ){
+			if( $vouchers = selectDB("vouchers","`status` = '0' AND `hidden` != '2' {$id}") ){
 				for( $i = 0; $i < sizeof($vouchers); $i++ ){
 					if ( $vouchers[$i]["hidden"] == 1 ){
 						$icon = "fa fa-unlock";
