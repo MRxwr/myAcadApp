@@ -6,12 +6,19 @@
 		</li>
 <?php 
 if( $pages = selectDB("pages","`status` = '0' AND `section` = '0' ORDER BY `order` ASC") ){
+	$listOfAllowedPages = "";
 	if( $roles = selectDB("roles","`id` = '{$userType}'") ){
 		$list = json_decode($roles[0]["pages"],true);
+		for( $i = 0; $i < sizeof($list); $i++ ){
+			$listOfAllowedPages .= "'{$list[$i]}'";
+		}
 	}else{
 		$list = array();
 	}
 	for( $i = 0; $i < sizeof($pages); $i++ ){
+		if( selectDB("`pages`","`enTitle` LIKE '{$_GET["v"]}' AND `id` IN ({$listOfAllowedPages})") == 0 ){
+			header("LOCATION: ?v=Home");die();
+		}
 		$active = ( isset($_GET["v"]) && strtolower($pages[$i]["enTitle"]) == strtolower(str_replace("_"," ",$_GET["v"])) ) ? "active" : "";
 		if ( $userType == '0' || in_array($pages[$i]["id"],$list) ){
 			if( $sections = selectDB("pages","`section` = '{$pages[$i]["id"]}' AND `status` != '1'") ){
