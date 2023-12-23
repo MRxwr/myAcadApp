@@ -16,9 +16,10 @@ if( $pages = selectDB("pages","`status` = '0' AND `section` = '0' ORDER BY `orde
 			}
 		}
 		if( $listOfpages = selectDB("`pages`","`enTitle` LIKE '{$_GET["v"]}' AND `id` IN ({$listOfAllowedPages})") ){
-			print_r($listOfpages);
-		}else{
-			header("LOCATION: ?v=Home");die();
+			$jsonPages = json_decode($listOfpages,true);
+			if($jsonPages == null && isset($jsonPages["ok"]) && $jsonPages["ok"] == "false"){
+				header("LOCATION: ?v=Home");die();
+			}
 		}
 	}else{
 		$list = array();
