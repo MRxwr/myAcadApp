@@ -239,7 +239,7 @@
 		
 		<tbody>
 		<?php 
-		$count = ( sizeof($academiesList) == 0 ) ? '1' : sizeof($academiesList);
+		$count = ( sizeof($academiesList) == 0 ) ? 1 : sizeof($academiesList);
 		for( $academyLoop = 0; $academLoop < $count; $academyLoop++ ){
 			$id = ( isset($academiesList[$academyLoop]) && !empty($academiesList[$academyLoop]) ) ? "`id` = '{$academiesList[$academyLoop]}'" : "";
 			if( $academies = selectDB("academies","`status` = '0' {$id}") ){
