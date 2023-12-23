@@ -12,13 +12,13 @@
                             <label for="nam"><?php echo direction("First Name","الإسم الأول") ?></label>
                             <input type="text" name="firstName" id="nam" value="<?php echo $user[0]["firstName"] ?>">
                         </div>
-                        <div class="col-lg-6 mt_15">
-                            <label for="nam2"><?php echo direction("Email","البريد الإلكتروني") ?></label>
-                            <input type="email" name="email" id="nam2" value="<?php echo $user[0]["email"] ?>">
-                        </div>
                         <div class="col-lg-6 mt_20">
                             <label for="nam"><?php echo direction("Last Name","الإسم الأخير") ?></label>
                             <input type="name" name="lastName" id="nam" value="<?php echo $user[0]["lastName"] ?>">
+                        </div>
+                        <div class="col-lg-6 mt_15">
+                            <label for="nam2"><?php echo direction("Email","البريد الإلكتروني") ?></label>
+                            <input type="email" name="email" id="nam2" value="<?php echo $user[0]["email"] ?>">
                         </div>
                         <div class="col-lg-6 mt_20">
                             <label for="nam"><?php echo direction("Phone Number","رقم الهاتف") ?></label>
