@@ -114,6 +114,11 @@ function selectJoinDB($table, $joinData, $where){
 function insertDB($table, $data){
     GLOBAL $dbconnect;
     $check = [';', '"'];
+    foreach ($data as $key => $value) {
+        if (is_array($value)) {
+            $data[$key] = json_encode($value);
+        }
+    }
     //$data = escapeString($data);
     $keys = array_keys($data);
     $sql = "INSERT INTO `{$table}`(";
@@ -165,7 +170,12 @@ function insertDB2($table, $data){
 
 function updateDB($table, $data, $where) {
     GLOBAL $dbconnect;
-    $check = [';', '"'];
+    $check = [';', '"']; 
+    foreach ($data as $key => $value) {
+        if (is_array($value)) {
+            $data[$key] = json_encode($value);
+        }
+    }
     //$data = escapeString($data);
     $where = str_replace($check, "", $where);
     $keys = array_keys($data);
