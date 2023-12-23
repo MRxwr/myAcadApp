@@ -46,7 +46,7 @@
 			
 			<div class="col-md-6">
 			<label><?php echo direction("Academy","الأكادمية") ?></label>
-			<select name="academyId" class="form-control">
+			<select name="academyId[]" class="form-control" id="academyList" multiple>
 				<?php
 				if( $academy = selectDB("academies","`status` = '0'") ){
 					for( $i = 0; $i < sizeof($academy); $i++ ){
@@ -153,6 +153,9 @@
 </div>
 </div>
 <script>
+	$(document).ready(function(){
+		$('#academyList').select2();
+	})
 	$(document).on("click",".edit", function(){
 		var id = $(this).attr("id");
 		var email = $("#email"+id).html();
