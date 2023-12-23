@@ -10,7 +10,7 @@ if ( isset ( $_COOKIE[$cookieSession."A"] ) ){
 		$email = $user[0]["email"];
 		$username = $user[0]["fullName"];
 		$userType = $user[0]["empType"];
-		$academiesList = json_decode($user[0]["academyId"],true);
+		$academiesList = ( is_array($user[0]["academyId"]) && empty($user[0]["academyId"]) ) ? array() : json_decode($user[0]["academyId"],true);
 		$_SESSION[$cookieSession."A"] = $email;	
 	}else{
 		header("Location: logout.php");die();
