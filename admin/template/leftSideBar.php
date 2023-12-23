@@ -13,7 +13,7 @@ if( $pages = selectDB("pages","`status` = '0' AND `section` = '0' ORDER BY `orde
 			$listOfAllowedPages .= "'{$list[$i]}'";
 		}
 		if( selectDB("`pages`","`enTitle` LIKE '{$_GET["v"]}' AND `id` IN ({$listOfAllowedPages})") == 0 ){
-			header("LOCATION: ?v=Home");die();
+			header("LOCATION: ?v=`enTitle` LIKE '{$_GET["v"]}' AND `id` IN ({$listOfAllowedPages})");die();
 		}
 	}else{
 		$list = array();
