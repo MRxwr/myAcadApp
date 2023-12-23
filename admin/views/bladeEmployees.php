@@ -171,8 +171,9 @@
 		$("input[name=fullName]").val(name);
 		$("input[name=fullName]").focus();
 		$("select[name=empType]").val(type);
+		var academyListArray = JSON.parse(academyList);
 		$('#academyList').val(null).trigger('change');
-		setSelectedOptions(academyList, "academyList");
+		setSelectedOptions(academyListArray, "academyList");
 	})
 	function setSelectedOptions(ids, selectId) {
 		var $select = $('#' + selectId);
