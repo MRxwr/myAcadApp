@@ -57,6 +57,13 @@
     margin-bottom: 10px;
 }
 </style>
+<?php
+$count = (is_array($academiesList) && !empty($academiesList)) ? count($academiesList) : 1;
+for( $z = 0; $z < $count; $z++ ){
+	$id .= ( $z == 0) ? "AND ": "OR ";
+	$id .= ( isset($academiesList[$z]) && !empty($academiesList[$z]) ) ? "`academyId` = '{$academiesList[$z]}'" : "";
+}
+?>
 <div class="row" style="padding:16px">
 	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 			<div class="panel panel-default card-view">
@@ -101,7 +108,7 @@ for ( $y =0; $y < 3; $y++){
 	$statTitle = [direction("Daily","يومية"),direction("Monthly","شهرية"),direction("All time Stats","أحصائيات الكل")];
 
 	$size = 0;
-	$sql = "SELECT SUM(f.total) as totalPrice FROM ( SELECT * FROM `orders` WHERE `status` = '1' {$statsDate[$y]}) as f;";
+	$sql = "SELECT SUM(f.total) as totalPrice FROM ( SELECT * FROM `orders` WHERE `status` = '1' {$id} {$statsDate[$y]}) as f;";
 	$result = $dbconnect->query($sql);
 	$row = $result->fetch_assoc();
 
