@@ -61,8 +61,8 @@
 $id = "";
 $count = (is_array($academiesList) && !empty($academiesList)) ? count($academiesList) : 1;
 for( $z = 0; $z < $count; $z++ ){
-	$id .= ( $z == 0) ? "AND ": "OR ";
-	$id .= ( isset($academiesList[$z]) && !empty($academiesList[$z]) ) ? "`academyId` = '{$academiesList[$z]}'" : "";
+	$check = ( $z == 0) ? "AND ": "OR ";
+	$id .= ( isset($academiesList[$z]) && !empty($academiesList[$z]) ) ? "{$check}`academyId` = '{$academiesList[$z]}'" : "";
 }
 ?>
 <div class="row" style="padding:16px">
