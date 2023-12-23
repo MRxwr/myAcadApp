@@ -241,8 +241,7 @@
 		<?php 
 		$count = ( sizeof($academiesList) == 0 ) ? 1 : sizeof($academiesList);
 		for( $z = 0; $z < $count; $z++ ){
-			$id = ( isset($academiesList[$z]) && !empty($academiesList[$z]) ) ? "`id` = '{$academiesList[$z]}'" : "";
-			echo $id;die();
+			$id = ( isset($academiesList[$z]) && !empty($academiesList[$z]) ) ? "AND `id` = '{$academiesList[$z]}'" : "";
 			if( $academies = selectDB("academies","`status` = '0' {$id}") ){
 				for( $i = 0; $i < sizeof($academies); $i++ ){
 					$academyTitle = direction($academies[$i]["enTitle"],$academies[$i]["arTitle"]);
