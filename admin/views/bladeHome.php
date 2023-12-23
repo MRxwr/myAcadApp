@@ -58,6 +58,7 @@
 }
 </style>
 <?php
+$id = "";
 $count = (is_array($academiesList) && !empty($academiesList)) ? count($academiesList) : 1;
 for( $z = 0; $z < $count; $z++ ){
 	$id .= ( $z == 0) ? "AND ": "OR ";
