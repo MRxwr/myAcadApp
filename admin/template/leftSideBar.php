@@ -20,7 +20,7 @@ if( $pages = selectDB("pages","`status` = '0' AND `section` = '0' ORDER BY `orde
 			print_r($jsonPages);
 			if(isset($jsonPages["error"]) && $jsonPages["error"] == "1" ){
 				//header("LOCATION: ?v=Home");die();
-			}
+			} 
 		}
 	}else{
 		$list = array();
