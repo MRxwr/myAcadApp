@@ -156,25 +156,25 @@ for ( $y = 1; $y < 2; $y++){
 	$size = 0;
 	for( $i=0; $i < 4 ; $i++){
 		if ( $i == 0 ){
-			if ($call = selectDB("orders","`status` = '1' {$statsDate[$y]}")){
+			if ($call = selectDB("orders","`status` = '1' {$statsDate[$y]} {$id}")){
 				$size = sizeof($call);
 			}
 			$title = direction("Success","ناجحه");
 			$icon = "fa fa-money text-success";
 		}elseif( $i == 1 ){
-			if ($call = selectDB("orders","`status` = '2' {$statsDate[$y]}")){
+			if ($call = selectDB("orders","`status` = '2' {$statsDate[$y]} {$id}")){
 				$size = sizeof($call);
 			}
 			$title = direction("Failed","فاشلة");
 			$icon = "fa fa-close text-info";
 		}elseif( $i == 2 ){
-			if ($call = selectDB("orders","`status` = '3' {$statsDate[$y]}")){
+			if ($call = selectDB("orders","`status` = '3' {$statsDate[$y]} {$id}")){
 				$size = sizeof($call);
 			}
 			$title = direction("Cancelled","ملغية");
 			$icon = "fa fa-undo text-danger";
 		}elseif( $i == 3 ){
-			if ($call = selectDB("orders","`status` = '4' {$statsDate[$y]}")){
+			if ($call = selectDB("orders","`status` = '4' {$statsDate[$y]} {$id}")){
 				$size = sizeof($call);
 			}
 			$title = direction("Ended","إنتهى");
@@ -232,7 +232,7 @@ for ( $y = 1; $y < 2; $y++){
 		</thead>
 			<tbody>
 			<?php
-			if( $orders = selectDB("orders","`id` != '0' ORDER BY `date` DESC LIMIT 5") ){
+			if( $orders = selectDB("orders","`id` != '0' {$id} ORDER BY `date` DESC LIMIT 5") ){
 				for( $i = 0; $i < sizeof($orders); $i++ ){
 					$status = [direction("Pending","إنتظار"),direction("Successful","ناجحه"),direction("Failed","فاشلة"),direction("Cancelled","ملغية"),direction("Ended","إنتهى")];
 					$statusColor = ["default","success","info","danger","warning"];
@@ -269,28 +269,28 @@ for ( $y = 1; $y < 2; $y++){
 
 <?php 
 $title1 = direction("Success","ناجحه");
-if ($call = selectDB("orders","`status` = '1'")){
+if ($call = selectDB("orders","`status` = '1' {$id}")){
 	$size1 = sizeof($call);
 }else{
 	$size1 = 0;
 }
 
 $title2 = direction("Failed","فاشلة");
-if ($call = selectDB("orders","`status` = '2'")){
+if ($call = selectDB("orders","`status` = '2' {$id}")){
 	$size2 = sizeof($call);
 }else{
 	$size2 = 0;
 }
 
 $title3 = direction("Cancelled","ملغية");
-if ($call = selectDB("orders","`status` = '3'")){
+if ($call = selectDB("orders","`status` = '3' {$id}")){
 	$size3 = sizeof($call);
 }else{
 	$size3 = 0;
 }
 
 $title4 = direction("Ended","إنتهى");
-if ($call = selectDB("orders","`status` = '4'")){
+if ($call = selectDB("orders","`status` = '4' {$id}")){
 	$size4 = sizeof($call);
 }else{
 	$size4 = 0;
@@ -317,7 +317,7 @@ $statsDate = [
 	<input id="endedText" value="<?php echo $title4 ?>">
 	<?php
 	for( $i = 0; $i < sizeof($statsDate); $i++){
-		if( $orders = selectDB("orders","`status` = '1' AND `date` LIKE '%{$statsDate[$i]}%'") ){
+		if( $orders = selectDB("orders","`status` = '1' AND `date` LIKE '%{$statsDate[$i]}%' {$id}") ){
 			$ordersDate = $statsDate[$i];
 			$ordersTotal = sizeof($orders);
 		}else{
