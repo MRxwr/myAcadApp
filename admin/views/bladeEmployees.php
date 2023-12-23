@@ -171,7 +171,6 @@
 		$("input[name=fullName]").val(name);
 		$("input[name=fullName]").focus();
 		$("select[name=empType]").val(type);
-		$("select[name=academyId]").val(academy);
 		$('#academyList').val(null).trigger('change');
 		setSelectedOptions(academyList, "academyList");
 	})
