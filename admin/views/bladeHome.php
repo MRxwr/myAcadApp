@@ -59,11 +59,12 @@
 </style>
 <?php
 $id = "";
+$listOfAcademies = "";
 $count = (is_array($academiesList) && !empty($academiesList)) ? count($academiesList) : 1;
 for( $z = 0; $z < $count; $z++ ){
-	$check = ( $z == 0) ? "AND ": "OR ";
-	$id .= ( isset($academiesList[$z]) && !empty($academiesList[$z]) ) ? "{$check}`academyId` = '{$academiesList[$z]}'" : "";
+	$listOfAcademies .= "'{$academiesList[$z]}'";
 }
+$id .= ( isset($academiesList[0]) && !empty($academiesList[0]) ) ? "AND `academyId` IN ($listOfAcademies)" : "";
 ?>
 <div class="row" style="padding:16px">
 	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
