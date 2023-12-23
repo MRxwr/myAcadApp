@@ -239,7 +239,7 @@
 		
 		<tbody>
 		<?php 
-		$count = (is_array($academiesList) && empty($academiesList)) ? 1 : count($academiesList);
+		$count = (is_array($academiesList) && !empty($academiesList)) ? count($academiesList) : 1;
 		for( $z = 0; $z < $count; $z++ ){
 			$id = ( isset($academiesList[$z]) && !empty($academiesList[$z]) ) ? "AND `id` = '{$academiesList[$z]}'" : "";
 			if( $academies = selectDB("academies","`status` = '0' {$id}") ){
