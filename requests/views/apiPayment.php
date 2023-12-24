@@ -199,7 +199,7 @@ if( !isset($_POST) ){
         insertDB2("orders",$_POST);
         if( $wallet == 1 ){
             $array["data"] = array(
-                "paymentURL" => "index.php?v=Success&OrderID={$_POST["gatewayId"]}",
+                "paymentURL" => "index.php?v=Success&OrderID={$_POST["gatewayId"]}&Result=CAPTURED",
                 "InvoiceId" => $comon_array["order_id"]
             );
             if( $user = selectDB("users","`id` = {$_POST["userId"]}") ){
