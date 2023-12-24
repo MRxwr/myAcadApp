@@ -16,7 +16,7 @@ if( isset($_GET["id"]) && !empty($_GET["id"]) && $role = selectDB("roles","`id` 
 <div class="panel panel-default card-view">
 <div class="panel-heading">
 <div class="pull-left">
-	<h6 class="panel-title txt-dark"><?php echo direction("ٌRole Permissions","ًصلاحيات العوضية") . "[ ".direction($role[0]["enTitle"],$role[0]["arTitle"])." ]"?></h6>
+	<h6 class="panel-title txt-dark"><?php echo direction("Role Permissions","ًصلاحيات العوضية") . "[ ".direction($role[0]["enTitle"],$role[0]["arTitle"])." ]"?></h6>
 </div>
 	<div class="clearfix"></div>
 </div>
