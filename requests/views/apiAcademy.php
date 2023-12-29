@@ -13,12 +13,12 @@ if( !isset($_GET["academyId"]) || empty($_GET["academyId"]) ){
 			$response["academy"]["enArea"] = "";
 			$response["academy"]["arArea"] = "";
 		}
-		if( $sessions = selectDB2("`id`, `enTitle`, `arTitle`, `quantity`","sessions","`academyId` = '{$academy[0]["id"]}' AND `status` = '0'") ){
+		if( $sessions = selectDB2("`id`, `enTitle`, `arTitle`, `quantity`","sessions","`academyId` = '{$academy[0]["id"]}' AND `status` = '0' AND `hidden` = '0'") ){
 			$response["academy"]["sessions"] = $sessions;
 		}else{
 			$response["academy"]["sessions"] = array();
 		}
-		if( $subscriptions = selectDB2("`id`, `enTitle`, `arTitle`, `price`, `priceAfterDiscount`","subscriptions","`academyId` = '{$academy[0]["id"]}'  AND `status` = '0' ORDER BY `price` ASC") ){
+		if( $subscriptions = selectDB2("`id`, `enTitle`, `arTitle`, `price`, `priceAfterDiscount`","subscriptions","`academyId` = '{$academy[0]["id"]}'  AND `status` = '0' AND `hidden` = '0' ORDER BY `price` ASC") ){
 			$response["academy"]["subscriptions"] = $subscriptions;
 		}else{
 			$response["academy"]["subscriptions"] = array();
