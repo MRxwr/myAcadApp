@@ -49,7 +49,7 @@
 
             <div class="col-md-6">
 			<label><?php echo direction("Price","القيمه") ?></label>
-			<input type="float" min='0' value='0' name="price" class="form-control" required>
+			<input type="number" step="any" name="price" class="form-control" required>
 			</div>
 			
 			<div class="col-md-12" style="margin-top:10px">
