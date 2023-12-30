@@ -150,9 +150,11 @@
             },
             success: function(result){
                 console.log(result);
-                var data = JSON.parse(result);
-                console.log(data["data"]["paymentURL"]);
-                windows.open(data["data"]["paymentURL"],"_blank");
+                result = JSON.parse(result);
+                console.log(result);
+                if( result["status"] == "success" ){
+                    windows.open(result["data"]["paymentURL"],"_blank");
+                }
             },
         })
     }
