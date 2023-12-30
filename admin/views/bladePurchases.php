@@ -141,11 +141,14 @@
             data: {
                 id: id
             },
+            headers: {
+                "myacadheader": "myAcadAppCreate",
+            },
             success: function(result){
                 console.log(result);
                 var data = JSON.parse(result);
                 windows.open(data["paymentURL"],"_blank");
-            }
+            },
         })
     }
 </script>
