@@ -14,7 +14,7 @@ if( !isset($_GET["userId"]) || empty($_GET["userId"]) ){
     }
     if( $orders = selectDB("orders","`userId` = '{$_GET["userId"]}' AND `type` != '4'") ){
         for( $i = 0; $i < sizeof($orders); $i++ ){
-            $subscriptions = selectDB("subscriptions","`subscriptionId` = '{$orders[$i]["subscriptionId"]}'");
+            $subscriptions = selectDB("subscriptions","`id` = '{$orders[$i]["subscriptionId"]}'");
             $numberOfDays = $subscriptions[0]["numberOfDays"];
             $endDate = date("Y-m-d H:i:s", strtotime($orders[$i]["date"] . " +{$numberOfDays} days"));
             if( ($endDate - $order[$i]["date"]) <= 0 ){
