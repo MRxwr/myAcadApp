@@ -12,6 +12,16 @@ if( !isset($_GET["userId"]) || empty($_GET["userId"]) ){
     }else{
         $_GET["type"] = $_GET["type"];
     }
+    if( $orders = selectDB("orders","`userId` = '{$_GET["userId"]}' AND `type` != '4'") ){
+        for( $i = 0; $i < sizeof($orders); $i++ ){
+            $subscriptions = selectDB("subscriptions","`subscriptionId` = '{$orders[$i]["subscriptionId"]}'");
+            $numberOfDays = $subscriptions[0]["numberOfDays"];
+            $endDate = date("Y-m-d H:i:s", strtotime($orders[$i]["date"] . " +{$numberOfDays} days"));
+            if( ($endDate - $order[$i]["date"]) <= 0 ){
+                updateDB("orders",array("type" => 4),"`id` = '{$orders[$i]["id"]}'");
+            }
+        }
+    }
 	if( $orders = selectDB2("`id`,`date`,`academyId`,`gatewayId`","orders","`userId` = '{$_GET["userId"]}' AND `status` = '{$_GET["type"]}'") ){
         for( $i = 0; $i < sizeof($orders); $i++ ){
             $academy = selectDB2("`area`,`enTitle`,`arTitle`,`imageurl`,`location`,`sport`","academies","`id` = '{$orders[$i]["academyId"]}'");
