@@ -12,6 +12,7 @@ if( !isset($_GET["userId"]) || empty($_GET["userId"]) ){
     }else{
         $_GET["type"] = $_GET["type"];
     }
+    var_dump(selectDB("orders","`userId` = '{$_GET["userId"]}' AND `type` != '4'"));
     if( $orders = selectDB("orders","`userId` = '{$_GET["userId"]}' AND `type` != '4'") ){
         for( $i = 0; $i < sizeof($orders); $i++ ){
             $subscriptions = selectDB("subscriptions","`id` = '{$orders[$i]["subscriptionId"]}'");
