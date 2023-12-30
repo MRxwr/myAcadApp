@@ -17,7 +17,7 @@ if( !isset($_GET["userId"]) || empty($_GET["userId"]) ){
             $subscriptions = selectDB("subscriptions","`id` = '{$orders[$i]["subscriptionId"]}'");
             $numberOfDays = $subscriptions[0]["numberOfDays"];
             $endDate = date("Y-m-d H:i:s", strtotime($orders[$i]["date"] . " +{$numberOfDays} days"));
-            if( ($endDate - $order[$i]["date"]) <= 0 ){
+            if( ($endDate - $orders[$i]["date"]) <= 0 ){
                 updateDB("orders",array("status" => 4),"`id` = '{$orders[$i]["id"]}'");
             }
         }
