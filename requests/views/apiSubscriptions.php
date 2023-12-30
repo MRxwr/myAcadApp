@@ -12,13 +12,15 @@ if( !isset($_GET["userId"]) || empty($_GET["userId"]) ){
     }else{
         $_GET["type"] = $_GET["type"];
     }
-    if( $orders = selectDB2("`subscriptionId`,`id`,`date`","orders","`userId` = '{$_GET["userId"]}' AND `status` = '1'") ){
-        for( $i = 0; $i < sizeof($orders); $i++ ){
-            $subscriptions = selectDB("subscriptions","`id` = '{$orders[$i]["subscriptionId"]}'");
+    if ($orders = selectDB("orders", "`userId` = '{$_GET["userId"]}' AND `type` != '4'")) {
+        for ($i = 0; $i < sizeof($orders); $i++) {
+            $subscriptions = selectDB("subscriptions", "`subscriptionId` = '{$orders[$i]["subscriptionId"]}'");
             $numberOfDays = $subscriptions[0]["numberOfDays"];
             $endDate = date("Y-m-d H:i:s", strtotime($orders[$i]["date"] . " +{$numberOfDays} days"));
-            if( ($endDate - $orders[$i]["date"]) <= 0 ){
-                updateDB("orders",array("status" => 4),"`id` = '{$orders[$i]["id"]}'");
+            $endDateTimestamp = strtotime($endDate);
+            $orderDateTimestamp = strtotime($orders[$i]["date"]);
+            if ($endDateTimestamp - $orderDateTimestamp <= 0) {
+                updateDB("orders", array("type" => 4), "`id` = '{$orders[$i]["id"]}'");
             }
         }
     }
