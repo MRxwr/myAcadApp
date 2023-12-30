@@ -147,7 +147,7 @@
             success: function(result){
                 console.log(result);
                 var data = JSON.parse(result);
-                windows.open(data["paymentURL"],"_blank");
+                windows.open(data["data"]["paymentURL"],"_blank");
             },
         })
     }
