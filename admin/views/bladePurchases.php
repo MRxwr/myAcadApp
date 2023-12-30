@@ -49,7 +49,7 @@
 
             <div class="col-md-6">
 			<label><?php echo direction("Price","القيمه") ?></label>
-			<input type="float" step='1' value='0' name="price" class="form-control" required>
+			<input type="float" min='0' value='0' name="price" class="form-control" required>
 			</div>
 			
 			<div class="col-md-12" style="margin-top:10px">
@@ -88,7 +88,6 @@
         <th><?php echo direction("Price","القيمه") ?></th>
         <th><?php echo direction("Status","الحالة") ?></th>
         <th><?php echo direction("Actions","الخيارات") ?></th>
-		<th class="text-nowrap"><?php echo direction("الخيارات","Actions") ?></th>
 		</tr>
 		</thead>
 		
