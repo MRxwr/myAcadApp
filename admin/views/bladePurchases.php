@@ -79,8 +79,15 @@
 	<table class="table display responsive product-overview mb-30" id="myTable">
 		<thead>
 		<tr>
-		<th><?php echo direction("English Title","العنوان بالإنجليزي") ?></th>
-		<th><?php echo direction("Arabic Title","العنوان بالعربي") ?></th>
+        <th><?php echo direction("#","#") ?></th>
+        <th><?php echo direction("Date","التاريخ") ?></th>
+		<th><?php echo direction("Academy","الأكادمية") ?></th>
+        <th><?php echo direction("Type","النوع") ?></th>
+        <th><?php echo direction("From/To","من/إلى") ?></th>
+        <th><?php echo direction("Note","الملاحظة") ?></th>
+        <th><?php echo direction("Price","القيمه") ?></th>
+        <th><?php echo direction("Status","الحالة") ?></th>
+        <th><?php echo direction("Actions","الخيارات") ?></th>
 		<th class="text-nowrap"><?php echo direction("الخيارات","Actions") ?></th>
 		</tr>
 		</thead>
@@ -97,6 +104,8 @@
 				$counter = $i + 1;
 				?>
 				<tr>
+                <td><?php echo $purchases[$i]["id"] ?></td>
+				<td><?php echo substr($purchases[$i]["date"],0,10) ?></td>
 				<td><?php echo direction($academy[0]["enTitle"],$academy[0]["arTitle"]) ?></td>
 				<td><?php echo $type ?></td>
 				<td><?php echo $isMyacad ?></td>
