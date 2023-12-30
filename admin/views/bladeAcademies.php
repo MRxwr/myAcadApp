@@ -229,6 +229,7 @@
 		<tr>
 		<th>#</th>
 		<th><?php echo direction("Title","العنوان") ?></th>
+		<th><?php echo direction("Sport","الرياضة") ?></th>
 		<th><?php echo direction("Country","البلد") ?></th>
 		<th><?php echo direction("Gender","الجنس") ?></th>
 		<th><?php echo direction("Promotion","العرض") ?></th>
@@ -241,6 +242,7 @@
 		<?php 
 		if( $academies = selectDB("academies","`status` = '0'") ){
 			for( $i = 0; $i < sizeof($academies); $i++ ){
+				$sport = selectDB("sports","`id` = '{$academies[$i]["sport"]}'");
 				$academyTitle = direction($academies[$i]["enTitle"],$academies[$i]["arTitle"]);
 				$videoText = ( !empty($academies[$i]["video"]) ) ? direction("Watch","شاهد") : "";
 				$locationText = ( !empty($academies[$i]["location"]) ) ? direction("View","إعرض") : "";
@@ -260,6 +262,7 @@
 				<tr>
 				<td><?php echo str_pad(1 + $i, 3 ,'0', STR_PAD_LEFT) ?></td>
 				<td><?php echo $academyTitle ?></td>
+				<td><?php echo direction($sport[0]["enTitle"],$sport[0]["arTitle"]) ?></td>
 				<td id="country<?php echo $academies[$i]["id"]?>" ><?php echo $academies[$i]["country"] ?></td>
 				<td><?php echo $genderText ?><label style="display:none" id="gender<?php echo $academies[$i]["id"]?>"  ><?php echo $academies[$i]["gender"] ?></label></td>
 				<td><?php echo $isPromotionText ?><label style="display:none" id="isPromotion<?php echo $academies[$i]["id"]?>"  ><?php echo $academies[$i]["isPromotion"] ?></label></td>
