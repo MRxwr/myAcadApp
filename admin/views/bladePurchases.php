@@ -12,7 +12,7 @@
 		<div class="row m-0">
             <div class="col-md-4">
 			<label><?php echo direction("Academy","الأكادمية") ?></label>
-			<select name="academyId" class="form-control">
+			<select name="academyId" class="form-control" id="academyList">
 				<?php
                 echo "<option value='0'>".direction("None","لايوجد")."</option>";
 				if( $academy = selectDB("academies","`status` = '0'") ){
@@ -129,3 +129,9 @@
 </div>
 </div>
 </div>
+
+<script>
+    $(document).ready(function(){
+		$('#academyList').select2();
+	})
+</script>
