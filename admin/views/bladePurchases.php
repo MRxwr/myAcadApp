@@ -133,4 +133,19 @@
     $(document).ready(function(){
 		$('#academyList').select2();
 	})
+    function generatePurchaseLink(id){
+        console.log(id);
+        $.ajax({
+            type: "POST",
+            url: "../requests/index.php?a=Purchases",
+            data: {
+                id: id
+            },
+            success: function(result){
+                console.log(result);
+                var data = JSON.parse(result);
+                windows.open(data["paymentURL"],"_blank");
+            }
+        })
+    }
 </script>
