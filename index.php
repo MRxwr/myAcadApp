@@ -3,6 +3,7 @@ if( isset($_GET["Result"]) ){
 	if( $_GET["Result"] == "CANCELED" || $_GET["Result"] == "ERROR" ){
 		$_GET["v"] = "Fail";
 	}elseif( $_GET["Result"] == "CAPTURED" ){
+		sleep(5);
 		$_GET["v"] = "Success";
 	}
 }
