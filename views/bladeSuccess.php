@@ -54,8 +54,8 @@ if( isset($_GET["OrderID"]) && !empty($_GET["OrderID"]) ){
                             <h2><?php echo direction("Your Subscription is Confirmed ","تم تأكيد إشتراكك ") ?><img src="img/suc.svg" alt=""></h2>
                             <h3><?php echo direction("Order Id: ","رقم الطلب: ") . " {$order[0]["id"]}" ?></h3>
                             <div class="wap_date">
-                                <h4><?php echo direction("Start Date: ","تاريخ البدايه: ") . substr($order[0]["date"],0,11)?></h4>
-                                <h4><?php echo direction("End Date: ","تاريخ النهاية: ") . substr(date("Y-m-d H:i:s", strtotime($order[0]["date"] . " +{$subscription[0]["numberOfDays"]} days")),0,11)?></h4>
+                                <h4><?php echo direction("Start: ","البدايه: ") . substr($order[0]["date"],0,11)?></h4>
+                                <h4><?php echo direction("End: ","النهاية: ") . substr(date("Y-m-d H:i:s", strtotime($order[0]["date"] . " +{$subscription[0]["numberOfDays"]} days")),0,11)?></h4>
                             </div>
                             <p><?php echo direction("YOU WILL RECIVE A CONFIRMATION EMAIL SOON !<br>THANK YOU FOR USING <span>MY ACAD</span>","سوف يصلكم تأكيد الإشتراك على بريدكم الإلكتروني قريبا!<br>شكراً لأستخدامكم<span>MY ACAD</span>") ?></p>
                             <a href="?v=Home" class="button"><?php echo direction("HOME","الرئيسية") ?></a>
