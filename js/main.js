@@ -68,10 +68,15 @@
 		// change the view of select sport
 		$('select[name=gender]').on('change', function (event) {
 			event.preventDefault();
-			$("select[name=governate]").prop("disabled",false);
-			$("#homeBtnSubmit").prop("disabled",false).attr("style","");
+            if ($(this).val() != 0) {
+                $("select[name=governate]").prop("disabled",false);
+			    $("#homeBtnSubmit").prop("disabled",false).attr("style","");
+            }else{
+                $("select[name=governate]").prop("disabled",true);
+			    $("#homeBtnSubmit").prop("disabled",true).attr("style","");
+            }
 		});
-		
+
 		// change the view of select sport
 		$('.governateSelect').on('change', function () {
 			var selectedGovernate = $(this).val();
