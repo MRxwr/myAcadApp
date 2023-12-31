@@ -149,9 +149,13 @@
                 console.log("loading");
             },
             success: function(result){
-                console.log(result);
-                var output = JSON.parse(result);
-                console.log(output);
+                try {
+                  console.log(result);
+                  var output = JSON.parse(result);
+                  console.log(output);
+                } catch (error) {
+                  console.error('Error parsing JSON:', error);
+                }
                 /*
                 if( output["status"] == "success" ){
                     alert("<?php echo direction("Success","نجاح") ?>");
