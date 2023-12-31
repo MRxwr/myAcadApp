@@ -200,6 +200,7 @@
     }
 
     function shareMe(id) {
+        console.log("shareMe called with id:", id);
         if (navigator.share !== undefined && navigator.share !== null) {
             // Use the Web Share API
             navigator.share({
