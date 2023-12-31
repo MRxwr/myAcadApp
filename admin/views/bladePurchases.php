@@ -190,7 +190,7 @@
                         navigator.share({
                             title: 'MY ACAD - Purchase',
                             text: "Please follow this link to pay your purchase.",
-                            url: 'https://myacad.app/Purchase.php?s=' + $result["data"]["InvoiceId"]
+                            url: 'https://myacad.app/Purchase.php?s=' + result["data"]["InvoiceId"]
                         })
                         .then(() => {
                             console.log('Shared successfully');
