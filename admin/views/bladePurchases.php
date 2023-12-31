@@ -187,21 +187,21 @@
                 if (result["status"] === "successful") {
                     if (navigator.share) {
                         // Use the Web Share API
-                        function share() {
-                            navigator.share({
-                                title: 'MY ACAD - Purchase',
-                                text: "Please follow this link to pay your purchase.",
-                                url: 'https://myacad.app/Purchase.php?s=' + result["data"]["InvoiceId"]
-                            })
-                            .then(() => {
+                        async function share() {
+                            try {
+                                await navigator.share({
+                                    title: 'MY ACAD - Purchase',
+                                    text: "Please follow this link to pay your purchase.",
+                                    url: 'https://myacad.app/Purchase.php?s=' + result["data"]["InvoiceId"]
+                                });
                                 console.log('Shared successfully');
-                                // Call the share function within a user gesture event handler
-                                document.addEventListener('click', share);
-                            })
-                            .catch((error) => {
+                            } catch (error) {
                                 console.error('Error sharing:', error);
-                            });
+                            }
                         }
+                
+                        // Call the share function within a user gesture event handler
+                        document.addEventListener('click', share);
                     } else {
                         // Fallback behavior for browsers that do not support the Web Share API
                         alert('Sharing is not supported on this device/browser.');
