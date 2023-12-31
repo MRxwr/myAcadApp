@@ -187,27 +187,21 @@
                 if (result["status"] === "successful") {
                     if (navigator.share) {
                         // Use the Web Share API
-                        async function share(invoiceId) {
-                            try {
-                                if (typeof invoiceId === "undefined") {
-                                    throw new Error("InvoiceId is undefined");
-                                }
-                
-                                await navigator.share({
-                                    title: 'MY ACAD - Purchase',
-                                    text: "Please follow this link to pay your purchase.",
-                                    url: `https://myacad.app/Purchase.php?s=${invoiceId}`
-                                });
+                        function share() {
+                            navigator.share({
+                                title: 'MY ACAD - Purchase',
+                                text: "Please follow this link to pay your purchase.",
+                                url: 'https://myacad.app/Purchase.php?s=' + result["data"]["data"]["InvoiceId"]
+                            })
+                            .then(() => {
                                 console.log('Shared successfully');
-                            } catch (error) {
+                                // Call the share function within a user gesture event handler
+                                document.addEventListener('click', share);
+                            })
+                            .catch((error) => {
                                 console.error('Error sharing:', error);
-                            }
+                            });
                         }
-        
-                        // Get the invoice ID from the AJAX response
-                        const invoiceId = result["data"]["data"]["InvoiceId"];
-                        // Call the share function with the invoice ID
-                        share(invoiceId);
                     } else {
                         // Fallback behavior for browsers that do not support the Web Share API
                         alert('Sharing is not supported on this device/browser.');
