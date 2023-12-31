@@ -15,7 +15,7 @@ if( isset($_GET["s"]) && !empty($_GET["s"]) && $link = selectDB("purchases","`ga
 }else{
     ?>
     <script>
-        window.location.href = "?v=Home";
+        window.location.href = "index?v=Home";
     </script>
     <?php
 }
