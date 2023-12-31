@@ -63,7 +63,6 @@ require ("includes/checksouthead.php");
 
 	<style>
 #loader {
-	display: none;
     position: fixed;
     top: 0;
     left: 0;
@@ -100,7 +99,7 @@ require ("includes/checksouthead.php");
 		<div class="la-anim-1"></div>
 	</div>
 
-	<div id="loader">
+	<div id="loader" style="display: none;">
 		<div class="loading-spinner"></div>
 	</div>
 	<!-- /Preloader -->
