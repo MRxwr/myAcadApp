@@ -149,11 +149,11 @@
                 console.log("loading");
             },
             success: function(result) {
-              if (result["status"] === "success") {
-                alert("Success");
+              if (result["status"] === "successful") {
+                alert("Success.. you will be redirected to payment gateway.");
                 window.open(result["data"]["paymentURL"], "_blank");
               } else {
-                alert("Fail");
+                alert("Fail.. please try again.");
               }
             },
         })
