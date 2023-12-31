@@ -150,8 +150,7 @@
             },
             success: function(result){
                 console.log(result);
-                result = JSON.parse(result);
-                console.log(result);
+                //result = JSON.parse(result);
                 if( result["status"] == "success" ){
                     windows.open(result["data"]["paymentURL"],"_blank");
                 }
