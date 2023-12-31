@@ -185,41 +185,34 @@
             success: function(result) {
                 $("#loader").hide();
                 if (result["status"] === "successful") {
-                  if (navigator.share) {
-                    // Use the Web Share API
-                    function share() {
-                      const invoiceId = result["data"]["data"]["InvoiceId"];
-                      if (typeof invoiceId === "undefined") {
-                        alert("InvoiceId is undefined");
-                        return;
-                      }
+                    if (navigator.share) {
+                        // Use the Web Share API
+                        async function share() {
+                            try {
+                                const invoiceId = result["data"]["data"]["InvoiceId"];
+                                if (typeof invoiceId === "undefined") {
+                                    throw new Error("InvoiceId is undefined");
+                                }
                 
-                      navigator.share({
-                        title: 'MY ACAD - Purchase',
-                        text: "Please follow this link to pay your purchase.",
-                        url: `https://myacad.app/Purchase.php?s=${invoiceId}`
-                      })
-                        .then(() => {
-                          console.log('Shared successfully');
-                        })
-                        .catch((error) => {
-                          console.error('Error sharing:', error);
-                        });
+                                await navigator.share({
+                                    title: 'MY ACAD - Purchase',
+                                    text: "Please follow this link to pay your purchase.",
+                                    url: `https://myacad.app/Purchase.php?s=${invoiceId}`
+                                });
+                                console.log('Shared successfully');
+                            } catch (error) {
+                                console.error('Error sharing:', error);
+                            }
+                        }
+                
+                        // Call the share function within a user gesture event handler
+                        document.addEventListener('click', share);
+                    } else {
+                        // Fallback behavior for browsers that do not support the Web Share API
+                        alert('Sharing is not supported on this device/browser.');
                     }
-                
-                    // Create a share button or link on the page
-                    const shareButton = document.createElement('button');
-                    shareButton.textContent = 'Share';
-                    shareButton.addEventListener('click', share);
-                
-                    // Append the button to the document body
-                    document.body.appendChild(shareButton);
-                  } else {
-                    // Fallback behavior for browsers that do not support the Web Share API
-                    alert('Sharing is not supported on this device/browser.');
-                  }
                 } else {
-                  alert("Fail.. please try again.");
+                    alert("Fail.. please try again.");
                 }
             },
         })
