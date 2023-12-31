@@ -10,13 +10,12 @@ if( isset($_GET["Result"]) ){
 		$_GET["v"] = "Fail";
         $message = direction("Your payment has failed","عملية دفع فاشلة");
         $icon = "close";
-        updateDB("purchases",array("status"=>2),"`gatewayId` = '{$_GET["OrderID"]}'");
+        updateDB("purchases",array("status"=>2,"gatewayResponse"=>json_encode($_GET)),"`gatewayId` = '{$_GET["OrderID"]}'");
 	}elseif( $_GET["Result"] == "CAPTURED" ){
-		sleep(5);
 		$_GET["v"] = "Success";
         $message = direction("Your payment is Confirmed ","تم تأكيد عملية الدفع بنجاح ");
         $icon = "suc";
-        updateDB("purchases",array("status"=>1),"`gatewayId` = '{$_GET["OrderID"]}'");
+        updateDB("purchases",array("status"=>1,"gatewayResponse"=>json_encode($_GET)),"`gatewayId` = '{$_GET["OrderID"]}'");
 	}
 }
 
