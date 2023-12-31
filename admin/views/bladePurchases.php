@@ -150,11 +150,16 @@
             },
             success: function(result){
                 console.log(result);
-                //result = JSON.parse(result);
-                if( result["status"] == "success" ){
-                    console.log(result["data"]["paymentURL"]);
-                    windows.open(result["data"]["paymentURL"],"_blank");
+                var output = JSON.parse(result);
+                console.log(output);
+                /*
+                if( output["status"] == "success" ){
+                    alert("<?php echo direction("Success","نجاح") ?>");
+                    windows.open(output["data"]["paymentURL"],"_blank");
+                }else{
+                    alert("<?php echo direction("fail","فشل") ?>");
                 }
+                */
             },
         })
     }
