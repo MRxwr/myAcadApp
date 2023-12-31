@@ -54,6 +54,7 @@
                     $select.append($option);
                 });
                 $select.select2();
+                $select.trigger('change.select2');
               });
 			$("#sportMainImage").attr("src",sportImage);
 			$("#sportMainTitle").html(sportTitle);
