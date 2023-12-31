@@ -112,7 +112,17 @@
 				<td><?php echo $purchases[$i]["price"] ?></td>
 				<td class='text-<?php echo $statusColor ?>'><?php echo $status ?></td>
 				<td class="text-nowrap">
-					<button class="btn btn-primary btn-outline btn-icon left-icon" onclick="generatePurchaseLink('<?php echo $purchases[$i]["id"] ?>')"><i class="fa fa-plus"></i></button>
+                    <?php
+                    if( $purchases[$i]["status"] == 0 && $purchases[$i]["isMyacad"] == 1 ){
+                        ?>
+                        <button class="btn btn-primary btn-outline btn-icon left-icon" onclick="generatePurchaseLink('<?php echo $purchases[$i]["id"] ?>')"><?php echo direction("Pay now","ادفع") ?></button>
+                        <?php
+                    }elseif( $purchases[$i]["status"] == 0 && $purchases[$i]["isMyacad"] == 2 ){
+                        ?>
+                        <button class="btn btn-primary btn-outline btn-icon left-icon" onclick="sharePurchaseLink('<?php echo $purchases[$i]["id"] ?>')"><?php echo direction("Share link","شارك الرابط") ?></button>
+                        <?php
+                    }
+                    ?>
 				</td>
 				</tr>
 				<?php
@@ -138,7 +148,8 @@
             type: "POST",
             url: "../requests/index.php?a=Purchases",
             data: {
-                id: id
+                id: id,
+                type: "pay"
             },
             headers: {
                 "myacadheader": "myAcadAppCreate",
@@ -152,6 +163,46 @@
                     alert("Success.. you will be redirected to payment gateway.");
                     window.open(result["data"]["paymentURL"], "_blank");
                 } else {
+                    alert("Fail.. please try again.");
+                }
+            },
+        })
+    }
+    function sharePurchaseLink(id){
+        $.ajax({
+            type: "POST",
+            url: "../requests/index.php?a=Purchases",
+            data: {
+                id: id,
+                type: "share"
+            },
+            headers: {
+                "myacadheader": "myAcadAppCreate",
+            },
+            beforeSend: function(){
+                $("#loader").show();
+            },
+            success: function(result) {
+                $("#loader").hide();
+                if(result["status"] === "successful"){
+                    if (navigator.share){
+                        // Use the Web Share API
+                        navigator.share({
+                            title: 'MY ACAD - Purchase',
+                            text: "Please follow this link to pay your purchase.",
+                            url: 'https://myacad.app/Purchase.php?s=' + $result["data"]["InvoiceId"]
+                        })
+                        .then(() => {
+                            console.log('Shared successfully');
+                        })
+                        .catch((error) => {
+                            console.error('Error sharing:', error);
+                        });
+                    }else{
+                        // Fallback behavior for browsers that do not support the Web Share API
+                        alert('Sharing is not supported on this device/browser.');
+                    }
+                }else{
                     alert("Fail.. please try again.");
                 }
             },
