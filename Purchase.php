@@ -5,6 +5,10 @@ header('Content-Type: text/html; charset=utf-8');
 require("template/header.php");
 require("template/navbar.php");
 
+if( isset($_GET["s"]) && !empty($_GET["s"]) && $link = selectDB("purchases","`gatewayId` = '{$_GET["s"]}'") ){
+    header("Location: {$link[0]["gatewayURL"]}");die();
+}
+
 if( isset($_GET["Result"]) ){
     $order = selectDB("purchases","`gatewayId` = '{$_GET["OrderID"]}'");
     if( $order[0]["status"] == 0 ){
