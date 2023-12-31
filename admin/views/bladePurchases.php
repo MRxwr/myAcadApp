@@ -152,6 +152,7 @@
                 console.log(result);
                 //result = JSON.parse(result);
                 if( result["status"] == "success" ){
+                    console.log(result["data"]["paymentURL"]);
                     windows.open(result["data"]["paymentURL"],"_blank");
                 }
             },
