@@ -112,7 +112,7 @@
 				<td><?php echo $purchases[$i]["price"] ?></td>
 				<td class='text-<?php echo $statusColor ?>'><?php echo $status ?></td>
 				<td class="text-nowrap">
-					<button class="btn btn-primary btn-outline btn-icon left-icon" onclick="generatePurchaseLink('<?php echo $purchases[$i]["id"] ?>')"><i class="fa fa-plus"></i></button>			
+					<button class="btn btn-primary btn-outline btn-icon left-icon" onclick="generatePurchaseLink('<?php echo $purchases[$i]["id"] ?>')"><i class="fa fa-plus"></i></button>
 				</td>
 				</tr>
 				<?php
@@ -134,7 +134,6 @@
 		$('#academyList').select2();
 	})
     function generatePurchaseLink(id){
-        console.log(id);
         $.ajax({
             type: "POST",
             url: "../requests/index.php?a=Purchases",
@@ -144,17 +143,17 @@
             headers: {
                 "myacadheader": "myAcadAppCreate",
             },
-            // add loading indicator
             beforeSend: function(){
-                console.log("loading");
+                $("#loader").show();
             },
             success: function(result) {
-              if (result["status"] === "successful") {
-                alert("Success.. you will be redirected to payment gateway.");
-                window.open(result["data"]["paymentURL"], "_blank");
-              } else {
-                alert("Fail.. please try again.");
-              }
+                $("#loader").hide();
+                if (result["status"] === "successful") {
+                    alert("Success.. you will be redirected to payment gateway.");
+                    window.open(result["data"]["paymentURL"], "_blank");
+                } else {
+                    alert("Fail.. please try again.");
+                }
             },
         })
     }
