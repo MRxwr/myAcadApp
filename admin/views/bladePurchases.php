@@ -187,9 +187,8 @@
                 if (result["status"] === "successful") {
                     if (navigator.share) {
                         // Use the Web Share API
-                        async function share() {
+                        async function share(invoiceId) {
                             try {
-                                const invoiceId = result["data"]["data"]["InvoiceId"];
                                 if (typeof invoiceId === "undefined") {
                                     throw new Error("InvoiceId is undefined");
                                 }
@@ -204,9 +203,11 @@
                                 console.error('Error sharing:', error);
                             }
                         }
-                
-                        // Call the share function within a user gesture event handler
-                        document.addEventListener('click', share);
+        
+                        // Get the invoice ID from the AJAX response
+                        const invoiceId = result["data"]["data"]["InvoiceId"];
+                        // Call the share function with the invoice ID
+                        share(invoiceId);
                     } else {
                         // Fallback behavior for browsers that do not support the Web Share API
                         alert('Sharing is not supported on this device/browser.');
