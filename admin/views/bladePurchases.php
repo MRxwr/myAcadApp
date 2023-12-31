@@ -195,14 +195,13 @@
                             })
                             .then(() => {
                                 console.log('Shared successfully');
+                                // Call the share function within a user gesture event handler
+                                document.addEventListener('click', share);
                             })
                             .catch((error) => {
                                 console.error('Error sharing:', error);
                             });
                         }
-                
-                        // Call the share function within a user gesture event handler
-                        document.addEventListener('click', share);
                     } else {
                         // Fallback behavior for browsers that do not support the Web Share API
                         alert('Sharing is not supported on this device/browser.');
