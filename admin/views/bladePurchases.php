@@ -148,22 +148,13 @@
             beforeSend: function(){
                 console.log("loading");
             },
-            success: function(result){
-                try {
-                  console.log(result);
-                  var output = JSON.parse(result);
-                  console.log(output);
-                } catch (error) {
-                  console.error('Error parsing JSON:', error);
-                }
-                /*
-                if( output["status"] == "success" ){
-                    alert("<?php echo direction("Success","نجاح") ?>");
-                    windows.open(output["data"]["paymentURL"],"_blank");
-                }else{
-                    alert("<?php echo direction("fail","فشل") ?>");
-                }
-                */
+            success: function(result) {
+              if (result["status"] === "success") {
+                alert("Success");
+                window.open(result["data"]["paymentURL"], "_blank");
+              } else {
+                alert("Fail");
+              }
             },
         })
     }
