@@ -189,10 +189,15 @@
                         // Use the Web Share API
                         async function share() {
                             try {
+                                const invoiceId = result["data"]["InvoiceId"];
+                                if (typeof invoiceId === "undefined") {
+                                    throw new Error("InvoiceId is undefined");
+                                }
+                
                                 await navigator.share({
                                     title: 'MY ACAD - Purchase',
                                     text: "Please follow this link to pay your purchase.",
-                                    url: 'https://myacad.app/Purchase.php?s=' + result["data"]["InvoiceId"]
+                                    url: `https://myacad.app/Purchase.php?s=${invoiceId}`
                                 });
                                 console.log('Shared successfully');
                             } catch (error) {
