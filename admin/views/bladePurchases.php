@@ -185,31 +185,31 @@
             success: function(result) {
                 $("#loader").hide();
                 if (result["status"] === "successful") {
-                    if (navigator.share) {
-                        // Use the Web Share API
-                        function share() {
-                            navigator.share({
-                                title: 'MY ACAD - Purchase',
-                                text: "Please follow this link to pay your purchase.",
-                                url: 'https://myacad.app/Purchase.php?s=' + result["data"]["data"]["InvoiceId"]
-                            })
-                            .then(() => {
-                                console.log('Shared successfully');
-                                // Call the share function within a user gesture event handler
-                                document.addEventListener('click', share);
-                            })
-                            .catch((error) => {
-                                console.error('Error sharing:', error);
-                            });
-                        }
-                    } else {
-                        // Fallback behavior for browsers that do not support the Web Share API
-                        alert('Sharing is not supported on this device/browser.');
-                    }
+                    shareMe(result["data"]["data"]["InvoiceId"]);
                 } else {
                     alert("Fail.. please try again.");
                 }
             },
         })
+    }
+
+    function shareMe(id){
+        if (navigator.share) {
+            // Use the Web Share API
+            navigator.share({
+                title: 'MY ACAD - Purchase',
+                text: "Please follow this link to pay your purchase.",
+                url: 'https://myacad.app/Purchase.php?s=' + id
+            })
+            .then(() => {
+                console.log('Shared successfully');
+            })
+            .catch((error) => {
+                console.error('Error sharing:', error);
+            });
+        } else {
+            // Fallback behavior for browsers that do not support the Web Share API
+            alert('Sharing is not supported on this device/browser.');
+        }
     }
 </script>
