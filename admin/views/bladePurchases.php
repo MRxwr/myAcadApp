@@ -119,7 +119,8 @@
                         <?php
                     }elseif( $purchases[$i]["status"] == 0 && $purchases[$i]["isMyacad"] == 2 ){
                         ?>
-                        <button class="btn btn-primary btn-outline btn-icon left-icon" onclick="sharePurchaseLink('<?php echo $purchases[$i]["id"] ?>')"><?php echo direction("Share link","شارك الرابط") ?></button>
+                        <button class="btn btn-primary btn-outline btn-icon left-icon" onclick="sharePurchaseLink('<?php echo $purchases[$i]["id"] ?>')"><?php echo direction("Generate link","انشاء الرابط") ?></button>
+                        <button class="btn btn-warning btn-outline btn-icon left-icon shareBtn" id="" ><?php echo direction("Share link","شارك الرابط") ?></button>
                         <?php
                     }
                     ?>
@@ -185,7 +186,8 @@
         })
         .done(function(result) {
             if (result["status"] === "successful") {
-                shareMe(result["data"]["data"]["InvoiceId"]);
+                $(".shareBtn").attr("id", result["data"]["data"]["InvoiceId"]);
+                alert("link generated successfully, you can proceed to share.");
             } else {
                 alert("Fail.. please try again.");
             }
@@ -199,24 +201,26 @@
         });
     }
 
-    function shareMe(id) {
-        console.log("shareMe called with id:", id);
-        if (navigator.share !== undefined && navigator.share !== null) {
-            // Use the Web Share API
-            navigator.share({
-                    title: 'MY ACAD - Purchase',
-                    text: "Please follow this link to pay your purchase.",
-                    url: 'https://myacad.app/Purchase.php?s=' + id
-                })
-                .then(() => {
-                    console.log('Shared successfully');
-                })
-                .catch((error) => {
-                    console.error('Error sharing:', error);
-                });
-        } else {
-            // Fallback behavior for browsers that do not support the Web Share API
-            alert('Sharing is not supported on this device/browser.');
-        }
-    }
+    $(document).ready(function() {
+        $('.shareBtn').on('click', function() {
+            var id = $(this).attr('id');
+            if (navigator.share !== undefined && navigator.share !== null) {
+                // Use the Web Share API
+                navigator.share({
+                        title: 'MY ACAD - Purchase',
+                        text: "Please follow this link to pay your purchase.",
+                        url: 'https://myacad.app/Purchase.php?s=' + id
+                    })
+                    .then(() => {
+                        console.log('Shared successfully');
+                    })
+                    .catch((error) => {
+                        console.error('Error sharing:', error);
+                    });
+            } else {
+                // Fallback behavior for browsers that do not support the Web Share API
+                alert('Sharing is not supported on this device/browser.');
+            }
+        })
+    })
 </script>
