@@ -63,6 +63,7 @@ require ("includes/checksouthead.php");
 
 	<style>
 #loader {
+	display: none;
     position: fixed;
     top: 0;
     left: 0;
