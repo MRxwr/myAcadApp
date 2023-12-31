@@ -119,9 +119,8 @@
                         <?php
                     }elseif( $purchases[$i]["status"] == 0 && $purchases[$i]["isMyacad"] == 2 ){
                         ?>
-                        <button class="btn btn-primary btn-outline btn-icon left-icon shareBtn" id="" ><?php echo direction("Share link","شارك الرابط") ?></button>
                         <button class="btn btn-primary btn-outline btn-icon left-icon" onclick="sharePurchaseLink('<?php echo $purchases[$i]['id'] ?>')"><?php echo direction("Generate link","انشاء الرابط") ?></button>
-                        
+                        <button class="btn btn-warning btn-outline btn-icon left-icon shareBtn" id="" ><?php echo direction("Share link","شارك الرابط") ?></button>
                         <?php
                     }
                     ?>
