@@ -189,7 +189,7 @@
                         // Use the Web Share API
                         async function share() {
                             try {
-                                const invoiceId = result["data"]["InvoiceId"];
+                                const invoiceId = result["data"]["data"]["InvoiceId"];
                                 if (typeof invoiceId === "undefined") {
                                     throw new Error("InvoiceId is undefined");
                                 }
