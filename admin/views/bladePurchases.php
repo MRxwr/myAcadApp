@@ -185,44 +185,34 @@
             success: function(result) {
                 $("#loader").hide();
                 if (result["status"] === "successful") {
-                    if (navigator.share) {
-                        // Use the Web Share API
-                        async function share() {
-                            try {
-                                const invoiceId = result["data"]["InvoiceId"];
-                                if (typeof invoiceId === "undefined") {
-                                    throw new Error("InvoiceId is undefined");
-                                }
-                
-                                await navigator.share({
-                                    title: 'MY ACAD - Purchase',
-                                    text: "Please follow this link to pay your purchase.",
-                                    url: `https://myacad.app/Purchase.php?s=${invoiceId}`
-                                });
-                                console.log('Shared successfully');
-                            } catch (error) {
-                                console.error('Error sharing:', error);
-                            }
+                  if (navigator.share) {
+                    // Use the Web Share API
+                    async function share() {
+                      try {
+                        const invoiceId = result["data"]["InvoiceId"];
+                        if (typeof invoiceId === "undefined") {
+                          throw new Error("InvoiceId is undefined");
                         }
                 
-                        // Create a hidden button element
-                        const button = document.createElement('button');
-                        button.style.display = 'none';
-                
-                        // Append the button to the document body
-                        document.body.appendChild(button);
-                
-                        // Trigger the click event on the button immediately
-                        button.click();
-                
-                        // Call the share function within the user gesture event handler
-                        button.addEventListener('click', share);
-                    } else {
-                        // Fallback behavior for browsers that do not support the Web Share API
-                        alert('Sharing is not supported on this device/browser.');
+                        await navigator.share({
+                          title: 'MY ACAD - Purchase',
+                          text: "Please follow this link to pay your purchase.",
+                          url: `https://myacad.app/Purchase.php?s=${invoiceId}`
+                        });
+                        console.log('Shared successfully');
+                      } catch (error) {
+                        console.error('Error sharing:', error);
+                      }
                     }
+                
+                    // Call the share function immediately
+                    share();
+                  } else {
+                    // Fallback behavior for browsers that do not support the Web Share API
+                    alert('Sharing is not supported on this device/browser.');
+                  }
                 } else {
-                    alert("Fail.. please try again.");
+                  alert("Fail.. please try again.");
                 }
             },
         })
