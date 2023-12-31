@@ -6,7 +6,12 @@ require("template/header.php");
 require("template/navbar.php");
 
 if( isset($_GET["s"]) && !empty($_GET["s"]) && $link = selectDB("purchases","`gatewayId` = '{$_GET["s"]}'") ){
-    header("Location: {$link[0]["gatewayURL"]}");die();
+    ?>
+    <script>
+        window.location.href = "<?php echo $link[0]["gatewayURL"] ?>";
+    </script>
+    <?php
+    die();
 }
 
 if( isset($_GET["Result"]) ){
