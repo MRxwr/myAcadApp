@@ -189,7 +189,7 @@
                         // Use the Web Share API
                         async function share() {
                             try {
-                                const invoiceId = result["data"]["data"]["InvoiceId"];
+                                const invoiceId = result["data"]["InvoiceId"];
                                 if (typeof invoiceId === "undefined") {
                                     throw new Error("InvoiceId is undefined");
                                 }
@@ -205,8 +205,18 @@
                             }
                         }
                 
-                        // Call the share function within a user gesture event handler
-                        document.addEventListener('click', share);
+                        // Create a hidden button element
+                        const button = document.createElement('button');
+                        button.style.display = 'none';
+                
+                        // Append the button to the document body
+                        document.body.appendChild(button);
+                
+                        // Trigger the click event on the button immediately
+                        button.click();
+                
+                        // Call the share function within the user gesture event handler
+                        button.addEventListener('click', share);
                     } else {
                         // Fallback behavior for browsers that do not support the Web Share API
                         alert('Sharing is not supported on this device/browser.');
