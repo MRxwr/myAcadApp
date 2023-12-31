@@ -168,7 +168,7 @@
             },
         })
     }
-    function sharePurchaseLink(id){
+    function sharePurchaseLink(id) {
         $.ajax({
             type: "POST",
             url: "../requests/index.php?a=Purchases",
@@ -179,34 +179,40 @@
             headers: {
                 "myacadheader": "myAcadAppCreate",
             },
-            beforeSend: function(){
+            beforeSend: function() {
                 $("#loader").show();
             },
-            success: function(result) {
-                $("#loader").hide();
-                if (result["status"] === "successful") {
-                    shareMe(result["data"]["data"]["InvoiceId"]);
-                } else {
-                    alert("Fail.. please try again.");
-                }
-            },
         })
+        .done(function(result) {
+            if (result["status"] === "successful") {
+                shareMe(result["data"]["data"]["InvoiceId"]);
+            } else {
+                alert("Fail.. please try again.");
+            }
+        })
+        .fail(function(xhr, status, error) {
+            console.error("AJAX request failed:", status, error);
+            alert("An error occurred. Please try again later.");
+        })
+        .always(function() {
+            $("#loader").hide();
+        });
     }
 
-    function shareMe(id){
-        if (navigator.share) {
+    function shareMe(id) {
+        if (navigator.share !== undefined && navigator.share !== null) {
             // Use the Web Share API
             navigator.share({
-                title: 'MY ACAD - Purchase',
-                text: "Please follow this link to pay your purchase.",
-                url: 'https://myacad.app/Purchase.php?s=' + id
-            })
-            .then(() => {
-                console.log('Shared successfully');
-            })
-            .catch((error) => {
-                console.error('Error sharing:', error);
-            });
+                    title: 'MY ACAD - Purchase',
+                    text: "Please follow this link to pay your purchase.",
+                    url: 'https://myacad.app/Purchase.php?s=' + id
+                })
+                .then(() => {
+                    console.log('Shared successfully');
+                })
+                .catch((error) => {
+                    console.error('Error sharing:', error);
+                });
         } else {
             // Fallback behavior for browsers that do not support the Web Share API
             alert('Sharing is not supported on this device/browser.');
