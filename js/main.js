@@ -48,6 +48,9 @@
                         value: item.id,
                         text: item[selectedLanguage]
                     });
+                    if (item.id === 0) {
+                        $option.prop('disabled', true);
+                    }
                     $select.append($option);
                 });
                 $select.select2();
@@ -85,7 +88,7 @@
 
         $('#btnSubmit').on('click', function (event) {
 			$('#formSubmit').submit();
-		});
+		}); 
 		
         // Show or hide the sticky footer button
         $(window).on('scroll', function () {
