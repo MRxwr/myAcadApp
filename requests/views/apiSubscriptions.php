@@ -12,7 +12,7 @@ if( !isset($_GET["userId"]) || empty($_GET["userId"]) ){
     }else{
         $_GET["type"] = $_GET["type"];
     }
-    if ($orders = selectDB("orders", "`userId` = '{$_GET["userId"]}' AND `status` != '4'")) {
+    if ($orders = selectDB("orders", "`userId` = '{$_GET["userId"]}' AND `status` = '1'")) {
         for ($i = 0; $i < sizeof($orders); $i++) {
             $subscriptions = selectDB("subscriptions", "`id` = '{$orders[$i]["subscriptionId"]}'");
             $numberOfDays = $subscriptions[0]["numberOfDays"];
