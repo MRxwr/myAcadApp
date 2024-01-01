@@ -5,20 +5,6 @@ header('Content-Type: text/html; charset=utf-8');
 require("template/header.php");
 require("template/navbar.php");
 
-if ($orders = selectDB("orders", "`id` = '504'")) {
-    for ($i = 0; $i < sizeof($orders); $i++) {
-        $subscriptions = selectDB("subscriptions", "`id` = '{$orders[$i]["subscriptionId"]}'");
-        $numberOfDays = $subscriptions[0]["numberOfDays"];
-        $endDate = date("Y-m-d H:i:s", strtotime($orders[$i]["date"] . " +{$numberOfDays} days"));
-        $endDateTimestamp = strtotime($endDate);
-        $orderDateTimestamp = strtotime($orders[$i]["date"]);
-        echo "{$endDateTimestamp} - {$orderDateTimestamp}<br>{$endDate} - {$orders[$i]["date"]}<br>";
-        if ($endDateTimestamp - $orderDateTimestamp <= 0) {
-            updateDB("orders", array("status" => 4), "`id` = '{$orders[$i]["id"]}'");
-        }
-    }
-}
-die();
 if( isset($_GET["s"]) && !empty($_GET["s"]) && $link = selectDB("purchases","`gatewayId` = '{$_GET["s"]}'") ){
     ?>
     <script>
