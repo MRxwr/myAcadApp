@@ -12,7 +12,7 @@ if ($orders = selectDB("orders", "`id` = '504'")) {
         $endDate = date("Y-m-d H:i:s", strtotime($orders[$i]["date"] . " +{$numberOfDays} days"));
         $endDateTimestamp = strtotime($endDate);
         $orderDateTimestamp = strtotime($orders[$i]["date"]);
-        echo "{$endDateTimestamp} - {$orderDateTimestamp}";
+        echo "{$endDateTimestamp} - {$orderDateTimestamp}<br>{$endDate} - {$orders[$i]["date"]}<br>";
         if ($endDateTimestamp - $orderDateTimestamp <= 0) {
             updateDB("orders", array("status" => 4), "`id` = '{$orders[$i]["id"]}'");
         }
