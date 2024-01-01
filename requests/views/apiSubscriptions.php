@@ -18,8 +18,8 @@ if( !isset($_GET["userId"]) || empty($_GET["userId"]) ){
             $numberOfDays = $subscriptions[0]["numberOfDays"];
             $endDate = date("Y-m-d H:i:s", strtotime($orders[$i]["date"] . " +{$numberOfDays} days"));
             $endDateTimestamp = strtotime($endDate);
-            $orderDateTimestamp = strtotime($orders[$i]["date"]);
-            if ($endDateTimestamp - $orderDateTimestamp <= 0) {
+            $todaysDate = strtotime(date("Y-m-d H:i:s"));
+            if ($endDateTimestamp <= $todaysDate ) {
                 updateDB("orders", array("status" => 4), "`id` = '{$orders[$i]["id"]}'");
             }
         }
