@@ -171,7 +171,7 @@ if( !isset($_POST) ){
         'ExtraMerchantsData'=> json_encode($extraMerchantData),//Optional for multivendor API
     );
     
-    print_r($comon_array);die();
+    //print_r($comon_array);die();
 
     $fields_string = http_build_query($comon_array);
 	$ch = curl_init();
