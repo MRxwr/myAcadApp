@@ -42,6 +42,7 @@ if( !isset($_POST) ){
         'success_url'=>'https://myacad.app/Purchase.php',
         'error_url'=>'https://myacad.app/Purchase.php',
         'notifyURL'=>'https://myacad.app/Purchase.php',
+        'create_invoice'=>1,
         'test_mode'=>0,
         "whitelabled" => 1,
         'CurrencyCode'=>'KWD',			

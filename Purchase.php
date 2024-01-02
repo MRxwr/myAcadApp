@@ -12,12 +12,13 @@ if( isset($_GET["s"]) && !empty($_GET["s"]) && $link = selectDB("purchases","`ga
     </script>
     <?php
     die();
-}else{
+}elseif( !isset($_GET["OrderID"]) ){
     ?>
     <script>
-        window.location.href = "index?v=Home";
+        window.location.href = "index?v=Home"; 
     </script>
     <?php
+    die();
 }
 
 if( isset($_GET["Result"]) ){
