@@ -31,7 +31,7 @@
 	<label class="control-label mb-10">Select Academy</label>
 	<select class="form-control" name="academyId">
 		<?php
-		if( $userType == 0 ){
+		if( $userType == 0 || $userType == 8 ){
 			echo "<option value='0' selected>".direction("All","الكل")."</option>";
 		}
 		$count = (is_array($academiesList) && !empty($academiesList)) ? count($academiesList) : 1;
