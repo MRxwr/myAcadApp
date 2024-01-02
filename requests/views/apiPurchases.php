@@ -44,6 +44,7 @@ if( !isset($_POST) ){
         'notifyURL'=>'https://myacad.app/Purchase.php',
         'create_invoice'=>1,
         'test_mode'=>0,
+        'notification'=>"link",
         "whitelabled" => 1,
         'CurrencyCode'=>'KWD',			
         'CstFName'=>"PURCHASE {$title}",		
