@@ -179,7 +179,7 @@ function sendMailsAdmin($orderId, $email){
 		curl_close($curl);
 }
 
-checkExpiryNotification(){
+function checkExpiryNotification(){
 	$expiry = "0";
 	return 0;
 };
