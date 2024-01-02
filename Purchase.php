@@ -24,14 +24,14 @@ if( isset($_GET["s"]) && !empty($_GET["s"]) && $link = selectDB("purchases","`ga
 if( isset($_GET["Result"]) ){
     $order = selectDB("purchases","`gatewayId` = '{$_GET["OrderID"]}'");
     if( $order[0]["status"] == 0 ){
-        if( $_GET["Result"] == "CANCELED" || $_GET["Result"] == "ERROR" ){
-            $message = direction("Your payment has failed","عملية دفع فاشلة");
-            $icon = "close";
-            updateDB("purchases",array("status"=>2,"gatewayResponse"=>json_encode($_GET)),"`gatewayId` = '{$_GET["OrderID"]}'");
-        }elseif( $_GET["Result"] == "CAPTURED" ){
+        if( $_GET["Result"] == "CAPTURED" ){
             $message = direction("Your payment is Confirmed ","تم تأكيد عملية الدفع بنجاح ");
             $icon = "suc";
             updateDB("purchases",array("status"=>1,"gatewayResponse"=>json_encode($_GET)),"`gatewayId` = '{$_GET["OrderID"]}'");
+        }else{
+            $message = direction("Your payment has failed","عملية دفع فاشلة");
+            $icon = "close";
+            updateDB("purchases",array("status"=>2,"gatewayResponse"=>json_encode($_GET)),"`gatewayId` = '{$_GET["OrderID"]}'");
         }
     }elseif( $order[0]["status"] == 1 ){
         $message = direction("Your payment is Confirmed ","تم تأكيد عملية الدفع بنجاح ");
