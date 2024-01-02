@@ -35,9 +35,10 @@
 			echo "<option value='0' selected>".direction("All","الكل")."</option>";
 		}
 		$count = (is_array($academiesList) && !empty($academiesList)) ? count($academiesList) : 1;
+		$orderBy = direction("enTitle","arTitle");
 		for( $z = 0; $z < $count; $z++ ){
 			$id = ( isset($academiesList[$z]) && !empty($academiesList[$z]) ) ? "AND `id` = '{$academiesList[$z]}'" : "AND `id` != '0'";
-			if( $academies = selectDB("academies","`status` = '0' {$id}")){
+			if( $academies = selectDB("academies","`status` = '0' {$id} ORDER BY `{$orderBy}` ASC") ){
 				for( $i = 0; $i < sizeof($academies); $i++ ){
 					echo "<option value='{$academies[$i]["id"]}'>".direction($academies[$i]["enTitle"],$academies[$i]["arTitle"])."</option>";
 				}
