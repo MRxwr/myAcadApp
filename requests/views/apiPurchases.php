@@ -45,10 +45,14 @@ if( !isset($_POST) ){
         'test_mode'=>0,
         "whitelabled" => 1,
         'CurrencyCode'=>'KWD',			
-        'CstFName'=>"PURCHASE {$title}",		
+        'CstFName'=>"PURCHASE MYACAD",	
         'Cstemail'=>"{$AdminSettings[0]["email"]}",
         'CstMobile'=>"{$socialMedia[0]["whatsapp"]}",
         'ExtraMerchantsData'=> json_encode($extraMerchantData),
+        'ProductTitle' => "Checkout List",
+        'ProductName' => json_encode(array( 0 => "Purchase {$title}")),
+        'ProductPrice' => json_encode(array( 0 => $fullAmount)),
+        'ProductQty' => json_encode(array( 0 => 1)),
     );
 
     $fields_string = http_build_query($comon_array);
