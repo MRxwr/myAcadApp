@@ -1,6 +1,6 @@
 <?php 
 
-checkExpiryNotification();
+expiredSubscription();
 
 if( $banners = selectDB2("`id`, `type`, `imageurl`, `link`","banners","`hidden` = '0' AND `status` = '0' ORDER BY `order` ASC") ){
     $response["banners"] = $banners;
