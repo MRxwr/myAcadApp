@@ -178,9 +178,4 @@ function sendMailsAdmin($orderId, $email){
 		$response = curl_exec($curl);
 		curl_close($curl);
 }
-
-function checkExpiryNotification(){
-	$expiry = "0";
-	return 0;
-};
 ?>
