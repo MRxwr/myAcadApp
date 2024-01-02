@@ -103,7 +103,7 @@
 				$counter = $i + 1;
 				?>
 				<tr>
-                <td><?php echo $purchases[$i]["id"] ?></td>
+                <td><?php echo str_pad($purchases[$i]["id"], 5, "0", STR_PAD_LEFT) ?></td>
 				<td><?php echo substr($purchases[$i]["date"],0,10) ?></td>
 				<td><?php echo direction($academy[0]["enTitle"],$academy[0]["arTitle"]) ?></td>
 				<td><?php echo $type ?></td>
