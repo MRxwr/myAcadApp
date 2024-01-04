@@ -62,7 +62,8 @@ function expiredSubscription(){
             $numberOfDays = ($subscriptions[0]["numberOfDays"]-2);
             echo $endDate = date("Y-m-d H:i:s", strtotime($orders[$i]["date"] . " +{$numberOfDays} days"));
             $endDateTimestamp = strtotime($endDate);
-            echo $todaysDate = strtotime(date("Y-m-d H:i:s"));
+			echo $todayDate = date("Y-m-d H:i:s");
+            $todaysDate = strtotime($todayDate);
             if ($endDateTimestamp <= $todaysDate ) {
                 updateDB("orders", array("isNotified" => 1), "`id` = '{$orders[$i]["id"]}'");
             }
