@@ -59,12 +59,19 @@ function expiredSubscription(){
 	if ($orders = selectDB("orders", "`status` = '1' AND `isNotified` = '0'")) {
         for ($i = 0; $i < sizeof($orders); $i++) {
             $subscriptions = selectDB("subscriptions", "`id` = '{$orders[$i]["subscriptionId"]}'");
+			$user = selectDB2("firebase","users","`id` = '{$orders[$i]["userId"]}'");
             $numberOfDays = ($subscriptions[0]["numberOfDays"]-2);
             echo $endDate = date("Y-m-d H:i:s", strtotime($orders[$i]["date"] . " +{$numberOfDays} days"));
             $endDateTimestamp = strtotime($endDate);
 			echo $todayDate = date("Y-m-d H:i:s");
             $todaysDate = strtotime($todayDate);
             if ($endDateTimestamp <= $todaysDate ) {
+				$data = array(
+					"title" => direction("Subscription End Soon","سينتهي الإشتراك قريبا"),
+					"msg" => direction("Your subscription with {$orders[$i]["enAcademy"]} Will end soon. Please resubscribe and continue the fun.","سينتهي إشتراك قريبا مع {$orders[$i]["arAcademy"]}، الرجاء إعادة الإشتراك لتستمر المتعه."),
+					"firebase" => $user[0]["firebase"]
+				);
+				sendNotification($data);
                 updateDB("orders", array("isNotified" => 1), "`id` = '{$orders[$i]["id"]}'");
             }
         }
