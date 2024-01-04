@@ -60,9 +60,9 @@ function expiredSubscription(){
         for ($i = 0; $i < sizeof($orders); $i++) {
             $subscriptions = selectDB("subscriptions", "`id` = '{$orders[$i]["subscriptionId"]}'");
             $numberOfDays = ($subscriptions[0]["numberOfDays"]-2);
-            $endDate = date("Y-m-d H:i:s", strtotime($orders[$i]["date"] . " +{$numberOfDays} days"));
+            echo $endDate = date("Y-m-d H:i:s", strtotime($orders[$i]["date"] . " +{$numberOfDays} days"));
             $endDateTimestamp = strtotime($endDate);
-            $todaysDate = strtotime(date("Y-m-d H:i:s"));
+            echo $todaysDate = strtotime(date("Y-m-d H:i:s"));
             if ($endDateTimestamp <= $todaysDate ) {
                 updateDB("orders", array("isNotified" => 1), "`id` = '{$orders[$i]["id"]}'");
             }
