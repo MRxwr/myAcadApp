@@ -42,6 +42,7 @@ function sendNotification($data){
 }
 
 function expiredSubscription(){
+	/*
 	if ( $getSubscriptions = selectDB2("`userId`,`enAcademy`,`arAcademy`, `id`","orders","DATEDIFF( DATE_SUB(DATE_ADD(CURRENT_DATE(), INTERVAL 1 MONTH), INTERVAL 2 DAY), DATE_SUB(DATE_ADD(`date`, INTERVAL 1 MONTH), INTERVAL 2 DAY) ) <= 2 AND `isNotified` = '0'") ){
 		for( $i = 0; $i < sizeof($getSubscriptions); $i++ ){
 			$user = selectDB2("firebase","users","`id` = '{$getSubscriptions[$i]["userId"]}'");
@@ -54,6 +55,19 @@ function expiredSubscription(){
 			updateDB("orders",array("isNotified"=>1),"`id` = '{$getSubscriptions[$i]["id"]}}'");
 		}
 	}
+	*/
+	if ($orders = selectDB("orders", "`status` = '1' AND `isNotified` = '0'")) {
+        for ($i = 0; $i < sizeof($orders); $i++) {
+            $subscriptions = selectDB("subscriptions", "`id` = '{$orders[$i]["subscriptionId"]}'");
+            $numberOfDays = ($subscriptions[0]["numberOfDays"]-2);
+            $endDate = date("Y-m-d H:i:s", strtotime($orders[$i]["date"] . " +{$numberOfDays} days"));
+            $endDateTimestamp = strtotime($endDate);
+            $todaysDate = strtotime(date("Y-m-d H:i:s"));
+            if ($endDateTimestamp <= $todaysDate ) {
+                updateDB("orders", array("isNotified" => 1), "`id` = '{$orders[$i]["id"]}'");
+            }
+        }
+    }
 }
 
 function emailBody($order){
