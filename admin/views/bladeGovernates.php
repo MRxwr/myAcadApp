@@ -60,6 +60,15 @@
 		if( $governates = selectDB("governates","`status` = '0' AND `countryCode` LIKE '{$_GET["code"]}' ORDER BY `{$orderBy}` ASC") ){
 			for( $i = 0; $i < sizeof($governates); $i++ ){
 				$counter = $i + 1;
+				if ( $governates[$i]["hidden"] == 1 ){
+					$icon = "fa fa-eye";
+					$link = "?show={$areas[$i]["id"]}";
+					$hide = direction("Show","أظهر");
+				}else{
+					$icon = "fa fa-eye-slash";
+					$link = "?hide={$areas[$i]["id"]}";
+					$hide = direction("Hide","إخفاء");
+				}
 				?>
 				<tr>
 				<td id="enTitle<?php echo $governates[$i]["id"]?>" ><?php echo $governates[$i]["enTitle"] ?></td>
@@ -67,6 +76,7 @@
 				<td class="text-nowrap">
 					<a id="<?php echo $governates[$i]["id"] ?>" class="edit btn btn-warning" data-toggle="tooltip" data-original-title="<?php echo direction("Edit","تعديل")  ?>"> <i class="fa fa-pencil text-inverse m-r-10"></i>
 					</a>
+					<a href="<?php echo $link . "&v={$_GET["v"]}&code={$_GET["code"]}" ?>" class="btn btn-default" data-toggle="tooltip" data-original-title="<?php echo $hide ?>"> <i class="<?php echo $icon ?> text-inverse m-r-10"></i></a>
 					<a href="?delId=<?php echo $governates[$i]["id"] . "&v={$_GET["v"]}&code={$_GET["code"]}" ?>" data-toggle="tooltip" data-original-title="<?php echo direction("Delete","حذف")  ?>" class="btn btn-danger"><i class="fa fa-close text-inverse"></i>
 					</a>			
 				</td>
