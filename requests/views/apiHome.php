@@ -27,13 +27,11 @@ if( isset($_GET["countryCode"]) && $governates = selectDB2("`id`, `enTitle`, `ar
         "enTitle" => "SELECT GOVERNATE",
         "arTitle" => "إختر المحافظة"
     );
-    /*
     $array0 = array(
         "id" => 0,
         "enTitle" => "SELECT ALL",
         "arTitle" => "إختيار الكل"
     );
-    */
     array_unshift($response["governates"], $array1, $array0);
 }else{
     $response["governates"] = array();
