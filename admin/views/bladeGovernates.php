@@ -62,11 +62,11 @@
 				$counter = $i + 1;
 				if ( $governates[$i]["hidden"] == 1 ){
 					$icon = "fa fa-eye";
-					$link = "?show={$areas[$i]["id"]}";
+					$link = "?show={$governates[$i]["id"]}";
 					$hide = direction("Show","أظهر");
 				}else{
 					$icon = "fa fa-eye-slash";
-					$link = "?hide={$areas[$i]["id"]}";
+					$link = "?hide={$governates[$i]["id"]}";
 					$hide = direction("Hide","إخفاء");
 				}
 				?>
