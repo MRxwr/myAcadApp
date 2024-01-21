@@ -26,8 +26,8 @@ if( !isset($_GET["sportId"]) || empty($_GET["sportId"]) ){
 			$response["academies"][$i]["rating"] = 0;
 		}
 	}else{
-		$response["academies"] = array();
 		$response["msg"] = popupMsg($requestLang,"No academies found","لا يوجد أكاديميات");
+		$response["academies"] = array();
 		echo outputError($response);die();
 	}
 }
