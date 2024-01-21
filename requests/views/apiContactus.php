@@ -6,10 +6,10 @@ if(
 ( isset($_POST["message"]) && !empty($_POST["message"]) ) &&
 insertDB("contact_us",$_POST) 
 ){
-	$response["msg"] = "message sent successfully";
+	$response["msg"] = popupMsg($requestLang,"message sent successfully","تم ارسال الرسالة بنجاح");
 	echo outputData($response);
 }else{
-	$error = array("msg"=>"Error while sending you message please try again.");
-	echo outputError($error);die();
+	$response["msg"] = popupMsg($requestLang,"Error while sending you message please try again.","خطأ في ارسال رسالتك الرجاء المحاولة مرة اخرى");
+	echo outputError($response);die();
 }
 ?>

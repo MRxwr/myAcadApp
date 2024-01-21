@@ -9,6 +9,12 @@ if( isset($_GET["page"]) && $_GET["page"] == "success" ){
 	die();
 }
 
+if( isset($_GET["lang"]) && !empty($_GET["lang"]) ){
+	$requestLang = $_GET["lang"];
+}else{
+	$requestLang = "en";
+}
+
 if ( isset(getallheaders()["myacadheader"]) ){
 	$headerAPI =  getallheaders()["myacadheader"];
 }else{

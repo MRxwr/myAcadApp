@@ -11,10 +11,10 @@ if ( isset($_GET["type"]) && !empty($_GET["type"]) ){
 		}
 		if($user = selectDB('users',"`email` LIKE '".$_POST["email"]."' AND `password` LIKE '".sha1($_POST["password"])."'")){
 			if( $user[0]["status"] == 1 ){
-				$error = array("msg"=>"Your account has been blocked. Please aconatct administration.");
+				$error["msg"] = popupMsg($requestLang,"Your account has been blocked. Please aconatct administration.","تم قفل حسابك ، الراجاء التواصل مع الإداره");
 				echo outputError($error);die();
 			}elseif( $user[0]["status"] == 2 ){
-				$error = array("msg"=>"No user with this email.");
+				$error["msg"] = popupMsg($requestLang,"No user with this email.","لا يوجد مستخدم بهذا البريد الالكتروني");
 				echo outputError($error);die();
 			}else{
 				$data = array("firebase" => "{$_POST["firebase"]}");
@@ -24,7 +24,7 @@ if ( isset($_GET["type"]) && !empty($_GET["type"]) ){
 				echo outputData(array('id'=>$user[0]["id"]));
 			}
 		}else{
-			$error = array("msg"=>"Please enter user credintial correctly.");
+			$error["msg"] = popupMsg($requestLang,"Please enter user credintial correctly.","الرجاء التحقق من بيانات المستخدم");
 			echo outputError($error);die();
 		}
 	}elseif( $_GET["type"] == "deleteUser" ){
@@ -34,7 +34,7 @@ if ( isset($_GET["type"]) && !empty($_GET["type"]) ){
 		}elseif( $user = selectDB('users',"`id` = '{$_GET["userId"]}'") ){
 			$email = "DELETED - {$user[0]["email"]}";
 			updateDB('users',array("status"=>"2","email"=>$email),"`id` = '{$_GET["userId"]}'");
-			echo outputData(array('msg'=>"User account has been removed successfully."));
+			echo outputData(array('msg'=>popupMsg($requestLang,"User account has been removed successfully.","تم حذف حساب المستخدم بنجاح")));
 		}else{
 			$error = array("msg"=>"user id is wrong, please check user id.");
 			echo outputError($error);die();
@@ -67,9 +67,9 @@ if ( isset($_GET["type"]) && !empty($_GET["type"]) ){
 			));
 			$response = curl_exec($curl);
 			curl_close($curl);
-			echo outputData(array('msg'=>"A new password has been sent to your email."));
+			echo outputData(array('msg'=>popupMsg($requestLang,"A new password has been sent to your email.","تم ارسال كلمة مرور جديدة الي بريدك الالكتروني")));
 		}else{
-			$error = array("msg"=>"This email is not registred on our app, please enter a correct one.");
+			$error = array("msg"=>popupMsg($requestLang,"This email is not registred on our app, please enter a correct one.","هذا البريد الالكتروني غير مسجل في تطبيقنا، الرجاء التحقق من بريدك الالكتروني"));
 			echo outputError($error);die();
 		}
 	}elseif( $_GET["type"] == "changePassword" ){
@@ -86,7 +86,7 @@ if ( isset($_GET["type"]) && !empty($_GET["type"]) ){
 			echo outputError($error);die();
 		}
 		if ( $_POST["confirmPassword"] != $_POST["newPassword"] ){
-			$error = array("msg"=>"please set new password and confrim password correctly.");
+			$error = array("msg"=>popupMsg($requestLang,"please set new password and confrim password correctly.","الرجاء تعيين كلمة مرور جديدة وتأكيدها بشكل صحيح"));
 			echo outputError($error);die();
 		}
 		if( $user = selectDB("users","`id` = '{$_GET["userId"]}'" ) ){
@@ -94,9 +94,9 @@ if ( isset($_GET["type"]) && !empty($_GET["type"]) ){
 			$oldPass = sha1($_POST["oldPassword"]);
 			if ( $user = selectDB("users","`id` = '{$_GET["userId"]}' AND `password` = '{$oldPass}'" ) ){
 			updateDB('users',array("password"=>$newPass),"`id` = '{$_GET["userId"]}'");
-				echo outputData(array('msg'=>"Password has been changed successfully."));
+				echo outputData(array('msg'=>popupMsg($requestLang,"Password has been changed successfully.","تم تغيير كلمة المرور بنجاح")));
 			}else{
-				$error = array("msg"=>"Old password is wrong.");
+				$error = array("msg"=>popupMsg($requestLang,"Old password is wrong.","كلمة المرور القديمة غير صحيحة"));
 				echo outputError($error);die();
 			}
 		}else{
@@ -133,7 +133,7 @@ if ( isset($_GET["type"]) && !empty($_GET["type"]) ){
 			echo outputError($error);die();
 		}
 		if ( $_POST["password"] != $_POST["confirmPassword"] ){
-			$error = array("msg"=>"Passwords does not match. Please try again.");
+			$error = array("msg"=>popupMsg($requestLang,"Passwords does not match. Please try again.","كلمة المرور غير متطابقة ، الرجاء المحاولة مرة اخرى"));
 			echo outputError($error);die();
 		}
 	
@@ -144,20 +144,20 @@ if ( isset($_GET["type"]) && !empty($_GET["type"]) ){
 			if( $user[0]["status"] == 2 ){
 				updateDB("users",array("email" => "DELETED - {$user[0]["email"]}" ), "`id` = '{$user[0]["id"]}'");
 			}else{
-				$error = array("msg"=>"A user with this email is already registred.");
+				$error = array("msg"=>popupMsg($requestLang,"A user with this email is already registred.","يوجد مستخدم مسجل بهذا البريد الالكتروني"));
 				echo outputError($error);die();
 			}
 		}
 		if( insertDB('users',$data) ){
 			if ( $user = selectDB('users',"`email` LIKE '".$_POST["email"]."' AND `password` LIKE '".$_POST["password"]."'") ){
 				if( $user[0]["status"] == 1 ){
-					$error = array("msg"=>"Your account has been blocked. Please aconatct administration.");
+					$error = array("msg"=>popupMsg($requestLang,"Your account has been blocked. Please aconatct administration.","تم قفل حسابك ، الرجاء التواصل مع الإداره"));
 					echo outputError($error);die();
 				}
 				echo outputData(array('id'=>$user[0]["id"]));
 			}
 		}else{
-			$error = array("msg"=>"Please enter registration data correctly.");
+			$error = array("msg"=>popupMsg($requestLang,"Please enter registration data correctly.","الرجاء التحقق من بيانات التسجيل"));
 			echo outputError($error);die();
 		}
 	}elseif( $_GET["type"] == "profile" ){
@@ -196,7 +196,7 @@ if ( isset($_GET["type"]) && !empty($_GET["type"]) ){
 			if( $user = selectDB("users","`id` = '{$_GET["userId"]}' " ) ){
 				if ( updateDB("users",$data,"`id` = '{$_GET["userId"]}'" ) ){
 					$user = selectDB2("`firstName`, `lastName`, `email`, `phone`, `gender`","users","`id` = '{$_GET["userId"]}' " );
-					echo outputData(array('msg'=>"profile has been updated successfully.","user"=>$user));
+					echo outputData(array('msg'=>popupMsg($requestLang,"profile has been updated successfully.","تم تحديث الملف الشخصي بنجاح"),"user"=>$user));
 				}
 			}else{
 				$error = array("msg"=>"No user with this id");

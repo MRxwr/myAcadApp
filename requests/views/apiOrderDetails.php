@@ -9,7 +9,7 @@ if( !isset($_POST["orderId"]) || empty($_POST["orderId"]) ){
         $order[0]["endDate"] = date("Y-m-d H:i:s", strtotime($order[0]["date"] . " +{$subscription[0]["numberOfDays"]} days"));
         $response = $order;
     }else{
-        $response = array("msg"=>"we could not find this order id in our db.");
+        $response["msg"] = popupMsg($requestLang,"we could not find this invoice id in out db.","لم يتم العثور على هذا الرقم في قاعدة بياناتنا");
 	    echo outputError($response);die();
     }
 }

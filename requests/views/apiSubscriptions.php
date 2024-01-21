@@ -43,7 +43,7 @@ if( !isset($_GET["userId"]) || empty($_GET["userId"]) ){
             );
         }
     }else{
-        $response = array("msg"=>"we could not find any order for this user id.");
+        $response["msg"] = popupMsg($requestLang,"we could not find any order for this user id.","لم يتم العثور على طلبات لهذا المستخدم");
 	    echo outputError($response);die();
     }
 }

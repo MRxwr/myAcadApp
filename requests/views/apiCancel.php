@@ -19,9 +19,9 @@ if( !isset($_GET["userId"]) || empty($_GET["userId"]) ){
         sendMailsCancel($orders,$settingsEmail[0]["email"]);
         $user = selectDB("users","`id` = '{$_GET["userId"]}'");
         updateDB("users",array("wallet" => ( (float)$user[0]["wallet"]+(float)$orders[0]["total"]) ),"`id` = '{$_GET["userId"]}'");
-        $response["msg"] = "Order has been refunded successfully.";
+        $response["msg"] = popupMsg($requestLang,"Order has been refunded successfully.","تم استرداد الطلب بنجاح");
     }else{
-        $response = array("msg"=>"we could not find any order with provided info.");
+        $response["msg"] = popupMsg($requestLang,"we could not find any order with provided info.","لم يتم العثور على طلب بالمعلومات المدخلة");
 	    echo outputError($response);die();
     }
 }

@@ -25,7 +25,7 @@ if( !isset($_GET["academyId"]) || empty($_GET["academyId"]) ){
 		}
 		$response["academy"]["rating"] = 0;
 	}else{
-		$response["msg"] = "there is no academy with this id";
+		$response["msg"] = popupMsg($requestLang,"there is no academy with this id","لا يوجد اكادمية بهذا الرقم");
 		echo outputError($response);die();
 	}
 }

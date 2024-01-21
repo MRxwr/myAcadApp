@@ -1,6 +1,6 @@
 <?php
 if( !isset($_POST) ){
-    $response["msg"] = "Please make sure you send post data before submitting.";
+    $response["msg"] = popupMsg($requestLang,"Please make sure you send post data before submitting.","يرجى التأكد من ارسال بيانات POST قبل الارسال");
 	echo outputError($response);die();
 }else{
     $data = $_POST;
@@ -59,9 +59,7 @@ if( !isset($_POST) ){
 
     //checking session information
     if( $sessionData = selectDB("sessions","`id` = '{$session}' AND `quantity` >= '{$subscriptionQuantity}'")){}else{
-        $response = array(
-            "msg" => 'No sessions available anymore.',
-        );
+        $response["msg"] = popupMsg($requestLang,'No sessions available anymore.','لا يوجد كلاسات متاحة.');
         echo outputError($response);die();
     }
 
@@ -211,9 +209,7 @@ if( !isset($_POST) ){
             echo outputData($response);
         }
     }else{
-        $response = array(
-            "msg" => 'Error while proccessing payment',
-        );
+        $response["msg"] = popupMsg($requestLang,'Error while proccessing payment','خطأ في عملية الدفع');
         echo outputError($response);
     }
     

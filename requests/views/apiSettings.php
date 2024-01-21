@@ -12,7 +12,7 @@ if( $settings = selectDB2("`version`, `enTerms`, `arTerms`, `enPolicy`, `arPolic
 	$response["settings"] = $settings[0];
 	echo outputData($response);
 }else{
-	$error = array("msg"=>"Error while loading settings info");
+	$error["msg"] = popupMsg($requestLang,"Error while loading settings info","خطأ في تحميل معلومات الاعدادات");
 	echo outputError($error);die();
 }
 ?>

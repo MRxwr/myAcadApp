@@ -23,6 +23,16 @@ function direction($valEn,$valAr){
 	return $response;
 }
 
+// general \\
+function popupMsg($lang,$valEn,$valAr){
+	if ( $lang == "ar" ){
+		$response = $valAr;
+	}else{
+		$response = $valEn;
+	}
+	return $response;
+}
+
 // select a randon letter \\
 function randLetter() {
     $alphabet = 'abcdefghijklmnopqrstuvwxyz';

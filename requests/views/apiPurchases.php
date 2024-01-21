@@ -1,6 +1,6 @@
 <?php
 if( !isset($_POST) ){
-    $response["msg"] = "Please make sure you send post data before submitting.";
+    $response["msg"] = popupMsg($requestLang,"Please make sure you send post data before submitting.","يرجى التأكد من ارسال بيانات POST قبل الارسال");
 	echo outputError($response);die();
 }else{
     $data = $_POST;
@@ -78,9 +78,7 @@ if( !isset($_POST) ){
         updateDB("purchases",$_POST,"`id` = '{$data["id"]}'");
         echo outputData($response);
     }else{
-        $response = array(
-            "msg" => 'Error while proccessing payment',
-        );
+        $response["msg"] = popupMsg($requestLang,'Error while proccessing payment','خطأ في عملية الدفع');
         echo outputError($response);
     }
     
