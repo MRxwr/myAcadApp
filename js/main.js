@@ -62,7 +62,7 @@
 			$("input[name=sport]").val(id);
 			$("select[name=gender]").prop("disabled",false);
 			$("select[name=gender]").prop("required",true);
-            $("#homeBtnSubmit").prop("disabled",true).attr("style","");
+            $("#homeBtnSubmit").prop("disabled",true).attr("style","background: gray;color: black;");
 			$('#sport').modal('toggle');
 		});
 		
@@ -74,7 +74,7 @@
 			    $("#homeBtnSubmit").prop("disabled",false).attr("style","");
             }else{
                 $("select[name=governate]").prop("disabled",true);
-			    $("#homeBtnSubmit").prop("disabled",true).attr("style","");
+			    $("#homeBtnSubmit").prop("disabled",true).attr("style","background: gray;color: black;");
             }
 		});
 
