@@ -62,6 +62,7 @@
 			$("input[name=sport]").val(id);
 			$("select[name=gender]").prop("disabled",false);
 			$("select[name=gender]").prop("required",true);
+            $("#homeBtnSubmit").prop("disabled",false).attr("style","");
 			$('#sport').modal('toggle');
 		});
 		
