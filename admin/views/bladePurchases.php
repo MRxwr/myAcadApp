@@ -1,7 +1,7 @@
 <?php
 if( isset($_GET["cancel"]) ){
     $cancel = $_GET["cancel"];
-    updateDB("purchases","`status` = '2'","`id` = '{$cancel}'");
+    updateDB("purchases",array("status" => "2"),"`id` = '{$cancel}'");
 }
 ?>
 <div class="col-sm-12">
