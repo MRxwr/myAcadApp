@@ -129,7 +129,7 @@ if( isset($_GET["cancel"]) ){
                         <button class="btn btn-warning btn-outline btn-icon left-icon shareBtn" id="" ><?php echo direction("Share link","شارك الرابط") ?></button>
                         <?php
                     }
-                    if( $purchases[$i]["status"] != 0 ){
+                    if( $purchases[$i]["status"] == 0 ){
                         ?>
                             <a class="btn btn-danger btn-outline btn-icon left-icon" href="?v=<?php echo "{$_GET["v"]}&cancel={$purchases[$i]["id"]}" ?>"><?php echo direction("Cancel","الغاء") ?></a>
                         <?php
