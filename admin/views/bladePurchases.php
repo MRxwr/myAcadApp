@@ -131,7 +131,7 @@ if( isset($_GET["cancel"]) ){
                     }
                     if( $purchases[$i]["status"] == 0 ){
                         ?>
-                            <a class="btn btn-danger btn-outline btn-icon left-icon" href="?v=<?php echo "{$_GET["v"]}&cancel={$purchases[$i]["id"]}" ?>"><?php echo direction("Cancel","الغاء") ?></a>
+                            <a class="btn btn-danger btn-outline btn-icon left-icon" onclick="alert('Are you sure you want to cancel this purchase?');" href="?v=<?php echo "{$_GET["v"]}&cancel={$purchases[$i]["id"]}" ?>"><?php echo direction("Cancel","الغاء") ?></a>
                         <?php
                     }
                     ?>
