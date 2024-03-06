@@ -1,3 +1,9 @@
+<?php
+if( isset($_GET["cancel"]) ){
+    $cancel = $_GET["cancel"];
+    updateDB("purchases","`status` = '2'","`id` = '{$cancel}'");
+}
+?>
 <div class="col-sm-12">
 <div class="panel panel-default card-view">
 <div class="panel-heading">
@@ -121,6 +127,11 @@
                         ?>
                         <button class="btn btn-primary btn-outline btn-icon left-icon" onclick="sharePurchaseLink('<?php echo $purchases[$i]['id'] ?>')"><?php echo direction("Generate link","انشاء الرابط") ?></button>
                         <button class="btn btn-warning btn-outline btn-icon left-icon shareBtn" id="" ><?php echo direction("Share link","شارك الرابط") ?></button>
+                        <?php
+                    }
+                    if( $purchases[$i]["status"] != 0 ){
+                        ?>
+                            <a class="btn btn-danger btn-outline btn-icon left-icon" href="?v=<?php echo "{$_GET["v"]}&cancel={$purchases[$i]["id"]}" ?>"><?php echo direction("Cancel","الغاء") ?></a>
                         <?php
                     }
                     ?>
