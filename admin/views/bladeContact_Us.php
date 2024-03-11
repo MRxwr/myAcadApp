@@ -14,6 +14,7 @@
 	<table class="table display responsive product-overview mb-30" id="myTable">
 		<thead>
 		<tr>
+		<th><?php echo direction("Date/Time","التاريخ/الوقت") ?></th>
 		<th><?php echo direction("Title","العنوان") ?></th>
 		<th><?php echo direction("Email","البريد الإلكتروني") ?></th>
 		<th><?php echo direction("Phone","الهاتف") ?></th>
@@ -29,6 +30,7 @@
 				$counter = $i + 1;
 				?>
 				<tr>
+				<td id="dateTime<?php echo $contacts[$i]["id"]?>" ><?php echo $contacts[$i]["date"] ?></td>
 				<td id="title<?php echo $contacts[$i]["id"]?>" ><?php echo $contacts[$i]["title"] ?></td>
 				<td id="email<?php echo $contacts[$i]["id"]?>" ><?php echo $contacts[$i]["email"] ?></td>
 				<td id="phone<?php echo $contacts[$i]["id"]?>" ><?php echo $contacts[$i]["phone"] ?></td>
