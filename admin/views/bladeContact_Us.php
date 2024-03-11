@@ -28,6 +28,8 @@
 		if( $contacts = selectDB("contact_us","`status` = '0' ORDER BY `id` ASC") ){
 			for( $i = 0; $i < sizeof($contacts); $i++ ){
 				$counter = $i + 1;
+				// convert to gmt+3
+				$contacts[$i]["date"] = date("Y-m-d H:i:s", strtotime($contacts[$i]["date"]) + 10800);
 				?>
 				<tr>
 				<td id="dateTime<?php echo $contacts[$i]["id"]?>" ><?php echo $contacts[$i]["date"] ?></td>
