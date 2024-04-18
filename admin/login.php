@@ -2,7 +2,7 @@
 require ("includes/config.php");
 require ("includes/translate.php");
 
-if ( isset($_COOKIE[$cookieSession."A"]) )
+if ( isset($_COOKIE[$cookieSession."A"]) && !empty($_COOKIE[$cookieSession."A"]) )
 {
 	header("Location: index");
 }
