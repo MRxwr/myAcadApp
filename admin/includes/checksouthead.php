@@ -2,7 +2,7 @@
 require ("config.php");
 require ("translate.php");
 require ("functions.php");
-if ( isset ( $_COOKIE[$cookieSession."A"] ) ){
+if ( isset($_COOKIE[$cookieSession."A"]) && !empty($_COOKIE[$cookieSession."A"]) ){
 	session_start ();
 	$svdva = $_COOKIE[$cookieSession."A"];
 	if ( $user = selectDB("employees","`keepMeAlive` LIKE '%".$svdva."%'") ){
