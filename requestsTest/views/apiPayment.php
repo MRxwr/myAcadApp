@@ -139,7 +139,7 @@ if( !isset($_POST) ){
         $newTotal = $newTotal - $myacadDeposit;
         $paymentGateway = "knet";
     }
-
+/*
     //preparing upayment payload
     $extraMerchantData[] =  array(
         'amount' => $myacadDeposit,
@@ -157,48 +157,33 @@ if( !isset($_POST) ){
         'ccChargeType' => 'percentage',
         'ibanNumber' => "{$academyData[0]["iban"]}"
     );
-    
-    $comon_array = array(
-        "paymentGateway" => array("src" => "{$paymentGateway}"),
-        'returnUrl'=>'https://myacad.app/index.php',
-        'cancelUrl'=>'https://myacad.app/index.php',
-        'notificationUrl'=>'https://myacad.app/index.php',
-        "language" => "en",
-        "order" => array(
-            "id" => time(),
-            "description" => "order for {$academyData[0]["enTitle"]}, {$sessionData[0]["enTitle"]}, {$subscriptionData[0]["enTitle"]} with quantity {$subscriptionQuantity} and jersy quantity {$jersyQuantity}",
-            "currency" => "KWD",
-            "amount"=> $fullAmount
-        ),
-        "reference" => array(
-            "id"=> time(),
-        ),
-        'customer' => array(
-            "name" => "{$_POST["name"]}",
-            "email" => "{$_POST["email"]}",
-            "mobile" => "{$_POST["phone"]}"
-        ),
-        'extraMerchantData' => $extraMerchantData,//Optional for multivendor API
-    );
-
+*/
     $postBody = array(
         'language' => 'en',
-        'order[id]' => '123321123321',
+        'order[id]' => time(),
         'order[currency]' => 'KWD',
-        'order[amount]' => '10',
-        'reference[id]' => '123321123321',
+        'order[amount]' => $fullAmount,
+        'order[description]' => "order for {$academyData[0]["enTitle"]}, {$sessionData[0]["enTitle"]}, {$subscriptionData[0]["enTitle"]} with quantity {$subscriptionQuantity} and jersy quantity {$jersyQuantity}",
+        'reference[id]' => time(),
         'returnUrl' => 'https://google.com',
         'cancelUrl' => 'https://yahoo.com',
         'notificationUrl' => 'https://msn.com',
-        'paymentGateway' => array(
-            "src" => "knet"
-        ),
-        'extraMerchantData[0][amount]' => '10',
+        'paymentGateway[src]' => 'knet',
+        'customer[name]' => "{$_POST["name"]}",
+        'customer[email]' => "{$_POST["email"]}",
+        'customer[mobile]' => "{$_POST["phone"]}",
+        'extraMerchantData[0][amount]' => $myacadDeposit,
         'extraMerchantData[0][knetCharge]' => '0.25',
         'extraMerchantData[0][knetChargeType]' => 'fixed',
-        'extraMerchantData[0][ccCharge]' => '3',
-        'extraMerchantData[0][ccChargeType]' => 'percentage',
-        'extraMerchantData[0][ibanNumber]' => 'KW91KFHO0000000000051010173254'
+        'extraMerchantData[0][ccCharge]' => '0.25',
+        'extraMerchantData[0][ccChargeType]' => 'fixed',
+        'extraMerchantData[0][ibanNumber]' => "{$AdminSettings[0]["mainIban"]}",
+        'extraMerchantData[1][amount]' => ($newTotal+(float)$jersyPrice),
+        'extraMerchantData[1][knetCharge]' => '0',
+        'extraMerchantData[1][knetChargeType]' => 'fixed',
+        'extraMerchantData[1][ccCharge]' => '0',
+        'extraMerchantData[1][ccChargeType]' => 'fixed',
+        'extraMerchantData[1][ibanNumber]' => "{$academyData[0]["iban"]}",
         );
     $curl = curl_init();
     curl_setopt_array($curl, array(
@@ -216,12 +201,10 @@ if( !isset($_POST) ){
         ),
     ));
 
-$response = curl_exec($curl);
-
-curl_close($curl);
-echo $response;die();
+    $response = curl_exec($curl);
+    curl_close($curl);
     
-    
+    /*
     //print_r(json_encode($comon_array));die();
     $headers = array(
         'Authorization: Bearer e66a94d579cf75fba327ff716ad68c53aae11528',
@@ -238,7 +221,7 @@ echo $response;die();
 	var_dump($server_output = curl_exec($ch));
 	curl_close ($ch);
 	$response = json_decode($server_output,true);
-
+    */
     //saving info and redirecting to payment pages
     if( $response["status"] === true && isset($response["link"]) && !empty($response["link"]) ){
         $_POST["gatewayId"] = $comon_array["order_id"];
