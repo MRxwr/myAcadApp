@@ -178,9 +178,47 @@ if( !isset($_POST) ){
             "email" => "{$_POST["email"]}",
             "mobile" => "{$_POST["phone"]}"
         ),
-        'extraMerchantsData' => $extraMerchantData,//Optional for multivendor API
+        'extraMerchantData' => $extraMerchantData,//Optional for multivendor API
     );
-    
+/*
+    $postBody = array(
+        'language' => 'en',
+        'order[id]' => '123321123321',
+        'order[currency]' => 'KWD',
+        'order[amount]' => '10',
+        'reference[id]' => '123321123321',
+        'returnUrl' => 'https://google.com',
+        'cancelUrl' => 'https://yahoo.com',
+        'notificationUrl' => 'https://msn.com',
+        'paymentGateway[src]' => 'knet',
+        'extraMerchantData[0][amount]' => '10',
+        'extraMerchantData[0][knetCharge]' => '0.25',
+        'extraMerchantData[0][knetChargeType]' => 'fixed',
+        'extraMerchantData[0][ccCharge]' => '3',
+        'extraMerchantData[0][ccChargeType]' => 'percentage',
+        'extraMerchantData[0][ibanNumber]' => 'KW91KFHO0000000000051010173254'
+        );
+    $curl = curl_init();
+    curl_setopt_array($curl, array(
+        CURLOPT_URL => 'https://sandboxapi.upayments.com/api/v1/charge',
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => '',
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => 'POST',
+        CURLOPT_POSTFIELDS => $postBody,
+        CURLOPT_HTTPHEADER => array(
+            'Authorization: ••••••',
+        ),
+    ));
+
+$response = curl_exec($curl);
+
+curl_close($curl);
+echo $response;
+    */
     
     //print_r(json_encode($comon_array));die();
     $headers = array(
