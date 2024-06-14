@@ -173,6 +173,9 @@ if( !isset($_POST) ){
         'order[currency]' => 'KWD',
         'order[amount]' => '20',
         'reference[id]' => time(),
+        'customer[name]' => 'NASER HATAB',
+        'customer[email]' => 'nasserhatab@gmail.com',
+        'customer[mobile]' => '96590949089',
         'returnUrl' => 'https://myacad.app/index.php',
         'cancelUrl' => 'https://myacad.app/index.php',
         'notificationUrl' => 'https://myacad.app/index.php',
@@ -189,9 +192,6 @@ if( !isset($_POST) ){
         'extraMerchantData[1][ccCharge]' => '0.25',
         'extraMerchantData[1][ccChargeType]' => 'fixed',
         'extraMerchantData[1][ibanNumber]' => 'KW91KFHO0000000000051010173254',
-        'customer[name]' => 'NASER HATAB',
-        'customer[email]' => 'nasserhatab@gmail.com',
-        'customer[mobile]' => '96590949089'
         );
     $curl = curl_init();
     curl_setopt_array($curl, array(
