@@ -140,13 +140,15 @@ if( !isset($_POST) ){
         $paymentGateway = "knet";
     }
 
+    $orderId = time();
+
     $postBody = array(
         'language' => 'en',
-        'order[id]' => time(),
+        'order[id]' => $orderId,
         'order[currency]' => 'KWD',
         'order[amount]' => (string)$fullAmount,
         'order[description]' => "order for {$academyData[0]["enTitle"]}, {$sessionData[0]["enTitle"]}, {$subscriptionData[0]["enTitle"]} with quantity {$subscriptionQuantity} and jersy quantity {$jersyQuantity}",
-        'reference[id]' => time(),
+        'reference[id]' => $orderId,
         'returnUrl' => 'https://google.com',
         'cancelUrl' => 'https://yahoo.com',
         'notificationUrl' => 'https://msn.com',
@@ -170,11 +172,11 @@ if( !isset($_POST) ){
     $postBody = array(
         'language' => 'en',
         'paymentGateway[src]' => "{$paymentGateway}",
-        'order[id]' => time(),
+        'order[id]' => $orderId,
         'order[currency]' => 'KWD',
         'order[amount]' => (string)$fullAmount,
         'order[description]' => "order for {$academyData[0]["enTitle"]}, {$sessionData[0]["enTitle"]}, {$subscriptionQuantity}x {$subscriptionData[0]["enTitle"]} and {$jersyQuantity}x jersy",
-        'reference[id]' => time(),
+        'reference[id]' => $orderId,
         'customer[name]' => "{$_POST["name"]}",
         'customer[email]' => "{$_POST["email"]}",
         'customer[mobile]' => "{$_POST["phone"]}",
@@ -216,7 +218,7 @@ if( !isset($_POST) ){
 
     //saving info and redirecting to payment pages
     if( isset($response["status"]) && $response["status"] == "true" && isset($response["data"]["link"]) && !empty($response["data"]["link"]) ){
-        $_POST["gatewayId"] = ( isset($response["data"]["trackId"]) && !empty($response["data"]["trackId"]) ) ? $response["data"]["trackId"] : 123321;
+        $_POST["gatewayId"] = $orderId;
         $_POST["gatewayURL"] = $response["data"]["link"];
         $_POST["apiPayload"] = json_encode($postBody);
         $_POST["apiResponse"] = json_encode($response);
@@ -225,14 +227,14 @@ if( !isset($_POST) ){
         $response["status"] = "success";
         $response["data"] = array(
             "paymentURL" => $response["data"]["link"],
-            "InvoiceId"  => ( isset($response["data"]["trackId"]) && !empty($response["data"]["trackId"]) ) ? $response["data"]["trackId"] : 123321,
+            "InvoiceId"  => $orderId,
         );
         
         insertDB2("orders",$_POST);
         if( $wallet == 1 ){
             $array["data"] = array(
                 "paymentURL" => "index.php?v=Success&OrderID={$_POST["gatewayId"]}&Result=CAPTURED",
-                "InvoiceId" => ( isset($response["data"]["trackId"]) && !empty($response["data"]["trackId"]) ) ? $response["data"]["trackId"] : 123321,
+                "InvoiceId" => $orderId,
             );
             if( $user = selectDB("users","`id` = {$_POST["userId"]}") ){
                 $newWallet = $user[0]["wallet"] - $_POST["total"];
