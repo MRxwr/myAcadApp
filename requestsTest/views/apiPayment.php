@@ -220,12 +220,13 @@ if( !isset($_POST) ){
         $_POST["apiPayload"] = json_encode($postBody);
         $_POST["apiResponse"] = json_encode($response);
         $_POST["paymentMethod"] = ( $wallet == 1 ) ? 3 : $paymentMethod;
+        $response["paymentURL"] = $response["data"]["link"];
+        $response["status"] = "success";
         $response["data"] = array(
             "paymentURL" => $response["data"]["link"],
             "InvoiceId"  => $response["data"]["trackId"]
         );
-        $response["paymentURL"] = $response["data"]["link"];
-        $response["status"] = "success";
+        
         insertDB2("orders",$_POST);
         if( $wallet == 1 ){
             $array["data"] = array(
