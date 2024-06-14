@@ -190,7 +190,9 @@ if( !isset($_POST) ){
         'returnUrl' => 'https://google.com',
         'cancelUrl' => 'https://yahoo.com',
         'notificationUrl' => 'https://msn.com',
-        'paymentGateway[src]' => 'knet',
+        'paymentGateway' => array(
+            "src" => "knet"
+        ),
         'extraMerchantData[0][amount]' => '10',
         'extraMerchantData[0][knetCharge]' => '0.25',
         'extraMerchantData[0][knetChargeType]' => 'fixed',
