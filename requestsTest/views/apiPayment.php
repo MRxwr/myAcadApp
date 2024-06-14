@@ -167,6 +167,32 @@ if( !isset($_POST) ){
         'extraMerchantData[1][ccChargeType]' => 'fixed',
         'extraMerchantData[1][ibanNumber]' => "{$academyData[0]["iban"]}",
         );
+    $postBody = array(
+        'language' => 'en',
+        'order[id]' => '123321123321',
+        'order[currency]' => 'KWD',
+        'order[amount]' => '20',
+        'reference[id]' => '123321123321',
+        'returnUrl' => 'https://myacad.app/index.php',
+        'cancelUrl' => 'https://myacad.app/index.php',
+        'notificationUrl' => 'https://myacad.app/index.php',
+        'paymentGateway[src]' => 'knet',
+        'extraMerchantData[0][amount]' => '5',
+        'extraMerchantData[0][knetCharge]' => '0.25',
+        'extraMerchantData[0][knetChargeType]' => 'fixed',
+        'extraMerchantData[0][ccCharge]' => '0.25',
+        'extraMerchantData[0][ccChargeType]' => 'fixed',
+        'extraMerchantData[0][ibanNumber]' => 'KW69COMB0000509609993100414015',
+        'extraMerchantData[1][amount]' => '15',
+        'extraMerchantData[1][knetCharge]' => '0.25',
+        'extraMerchantData[1][knetChargeType]' => 'fixed',
+        'extraMerchantData[1][ccCharge]' => '0.25',
+        'extraMerchantData[1][ccChargeType]' => 'fixed',
+        'extraMerchantData[1][ibanNumber]' => 'KW70KFHO0000000000511010009873',
+        'customer[name]' => 'NASER HATAB',
+        'customer[email]' => 'nasserhatab@gmail.com',
+        'customer[mobile]' => '96590949089'
+        );
     $curl = curl_init();
     curl_setopt_array($curl, array(
         CURLOPT_URL => 'https://uapi.upayments.com/api/v1/charge',
