@@ -145,21 +145,31 @@ if( !isset($_POST) ){
         'order[id]' => time(),
         'order[currency]' => 'KWD',
         'order[amount]' => (string)$fullAmount,
+        'order[description]' => "order for {$academyData[0]["enTitle"]}, {$sessionData[0]["enTitle"]}, {$subscriptionData[0]["enTitle"]} with quantity {$subscriptionQuantity} and jersy quantity {$jersyQuantity}",
         'reference[id]' => time(),
         'returnUrl' => 'https://google.com',
         'cancelUrl' => 'https://yahoo.com',
         'notificationUrl' => 'https://msn.com',
         'paymentGateway[src]' => 'knet',
-        'extraMerchantData[0][amount]' => (string)$fullAmount,
+        'customer[name]' => "{$_POST["name"]}",
+        'customer[email]' => "{$_POST["email"]}",
+        'customer[mobile]' => "{$_POST["phone"]}",
+        'extraMerchantData[0][amount]' => (string)$myacadDeposit,
         'extraMerchantData[0][knetCharge]' => '0.25',
         'extraMerchantData[0][knetChargeType]' => 'fixed',
         'extraMerchantData[0][ccCharge]' => '0.25',
         'extraMerchantData[0][ccChargeType]' => 'fixed',
         'extraMerchantData[0][ibanNumber]' => "{$AdminSettings[0]["mainIban"]}",
+        'extraMerchantData[1][amount]' => (string)($newTotal+(float)$jersyPrice),
+        'extraMerchantData[1][knetCharge]' => '0',
+        'extraMerchantData[1][knetChargeType]' => 'fixed',
+        'extraMerchantData[1][ccCharge]' => '0',
+        'extraMerchantData[1][ccChargeType]' => 'fixed',
+        'extraMerchantData[1][ibanNumber]' => "{$academyData[0]["iban"]}",
         );
     $curl = curl_init();
     curl_setopt_array($curl, array(
-        CURLOPT_URL => 'https://sandboxapi.upayments.com/api/v1/charge',
+        CURLOPT_URL => 'https://uapi.upayments.com/api/v1/charge',
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => '',
         CURLOPT_MAXREDIRS => 10,
@@ -169,7 +179,7 @@ if( !isset($_POST) ){
         CURLOPT_CUSTOMREQUEST => 'POST',
         CURLOPT_POSTFIELDS => $postBody,
         CURLOPT_HTTPHEADER => array(
-            'Authorization: Bearer e66a94d579cf75fba327ff716ad68c53aae11528',
+            'Authorization: Bearer afmceR6nHQaIehhpOel036LBhC8hihuB8iNh9ACF',
         ),
     ));
 
