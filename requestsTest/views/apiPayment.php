@@ -164,6 +164,7 @@ if( !isset($_POST) ){
         'cancelUrl'=>'https://myacad.app/index.php',
         'notificationUrl'=>'https://myacad.app/index.php',
         "language" => "en",
+        "reference" => time(),
         "order" => array(
             "id" => time(),
             "description" => "order for {$academyData[0]["enTitle"]}, {$sessionData[0]["enTitle"]}, {$subscriptionData[0]["enTitle"]} with quantity {$subscriptionQuantity} and jersy quantity {$jersyQuantity}",
