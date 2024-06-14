@@ -180,7 +180,7 @@ if( !isset($_POST) ){
         ),
         'extraMerchantData' => $extraMerchantData,//Optional for multivendor API
     );
-/*
+
     $postBody = array(
         'language' => 'en',
         'order[id]' => '123321123321',
@@ -210,15 +210,15 @@ if( !isset($_POST) ){
         CURLOPT_CUSTOMREQUEST => 'POST',
         CURLOPT_POSTFIELDS => $postBody,
         CURLOPT_HTTPHEADER => array(
-            'Authorization: ••••••',
+            'Authorization: Bearer e66a94d579cf75fba327ff716ad68c53aae11528',
         ),
     ));
 
 $response = curl_exec($curl);
 
 curl_close($curl);
-echo $response;
-    */
+echo $response;die();
+    
     
     //print_r(json_encode($comon_array));die();
     $headers = array(
