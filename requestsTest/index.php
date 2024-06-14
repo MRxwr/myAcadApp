@@ -14,7 +14,7 @@ if( isset($_GET["lang"]) && !empty($_GET["lang"]) ){
 }else{
 	$requestLang = "en";
 }
-
+/*
 if ( isset(getallheaders()["myacadheader"]) ){
 	$headerAPI =  getallheaders()["myacadheader"];
 }else{
@@ -26,7 +26,7 @@ if ( $headerAPI != "myAcadAppCreate" ){
 	$error = array("msg"=>"headers value is wrong");
 	echo outputError($error);die();
 }
-
+*/
 // get viewed page from pages folder \\
 if( isset($_GET["a"]) && searchFile("views","api{$_GET["a"]}.php") ){
 	require_once("views/".searchFile("views","api{$_GET["a"]}.php"));
