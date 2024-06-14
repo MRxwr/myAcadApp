@@ -169,10 +169,11 @@ if( !isset($_POST) ){
         );
     $postBody = array(
         'language' => 'en',
-        'order[id]' => '123321123321',
+        'order[id]' => time(),
         'order[currency]' => 'KWD',
-        'order[amount]' => '20',
-        'reference[id]' => '123321123321',
+        'order[amount]' => (string)$fullAmount,
+        'order[description]' => "order for {$academyData[0]["enTitle"]}, {$sessionData[0]["enTitle"]}, {$subscriptionData[0]["enTitle"]} with quantity {$subscriptionQuantity} and jersy quantity {$jersyQuantity}",
+        'reference[id]' => time(),
         'returnUrl' => 'https://myacad.app/index.php',
         'cancelUrl' => 'https://myacad.app/index.php',
         'notificationUrl' => 'https://myacad.app/index.php',
@@ -189,9 +190,9 @@ if( !isset($_POST) ){
         'extraMerchantData[1][ccCharge]' => '0.25',
         'extraMerchantData[1][ccChargeType]' => 'fixed',
         'extraMerchantData[1][ibanNumber]' => 'KW91KFHO0000000000051010173254',
-        'customer[name]' => 'NASER HATAB',
-        'customer[email]' => 'nasserhatab@gmail.com',
-        'customer[mobile]' => '96590949089'
+        'customer[name]' => "{$_POST["name"]}",
+        'customer[email]' => "{$_POST["email"]}",
+        'customer[mobile]' => "{$_POST["phone"]}"
         );
     $curl = curl_init();
     curl_setopt_array($curl, array(
