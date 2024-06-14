@@ -169,7 +169,7 @@ if( !isset($_POST) ){
         );
     $postBody = array(
         'language' => 'en',
-        'paymentGateway[src]' => "{$paymentGateway}",
+        //'paymentGateway[src]' => "{$paymentGateway}",
         'order[id]' => time(),
         'order[currency]' => 'KWD',
         'order[amount]' => (string)$fullAmount,
@@ -196,7 +196,7 @@ if( !isset($_POST) ){
         );
     $curl = curl_init();
     curl_setopt_array($curl, array(
-        CURLOPT_URL => 'https://sandboxapi.upayments.com/api/v1/charge',//'https://uapi.upayments.com/api/v1/charge',
+        CURLOPT_URL => 'https://uapi.upayments.com/api/v1/charge',//'https://sandboxapi.upayments.com/api/v1/charge',//'https://uapi.upayments.com/api/v1/charge',
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => '',
         CURLOPT_MAXREDIRS => 10,
@@ -206,7 +206,7 @@ if( !isset($_POST) ){
         CURLOPT_CUSTOMREQUEST => 'POST',
         CURLOPT_POSTFIELDS => $postBody,
         CURLOPT_HTTPHEADER => array(
-            'Authorization: Bearer jtest123', //e66a94d579cf75fba327ff716ad68c53aae11528',//afmceR6nHQaIehhpOel036LBhC8hihuB8iNh9ACF',
+            'Authorization: Bearer afmceR6nHQaIehhpOel036LBhC8hihuB8iNh9ACF', //e66a94d579cf75fba327ff716ad68c53aae11528',//afmceR6nHQaIehhpOel036LBhC8hihuB8iNh9ACF',
         ),
     ));
 
