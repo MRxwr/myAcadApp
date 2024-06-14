@@ -178,7 +178,7 @@ if( !isset($_POST) ){
             "email" => "{$_POST["email"]}",
             "mobile" => "{$_POST["phone"]}"
         ),
-        'extraMerchantsData' => json_encode($extraMerchantData),//Optional for multivendor API
+        'extraMerchantsData' => $extraMerchantData,//Optional for multivendor API
     );
     
     
