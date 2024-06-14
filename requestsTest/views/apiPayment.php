@@ -171,7 +171,7 @@ if( !isset($_POST) ){
         );
     $postBody = array(
         'language' => 'en',
-        'paymentGateway[src]' => "apple-pay",
+        'paymentGateway[src]' => "{$paymentGateway}",
         'order[id]' => $orderId,
         'order[currency]' => 'KWD',
         'order[amount]' => (string)$fullAmount,
@@ -188,17 +188,17 @@ if( !isset($_POST) ){
         'extraMerchantData[0][knetChargeType]' => 'fixed',
         'extraMerchantData[0][ccCharge]' => '0.25',
         'extraMerchantData[0][ccChargeType]' => 'fixed',
-        'extraMerchantData[0][ibanNumber]' => "{$AdminSettings[0]["mainIban"]}",//'KW31NBOK0000000000002010177457',
+        'extraMerchantData[0][ibanNumber]' => 'KW31NBOK0000000000002010177457',//"{$AdminSettings[0]["mainIban"]}",//,
         'extraMerchantData[1][amount]' => (string)($newTotal+(float)$jersyPrice),
         'extraMerchantData[1][knetCharge]' => '0.25',
         'extraMerchantData[1][knetChargeType]' => 'fixed',
         'extraMerchantData[1][ccCharge]' => '0.25',
         'extraMerchantData[1][ccChargeType]' => 'fixed',
-        'extraMerchantData[1][ibanNumber]' => "{$academyData[0]["iban"]}",//'KW91KFHO0000000000051010173254',
+        'extraMerchantData[1][ibanNumber]' => 'KW91KFHO0000000000051010173254',//"{$academyData[0]["iban"]}",//,
         );
     $curl = curl_init();
     curl_setopt_array($curl, array(
-        CURLOPT_URL => 'https://uapi.upayments.com/api/v1/charge',//'https://sandboxapi.upayments.com/api/v1/charge',//'https://uapi.upayments.com/api/v1/charge',
+        CURLOPT_URL => 'https://sandboxapi.upayments.com/api/v1/charge',//'https://sandboxapi.upayments.com/api/v1/charge',//'https://uapi.upayments.com/api/v1/charge',
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => '',
         CURLOPT_MAXREDIRS => 10,
@@ -208,7 +208,7 @@ if( !isset($_POST) ){
         CURLOPT_CUSTOMREQUEST => 'POST',
         CURLOPT_POSTFIELDS => $postBody,
         CURLOPT_HTTPHEADER => array(
-            'Authorization: Bearer afmceR6nHQaIehhpOel036LBhC8hihuB8iNh9ACF', //e66a94d579cf75fba327ff716ad68c53aae11528',//afmceR6nHQaIehhpOel036LBhC8hihuB8iNh9ACF',
+            'Authorization: Bearer e66a94d579cf75fba327ff716ad68c53aae11528', //e66a94d579cf75fba327ff716ad68c53aae11528',//afmceR6nHQaIehhpOel036LBhC8hihuB8iNh9ACF',
         ),
     ));
 
