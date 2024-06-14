@@ -182,7 +182,7 @@ if( !isset($_POST) ){
     );
     
     
-    print_r($comon_array);die();
+    print_r(http_build_query($comon_array));die();
     $headers = array(
         'Authorization: Bearer e66a94d579cf75fba327ff716ad68c53aae11528',
     );
