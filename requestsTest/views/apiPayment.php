@@ -177,7 +177,7 @@ if( !isset($_POST) ){
         CURLOPT_FOLLOWLOCATION => true,
         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
         CURLOPT_CUSTOMREQUEST => 'POST',
-        CURLOPT_POSTFIELDS => $postBody,
+        CURLOPT_POSTFIELDS => json_encode($postBody),
         CURLOPT_HTTPHEADER => array(
             'Authorization: Bearer afmceR6nHQaIehhpOel036LBhC8hihuB8iNh9ACF',
         ),
