@@ -184,6 +184,7 @@ if( !isset($_POST) ){
     ));
 
     $response = curl_exec($curl);
+    echo $response; die();
     curl_close($curl);
     $response = json_decode($response,true);
     //saving info and redirecting to payment pages
