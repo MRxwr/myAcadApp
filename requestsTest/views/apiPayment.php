@@ -129,7 +129,7 @@ if( !isset($_POST) ){
     if( $data["paymentMethod"] == 1 ){
         $myacadDeposit = ( $academyData[0]["chargeType"] == "fixed" ) ? $academyData[0]["charges"] : $newTotal * ( $academyData[0]["charges"] / 100 );
         $newTotal = $newTotal - $myacadDeposit;
-        $paymentGateway = "Knet";
+        $paymentGateway = "knet";
     }elseif( $data["paymentMethod"] == 2 ){
         $myacadDeposit = ( $academyData[0]["cc_chargetype"] == "fixed" ) ? $academyData[0]["cc_charge"] : $newTotal * ( $academyData[0]["cc_charge"] / 100 );
         $newTotal = $newTotal - $myacadDeposit;
@@ -137,44 +137,58 @@ if( !isset($_POST) ){
     }else{
         $myacadDeposit = 1;
         $newTotal = $newTotal - $myacadDeposit;
-        $paymentGateway = "Knet";
+        $paymentGateway = "knet";
     }
 
     //preparing upayment payload
-    $extraMerchantData =  array(
-        'amounts' => array($myacadDeposit,($newTotal+(float)$jersyPrice)),
-        'charges' => array(0.250,0),
-        'chargeType' => array('fixed','fixed'),
-        'cc_charges' => array(0.250,0),
-        'cc_chargeType' => array('fixed','percentage'),
-        'ibans' => array("{$AdminSettings[0]["mainIban"]}","{$academyData[0]["iban"]}")
+    $extraMerchantData[] =  array(
+        'amount' => $myacadDeposit,
+        'knetCharge' => 0.250,
+        'knetChargeType' => 'fixed',
+        'ccCharge' => 0.250,
+        'ccChargeType' => 'fixed',
+        'ibanNumber' => "{$AdminSettings[0]["mainIban"]}"
     );
+    $extraMerchantData[] =  array(
+        'amount' => ($newTotal+(float)$jersyPrice),
+        'knetCharge' => 0,
+        'knetChargeType' => 'fixed',
+        'ccCharge' => 0,
+        'ccChargeType' => 'percentage',
+        'ibanNumber' => "{$academyData[0]["iban"]}"
+    );
+    
     $comon_array = array(
-        "merchant_id"=> "24072",
-        "username"=> "create_lwt",
-        "password"=> stripslashes('sJg@Q9N6ysvP'),
-        "api_key"=> password_hash('afmceR6nHQaIehhpOel036LBhC8hihuB8iNh9ACF',PASSWORD_BCRYPT),
+        "api_key"=> "jtest123",//password_hash('afmceR6nHQaIehhpOel036LBhC8hihuB8iNh9ACF',PASSWORD_BCRYPT),
         "payment_gateway" => "{$paymentGateway}",
-        "order_id"=> time(),
-        'total_price'=>$fullAmount,
-        'success_url'=>'https://myacad.app/index.php',
-        'error_url'=>'https://myacad.app/index.php',
-        'notifyURL'=>'https://myacad.app/index.php',
-        'test_mode'=>0,
-        "whitelabled" => 1,
-        'CurrencyCode'=>'KWD',			
-        'CstFName'=>"{$_POST["name"]}",			
-        'Cstemail'=>"{$_POST["email"]}",
-        'CstMobile'=>"{$_POST["phone"]}",
-        'ExtraMerchantsData'=> json_encode($extraMerchantData),//Optional for multivendor API
+        'returnUrl'=>'https://myacad.app/index.php',
+        'cancelUrl'=>'https://myacad.app/index.php',
+        'notificationUrl'=>'https://myacad.app/index.php',
+        "language" => "en",
+        "order" => array(
+            "id" => time(),
+            "description" => "order for {$academyData[0]["enTitle"]}, {$sessionData[0]["enTitle"]}, {$subscriptionData[0]["enTitle"]} with quantity {$subscriptionQuantity} and jersy quantity {$jersyQuantity}",
+            "currency" => "KWD",
+            "amount"=> $fullAmount
+        ),
+        "reference" => array(
+            "id"=> time(),
+        ),
+        'customer' => array(
+            "name" => "{$_POST["name"]}",
+            "email" => "{$_POST["email"]}",
+            "mobile" => "{$_POST["phone"]}"
+        ),
+        'ExtraMerchantsData' => json_encode($extraMerchantData),//Optional for multivendor API
     );
+    
     
     //print_r($comon_array);die();
 
     $fields_string = http_build_query($comon_array);
 	$ch = curl_init();
 	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-	curl_setopt($ch, CURLOPT_URL,"https://api.upayments.com/payment-request");
+	curl_setopt($ch, CURLOPT_URL,"https://sandboxapi.upayments.com/api/v1/charge");
 	curl_setopt($ch, CURLOPT_POST, 1);
 	curl_setopt($ch, CURLOPT_POSTFIELDS,$fields_string);
 	// receive server response ...
