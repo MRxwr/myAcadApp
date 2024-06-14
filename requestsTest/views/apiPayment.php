@@ -172,7 +172,7 @@ if( !isset($_POST) ){
         'order[id]' => time(),
         'order[currency]' => 'KWD',
         'order[amount]' => '20',
-        'reference[id]' => '123321123321',
+        'reference[id]' => time(),
         'returnUrl' => 'https://myacad.app/index.php',
         'cancelUrl' => 'https://myacad.app/index.php',
         'notificationUrl' => 'https://myacad.app/index.php',
