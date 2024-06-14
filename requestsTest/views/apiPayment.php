@@ -151,9 +151,6 @@ if( !isset($_POST) ){
         'cancelUrl' => 'https://yahoo.com',
         'notificationUrl' => 'https://msn.com',
         'paymentGateway[src]' => 'knet',
-        'customer[name]' => "{$_POST["name"]}",
-        'customer[email]' => "{$_POST["email"]}",
-        'customer[mobile]' => "{$_POST["phone"]}",
         'extraMerchantData[0][amount]' => $myacadDeposit,
         'extraMerchantData[0][knetCharge]' => '0.25',
         'extraMerchantData[0][knetChargeType]' => 'fixed',
@@ -184,7 +181,9 @@ if( !isset($_POST) ){
     ));
 
     $response = curl_exec($curl);
-    echo $response; die();
+    print_r($postBody);
+    print_r($response); 
+    die();
     curl_close($curl);
     $response = json_decode($response,true);
     //saving info and redirecting to payment pages
