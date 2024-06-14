@@ -129,7 +129,7 @@ if( !isset($_POST) ){
     if( $data["paymentMethod"] == 1 ){
         $myacadDeposit = ( $academyData[0]["chargeType"] == "fixed" ) ? $academyData[0]["charges"] : $newTotal * ( $academyData[0]["charges"] / 100 );
         $newTotal = $newTotal - $myacadDeposit;
-        $paymentGateway = "knet";
+        $paymentGateway = "Knet";
     }elseif( $data["paymentMethod"] == 2 ){
         $myacadDeposit = ( $academyData[0]["cc_chargetype"] == "fixed" ) ? $academyData[0]["cc_charge"] : $newTotal * ( $academyData[0]["cc_charge"] / 100 );
         $newTotal = $newTotal - $myacadDeposit;
@@ -137,102 +137,68 @@ if( !isset($_POST) ){
     }else{
         $myacadDeposit = 1;
         $newTotal = $newTotal - $myacadDeposit;
-        $paymentGateway = "knet";
+        $paymentGateway = "Knet";
     }
 
-    $postBody = array(
-        'language' => 'en',
-        'order[id]' => time(),
-        'order[currency]' => 'KWD',
-        'order[amount]' => (string)$fullAmount,
-        'order[description]' => "order for {$academyData[0]["enTitle"]}, {$sessionData[0]["enTitle"]}, {$subscriptionData[0]["enTitle"]} with quantity {$subscriptionQuantity} and jersy quantity {$jersyQuantity}",
-        'reference[id]' => time(),
-        'returnUrl' => 'https://google.com',
-        'cancelUrl' => 'https://yahoo.com',
-        'notificationUrl' => 'https://msn.com',
-        'paymentGateway[src]' => 'knet',
-        'customer[name]' => "{$_POST["name"]}",
-        'customer[email]' => "{$_POST["email"]}",
-        'customer[mobile]' => "{$_POST["phone"]}",
-        'extraMerchantData[0][amount]' => (string)$myacadDeposit,
-        'extraMerchantData[0][knetCharge]' => '0.25',
-        'extraMerchantData[0][knetChargeType]' => 'fixed',
-        'extraMerchantData[0][ccCharge]' => '0.25',
-        'extraMerchantData[0][ccChargeType]' => 'fixed',
-        'extraMerchantData[0][ibanNumber]' => "{$AdminSettings[0]["mainIban"]}",
-        'extraMerchantData[1][amount]' => (string)($newTotal+(float)$jersyPrice),
-        'extraMerchantData[1][knetCharge]' => '0.25',
-        'extraMerchantData[1][knetChargeType]' => 'fixed',
-        'extraMerchantData[1][ccCharge]' => '0.25',
-        'extraMerchantData[1][ccChargeType]' => 'fixed',
-        'extraMerchantData[1][ibanNumber]' => "{$academyData[0]["iban"]}",
-        );
-    $postBody = array(
-        'language' => 'en',
-        'paymentGateway[src]' => "{$paymentGateway}",
-        'order[id]' => time(),
-        'order[currency]' => 'KWD',
-        'order[amount]' => (string)$fullAmount,
-        'order[description]' => "order for {$academyData[0]["enTitle"]}, {$sessionData[0]["enTitle"]}, {$subscriptionQuantity}x {$subscriptionData[0]["enTitle"]} and {$jersyQuantity}x jersy",
-        'reference[id]' => time(),
-        'customer[name]' => "{$_POST["name"]}",
-        'customer[email]' => "{$_POST["email"]}",
-        'customer[mobile]' => "{$_POST["phone"]}",
-        'returnUrl' => 'https://myacad.app/index.php',
-        'cancelUrl' => 'https://myacad.app/index.php',
-        'notificationUrl' => 'https://myacad.app/index.php',
-        'extraMerchantData[0][amount]' => (string)$myacadDeposit,
-        'extraMerchantData[0][knetCharge]' => '0.25',
-        'extraMerchantData[0][knetChargeType]' => 'fixed',
-        'extraMerchantData[0][ccCharge]' => '0.25',
-        'extraMerchantData[0][ccChargeType]' => 'fixed',
-        'extraMerchantData[0][ibanNumber]' => 'KW31NBOK0000000000002010177457',
-        'extraMerchantData[1][amount]' => (string)($newTotal+(float)$jersyPrice),
-        'extraMerchantData[1][knetCharge]' => '0.25',
-        'extraMerchantData[1][knetChargeType]' => 'fixed',
-        'extraMerchantData[1][ccCharge]' => '0.25',
-        'extraMerchantData[1][ccChargeType]' => 'fixed',
-        'extraMerchantData[1][ibanNumber]' => 'KW91KFHO0000000000051010173254',
-        );
-    $curl = curl_init();
-    curl_setopt_array($curl, array(
-        CURLOPT_URL => 'https://sandboxapi.upayments.com/api/v1/charge',//'https://uapi.upayments.com/api/v1/charge',
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_ENCODING => '',
-        CURLOPT_MAXREDIRS => 10,
-        CURLOPT_TIMEOUT => 0,
-        CURLOPT_FOLLOWLOCATION => true,
-        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        CURLOPT_CUSTOMREQUEST => 'POST',
-        CURLOPT_POSTFIELDS => $postBody,
-        CURLOPT_HTTPHEADER => array(
-            'Authorization: Bearer jtest123', //e66a94d579cf75fba327ff716ad68c53aae11528',//afmceR6nHQaIehhpOel036LBhC8hihuB8iNh9ACF',
-        ),
-    ));
+    //preparing upayment payload
+    $extraMerchantData =  array(
+        'amounts' => array($myacadDeposit,($newTotal+(float)$jersyPrice)),
+        'charges' => array(0.250,0),
+        'chargeType' => array('fixed','fixed'),
+        'cc_charges' => array(0.250,0),
+        'cc_chargeType' => array('fixed','percentage'),
+        'ibans' => array("{$AdminSettings[0]["mainIban"]}","{$academyData[0]["iban"]}")
+    );
+    $comon_array = array(
+        "merchant_id"=> "24072",
+        "username"=> "create_lwt",
+        "password"=> stripslashes('sJg@Q9N6ysvP'),
+        "api_key"=> password_hash('afmceR6nHQaIehhpOel036LBhC8hihuB8iNh9ACF',PASSWORD_BCRYPT),
+        "payment_gateway" => "{$paymentGateway}",
+        "order_id"=> time(),
+        'total_price'=>$fullAmount,
+        'success_url'=>'https://myacad.app/index.php',
+        'error_url'=>'https://myacad.app/index.php',
+        'notifyURL'=>'https://myacad.app/index.php',
+        'test_mode'=>0,
+        "whitelabled" => 1,
+        'CurrencyCode'=>'KWD',			
+        'CstFName'=>"{$_POST["name"]}",			
+        'Cstemail'=>"{$_POST["email"]}",
+        'CstMobile'=>"{$_POST["phone"]}",
+        'ExtraMerchantsData'=> json_encode($extraMerchantData),//Optional for multivendor API
+    );
+    
+    //print_r($comon_array);die();
 
-    $response = curl_exec($curl);
-    curl_close($curl);
-    $response = json_decode($response,true);
+    $fields_string = http_build_query($comon_array);
+	$ch = curl_init();
+	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+	curl_setopt($ch, CURLOPT_URL,"https://api.upayments.com/payment-request");
+	curl_setopt($ch, CURLOPT_POST, 1);
+	curl_setopt($ch, CURLOPT_POSTFIELDS,$fields_string);
+	// receive server response ...
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	$server_output = curl_exec($ch);
+	curl_close ($ch);
+	$response = json_decode($server_output,true);
 
     //saving info and redirecting to payment pages
-    if( isset($response["status"]) && $response["status"] == "true" && isset($response["data"]["link"]) && !empty($response["data"]["link"]) ){
-        $_POST["gatewayId"] = ( isset($response["data"]["trackId"]) && !empty($response["data"]["trackId"]) ) ? $response["data"]["trackId"] : "No Invoice ID";
-        $_POST["gatewayURL"] = $response["data"]["link"];
-        $_POST["apiPayload"] = json_encode($postBody);
+    if( $response["status"] == "success" && isset($response["paymentURL"]) && !empty($response["paymentURL"]) ){
+        $_POST["gatewayId"] = $comon_array["order_id"];
+        $_POST["gatewayURL"] = $response["paymentURL"];
+        $_POST["apiPayload"] = json_encode($comon_array);
         $_POST["apiResponse"] = json_encode($response);
         $_POST["paymentMethod"] = ( $wallet == 1 ) ? 3 : $paymentMethod;
-        $response["paymentURL"] = $response["data"]["link"];
-        $response["status"] = "success";
         $response["data"] = array(
-            "paymentURL" => $response["data"]["link"],
-            "InvoiceId"  => ( isset($response["data"]["trackId"]) && !empty($response["data"]["trackId"]) ) ? $response["data"]["trackId"] : "No Invoice ID",
+            "paymentURL" => $response["paymentURL"],
+            "InvoiceId"  => $comon_array["order_id"]
         );
-        
         insertDB2("orders",$_POST);
         if( $wallet == 1 ){
             $array["data"] = array(
                 "paymentURL" => "index.php?v=Success&OrderID={$_POST["gatewayId"]}&Result=CAPTURED",
-                "InvoiceId" => ( isset($response["data"]["trackId"]) && !empty($response["data"]["trackId"]) ) ? $response["data"]["trackId"] : "No Invoice ID",
+                "InvoiceId" => $comon_array["order_id"]
             );
             if( $user = selectDB("users","`id` = {$_POST["userId"]}") ){
                 $newWallet = $user[0]["wallet"] - $_POST["total"];
