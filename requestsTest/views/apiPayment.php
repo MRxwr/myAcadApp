@@ -169,7 +169,7 @@ if( !isset($_POST) ){
         );
     $postBody = array(
         'language' => 'en',
-        //'paymentGateway[src]' => "{$paymentGateway}",
+        'paymentGateway[src]' => "{$paymentGateway}",
         'order[id]' => time(),
         'order[currency]' => 'KWD',
         'order[amount]' => (string)$fullAmount,
@@ -186,13 +186,13 @@ if( !isset($_POST) ){
         'extraMerchantData[0][knetChargeType]' => 'fixed',
         'extraMerchantData[0][ccCharge]' => '0.25',
         'extraMerchantData[0][ccChargeType]' => 'fixed',
-        'extraMerchantData[0][ibanNumber]' => 'KW31NBOK0000000000002010177457',
+        'extraMerchantData[0][ibanNumber]' => "{$AdminSettings[0]["mainIban"]}",//'KW31NBOK0000000000002010177457',
         'extraMerchantData[1][amount]' => (string)($newTotal+(float)$jersyPrice),
         'extraMerchantData[1][knetCharge]' => '0.25',
         'extraMerchantData[1][knetChargeType]' => 'fixed',
         'extraMerchantData[1][ccCharge]' => '0.25',
         'extraMerchantData[1][ccChargeType]' => 'fixed',
-        'extraMerchantData[1][ibanNumber]' => 'KW91KFHO0000000000051010173254',
+        'extraMerchantData[1][ibanNumber]' => "{$academyData[0]["iban"]}",//'KW91KFHO0000000000051010173254',
         );
     $curl = curl_init();
     curl_setopt_array($curl, array(
