@@ -184,7 +184,9 @@ if( !isset($_POST) ){
     
     
     //print_r($comon_array);die();
-
+    $headers = array(
+        'Authorization: Bearer jtest123',
+    );
     $fields_string = http_build_query($comon_array);
 	$ch = curl_init();
 	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
@@ -193,9 +195,7 @@ if( !isset($_POST) ){
 	curl_setopt($ch, CURLOPT_POSTFIELDS,$fields_string);
 	// receive server response ...
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-        'Authorization: Bearer jtest123',
-      ));
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 	$server_output = curl_exec($ch);
 	curl_close ($ch);
 	$response = json_decode($server_output,true);
