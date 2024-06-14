@@ -178,18 +178,18 @@ if( !isset($_POST) ){
             "email" => "{$_POST["email"]}",
             "mobile" => "{$_POST["phone"]}"
         ),
-        'ExtraMerchantsData' => json_encode($extraMerchantData),//Optional for multivendor API
+        'extraMerchantsData' => json_encode($extraMerchantData),//Optional for multivendor API
     );
     
     
-    //print_r($comon_array);die();
+    print_r($comon_array);die();
     $headers = array(
-        'Authorization: Bearer afmceR6nHQaIehhpOel036LBhC8hihuB8iNh9ACF',
+        'Authorization: Bearer e66a94d579cf75fba327ff716ad68c53aae11528',
     );
     $fields_string = http_build_query($comon_array);
 	$ch = curl_init();
 	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-	curl_setopt($ch, CURLOPT_URL,"https://uapi.upayments.com/api/v1/charge");
+	curl_setopt($ch, CURLOPT_URL,"https://sandboxapi.upayments.com/api/v1/charge");
 	curl_setopt($ch, CURLOPT_POST, 1);
 	curl_setopt($ch, CURLOPT_POSTFIELDS,$fields_string);
 	// receive server response ...
@@ -200,14 +200,14 @@ if( !isset($_POST) ){
 	$response = json_decode($server_output,true);
 
     //saving info and redirecting to payment pages
-    if( $response["status"] == "true" && isset($response["paymentURL"]) && !empty($response["paymentURL"]) ){
+    if( $response["status"] === true && isset($response["link"]) && !empty($response["link"]) ){
         $_POST["gatewayId"] = $comon_array["order_id"];
-        $_POST["gatewayURL"] = $response["paymentURL"];
+        $_POST["gatewayURL"] = $response["link"];
         $_POST["apiPayload"] = json_encode($comon_array);
         $_POST["apiResponse"] = json_encode($response);
         $_POST["paymentMethod"] = ( $wallet == 1 ) ? 3 : $paymentMethod;
         $response["data"] = array(
-            "paymentURL" => $response["paymentURL"],
+            "paymentURL" => $response["link"],
             "InvoiceId"  => $comon_array["order_id"]
         );
         insertDB2("orders",$_POST);
