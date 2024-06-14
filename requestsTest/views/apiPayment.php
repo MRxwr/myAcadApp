@@ -206,7 +206,7 @@ if( !isset($_POST) ){
         CURLOPT_CUSTOMREQUEST => 'POST',
         CURLOPT_POSTFIELDS => $postBody,
         CURLOPT_HTTPHEADER => array(
-            'Authorization: Bearer e66a94d579cf75fba327ff716ad68c53aae11528', //jtest123',//afmceR6nHQaIehhpOel036LBhC8hihuB8iNh9ACF',
+            'Authorization: Bearer jtest123', //e66a94d579cf75fba327ff716ad68c53aae11528',//afmceR6nHQaIehhpOel036LBhC8hihuB8iNh9ACF',
         ),
     ));
 
@@ -216,7 +216,7 @@ if( !isset($_POST) ){
 
     //saving info and redirecting to payment pages
     if( isset($response["status"]) && $response["status"] == "true" && isset($response["data"]["link"]) && !empty($response["data"]["link"]) ){
-        $_POST["gatewayId"] = ( isset($response["data"]["trackId"]) && !empty($response["data"]["trackId"]) ) ? $response["data"]["trackId"] : "No Invoice ID";
+        $_POST["gatewayId"] = ( isset($response["data"]["trackId"]) && !empty($response["data"]["trackId"]) ) ? $response["data"]["trackId"] : "123321";
         $_POST["gatewayURL"] = $response["data"]["link"];
         $_POST["apiPayload"] = json_encode($postBody);
         $_POST["apiResponse"] = json_encode($response);
@@ -225,14 +225,14 @@ if( !isset($_POST) ){
         $response["status"] = "success";
         $response["data"] = array(
             "paymentURL" => $response["data"]["link"],
-            "InvoiceId"  => ( isset($response["data"]["trackId"]) && !empty($response["data"]["trackId"]) ) ? $response["data"]["trackId"] : "No Invoice ID",
+            "InvoiceId"  => ( isset($response["data"]["trackId"]) && !empty($response["data"]["trackId"]) ) ? $response["data"]["trackId"] : "123321",
         );
         
         insertDB2("orders",$_POST);
         if( $wallet == 1 ){
             $array["data"] = array(
                 "paymentURL" => "index.php?v=Success&OrderID={$_POST["gatewayId"]}&Result=CAPTURED",
-                "InvoiceId" => ( isset($response["data"]["trackId"]) && !empty($response["data"]["trackId"]) ) ? $response["data"]["trackId"] : "No Invoice ID",
+                "InvoiceId" => ( isset($response["data"]["trackId"]) && !empty($response["data"]["trackId"]) ) ? $response["data"]["trackId"] : "123321",
             );
             if( $user = selectDB("users","`id` = {$_POST["userId"]}") ){
                 $newWallet = $user[0]["wallet"] - $_POST["total"];
