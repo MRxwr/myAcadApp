@@ -224,6 +224,8 @@ if( !isset($_POST) ){
             "paymentURL" => $response["data"]["link"],
             "InvoiceId"  => $response["data"]["trackId"]
         );
+        $response["paymentURL"] = $response["data"]["link"];
+        $response["status"] = "success";
         insertDB2("orders",$_POST);
         if( $wallet == 1 ){
             $array["data"] = array(
