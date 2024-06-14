@@ -169,15 +169,18 @@ if( !isset($_POST) ){
         );
     $postBody = array(
         'language' => 'en',
+        'paymentGateway[src]' => 'knet',
         'order[id]' => time(),
         'order[currency]' => 'KWD',
         'order[amount]' => (string)$fullAmount,
         'order[description]' => "order for {$academyData[0]["enTitle"]}, {$sessionData[0]["enTitle"]}, {$subscriptionData[0]["enTitle"]} with quantity {$subscriptionQuantity} and jersy quantity {$jersyQuantity}",
         'reference[id]' => time(),
+        'customer[name]' => "{$_POST["name"]}",
+        'customer[email]' => "{$_POST["email"]}",
+        'customer[mobile]' => "{$_POST["phone"]}",
         'returnUrl' => 'https://myacad.app/index.php',
         'cancelUrl' => 'https://myacad.app/index.php',
         'notificationUrl' => 'https://myacad.app/index.php',
-        'paymentGateway[src]' => 'knet',
         'extraMerchantData[0][amount]' => '5',
         'extraMerchantData[0][knetCharge]' => '0.25',
         'extraMerchantData[0][knetChargeType]' => 'fixed',
@@ -190,9 +193,6 @@ if( !isset($_POST) ){
         'extraMerchantData[1][ccCharge]' => '0.25',
         'extraMerchantData[1][ccChargeType]' => 'fixed',
         'extraMerchantData[1][ibanNumber]' => 'KW91KFHO0000000000051010173254',
-        'customer[name]' => "{$_POST["name"]}",
-        'customer[email]' => "{$_POST["email"]}",
-        'customer[mobile]' => "{$_POST["phone"]}"
         );
     $curl = curl_init();
     curl_setopt_array($curl, array(
