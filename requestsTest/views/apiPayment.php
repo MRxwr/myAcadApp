@@ -173,7 +173,7 @@ if( !isset($_POST) ){
         'order[id]' => time(),
         'order[currency]' => 'KWD',
         'order[amount]' => (string)$fullAmount,
-        'order[description]' => "order for {$academyData[0]["enTitle"]}, {$sessionData[0]["enTitle"]}, {$subscriptionData[0]["enTitle"]} with quantity {$subscriptionQuantity} and jersy quantity {$jersyQuantity}",
+        'order[description]' => "order for {$academyData[0]["enTitle"]}, {$sessionData[0]["enTitle"]}, {$subscriptionQuantity}x {$subscriptionData[0]["enTitle"]} and {$jersyQuantity}x jersy",
         'reference[id]' => time(),
         'customer[name]' => "{$_POST["name"]}",
         'customer[email]' => "{$_POST["email"]}",
