@@ -196,7 +196,7 @@ if( !isset($_POST) ){
 	// receive server response ...
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-	$server_output = curl_exec($ch);
+	var_dump($server_output = curl_exec($ch));
 	curl_close ($ch);
 	$response = json_decode($server_output,true);
 
