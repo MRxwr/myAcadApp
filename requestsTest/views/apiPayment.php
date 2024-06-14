@@ -161,9 +161,9 @@ if( !isset($_POST) ){
         'extraMerchantData[0][ccChargeType]' => 'fixed',
         'extraMerchantData[0][ibanNumber]' => "{$AdminSettings[0]["mainIban"]}",
         'extraMerchantData[1][amount]' => (string)($newTotal+(float)$jersyPrice),
-        'extraMerchantData[1][knetCharge]' => '0',
+        'extraMerchantData[1][knetCharge]' => '0.25',
         'extraMerchantData[1][knetChargeType]' => 'fixed',
-        'extraMerchantData[1][ccCharge]' => '0',
+        'extraMerchantData[1][ccCharge]' => '0.25',
         'extraMerchantData[1][ccChargeType]' => 'fixed',
         'extraMerchantData[1][ibanNumber]' => "{$academyData[0]["iban"]}",
         );
