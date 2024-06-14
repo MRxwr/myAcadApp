@@ -193,6 +193,9 @@ if( !isset($_POST) ){
 	curl_setopt($ch, CURLOPT_POSTFIELDS,$fields_string);
 	// receive server response ...
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+        'Authorization: Bearer jtest123',
+      ));
 	$server_output = curl_exec($ch);
 	curl_close ($ch);
 	$response = json_decode($server_output,true);
