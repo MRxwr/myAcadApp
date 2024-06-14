@@ -139,25 +139,7 @@ if( !isset($_POST) ){
         $newTotal = $newTotal - $myacadDeposit;
         $paymentGateway = "knet";
     }
-/*
-    //preparing upayment payload
-    $extraMerchantData[] =  array(
-        'amount' => $myacadDeposit,
-        'knetCharge' => 0.250,
-        'knetChargeType' => 'fixed',
-        'ccCharge' => 0.250,
-        'ccChargeType' => 'fixed',
-        'ibanNumber' => "{$AdminSettings[0]["mainIban"]}"
-    );
-    $extraMerchantData[] =  array(
-        'amount' => ($newTotal+(float)$jersyPrice),
-        'knetCharge' => 0,
-        'knetChargeType' => 'fixed',
-        'ccCharge' => 0,
-        'ccChargeType' => 'percentage',
-        'ibanNumber' => "{$academyData[0]["iban"]}"
-    );
-*/
+
     $postBody = array(
         'language' => 'en',
         'order[id]' => time(),
@@ -204,26 +186,8 @@ if( !isset($_POST) ){
     $response = curl_exec($curl);
     curl_close($curl);
     
-    /*
-    //print_r(json_encode($comon_array));die();
-    $headers = array(
-        'Authorization: Bearer e66a94d579cf75fba327ff716ad68c53aae11528',
-    );
-    $fields_string = json_encode($comon_array);
-	$ch = curl_init();
-	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-	curl_setopt($ch, CURLOPT_URL,"https://sandboxapi.upayments.com/api/v1/charge");
-	curl_setopt($ch, CURLOPT_POST, 1);
-	curl_setopt($ch, CURLOPT_POSTFIELDS,$fields_string);
-	// receive server response ...
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-	var_dump($server_output = curl_exec($ch));
-	curl_close ($ch);
-	$response = json_decode($server_output,true);
-    */
     //saving info and redirecting to payment pages
-    if( $response["status"] === true && isset($response["link"]) && !empty($response["link"]) ){
+    if( $response["status"] == true && isset($response["link"]) && !empty($response["link"]) ){
         $_POST["gatewayId"] = $comon_array["order_id"];
         $_POST["gatewayURL"] = $response["link"];
         $_POST["apiPayload"] = json_encode($comon_array);
