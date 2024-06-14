@@ -182,11 +182,11 @@ if( !isset($_POST) ){
     );
     
     
-    print_r(json_encode($comon_array));die();
+    //print_r(json_encode($comon_array));die();
     $headers = array(
         'Authorization: Bearer e66a94d579cf75fba327ff716ad68c53aae11528',
     );
-    $fields_string = http_build_query($comon_array);
+    $fields_string = json_encode($comon_array);
 	$ch = curl_init();
 	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 	curl_setopt($ch, CURLOPT_URL,"https://sandboxapi.upayments.com/api/v1/charge");
@@ -195,7 +195,7 @@ if( !isset($_POST) ){
 	// receive server response ...
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-	var_dump($server_output = curl_exec($ch));
+	$server_output = curl_exec($ch);
 	curl_close ($ch);
 	$response = json_decode($server_output,true);
 
