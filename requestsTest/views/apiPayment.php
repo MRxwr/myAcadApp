@@ -169,9 +169,11 @@ if( !isset($_POST) ){
         );
     $postBody = array(
         'language' => 'en',
+        'paymentGateway[src]' => "{$paymentGateway}",
         'order[id]' => time(),
         'order[currency]' => 'KWD',
         'order[amount]' => (string)$fullAmount,
+        'order[description]' => "order for {$academyData[0]["enTitle"]}, {$sessionData[0]["enTitle"]}, {$subscriptionData[0]["enTitle"]} with quantity {$subscriptionQuantity} and jersy quantity {$jersyQuantity}",
         'reference[id]' => time(),
         'customer[name]' => "{$_POST["name"]}",
         'customer[email]' => "{$_POST["email"]}",
@@ -179,7 +181,6 @@ if( !isset($_POST) ){
         'returnUrl' => 'https://myacad.app/index.php',
         'cancelUrl' => 'https://myacad.app/index.php',
         'notificationUrl' => 'https://myacad.app/index.php',
-        'paymentGateway[src]' => 'knet',
         'extraMerchantData[0][amount]' => (string)$myacadDeposit,
         'extraMerchantData[0][knetCharge]' => '0.25',
         'extraMerchantData[0][knetChargeType]' => 'fixed',
