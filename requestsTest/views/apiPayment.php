@@ -159,7 +159,6 @@ if( !isset($_POST) ){
     );
     
     $comon_array = array(
-        "api_key"=> "jtest123",//password_hash('afmceR6nHQaIehhpOel036LBhC8hihuB8iNh9ACF',PASSWORD_BCRYPT),
         "payment_gateway" => "{$paymentGateway}",
         'returnUrl'=>'https://myacad.app/index.php',
         'cancelUrl'=>'https://myacad.app/index.php',
