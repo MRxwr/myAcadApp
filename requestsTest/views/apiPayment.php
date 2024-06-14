@@ -185,7 +185,7 @@ if( !isset($_POST) ){
 
     $response = curl_exec($curl);
     curl_close($curl);
-    
+    $response = json_decode($response,true);
     //saving info and redirecting to payment pages
     if( $response["status"] == true && isset($response["link"]) && !empty($response["link"]) ){
         $_POST["gatewayId"] = $comon_array["order_id"];
