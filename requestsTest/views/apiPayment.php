@@ -185,12 +185,12 @@ if( !isset($_POST) ){
     
     //print_r($comon_array);die();
     $headers = array(
-        'Authorization: Bearer jtest123',
+        'Authorization: Bearer afmceR6nHQaIehhpOel036LBhC8hihuB8iNh9ACF',
     );
     $fields_string = http_build_query($comon_array);
 	$ch = curl_init();
 	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-	curl_setopt($ch, CURLOPT_URL,"https://sandboxapi.upayments.com/api/v1/charge");
+	curl_setopt($ch, CURLOPT_URL,"https://uapi.upayments.com/api/v1/charge");
 	curl_setopt($ch, CURLOPT_POST, 1);
 	curl_setopt($ch, CURLOPT_POSTFIELDS,$fields_string);
 	// receive server response ...
