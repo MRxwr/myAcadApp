@@ -159,12 +159,11 @@ if( !isset($_POST) ){
     );
     
     $comon_array = array(
-        "payment_gateway" => "{$paymentGateway}",
+        "paymentGateway" => array("src" => "{$paymentGateway}"),
         'returnUrl'=>'https://myacad.app/index.php',
         'cancelUrl'=>'https://myacad.app/index.php',
         'notificationUrl'=>'https://myacad.app/index.php',
         "language" => "en",
-        "reference" => time(),
         "order" => array(
             "id" => time(),
             "description" => "order for {$academyData[0]["enTitle"]}, {$sessionData[0]["enTitle"]}, {$subscriptionData[0]["enTitle"]} with quantity {$subscriptionQuantity} and jersy quantity {$jersyQuantity}",
@@ -201,7 +200,7 @@ if( !isset($_POST) ){
 	$response = json_decode($server_output,true);
 
     //saving info and redirecting to payment pages
-    if( $response["status"] == "success" && isset($response["paymentURL"]) && !empty($response["paymentURL"]) ){
+    if( $response["status"] == "true" && isset($response["paymentURL"]) && !empty($response["paymentURL"]) ){
         $_POST["gatewayId"] = $comon_array["order_id"];
         $_POST["gatewayURL"] = $response["paymentURL"];
         $_POST["apiPayload"] = json_encode($comon_array);
