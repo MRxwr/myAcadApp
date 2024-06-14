@@ -169,7 +169,7 @@ if( !isset($_POST) ){
         );
     $postBody = array(
         'language' => 'en',
-        //'paymentGateway[src]' => "{$paymentGateway}",
+        'paymentGateway[src]' => "{$paymentGateway}",
         'order[id]' => time(),
         'order[currency]' => 'KWD',
         'order[amount]' => (string)$fullAmount,
