@@ -131,17 +131,13 @@
 				<td><?php echo $userGender ?><label id="gender<?php echo $users[$i]["id"]?>" style="display:none"><?php echo $users[$i]["gender"] ?></label></td>
 				<td class="text-nowrap">
 				<?php
-				if ( $users[$i]["status"] != 2 ){
 				?>		
 				<a id="<?php echo $users[$i]["id"] ?>" class="edit btn btn-warning" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i>
 				</a>
 				<a href="<?php echo $link ?>" class="btn btn-default" data-toggle="tooltip" data-original-title="<?php echo $hide ?>"> <i class="<?php echo $icon ?> text-inverse m-r-10"></i>
 				</a>
 				<a href="<?php echo "?v={$_GET["v"]}&delId={$users[$i]["id"]}&delStatus={$delStatus}" ?> data-toggle="tooltip" data-original-title="Delete" class="btn btn-danger"><i class="<?php echo $statusIcon ?> text-inverse"></i>
-				</a>
-				<?php
-					}
-				?>			
+				</a>		
 				</td>
 				</tr>
 				<?php
