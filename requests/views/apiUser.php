@@ -11,7 +11,7 @@ if ( isset($_GET["type"]) && !empty($_GET["type"]) ){
 		}
 		if($user = selectDBNew('users',[$_POST["email"],sha1($_POST["password"])],"`email` LIKE ? AND `password` LIKE ?","")){
 			if( $user[0]["status"] == 1 ){
-				$error["msg"] = popupMsg($requestLang,"Your account has been blocked. Please aconatct administration.","تم قفل حسابك ، الراجاء التواصل مع الإداره");
+				$error["msg"] = popupMsg($requestLang,"Your account has been blocked. Please conatct administration.","تم قفل حسابك ، الراجاء التواصل مع الإداره");
 				echo outputError($error);die();
 			}elseif( $user[0]["status"] == 2 ){
 				$error["msg"] = popupMsg($requestLang,"No user with this email.","لا يوجد مستخدم بهذا البريد الالكتروني");
