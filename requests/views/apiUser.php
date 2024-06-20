@@ -13,6 +13,9 @@ if ( isset($_GET["type"]) && !empty($_GET["type"]) ){
 			if( $user[0]["hidden"] == 1 ){
 				$error["msg"] = popupMsg($requestLang,"Your account has been blocked. Please conatct administration.","تم قفل حسابك ، الراجاء التواصل مع الإداره");
 				echo outputError($error);die();
+			}elseif( $user[0]["status"] == 1 ){
+				$error["msg"] = popupMsg($requestLang,"Your email has been banned permenantly, Please contact administration.","تم حظر بريدك الالكتروني ، الرجاء التواصل مع الإداره");
+				echo outputError($error);die();
 			}elseif( $user[0]["status"] == 2 ){
 				$error["msg"] = popupMsg($requestLang,"No user with this email.","لا يوجد مستخدم بهذا البريد الالكتروني");
 				echo outputError($error);die();
@@ -152,6 +155,9 @@ if ( isset($_GET["type"]) && !empty($_GET["type"]) ){
 		if ( $user = selectDBNew('users',[$_POST["email"],$_POST["password"]],"`email` LIKE ? AND `password` LIKE ?","") ){
 				if( $user[0]["hidden"] == 1 ){
 					$error = array("msg"=>popupMsg($requestLang,"Your account has been blocked. Please conatct administration.","تم قفل حسابك ، الرجاء التواصل مع الإداره"));
+					echo outputError($error);die();
+				}elseif( $user[0]["status"] == 1 ){
+					$error["msg"] = popupMsg($requestLang,"Your email has been banned permenantly, Please contact administration.","تم حظر بريدك الالكتروني ، الرجاء التواصل مع الإداره");
 					echo outputError($error);die();
 				}
 				echo outputData(array('id'=>$user[0]["id"]));
