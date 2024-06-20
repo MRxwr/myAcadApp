@@ -92,7 +92,7 @@
 		
 		<tbody>
 		<?php 
-		if( $users = selectDB("users","`status` != '1' AND `hidden` != '2'") ){
+		if( $users = selectDB("users","`id` != '0' ") ){
 			for( $i = 0; $i < sizeof($users); $i++ ){
 				$counter = $i + 1;
 				if ( $users[$i]["hidden"] == 1 ){
