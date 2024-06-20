@@ -108,9 +108,11 @@
 				if ( $users[$i]["status"] == 0 ){
 					$statusIcon = "fa fa-close";
 					$delStatus = 1;
+					$statusText = direction("Delete","حذف الحساب");
 				}else{
 					$statusIcon = "fa fa-check";
 					$delStatus = 0;
+					$statusText = direction("Open","إعاده الحساب");
 				}
 				
 				if( $users[$i]["gender"] == 0 ){
@@ -136,7 +138,7 @@
 				</a>
 				<a href="<?php echo $link ?>" class="btn btn-default" data-toggle="tooltip" data-original-title="<?php echo $hide ?>"> <i class="<?php echo $icon ?> text-inverse m-r-10"></i>
 				</a>
-				<a href="<?php echo "?v={$_GET["v"]}&delId={$users[$i]["id"]}&delStatus={$delStatus}" ?>" data-toggle="tooltip" data-original-title="Delete" class="btn btn-danger"><i class="<?php echo $statusIcon ?> text-inverse"></i>
+				<a href="<?php echo "?v={$_GET["v"]}&delId={$users[$i]["id"]}&delStatus={$delStatus}" ?>" data-toggle="tooltip" data-original-title="<?php echo $statusText ?>" class="btn btn-danger"><i class="<?php echo $statusIcon ?> text-inverse"></i>
 				</a>		
 				</td>
 				</tr>
