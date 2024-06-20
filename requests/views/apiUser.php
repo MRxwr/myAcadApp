@@ -151,7 +151,7 @@ if ( isset($_GET["type"]) && !empty($_GET["type"]) ){
 		if( insertDB('users',$data) ){
 		if ( $user = selectDBNew('users',[$_POST["email"],$_POST["password"]],"`email` LIKE ? AND `password` LIKE ?","") ){
 				if( $user[0]["status"] == 1 ){
-					$error = array("msg"=>popupMsg($requestLang,"Your account has been blocked. Please aconatct administration.","تم قفل حسابك ، الرجاء التواصل مع الإداره"));
+					$error = array("msg"=>popupMsg($requestLang,"Your account has been blocked. Please conatct administration.","تم قفل حسابك ، الرجاء التواصل مع الإداره"));
 					echo outputError($error);die();
 				}
 				echo outputData(array('id'=>$user[0]["id"]));
