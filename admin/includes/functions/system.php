@@ -2,7 +2,7 @@
 // user \\
 function getLoginStatus(){
 	$output = "";
-	if( isset($_COOKIE["createmyacad"]) && !empty($_COOKIE["createmyacad"]) && $user = selectDB("users","`keepMeAlive` LIKE '{$_COOKIE["createmyacad"]}' AND `status` = '0'") ){
+	if( isset($_COOKIE["createmyacad"]) && !empty($_COOKIE["createmyacad"]) && $user = selectDBNew("users",[$_COOKIE["createmyacad"]],"`keepMeAlive` LIKE ? AND `status` = '0'","") ){
 		$output = "<a href='?v=Logout' class='button'>".direction("Logout","الخروج")."</a>";
 	}else{
 		$output = "<a href='?v=Login' class='button'>".direction("Login","تسجيل")."</a>";
@@ -13,7 +13,7 @@ function getLoginStatus(){
 // user login Status Response \\
 function getLoginStatusResponse(){
 	$output = "";
-	if( isset($_COOKIE["createmyacad"]) && !empty($_COOKIE["createmyacad"]) && $user = selectDB("users","`keepMeAlive` LIKE '{$_COOKIE["createmyacad"]}' AND `status` = '0'") ){
+	if( isset($_COOKIE["createmyacad"]) && !empty($_COOKIE["createmyacad"]) && $user = selectDBNew("users",[$_COOKIE["createmyacad"]],"`keepMeAlive` LIKE ? AND `status` = '0'","") ){
 		return $user[0]["id"];
 	}else{
 		return 0;
@@ -22,7 +22,7 @@ function getLoginStatusResponse(){
 
 // user login \\
 function userLogin($data){
-	if ( $user = selectDB("users","`email` LIKE '{$data["email"]}' AND `password` LIKE '".sha1($data["password"])."' AND `status` = '0' AND `hidden` = '0'") ){
+	if ($user = selectDBNew("users",[$data["email"],sha1($data["password"])],"`email` LIKE ? AND `password` LIKE ? AND `status` = '0' AND `hidden` = '0'","")){
 		$randomCookie = sha1(rand(000000,999999)+time());
 		$CookieTime = time() + (86400*30);
 		setcookie("createmyacad", $randomCookie, $CookieTime, '/');
@@ -43,7 +43,7 @@ function forgetPass($data){
 	$domainName = substr($domainName, strpos($domainName, '//') + 2);
 	$curl = curl_init();
 	curl_setopt_array($curl, array(
-		CURLOPT_URL => 'myid.createkwservers.com/api/v1/send/notify',
+		CURLOPT_URL => 'https://createid.link/api/v1/send/notify',
 		CURLOPT_RETURNTRANSFER => true,
 		CURLOPT_ENCODING => '',
 		CURLOPT_MAXREDIRS => 10,

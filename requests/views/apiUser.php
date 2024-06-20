@@ -9,7 +9,7 @@ if ( isset($_GET["type"]) && !empty($_GET["type"]) ){
 			$error = array("msg"=>"Please enter password correctly.");
 			echo outputError($error);die();
 		}
-		if($user = selectDB('users',"`email` LIKE '".$_POST["email"]."' AND `password` LIKE '".sha1($_POST["password"])."'")){
+		if($user = selectDBNew('users',[$_POST["email"],sha1($_POST["password"])],"`email` LIKE ? AND `password` LIKE ?","")){
 			if( $user[0]["status"] == 1 ){
 				$error["msg"] = popupMsg($requestLang,"Your account has been blocked. Please aconatct administration.","تم قفل حسابك ، الراجاء التواصل مع الإداره");
 				echo outputError($error);die();
@@ -44,7 +44,7 @@ if ( isset($_GET["type"]) && !empty($_GET["type"]) ){
 			$error = array("msg"=>"Please fill email");
 			echo outputError($error);die();
 		}
-		if( selectDB('users',"`email` LIKE '".$_GET["email"]."'") ){
+	if( selectDBNew('users',[$_GET["email"]],"`email` LIKE ?","") ){
 			$random = rand(11111111,99999999);
 			updateDB('users',array("password"=>sha1($random)),"`email` LIKE '".$_GET["email"]."'");
 			$curl = curl_init();
@@ -89,7 +89,7 @@ if ( isset($_GET["type"]) && !empty($_GET["type"]) ){
 			$error = array("msg"=>popupMsg($requestLang,"please set new password and confrim password correctly.","الرجاء تعيين كلمة مرور جديدة وتأكيدها بشكل صحيح"));
 			echo outputError($error);die();
 		}
-		if( $user = selectDB("users","`id` = '{$_GET["userId"]}'" ) ){
+		if( $user = selectDBNew("users",[$_GET["userId"]],"`id` = ?","") ){
 			$newPass = sha1($_POST["newPassword"]);
 			$oldPass = sha1($_POST["oldPassword"]);
 			if ( $user = selectDB("users","`id` = '{$_GET["userId"]}' AND `password` = '{$oldPass}'" ) ){
@@ -140,7 +140,7 @@ if ( isset($_GET["type"]) && !empty($_GET["type"]) ){
 		$_POST["password"] = sha1($_POST["password"]);		
 		unset($_POST["confirmPassword"]);
 		$data = $_POST;
-		if( $user = selectDB('users',"`email` LIKE '".$_POST["email"]."'") ){
+		if( $user = selectDBNew('users',[$_POST["email"]],"`email` LIKE ?","") ){
 			if( $user[0]["status"] == 2 ){
 				updateDB("users",array("email" => "DELETED - {$user[0]["email"]}" ), "`id` = '{$user[0]["id"]}'");
 			}else{
@@ -149,7 +149,7 @@ if ( isset($_GET["type"]) && !empty($_GET["type"]) ){
 			}
 		}
 		if( insertDB('users',$data) ){
-			if ( $user = selectDB('users',"`email` LIKE '".$_POST["email"]."' AND `password` LIKE '".$_POST["password"]."'") ){
+		if ( $user = selectDBNew('users',[$_POST["email"],$_POST["password"]],"`email` LIKE ? AND `password` LIKE ?","") ){
 				if( $user[0]["status"] == 1 ){
 					$error = array("msg"=>popupMsg($requestLang,"Your account has been blocked. Please aconatct administration.","تم قفل حسابك ، الرجاء التواصل مع الإداره"));
 					echo outputError($error);die();
@@ -193,7 +193,7 @@ if ( isset($_GET["type"]) && !empty($_GET["type"]) ){
 				"phone"=>$_POST["phone"],
 				"gender"=>$_POST["gender"]
 			);
-			if( $user = selectDB("users","`id` = '{$_GET["userId"]}' " ) ){
+			if( $user = selectDBNew("users",[$_GET["userId"]],"`id` = ? ","" ) ){
 				if ( updateDB("users",$data,"`id` = '{$_GET["userId"]}'" ) ){
 					$user = selectDB2("`firstName`, `lastName`, `email`, `phone`, `gender`","users","`id` = '{$_GET["userId"]}' " );
 					echo outputData(array('msg'=>popupMsg($requestLang,"profile has been updated successfully.","تم تحديث الملف الشخصي بنجاح"),"user"=>$user));
