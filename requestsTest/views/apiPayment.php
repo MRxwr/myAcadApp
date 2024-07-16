@@ -12,7 +12,7 @@ if( !isset($_POST) ){
     $subscriptionQuantity = $data["subscriptionQuantity"]; 
     $jersyQuantity = $data["jersyQuantity"];
     $paymentMethod = $data["paymentMethod"];
-    $voucher = $data["voucher"];
+    $voucher = ( isset($data["voucher"]) && !empty($data["voucher"]) ) ? $data["voucher"] : 0;
     
     //checking voucher
     $numberOfTimesAvalability = false;
