@@ -3,6 +3,7 @@ if( !isset($_POST) ){
     $response["msg"] = popupMsg($requestLang,"Please make sure you send post data before submitting.","يرجى التأكد من ارسال بيانات POST قبل الارسال");
 	echo outputError($response);die();
 }else{
+    /*
     $data = $_POST;
     unset($_POST);
     $user = $data["user"];
@@ -212,6 +213,8 @@ if( !isset($_POST) ){
         $response["msg"] = popupMsg($requestLang,'Error while proccessing payment','خطأ في عملية الدفع');
         echo outputError($response);
     }
-    
+    */
+    $response["msg"] = popupMsg($requestLang,'Error while proccessing payment','خطأ في عملية الدفع');
+    echo outputError($response);
 }
 ?>
