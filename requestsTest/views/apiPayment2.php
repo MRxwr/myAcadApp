@@ -208,7 +208,7 @@ if( !isset($_POST) ){
         CURLOPT_CUSTOMREQUEST => 'POST',
         CURLOPT_POSTFIELDS => $postBody,
         CURLOPT_HTTPHEADER => array(
-            'Authorization: Bearer $2y$10$PVhzO1UWvuXyZdyaVzxWz..KhstTHaHjcxog9/cuY/WuuR8goCiJK', //e66a94d579cf75fba327ff716ad68c53aae11528',//afmceR6nHQaIehhpOel036LBhC8hihuB8iNh9ACF',
+            'Authorization: Bearer afmceR6nHQaIehhpOel036LBhC8hihuB8iNh9ACF', //e66a94d579cf75fba327ff716ad68c53aae11528',//afmceR6nHQaIehhpOel036LBhC8hihuB8iNh9ACF',
         ),
     ));
 
