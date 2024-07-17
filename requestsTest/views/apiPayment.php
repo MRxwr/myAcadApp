@@ -214,7 +214,7 @@ if( !isset($_POST) ){
         echo outputError($response);
     }
     */
-    $response["msg"] = popupMsg($requestLang,'Please update the app from the store to proceed with payment','يرجى تحديث التطبيق من المتجر لمتابعة عملية الدفع');
+    $response["msg"] = popupMsg($requestLang,'Please update the app from the store to proceed with payment -- يرجى تحديث التطبيق من المتجر لمتابعة عملية الدفع','');
     echo outputError($response);
 }
 ?>
