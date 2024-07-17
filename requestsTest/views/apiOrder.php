@@ -12,7 +12,7 @@ if( !isset($_POST["invoiceId"]) || empty($_POST["invoiceId"]) ){
 	if( $order = selectDB2("`id`, `date`, `paymentMethod`, `enAcademy`, `arAcademy`, `enSession`, `arSession`, `enSubscription`, `arSubscription`, `subscriptionQuantity`, `jersyQuantity`, `totalSubscriptionPrice`, `totalJersyPrice`,`voucher`, `total`","orders","`gatewayId` = '{$_POST["invoiceId"]}'") ){
         $order2 = selectDB("orders","`gatewayId` = '{$_POST["invoiceId"]}'");
         if( $order2[0]["status"] == 0 ){
-            var_dump($_POST["url"]);
+            var_dump(urlencode($_POST["url"]));die();
             /*
             if( isset($_GET["Result"]) ){
                 if( $_GET["Result"] == "CANCELED" || $_GET["Result"] == "ERROR" ){
