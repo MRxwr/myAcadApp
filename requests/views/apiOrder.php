@@ -12,7 +12,6 @@ if( !isset($_POST["invoiceId"]) || empty($_POST["invoiceId"]) ){
 	if( $order = selectDB2("`id`, `date`, `paymentMethod`, `enAcademy`, `arAcademy`, `enSession`, `arSession`, `enSubscription`, `arSubscription`, `subscriptionQuantity`, `jersyQuantity`, `totalSubscriptionPrice`, `totalJersyPrice`,`voucher`, `total`","orders","`gatewayId` = '{$_POST["invoiceId"]}'") ){
         $order2 = selectDB("orders","`gatewayId` = '{$_POST["invoiceId"]}'");
         if( $order2[0]["status"] == 0 ){
-            
             updateDB("orders",array("gatewayLink"=>json_encode($_POST["url"]),"status"=>$_POST["status"]),"`gatewayId` = '{$_POST["invoiceId"]}'");
             $session = selectDB("sessions","`id` = '{$order2[0]["sessionId"]}'");
             $quantity = $session[0]["quantity"] - $order2[0]["subscriptionQuantity"];
