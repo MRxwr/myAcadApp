@@ -15,15 +15,19 @@ if( !isset($_POST["invoiceId"]) || empty($_POST["invoiceId"]) ){
             updateDB("orders",array("gatewayLink"=>json_encode($_POST["url"]),"status"=>$_POST["status"]),"`gatewayId` = '{$_POST["invoiceId"]}'");
             $session = selectDB("sessions","`id` = '{$order2[0]["sessionId"]}'");
             $quantity = $session[0]["quantity"] - $order2[0]["subscriptionQuantity"];
-            updateDB("sessions",array("quantity"=>$quantity),"`id` = '{$order2[0]["sessionId"]}'");
-            $subscription = selectDB("subscriptions","`id` = '{$order2[0]["subscriptionId"]}'");
-            $order[0]["endDate"] = date("Y-m-d H:i:s", strtotime($order[0]["date"] . " +{$subscription[0]["numberOfDays"]} days"));
-            $response = $order;
-            $academyEmail = selectDB("academies","`id` = '{$order2[0]["academyId"]}'");
-            $settingsEmail = selectDB("settings","`id` = '1'");
-            sendMails($order2,$order2[0]["email"]);
-            sendMails($order2,$academyEmail[0]["email"]);
-            sendMails($order2,$settingsEmail[0]["email"]);
+            if ( $_POST["status"] == 1 ){
+                updateDB("sessions",array("quantity"=>$quantity),"`id` = '{$order2[0]["sessionId"]}'");
+                $subscription = selectDB("subscriptions","`id` = '{$order2[0]["subscriptionId"]}'");
+                $order[0]["endDate"] = date("Y-m-d H:i:s", strtotime($order[0]["date"] . " +{$subscription[0]["numberOfDays"]} days"));
+                $response = $order;
+                $academyEmail = selectDB("academies","`id` = '{$order2[0]["academyId"]}'");
+                $settingsEmail = selectDB("settings","`id` = '1'");
+                sendMails($order2,$order2[0]["email"]);
+                sendMails($order2,$academyEmail[0]["email"]);
+                sendMails($order2,$settingsEmail[0]["email"]);
+            }elseif( $_POST["status"] == 2 ){
+                
+            }
         }else{
             $response = $order;
         }
