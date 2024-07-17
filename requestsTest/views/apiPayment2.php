@@ -171,7 +171,7 @@ if( !isset($_POST) ){
         );
     $postBody = array(
         'language' => 'en',
-        'paymentGateway[src]' => "create-invoice",//"{$paymentGateway}",
+        'paymentGateway[src]' => "apple-pay",//"{$paymentGateway}",
         'order[id]' => $orderId,
         'order[currency]' => 'KWD',
         'order[amount]' => (string)$fullAmount,
