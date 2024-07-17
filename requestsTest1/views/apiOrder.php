@@ -12,17 +12,6 @@ if( !isset($_POST["invoiceId"]) || empty($_POST["invoiceId"]) ){
 	if( $order = selectDB2("`id`, `date`, `paymentMethod`, `enAcademy`, `arAcademy`, `enSession`, `arSession`, `enSubscription`, `arSubscription`, `subscriptionQuantity`, `jersyQuantity`, `totalSubscriptionPrice`, `totalJersyPrice`,`voucher`, `total`","orders","`gatewayId` = '{$_POST["invoiceId"]}'") ){
         $order2 = selectDB("orders","`gatewayId` = '{$_POST["invoiceId"]}'");
         if( $order2[0]["status"] == 0 ){
-            var_dump(urlencode($_POST["url"]));die();
-            /*
-            if( isset($_GET["Result"]) ){
-                if( $_GET["Result"] == "CANCELED" || $_GET["Result"] == "ERROR" ){
-                    $_GET["v"] = "Fail";
-                }elseif( $_GET["Result"] == "CAPTURED" ){
-                    sleep(5);
-                    $_GET["v"] = "Success";
-                }
-            }
-            */
             updateDB("orders",array("gatewayLink"=>json_encode($_POST["url"]),"status"=>1),"`gatewayId` = '{$_POST["invoiceId"]}'");
             $session = selectDB("sessions","`id` = '{$order2[0]["sessionId"]}'");
             $quantity = $session[0]["quantity"] - $order2[0]["subscriptionQuantity"];
