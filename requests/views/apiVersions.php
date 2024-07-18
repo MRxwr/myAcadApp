@@ -19,6 +19,9 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
         $error["msg"] = popupMsg($requestLang,"Error while loading settings info","خطأ في تحميل معلومات الاعدادات");
         echo outputError($error);die();
     }
+}else{
+    $error["msg"] = popupMsg($requestLang,"Please enter a correct action","الرجاء التحقق من العملية");
+    echo outputError($error);die();
 }
 
 ?>
