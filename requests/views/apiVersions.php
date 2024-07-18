@@ -5,7 +5,11 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
             "ios" => $_POST["ios"],
             "android" => $_POST["android"]
         );
-        updateDB("versions",$dataUpdate,"`id` = '1'");
+        if( updateDB("versions",$dataUpdate,"`id` = '1'") ){
+            $versions = selectDB("versions","`id` = '1'" );
+            $response["versions"] = $versions[0];
+            echo outputData($response);
+        }
     }elseif( $_GET["action"] == "list" ){
         if( $versions = selectDB("versions","`id` = '1'" ) ){
             $response["versions"] = $versions[0];
