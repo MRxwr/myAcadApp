@@ -1,6 +1,6 @@
 <?php 
 if( isset($_GET["action"]) && !empty($_GET["action"]) ){
-    if( $_GET["action"] == "update" && isset($_POST["ios"]) && !empty($_POST["ios"]) && isset($_POST["android"]) && !empty($_POST["android"]) ){
+    if( $_GET["action"] == "update" && (isset($_POST["ios"]) && !empty($_POST["ios"])) && (isset($_POST["android"]) && !empty($_POST["android"])) ){
         $dataUpdate = array(
             "ios" => $_POST["ios"],
             "android" => $_POST["android"]
