@@ -161,7 +161,7 @@ if( !isset($_POST) ){
         'error_url'=>'https://myacad.app/index.php',
         'notifyURL'=>'https://myacad.app/index.php',
         'test_mode'=>0,
-        "whitelabled" => 1,
+        "whitelabled" => 0,
         'CurrencyCode'=>'KWD',			
         'CstFName'=>"{$_POST["name"]}",			
         'Cstemail'=>"{$_POST["email"]}",
