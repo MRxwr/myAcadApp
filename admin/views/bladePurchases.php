@@ -196,6 +196,7 @@ if( isset($_GET["cancel"]) ){
             },
         })
         .done(function(result) {
+            console.log(result);
             if (result["status"] === "true") {
                 $(".shareBtn").attr("id", result["data"]["data"]["InvoiceId"]);
                 alert("link generated successfully, you can proceed to share.");
@@ -203,7 +204,7 @@ if( isset($_GET["cancel"]) ){
                 alert("Fail.. please try again.");
             }
         })
-        .always(function() {
+        .always(function(xhr, status) {
             console.log(xhr.responseText); // Log the response text
             $("#loader").hide();
         });
