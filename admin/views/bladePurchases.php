@@ -171,7 +171,7 @@ if( isset($_GET["cancel"]) ){
             },
             success: function(result) {
                 $("#loader").hide();
-                if (result["status"] === "true") {
+                if (result["status"] === "successful") {
                     alert("Success.. you will be redirected to payment gateway.");
                     window.open(result["data"]["paymentURL"], "_blank");
                 } else {
@@ -196,16 +196,18 @@ if( isset($_GET["cancel"]) ){
             },
         })
         .done(function(result) {
-            console.log(result);
-            if (result["status"] === "true") {
+            if (result["status"] === "successful") {
                 $(".shareBtn").attr("id", result["data"]["data"]["InvoiceId"]);
                 alert("link generated successfully, you can proceed to share.");
             } else {
                 alert("Fail.. please try again.");
             }
         })
-        .always(function(xhr, status) {
-            console.log(xhr.responseText); // Log the response text
+        .fail(function(xhr, status, error) {
+            console.error("AJAX request failed:", status, error);
+            alert("An error occurred. Please try again later.");
+        })
+        .always(function() {
             $("#loader").hide();
         });
     }

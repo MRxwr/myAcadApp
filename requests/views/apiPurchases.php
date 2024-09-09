@@ -21,11 +21,11 @@ if( !isset($_POST) ){
             }
         }
     }
-
+    $orderId = time();
     $postBody = array(
         'language' => 'en',
         'paymentGateway[src]' => "knet",
-        'order[id]' => time(),
+        'order[id]' => $orderId,
         'order[currency]' => 'KWD',
         'order[amount]' => (string)$fullAmount,
         'order[description]' => "Checkout List for 1x " . json_encode(array( 0 => "Purchase {$title}")),
