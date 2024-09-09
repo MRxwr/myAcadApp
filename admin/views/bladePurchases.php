@@ -203,12 +203,8 @@ if( isset($_GET["cancel"]) ){
                 alert("Fail.. please try again.");
             }
         })
-        .fail(function(xhr, status, error) {
-            console.error("AJAX request failed:", status, error);
-            console.log(xhr.responseText);
-            alert("An error occurred. Please try again later.");
-        })
         .always(function() {
+            console.log(xhr.responseText); // Log the response text
             $("#loader").hide();
         });
     }
