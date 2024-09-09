@@ -44,6 +44,8 @@ if( !isset($_POST) ){
         'extraMerchantData[0][ibanNumber]' => "{$iban}",
         );
 
+        var_dump($postBody);die();
+
 	$curl = curl_init();
     curl_setopt_array($curl, array(
         CURLOPT_URL => 'https://uapi.upayments.com/api/v1/charge',
