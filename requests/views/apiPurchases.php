@@ -44,16 +44,25 @@ if( !isset($_POST) ){
         'extraMerchantData[0][ibanNumber]' => "{$iban}",
         );
 
-    $fields_string = http_build_query($postBody);
-	$ch = curl_init();
-	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-	curl_setopt($ch, CURLOPT_URL,"https://uapi.upayments.com/api/v1/charge");
-	curl_setopt($ch, CURLOPT_POST, 1);
-	curl_setopt($ch, CURLOPT_POSTFIELDS,$fields_string);
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-	$server_output = curl_exec($ch);
-	curl_close ($ch);
-	$response = json_decode($server_output,true);
+	$curl = curl_init();
+    curl_setopt_array($curl, array(
+        CURLOPT_URL => 'https://uapi.upayments.com/api/v1/charge',
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => '',
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => 'POST',
+        CURLOPT_POSTFIELDS => $postBody,
+        CURLOPT_HTTPHEADER => array(
+            'Authorization: Bearer afmceR6nHQaIehhpOel036LBhC8hihuB8iNh9ACF',
+        ),
+    ));
+
+    $response = curl_exec($curl);
+    curl_close($curl);
+    $response = json_decode($response,true);
 
     if( $response["status"] == "success" && isset($response["paymentURL"]) && !empty($response["paymentURL"]) ){
         $_POST["gatewayId"] = $comon_array["order_id"];
