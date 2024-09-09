@@ -21,44 +21,33 @@ if( !isset($_POST) ){
             }
         }
     }
-    
-    //preparing upayment payload
-    $extraMerchantData =  array(
-        'amounts' => array($fullAmount),
-        'charges' => array(0.250),
-        'chargeType' => array('fixed'),
-        'cc_charges' => array(0.250),
-        'cc_chargeType' => array('fixed'),
-        'ibans' => array("{$iban}")
-    );
-    $comon_array = array(
-        "merchant_id"=> "24072",
-        "username"=> "create_lwt",
-        "password"=> stripslashes('sJg@Q9N6ysvP'),
-        "api_key"=> password_hash('afmceR6nHQaIehhpOel036LBhC8hihuB8iNh9ACF',PASSWORD_BCRYPT),
-        "payment_gateway" => "knet",
-        "order_id"=> time(),
-        'total_price'=>$fullAmount,
-        'success_url'=>'https://myacad.app/Purchase.php',
-        'error_url'=>'https://myacad.app/Purchase.php',
-        'notifyURL'=>'https://myacad.app/Purchase.php',
-        'test_mode'=>0,
-        "whitelabled" => 1,
-        'CurrencyCode'=>'KWD',			
-        'CstFName'=>"PURCHASE MYACAD",	
-        'Cstemail'=>"{$AdminSettings[0]["email"]}",
-        'CstMobile'=>"00{$socialMedia[0]["whatsapp"]}",
-        'ExtraMerchantsData'=> json_encode($extraMerchantData),
-        'ProductTitle' => "Checkout List",
-        'ProductName' => json_encode(array( 0 => "Purchase {$title}")),
-        'ProductPrice' => json_encode(array( 0 => $fullAmount)),
-        'ProductQty' => json_encode(array( 0 => 1)),
-    );
 
-    $fields_string = http_build_query($comon_array);
+    $postBody = array(
+        'language' => 'en',
+        'paymentGateway[src]' => "knet",
+        'order[id]' => time(),
+        'order[currency]' => 'KWD',
+        'order[amount]' => (string)$fullAmount,
+        'order[description]' => "Checkout List for 1x " . json_encode(array( 0 => "Purchase {$title}")),
+        'reference[id]' => $orderId,
+        'customer[name]' => "PURCHASE MYACAD",
+        'customer[email]' => "{$AdminSettings[0]["email"]}",
+        'customer[mobile]' => "00{$socialMedia[0]["whatsapp"]}",
+        'returnUrl' => 'https://myacad.app/Purchase.php',
+        'cancelUrl' => 'https://myacad.app/Purchase.php',
+        'notificationUrl' => 'https://myacad.app/Purchase.php',
+        'extraMerchantData[0][amount]' => (string)$fullAmount,
+        'extraMerchantData[0][knetCharge]' => '0.25',
+        'extraMerchantData[0][knetChargeType]' => 'fixed',
+        'extraMerchantData[0][ccCharge]' => '0.25',
+        'extraMerchantData[0][ccChargeType]' => 'fixed',
+        'extraMerchantData[0][ibanNumber]' => "{$iban}",
+        );
+
+    $fields_string = http_build_query($postBody);
 	$ch = curl_init();
 	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-	curl_setopt($ch, CURLOPT_URL,"https://api.upayments.com/payment-request");
+	curl_setopt($ch, CURLOPT_URL,"https://uapi.upayments.com/api/v1/charge");
 	curl_setopt($ch, CURLOPT_POST, 1);
 	curl_setopt($ch, CURLOPT_POSTFIELDS,$fields_string);
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
