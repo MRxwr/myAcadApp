@@ -170,7 +170,6 @@ if( isset($_GET["cancel"]) ){
                 $("#loader").show();
             },
             success: function(result) {
-                alert(result);
                 $("#loader").hide();
                 if (result["status"] === "true") {
                     alert("Success.. you will be redirected to payment gateway.");
@@ -197,6 +196,7 @@ if( isset($_GET["cancel"]) ){
             },
         })
         .done(function(result) {
+            alert(result);
             if (result["status"] === "true") {
                 $(".shareBtn").attr("id", result["data"]["data"]["InvoiceId"]);
                 alert("link generated successfully, you can proceed to share.");
