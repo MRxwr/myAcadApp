@@ -196,7 +196,6 @@ if( isset($_GET["cancel"]) ){
             },
         })
         .done(function(result) {
-            console.log(result);
             if (result["status"] === "successful") {
                 $(".shareBtn").attr("id", result["data"]["data"]["InvoiceId"]);
                 alert("link generated successfully, you can proceed to share.");
@@ -205,7 +204,6 @@ if( isset($_GET["cancel"]) ){
             }
         })
         .fail(function(xhr, status, error) {
-            console.log(result);
             console.error("AJAX request failed:", status, error);
             alert("An error occurred. Please try again later.");
         })
