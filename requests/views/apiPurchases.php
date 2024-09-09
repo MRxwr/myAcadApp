@@ -64,6 +64,8 @@ if( !isset($_POST) ){
     curl_close($curl);
     $response = json_decode($response,true);
 
+    var_dump($response0);die();
+
     if( $response["status"] == "success" && isset($response["paymentURL"]) && !empty($response["paymentURL"]) ){
         $_POST["gatewayId"] = $comon_array["order_id"];
         $_POST["gatewayURL"] = $response["paymentURL"];
