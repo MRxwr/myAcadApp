@@ -139,7 +139,7 @@ if( !isset($_POST) ){
         $newTotal = $newTotal - $myacadDeposit;
         $paymentGateway = "Knet";
     }
-
+/*
     //preparing upayment payload
     $extraMerchantData =  array(
         'amounts' => array($myacadDeposit,($newTotal+(float)$jersyPrice)),
@@ -182,6 +182,53 @@ if( !isset($_POST) ){
 	$server_output = curl_exec($ch);
 	curl_close ($ch);
 	$response = json_decode($server_output,true);
+*/
+    $postBody = array(
+        'language' => 'en',
+        'paymentGateway[src]' => "{$paymentGateway}",
+        'order[id]' => $orderId,
+        'order[currency]' => 'KWD',
+        'order[amount]' => (string)$fullAmount,
+        'order[description]' => "order for {$academyData[0]["enTitle"]}, {$sessionData[0]["enTitle"]}, {$subscriptionQuantity}x {$subscriptionData[0]["enTitle"]} and {$jersyQuantity}x jersy",
+        'reference[id]' => $orderId,
+        'customer[name]' => "{$_POST["name"]}",
+        'customer[email]' => "{$_POST["email"]}",
+        'customer[mobile]' => "{$_POST["phone"]}",
+        'returnUrl' => 'https://myacad.app/index.php',
+        'cancelUrl' => 'https://myacad.app/index.php',
+        'notificationUrl' => 'https://myacad.app/index.php',
+        'extraMerchantData[0][amount]' => (string)$myacadDeposit,
+        'extraMerchantData[0][knetCharge]' => '0.25',
+        'extraMerchantData[0][knetChargeType]' => 'fixed',
+        'extraMerchantData[0][ccCharge]' => '0.25',
+        'extraMerchantData[0][ccChargeType]' => 'fixed',
+        'extraMerchantData[0][ibanNumber]' => "{$AdminSettings[0]["mainIban"]}",
+        'extraMerchantData[1][amount]' => (string)($newTotal+(float)$jersyPrice),
+        'extraMerchantData[1][knetCharge]' => '0.25',
+        'extraMerchantData[1][knetChargeType]' => 'fixed',
+        'extraMerchantData[1][ccCharge]' => '0.25',
+        'extraMerchantData[1][ccChargeType]' => 'fixed',
+        'extraMerchantData[1][ibanNumber]' => "{$academyData[0]["iban"]}",
+        );
+    $curl = curl_init();
+    curl_setopt_array($curl, array(
+        CURLOPT_URL => 'https://uapi.upayments.com/api/v1/charge',
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => '',
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => 'POST',
+        CURLOPT_POSTFIELDS => $postBody,
+        CURLOPT_HTTPHEADER => array(
+            'Authorization: Bearer afmceR6nHQaIehhpOel036LBhC8hihuB8iNh9ACF',
+        ),
+    ));
+
+    $response = curl_exec($curl);
+    curl_close($curl);
+    $response = json_decode($response,true);
 
     //saving info and redirecting to payment pages
     if( $response["status"] == "success" && isset($response["paymentURL"]) && !empty($response["paymentURL"]) ){
