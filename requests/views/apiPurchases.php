@@ -64,13 +64,13 @@ if( !isset($_POST) ){
     $response = json_decode($response,true);
 
     if( $response["status"] == "true" && isset($response["data"]["link"]) && !empty($response["data"]["link"]) ){
-        $_POST["gatewayId"] = $postBody["order_id"];
+        $_POST["gatewayId"] = $orderId;
         $_POST["gatewayURL"] = $response["data"]["link"];
         $_POST["apiPayload"] = json_encode($postBody);
         $_POST["apiResponse"] = json_encode($response);
         $response["data"] = array(
             "paymentURL" => $response["data"]["link"],
-            "InvoiceId"  => $postBody["order_id"]
+            "InvoiceId"  => $orderId
         );
         updateDB("purchases",$_POST,"`id` = '{$data["id"]}'");
         echo outputData($response);
