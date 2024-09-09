@@ -59,21 +59,18 @@ if( !isset($_POST) ){
             'Authorization: Bearer afmceR6nHQaIehhpOel036LBhC8hihuB8iNh9ACF',
         ),
     ));
-
     $response = curl_exec($curl);
     curl_close($curl);
     $response = json_decode($response,true);
 
-    var_dump($response0);die();
-
-    if( $response["status"] == "success" && isset($response["paymentURL"]) && !empty($response["paymentURL"]) ){
-        $_POST["gatewayId"] = $comon_array["order_id"];
-        $_POST["gatewayURL"] = $response["paymentURL"];
-        $_POST["apiPayload"] = json_encode($comon_array);
+    if( $response["status"] == "true" && isset($response["data"]["link"]) && !empty($response["data"]["link"]) ){
+        $_POST["gatewayId"] = $postBody["order_id"];
+        $_POST["gatewayURL"] = $response["data"]["link"];
+        $_POST["apiPayload"] = json_encode($postBody);
         $_POST["apiResponse"] = json_encode($response);
         $response["data"] = array(
-            "paymentURL" => $response["paymentURL"],
-            "InvoiceId"  => $comon_array["order_id"]
+            "paymentURL" => $response["data"]["link"],
+            "InvoiceId"  => $postBody["order_id"]
         );
         updateDB("purchases",$_POST,"`id` = '{$data["id"]}'");
         echo outputData($response);
