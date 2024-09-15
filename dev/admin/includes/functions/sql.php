@@ -107,7 +107,7 @@ function selectDB2($select, $table, $where){
         }
     } else {
         $error = array("msg" => "select table error");
-        return outputError($error);
+        return 0;
     }
 }
 
