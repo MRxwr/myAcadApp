@@ -12,7 +12,10 @@ require("template/bannersSlider.php");
 			<input type="hidden" name="area" value="0">
 			<input type="hidden" name="governate" value="0">
             <h2 style="padding-top:10px"><?php echo direction("SELECT YOUR ACADEMY","إختر الأكادمية الخاصه بك"); ?>!</h2>
-            <a class="select_btn mb_20" data-toggle="modal" data-target="#sport"><img id="sportMainImage" src="img/select_1.svg" alt=""><label id="sportMainTitle" style="font-weight: bolder;"><?php echo direction("SELECT SPORT","إختر الرياضة") ?><label></a>
+            <a class="select_btn mb_20" data-toggle="modal" data-target="#sport">
+				<img id="sportMainImage" src="img/select_1.svg" alt="">
+				<label id="sportMainTitle" style="font-weight: bolder;"><?php echo direction("SELECT SPORT","إختر الرياضة") ?><label>
+			</a>
             <div class="selet_wapper mb_20">
                 <img src="img/select_2.svg" alt="">
                 <select class="select_btn select" name="gender" disabled>
@@ -53,7 +56,11 @@ require("template/bannersSlider.php");
 						if ($i != 0) {
 							echo "</div>";
 						}
-						echo "<div class='governate' id='governate{$areas[$i]["governateId"]}' style='display:none'><option selected disabled value='0'>".direction("SELECT AREA","إختر المنطقة")."</option><option selected value='0'>".direction("Select All","إختر الكل")."</option>";
+						echo "
+								<div class='governate' id='governate{$areas[$i]["governateId"]}' style='display:none'>
+									<option selected disabled value='0'>".direction("SELECT AREA","إختر المنطقة")."</option>
+									<option selected value='0'>".direction("Select All","إختر الكل")."</option>
+							";
 					}
 					echo "<option value='{$areas[$i]["id"]}'>" . direction($areas[$i]["areaEnTitle"], $areas[$i]["areaArTitle"]) . "</option>";
 					$governateId = $areas[$i]["governateId"];
@@ -63,7 +70,9 @@ require("template/bannersSlider.php");
 			?>
 			
 			<input type="hidden" name="sport" value="">
-            <button type="submit" class="button" id="homeBtnSubmit" disabled style="background: gray;color: black;"><?php echo direction("Search","إبحث") ?></button>
+            <button type="submit" class="button" id="homeBtnSubmit" disabled style="background: gray;color: black;">
+				<?php echo direction("Search","إبحث") ?>
+			</button>
         </form>
     </div>
 </div>
