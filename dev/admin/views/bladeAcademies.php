@@ -301,6 +301,7 @@
 					<div style="display:none"><label id="cc_charge<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["cc_charge"] ?></label></div>
 					<div style="display:none"><label id="cc_chargetype<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["cc_chargetype"] ?></label></div>
 					<div style="display:none"><label id="iban<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["iban"] ?></label></div>
+					<div style="display:none"><label id="isIndoor<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["isIndoor"] ?></label></div>
 				</td>
 				</tr>
 				<?php
