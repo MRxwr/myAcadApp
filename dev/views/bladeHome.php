@@ -11,7 +11,7 @@ require("template/bannersSlider.php");
 			<input type="hidden" name="gender" value="0">
 			<input type="hidden" name="area" value="0">
 			<input type="hidden" name="governate" value="0">
-            <h2 style="padding-top:10px"><?php echo direction("SELECT YOUR ACADEMY","إختر الأكادمية الخاصه بك"); ?>!</h2>
+            <h2 style="padding-top:10px"><?php echo direction("SELECT YOUR SPORT","إختر الرياضة الخاصة بك"); ?></h2>
             <a class="select_btn mb_20" data-toggle="modal" data-target="#sport">
 				<img id="sportMainImage" src="img/select_1.svg" alt="">
 				<label id="sportMainTitle" style="font-weight: bolder;"><?php echo direction("SELECT SPORT","إختر الرياضة") ?><label>
@@ -40,15 +40,6 @@ require("template/bannersSlider.php");
 					?>
 				</select>
 			</div>
-			<!--
-			<div class="selet_wapper mb_20">
-				<img src="img/select_4.svg" alt="">
-				<select class="select_btn select areaSelect" name="area" disabled>
-					<option selected disabled value="0"><?php echo direction("SELECT AREA","إختر المنطقة") ?></option>
-					<option value="0"><?php echo direction("Select All","إختر الكل") ?></option>
-				</select>
-			</div>
-				-->
 			<?php
 			if ($areas = selectDB("countries", "`status` = '1' AND `hidden` = '0' AND `countryCode` LIKE '{$_COOKIE["createmyacadcountry"]}' ORDER BY `governateId` ASC")) {
 				$governateId = $areas[0]["governateId"];
