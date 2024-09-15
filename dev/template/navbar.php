@@ -1,10 +1,9 @@
 <?php
+if( !isset($_COOKIE["createmyacadcountry"]) ){
+    setcookie("createmyacadcountry", "KW", time() + (86400*30 ), "/");
+}
 if( isset($_GET["country"]) && !empty($_GET["country"]) ){
     setcookie("createmyacadcountry", $_GET["country"], time() + (86400*30 ), "/");
-    $_COOKIE["createmyacadcountry"] = $_GET["country"];
-}else{
-    setcookie("createmyacadcountry", "KW", time() + (86400*30 ), "/");
-    $_COOKIE["createmyacadcountry"] = "KW";
 }
 ?>
 
