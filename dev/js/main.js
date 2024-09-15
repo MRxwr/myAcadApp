@@ -3,7 +3,7 @@
 
     $(window).on('load', function(){
         //===== Prealoder
-        $("#preloader").delay(600).fadeOut();
+        $("#preloader").fadeOut();
 
     });
 
