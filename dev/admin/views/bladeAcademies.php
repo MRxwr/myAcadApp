@@ -23,19 +23,27 @@
 			</select>
 			</div>
 
-			<div class="col-md-4">
+			<div class="col-md-3">
 			<label><?php echo direction("English Title","الإسم الإنجليزي") ?></label>
 			<input type="text" name="enTitle" class="form-control" required>
 			</div>
 			
-			<div class="col-md-4">
+			<div class="col-md-3">
 			<label><?php echo direction("Arabic Title","الإسم العربي") ?></label>
 			<input type="text" name="arTitle" class="form-control" required>
 			</div>
 			
-			<div class="col-md-4">
+			<div class="col-md-3">
 			<label><?php echo direction("Email","البريد الإكتروني") ?></label>
 			<input type="text" name="email" class="form-control" required>
+			</div>
+
+			<div class="col-md-3">
+			<label><?php echo direction("Is Indoor? ","هل الأكادمية داخليه؟") ?></label>
+			<select name="isIndoor" class="form-control" required>
+				<option value="1" ><?php echo direction("Yes","نعم") ?></option>
+				<option value="0" ><?php echo direction("No","لا") ?></option>
+			</select>
 			</div>
 
 			<div class="col-md-3">
@@ -327,50 +335,29 @@
 
 		$(document).on("click",".edit", function(){
 			var id = $(this).attr("id");
-			var enTitle = $("#enTitle"+id).html();
-			var arTitle = $("#arTitle"+id).html();
-			var video = $("#video"+id).html();
-			var email = $("#email"+id).html();
-			var gender = $("#gender"+id).html();
-			var country = $("#country"+id).html();
-			var governate = $("#governates"+id).html();
-			var area = $("#area"+id).html();
-			var sport = $("#sport"+id).html();
-			var isClothes = $("#isClothes"+id).html();
-			var isPromotion = $("#isPromotion"+id).html();
-			var clothesPrice = $("#clothesPrice"+id).html();
-			var location = $("#location"+id).html();
-			var logo = $("#logo"+id).html();
-			var header = $("#header"+id).html();
-			var clothes = $("#clothes"+id).html();
-			var locationImg = $("#locationImg"+id).html();
-			var charges = $("#charges"+id).html();
-			var chargeType = $("#chargeType"+id).html();
-			var cc_charge = $("#cc_charge"+id).html();
-			var cc_chargetype = $("#cc_chargetype"+id).html();
-			var iban = $("#iban"+id).html();
-			$("input[name=enTitle]").val(enTitle).focus();
-			$("input[name=arTitle]").val(arTitle);
-			$("input[name=video]").val(video);
-			$("input[name=email]").val(email);
-			$("select[name=gender]").val(gender);
-			$("select[name=country]").val(country).trigger('change');
-			$("select[name=governate]").val(governate).trigger('change');
-			$("select[name=area]").val(area).trigger('change');
-			$("select[name=sport]").val(sport).trigger('change');
-			$("select[name=isClothes]").val(isClothes);
-			$("select[name=isPromotion]").val(isPromotion);
-			$("input[name=clothesPrice]").val(clothesPrice);
-			$("input[name=location]").val(location);
-			$("input[name=charges]").val(charges);
-			$("select[name=chargeType]").val(chargeType);
-			$("input[name=cc_charge]").val(cc_charge);
-			$("select[name=cc_chargetype]").val(cc_chargetype);
-			$("input[name=iban]").val(iban);
-			$("#logoImg").attr("src","../logos/"+logo);
-			$("#headerImg").attr("src","../logos/"+header);
-			$("#clothesImg").attr("src","../logos/"+clothes);
-			$("#locationImg").attr("src","../logos/"+locationImg);
+			$("input[name=enTitle]").val($("#enTitle"+id).html()).focus();
+			$("input[name=arTitle]").val($("#arTitle"+id).html());
+			$("input[name=video]").val($("#video"+id).html());
+			$("input[name=email]").val($("#email"+id).html());
+			$("select[name=gender]").val($("#gender"+id).html());
+			$("select[name=country]").val($("#country"+id).html()).trigger('change');
+			$("select[name=governate]").val($("#governates"+id).html()).trigger('change');
+			$("select[name=area]").val($("#area"+id).html()).trigger('change');
+			$("select[name=sport]").val($("#sport"+id).html()).trigger('change');
+			$("select[name=isClothes]").val($("#isClothes"+id).html());
+			$("select[name=isIndoor]").val($("#isIndoor"+id).html());
+			$("select[name=isPromotion]").val($("#isPromotion"+id).html());
+			$("input[name=clothesPrice]").val($("#clothesPrice"+id).html());
+			$("input[name=location]").val($("#location"+id).html());
+			$("input[name=charges]").val($("#charges"+id).html());
+			$("select[name=chargeType]").val($("#chargeType"+id).html());
+			$("input[name=cc_charge]").val($("#cc_charge"+id).html());
+			$("select[name=cc_chargetype]").val($("#cc_chargetype"+id).html());
+			$("input[name=iban]").val($("#iban"+id).html());
+			$("#logoImg").attr("src","../logos/"+$("#logo"+id).html());
+			$("#headerImg").attr("src","../logos/"+$("#header"+id).html());
+			$("#clothesImg").attr("src","../logos/"+$("#clothes"+id).html());
+			$("#locationImg").attr("src","../logos/"+$("#locationImg"+id).html());
 			$("#images").attr("style","margin-top:10px;display:block");
 			$("input[name=update]").val(id);
 		})
