@@ -25,6 +25,8 @@ require("template/bannersSlider.php");
                     <option value="2" ><?php echo direction("Woman","إمرأة") ?></option>
                     <option value="3" ><?php echo direction("Boy","ولد") ?></option>
                     <option value="4" ><?php echo direction("Girl","بنت") ?></option>
+                    <option value="5" ><?php echo direction("Mix Adults","مختلط كبار") ?></option>
+					<option value="6" ><?php echo direction("Mix Kids","مختلط الاطفال") ?></option>
                 </select> 
             </div>
             <div class="selet_wapper mb_20">
