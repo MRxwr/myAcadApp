@@ -139,50 +139,8 @@ if( !isset($_POST) ){
         $newTotal = $newTotal - $myacadDeposit;
         $paymentGateway = "Knet";
     }
-/*
-    //preparing upayment payload
-    $extraMerchantData =  array(
-        'amounts' => array($myacadDeposit,($newTotal+(float)$jersyPrice)),
-        'charges' => array(0.250,0),
-        'chargeType' => array('fixed','fixed'),
-        'cc_charges' => array(0.250,0),
-        'cc_chargeType' => array('fixed','percentage'),
-        'ibans' => array("{$AdminSettings[0]["mainIban"]}","{$academyData[0]["iban"]}")
-    );
-    $comon_array = array(
-        "merchant_id"=> "24072",
-        "username"=> "create_lwt",
-        "password"=> stripslashes('sJg@Q9N6ysvP'),
-        "api_key"=> password_hash('afmceR6nHQaIehhpOel036LBhC8hihuB8iNh9ACF',PASSWORD_BCRYPT),
-        "payment_gateway" => "{$paymentGateway}",
-        "order_id"=> time(),
-        'total_price'=>$fullAmount,
-        'success_url'=>'https://myacad.app/index.php',
-        'error_url'=>'https://myacad.app/index.php',
-        'notifyURL'=>'https://myacad.app/index.php',
-        'test_mode'=>0,
-        "whitelabled" => 0,
-        'CurrencyCode'=>'KWD',			
-        'CstFName'=>"{$_POST["name"]}",			
-        'Cstemail'=>"{$_POST["email"]}",
-        'CstMobile'=>"{$_POST["phone"]}",
-        'ExtraMerchantsData'=> json_encode($extraMerchantData),//Optional for multivendor API
-    );
-    
-    //print_r($comon_array);die();
 
-    $fields_string = http_build_query($comon_array);
-	$ch = curl_init();
-	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-	curl_setopt($ch, CURLOPT_URL,"https://api.upayments.com/payment-request");
-	curl_setopt($ch, CURLOPT_POST, 1);
-	curl_setopt($ch, CURLOPT_POSTFIELDS,$fields_string);
-	// receive server response ...
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-	$server_output = curl_exec($ch);
-	curl_close ($ch);
-	$response = json_decode($server_output,true);
-*/
+    //preparing upayment payload and creating order
     $postBody = array(
         'language' => 'en',
         'paymentGateway[src]' => "{$paymentGateway}",
