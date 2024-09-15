@@ -40,6 +40,7 @@ require("template/bannersSlider.php");
 					?>
 				</select>
 			</div>
+			<!--
 			<div class="selet_wapper mb_20">
 				<img src="img/select_4.svg" alt="">
 				<select class="select_btn select areaSelect" name="area" disabled>
@@ -47,7 +48,7 @@ require("template/bannersSlider.php");
 					<option value="0"><?php echo direction("Select All","إختر الكل") ?></option>
 				</select>
 			</div>
-
+				-->
 			<?php
 			if ($areas = selectDB("countries", "`status` = '1' AND `hidden` = '0' AND `countryCode` LIKE '{$_COOKIE["createmyacadcountry"]}' ORDER BY `governateId` ASC")) {
 				$governateId = $areas[0]["governateId"];
