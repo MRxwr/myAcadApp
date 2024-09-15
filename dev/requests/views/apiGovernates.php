@@ -20,8 +20,8 @@ if( !isset($_GET["genderId"]) || empty($_GET["genderId"]) ){
 if( $academies = selectDB2("`governate`","academies","`sport` = '{$_GET["sportId"]}' AND `country` LIKE '{$_GET["countryCode"]}' AND `gender` = '{$_GET["genderId"]}' AND `hidden` = '0' AND `status` = '0' GROUP BY `governate`") ){
     $response["governates"][0] = array(
         "id" => 0,
-        "enGovernates" => "",
-        "arGovernates" => ""
+        "enGovernates" => "SELECT GOVERNATE",
+        "arGovernates" => "إختر المحافظة"
     );
     for( $i = 0; $i < sizeof($academies); $i++ ){
         $governate = selectDB("governates","`id` = '{$academies[$i]["governate"]}'");
