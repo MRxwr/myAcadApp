@@ -85,7 +85,7 @@
 			if ($governates = selectDB("governates", "`status` = '0' AND `hidden` = '0'") ) {
 				$countryCode = $governates[0]["countryCode"];
 				for ($i = 0; $i < sizeof($governates); $i++) {
-					if ($i == 0 || $governateId != $governates[$i]["countryCode"]) {
+					if ($i == 0 || $countryCode != $governates[$i]["countryCode"]) {
 						if ($i != 0) {
 							echo "</div>";
 						}
