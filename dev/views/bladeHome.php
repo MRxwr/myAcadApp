@@ -33,13 +33,6 @@ require("template/bannersSlider.php");
 				<select class="select_btn select governateSelect" name="governate" disabled>
 					<option selected disabled value="0"><?php echo direction("SELECT GOVERNANT","إختر المحافظة") ?></option>
 					<option value="0"><?php echo direction("Select All","إختر الكل") ?></option>
-					<?php
-					if ($governates = selectDB("governates", "`countryCode` LIKE '{$_COOKIE["createmyacadcountry"]}' AND `status` = '0' AND `hidden` = '0'")) {
-						for ($i = 0; $i < sizeof($governates); $i++) {
-							echo "<option value='{$governates[$i]["id"]}'>" . direction($governates[$i]["enTitle"], $governates[$i]["arTitle"]) . "</option>";
-						}
-					}
-					?>
 				</select>
 			</div>
 			
