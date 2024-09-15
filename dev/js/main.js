@@ -69,7 +69,7 @@
 		});
 
         // change the view of select governates
-		$('.selectGender').on('click', function (event) {
+		$('.selectGender').on('change', function (event) {
 			event.preventDefault();
 			var id = $(this).attr("id");
             var countryCode = $.cookie("createmyacadcountry");
