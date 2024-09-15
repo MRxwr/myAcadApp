@@ -28,11 +28,13 @@
 		$('.selectSport').on('click', function (event) {
 			event.preventDefault();
 			var id = $(this).attr("id");
+            //get country code from cookie
+            var countryCode = $.cookie("createmyacadcountry");
 			var sportImage = $("#sportImage"+id).attr("src");
 			var sportTitle = $("#sportTitle"+id).html();
             var langCookieValue = $.cookie("CREATEkwLANG");
             var settings = {
-                "url": "requests/index.php?a=Genders&sportId="+id,
+                "url": "requests/index.php?a=Genders&sportId="+id+"&countryCode="+countryCode,
                 "method": "GET",
                 "timeout": 0,
                 "headers": {
