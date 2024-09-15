@@ -39,10 +39,11 @@ if( $sportTitle = selectDB("sports","`id` = '{$_POST["sport"]}'") ){
             <div class="col-lg-4 col-sm-6 mt_50">
                 <div class="foott_box">
 				<?php 
+                $inIndoor = ($academies[$i]["isIndoor"] == 1) ? direction("Indoor","داخلي") : direction("Outdoor","خارجي");
 				if( $academies[$i]["isPromotion"] == 1 ){
 					echo "<div class='promotion_box'><p>".direction("Promotion","خصم")."</p></div>";
 				}
-                echo "<div class='promotion_box_reverse'><p>".direction("Promotion","خصم")."</p></div>";
+                echo "<div class='promotion_box_reverse'><p>{$inIndoor}</p></div>";
 				?>
                     <a href="?v=Details&id=<?php echo $academies[$i]["id"] ?>" class="s_foot_img" alt="link_<?php echo $academies[$i]["enTitle"]?>">
                         <img src="logos/<?php echo $academies[$i]["header"] ?>" alt="header_<?php echo $academies[$i]["enTitle"]?>" class="w-100">
@@ -58,7 +59,7 @@ if( $sportTitle = selectDB("sports","`id` = '{$_POST["sport"]}'") ){
                                 <div>
                                     <h2><?php echo direction($academies[$i]["enTitle"],$academies[$i]["arTitle"]) ?></h2>
                                     <h3><?php echo $areaTitle ?></h3>
-                                    <h3><?php echo $inIndoor = ($academies[$i]["isIndoor"] == 1) ? direction("Indoor","داخلي") : direction("Outdoor","خارجي")?></h3>
+                                    <h3><?php ?></h3>
                                 </div>
                             </div>
                         </div>
