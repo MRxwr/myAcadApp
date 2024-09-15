@@ -83,9 +83,7 @@
                   "myacadheader": "myAcadAppCreate"
                 },
               };
-              console.log(settings);
               $.ajax(settings).done(function (response) {
-                console.log(response);
                 var $select = $('select[name=governate]');
                 $select.empty();
                 var selectedLanguage = (langCookieValue === undefined || langCookieValue === "" || langCookieValue === "EN") ? "enGovernate" : "arGovernate";
