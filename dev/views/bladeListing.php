@@ -57,7 +57,7 @@ if( $sportTitle = selectDB("sports","`id` = '{$_POST["sport"]}'") ){
                                 <div>
                                     <h2><?php echo direction($academies[$i]["enTitle"],$academies[$i]["arTitle"]) ?></h2>
                                     <h3><?php echo $areaTitle ?></h3>
-                                    <h3><?php echo $inIndoor = ($academies[$i]["inIndoor"] == 1) ? direction("Indoor","داخلي") : direction("Outdoor","خارجي")?></h3>
+                                    <h3><?php echo $inIndoor = ($academies[$i]["isIndoor"] == 1) ? direction("Indoor","داخلي") : direction("Outdoor","خارجي")?></h3>
                                 </div>
                             </div>
                         </div>
