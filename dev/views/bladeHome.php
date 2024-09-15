@@ -22,7 +22,7 @@ require("template/bannersSlider.php");
 
             <div class="selet_wapper mb_20">
                 <img src="img/select_2.svg" alt="">
-                <select class="select_btn select" name="gender" disabled>
+                <select class="select_btn select selectGender" name="gender" disabled>
                     <option value="" disabled selected><?php echo direction("SELECT GENDER","إختر الجنس") ?></option>
 					<option value="0"><?php echo direction("Select All","إختر الكل") ?></option>
                 </select> 

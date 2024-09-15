@@ -24,7 +24,7 @@
         sticky_header();
         //===== Back to top
 		
-		// change the view of select sport
+		// change the view of select gender
 		$('.selectSport').on('click', function (event) {
 			event.preventDefault();
 			var id = $(this).attr("id");
@@ -67,9 +67,46 @@
             $("#homeBtnSubmit").prop("disabled",true).attr("style","background: gray;color: black;");
 			$('#sport').modal('toggle');
 		});
+
+        // change the view of select governates
+		$('.selectGender').on('click', function (event) {
+			event.preventDefault();
+			var id = $(this).attr("id");
+            var countryCode = $.cookie("createmyacadcountry");
+            var sportId = $("input[name=sport]").val(id);
+            var langCookieValue = $.cookie("CREATEkwLANG");
+            var settings = {
+                "url": "requests/index.php?a=Governates&sportId="+sportId+"&countryCode="+countryCode+"&genderId="+id,
+                "method": "GET",
+                "timeout": 0,
+                "headers": {
+                  "myacadheader": "myAcadAppCreate"
+                },
+              };
+              $.ajax(settings).done(function (response) {
+                var $select = $('select[name=governate]');
+                $select.empty();
+                var selectedLanguage = (langCookieValue === undefined || langCookieValue === "" || langCookieValue === "EN") ? "enGovernate" : "arGovernate";
+                $.each(response.data.genders, function(index, item) {
+                    var $option = $('<option>', {
+                        value: item.id,
+                        text: item[selectedLanguage]
+                    });
+                    if (item.id === 0) {
+                        $option.prop('disabled', true);
+                        $option.prop('selected', true);
+                    }
+                    $select.append($option);
+                });
+                $select.select2();
+                $select.trigger('change.select2');
+              });
+			$("select[name=governate]").prop("disabled",false);
+			$("select[name=governate]").prop("required",true);
+		});
 		
 		// change the view of select sport
-		$('select[name=gender]').on('change', function (event) {
+		$('select[name=governate]').on('change', function (event) {
 			event.preventDefault();
             if ($(this).val() != 0) {
                 $("select[name=governate]").prop("disabled",false);
