@@ -86,7 +86,7 @@ if( isset($_GET["delIdArea"]) && !empty($_GET["delIdArea"]) && updateDB("countri
 		<tbody>
 		<?php 
 		$orderBy = direction("areaEnTitle","areaArTitle");
-		if( $areas = selectDB("countries","`status` = '1' AND `countryCode` LIKE '{$_GET["code"]}' ORDER BY `{$orderBy}` ASC") ){
+		if( $areas = selectDB("countries","`status` = '1' AND `countryCode` LIKE '{$_GET["code"]}' ORDER BY `{$orderBy}` ASC LIMIT 0,200") ){
 			for( $i = 0; $i < sizeof($areas); $i++ ){
 				if( $governate = selectDB("governates","`id` = '{$areas[$i]["governateId"]}'") ){
 					$governateTitle = direction($governate[0]["enTitle"],$governate[0]["arTitle"]);
