@@ -58,9 +58,9 @@
     <a href="#" class="back-to-top"><i class="fal fa-angle-up"></i></a>
     
     <!-- all js here -->
-    <script src="js/jquery-3.4.1.min.js?<?php echo randLetter() . "=" . rand(0000,9999) ?>" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js" defer></script>
-    <script src="js/plugins.js?<?php echo randLetter() . "=" . rand(0000,9999) ?>" defer></script>
+    <script src="js/jquery-3.4.1.min.js?<?php echo randLetter() . "=" . rand(0000,9999) ?>"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script src="js/plugins.js?<?php echo randLetter() . "=" . rand(0000,9999) ?>"></script>
     <script src="js/main.js?<?php echo randLetter() . "=" . rand(0000,9999) ?>" defer></script>
     <script>
         $(document).on("click","#voucherBtn", function(){
