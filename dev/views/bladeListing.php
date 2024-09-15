@@ -42,6 +42,7 @@ if( $sportTitle = selectDB("sports","`id` = '{$_POST["sport"]}'") ){
 				if( $academies[$i]["isPromotion"] == 1 ){
 					echo "<div class='promotion_box'><p>".direction("Promotion","خصم")."</p></div>";
 				}
+                echo "<div class='promotion_box_reverse'><p>".direction("Promotion","خصم")."</p></div>";
 				?>
                     <a href="?v=Details&id=<?php echo $academies[$i]["id"] ?>" class="s_foot_img" alt="link_<?php echo $academies[$i]["enTitle"]?>">
                         <img src="logos/<?php echo $academies[$i]["header"] ?>" alt="header_<?php echo $academies[$i]["enTitle"]?>" class="w-100">
