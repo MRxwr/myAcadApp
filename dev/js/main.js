@@ -83,6 +83,7 @@
                   "myacadheader": "myAcadAppCreate"
                 },
               };
+              console.log(settings);
               $.ajax(settings).done(function (response) {
                 console.log(response);
                 var $select = $('select[name=governate]');
