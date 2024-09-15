@@ -1,5 +1,12 @@
 </main>
-    <!-- footer -->
+<script>
+  $(window).on('load', function(){
+        //===== Prealoder
+        $("#preloader").delay(400).fadeOut();
+
+    });
+</script>
+<!-- footer -->
     <?php
     $curl = curl_init();
     curl_setopt_array($curl, array(
@@ -74,7 +81,7 @@
           form.append("academyId", academy);
 
           var settings = {
-            "url": "https://myacad.app/requests/index.php?a=Voucher",
+            "url": "requests/index.php?a=Voucher",
             "method": "POST",
             "timeout": 0,
             "headers": {
@@ -109,7 +116,7 @@
                     navigator.share({
                         title: 'MY ACAD',
                         text: title,
-                        url: 'https://myacad.app/?v=Success&OrderID=' + invoice
+                        url: 'index.php?v=Success&OrderID=' + invoice
                     })
                     .then(() => {
                         console.log('Shared successfully');

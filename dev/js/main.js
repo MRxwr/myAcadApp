@@ -1,12 +1,6 @@
 (function ($) {
     "use strict";
 
-    $(window).on('load', function(){
-        //===== Prealoder
-        $("#preloader").fadeOut();
-
-    });
-
     $(document).ready(function () {
         //05. sticky header
         function sticky_header(){
