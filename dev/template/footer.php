@@ -1,11 +1,4 @@
 </main>
-<script>
-  $(window).on('load', function(){
-        //===== Prealoder
-        $("#preloader").delay(400).fadeOut();
-
-    });
-</script>
 <!-- footer -->
     <?php
     $curl = curl_init();
