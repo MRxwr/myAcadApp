@@ -48,7 +48,7 @@
 
 			<div class="col-md-3">
 			<label><?php echo direction("Country","البلد") ?></label>
-			<select id="mySelect" name="country" class="form-control" required>
+			<select id="mySelect" name="country countrySelect" class="form-control" required>
 				<option value='KW'>KUWAIT</option>
 				<?php
 				if( $countries = selectDB("countries","`id` != '0' AND `countryEnTitle` NOT LIKE 'KUWAIT' AND `status` = '1' GROUP BY `countryCode` ORDER BY `countryEnTitle` ASC") ){
@@ -60,7 +60,7 @@
 			</select>
 			</div>
 
-			<div class="col-md-3">
+			<?php /*<div class="col-md-3">
 			<label><?php echo direction("Governates","المحافظات") ?></label>
 			<select id="mySelect1" class="form-control governateSelect" name="governate" required>
 				<option selected disabled value="0"><?php echo direction("SELECT GOVERNATE","إختر المحافظة") ?></option>
@@ -72,7 +72,31 @@
 				}
 				?>
 			</select>
+			</div> */ ?>
+
+			<div class="col-md-3">
+			<label><?php echo direction("Governates","المحافظات") ?></label>
+			<select id="mySelect1" class="form-control governateSelect" name="governate" required>
+				<option selected disabled value="0"><?php echo direction("SELECT GOVERNATE","إختر المحافظة") ?></option>
+			</select>
 			</div>
+
+			<?php
+			if ($governates = selectDB("governates", "`status` = '0' AND `hidden` = '0'") ) {
+				$countryCode = $governates[0]["countryCode"];
+				for ($i = 0; $i < sizeof($governates); $i++) {
+					if ($i == 0 || $governateId != $governates[$i]["governateId"]) {
+						if ($i != 0) {
+							echo "</div>";
+						}
+						echo "<div class='governate' id='country{$governates[$i]["countryCode"]}' style='display:none'>";
+					}
+					echo "<option value='{$governates[$i]["id"]}'>" . direction($governates[$i]["enTitle"], $governates[$i]["arTitle"]) . "</option>";
+					$countryCode = $governates[$i]["countryCode"];
+				}
+				echo "</div>";
+			}
+			?>
 
 			<div class="col-md-3">
 			<label><?php echo direction("Areas","المناطق") ?></label>
@@ -82,7 +106,7 @@
 			</div>
 
 			<?php
-			if ($areas = selectDB("countries", "`status` = '1' AND `hidden` = '0' AND `countryCode` LIKE 'KW' ORDER BY `governateId` ASC")) {
+			if ($areas = selectDB("countries", "`status` = '1' AND `hidden` = '0' AND `governateId` != '' ORDER BY `governateId` ASC")) {
 				$governateId = $areas[0]["governateId"];
 				for ($i = 0; $i < sizeof($areas); $i++) {
 					if ($i == 0 || $governateId != $areas[$i]["governateId"]) {
@@ -330,6 +354,15 @@
 				if (governateDiv.length) {
 					var areas = governateDiv.html();
 					$('.areaSelect').html(areas);
+				}
+			});
+
+			$('.countrySelect').on('change', function () {
+				var selectedCountry = $(this).val();
+				var countryDiv = $('#country' + selectedCountry);
+				if (countryDiv.length) {
+					var areas = countryDiv.html();
+					$('.governateSelect').html(areas);
 				}
 			});
 		});
