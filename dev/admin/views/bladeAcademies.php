@@ -48,7 +48,7 @@
 
 			<div class="col-md-3">
 			<label><?php echo direction("Country","البلد") ?></label>
-			<select id="mySelect" name="country countrySelect" class="form-control" required>
+			<select id="mySelect" name="country" class="form-control countrySelect" required>
 				<option value='KW'>KUWAIT</option>
 				<?php
 				if( $countries = selectDB("countries","`id` != '0' AND `countryEnTitle` NOT LIKE 'KUWAIT' AND `status` = '1' GROUP BY `countryCode` ORDER BY `countryEnTitle` ASC") ){
