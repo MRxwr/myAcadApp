@@ -133,13 +133,9 @@ if( isset($_GET["delIdArea"]) && !empty($_GET["delIdArea"]) && updateDB("countri
 	<script>
 		$(document).on("click",".edit", function(){
 			var id = $(this).attr("id");
-			var enTitle = $("#enTitle"+id).html();
-			var arTitle = $("#arTitle"+id).html();
-			var governateId = $("#governateId"+id).html();
-			$("input[name=areaEnTitle]").val(enTitle);
-			$("select[name=governateId]").val(governateId);
+			$("input[name=areaEnTitle]").val($("#enTitle"+id).html()).focus();
+			$("input[name=areaArTitle]").val($("#arTitle"+id).html());
+			$("select[name=governateId]").val($("#governateId"+id).html());
 			$("input[name=update]").val(id);
-			$("input[name=areaArTitle]").val(arTitle);
-			$("input[name=areaEnTitle]").focus()
 		})
 	</script>
