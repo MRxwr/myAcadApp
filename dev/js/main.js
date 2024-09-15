@@ -73,7 +73,7 @@
 			event.preventDefault();
 			var id = $(this).attr("id");
             var countryCode = $.cookie("createmyacadcountry");
-            var sportId = $("input[name=sport]").val(id);
+            var sportId = $("input[name=sport]").val();
             var langCookieValue = $.cookie("CREATEkwLANG");
             var settings = {
                 "url": "requests/index.php?a=Governates&sportId="+sportId+"&countryCode="+countryCode+"&genderId="+id,
@@ -116,22 +116,6 @@
 			    $("#homeBtnSubmit").prop("disabled",true).attr("style","background: gray;color: black;");
             }
 		});
-
-		// change the view of select sport
-		$('.governateSelect').on('change', function () {
-			var selectedGovernate = $(this).val();
-			var governateDiv = $('#governate' + selectedGovernate);
-			
-			// Hide all "area" selects first
-			$('.areaSelect').prop('disabled', true);
-			
-			if (governateDiv.length) {
-				var areas = governateDiv.html();
-				$('.areaSelect').html(areas);
-				$('.areaSelect').prop('disabled', false);
-			}
-		});
-		
 
         $('#btnSubmit').on('click', function (event) {
 			$('#formSubmit').submit();
