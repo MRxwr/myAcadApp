@@ -71,7 +71,7 @@
         // change the view of select governates
 		$('.selectGender').on('change', function (event) {
 			event.preventDefault();
-			var id = $(this).attr("id");
+			var id = $(this).val();
             var countryCode = $.cookie("createmyacadcountry");
             var sportId = $("input[name=sport]").val();
             var langCookieValue = $.cookie("CREATEkwLANG");
