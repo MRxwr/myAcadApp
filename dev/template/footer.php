@@ -3,7 +3,7 @@
     <?php
     $curl = curl_init();
     curl_setopt_array($curl, array(
-      CURLOPT_URL => 'https://myacad.app/requests?a=Settings',
+      CURLOPT_URL => "{$baseURL}?a=Settings",
       CURLOPT_RETURNTRANSFER => true,
       CURLOPT_ENCODING => '',
       CURLOPT_MAXREDIRS => 10,

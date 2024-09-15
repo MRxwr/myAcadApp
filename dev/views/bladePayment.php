@@ -13,7 +13,7 @@ if( isset($_POST["data"]) && !empty($_POST["data"]) ){
     );
     $curl = curl_init();
     curl_setopt_array($curl, array(
-      CURLOPT_URL => 'https://myacad.app/requests/index.php?a=Payment',
+      CURLOPT_URL => "{$baseURL}/index.php?a=Payment",
       CURLOPT_RETURNTRANSFER => true,
       CURLOPT_ENCODING => '',
       CURLOPT_MAXREDIRS => 10,

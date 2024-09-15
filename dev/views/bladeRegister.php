@@ -3,7 +3,7 @@ if( isset($_POST["firstName"]) && !empty($_POST["firstName"]) ){
     $_POST["firebase"] = "web123";
     $curl = curl_init();
     curl_setopt_array($curl, array(
-        CURLOPT_URL => 'https://myacad.app/requests/?a=User&type=register',
+        CURLOPT_URL => "{$baseURL}/?a=User&type=register",
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => '',
         CURLOPT_MAXREDIRS => 10,

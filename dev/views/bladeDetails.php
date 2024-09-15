@@ -1,7 +1,7 @@
 <?php
 $curl = curl_init();
 curl_setopt_array($curl, array(
-  CURLOPT_URL => "https://myacad.app/requests?a=Academy&academyId={$_GET["id"]}",
+  CURLOPT_URL => "{$baseURL}?a=Academy&academyId={$_GET["id"]}",
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => '',
   CURLOPT_MAXREDIRS => 10,

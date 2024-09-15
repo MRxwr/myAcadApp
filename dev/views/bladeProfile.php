@@ -20,7 +20,7 @@ if( isset($_POST["changePass"]) && !empty($_POST["changePass"]) ){
     }
     $curl = curl_init();
     curl_setopt_array($curl, array(
-    CURLOPT_URL => "https://myacad.app/requests/index.php?a=User&type=changePassword&userId={$user[0]["id"]}",
+    CURLOPT_URL => "{$baseURL}/index.php?a=User&type=changePassword&userId={$user[0]["id"]}",
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_ENCODING => '',
     CURLOPT_MAXREDIRS => 10,

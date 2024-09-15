@@ -1,5 +1,6 @@
 <?php
 function mySubscriptions($type){
+    global $baseURL;
     if( getLoginStatusResponse() == 0 ){
         ?>
         <script>window.location.href = "?v=Login&error=3";</script>
@@ -9,7 +10,7 @@ function mySubscriptions($type){
     $userId = getLoginStatusResponse();
     $curl = curl_init();
     curl_setopt_array($curl, array(
-        CURLOPT_URL => "https://myacad.app/requests?a=Subscriptions&userId={$userId}&type={$type}",
+        CURLOPT_URL => "{$baseURL}?a=Subscriptions&userId={$userId}&type={$type}",
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => '',
         CURLOPT_MAXREDIRS => 10,
@@ -31,7 +32,7 @@ if( isset($_GET["cancel"]) && !empty($_GET["cancel"]) ){
     $orderId = selectDB2("`id`","orders","`gatewayId` = '{$_GET["cancel"]}'");
     $curl = curl_init();
     curl_setopt_array($curl, array(
-    CURLOPT_URL => "https://myacad.app/requests?a=Cancel&userId={$userId}&orderId={$orderId[0]["id"]}",
+    CURLOPT_URL => "{$baseURL}?a=Cancel&userId={$userId}&orderId={$orderId[0]["id"]}",
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_ENCODING => '',
     CURLOPT_MAXREDIRS => 10,
