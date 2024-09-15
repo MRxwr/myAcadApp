@@ -87,7 +87,7 @@
                 var $select = $('select[name=governate]');
                 $select.empty();
                 var selectedLanguage = (langCookieValue === undefined || langCookieValue === "" || langCookieValue === "EN") ? "enGovernate" : "arGovernate";
-                $.each(response.data.genders, function(index, item) {
+                $.each(response.data.governates, function(index, item) {
                     var $option = $('<option>', {
                         value: item.id,
                         text: item[selectedLanguage]
