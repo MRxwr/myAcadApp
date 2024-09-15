@@ -3,7 +3,7 @@ require("template/bannersSlider.php");
 
 $curl = curl_init();
 curl_setopt_array($curl, array(
-  CURLOPT_URL => "{$baseURL}?a=Search&sportId={$_POST["sport"]}&genderId={$_POST["gender"]}&governateId={$_POST["governate"]}&areaId={$_POST["area"]}",
+  CURLOPT_URL => "{$baseURL}?a=Search&sportId={$_POST["sport"]}&genderId={$_POST["gender"]}&governateId={$_POST["governate"]}&areaId={$_POST["area"]}&countryCode={$_POST["countryCode"]}",
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => '',
   CURLOPT_MAXREDIRS => 10,
