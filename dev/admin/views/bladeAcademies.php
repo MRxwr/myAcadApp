@@ -49,7 +49,7 @@
 			<div class="col-md-3">
 			<label><?php echo direction("Country","البلد") ?></label>
 			<select id="mySelect" name="country" class="form-control countrySelect" required>
-				<option selected disabled value="0"><?php echo direction("SELECT Country","إختر البلد") ?></option>
+				<option selected disabled value="0"><?php echo direction("SELECT COUNTRY","إختر البلد") ?></option>
 				<option value='KW'>KUWAIT</option>
 				<?php
 				if( $countries = selectDB("countries","`id` != '0' AND `countryEnTitle` NOT LIKE 'KUWAIT' AND `status` = '1' GROUP BY `countryCode` ORDER BY `countryEnTitle` ASC") ){
@@ -64,7 +64,7 @@
 			<div class="col-md-3">
 			<label><?php echo direction("Governates","المحافظات") ?></label>
 			<select id="mySelect1" class="form-control governateSelect" name="governate" required>
-				
+				<option selected disabled value="0"><?php echo direction("SELECT GOVERNATE","إختر المحافظة") ?></option>
 			</select>
 			</div>
 
