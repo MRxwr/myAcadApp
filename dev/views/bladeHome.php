@@ -31,7 +31,7 @@ require("template/bannersSlider.php");
             <div class="selet_wapper mb_20">
 				<img src="img/select_3.svg" alt="">
 				<select class="select_btn select governateSelect" name="governate" disabled>
-					<option selected disabled value=""><?php echo direction("SELECT GOVERNANT","إختر المحافظة") ?></option>
+					<option value="" disabled selected><?php echo direction("SELECT GOVERNANT","إختر المحافظة") ?></option>
 					<option value="0"><?php echo direction("Select All","إختر الكل") ?></option>
 				</select>
 			</div>
