@@ -8,7 +8,7 @@
     });
 
     $(document).ready(function () {
-        $('select[name="checkout[subscription]"]').select2();
+        //$('select[name="checkout[subscription]"]').select2();
 
         //05. sticky header
         function sticky_header(){
