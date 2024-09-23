@@ -219,7 +219,7 @@
                 nav: false,
                 dots: true,
             });
-
+/*
             $('input[type="radio"]').click(function () {
                 var $select = $('select[name="checkout[subscription]"]');
                 $select.empty();
@@ -254,6 +254,7 @@
             });
 
             // change the view of select governates
+            */
 		$('input[type="radio"]').on('click', function (event) {
 			event.preventDefault();
             var sessionId = $(this).val();
@@ -267,7 +268,7 @@
                 },
               };
               $.ajax(settings).done(function (response) {
-                var $select = $('select[name=checkout[subscription]]');
+                var $select = $('select[name="checkout[subscription]"]');
                 $select.empty();
                 var selectedLanguage = (langCookieValue === undefined || langCookieValue === "" || langCookieValue === "EN") ? "enTitle" : "arTitle";
                 $.each(response.data.subscriptions, function(index, item) {
@@ -280,8 +281,8 @@
                 $select.select2();
                 $select.trigger('change.select2');
               });
-			$("select[name=checkout[subscription]]").prop("disabled",false);
-			$("select[name=checkout[subscription]]").prop("required",true);
+			$('select[name="checkout[subscription]"]').prop("disabled",false);
+			$('select[name="checkout[subscription]"]').prop("required",true);
 		});
      
     });
