@@ -243,7 +243,7 @@
                         return `<option class='strike-through' value='${subscription.id}' data-display='${optionText}'>${optionText}</option>`;
                       });
                     
-                      $('select[name="checkout[subscription]"]').html(options.join('')).trigger('change');
+                      $('select[name="checkout[subscription]"]').html(options.join(''));
                     }
                 });
             });
