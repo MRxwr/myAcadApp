@@ -222,7 +222,7 @@
                 var sessionId = $(this).val();
                 console.log(sessionId);
                 $.ajax({
-                    type: "POST",
+                    type: "GET",
                     url: "requests/index.php?a=SessionSubscription",
                     data: {sessionId: sessionId},
                     headers: {
