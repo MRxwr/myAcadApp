@@ -228,6 +228,7 @@
                         "myacadheader": "myAcadAppCreate"
                     },
                     success: function(data) {
+                        console.log(data);
                       const options = data.data.subscriptions[0].map(subscription => {
                         const title = subscription.enTitle;
                         const price = subscription.price;
