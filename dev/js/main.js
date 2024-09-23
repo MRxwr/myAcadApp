@@ -221,6 +221,8 @@
             });
 
             $('input[type="radio"]').click(function () {
+                var $select = $('select[name="checkout[subscription]"]');
+                $select.empty();
                 var sessionId = $(this).val();
                 $.ajax({
                     type: "GET",
@@ -230,17 +232,20 @@
                         "myacadheader": "myAcadAppCreate"
                     },
                     success: function(data) {
-                        console.log(data);
-                      const options = data.data.subscriptions[0].map(subscription => {
-                        const title = subscription.enTitle;
-                        const price = subscription.price;
-                        const priceAfterDiscount = subscription.priceAfterDiscount;
+                      console.log(data);
+                      const options = [];
+                      data.data.subscriptions.forEach(subscriptionArray => {
+                        subscriptionArray.forEach(subscription => {
+                          const title = subscription.enTitle;
+                          const price = subscription.price;
+                          const priceAfterDiscount = subscription.priceAfterDiscount;
                     
-                        const optionText = priceAfterDiscount > 0
-                          ? `${title} <del>(${price}KD)</del> (${priceAfterDiscount}KD)`
-                          : `${title} (${price}KD)`;
+                          const optionText = priceAfterDiscount > 0
+                            ? `${title} <del>(${price}KD)</del> (${priceAfterDiscount}KD)`
+                            : `${title} (${price}KD)`;
                     
-                        return `<option class='strike-through' value='${subscription.id}' data-display='${optionText}'>${optionText}</option>`;
+                          options.push(`<option class='strike-through' value='${subscription.id}' data-display='${optionText}'>${optionText}</option>`);
+                        });
                       });
                     
                       $('select[name="checkout[subscription]"]').html(options.join(''));
