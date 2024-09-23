@@ -252,6 +252,37 @@
                     }
                 });
             });
+
+            // change the view of select governates
+		$('input[type="radio"]').on('click', function (event) {
+			event.preventDefault();
+            var sessionId = $(this).val();
+            var langCookieValue = $.cookie("CREATEkwLANG");
+            var settings = {
+                "url": "requests/index.php?a=SessionSubscription&sessionId="+sessionId,
+                "method": "GET",
+                "timeout": 0,
+                "headers": {
+                  "myacadheader": "myAcadAppCreate"
+                },
+              };
+              $.ajax(settings).done(function (response) {
+                var $select = $('select[name=checkout[subscription]]');
+                $select.empty();
+                var selectedLanguage = (langCookieValue === undefined || langCookieValue === "" || langCookieValue === "EN") ? "enTitle" : "arTitle";
+                $.each(response.data.subscriptions, function(index, item) {
+                    var $option = $('<option>', {
+                        value: item.id,
+                        text: item[selectedLanguage]
+                    });
+                    $select.append($option);
+                });
+                $select.select2();
+                $select.trigger('change.select2');
+              });
+			$("select[name=checkout[subscription]]").prop("disabled",false);
+			$("select[name=checkout[subscription]]").prop("required",true);
+		});
      
     });
 
