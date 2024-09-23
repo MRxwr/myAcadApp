@@ -272,13 +272,14 @@
                 $select.empty();
                 var selectedLanguage = (langCookieValue === undefined || langCookieValue === "" || langCookieValue === "EN") ? "enTitle" : "arTitle";
                 $.each(response.data.subscriptions, function(index, item) {
-                    var $option = $('<option>', {
-                        value: item.id,
-                        text: item[selectedLanguage]
-                    });
-                    $select.append($option);
+                  var $option = $('<option>', {
+                    value: item.id,
+                    text: item[selectedLanguage]
+                  });
+                  $select.append($option);
                 });
-                $select.select2();
+                $select.niceSelect('destroy');
+                $select.niceSelect('update');
                 $select.trigger('change.select2');
               });
 			$('select[name="checkout[subscription]"]').prop("disabled",false);
