@@ -64,7 +64,7 @@
 		<tbody>
 		<?php 
 		$orderBy = direction("enTitle","arTitle");
-		if( $sessions = selectDB("session_subscription","`status` = '0' AND `academyId` LIKE '{$_GET["code"]}' AND `sessionId` LIKE '{$_GET["session"]}' ORDER BY `{$orderBy}` ASC") ){
+		if( $sessions = selectDB("session_subscription","`status` = '0' AND `academyId` LIKE '{$_GET["code"]}' AND `sessionId` LIKE '{$_GET["sessionId"]}' ORDER BY `{$orderBy}` ASC") ){
 			for( $i = 0; $i < sizeof($sessions); $i++ ){
                 $subscription = selectDB("subscriptions","`id` = '{$sessions[$i]["subscriptionId"]}'");
 				if ( $sessions[$i]["hidden"] == 1 ){
