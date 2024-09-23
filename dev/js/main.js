@@ -8,6 +8,8 @@
     });
 
     $(document).ready(function () {
+        $('select[name="checkout[subscription]"]').select2();
+
         //05. sticky header
         function sticky_header(){
             var wind = $(window);
