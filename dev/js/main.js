@@ -222,7 +222,7 @@
                 var sessionId = $(this).val();
                 $.ajax({
                     type: "POST",
-                    url: "requests/index.php?a=sessionSubscription",
+                    url: "requests/index.php?a=SessionSubscription",
                     data: {sessionId: sessionId},
                     headers: {
                         "myacadheader": "myAcadAppCreate"
