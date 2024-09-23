@@ -217,6 +217,20 @@
                 nav: false,
                 dots: true,
             });
+
+            $('input[type="radio"]').click(function () {
+                var sessionId = $(this).val();
+                $.ajax({
+                    type: "POST",
+                    url: "requests/index.php?a=sessionSubscription",
+                    data: {sessionId: sessionId},
+                    success: function (data) {
+                        // load the data as <option> inside the subscription select
+                        //$('select[name="checkout[subscription]"]').html(data);
+                        console.log(data);
+                    }
+                });
+            });
      
     });
 

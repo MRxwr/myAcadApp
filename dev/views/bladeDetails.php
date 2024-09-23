@@ -151,24 +151,3 @@ $redirect = ($academy["isClothes"] == 1 ) ? "Jersy" : "Checkout" ;
         </div>
     </div>
 </div>
-
-<script>
-    // i want on cliking the radio button checkout[session] get sessionId and send it throught ajax using jquery
-
-    $(document).ready(function () {
-        $('input[type="radio"]').click(function () {
-            var sessionId = $(this).val();
-            $.ajax({
-                type: "POST",
-                url: "requests/index.php?a=sessionSubscription",
-                data: {sessionId: sessionId},
-                success: function (data) {
-                    // load the data as <option> inside the subscription select
-                    //$('select[name="checkout[subscription]"]').html(data);
-                    console.log(data);
-                }
-            });
-        });
-    });
-
-</script>
