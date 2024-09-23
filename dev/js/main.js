@@ -268,21 +268,17 @@
                 },
               };
               $.ajax(settings).done(function (response) {
-                console.log(response.data.subscriptions);
-                console.log(response);
                 var $select = $('select[name="checkout[subscription]"]');
-                var $niceSelect = $select.next('.nice-select');
-                $niceSelect.find('ul.list').empty();
+                $select.empty();
                 var selectedLanguage = (langCookieValue === undefined || langCookieValue === "" || langCookieValue === "EN") ? "enTitle" : "arTitle";
                 $.each(response.data.subscriptions, function(index, item) {
-                  var $option = $('<li>', {
-                    'data-value': item.id,
-                    'data-display': item[selectedLanguage],
+                  var $option = $('<option>', {
+                    value: item.id,
                     text: item[selectedLanguage]
                   });
-                  $niceSelect.find('ul.list').append($option);
+                  $select.append($option);
                 });
-                $select.trigger('change.select2');
+                $select.niceSelect('update');
               });
 			$('select[name="checkout[subscription]"]').prop("disabled",false);
 			$('select[name="checkout[subscription]"]').prop("required",true);
