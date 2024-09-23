@@ -240,8 +240,7 @@
                         return `<option class='strike-through' value='${subscription.id}' data-display='${optionText}'>${optionText}</option>`;
                       });
                     
-                      const selectHtml = `<select name='checkout[subscription]'>${options.join('')}</select>`;
-                      $('#your-select-element').html(selectHtml);
+                      $('select[name="checkout[subscription]"]').html(options.join('')).trigger('change');
                     }
                 });
             });
