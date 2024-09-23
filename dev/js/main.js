@@ -268,6 +268,8 @@
                 },
               };
               $.ajax(settings).done(function (response) {
+                console.log(response.data.subscriptions);
+                console.log(response);
                 var $select = $('select[name="checkout[subscription]"]');
                 var $niceSelect = $select.next('.nice-select');
                 $niceSelect.find('ul.list').empty();
