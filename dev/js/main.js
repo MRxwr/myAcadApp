@@ -269,6 +269,7 @@
               };
               $.ajax(settings).done(function (response) {
                 var $select = $('select[name="checkout[subscription]"]');
+                $select.niceSelect('destroy');
                 $select.empty();
                 var selectedLanguage = (langCookieValue === undefined || langCookieValue === "" || langCookieValue === "EN") ? "enTitle" : "arTitle";
                 $.each(response.data.subscriptions, function(index, item) {
@@ -278,7 +279,6 @@
                   });
                   $select.append($option);
                 });
-                $select.niceSelect('destroy');
                 $select.niceSelect('update');
                 $select.trigger('change.select2');
               });
