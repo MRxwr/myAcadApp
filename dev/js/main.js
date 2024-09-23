@@ -269,17 +269,17 @@
               };
               $.ajax(settings).done(function (response) {
                 var $select = $('select[name="checkout[subscription]"]');
-                $select.niceSelect('destroy');
-                $select.empty();
+                var $niceSelect = $select.next('.nice-select');
+                $niceSelect.find('ul.list').empty();
                 var selectedLanguage = (langCookieValue === undefined || langCookieValue === "" || langCookieValue === "EN") ? "enTitle" : "arTitle";
                 $.each(response.data.subscriptions, function(index, item) {
-                  var $option = $('<option>', {
-                    value: item.id,
+                  var $option = $('<li>', {
+                    'data-value': item.id,
+                    'data-display': item[selectedLanguage],
                     text: item[selectedLanguage]
                   });
-                  $select.append($option);
+                  $niceSelect.find('ul.list').append($option);
                 });
-                $select.niceSelect('update');
                 $select.trigger('change.select2');
               });
 			$('select[name="checkout[subscription]"]').prop("disabled",false);
