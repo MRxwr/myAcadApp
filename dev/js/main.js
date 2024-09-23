@@ -224,6 +224,9 @@
                     type: "POST",
                     url: "requests/index.php?a=sessionSubscription",
                     data: {sessionId: sessionId},
+                    headers: {
+                        "myacadheader": "myAcadAppCreate"
+                    },
                     success: function (data) {
                         // load the data as <option> inside the subscription select
                         //$('select[name="checkout[subscription]"]').html(data);
