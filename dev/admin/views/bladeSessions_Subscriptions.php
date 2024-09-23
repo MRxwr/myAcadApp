@@ -15,7 +15,7 @@
 			<label><?php echo direction("Select Subscription","إختر الإشتراك") ?></label>
 			<select name="subscriptionId" class="form-control" required>
                 <?php
-                if( $subscriptionsList = selectDB("subscriptions","`status` = '0' AND `hidden` = '0' ORDER BY `id` ASC") ){
+                if( $subscriptionsList = selectDB("subscriptions","`status` = '0' AND `hidden` = '0' AND `academyId` LIKE '{$_GET["code"]}' ORDER BY `id` ASC") ){
                     for( $i =0; $i < sizeof($subscriptionsList); $i++ ){
                         $title = direction($subscriptionsList[$i]["enTitle"],$subscriptionsList[$i]["arTitle"]);
                         echo "<option value='{$subscriptionsList[$i]["id"]}'>{$title}</option>";
