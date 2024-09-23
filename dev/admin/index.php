@@ -168,6 +168,11 @@ if ( isset($_GET["hide"]) || isset($_GET["show"]) || isset($_GET["delId"]) || is
 	}else{
 		$countryCode = "";
 	}
+    if( isset($_GET["sessionId"]) && !empty($_GET["sessionId"]) ){
+		$countryCode .= "&sessionId={$_GET["sessionId"]}";
+	}else{
+		$countryCode .= "";
+	}
     if ( isset($_POST["firebaseTitle"]) && !empty($_POST["firebaseTitle"]) ){
         if( $users = selectDB("users","`id` != '0' GROUP BY `firebase`")){
             for( $i = 0; $i < sizeof($users); $i++ ){
