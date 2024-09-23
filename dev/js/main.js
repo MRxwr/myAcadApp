@@ -220,6 +220,7 @@
 
             $('input[type="radio"]').click(function () {
                 var sessionId = $(this).val();
+                console.log(sessionId);
                 $.ajax({
                     type: "POST",
                     url: "requests/index.php?a=SessionSubscription",
