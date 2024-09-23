@@ -220,7 +220,6 @@
 
             $('input[type="radio"]').click(function () {
                 var sessionId = $(this).val();
-                console.log(sessionId);
                 $.ajax({
                     type: "GET",
                     url: "requests/index.php?a=SessionSubscription",
@@ -228,10 +227,21 @@
                     headers: {
                         "myacadheader": "myAcadAppCreate"
                     },
-                    success: function (data) {
-                        // load the data as <option> inside the subscription select
-                        //$('select[name="checkout[subscription]"]').html(data);
-                        console.log(data);
+                    success: function(data) {
+                      const options = data.data.subscriptions[0].map(subscription => {
+                        const title = subscription.enTitle;
+                        const price = subscription.price;
+                        const priceAfterDiscount = subscription.priceAfterDiscount;
+                    
+                        const optionText = priceAfterDiscount > 0
+                          ? `${title} <del>(${price}KD)</del> (${priceAfterDiscount}KD)`
+                          : `${title} (${price}KD)`;
+                    
+                        return `<option class='strike-through' value='${subscription.id}' data-display='${optionText}'>${optionText}</option>`;
+                      });
+                    
+                      const selectHtml = `<select name='checkout[subscription]'>${options.join('')}</select>`;
+                      $('#your-select-element').html(selectHtml);
                     }
                 });
             });
