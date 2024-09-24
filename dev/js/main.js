@@ -285,6 +285,8 @@
                       'data-display': optionText,
                       text: optionText
                     });
+                    console.log(innerItem);
+                    console.log(optionText);
                     $select.append($option);
                   });
                 });
