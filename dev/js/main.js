@@ -276,7 +276,7 @@
                     value: item.id,
                     text: item[selectedLanguage]
                   });
-                  console.log($option);
+                  console.log($item);
                   $select.append($option);
                 });
                 $select.niceSelect('update');
