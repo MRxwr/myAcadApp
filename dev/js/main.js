@@ -273,7 +273,7 @@
                 var selectedLanguage = (langCookieValue === undefined || langCookieValue === "" || langCookieValue === "EN") ? "enTitle" : "arTitle";
                 $.each(response.data.subscriptions, function(index, outerItem) {
                   $.each(outerItem, function(index, innerItem) {
-                    var title = direction(innerItem.enTitle, innerItem.arTitle);
+                    var title = innerItem[selectedLanguage];
                     var price = innerItem.price;
                     var priceAfterDiscount = innerItem.priceAfterDiscount;
                     var optionText = priceAfterDiscount > 0
@@ -285,8 +285,6 @@
                       'data-display': optionText,
                       text: optionText
                     });
-                    console.log(innerItem);
-                    console.log(optionText);
                     $select.append($option);
                   });
                 });
