@@ -273,9 +273,17 @@
                 var selectedLanguage = (langCookieValue === undefined || langCookieValue === "" || langCookieValue === "EN") ? "enTitle" : "arTitle";
                 $.each(response.data.subscriptions, function(index, outerItem) {
                   $.each(outerItem, function(index, innerItem) {
+                    var title = direction(innerItem.enTitle, innerItem.arTitle);
+                    var price = innerItem.price;
+                    var priceAfterDiscount = innerItem.priceAfterDiscount;
+                    var optionText = priceAfterDiscount > 0
+                      ? `${title} <del>(${price}KD)</del> (${priceAfterDiscount}KD)`
+                      : `${title} (${price}KD)`;
                     var $option = $('<option>', {
+                      class: 'strike-through',
                       value: innerItem.id,
-                      text: innerItem[selectedLanguage]
+                      'data-display': optionText,
+                      text: optionText
                     });
                     $select.append($option);
                   });
@@ -285,7 +293,6 @@
 			$('select[name="checkout[subscription]"]').prop("disabled",false);
 			$('select[name="checkout[subscription]"]').prop("required",true);
 		});
-     
     });
 
 })(jQuery);
