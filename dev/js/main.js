@@ -271,13 +271,14 @@
                 var $select = $('select[name="checkout[subscription]"]');
                 $select.empty();
                 var selectedLanguage = (langCookieValue === undefined || langCookieValue === "" || langCookieValue === "EN") ? "enTitle" : "arTitle";
-                $.each(response.data.subscriptions, function(index, item) {
-                  var $option = $('<option>', {
-                    value: item.id,
-                    text: item[selectedLanguage]
+                $.each(response.data.subscriptions, function(index, outerItem) {
+                  $.each(outerItem, function(index, innerItem) {
+                    var $option = $('<option>', {
+                      value: innerItem.id,
+                      text: innerItem[selectedLanguage]
+                    });
+                    $select.append($option);
                   });
-                  console.log(item.id);
-                  $select.append($option);
                 });
                 $select.niceSelect('update');
               });
