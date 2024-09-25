@@ -28,12 +28,14 @@
 		
         $('#homeAcadimes').on('click', function (event) {
             $("input[name=isTournament]").val(0);
+            $("#formHome").attr("action","?v=Listing");
             $("#homeTournaments").removeClass("homeSelected");
             $("#homeAcadimes").addClass("homeSelected");
         });
 
         $('#homeTournaments').on('click', function (event) {
             $("input[name=isTournament]").val(1);
+            $("#formHome").attr("action","?v=Tournaments");
             $("#homeAcadimes").removeClass("homeSelected");
             $("#homeTournaments").addClass("homeSelected");
         });
