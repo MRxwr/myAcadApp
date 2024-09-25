@@ -7,7 +7,6 @@ input[name="searchListing"] {
     font-size: 15px;
     border: 1px solid #dedede;
     position: relative;
-    padding-left: 35px; /* Add padding to make room for the icon */
 }
 
 .search-input {
@@ -19,6 +18,11 @@ input[name="searchListing"] {
     left: 10px;
     top: 50%;
     transform: translateY(-50%);
+}
+
+.fa-search {
+    font-size: 20px;
+    color: #b0b0b0;
 }
 </style>
 <?php 
