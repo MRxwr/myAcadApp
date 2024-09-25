@@ -3,6 +3,22 @@ require("template/selectSportModal.php");
 
 require("template/bannersSlider.php");
 ?>
+<style>
+	.homeSelectButtons {
+		background-color: white;
+		color: black;
+		border: 1px solid #ffa300;
+		font-size: 20px;
+		width: 100px;
+	}
+	.homeSelectButtons :hover {
+		background-color: #ffa300;
+		color: black;
+		border: 1px solid #ffa300;
+		font-size: 20px;
+		width: 100px;
+	}
+</style>
 
 <div class="select_area">
     <div class="container">
@@ -16,11 +32,11 @@ require("template/bannersSlider.php");
 
 			<div class="row w-100 m-0 p-0">
 				<div class="col-5 text-center">
-					<button id="homeAcadimes" class="btn btn-primary"><?php echo direction("Academies","الأكادميات") ?></button>
+					<div id="homeAcadimes" class="homeSelectButtons"><?php echo direction("Academies","الأكادميات") ?></div>
 				</div>
 				<div class="col-2"></div>
 				<div class="col-5 text-center">
-					<button id="homeTournaments" class="btn btn-primary"><?php echo direction("Tournaments","البطولات") ?></button>
+					<button id="homeTournaments" class="homeSelectButtons"><?php echo direction("Tournaments","البطولات") ?></button>
 				</div>
 			</div>
             <h2 style="padding-top:10px"><?php echo direction("SELECT YOUR SPORT","إختر الرياضة الخاصة بك"); ?></h2>
