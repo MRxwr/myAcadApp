@@ -11,12 +11,8 @@ require("template/bannersSlider.php");
 		font-size: 20px;
 		width: 100px;
 	}
-	.homeSelectButtons :hover {
+	.homeSelectButtons:hover {
 		background-color: #ffa300;
-		color: black;
-		border: 1px solid #ffa300;
-		font-size: 20px;
-		width: 100px;
 	}
 </style>
 
@@ -32,7 +28,7 @@ require("template/bannersSlider.php");
 
 			<div class="row w-100 m-0 p-0">
 				<div class="col-5 text-center">
-					<div id="homeAcadimes" class="homeSelectButtons"><?php echo direction("Academies","الأكادميات") ?></div>
+					<button id="homeAcadimes" class="homeSelectButtons"><?php echo direction("Academies","الأكادميات") ?></button>
 				</div>
 				<div class="col-2"></div>
 				<div class="col-5 text-center">
