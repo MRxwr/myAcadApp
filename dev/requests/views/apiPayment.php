@@ -3,9 +3,10 @@ if( !isset($_POST) ){
     $response["msg"] = popupMsg($requestLang,"Please make sure you send post data before submitting.","يرجى التأكد من ارسال بيانات POST قبل الارسال");
 	echo outputError($response);die();
 }else{
-    if( isset($_POST["academy"]) && !empty($_POST["academy"]) ){
-        $data = $_POST;
-        unset($_POST);
+    $orderId = time();
+    $data = $_POST;
+    unset($_POST);
+    if( isset($data["academy"]) && !empty($data["academy"]) ){
         $user = $data["user"];
         $academy = $data["academy"];
         $session = $data["session"];
@@ -172,13 +173,12 @@ if( !isset($_POST) ){
             );
             
     }else{
-        $data = $_POST;
-        unset($_POST);
         $user = $data["user"];
         $tournament = $data["tournament"];
         $teamName = $data["teamName"];
         $players = $data["players"];
         $bench = $data["bench"];
+        $quantity = $data["quantity"];
         $paymentMethod = $data["paymentMethod"];
         $voucher = $data["voucher"];
         
@@ -197,7 +197,7 @@ if( !isset($_POST) ){
             if( $voucher[0]["numberOfTimes"] == 0 ){
                 $numberOfTimesAvalability = true;
             }elseif( $voucher[0]["numberOfTimes"] != 0 ){
-                if( $orders = selectDB("orders","`voucher` = '{$voucher[0]["id"]}'")){
+                if( $orders = selectDB("orders","`voucher` = '{$voucher[0]["id"]}' AND `isTournament` = 1") ){
                     $numberOfUsage = sizeof($orders);
                     if( $voucher[0]["numberOfTimes"] > $numberOfUsage ){
                         $numberOfTimesAvalability = true;
@@ -210,7 +210,7 @@ if( !isset($_POST) ){
             }
             
             if( $voucher[0]["academyId"] != 0 ){
-                if( $voucher[0]["academyId"] == $academy ){
+                if( $voucher[0]["academyId"] == $tournament ){
                     $academyAprroved = true;
                 }else{
                     $academyAprroved = false;
@@ -247,34 +247,30 @@ if( !isset($_POST) ){
             $freePayment = 0;
         }
 
+        //check tournemant Price
+        if( $tournaments = selectDB("tournaments","`id` = '{$tournament}'") ){
+            $price = $tournaments[0]["price"];
+        }
+
         //calulation of total prices
-        $newTotal = (float)$totalPrice;
-        $fullAmount = (float)$jersyPrice+(float)$totalPrice;
+        $newTotal = (float)$price;
         if( $numberOfTimesAvalability && $academyAprroved ){
             $newTotal = ( $voucherType == 0 ) ? ($newTotal*(1-($voucherAmount/100))) : $newTotal - $voucherAmount;
-            $fullAmount = ( $voucherType == 0 ) ? ($fullAmount*(1-($voucherAmount/100))) : $fullAmount - $voucherAmount;
         }
 
         $_POST["name"] = "{$userData[0]["firstName"]} {$userData[0]["lastName"]}";
         $_POST["phone"] = "{$userData[0]["phone"]}";
         $_POST["email"] = "{$userData[0]["email"]}";
         $_POST["userId"] = "{$userData[0]["id"]}";
-        $_POST["academyId"] = $academyData[0]["id"];
-        $_POST["enAcademy"] = $academyData[0]["enTitle"];
-        $_POST["arAcademy"] = $academyData[0]["arTitle"];
-        $_POST["sessionId"] = $sessionData[0]["id"];
-        $_POST["enSession"] = $sessionData[0]["enTitle"];
-        $_POST["arSession"] = $sessionData[0]["arTitle"];
-        $_POST["subscriptionId"] = $subscriptionData[0]["id"];
-        $_POST["enSubscription"] = $subscriptionData[0]["enTitle"];
-        $_POST["arSubscription"] = $subscriptionData[0]["arTitle"];
-        $_POST["subscriptionQuantity"] = $subscriptionQuantity;
-        $_POST["subscriptionPrice"] = $price;
-        $_POST["jersyQuantity"] = $jersyQuantity;
-        $_POST["jersyPrice"] = $academyData[0]["clothesPrice"];
-        $_POST["totalSubscriptionPrice"] = $totalPrice;
-        $_POST["totalJersyPrice"] = $jersyPrice;
-        $_POST["total"] = $fullAmount;
+        $_POST["tournamentId"] = $tournaments[0]["id"];
+        $_POST["teamDetails"]["enTournament"] = $tournaments[0]["enTitle"];
+        $_POST["teamDetails"]["arTournament"] = $tournaments[0]["arTitle"];
+        $_POST["teamDetails"]["teamName"] = $teamName;
+        $_POST["teamDetails"]["players"] = $players;
+        $_POST["teamDetails"]["bench"] = $bench;
+        $_POST["teamDetails"]["quantity"] = $quantity;
+        $_POST["teamDetails"]["price"] = $price;
+        $_POST["teamDetails"]["total"] = $newTotal;
         $_POST["paymentMethod"] = $paymentMethod;
         $_POST["voucher"] = $data["voucher"];
 
@@ -300,7 +296,7 @@ if( !isset($_POST) ){
             'order[id]' => $orderId,
             'order[currency]' => 'KWD',
             'order[amount]' => (string)$fullAmount,
-            'order[description]' => "order for {$academyData[0]["enTitle"]}, {$sessionData[0]["enTitle"]}, {$subscriptionQuantity}x {$subscriptionData[0]["enTitle"]} and {$jersyQuantity}x jersy",
+            'order[description]' => "order for {$tournaments[0]["enTitle"]}, {$teamName}, {$quantity}x Players: {$players} and Bench: {$bench}",
             'reference[id]' => $orderId,
             'customer[name]' => "{$_POST["name"]}",
             'customer[email]' => "{$_POST["email"]}",
