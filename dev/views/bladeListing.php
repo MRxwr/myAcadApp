@@ -1,5 +1,5 @@
 <?php 
-require("template/bannersSlider.php");
+//require("template/bannersSlider.php");
 
 $curl = curl_init();
 curl_setopt_array($curl, array(
