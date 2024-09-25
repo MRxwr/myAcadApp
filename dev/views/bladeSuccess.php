@@ -17,8 +17,10 @@ if( isset($_GET["OrderID"]) && !empty($_GET["OrderID"]) ){
             $paymentMethod = "Knet";
         }elseif( $order[0]["paymentMethod"] == 2 ){
             $paymentMethod = "VISA";
-        }else{
+        }elseif($order[0]["paymentMethod"] == 3 ){
             $paymentMethod = "WALLET";
+        }else{
+            $paymentMethod = "FREE";
         }
         $subscription = selectDB("subscriptions","`id` = '{$order[0]["subscriptionId"]}'");
     }else{
