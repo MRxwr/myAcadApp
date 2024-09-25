@@ -7,6 +7,7 @@ input[name="searchListing"] {
     font-size: 15px;
     border: 1px solid #dedede;
     position: relative;
+    padding-left: 35px; /* Add padding to make room for the icon */
 }
 
 input[name="searchListing"]::before {
@@ -16,6 +17,7 @@ input[name="searchListing"]::before {
     left: 10px;
     top: 50%;
     transform: translateY(-50%);
+    color: #666; /* Set a color for the icon */
 }
 </style>
 <?php 
