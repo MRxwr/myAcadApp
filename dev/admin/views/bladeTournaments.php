@@ -259,21 +259,21 @@
 		
 		<tbody>
 		<?php 
-		if( $academies = selectDB("academies","`status` = '0'") ){
-			for( $i = 0; $i < sizeof($academies); $i++ ){
-				$sport = selectDB("sports","`id` = '{$academies[$i]["sport"]}'");
-				$academyTitle = direction($academies[$i]["enTitle"],$academies[$i]["arTitle"]);
-				$videoText = ( !empty($academies[$i]["video"]) ) ? direction("Watch","شاهد") : "";
-				$locationText = ( !empty($academies[$i]["location"]) ) ? direction("View","إعرض") : "";
-				$price = ( empty($academies[$i]["price"]) )? direction("Free","مجانا") : $academies[$i]["price"];
-				$genderText = ( $academies[$i]["gender"] == 1 ) ? direction("Man","رجل") : ( ( $academies[$i]["gender"] == 2 ) ? direction("Woman","إمرأه") : ( ( $academies[$i]["gender"] == 3 ) ? direction("Boy","ولد") : direction("Girl","بنت") ) ) ;
-				if ( $academies[$i]["hidden"] == 1 ){
+		if( $tournaments = selectDB("academies","`status` = '0'") ){
+			for( $i = 0; $i < sizeof($tournaments); $i++ ){
+				$sport = selectDB("sports","`id` = '{$tournaments[$i]["sport"]}'");
+				$academyTitle = direction($tournaments[$i]["enTitle"],$tournaments[$i]["arTitle"]);
+				$videoText = ( !empty($tournaments[$i]["video"]) ) ? direction("Watch","شاهد") : "";
+				$locationText = ( !empty($tournaments[$i]["location"]) ) ? direction("View","إعرض") : "";
+				$price = ( empty($tournaments[$i]["price"]) )? direction("Free","مجانا") : $tournaments[$i]["price"];
+				$genderText = ( $tournaments[$i]["gender"] == 1 ) ? direction("Man","رجل") : ( ( $tournaments[$i]["gender"] == 2 ) ? direction("Woman","إمرأه") : ( ( $tournaments[$i]["gender"] == 3 ) ? direction("Boy","ولد") : direction("Girl","بنت") ) ) ;
+				if ( $tournaments[$i]["hidden"] == 1 ){
 					$icon = "fa fa-eye";
-					$link = "?show={$academies[$i]["id"]}";
+					$link = "?show={$tournaments[$i]["id"]}";
 					$hide = direction("Show","أظهر");
 				}else{
 					$icon = "fa fa-eye-slash";
-					$link = "?hide={$academies[$i]["id"]}";
+					$link = "?hide={$tournaments[$i]["id"]}";
 					$hide = direction("Hide","إخفاء");
 				}
 				?>
@@ -281,36 +281,36 @@
 				<td><?php echo str_pad(1 + $i, 3 ,'0', STR_PAD_LEFT) ?></td>
 				<td><?php echo $academyTitle ?></td>
 				<td><?php echo direction($sport[0]["enTitle"],$sport[0]["arTitle"]) ?></td>
-				<td id="country<?php echo $academies[$i]["id"]?>" ><?php echo $academies[$i]["country"] ?></td>
-				<td><?php echo $genderText ?><label style="display:none" id="gender<?php echo $academies[$i]["id"]?>"  ><?php echo $academies[$i]["gender"] ?></label></td>
-				<td><?php echo $price ?><label style="display:none" id="price<?php echo $academies[$i]["id"]?>"  ><?php echo $academies[$i]["price"] ?></label></td>
-				<td id="gameDate<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["gameDate"] ?></td>
-				<td id="gameTime<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["gameTime"] ?></td>
-				<td id="players<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["players"] ?></td>
-				<td id="bench<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["bench"] ?></td>
+				<td id="country<?php echo $tournaments[$i]["id"]?>" ><?php echo $tournaments[$i]["country"] ?></td>
+				<td><?php echo $genderText ?><label style="display:none" id="gender<?php echo $tournaments[$i]["id"]?>"  ><?php echo $tournaments[$i]["gender"] ?></label></td>
+				<td><?php echo $price ?><label style="display:none" id="price<?php echo $tournaments[$i]["id"]?>"  ><?php echo $tournaments[$i]["price"] ?></label></td>
+				<td id="gameDate<?php echo $tournaments[$i]["id"]?>"><?php echo $tournaments[$i]["gameDate"] ?></td>
+				<td id="gameTime<?php echo $tournaments[$i]["id"]?>"><?php echo $tournaments[$i]["gameTime"] ?></td>
+				<td id="players<?php echo $tournaments[$i]["id"]?>"><?php echo $tournaments[$i]["players"] ?></td>
+				<td id="bench<?php echo $tournaments[$i]["id"]?>"><?php echo $tournaments[$i]["bench"] ?></td>
 				<td class="text-nowrap">
-					<a id="<?php echo $academies[$i]["id"] ?>" class="edit btn btn-warning" data-toggle="tooltip" data-original-title="<?php echo direction("Edit","تعديل")  ?>"> <i class="fa fa-pencil text-inverse m-r-10"></i>
+					<a id="<?php echo $tournaments[$i]["id"] ?>" class="edit btn btn-warning" data-toggle="tooltip" data-original-title="<?php echo direction("Edit","تعديل")  ?>"> <i class="fa fa-pencil text-inverse m-r-10"></i>
 					</a>
 					<a href="<?php echo $link . "&v={$_GET["v"]}" ?>" class="btn btn-default" data-toggle="tooltip" data-original-title="<?php echo $hide ?>"> <i class="<?php echo $icon ?> text-inverse m-r-10"></i></a>
-					<a href="?delId=<?php echo $academies[$i]["id"] . "&v={$_GET["v"]}" ?>" data-toggle="tooltip" data-original-title="<?php echo direction("Delete","حذف")  ?>" class="btn btn-danger"><i class="fa fa-close text-inverse"></i>
+					<a href="?delId=<?php echo $tournaments[$i]["id"] . "&v={$_GET["v"]}" ?>" data-toggle="tooltip" data-original-title="<?php echo direction("Delete","حذف")  ?>" class="btn btn-danger"><i class="fa fa-close text-inverse"></i>
 					</a>
-					<div style="display:none"><label id="locationImg<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["locationImage"] ?></label></div>
-					<div style="display:none"><label id="logo<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["imageurl"] ?></label></div>
-					<div style="display:none"><label id="header<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["header"] ?></label></div>
-					<div style="display:none"><label id="governates<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["governate"] ?></label></div>
-					<div style="display:none"><label id="area<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["area"] ?></label></div>
-					<div style="display:none"><label id="sport<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["sport"] ?></label></div>
-					<div style="display:none"><label id="enTitle<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["enTitle"] ?></label></div>
-					<div style="display:none"><label id="arTitle<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["arTitle"] ?></label></div>
-					<div style="display:none"><label id="location<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["location"] ?></label></div>
-					<div style="display:none"><label id="video<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["video"] ?></label></div>
-					<div style="display:none"><label id="email<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["email"] ?></label></div>
-					<div style="display:none"><label id="charges<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["charges"] ?></label></div>
-					<div style="display:none"><label id="chargeType<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["chargeType"] ?></label></div>
-					<div style="display:none"><label id="cc_charge<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["cc_charge"] ?></label></div>
-					<div style="display:none"><label id="cc_chargetype<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["cc_chargetype"] ?></label></div>
-					<div style="display:none"><label id="iban<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["iban"] ?></label></div>
-					<div style="display:none"><label id="isIndoor<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["isIndoor"] ?></label></div>
+					<div style="display:none"><label id="locationImg<?php echo $tournaments[$i]["id"]?>"><?php echo $tournaments[$i]["locationImage"] ?></label></div>
+					<div style="display:none"><label id="logo<?php echo $tournaments[$i]["id"]?>"><?php echo $tournaments[$i]["imageurl"] ?></label></div>
+					<div style="display:none"><label id="header<?php echo $tournaments[$i]["id"]?>"><?php echo $tournaments[$i]["header"] ?></label></div>
+					<div style="display:none"><label id="governates<?php echo $tournaments[$i]["id"]?>"><?php echo $tournaments[$i]["governate"] ?></label></div>
+					<div style="display:none"><label id="area<?php echo $tournaments[$i]["id"]?>"><?php echo $tournaments[$i]["area"] ?></label></div>
+					<div style="display:none"><label id="sport<?php echo $tournaments[$i]["id"]?>"><?php echo $tournaments[$i]["sport"] ?></label></div>
+					<div style="display:none"><label id="enTitle<?php echo $tournaments[$i]["id"]?>"><?php echo $tournaments[$i]["enTitle"] ?></label></div>
+					<div style="display:none"><label id="arTitle<?php echo $tournaments[$i]["id"]?>"><?php echo $tournaments[$i]["arTitle"] ?></label></div>
+					<div style="display:none"><label id="location<?php echo $tournaments[$i]["id"]?>"><?php echo $tournaments[$i]["location"] ?></label></div>
+					<div style="display:none"><label id="video<?php echo $tournaments[$i]["id"]?>"><?php echo $tournaments[$i]["video"] ?></label></div>
+					<div style="display:none"><label id="email<?php echo $tournaments[$i]["id"]?>"><?php echo $tournaments[$i]["email"] ?></label></div>
+					<div style="display:none"><label id="charges<?php echo $tournaments[$i]["id"]?>"><?php echo $tournaments[$i]["charges"] ?></label></div>
+					<div style="display:none"><label id="chargeType<?php echo $tournaments[$i]["id"]?>"><?php echo $tournaments[$i]["chargeType"] ?></label></div>
+					<div style="display:none"><label id="cc_charge<?php echo $tournaments[$i]["id"]?>"><?php echo $tournaments[$i]["cc_charge"] ?></label></div>
+					<div style="display:none"><label id="cc_chargetype<?php echo $tournaments[$i]["id"]?>"><?php echo $tournaments[$i]["cc_chargetype"] ?></label></div>
+					<div style="display:none"><label id="iban<?php echo $tournaments[$i]["id"]?>"><?php echo $tournaments[$i]["iban"] ?></label></div>
+					<div style="display:none"><label id="isIndoor<?php echo $tournaments[$i]["id"]?>"><?php echo $tournaments[$i]["isIndoor"] ?></label></div>
 				</td>
 				</tr>
 				<?php
