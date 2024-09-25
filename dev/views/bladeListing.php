@@ -1,5 +1,5 @@
 <style>
-input[name="searchListing"] {
+input[name="keyword"] {
     width: 100%;
     border-radius: 30px;
     text-align: center;
@@ -61,7 +61,7 @@ if( $sportTitle = selectDB("sports","`id` = '{$_POST["sport"]}'") ){
             <div class="col-lg-8 col-sm-8 mt-5 mb-5">
                 <div class="search-input">
                     <form action="" method="post">
-                        <input type="text" name="searchListing" placeholder="<?php echo direction("Search Academies","بحث عن الأكاديميات") ?>">
+                        <input type="text" name="keyword" placeholder="<?php echo direction("Search Academies","بحث عن الأكاديميات") ?>">
                         <input type="hidden" name="sport" value="<?php echo $_POST["sport"] ?>">
                         <input type="hidden" name="gender" value="<?php echo $_POST["gender"] ?>">
                         <input type="hidden" name="governate" value="<?php echo $_POST["governate"] ?>">
