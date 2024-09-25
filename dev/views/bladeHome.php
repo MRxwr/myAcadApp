@@ -33,10 +33,10 @@ require("template/bannersSlider.php");
 			<input type="hidden" name="countryCode" value="<?php echo $_COOKIE["createmyacadcountry"] ?>">
 
 			<div class="row w-100 m-0 p-0">
-				<div class="col-6 p-0 pl-4 text-center">
+				<div class="col-6 p-0 pr-4 text-center">
 					<div id="homeAcadimes" class="homeSelectButtons"><?php echo direction("Academies","الأكادميات") ?></div>
 				</div>
-				<div class="col-6 p-0 pr-4 text-center">
+				<div class="col-6 p-0 pl-4 text-center">
 					<div id="homeTournaments" class="homeSelectButtons"><?php echo direction("Tournaments","البطولات") ?></div>
 				</div>
 			</div>
