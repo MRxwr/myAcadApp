@@ -187,14 +187,14 @@
 			</select>
 			</div>
 
-            <div class="col-md-3">
+            <div class="col-md-6">
 			<label><?php echo direction("English Terms","الشروط الإنجليزية") ?></label>
-            <textarea name="enTerms" class="tinymce"><?php echo $settings[0]["enTerms"] ?></textarea>
+            <textarea name="enTerms" class="tinymce"></textarea>
 			</div>
 
-            <div class="col-md-3">
+            <div class="col-md-6">
 			<label><?php echo direction("Arabic Terms","الشروط العربية") ?></label>
-            <textarea name="arTerms" class="tinymce"><?php echo $settings[0]["arTerms"] ?></textarea>
+            <textarea name="arTerms" class="tinymce"></textarea>
 			</div>
 			
 			<div class="col-md-4">
