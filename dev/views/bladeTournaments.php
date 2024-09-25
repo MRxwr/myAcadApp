@@ -61,12 +61,13 @@ if( $sportTitle = selectDB("sports","`id` = '{$_POST["sport"]}'") ){
             <div class="col-lg-8 col-sm-8 mt-5 mb-5">
                 <div class="search-input">
                     <form action="" method="post">
-                        <input type="text" name="keyword" placeholder="<?php echo direction("Search Academies","بحث عن الأكاديميات") ?>">
+                        <input type="text" name="keyword" placeholder="<?php echo direction("Search Tournaments","بحث عن البطولات") ?>">
                         <input type="hidden" name="sport" value="<?php echo $_POST["sport"] ?>">
                         <input type="hidden" name="gender" value="<?php echo $_POST["gender"] ?>">
                         <input type="hidden" name="governate" value="<?php echo $_POST["governate"] ?>">
                         <input type="hidden" name="area" value="<?php echo $_POST["area"] ?>">
                         <input type="hidden" name="countryCode" value="<?php echo $_POST["countryCode"] ?>">
+                        <input type="hidden" name="isTournament" value="1">
                         <span class="fa fa-search" onclick="this.parentNode.submit()"></span>
                     </form>
                 </div>
@@ -88,10 +89,6 @@ if( $sportTitle = selectDB("sports","`id` = '{$_POST["sport"]}'") ){
                 <div class="foott_box">
 				<?php 
                 $inIndoor = ($academies[$i]["isIndoor"] == 1) ? direction("Indoor","داخلي") : direction("Outdoor","خارجي");
-				if( $academies[$i]["isPromotion"] == 1 ){
-					echo "<div class='promotion_box'><p>".direction("Promotion","خصم")."</p></div>";
-				}
-                echo "<div class='promotion_box_reverse'><p>{$inIndoor}</p></div>";
 				?>
                     <a href="?v=Details&id=<?php echo $academies[$i]["id"] ?>" class="s_foot_img" alt="link_<?php echo $academies[$i]["enTitle"]?>">
                         <img src="logos/<?php echo $academies[$i]["header"] ?>" alt="header_<?php echo $academies[$i]["enTitle"]?>" class="w-100" style="height: 250px;">
@@ -112,11 +109,8 @@ if( $sportTitle = selectDB("sports","`id` = '{$_POST["sport"]}'") ){
                             </div>
                         </div>
                         <div class="last_rate">
-                            <h4><?php echo direction("Rate","التقيم") ?></h4>
-                            <div class="star_box">
-                                <img src="img/f_star.svg" alt="">
-                                <span><?php echo $academies[$i]["rating"]?></span>
-                            </div>
+                            <?php echo "<div class='promotion_box_reverse'><p>{$inIndoor}</p></div>" ?>
+                            <?php echo "<div class='promotion_box_reverse'><p>{$academies[$i]["price"]}KD</p></div>" ?>
                         </div>
                     </div>
                 </div>
