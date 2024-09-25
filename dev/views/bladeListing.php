@@ -94,7 +94,7 @@ if( $sportTitle = selectDB("sports","`id` = '{$_POST["sport"]}'") ){
                 echo "<div class='promotion_box_reverse'><p>{$inIndoor}</p></div>";
 				?>
                     <a href="?v=Details&id=<?php echo $academies[$i]["id"] ?>" class="s_foot_img" alt="link_<?php echo $academies[$i]["enTitle"]?>">
-                        <img src="logos/<?php echo $academies[$i]["header"] ?>" alt="header_<?php echo $academies[$i]["enTitle"]?>" class="w-100" style="height:250px">
+                        <img src="logos/<?php echo $academies[$i]["header"] ?>" alt="header_<?php echo $academies[$i]["enTitle"]?>" class="w-100">
                     </a>
                     <div class="foott_cont">
                         <div class="kuwat">
@@ -103,7 +103,7 @@ if( $sportTitle = selectDB("sports","`id` = '{$_POST["sport"]}'") ){
                             ?>
                             <span style="background-color:<?php echo $backgorudColor ?> !important;" ><?php echo $counter ?></span>
                             <div class="kuwat_items">
-                                <img src="logos/<?php echo $academies[$i]["imageurl"] ?>" alt="logo_<?php echo $academies[$i]["enTitle"]?>">
+                                <img src="logos/<?php echo $academies[$i]["imageurl"] ?>" alt="logo_<?php echo $academies[$i]["enTitle"]?>" style="width: 60px;height: 60px;">
                                 <div>
                                     <h2><?php echo direction($academies[$i]["enTitle"],$academies[$i]["arTitle"]) ?></h2>
                                     <h3><?php echo $areaTitle ?></h3>
