@@ -98,7 +98,7 @@ if( $sportTitle = selectDB("sports","`id` = '{$_POST["sport"]}'") ){
 				<?php 
                 $inIndoor = ($academies[$i]["isIndoor"] == 1) ? direction("Indoor","داخلي") : direction("Outdoor","خارجي");
 				?>
-                    <a href="?v=Details&id=<?php echo $academies[$i]["id"] ?>" class="s_foot_img" alt="link_<?php echo $academies[$i]["enTitle"]?>">
+                    <a href="?v=TournamentDetails&id=<?php echo $academies[$i]["id"] ?>" class="s_foot_img" alt="link_<?php echo $academies[$i]["enTitle"]?>">
                         <img src="logos/<?php echo $academies[$i]["header"] ?>" alt="header_<?php echo $academies[$i]["enTitle"]?>" class="w-100" style="height: 250px;">
                     </a>
                     <div class="foott_cont">
@@ -114,7 +114,7 @@ if( $sportTitle = selectDB("sports","`id` = '{$_POST["sport"]}'") ){
                         </div>
                         <div class="last_rate">
                             <?php echo "<div class='indoorPrice'><p>{$inIndoor}</p></div>" ?>
-                            <?php echo "<div class='indoorPrice'><p>{$academies[$i]["price"]}KD</p></div>" ?>
+                            <?php echo "<div class='indoorPrice'><p>{$academies[$i]["price"]} KD</p></div>" ?>
                         </div>
                     </div>
                 </div>
