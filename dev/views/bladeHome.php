@@ -17,7 +17,7 @@ require("template/bannersSlider.php");
 	.homeSelectButtons:hover {
 		background-color: #ffa300;
 	}
-	.homeSelectButtons:active, .selected {
+	.homeSelectButtons:active, .homeSelected{
 		background-color: #ffa300;
 	}
 </style>
@@ -34,12 +34,19 @@ require("template/bannersSlider.php");
 
 			<div class="row w-100 m-0 p-0">
 				<div class="col-6 p-0 pr-4 text-center">
-					<div id="homeAcadimes" class="homeSelectButtons selected"><?php echo direction("Academies","الأكادميات") ?></div>
+					<div id="homeAcadimes" class="homeSelectButtons homeSelected"><?php echo direction("Academies","الأكادميات") ?></div>
 				</div>
 				<div class="col-6 p-0 pl-4 text-center">
 					<div id="homeTournaments" class="homeSelectButtons"><?php echo direction("Tournaments","البطولات") ?></div>
 				</div>
 			</div>
+			
+            <h2 style="padding-top:10px"></h2>
+			
+            <a class="select_btn mb_20" data-toggle="modal" data-target="#sport">
+				<img id="sportMainImage" src="img/select_1.svg" alt="">
+				<label id="sportMainTitle" style="font-weight: bolder;"><?php echo direction("SELECT SPORT","إختر الرياضة") ?><label>
+			</a>
 
             <div class="selet_wapper mb_20">
                 <img src="img/select_2.svg" alt="">
