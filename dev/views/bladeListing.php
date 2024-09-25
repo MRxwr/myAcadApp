@@ -1,11 +1,21 @@
 <style>
-input[name="searchListing"]{
+input[name="searchListing"] {
     width: 100%;
     border-radius: 30px;
     text-align: center;
     height: 40px;
     font-size: 15px;
     border: 1px solid #dedede;
+    position: relative;
+}
+
+input[name="searchListing"]::before {
+    content: "\f002"; /* Unicode for search icon */
+    font-family: "Font Awesome 5 Free";
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
 }
 </style>
 <?php 
