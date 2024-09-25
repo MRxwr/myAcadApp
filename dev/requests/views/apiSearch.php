@@ -13,6 +13,9 @@ if( !isset($_GET["sportId"]) || empty($_GET["sportId"]) ){
 	if( isset($_GET["areaId"]) && !empty($_GET["areaId"]) ){
 		$where .= " AND `area` = '{$_GET["areaId"]}'";
 	}
+	if( isset($_GET["keyword"]) && !empty($_GET["keyword"]) ){
+		$where .= " AND ( `enTitle` LIKE '%".$_GET["keyword"]."%' OR `arTitle` LIKE '%".$_GET["keyword"]."%')";
+	}
 	if( isset($_GET["countryCode"]) && !empty($_GET["countryCode"]) ){
 		$where .= " AND `country` = '{$_GET["countryCode"]}'";
 	}else{

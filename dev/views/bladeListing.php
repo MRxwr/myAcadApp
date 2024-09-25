@@ -30,7 +30,7 @@ input[name="searchListing"] {
 
 $curl = curl_init();
 curl_setopt_array($curl, array(
-  CURLOPT_URL => "{$baseURL}?a=Search&sportId={$_POST["sport"]}&genderId={$_POST["gender"]}&governateId={$_POST["governate"]}&areaId={$_POST["area"]}&countryCode={$_POST["countryCode"]}",
+  CURLOPT_URL => "{$baseURL}?a=Search&sportId={$_POST["sport"]}&genderId={$_POST["gender"]}&governateId={$_POST["governate"]}&areaId={$_POST["area"]}&countryCode={$_POST["countryCode"]}&keyword={$_POST["searchListing"]}",
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => '',
   CURLOPT_MAXREDIRS => 10,
@@ -69,7 +69,7 @@ if( $sportTitle = selectDB("sports","`id` = '{$_POST["sport"]}'") ){
         </div>
 
         <h5><?php echo $sportTitle ?></h5>
-        <div class="row" class="listOfAcadimies">
+        <div class="row" class="listOfAcademies">
 		<?php
 		if( isset($response["data"]["academies"]) && $response["data"]["academies"] > 0 ){
 			$academies = $response["data"]["academies"];
