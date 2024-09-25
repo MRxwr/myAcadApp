@@ -16,11 +16,11 @@ require("template/bannersSlider.php");
 
 			<div class="row">
 				<div class="col-5">
-					<button id="homeAcadimes" class="btn btn-default"><?php echo direction("Academies","الأكادميات") ?></button>
+					<button id="homeAcadimes" class="btn btn-primary"><?php echo direction("Academies","الأكادميات") ?></button>
 				</div>
 				<div class="col-2"></div>
 				<div class="col-5">
-					<button id="homeTournaments" class="btn btn-default"><?php echo direction("Tournaments","البطولات") ?></button>
+					<button id="homeTournaments" class="btn btn-primary"><?php echo direction("Tournaments","البطولات") ?></button>
 				</div>
 			</div>
             <h2 style="padding-top:10px"><?php echo direction("SELECT YOUR SPORT","إختر الرياضة الخاصة بك"); ?></h2>
