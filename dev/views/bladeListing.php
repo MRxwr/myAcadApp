@@ -1,3 +1,13 @@
+<style>
+input[name="searchListing"]{
+    width: 100%;
+    border-radius: 30px;
+    text-align: center;
+    height: 40px;
+    font-size: 15px;
+    border: 1px solid #dedede;
+}
+</style>
 <?php 
 //require("template/bannersSlider.php");
 
@@ -32,7 +42,7 @@ if( $sportTitle = selectDB("sports","`id` = '{$_POST["sport"]}'") ){
             <div class="col-lg-2 col-sm-2">
             </div>
             <div class="col-lg-8 col-sm-8">
-                <input type="text" name="searchListing" value="<?php echo direction("Search Academies","بحث عن الأكاديميات") ?>">
+                <input type="text" name="searchListing" placeholder="<?php echo direction("Search Academies","بحث عن الأكاديميات") ?>">
             </div>
             <div class="col-lg-2 col-sm-2">
             </div>
