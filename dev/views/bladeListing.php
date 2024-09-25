@@ -94,7 +94,7 @@ if( $sportTitle = selectDB("sports","`id` = '{$_POST["sport"]}'") ){
                 echo "<div class='promotion_box_reverse'><p>{$inIndoor}</p></div>";
 				?>
                     <a href="?v=Details&id=<?php echo $academies[$i]["id"] ?>" class="s_foot_img" alt="link_<?php echo $academies[$i]["enTitle"]?>">
-                        <img src="logos/<?php echo $academies[$i]["header"] ?>" alt="header_<?php echo $academies[$i]["enTitle"]?>" class="w-100">
+                        <img src="logos/<?php echo $academies[$i]["header"] ?>" alt="header_<?php echo $academies[$i]["enTitle"]?>" class="w-100" style="height:250px">
                     </a>
                     <div class="foott_cont">
                         <div class="kuwat">
