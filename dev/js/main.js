@@ -26,6 +26,16 @@
         sticky_header();
         //===== Back to top
 		
+        $('.homeAcadimes').on('click', function (event) {
+			event.preventDefault();
+            $("name=isTournament").val(0);
+        });
+
+        $('.homeTournaments').on('click', function (event) {
+			event.preventDefault();
+            $("name=isTournament").val(1);
+        });
+
 		// change the view of select gender
 		$('.selectSport').on('click', function (event) {
 			event.preventDefault();
@@ -34,9 +44,10 @@
             var countryCode = $.cookie("createmyacadcountry");
 			var sportImage = $("#sportImage"+id).attr("src");
 			var sportTitle = $("#sportTitle"+id).html();
+			var isTournament = $("name=isTournament").val();
             var langCookieValue = $.cookie("CREATEkwLANG");
             var settings = {
-                "url": "requests/index.php?a=Genders&sportId="+id+"&countryCode="+countryCode,
+                "url": "requests/index.php?a=Genders&sportId="+id+"&countryCode="+countryCode+"&isTournament="+isTournament,
                 "method": "GET",
                 "timeout": 0,
                 "headers": {
@@ -77,8 +88,9 @@
             var countryCode = $.cookie("createmyacadcountry");
             var sportId = $("input[name=sport]").val();
             var langCookieValue = $.cookie("CREATEkwLANG");
+            var isTournament = $("name=isTournament").val();
             var settings = {
-                "url": "requests/index.php?a=Governates&sportId="+sportId+"&countryCode="+countryCode+"&genderId="+id,
+                "url": "requests/index.php?a=Governates&sportId="+sportId+"&countryCode="+countryCode+"&genderId="+id+"&isTournament="+isTournament,
                 "method": "GET",
                 "timeout": 0,
                 "headers": {

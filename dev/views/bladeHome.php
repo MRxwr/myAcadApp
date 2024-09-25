@@ -30,6 +30,7 @@ require("template/bannersSlider.php");
 			<input type="hidden" name="gender" value="0">
 			<input type="hidden" name="area" value="0">
 			<input type="hidden" name="governate" value="0">
+			<input type="hidden" name="isTournament" value="0">
 			<input type="hidden" name="countryCode" value="<?php echo $_COOKIE["createmyacadcountry"] ?>">
 
 			<div class="row w-100 m-0 p-0">
@@ -42,7 +43,7 @@ require("template/bannersSlider.php");
 			</div>
 			
             <h2 style="padding-top:10px"></h2>
-			
+
             <a class="select_btn mb_20" data-toggle="modal" data-target="#sport">
 				<img id="sportMainImage" src="img/select_1.svg" alt="">
 				<label id="sportMainTitle" style="font-weight: bolder;"><?php echo direction("SELECT SPORT","إختر الرياضة") ?><label>
