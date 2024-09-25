@@ -130,18 +130,23 @@
 			<label><?php echo direction("Video","الفيديو") ?></label>
 			<input type="text" name="video" class="form-control" required>
 			</div>
+
+			<div class="col-md-3">
+			<label><?php echo direction("Quantity","الكمية") ?></label>
+			<input type="number" step="any" name="quantity" class="form-control" required>
+			</div>
 			
-			<div class="col-md-4">
+			<div class="col-md-3">
 			<label><?php echo direction("Price","سعر") ?></label>
 			<input type="number" step="any" name="price" class="form-control" required>
 			</div>
 
-            <div class="col-md-4">
+            <div class="col-md-3">
 			<label><?php echo direction("Players","اللاعبين") ?></label>
 			<input type="number" step="any" name="players" class="form-control" required>
 			</div>
 
-            <div class="col-md-4">
+            <div class="col-md-3">
 			<label><?php echo direction("Bnech","الإحتياط") ?></label>
 			<input type="number" step="any" name="bench" class="form-control" required>
 			</div>
