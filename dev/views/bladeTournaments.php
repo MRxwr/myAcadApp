@@ -79,8 +79,8 @@ if( $sportTitle = selectDB("sports","`id` = '{$_POST["sport"]}'") ){
         <h5><?php echo $sportTitle ?></h5>
         <div class="row" class="listOfAcademies">
 		<?php
-		if( isset($response["data"]["academies"]) && $response["data"]["academies"] > 0 ){
-			$academies = $response["data"]["academies"];
+		if( isset($response["data"]["tournaments"]) && $response["data"]["tournaments"] > 0 ){
+			$academies = $response["data"]["tournaments"];
 			for( $i = 0; $i < sizeof($academies); $i++ ){
 				$counter = $i + 1;
 				$areaTitle = direction($academies[$i]["enArea"],$academies[$i]["arArea"]);
