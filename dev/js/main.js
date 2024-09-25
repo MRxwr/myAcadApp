@@ -46,7 +46,7 @@
             var countryCode = $.cookie("createmyacadcountry");
 			var sportImage = $("#sportImage"+id).attr("src");
 			var sportTitle = $("#sportTitle"+id).html();
-			var isTournament = $("name=isTournament").val();
+			var isTournament = $("input[name=isTournament]").val();
             var langCookieValue = $.cookie("CREATEkwLANG");
             var settings = {
                 "url": "requests/index.php?a=Genders&sportId="+id+"&countryCode="+countryCode+"&isTournament="+isTournament,
@@ -90,7 +90,7 @@
             var countryCode = $.cookie("createmyacadcountry");
             var sportId = $("input[name=sport]").val();
             var langCookieValue = $.cookie("CREATEkwLANG");
-            var isTournament = $("name=isTournament").val();
+            var isTournament = $("input[name=isTournament]").val();
             var settings = {
                 "url": "requests/index.php?a=Governates&sportId="+sportId+"&countryCode="+countryCode+"&genderId="+id+"&isTournament="+isTournament,
                 "method": "GET",
