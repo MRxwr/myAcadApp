@@ -259,7 +259,7 @@
 		
 		<tbody>
 		<?php 
-		if( $tournaments = selectDB("academies","`status` = '0'") ){
+		if( $tournaments = selectDB("tournaments","`status` = '0'") ){
 			for( $i = 0; $i < sizeof($tournaments); $i++ ){
 				$sport = selectDB("sports","`id` = '{$tournaments[$i]["sport"]}'");
 				$academyTitle = direction($tournaments[$i]["enTitle"],$tournaments[$i]["arTitle"]);
