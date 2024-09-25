@@ -32,6 +32,7 @@ require("template/bannersSlider.php");
 			<input type="hidden" name="governate" value="0">
 			<input type="hidden" name="isTournament" value="0">
 			<input type="hidden" name="countryCode" value="<?php echo $_COOKIE["createmyacadcountry"] ?>">
+			<input type="hidden" name="keyword" value="">
 
 			<div class="row w-100 m-0 p-0">
 				<div class="col-6 p-0 pr-4 text-center">
@@ -65,8 +66,6 @@ require("template/bannersSlider.php");
 				</select>
 			</div>
 			
-			<input type="hidden" name="sport" value="">
-			<input type="hidden" name="keyword" value="">
             <button type="submit" class="button" id="homeBtnSubmit" disabled style="background: gray;color: black;">
 				<?php echo direction("Search","إبحث") ?>
 			</button>
