@@ -51,7 +51,7 @@ if( $sportTitle = selectDB("sports","`id` = '{$_POST["sport"]}'") ){
         <div class="row">
             <div class="col-lg-2 col-sm-2">
             </div>
-            <div class="col-lg-8 col-sm-8">
+            <div class="col-lg-8 col-sm-8 mt-5 mb-5">
                 <input type="text" name="searchListing" placeholder="<?php echo direction("Search Academies","بحث عن الأكاديميات") ?>">
             </div>
             <div class="col-lg-2 col-sm-2">
