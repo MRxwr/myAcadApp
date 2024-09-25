@@ -24,7 +24,7 @@ if( !isset($_GET["genderId"]) || empty($_GET["genderId"]) ){
     );
     echo json_encode($response);die();
 }
-if( $academies = selectDB2("`governate`","{$table}","`sport` = '{$_GET["sportId"]}' AND `country` LIKE '{$_GET["countryCode"]}' AND `gender` = '{$_GET["genderId"]}' AND `hidden` = '0' AND `status` = '0' AND `isTournament` = '{$_GET["isTournament"]}' GROUP BY `governate`") ){
+if( $academies = selectDB2("`governate`","{$table}","`sport` = '{$_GET["sportId"]}' AND `country` LIKE '{$_GET["countryCode"]}' AND `gender` = '{$_GET["genderId"]}' AND `hidden` = '0' AND `status` = '0' GROUP BY `governate`") ){
     $response["governates"][0] = array(
         "id" => 0,
         "enGovernates" => "SELECT GOVERNATE",
