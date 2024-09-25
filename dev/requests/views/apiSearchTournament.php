@@ -31,7 +31,6 @@ if( !isset($_GET["sportId"]) || empty($_GET["sportId"]) ){
 				$response["tournaments"][$i]["enArea"] = "";
 				$response["tournaments"][$i]["arArea"] = "";
 			}
-			$response["tournaments"][$i]["rating"] = 0;
 		}
 	}else{
 		$response["msg"] = popupMsg($requestLang,"No tournaments found","لا يوجد بطولات");
