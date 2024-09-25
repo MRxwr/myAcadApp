@@ -29,11 +29,15 @@
         $('.homeAcadimes').on('click', function (event) {
 			event.preventDefault();
             $("name=isTournament").val(0);
+            $(".homeTournaments").removeClass("homeSelected");
+            $(".homeAcadimes").addClass("homeSelected");
         });
 
         $('.homeTournaments').on('click', function (event) {
 			event.preventDefault();
             $("name=isTournament").val(1);
+            $(".homeAcadimes").removeClass("homeSelected");
+            $(".homeTournaments").addClass("homeSelected");
         });
 
 		// change the view of select gender
