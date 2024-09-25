@@ -24,6 +24,14 @@ input[name="keyword"] {
     font-size: 20px;
     color: #b0b0b0;
 }
+
+.indoorPrice{
+    background-color: #f5f5f5;
+    padding: 0.6rem 2.4rem;
+    border-radius: 5px;
+    width: 60px;
+    margin-bottom: 10px;
+}
 </style>
 <?php 
 //require("template/bannersSlider.php");
@@ -95,10 +103,6 @@ if( $sportTitle = selectDB("sports","`id` = '{$_POST["sport"]}'") ){
                     </a>
                     <div class="foott_cont">
                         <div class="kuwat">
-                            <?php 
-                                $backgorudColor = ( $counter <= 3 ) ? "#FFA300" : "#cacaca";
-                            ?>
-                            <span style="background-color:<?php echo $backgorudColor ?> !important;" ><?php echo $counter ?></span>
                             <div class="kuwat_items">
                                 <img src="logos/<?php echo $academies[$i]["imageurl"] ?>" alt="logo_<?php echo $academies[$i]["enTitle"]?>" style="width: 60px;height: 60px;">
                                 <div>
@@ -109,8 +113,8 @@ if( $sportTitle = selectDB("sports","`id` = '{$_POST["sport"]}'") ){
                             </div>
                         </div>
                         <div class="last_rate">
-                            <?php echo "<div class='promotion_box_reverse'><p>{$inIndoor}</p></div>" ?>
-                            <?php echo "<div class='promotion_box_reverse'><p>{$academies[$i]["price"]}KD</p></div>" ?>
+                            <?php echo "<div class='indoorPrice'><p>{$inIndoor}</p></div>" ?>
+                            <?php echo "<div class='indoorPrice'><p>{$academies[$i]["price"]}KD</p></div>" ?>
                         </div>
                     </div>
                 </div>
