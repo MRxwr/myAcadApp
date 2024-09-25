@@ -60,8 +60,15 @@ if( $sportTitle = selectDB("sports","`id` = '{$_POST["sport"]}'") ){
             </div>
             <div class="col-lg-8 col-sm-8 mt-5 mb-5">
                 <div class="search-input">
-                    <input type="text" name="searchListing" placeholder="<?php echo direction("Search Academies","بحث عن الأكاديميات") ?>">
-                    <span class="fa fa-search"></span>
+                    <form action="" method="post">
+                        <input type="text" name="searchListing" placeholder="<?php echo direction("Search Academies","بحث عن الأكاديميات") ?>">
+                        <input type="hidden" name="sport" value="<?php echo $_POST["sport"] ?>">
+                        <input type="hidden" name="gender" value="<?php echo $_POST["gender"] ?>">
+                        <input type="hidden" name="governate" value="<?php echo $_POST["governate"] ?>">
+                        <input type="hidden" name="area" value="<?php echo $_POST["area"] ?>">
+                        <input type="hidden" name="countryCode" value="<?php echo $_POST["countryCode"] ?>">
+                        <span class="fa fa-search" onclick="this.parentNode.submit()"></span>
+                    </form>
                 </div>
             </div>
             <div class="col-lg-2 col-sm-2">
