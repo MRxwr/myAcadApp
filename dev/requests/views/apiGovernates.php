@@ -12,10 +12,8 @@ if( !isset($_GET["countryCode"]) || empty($_GET["countryCode"]) ){
     echo json_encode($response);die();
 }
 if( !isset($_GET["isTournament"]) || empty($_GET["isTournament"]) ){
-    $_GET["isTournament"] = 0;
     $table = "academies";
 }else{
-    $_GET["isTournament"] = 1;
     $table = "tournaments";
 }
 if( !isset($_GET["genderId"]) || empty($_GET["genderId"]) ){
