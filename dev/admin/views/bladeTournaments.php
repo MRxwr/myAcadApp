@@ -186,6 +186,16 @@
 				<option value='percentage'>percentage</option>
 			</select>
 			</div>
+
+            <div class="col-md-3">
+			<label><?php echo direction("English Terms","الشروط الإنجليزية") ?></label>
+            <textarea name="enTerms" class="tinymce"><?php echo $settings[0]["enTerms"] ?></textarea>
+			</div>
+
+            <div class="col-md-3">
+			<label><?php echo direction("Arabic Terms","الشروط العربية") ?></label>
+            <textarea name="arTerms" class="tinymce"><?php echo $settings[0]["arTerms"] ?></textarea>
+			</div>
 			
 			<div class="col-md-4">
 			<label><?php echo direction("Map View","صورة الخريطة") ?></label>
@@ -323,6 +333,8 @@
 					<div style="display:none"><label id="cc_chargetype<?php echo $tournaments[$i]["id"]?>"><?php echo $tournaments[$i]["cc_chargetype"] ?></label></div>
 					<div style="display:none"><label id="iban<?php echo $tournaments[$i]["id"]?>"><?php echo $tournaments[$i]["iban"] ?></label></div>
 					<div style="display:none"><label id="isIndoor<?php echo $tournaments[$i]["id"]?>"><?php echo $tournaments[$i]["isIndoor"] ?></label></div>
+					<div style="display:none"><label id="enTerms<?php echo $tournaments[$i]["id"]?>"><?php echo $tournaments[$i]["enTerms"] ?></label></div>
+					<div style="display:none"><label id="arTerms<?php echo $tournaments[$i]["id"]?>"><?php echo $tournaments[$i]["arTerms"] ?></label></div>
 				</td>
 				</tr>
 				<?php
@@ -387,6 +399,8 @@
 			$("input[name=gameTime]").val($("#gameTime"+id).html());
 			$("input[name=players]").val($("#players"+id).html());
 			$("input[name=bench]").val($("#bench"+id).html());
+			$("textarea[name=enTerms]").val($("#enTerms"+id).html());
+			$("textarea[name=arTerms]").val($("#arTerms"+id).html());
 			$("#logoImg").attr("src","../logos/"+$("#logo"+id).html());
 			$("#headerImg").attr("src","../logos/"+$("#header"+id).html());
 			$("#locationImg").attr("src","../logos/"+$("#locationImg"+id).html());
