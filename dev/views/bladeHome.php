@@ -37,6 +37,7 @@ require("template/bannersSlider.php");
 			</div>
 			
 			<input type="hidden" name="sport" value="">
+			<input type="hidden" name="keyword" value="">
             <button type="submit" class="button" id="homeBtnSubmit" disabled style="background: gray;color: black;">
 				<?php echo direction("Search","إبحث") ?>
 			</button>

@@ -30,7 +30,7 @@ input[name="searchListing"] {
 
 $curl = curl_init();
 curl_setopt_array($curl, array(
-  CURLOPT_URL => "{$baseURL}?a=Search&sportId={$_POST["sport"]}&genderId={$_POST["gender"]}&governateId={$_POST["governate"]}&areaId={$_POST["area"]}&countryCode={$_POST["countryCode"]}&keyword={$_POST["searchListing"]}",
+  CURLOPT_URL => "{$baseURL}?a=Search&sportId={$_POST["sport"]}&genderId={$_POST["gender"]}&governateId={$_POST["governate"]}&areaId={$_POST["area"]}&countryCode={$_POST["countryCode"]}&keyword={$_POST["keyword"]}",
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => '',
   CURLOPT_MAXREDIRS => 10,
