@@ -148,12 +148,12 @@
 
             <div class="col-md-6">
 			<label><?php echo direction("Tournament Date","تاريخ البطولة") ?></label>
-			<input type="number" step="any" name="gameDate" class="form-control" required>
+			<input type="date" name="gameDate" class="form-control" required>
 			</div>
 
             <div class="col-md-6">
 			<label><?php echo direction("Turnament Time","وقت البطولة") ?></label>
-			<input type="number" step="any" name="gameTime" class="form-control" required>
+			<input type="time" name="gameTime" class="form-control" required>
 			</div>
 
 			<div class="col-md-12">
