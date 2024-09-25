@@ -14,12 +14,12 @@ require("template/bannersSlider.php");
 			<input type="hidden" name="governate" value="0">
 			<input type="hidden" name="countryCode" value="<?php echo $_COOKIE["createmyacadcountry"] ?>">
 
-			<div class="row">
-				<div class="col-5">
+			<div class="row w-100 m-0 p-0">
+				<div class="col-5 text-center">
 					<button id="homeAcadimes" class="btn btn-primary"><?php echo direction("Academies","الأكادميات") ?></button>
 				</div>
 				<div class="col-2"></div>
-				<div class="col-5">
+				<div class="col-5 text-center">
 					<button id="homeTournaments" class="btn btn-primary"><?php echo direction("Tournaments","البطولات") ?></button>
 				</div>
 			</div>
