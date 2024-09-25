@@ -266,7 +266,19 @@
 				$videoText = ( !empty($tournaments[$i]["video"]) ) ? direction("Watch","شاهد") : "";
 				$locationText = ( !empty($tournaments[$i]["location"]) ) ? direction("View","إعرض") : "";
 				$price = ( empty($tournaments[$i]["price"]) )? direction("Free","مجانا") : $tournaments[$i]["price"];
-				$genderText = ( $tournaments[$i]["gender"] == 1 ) ? direction("Man","رجل") : ( ( $tournaments[$i]["gender"] == 2 ) ? direction("Woman","إمرأه") : ( ( $tournaments[$i]["gender"] == 3 ) ? direction("Boy","ولد") : direction("Girl","بنت") ) ) ;
+                if ( $tournaments[$i]["gender"] == 1 ){
+                    $genderText = direction("Man","رجل");
+                }elseif( $tournaments[$i]["gender"] == 2 ){
+                    $genderText = direction("Woman","إمرأه");
+                }elseif( $tournaments[$i]["gender"] == 3 ){
+                    $genderText = direction("Boy","ولد");
+                }elseif( $tournaments[$i]["gender"] == 4 ){
+                    $genderText = direction("Girl","بنت");
+                }elseif( $tournaments[$i]["gender"] == 5 ){
+                    $genderText = direction("Mixed Adults","مختلط كبار");
+                }elseif( $tournaments[$i]["gender"] == 6 ){
+                    $genderText = direction("Mixed Kids","مختلط الاطفال");
+                }
 				if ( $tournaments[$i]["hidden"] == 1 ){
 					$icon = "fa fa-eye";
 					$link = "?show={$tournaments[$i]["id"]}";
