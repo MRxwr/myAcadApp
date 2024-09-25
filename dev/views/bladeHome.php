@@ -14,6 +14,15 @@ require("template/bannersSlider.php");
 			<input type="hidden" name="governate" value="0">
 			<input type="hidden" name="countryCode" value="<?php echo $_COOKIE["createmyacadcountry"] ?>">
 
+			<div class="row">
+				<div class="col-5">
+					<button id="homeAcadimes" class="btn btn-default"><?php echo direction("Academies","الأكادميات") ?></button>
+				</div>
+				<div class="col-2"></div>
+				<div class="col-5">
+					<button id="homeTournaments" class="btn btn-default"><?php echo direction("Tournaments","البطولات") ?></button>
+				</div>
+			</div>
             <h2 style="padding-top:10px"><?php echo direction("SELECT YOUR SPORT","إختر الرياضة الخاصة بك"); ?></h2>
             <a class="select_btn mb_20" data-toggle="modal" data-target="#sport">
 				<img id="sportMainImage" src="img/select_1.svg" alt="">
