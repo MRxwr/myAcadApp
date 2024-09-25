@@ -27,8 +27,19 @@ if( $sportTitle = selectDB("sports","`id` = '{$_POST["sport"]}'") ){
 ?>
 <div class="s_football_area">
     <div class="container">
-        <h5><?php echo $sportTitle ?></h5>
+
         <div class="row">
+            <div class="col-lg-2 col-sm-2">
+            </div>
+            <div class="col-lg-8 col-sm-8">
+                <input type="text" name="searchListing" value="<?php echo direction("Search Academies","بحث عن الأكاديميات") ?>">
+            </div>
+            <div class="col-lg-2 col-sm-2">
+            </div>
+        </div>
+
+        <h5><?php echo $sportTitle ?></h5>
+        <div class="row" class="listOfAcadimies">
 		<?php
 		if( isset($response["data"]["academies"]) && $response["data"]["academies"] > 0 ){
 			$academies = $response["data"]["academies"];
