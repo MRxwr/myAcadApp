@@ -820,12 +820,14 @@ span.select2-selection.select2-selection--single {
 }
 
 .promotion_box_reverse {
-	background-color: #00bbff;
+	background-color: #cfcfcf;
 	padding: 0.6rem 2.4rem;
 	position: absolute;
-	right: 0;
-	top: 0;
+	right: 10px;
+	bottom: 70px;
 	z-index: 2;
+	border-radius: 5px;
+	box-shadow: 0px 0px 5px 1px #959595;
 }
 .promotion_box_reverse p{
 	display: -webkit-box;
@@ -834,7 +836,6 @@ span.select2-selection.select2-selection--single {
 	-webkit-column-gap: 1rem;
 	   -moz-column-gap: 1rem;
 	        column-gap: 1rem;
-	color: #fff;
 	font-size: 1.8rem;
 }
 
