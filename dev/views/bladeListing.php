@@ -10,14 +10,15 @@ input[name="searchListing"] {
     padding-left: 35px; /* Add padding to make room for the icon */
 }
 
-input[name="searchListing"]::before {
-    content: "\f002"; /* Unicode for search icon */
-    font-family: "Font Awesome 5 Free";
+.search-input {
+    position: relative;
+}
+
+.search-input .fa-search {
     position: absolute;
     left: 10px;
     top: 50%;
     transform: translateY(-50%);
-    color: #666; /* Set a color for the icon */
 }
 </style>
 <?php 
@@ -54,7 +55,10 @@ if( $sportTitle = selectDB("sports","`id` = '{$_POST["sport"]}'") ){
             <div class="col-lg-2 col-sm-2">
             </div>
             <div class="col-lg-8 col-sm-8 mt-5 mb-5">
-                <input type="text" name="searchListing" placeholder="<?php echo direction("Search Academies","بحث عن الأكاديميات") ?>">
+                <div class="search-input">
+                    <input type="text" name="searchListing" placeholder="<?php echo direction("Search Academies","بحث عن الأكاديميات") ?>">
+                    <span class="fa fa-search"></span>
+                </div>
             </div>
             <div class="col-lg-2 col-sm-2">
             </div>
