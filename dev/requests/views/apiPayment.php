@@ -275,7 +275,7 @@ if( !isset($_POST) ){
         $_POST["voucher"] = $data["voucher"];
 
         $_POST["teamDetails"] = json_encode($_POST["teamDetails"]);
-        
+
         //calculate totals prices that should be sent to upayments 
         if( $data["paymentMethod"] == 1 ){
             $myacadDeposit = ( $academyData[0]["chargeType"] == "fixed" ) ? $academyData[0]["charges"] : $newTotal * ( $academyData[0]["charges"] / 100 );
@@ -359,7 +359,7 @@ if( !isset($_POST) ){
                 "InvoiceId"     => $orderId
             );
             if( $user = selectDB("users","`id` = {$_POST["userId"]}") ){
-                $newWallet = $user[0]["wallet"] - $_POST["teamDetails"]["total"];
+                $newWallet = $user[0]["wallet"] - $newTotal;
                 updateDB("users",array("wallet" => $newWallet),"`id` = {$_POST["userId"]}");
             }
             echo outputData($response);
