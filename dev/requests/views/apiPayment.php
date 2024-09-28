@@ -344,13 +344,13 @@ if( !isset($_POST) ){
         $_POST["gatewayURL"]    = $response["data"]["link"];
         $_POST["apiPayload"]    = json_encode($postBody);
         $_POST["apiResponse"]   = json_encode($response);
-        $_POST["paymentMethod"] = ( $wallet == 1 ) ? 3 : $paymentMethod;
+        $_POST["paymentMethod"] = 
         $_POST["paymentMethod"] = ( $freePayment == 1 ) ? 4 : $paymentMethod;
         $response["data"] = array(
             "paymentURL" => $response["data"]["link"],
             "InvoiceId"  => $orderId
         );
-        echo outputData([$wallet,$data,$_POST,$response]);die();
+        echo outputData([$wallet,(( $wallet == 1 ) ? 3 : $paymentMethod)]);die();
         insertDB2("orders",$_POST);
         if( $wallet == 1 ){
             $array["data"] = array(
