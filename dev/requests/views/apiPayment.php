@@ -132,7 +132,7 @@ if( !isset($_POST) ){
         if( $data["paymentMethod"] == 1 ){
             $myacadDeposit = ( $academyData[0]["chargeType"] == "fixed" ) ? $academyData[0]["charges"] : $newTotal * ( $academyData[0]["charges"] / 100 );
             $newTotal = $newTotal - $myacadDeposit;
-            $paymentGateway = "Knet";
+            $paymentGateway = "knet";
         }elseif( $data["paymentMethod"] == 2 ){
             $myacadDeposit = ( $academyData[0]["cc_chargetype"] == "fixed" ) ? $academyData[0]["cc_charge"] : $newTotal * ( $academyData[0]["cc_charge"] / 100 );
             $newTotal = $newTotal - $myacadDeposit;
@@ -140,7 +140,7 @@ if( !isset($_POST) ){
         }else{
             $myacadDeposit = 1;
             $newTotal = $newTotal - $myacadDeposit;
-            $paymentGateway = "Knet";
+            $paymentGateway = "knet";
         }
 
         //preparing upayment payload and creating order
