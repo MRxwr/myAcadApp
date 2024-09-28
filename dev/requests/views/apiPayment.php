@@ -357,7 +357,7 @@ if( !isset($_POST) ){
                 "InvoiceId"     => $orderId
             );
             if( $user = selectDB("users","`id` = {$_POST["userId"]}") ){
-                $newWallet = $user[0]["wallet"] - $_POST["total"];
+                $newWallet = $user[0]["wallet"] - $_POST["teamDetails"]["total"];
                 updateDB("users",array("wallet" => $newWallet),"`id` = {$_POST["userId"]}");
             }
             echo outputData($response);
