@@ -318,7 +318,7 @@ if( !isset($_POST) ){
             'extraMerchantData[1][ibanNumber]' => "{$academyData[0]["iban"]}",
             );
     }
-    echo json_encode($postBody);
+
     $curl = curl_init();
     curl_setopt_array($curl, array(
         CURLOPT_URL => 'https://uapi.upayments.com/api/v1/charge',
@@ -334,30 +334,27 @@ if( !isset($_POST) ){
             'Authorization: Bearer afmceR6nHQaIehhpOel036LBhC8hihuB8iNh9ACF',
         ),
     ));
-
     $response = curl_exec($curl);
     curl_close($curl);
-    echo $response;
-    exit();
     $response = json_decode($response,true);
 
     //saving info and redirecting to payment pages
-    if( $response["status"] == "success" && isset($response["paymentURL"]) && !empty($response["paymentURL"]) ){
-        $_POST["gatewayId"] = $comon_array["order_id"];
-        $_POST["gatewayURL"] = $response["paymentURL"];
-        $_POST["apiPayload"] = json_encode($comon_array);
+    if( $response["status"] == true && isset($response["data"]["link"]) && !empty($response["data"]["link"]) ){
+        $_POST["gatewayId"] = $postBody["order_id"];
+        $_POST["gatewayURL"] = $response["data"]["link"];
+        $_POST["apiPayload"] = json_encode($postBody);
         $_POST["apiResponse"] = json_encode($response);
         $_POST["paymentMethod"] = ( $wallet == 1 ) ? 3 : $paymentMethod;
         $_POST["paymentMethod"] = ( $freePayment == 1 ) ? 4 : $paymentMethod;
         $response["data"] = array(
-            "paymentURL" => $response["paymentURL"],
-            "InvoiceId"  => $comon_array["order_id"]
+            "paymentURL" => $response["data"]["link"],
+            "InvoiceId"  => $postBody["order_id"]
         );
         insertDB2("orders",$_POST);
         if( $wallet == 1 ){
             $array["data"] = array(
                 "paymentURL" => "index.php?v=Success&OrderID={$_POST["gatewayId"]}&Result=CAPTURED",
-                "InvoiceId" => $comon_array["order_id"]
+                "InvoiceId" => $postBody["order_id"]
             );
             if( $user = selectDB("users","`id` = {$_POST["userId"]}") ){
                 $newWallet = $user[0]["wallet"] - $_POST["total"];
