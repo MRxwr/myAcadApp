@@ -183,7 +183,7 @@ if( !isset($_POST) ){
         
         //checking voucher
         $numberOfTimesAvalability = false;
-        $academyAprroved = false;
+        $tournamentAprroved = false;
         $dateApproved = false;
         $voucherType = 0;
         $voucherAmount = 0;
@@ -208,17 +208,17 @@ if( !isset($_POST) ){
                 }
             }
             
-            if( $voucher[0]["academyId"] != 0 ){
-                if( $voucher[0]["academyId"] == $tournament ){
-                    $academyAprroved = true;
+            if( $voucher[0]["tournamentId"] != 0 ){
+                if( $voucher[0]["tournamentId"] == $tournament ){
+                    $tournamentAprroved = true;
                 }else{
-                    $academyAprroved = false;
+                    $tournamentAprroved = false;
                 }
-            }elseif( $voucher[0]["academyId"] == 0 ){
-                $academyAprroved = true;
+            }elseif( $voucher[0]["tournamentId"] == 0 ){
+                $tournamentAprroved = true;
             }
             
-            if( $numberOfTimesAvalability && $academyAprroved && $dateApproved){
+            if( $numberOfTimesAvalability && $tournamentAprroved && $dateApproved){
                 $voucherType = ($voucher[0]["type"] == 0) ? 0 : 1;
                 $voucherAmount = $voucher[0]["amount"];
             }
@@ -229,6 +229,9 @@ if( !isset($_POST) ){
 
         //checking adamin settings for main IBAN
         if( $AdminSettings = selectDB("settings","`id` = '1'") ){}
+
+        //checking jersy Inforamtion
+        if( $tournamentData = selectDB("tournaments","`id` = '{$tournament}'")){}
 
         //checking payment method
         if( $paymentMethod == 3 ){
@@ -249,8 +252,10 @@ if( !isset($_POST) ){
 
         //calulation of total prices
         $newTotal = (float)$price;
-        if( $numberOfTimesAvalability && $academyAprroved ){
+        $fullAmount = (float)$fullAmount;
+        if( $numberOfTimesAvalability && $tournamentAprroved ){
             $newTotal = ( $voucherType == 0 ) ? ($newTotal*(1-($voucherAmount/100))) : $newTotal - $voucherAmount;
+            $fullAmount = ( $voucherType == 0 ) ? ($fullAmount*(1-($voucherAmount/100))) : $fullAmount - $voucherAmount;
         }
 
         $_POST["name"] = "{$userData[0]["firstName"]} {$userData[0]["lastName"]}";
@@ -305,7 +310,7 @@ if( !isset($_POST) ){
             'extraMerchantData[0][ccCharge]' => '0.25',
             'extraMerchantData[0][ccChargeType]' => 'fixed',
             'extraMerchantData[0][ibanNumber]' => "{$AdminSettings[0]["mainIban"]}",
-            'extraMerchantData[1][amount]' => (string)($newTotal+(float)$jersyPrice),
+            'extraMerchantData[1][amount]' => (string)($newTotal),
             'extraMerchantData[1][knetCharge]' => '0.25',
             'extraMerchantData[1][knetChargeType]' => 'fixed',
             'extraMerchantData[1][ccCharge]' => '0.25',
