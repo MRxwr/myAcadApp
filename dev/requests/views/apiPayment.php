@@ -4,6 +4,8 @@ if( !isset($_POST) ){
 	echo outputError($response);die();
 }else{
     $orderId = time();
+    $wallet = 0;
+    $freePayment = 0;
     $data = $_POST;
     unset($_POST);
     if( isset($data["academy"]) && !empty($data["academy"]) ){
@@ -89,12 +91,9 @@ if( !isset($_POST) ){
         }
 
         //checking payment method
-        $freePayment = 0;
         if( $paymentMethod == 3 ){
             $paymentMethod = 1;
             $wallet = 1;
-        }else{
-            $wallet = 0;
         }
 
         //calulation of total prices
@@ -235,16 +234,12 @@ if( !isset($_POST) ){
         if( $paymentMethod == 3 ){
             $paymentMethod = 1;
             $wallet = 1;
-        }else{
-            $wallet = 0;
         }
 
         //checking free payment
         if( $paymentMethod == 4 ){
             $paymentMethod = 1;
             $freePayment = 1;
-        }else{
-            $freePayment = 0;
         }
 
         //check tournemant Price
@@ -344,8 +339,8 @@ if( !isset($_POST) ){
         $_POST["gatewayURL"]    = $response["data"]["link"];
         $_POST["apiPayload"]    = json_encode($postBody);
         $_POST["apiResponse"]   = json_encode($response);
-        $_POST["paymentMethod"] = 
-        $_POST["paymentMethod"] = ( $freePayment == 1 ) ? 4 : $paymentMethod;
+        $_POST["paymentMethod"] = ( $wallet == 1 ) ? 3 : $paymentMethod;
+        $_POST["paymentMethod"] = ( $freePayment == 1 ) ? 4 : $_POST["paymentMethod"];
         $response["data"] = array(
             "paymentURL" => $response["data"]["link"],
             "InvoiceId"  => $orderId
