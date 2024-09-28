@@ -278,7 +278,7 @@ if( !isset($_POST) ){
         if( $data["paymentMethod"] == 1 ){
             $myacadDeposit = ( $academyData[0]["chargeType"] == "fixed" ) ? $academyData[0]["charges"] : $newTotal * ( $academyData[0]["charges"] / 100 );
             $newTotal = $newTotal - $myacadDeposit;
-            $paymentGateway = "Knet";
+            $paymentGateway = "knet";
         }elseif( $data["paymentMethod"] == 2 ){
             $myacadDeposit = ( $academyData[0]["cc_chargetype"] == "fixed" ) ? $academyData[0]["cc_charge"] : $newTotal * ( $academyData[0]["cc_charge"] / 100 );
             $newTotal = $newTotal - $myacadDeposit;
@@ -286,7 +286,7 @@ if( !isset($_POST) ){
         }else{
             $myacadDeposit = 1;
             $newTotal = $newTotal - $myacadDeposit;
-            $paymentGateway = "Knet";
+            $paymentGateway = "knet";
         }
 
         //preparing upayment payload and creating order
@@ -319,7 +319,6 @@ if( !isset($_POST) ){
             );
     }
     echo json_encode($postBody);
-    exit();
     $curl = curl_init();
     curl_setopt_array($curl, array(
         CURLOPT_URL => 'https://uapi.upayments.com/api/v1/charge',
@@ -338,6 +337,8 @@ if( !isset($_POST) ){
 
     $response = curl_exec($curl);
     curl_close($curl);
+    echo $response;
+    exit();
     $response = json_decode($response,true);
 
     //saving info and redirecting to payment pages
