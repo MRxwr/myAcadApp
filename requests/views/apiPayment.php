@@ -356,7 +356,7 @@ if( !isset($_POST) ){
         insertDB2("orders",$_POST);
         if( $wallet == 1 || $freePayment == 1){
             $response["data"] = array(
-                "paymentURL"    => "index.php?v=Success&OrderID={$_POST["gatewayId"]}&Result=CAPTURED",
+                "paymentURL"    => "index.php?v=Success&order_id={$_POST["gatewayId"]}&result=CAPTURED",
                 "InvoiceId"     => $orderId
             );
             if( $user = selectDB("users","`id` = {$_POST["userId"]}") ){
