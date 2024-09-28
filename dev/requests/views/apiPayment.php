@@ -350,6 +350,7 @@ if( !isset($_POST) ){
             "paymentURL" => $response["data"]["link"],
             "InvoiceId"  => $orderId
         );
+        $_POST["teamDetails"] = json_encode($_POST["teamDetails"]);
         insertDB2("orders",$_POST);
         if( $wallet == 1 || $freePayment == 1){
             $response["data"] = array(
