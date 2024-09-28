@@ -1,11 +1,11 @@
 <?php
-if( isset($_GET["OrderID"]) && !empty($_GET["OrderID"]) ){
-    if( $order = selectDB("orders","`gatewayId` = '{$_GET["OrderID"]}'") ){
-        $order2 = selectDB("orders","`gatewayId` = '{$_GET["OrderID"]}'");
+if( isset($_GET["requested_order_id"]) && !empty($_GET["requested_order_id"]) ){
+    if( $order = selectDB("orders","`gatewayId` = '{$_GET["requested_order_id"]}'") ){
+        $order2 = selectDB("orders","`gatewayId` = '{$_GET["requested_order_id"]}'");
         if( $order2[0]["status"] == 0 ){
             $session = selectDB("sessions","`id` = '{$order2[0]["sessionId"]}'");
             $quantity = $session[0]["quantity"] - $order2[0]["subscriptionQuantity"];
-            updateDB("orders",array("gatewayLink"=>json_encode($_GET),"status"=>1),"`gatewayId` = '{$_GET["OrderID"]}'");
+            updateDB("orders",array("gatewayLink"=>json_encode($_GET),"status"=>1),"`gatewayId` = '{$_GET["requested_order_id"]}'");
             updateDB("sessions",array("quantity"=>$quantity),"`id` = '{$order2[0]["sessionId"]}'");
             $academyEmail = selectDB("academies","`id` = '{$order2[0]["academyId"]}'");
             $settingsEmail = selectDB("settings","`id` = '1'");
