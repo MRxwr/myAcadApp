@@ -228,9 +228,9 @@ if( !isset($_POST) ){
     ));
 
     $response = curl_exec($curl);
+    echo curl_error($curl);die();
     curl_close($curl);
     $response = json_decode($response,true);
-    echo outputData([$data,$_POST,$response]);die();
     //saving info and redirecting to payment pages
     if( $response["status"] == true 
         && isset($response["data"]["link"]) 
