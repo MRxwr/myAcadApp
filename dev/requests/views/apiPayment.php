@@ -336,7 +336,7 @@ if( !isset($_POST) ){
 
     $response = curl_exec($curl);
     curl_close($curl);
-    $response = json_decode($response,true);
+    echo $response = json_decode($response,true);
 
     //saving info and redirecting to payment pages
     if( $response["status"] == "success" && isset($response["paymentURL"]) && !empty($response["paymentURL"]) ){
