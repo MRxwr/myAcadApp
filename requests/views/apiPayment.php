@@ -4,6 +4,7 @@ if( !isset($_POST) ){
 	echo outputError($response);die();
 }else{
     $data = $_POST;
+    $orderId = time();
     unset($_POST);
     $user = $data["user"];
     $academy = $data["academy"];
