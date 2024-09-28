@@ -351,8 +351,8 @@ if( !isset($_POST) ){
             "InvoiceId"  => $orderId
         );
         insertDB2("orders",$_POST);
-        if( $wallet == 1 ){
-            $array["data"] = array(
+        if( $wallet == 1 || $freePayment == 1){
+            $response["data"] = array(
                 "paymentURL"    => "index.php?v=Success&OrderID={$_POST["gatewayId"]}&Result=CAPTURED",
                 "InvoiceId"     => $orderId
             );
@@ -360,7 +360,7 @@ if( !isset($_POST) ){
                 $newWallet = $user[0]["wallet"] - $_POST["total"];
                 updateDB("users",array("wallet" => $newWallet),"`id` = {$_POST["userId"]}");
             }
-            echo outputData($array);
+            echo outputData($response);
         }else{
             echo outputData($response);
         }
