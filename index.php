@@ -1,8 +1,8 @@
 <?php
-if( isset($_GET["Result"]) ){
-	if( $_GET["Result"] == "CANCELED" || $_GET["Result"] == "ERROR" ){
+if( isset($_GET["result"]) ){
+	if( $_GET["result"] == "CANCELED" || $_GET["result"] == "ERROR" || $_GET["result"] == "NOT CAPTURED" ){
 		$_GET["v"] = "Fail";
-	}elseif( $_GET["Result"] == "CAPTURED" ){
+	}elseif( $_GET["result"] == "CAPTURED" ){
 		sleep(5);
 		$_GET["v"] = "Success";
 	}
