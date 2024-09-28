@@ -36,7 +36,7 @@ if( isset($_GET["requested_order_id"]) && !empty($_GET["requested_order_id"]) ){
     ?>
     <script>
     window.onload = function() {
-        alert("<?php echo direction("Error, Your subscription order could not be completed. Please try again.","خطأ، لم نستطع تأكيد إشتراكك، الرجاء المحاولة مجدداً") ?>");
+        alert("<?php echo direction("Error, Your subscription order could not be completed. Please try again...","خطأ، لم نستطع تأكيد إشتراكك، الرجاء المحاولة مجدداً") ?>");
         window.location.href = "?v=Home";
     };
     </script>
