@@ -350,6 +350,7 @@ if( !isset($_POST) ){
             "paymentURL" => $response["data"]["link"],
             "InvoiceId"  => $orderId
         );
+        echo outputData([$_POST,$response]);die();
         insertDB2("orders",$_POST);
         if( $wallet == 1 ){
             $array["data"] = array(
