@@ -348,6 +348,7 @@ if( !isset($_POST) ){
         $_POST["apiResponse"]   = json_encode($response);
         $_POST["paymentMethod"] = ( $wallet == 1 ) ? 3 : $paymentMethod;
         $_POST["paymentMethod"] = ( $freePayment == 1 ) ? 4 : $_POST["paymentMethod"];
+        $response["paymentURL"] = $response["data"]["link"];
         $response["data"] = array(
             "paymentURL" => $response["data"]["link"],
             "InvoiceId"  => $orderId
