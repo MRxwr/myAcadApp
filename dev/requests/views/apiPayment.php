@@ -292,7 +292,7 @@ if( !isset($_POST) ){
         //preparing upayment payload and creating order
         $postBody = array(
             'language' => 'en',
-            //'paymentGateway[src]' => "{$paymentGateway}",
+            'paymentGateway[src]' => "{$paymentGateway}",
             'order[id]' => $orderId,
             'order[currency]' => 'KWD',
             'order[amount]' => (string)$fullAmount,
@@ -318,7 +318,8 @@ if( !isset($_POST) ){
             'extraMerchantData[1][ibanNumber]' => "{$academyData[0]["iban"]}",
             );
     }
-    echo json_encode($postBody);die();
+    echo json_encode($postBody);
+    exit();
     $curl = curl_init();
     curl_setopt_array($curl, array(
         CURLOPT_URL => 'https://uapi.upayments.com/api/v1/charge',
@@ -335,7 +336,7 @@ if( !isset($_POST) ){
         ),
     ));
 
-    echo $response = curl_exec($curl);
+    $response = curl_exec($curl);
     curl_close($curl);
     $response = json_decode($response,true);
 
