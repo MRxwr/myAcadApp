@@ -4,6 +4,7 @@ if( !isset($_POST) ){
 	echo outputError($response);die();
 }else{
     $data = $_POST;
+    $orderId = date("Ymd").rand(1000,9999).date("His");
     unset($_POST);
     $user = $data["user"];
     $academy = $data["academy"];
@@ -231,21 +232,21 @@ if( !isset($_POST) ){
     $response = json_decode($response,true);
 
     //saving info and redirecting to payment pages
-    if( $response["status"] == "success" && isset($response["paymentURL"]) && !empty($response["paymentURL"]) ){
-        $_POST["gatewayId"] = $comon_array["order_id"];
-        $_POST["gatewayURL"] = $response["paymentURL"];
+    if( $response["status"] == true && isset($response["data"]["link"]) && !empty($response["data"]["link"]) ){
+        $_POST["gatewayId"] = $orderId;
+        $_POST["gatewayURL"] = $response["data"]["link"];
         $_POST["apiPayload"] = json_encode($comon_array);
         $_POST["apiResponse"] = json_encode($response);
         $_POST["paymentMethod"] = ( $wallet == 1 ) ? 3 : $paymentMethod;
         $response["data"] = array(
-            "paymentURL" => $response["paymentURL"],
-            "InvoiceId"  => $comon_array["order_id"]
+            "paymentURL" => $response["data"]["link"],
+            "InvoiceId"  => $orderId
         );
         insertDB2("orders",$_POST);
         if( $wallet == 1 ){
             $array["data"] = array(
                 "paymentURL" => "index.php?v=Success&OrderID={$_POST["gatewayId"]}&Result=CAPTURED",
-                "InvoiceId" => $comon_array["order_id"]
+                "InvoiceId" => $orderId
             );
             if( $user = selectDB("users","`id` = {$_POST["userId"]}") ){
                 $newWallet = $user[0]["wallet"] - $_POST["total"];
