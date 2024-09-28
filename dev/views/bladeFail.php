@@ -1,9 +1,9 @@
 <?php
-if( isset($_GET["OrderID"]) && !empty($_GET["OrderID"]) ){
-    if( $order = selectDB("orders","`gatewayId` = '{$_GET["OrderID"]}'")){
+if( isset($_GET["requested_order_id"]) && !empty($_GET["requested_order_id"]) ){
+    if( $order = selectDB("orders","`gatewayId` = '{$_GET["requested_order_id"]}'")){
         if( $order[0]["status"] == 0 ){
             $academyId = $order[0]["academyId"];
-            updateDB("orders",array("gatewayLink"=>json_encode($_GET),"status"=>2),"`gatewayId` = '{$_GET["OrderID"]}'");
+            updateDB("orders",array("gatewayLink"=>json_encode($_GET),"status"=>2),"`gatewayId` = '{$_GET["requested_order_id"]}'");
         }
     }else{
         $academyId = "";
