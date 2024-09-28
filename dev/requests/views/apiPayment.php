@@ -340,7 +340,7 @@ if( !isset($_POST) ){
 
     //saving info and redirecting to payment pages
     if( $response["status"] == true && isset($response["data"]["link"]) && !empty($response["data"]["link"]) ){
-        $_POST["gatewayId"]     = $postBody["order"]["id"];
+        $_POST["gatewayId"]     = $orderId;
         $_POST["gatewayURL"]    = $response["data"]["link"];
         $_POST["apiPayload"]    = json_encode($postBody);
         $_POST["apiResponse"]   = json_encode($response);
@@ -348,13 +348,13 @@ if( !isset($_POST) ){
         $_POST["paymentMethod"] = ( $freePayment == 1 ) ? 4 : $paymentMethod;
         $response["data"] = array(
             "paymentURL" => $response["data"]["link"],
-            "InvoiceId"  => $postBody["order"]["id"]
+            "InvoiceId"  => $orderId
         );
         insertDB2("orders",$_POST);
         if( $wallet == 1 ){
             $array["data"] = array(
                 "paymentURL"    => "index.php?v=Success&OrderID={$_POST["gatewayId"]}&Result=CAPTURED",
-                "InvoiceId"     => $postBody["order"]["id"]
+                "InvoiceId"     => $orderId
             );
             if( $user = selectDB("users","`id` = {$_POST["userId"]}") ){
                 $newWallet = $user[0]["wallet"] - $_POST["total"];
