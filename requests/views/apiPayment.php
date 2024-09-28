@@ -232,21 +232,21 @@ if( !isset($_POST) ){
     $response = json_decode($response,true);
 
     //saving info and redirecting to payment pages
-    if( $response["status"] == "success" && isset($response["paymentURL"]) && !empty($response["paymentURL"]) ){
-        $_POST["gatewayId"] = $comon_array["order_id"];
-        $_POST["gatewayURL"] = $response["paymentURL"];
-        $_POST["apiPayload"] = json_encode($comon_array);
+    if( $response["status"] == true && isset($response["data"]["link"]) && !empty($response["data"]["link"]) ){
+        $_POST["gatewayId"] = $orderId;
+        $_POST["gatewayURL"] = $response["data"]["link"];
+        $_POST["apiPayload"] = json_encode($postBody);
         $_POST["apiResponse"] = json_encode($response);
         $_POST["paymentMethod"] = ( $wallet == 1 ) ? 3 : $paymentMethod;
         $response["data"] = array(
-            "paymentURL" => $response["paymentURL"],
-            "InvoiceId"  => $comon_array["order_id"]
+            "paymentURL" => $response["data"]["link"],
+            "InvoiceId"  => $orderId
         );
         insertDB2("orders",$_POST);
         if( $wallet == 1 ){
             $array["data"] = array(
                 "paymentURL" => "index.php?v=Success&OrderID={$_POST["gatewayId"]}&Result=CAPTURED",
-                "InvoiceId" => $comon_array["order_id"]
+                "InvoiceId" => $orderId
             );
             if( $user = selectDB("users","`id` = {$_POST["userId"]}") ){
                 $newWallet = $user[0]["wallet"] - $_POST["total"];
