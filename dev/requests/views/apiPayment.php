@@ -274,6 +274,8 @@ if( !isset($_POST) ){
         $_POST["paymentMethod"] = $paymentMethod;
         $_POST["voucher"] = $data["voucher"];
 
+        $_POST["teamDetails"] = json_encode($_POST["teamDetails"]);
+        
         //calculate totals prices that should be sent to upayments 
         if( $data["paymentMethod"] == 1 ){
             $myacadDeposit = ( $academyData[0]["chargeType"] == "fixed" ) ? $academyData[0]["charges"] : $newTotal * ( $academyData[0]["charges"] / 100 );
@@ -350,7 +352,6 @@ if( !isset($_POST) ){
             "paymentURL" => $response["data"]["link"],
             "InvoiceId"  => $orderId
         );
-        $_POST["teamDetails"] = json_encode($_POST["teamDetails"]);
         insertDB2("orders",$_POST);
         if( $wallet == 1 || $freePayment == 1){
             $response["data"] = array(
