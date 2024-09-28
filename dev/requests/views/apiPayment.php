@@ -230,7 +230,7 @@ if( !isset($_POST) ){
         //checking adamin settings for main IBAN
         if( $AdminSettings = selectDB("settings","`id` = '1'") ){}
 
-        //checking jersy Inforamtion
+        //checking tournament Inforamtion
         if( $tournamentData = selectDB("tournaments","`id` = '{$tournament}'")){}
 
         //checking payment method
@@ -252,7 +252,7 @@ if( !isset($_POST) ){
 
         //calulation of total prices
         $newTotal = (float)$price;
-        $fullAmount = (float)$fullAmount;
+        $fullAmount = (float)$price;
         if( $numberOfTimesAvalability && $tournamentAprroved ){
             $newTotal = ( $voucherType == 0 ) ? ($newTotal*(1-($voucherAmount/100))) : $newTotal - $voucherAmount;
             $fullAmount = ( $voucherType == 0 ) ? ($fullAmount*(1-($voucherAmount/100))) : $fullAmount - $voucherAmount;
@@ -315,7 +315,7 @@ if( !isset($_POST) ){
             'extraMerchantData[1][knetChargeType]' => 'fixed',
             'extraMerchantData[1][ccCharge]' => '0.25',
             'extraMerchantData[1][ccChargeType]' => 'fixed',
-            'extraMerchantData[1][ibanNumber]' => "{$academyData[0]["iban"]}",
+            'extraMerchantData[1][ibanNumber]' => "{$tournamentData[0]["iban"]}",
             );
     }
 
