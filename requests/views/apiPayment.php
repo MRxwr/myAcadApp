@@ -232,7 +232,9 @@ if( !isset($_POST) ){
     $response = json_decode($response,true);
 
     //saving info and redirecting to payment pages
-    if( $response["status"] == true && isset($response["data"]["link"]) && !empty($response["data"]["link"]) ){
+    if( $response["status"] == true 
+        && isset($response["data"]["link"]) 
+        && !empty($response["data"]["link"]) ){
         $_POST["gatewayId"] = $orderId;
         $_POST["gatewayURL"] = $response["data"]["link"];
         $_POST["apiPayload"] = json_encode($comon_array);
