@@ -147,8 +147,8 @@ if( $response["error"] == 1 ){
                                 <div class="col-12 p-3 mb-5">
                                     <input type="hidden" name="tournamentId" value="<?php echo $_GET["id"] ?>">
                                     <input type="hidden" name="teamName" value="<?php echo $_POST["teamName"] ?>">
-                                    <input type="hidden" name="players" value="<?php echo $_POST["players"] ?>">
-                                    <input type="hidden" name="bench" value="<?php echo $_POST["bench"] ?>">
+                                    <input type="hidden" name="players" value="<?php echo json_encode($_POST["players"]) ?>">
+                                    <input type="hidden" name="bench" value="<?php echo json_encode($_POST["bench"]) ?>">
                                     <button class="button mt_55"><?php echo direction("Register Now","سجل الان") ?></button>
                                 </div>
                             </div>
