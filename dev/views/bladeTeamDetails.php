@@ -27,6 +27,7 @@ if( $response["error"] == 1 ){
 	<?php
 }else{
 	$tournament = $response["data"]["tournament"];
+    $user = selectDB("users","`keepMeAlive` LIKE '{$_COOKIE["createmyacad"]}'");
 }
 ?>
 
@@ -118,6 +119,20 @@ if( $response["error"] == 1 ){
                                             <?php
                                         }
                                         ?>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 text-left p-3"><h5><?php echo direction("PAYMENT METHOD", "طرق الدفع" ) ?></h5></div>
+                                <div class="col-12 p-3">
+                                    <div class="check_out">
+                                        <div class="shape_items">
+                                            <input type="radio" checked="" name="paymentMethod" id="out_1" value="1">
+                                            <label for="out_1"><span></span>Online Payment</label>
+                                        </div>
+                                        <div class="shape_items">
+                                            <input type="radio" name="paymentMethod" id="out_3" <?php echo $disabled = ( $user[0]["wallet"] > ($tournament["price"])) ? "" : "disabled" ; ?> value="3">
+                                            <label for="out_3"><span></span><?php echo direction("Wallet","المحفظة") ?> <p>  ( <?php echo $user[0]["wallet"] ?>KD )</p></label>
+                                        </div>
                                     </div>
                                 </div>
 
