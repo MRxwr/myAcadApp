@@ -54,9 +54,6 @@ if( $response["error"] == 1 ){
                                 </div>
                             </div>
                         </div>
-                        <div class="d-lg-none mt_20 mb_20">
-                            <iframe width="100%" height="400" src="<?php echo $tournament["video"] ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                        </div>
                         <form action="<?php echo "?v=TeamDetails&id={$_GET["id"]}" ?>" method="POST" class="cup_area">
                             <div class="row">
                                 <div class="col-12 p-3"><h5><?php echo direction("Team name","اسم الفريق") ?></h5></div>
