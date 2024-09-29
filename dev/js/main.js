@@ -137,9 +137,8 @@
 
         $('#submitTeam').on('click', function (event) {
             event.preventDefault();
-            var langCookieValue = $.cookie("CREATEkwLANG");
-            console.log(langCookieValue);
-            var selectedLanguage = (langCookieValue === undefined || langCookieValue === "" || langCookieValue === "EN") ? "Please fill all feilds" : "يرجى ملء جميع الحقول";
+            //var langCookieValue = $.cookie("CREATEkwLANG");
+            //var selectedLanguage = (langCookieValue === undefined || langCookieValue === "" || langCookieValue === "EN") ? "Please fill all feilds" : "يرجى ملء جميع الحقول";
             var isValid = true;
         
             // Check players[] fields
@@ -161,17 +160,11 @@
             if (teamName === "") {
                 isValid = false;
             }
-
-            if (!isValid) {
-                console.log('selectedLanguage:', selectedLanguage);
-                alert(selectedLanguage);
-                return false;
-            }
         
             if (isValid) {
                 return true;
             } else {
-                alert(selectedLanguage);
+                //alert(selectedLanguage);
                 return false;
             }
         });
