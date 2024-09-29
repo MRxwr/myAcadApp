@@ -271,6 +271,19 @@
 
             // change the view of select governates
             */
+
+        // on checkbox change remove disabled attr from button if goToTeamInit
+        $('input[type="checkbox"]').on('click', function (event) {
+            event.preventDefault();
+            var goToTeamInit = $(this).prop('checked');
+            if (goToTeamInit) {
+                $('#goToTeamInit').prop('disabled', false);
+                $('#goToTeamInit').attr('style', "");
+            } else {
+                $('#goToTeamInit').prop('disabled', true);
+                $('#goToTeamInit').attr('style', "background: gray;color: black;");
+            }
+        })
 		$('input[type="radio"]').on('click', function (event) {
 			event.preventDefault();
             var sessionId = $(this).val();
