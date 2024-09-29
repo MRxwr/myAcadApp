@@ -135,18 +135,36 @@
             }
 		});
 
-        // check if all input feilds with name players and bench and team name filled then open buttin to submit
         $('#submitTeam').on('click', function (event) {
             event.preventDefault();
             var langCookieValue = $.cookie("CREATEkwLANG");
             console.log(langCookieValue);
             var selectedLanguage = (langCookieValue === undefined || langCookieValue === "" || langCookieValue === "EN") ? "Please fill all feilds" : "يرجى ملء جميع الحقول";
-            var players = $("input[name=players]").val();
-            var bench = $("input[name=bench]").val();
-            var teamName = $("input[name=teamName]").val();
-            if (players != "" || bench != "" || teamName != "") {
+            var isValid = true;
+        
+            // Check players[] fields
+            $("input[name='players[]']").each(function() {
+                if ($(this).val() === "") {
+                    isValid = false;
+                }
+            });
+        
+            // Check bench[] fields
+            $("input[name='bench[]']").each(function() {
+                if ($(this).val() === "") {
+                    isValid = false;
+                }
+            });
+        
+            // Check teamName field
+            var teamName = $("input[name='teamName[]']").val();
+            if (teamName === "") {
+                isValid = false;
+            }
+        
+            if (isValid) {
                 return true;
-            }else{
+            } else {
                 alert(selectedLanguage);
                 return false;
             }
