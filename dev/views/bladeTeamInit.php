@@ -59,15 +59,9 @@ if( $response["error"] == 1 ){
                         </div>
                         <form action="<?php echo "?v=TeamDetails&id={$_GET["id"]}" ?>" method="POST" class="cup_area">
                             <div class="row">
-                                <div class="col-12 p-1">
-                                    <h5><?php echo direction("Team name","اسم الفريق") ?></h5>
-                                </div>
-                                <div class="col-12 p-1">
-                                    <input type="text" name="teamName" id="teamName" class="textInput" placeholder="Team Name">
-                                </div>
-                                <div class="col-12 p-1">
-                                    <h5><?php echo direction("Players","اللاعبين") ?></h5>
-                                </div>
+                                <div class="col-12 p-1"><h5><?php echo direction("Team name","اسم الفريق") ?></h5></div>
+                                <div class="col-12 p-1"><input type="text" name="teamName" id="teamName" class="textInput" placeholder="Team Name"></div>
+                                <div class="col-12 p-1"><h5><?php echo direction("Players","اللاعبين") ?></h5></div>
                                 <?php
                                 for( $i = 0; $i < $tournament["players"]; $i++){
                                     ?>
@@ -85,9 +79,7 @@ if( $response["error"] == 1 ){
                                     <?php
                                 }
                                 ?>
-                                <div class="col-12 p-1">
-                                    <button class="button mt_55" id="submitTeam" ><?php echo direction("Continue","تابع") ?></button>
-                                </div>
+                                <div class="col-12 p-1"><button class="button mt_55" id="submitTeam" ><?php echo direction("Continue","تابع") ?></button></div>
                             </div>
                         </form>
                     </div>
