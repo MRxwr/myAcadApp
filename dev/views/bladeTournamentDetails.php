@@ -85,8 +85,8 @@ if( $response["error"] == 1 ){
                             <p>
                                 <?php echo direction($tournament["enTerms"],$tournament["arTerms"]) ?>
                             </p>
-                            <input type="radio" name="checkTerms" value="1"><span><?php echo direction("I agree to the terms and conditions","أوافق على الشروط والاحكام") ?></span>
-							<button class="button mt_55" id="chooseBtn"><?php echo direction("Choose","إختر") ?></button>
+                            <input type="checkbox" name="checkTerms" value="1"><span><?php echo direction("I agree to the terms and conditions","أوافق على الشروط والاحكام") ?></span>
+							<button class="button mt_55" id="chooseBtn" disabled><?php echo direction("Choose","إختر") ?></button>
                         </form>
                     </div>
                 </div>
