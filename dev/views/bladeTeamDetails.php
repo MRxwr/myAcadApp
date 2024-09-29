@@ -99,7 +99,7 @@ if( $response["error"] == 1 ){
                                         <?php
                                         for( $i = 0; $i < count($_POST["players"]); $i++){
                                             ?>
-                                            <div class="col-12 text-right p-3"><h5><?php echo $_POST["players"][$i] ?></h5></div>
+                                            <div class="col-12 p-3"><h5><?php echo $_POST["players"][$i] ?></h5></div>
                                             <?php
                                         }
                                         ?>
@@ -107,7 +107,7 @@ if( $response["error"] == 1 ){
                                         <?php
                                         for( $i = 0; $i < count($_POST["bench"]); $i++){
                                             ?>
-                                            <div class="col-12 text-right p-3"><h5><?php echo $_POST["bench"][$i] ?></h5></div>
+                                            <div class="col-12 p-3"><h5><?php echo $_POST["bench"][$i] ?></h5></div>
                                             <?php
                                         }
                                         $price = ( $tournament["price"] != 0 ) ? $tournament["price"] . " KD" : "";
