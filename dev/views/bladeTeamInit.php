@@ -30,35 +30,6 @@ if( $response["error"] == 1 ){
 }
 ?>
 
-<style>
-	input[type="number"]::-webkit-outer-spin-button,
-	input[type="number"]::-webkit-inner-spin-button {
-		-webkit-appearance: none;
-		appearance: none;
-		margin: 0;
-	}
-	input[type="number"] {
-        appearance: textfield;
-		-moz-appearance: textfield; /* Firefox */
-	}
-	input[type="text"],
-	input[type="number"] {
-		text-align: center;
-	}
-    /* Add strike-through style to Nice Select option text */
-    .nice-select .strike-through {
-        display: block;
-        padding: 0.5rem 1rem;
-        font-size: 1rem;
-        text-decoration: line-through;
-    }
-
-    /* Style the non-strikethrough part of the option */
-    .nice-select .strike-through:not([data-display]) {
-        text-decoration: none;
-    }
-</style>
-
 <div class="jersy_area mt_20">
     <div class="container">
         <div class="row justify-content-center">
@@ -81,28 +52,28 @@ if( $response["error"] == 1 ){
                             <iframe width="100%" height="400" src="<?php echo $tournament["video"] ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                         </div>
                         <form action="<?php echo "?v=TeamInit&id={$_GET["id"]}" ?>" method="POST" class="cup_area">
-                            <h5><?php echo direction("Terms & Conditions","الشروط والاحكام") ?></h5>
-                            <p>
-                                <?php echo direction($tournament["enTerms"],$tournament["arTerms"]) ?>
-                            </p>
-                            <input type="checkbox" id="checkTerms" ><span><?php echo direction("I agree to the terms and conditions","أوافق على الشروط والاحكام") ?></span>
-							<button class="button mt_55" id="goToTeamInit" disabled style="background: gray;color: black;"><?php echo direction("Choose","إختر") ?></button>
+                            <h5><?php echo direction("Team name","اسم الفريق") ?></h5>
+                                <input type="text" name="teamName" id="teamName" placeholder="Team Name">
+                            <h5><?php echo direction("Players","اللاعبين") ?></h5>
+                                <?php
+                                for( $i = 0; $i < $tournament["players"]; $i++){
+                                    ?>
+                                    <input type="text" name="players[]" placeholder="Player Name">
+                                    <?php
+                                }
+                                ?>
+                            <h5><?php echo direction("Bench","الإحتياط") ?></h5>
+                            <?php
+                                for( $i = 0; $i < $tournament["bench"]; $i++){
+                                    ?>
+                                    <input type="text" name="bench[]" placeholder="Player Name">
+                                    <?php
+                                }
+                            ?>
+							<button class="button mt_55" id="submitTeam" disabled style="background: gray;color: black;"><?php echo direction("Continue","تابع") ?></button>
                         </form>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- map_area -->
-<div class="map_area mt_30">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-10">
-                <h2><img src="img/map.svg" alt=""><?php echo direction("Location","الموقع") ?></h2>
-                <a href="<?php echo $tournament["location"] ?>">
-                    <img src="<?php echo "logos/{$tournament["locationImage"]}" ?>" style="width: 100%;height: 250px;" alt="">
-                </a>
             </div>
         </div>
     </div>
