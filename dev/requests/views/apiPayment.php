@@ -336,7 +336,7 @@ if( !isset($_POST) ){
             'Authorization: Bearer afmceR6nHQaIehhpOel036LBhC8hihuB8iNh9ACF',
         ),
     ));
-    $response = curl_exec($curl);
+    echo $response = curl_exec($curl);
     curl_close($curl);
     $response = json_decode($response,true);
 
