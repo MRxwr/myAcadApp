@@ -25,7 +25,6 @@ if( isset($_POST) && !empty($_POST) ){
             "voucher" => "",
         );
     }
-    var_dump($data);die();
     $curl = curl_init();
     curl_setopt_array($curl, array(
       CURLOPT_URL => "{$baseURL}/index.php?a=Payment",
