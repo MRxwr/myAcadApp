@@ -1,16 +1,30 @@
 <?php
 if( isset($_POST["data"]) && !empty($_POST["data"]) ){
-    $incommingData = json_decode($_POST["data"],true);
-    $data = array(
-        'user' => "{$incommingData["user"]}",
-        'academy' => "{$incommingData["academy"]}",
-        'session' => "{$incommingData["session"]}",
-        'subscription' => "{$incommingData["subscription"]}",
-        'subscriptionQuantity' => "{$incommingData["subscriptionQuantity"]}",
-        'jersyQuantity' => "{$incommingData["jersyQuantity"]}",
-        'voucher' => "{$_POST["voucher"]}",
-        'paymentMethod' => "{$_POST["paymentMethod"]}"
-    );
+    if( isset($_POST["academy"]) && !empty($_POST["academy"]) ){
+        $incommingData = json_decode($_POST["data"],true);
+        $data = array(
+            'user' => "{$incommingData["user"]}",
+            'academy' => "{$incommingData["academy"]}",
+            'session' => "{$incommingData["session"]}",
+            'subscription' => "{$incommingData["subscription"]}",
+            'subscriptionQuantity' => "{$incommingData["subscriptionQuantity"]}",
+            'jersyQuantity' => "{$incommingData["jersyQuantity"]}",
+            'voucher' => "{$_POST["voucher"]}",
+            'paymentMethod' => "{$_POST["paymentMethod"]}"
+        );
+    }elseif( isset($_POST["tournamentId"]) && !empty($_POST["tournamentId"]) ){
+        $user = selectDB("users","`keepMeAlive` LIKE '{$_COOKIE["createmyacad"]}'");
+        $data = array(    
+            "user" => $user[0]["user"],
+            "tournament" => $_POST["tournamentId"],
+            "teamName" => $_POST["teamName"],
+            "players" => $_POST["players"],
+            "bench" => $_POST["bench"],
+            "quantity" => 1,
+            "paymentMethod" => $_POST["paymentMethod"],
+            "voucher" => "",
+        );
+    }
     $curl = curl_init();
     curl_setopt_array($curl, array(
       CURLOPT_URL => "{$baseURL}/index.php?a=Payment",
