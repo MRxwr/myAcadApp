@@ -58,17 +58,17 @@ if( $response["error"] == 1 ){
                             <div class="row">
                                 <div class="col-12 p-3"><h5><?php echo direction("Team name","اسم الفريق") ?></h5></div>
                                 <div class="col-12 p-3"><input type="text" name="teamName" id="teamName" style="border: 1px #e2e2e2 solid !important;width: 100% !important;padding: 10px;" placeholder="Team Name"></div>
-                                <div class="col-12 p-3"><h5><?php echo direction("Players","اللاعبين") ?></h5></div>
+                                <div class="col-6 text-left p-3"><h5><?php echo direction("Main Players","اللاعبين الأساسيين") ?></h5></div>
+                                <div class="col-6 text-right p-3"><h5><?php echo "({$tournament["players"]}) " . direction("Players","اللاعبين") ?></h5></div>
                                 <?php
                                 for( $i = 0; $i < $tournament["players"]; $i++){
                                     ?>
-                                    <div class="col-12 p-3"><input type="text" name="players[]" style="border: 1px #e2e2e2 solid !important;width: 100% !important;padding: 10px;" placeholder="Player Name"></p></div>
+                                    <div class="col-12 p-3"><input type="text" name="players[]" style="border: 1px #e2e2e2 solid !important;width: 100% !important;padding: 10px;" placeholder="Player Name" required></p></div>
                                     <?php
                                 }
                                 ?>
-                                <div class="col-12 p-3">
-                                    <h5><?php echo direction("Bench","الإحتياط") ?></h5>
-                                </div>
+                                <div class="col-12 p-3"><h5><?php echo direction("Bench Players","اللاعبين الإحتياط") . " (" . direction("Optional","اختياري") . ")"?></h5></div>
+                                <div class="col-6 text-right p-3"><h5><?php echo "({$tournament["bench"]}) " . direction("Players","اللاعبين") ?></h5></div>
                                 <?php
                                 for( $i = 0; $i < $tournament["bench"]; $i++){
                                     ?>

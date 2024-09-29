@@ -147,13 +147,6 @@
                 }
             });
         
-            // Check bench[] fields
-            $("input[name='bench[]']").each(function() {
-                if ($(this).val() === "") {
-                    isValid = false;
-                }
-            });
-        
             // Check teamName field
             var teamName = $("input[name='teamName[]']").val();
             if (teamName === "") {
