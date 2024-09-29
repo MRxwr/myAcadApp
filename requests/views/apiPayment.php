@@ -366,12 +366,8 @@ if( !isset($_POST) ){
                 $newWallet = $user[0]["wallet"] - $fullAmount;
                 updateDB("users",array("wallet" => $newWallet),"`id` = {$_POST["userId"]}");
             }
-            echo outputData($response);
-        }else{
-            $response["msg"] = "DATA RECEIVED SUCCESSFULLY";
-            $response["status"] = "true";
-            echo outputData($response);
         }
+        echo outputData($response);
     }else{
         $response["msg"] = popupMsg($requestLang,'Error while proccessing payment','خطأ في عملية الدفع');
         echo outputError($response);
