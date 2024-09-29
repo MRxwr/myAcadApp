@@ -278,11 +278,11 @@ if( !isset($_POST) ){
 
         //calculate totals prices that should be sent to upayments 
         if( $data["paymentMethod"] == 1 ){
-            $myacadDeposit = ( $academyData[0]["chargeType"] == "fixed" ) ? $academyData[0]["charges"] : $newTotal * ( $academyData[0]["charges"] / 100 );
+            $myacadDeposit = ( $tournaments[0]["chargeType"] == "fixed" ) ? $tournaments[0]["charges"] : $newTotal * ( $tournaments[0]["charges"] / 100 );
             $newTotal = $newTotal - $myacadDeposit;
             $paymentGateway = "knet";
         }elseif( $data["paymentMethod"] == 2 ){
-            $myacadDeposit = ( $academyData[0]["cc_chargetype"] == "fixed" ) ? $academyData[0]["cc_charge"] : $newTotal * ( $academyData[0]["cc_charge"] / 100 );
+            $myacadDeposit = ( $tournaments[0]["cc_chargetype"] == "fixed" ) ? $tournaments[0]["cc_charge"] : $newTotal * ( $tournaments[0]["cc_charge"] / 100 );
             $newTotal = $newTotal - $myacadDeposit;
             $paymentGateway = "cc";
         }else{
