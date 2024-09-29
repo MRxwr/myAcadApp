@@ -353,6 +353,8 @@ if( !isset($_POST) ){
             "paymentURL" => $response["data"]["link"],
             "InvoiceId"  => $orderId
         );
+        $response["data"]["msg"] = "DATA RECEIVED SUCCESSFULLY";
+        $response["data"]["status"] = "true";
         insertDB2("orders",$_POST);
         if( $wallet == 1 || $freePayment == 1){
             $response["data"] = array(
@@ -366,6 +368,8 @@ if( !isset($_POST) ){
             }
             echo outputData($response);
         }else{
+            $response["data"]["msg"] = "DATA RECEIVED SUCCESSFULLY";
+            $response["data"]["status"] = "true";
             echo outputData($response);
         }
     }else{
