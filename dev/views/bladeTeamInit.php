@@ -30,6 +30,35 @@ if( $response["error"] == 1 ){
 }
 ?>
 
+<style>
+	input[type="number"]::-webkit-outer-spin-button,
+	input[type="number"]::-webkit-inner-spin-button {
+		-webkit-appearance: none;
+		appearance: none;
+		margin: 0;
+	}
+	input[type="number"] {
+        appearance: textfield;
+		-moz-appearance: textfield; /* Firefox */
+	}
+	input[type="text"],
+	input[type="number"] {
+		text-align: center;
+	}
+    /* Add strike-through style to Nice Select option text */
+    .nice-select .strike-through {
+        display: block;
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+        text-decoration: line-through;
+    }
+
+    /* Style the non-strikethrough part of the option */
+    .nice-select .strike-through:not([data-display]) {
+        text-decoration: none;
+    }
+</style>
+
 <div class="jersy_area mt_20">
     <div class="container">
         <div class="row justify-content-center">

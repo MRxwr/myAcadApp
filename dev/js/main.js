@@ -235,44 +235,6 @@
                 nav: false,
                 dots: true,
             });
-/*
-            $('input[type="radio"]').click(function () {
-                var $select = $('select[name="checkout[subscription]"]');
-                $select.empty();
-                var sessionId = $(this).val();
-                $.ajax({
-                    type: "GET",
-                    url: "requests/index.php?a=SessionSubscription",
-                    data: {sessionId: sessionId},
-                    headers: {
-                        "myacadheader": "myAcadAppCreate"
-                    },
-                    success: function(data) {
-                      console.log(data);
-                      const options = [];
-                      data.data.subscriptions.forEach(subscriptionArray => {
-                        subscriptionArray.forEach(subscription => {
-                          const title = subscription.enTitle;
-                          const price = subscription.price;
-                          const priceAfterDiscount = subscription.priceAfterDiscount;
-                    
-                          const optionText = priceAfterDiscount > 0
-                            ? `${title} <del>(${price}KD)</del> (${priceAfterDiscount}KD)`
-                            : `${title} (${price}KD)`;
-                    
-                          options.push(`<option class='strike-through' value='${subscription.id}' data-display='${optionText}'>${optionText}</option>`);
-                        });
-                      });
-                    
-                      $('select[name="checkout[subscription]"]').html(options.join(''));
-                    }
-                });
-            });
-
-            // change the view of select governates
-            */
-
-        // on checkbox change remove disabled attr from button if goToTeamInit
         $('#checkTerms').on('change', function (event) {
             event.preventDefault();
             var goToTeamInit = $(this).prop('checked');
