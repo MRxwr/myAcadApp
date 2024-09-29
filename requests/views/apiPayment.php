@@ -355,7 +355,7 @@ if( !isset($_POST) ){
         );
         $response["msg"] = "DATA RECEIVED SUCCESSFULLY";
         $response["status"] = "true";
-        insertDB2("orders",$_POST);
+        //insertDB2("orders",$_POST);
         if( $wallet == 1 || $freePayment == 1){
             $response["data"] = array(
                 "paymentURL"    => "index.php?v=Success&requested_order_id={$_POST["gatewayId"]}&result=CAPTURED",
@@ -367,11 +367,12 @@ if( !isset($_POST) ){
                 updateDB("users",array("wallet" => $newWallet),"`id` = {$_POST["userId"]}");
             }
         }
-        echo outputData($response);
+        //echo outputData($response);
+        $response["msg"] = popupMsg($requestLang,'Error while proccessing payment','خطأ في عملية الدفع');
+        echo outputError($response);
     }else{
         $response["msg"] = popupMsg($requestLang,'Error while proccessing payment','خطأ في عملية الدفع');
         echo outputError($response);
     }
-    
 }
 ?>
