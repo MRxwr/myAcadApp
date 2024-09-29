@@ -30,6 +30,12 @@ if( $response["error"] == 1 ){
 }
 ?>
 
+<style>
+    .textInput{
+        border: 1px #e2e2e2 solid;
+        width: 100% !important;
+    }
+</style>
 <div class="jersy_area mt_20">
     <div class="container">
         <div class="row justify-content-center">
@@ -53,33 +59,33 @@ if( $response["error"] == 1 ){
                         </div>
                         <form action="<?php echo "?v=TeamDetails&id={$_GET["id"]}" ?>" method="POST" class="cup_area">
                             <div class="row">
-                                <div class="col-12">
+                                <div class="col-12 p-1">
                                     <h5><?php echo direction("Team name","اسم الفريق") ?></h5>
                                 </div>
-                                <div class="col-12">
-                                    <input type="text" name="teamName" id="teamName" class="form-control" placeholder="Team Name">
+                                <div class="col-12 p-1">
+                                    <input type="text" name="teamName" id="teamName" class="textInput" placeholder="Team Name">
                                 </div>
-                                <div class="col-12">
+                                <div class="col-12 p-1">
                                     <h5><?php echo direction("Players","اللاعبين") ?></h5>
                                 </div>
                                 <?php
                                 for( $i = 0; $i < $tournament["players"]; $i++){
                                     ?>
-                                    <div class="col-12"><input type="text" name="players[]" class="form-control" placeholder="Player Name"></p></div>
+                                    <div class="col-12 p-1"><input type="text" name="players[]" class="textInput" placeholder="Player Name"></p></div>
                                     <?php
                                 }
                                 ?>
-                                <div class="col-12">
+                                <div class="col-12 p-1">
                                     <h5><?php echo direction("Bench","الإحتياط") ?></h5>
                                 </div>
                                 <?php
                                 for( $i = 0; $i < $tournament["bench"]; $i++){
                                     ?>
-                                    <div class="col-12"><input type="text" name="bench[]" class="form-control" placeholder="Player Name"></div>
+                                    <div class="col-12 p-1"><input type="text" name="bench[]" class="textInput" placeholder="Player Name"></div>
                                     <?php
                                 }
                                 ?>
-                                <div class="col-12">
+                                <div class="col-12 p-1">
                                     <button class="button mt_55" id="submitTeam" ><?php echo direction("Continue","تابع") ?></button>
                                 </div>
                             </div>
