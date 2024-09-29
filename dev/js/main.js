@@ -138,10 +138,8 @@
         // check if all input feilds with name players and bench and team name filled then open buttin to submit
         $('#submitTeam').on('click', function (event) {
             event.preventDefault();
-            // loop through all players feilds and all bench feilds beucase they are submited as array 
-            // if one of them is empty then button will be disabled
-            // if all feilds are filled then button will be enabled
             var langCookieValue = $.cookie("CREATEkwLANG");
+            console.log(langCookieValue);
             var selectedLanguage = (langCookieValue === undefined || langCookieValue === "" || langCookieValue === "EN") ? "Please fill all feilds" : "يرجى ملء جميع الحقول";
             var players = $("input[name=players]").val();
             var bench = $("input[name=bench]").val();
