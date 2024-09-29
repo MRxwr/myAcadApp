@@ -353,15 +353,17 @@ if( !isset($_POST) ){
             "paymentURL" => $response["data"]["link"],
             "InvoiceId"  => $orderId
         );
+        $response["paymentURL"] = $response["data"]["link"];
         insertDB2("orders",$_POST);
         if( $wallet == 1 || $freePayment == 1){
             $response["data"] = array(
                 "paymentURL"    => "index.php?v=Success&requested_order_id={$_POST["gatewayId"]}&result=CAPTURED",
                 "InvoiceId"     => $orderId
             );
+            $response["paymentURL"] = "index.php?v=Success&requested_order_id={$_POST["gatewayId"]}&result=CAPTURED";
             if( $user = selectDB("users","`id` = {$_POST["userId"]}") ){
-                $newWallet = $user[0]["wallet"] - $newTotal;
-                updateDB("users",array("wallet" => $fullAmount),"`id` = {$_POST["userId"]}");
+                $newWallet = $user[0]["wallet"] - $fullAmount;
+                updateDB("users",array("wallet" => $newWallet),"`id` = {$_POST["userId"]}");
             }
             echo outputData($response);
         }else{
