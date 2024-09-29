@@ -40,7 +40,7 @@ if( isset($_POST) && !empty($_POST) ){
         'myacadheader: myAcadAppCreate'
       ),
     ));
-    $response = curl_exec($curl);
+    echo $response = curl_exec($curl);
     curl_close($curl);
     $response = json_decode($response,true);
     if( $response["error"] == 0 ){
