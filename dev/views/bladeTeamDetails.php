@@ -58,42 +58,42 @@ if( $response["error"] == 1 ){
                             <div class="row">
                                 <div class="col-12 p-3"><h5><?php echo direction("ORDER INFO","معلومات الحجز") ?></h5></div>  
 
-                                <div class="col-12">
+                                <div class="col-12 p-3">
                                     <div class="row m-0 w-100" style="border:1px solid #e2e2e2">
                                         <div class="col-6 text-left p-3"><h5><?php echo direction("Tournament Name","اسم البطولة") ?></h5></div>
                                         <div class="col-6 text-right p-3"><h5><?php echo direction($tournament["enTitle"],$tournament["arTitle"]) ?></h5></div>
                                     </div>
                                 </div>
 
-                                <div class="col-12">
+                                <div class="col-12 p-3">
                                     <div class="row m-0 w-100" style="border:1px solid #e2e2e2">
                                         <div class="col-6 text-left p-3"><h5><?php echo direction("Location","المكان") ?></h5></div>
                                         <div class="col-6 text-right p-3"><h5><?php echo direction($tournament["enArea"],$tournament["arArea"]) ?></h5></div>
                                     </div>
                                 </div>
 
-                                <div class="col-12">
+                                <div class="col-12 p-3">
                                     <div class="row m-0 w-100" style="border:1px solid #e2e2e2">
                                         <div class="col-6 text-left p-3"><h5><?php echo direction("Date","التاريخ") ?></h5></div>
-                                        <div class="col-6 text-right p-3"><h5><?php echo $_POST["gameDate"] ?></h5></div>
+                                        <div class="col-6 text-right p-3"><h5><?php echo $tournament["gameDate"] ?></h5></div>
                                     </div>
                                 </div>
                                 
-                                <div class="col-12">
+                                <div class="col-12 p-3">
                                     <div class="row m-0 w-100" style="border:1px solid #e2e2e2">
                                         <div class="col-6 text-left p-3"><h5><?php echo direction("Time","الوقت") ?></h5></div>
-                                        <div class="col-6 text-right p-3"><h5><?php echo $_POST["gameTime"] ?></h5></div>
+                                        <div class="col-6 text-right p-3"><h5><?php echo $tournament["gameTime"] ?></h5></div>
                                     </div>
                                 </div>
 
-                                <div class="col-12">
+                                <div class="col-12 p-3">
                                     <div class="row m-0 w-100" style="border:1px solid #e2e2e2">
                                         <div class="col-6 text-left p-3"><h5><?php echo direction("Team name","اسم الفريق") ?></h5></div>
                                         <div class="col-6 text-right p-3"><h5><?php echo $_POST["teamName"] ?></h5></div>
                                     </div>
                                 </div>
 
-                                <div class="col-12">
+                                <div class="col-12 p-3">
                                     <div class="row m-0 w-100" style="border:1px solid #e2e2e2">
                                         <div class="col-12 text-left p-3"><h5><?php echo direction("Team Members","اعضاء الفريق") ?></h5></div>
                                         <?php
