@@ -56,6 +56,7 @@ if( $response["error"] == 1 ){
                             </div>
                         </div>
                         <form id="teamInitForm" action="<?php echo "?v=Payment&id={$_GET["id"]}" ?>" method="POST" class="cup_area">
+                            <input type="hidden" name="paymentMethod" value="4">
                             <div class="row">
                                 <div class="col-12 p-3"><h5><?php echo direction("ORDER INFO","معلومات الحجز") ?></h5></div>  
 
@@ -121,6 +122,9 @@ if( $response["error"] == 1 ){
                                         ?>
                                     </div>
                                 </div>
+                                <?php 
+                                if ( $tournament["price"] != 0 ){
+                                    ?>
 
                                 <div class="col-12 text-left p-3"><h5><?php echo direction("PAYMENT METHOD", "طرق الدفع" ) ?></h5></div>
                                 <div class="col-12 p-3">
@@ -135,6 +139,10 @@ if( $response["error"] == 1 ){
                                         </div>
                                     </div>
                                 </div>
+
+                                    <?php
+                                }
+                                ?>
 
                                 <div class="col-12 p-3 mb-5">
                                     <input type="hidden" name="tournamentId" value="<?php echo $_GET["id"] ?>">
