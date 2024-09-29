@@ -368,8 +368,8 @@ if( !isset($_POST) ){
             }
             echo outputData($response);
         }else{
-            $response["data"]["msg"] = "DATA RECEIVED SUCCESSFULLY";
-            $response["data"]["status"] = "true";
+            $response["msg"] = "DATA RECEIVED SUCCESSFULLY";
+            $response["status"] = "true";
             echo outputData($response);
         }
     }else{
