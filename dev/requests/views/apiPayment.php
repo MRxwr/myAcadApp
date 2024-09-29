@@ -266,8 +266,8 @@ if( !isset($_POST) ){
         $_POST["teamDetails"]["enTournament"] = $tournaments[0]["enTitle"];
         $_POST["teamDetails"]["arTournament"] = $tournaments[0]["arTitle"];
         $_POST["teamDetails"]["teamName"] = $teamName;
-        $_POST["teamDetails"]["players"] = $players;
-        $_POST["teamDetails"]["bench"] = $bench;
+        $_POST["teamDetails"]["players"] = json_decode($players,true);
+        $_POST["teamDetails"]["bench"] = json_decode($bench,true);
         $_POST["teamDetails"]["quantity"] = $quantity;
         $_POST["teamDetails"]["price"] = $price;
         $_POST["teamDetails"]["total"] = $newTotal;

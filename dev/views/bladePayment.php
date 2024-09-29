@@ -15,11 +15,11 @@ if( isset($_POST) && !empty($_POST) ){
     }elseif( isset($_POST["tournamentId"]) && !empty($_POST["tournamentId"]) ){
         $user = selectDB("users","`keepMeAlive` LIKE '{$_COOKIE["createmyacad"]}'");
         $data = array(    
-            "user" => $user[0]["user"],
+            "user" => $user[0]["id"],
             "tournament" => $_POST["tournamentId"],
             "teamName" => $_POST["teamName"],
-            "players" => $_POST["players"],
-            "bench" => $_POST["bench"],
+            "players" => json_encode($_POST["players"]),
+            "bench" => json_encode($_POST["bench"]),
             "quantity" => 1,
             "paymentMethod" => $_POST["paymentMethod"],
             "voucher" => "",
