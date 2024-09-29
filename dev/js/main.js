@@ -136,9 +136,8 @@
 		});
 
         $('#submitTeam').on('click', function (event) {
-            event.preventDefault();
-            //var langCookieValue = $.cookie("CREATEkwLANG");
-            //var selectedLanguage = (langCookieValue === undefined || langCookieValue === "" || langCookieValue === "EN") ? "Please fill all feilds" : "يرجى ملء جميع الحقول";
+            var langCookieValue = $.cookie("CREATEkwLANG");
+            var selectedLanguage = (langCookieValue === undefined || langCookieValue === "" || langCookieValue === "EN") ? "Please fill all feilds" : "يرجى ملء جميع الحقول";
             var isValid = true;
         
             // Check players[] fields
@@ -162,10 +161,13 @@
             }
         
             if (isValid) {
+                $('#teamInitForm').submit();
                 return true;
             } else {
-                //alert(selectedLanguage);
+                event.preventDefault();
+                alert(selectedLanguage);
                 return false;
+                
             }
         });
 
