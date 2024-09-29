@@ -61,35 +61,35 @@ if( $response["error"] == 1 ){
                                 <div class="col-12 p-3">
                                     <div class="row m-0 w-100" style="border:1px solid #e2e2e2">
                                         <div class="col-6 text-left p-3"><h5><?php echo direction("Tournament Name","اسم البطولة") ?></h5></div>
-                                        <div class="col-6 text-right p-3"><h5><?php echo direction($tournament["enTitle"],$tournament["arTitle"]) ?></h5></div>
+                                        <div class="col-6 text-right p-3"><h5 style="color: black"><?php echo direction($tournament["enTitle"],$tournament["arTitle"]) ?></h5></div>
                                     </div>
                                 </div>
 
                                 <div class="col-12 p-3">
                                     <div class="row m-0 w-100" style="border:1px solid #e2e2e2">
                                         <div class="col-6 text-left p-3"><h5><?php echo direction("Location","المكان") ?></h5></div>
-                                        <div class="col-6 text-right p-3"><h5><?php echo direction($tournament["enArea"],$tournament["arArea"]) ?></h5></div>
+                                        <div class="col-6 text-right p-3"><h5 style="color: black"><?php echo direction($tournament["enArea"],$tournament["arArea"]) ?></h5></div>
                                     </div>
                                 </div>
 
                                 <div class="col-12 p-3">
                                     <div class="row m-0 w-100" style="border:1px solid #e2e2e2">
                                         <div class="col-6 text-left p-3"><h5><?php echo direction("Date","التاريخ") ?></h5></div>
-                                        <div class="col-6 text-right p-3"><h5><?php echo $tournament["gameDate"] ?></h5></div>
+                                        <div class="col-6 text-right p-3"><h5 style="color: black"><?php echo $tournament["gameDate"] ?></h5></div>
                                     </div>
                                 </div>
                                 
                                 <div class="col-12 p-3">
                                     <div class="row m-0 w-100" style="border:1px solid #e2e2e2">
                                         <div class="col-6 text-left p-3"><h5><?php echo direction("Time","الوقت") ?></h5></div>
-                                        <div class="col-6 text-right p-3"><h5><?php echo $tournament["gameTime"] ?></h5></div>
+                                        <div class="col-6 text-right p-3"><h5 style="color: black"><?php echo $tournament["gameTime"] ?></h5></div>
                                     </div>
                                 </div>
 
                                 <div class="col-12 p-3">
                                     <div class="row m-0 w-100" style="border:1px solid #e2e2e2">
                                         <div class="col-6 text-left p-3"><h5><?php echo direction("Team name","اسم الفريق") ?></h5></div>
-                                        <div class="col-6 text-right p-3"><h5><?php echo $_POST["teamName"] ?></h5></div>
+                                        <div class="col-6 text-right p-3"><h5 style="color: black"><?php echo $_POST["teamName"] ?></h5></div>
                                     </div>
                                 </div>
 
@@ -99,7 +99,7 @@ if( $response["error"] == 1 ){
                                         <?php
                                         for( $i = 0; $i < count($_POST["players"]); $i++){
                                             ?>
-                                            <div class="col-12 p-3"><h5><?php echo $_POST["players"][$i] ?></h5></div>
+                                            <div class="col-12 p-3"><h5 style="color: black"><?php echo $_POST["players"][$i] ?></h5></div>
                                             <?php
                                         }
                                         ?>
@@ -107,7 +107,7 @@ if( $response["error"] == 1 ){
                                         <?php
                                         for( $i = 0; $i < count($_POST["bench"]); $i++){
                                             ?>
-                                            <div class="col-12 p-3"><h5><?php echo $_POST["bench"][$i] ?></h5></div>
+                                            <div class="col-12 p-3"><h5 style="color: black"><?php echo $_POST["bench"][$i] ?></h5></div>
                                             <?php
                                         }
                                         $price = ( $tournament["price"] != 0 ) ? $tournament["price"] . " KD" : "";
