@@ -273,9 +273,10 @@
             */
 
         // on checkbox change remove disabled attr from button if goToTeamInit
-        $('input[type="checkbox"]').on('click', function (event) {
+        $('#checkTerms').on('change', function (event) {
             event.preventDefault();
             var goToTeamInit = $(this).prop('checked');
+            console.log(goToTeamInit);
             if (goToTeamInit) {
                 $('#goToTeamInit').prop('disabled', false);
                 $('#goToTeamInit').attr('style', "");
