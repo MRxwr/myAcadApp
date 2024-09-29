@@ -161,6 +161,12 @@
             if (teamName === "") {
                 isValid = false;
             }
+
+            if (!isValid) {
+                console.log('selectedLanguage:', selectedLanguage);
+                alert(selectedLanguage);
+                return false;
+            }
         
             if (isValid) {
                 return true;
