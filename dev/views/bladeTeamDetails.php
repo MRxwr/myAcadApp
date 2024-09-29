@@ -54,29 +54,74 @@ if( $response["error"] == 1 ){
                                 </div>
                             </div>
                         </div>
-                        <form id="teamInitForm" action="<?php echo "?v=TeamDetails&id={$_GET["id"]}" ?>" method="POST" class="cup_area">
+                        <form id="teamInitForm" action="<?php echo "?v=Payment&id={$_GET["id"]}" ?>" method="POST" class="cup_area">
                             <div class="row">
-                                <div class="col-12 p-3"><h5><?php echo direction("Team name","اسم الفريق") ?></h5></div>
-                                <div class="col-12 p-3"><input type="text" name="teamName" id="teamName" style="border: 1px #e2e2e2 solid !important;width: 100% !important;padding: 10px;" placeholder="Team Name"></div>
-                                <div class="col-12 p-3"><h5><?php echo direction("Players","اللاعبين") ?></h5></div>
-                                <?php
-                                for( $i = 0; $i < $tournament["players"]; $i++){
-                                    ?>
-                                    <div class="col-12 p-3"><input type="text" name="players[]" style="border: 1px #e2e2e2 solid !important;width: 100% !important;padding: 10px;" placeholder="Player Name"></p></div>
-                                    <?php
-                                }
-                                ?>
-                                <div class="col-12 p-3">
-                                    <h5><?php echo direction("Bench","الإحتياط") ?></h5>
+                                <div class="col-12 p-3"><h5><?php echo direction("ORDER INFO","معلومات الحجز") ?></h5></div>  
+
+                                <div class="col-12">
+                                    <div class="row m-0 w-100" style="border:1px solid #e2e2e2">
+                                        <div class="col-6 text-left p-3"><h5><?php echo direction("Tournament Name","اسم البطولة") ?></h5></div>
+                                        <div class="col-6 text-right p-3"><h5><?php echo direction($tournament["enTitle"],$tournament["arTitle"]) ?></h5></div>
+                                    </div>
                                 </div>
-                                <?php
-                                for( $i = 0; $i < $tournament["bench"]; $i++){
-                                    ?>
-                                    <div class="col-12 p-3"><input type="text" name="bench[]" placeholder="Player Name" style="border: 1px #e2e2e2 solid !important;width: 100% !important;padding: 10px;"></div>
-                                    <?php
-                                }
-                                ?>
-                                <div class="col-12 p-3 mb-5"><button class="button mt_55" id="submitTeam" ><?php echo direction("Checkout","تاكيد") ?></button></div>
+
+                                <div class="col-12">
+                                    <div class="row m-0 w-100" style="border:1px solid #e2e2e2">
+                                        <div class="col-6 text-left p-3"><h5><?php echo direction("Location","المكان") ?></h5></div>
+                                        <div class="col-6 text-right p-3"><h5><?php echo direction($tournament["enArea"],$tournament["arArea"]) ?></h5></div>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="row m-0 w-100" style="border:1px solid #e2e2e2">
+                                        <div class="col-6 text-left p-3"><h5><?php echo direction("Date","التاريخ") ?></h5></div>
+                                        <div class="col-6 text-right p-3"><h5><?php echo $_POST["gameDate"] ?></h5></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-12">
+                                    <div class="row m-0 w-100" style="border:1px solid #e2e2e2">
+                                        <div class="col-6 text-left p-3"><h5><?php echo direction("Time","الوقت") ?></h5></div>
+                                        <div class="col-6 text-right p-3"><h5><?php echo $_POST["gameTime"] ?></h5></div>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="row m-0 w-100" style="border:1px solid #e2e2e2">
+                                        <div class="col-6 text-left p-3"><h5><?php echo direction("Team name","اسم الفريق") ?></h5></div>
+                                        <div class="col-6 text-right p-3"><h5><?php echo $_POST["teamName"] ?></h5></div>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="row m-0 w-100" style="border:1px solid #e2e2e2">
+                                        <div class="col-12 text-left p-3"><h5><?php echo direction("Team Members","اعضاء الفريق") ?></h5></div>
+                                        <?php
+                                        for( $i = 0; $i < count($_POST["players"]); $i++){
+                                            ?>
+                                            <div class="col-12 text-right p-3"><h5><?php echo $_POST["players"][$i] ?></h5></div>
+                                            <?php
+                                        }
+                                        ?>
+                                        <div class="col-12 text-left p-3"><h5><?php echo direction("Bench","الإحتياط") ?></h5></div>
+                                        <?php
+                                        for( $i = 0; $i < count($_POST["bench"]); $i++){
+                                            ?>
+                                            <div class="col-12 text-right p-3"><h5><?php echo $_POST["bench"][$i] ?></h5></div>
+                                            <?php
+                                        }
+                                        $price = ( $tournament["price"] != 0 ) ? $tournament["price"] . " KD" : "";
+                                        ?>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 p-3 mb-5">
+                                    <input type="hidden" name="tournamentId" value="<?php echo $_GET["id"] ?>">
+                                    <input type="hidden" name="teamName" value="<?php echo $_POST["teamName"] ?>">
+                                    <input type="hidden" name="players" value="<?php echo $_POST["players"] ?>">
+                                    <input type="hidden" name="bench" value="<?php echo $_POST["bench"] ?>">
+                                    <button class="button mt_55"><?php echo direction("Checkout","تاكيد") . " " . $price ?></button>
+                                </div>
                             </div>
                         </form>
                     </div>
