@@ -273,6 +273,7 @@ if( !isset($_POST) ){
         $_POST["teamDetails"]["quantity"] = $quantity;
         $_POST["teamDetails"]["price"] = $price;
         $_POST["teamDetails"]["total"] = $newTotal;
+        $_POST["total"] = $newTotal;
         $_POST["paymentMethod"] = $paymentMethod;
         $_POST["voucher"] = $data["voucher"];
 
