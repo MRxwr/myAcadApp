@@ -168,7 +168,7 @@
             });
         
             // Check teamName field
-            var teamName = $("input[name='teamName[]']").val();
+            var teamName = $("input[name='teamName']").val();
             if (teamName === "") {
                 isValid = false;
             }
