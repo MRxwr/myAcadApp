@@ -51,6 +51,9 @@ if( isset($_GET["requested_order_id"]) && !empty($_GET["requested_order_id"]) ){
         <div class="row justify-content-center">
             <div class="col-lg-10">
                 <div class="row justify-content-between">
+                    <?php
+                    if( $order[0]["isTournament"] == 0 ){
+                        ?>
                     <div class="col-lg-5 mt_40">
                         <div class="left_succes">
                             <h2><?php echo direction("Your Subscription is Confirmed ","تم تأكيد إشتراكك ") ?><img src="img/suc.svg" alt=""></h2>
@@ -64,9 +67,6 @@ if( isset($_GET["requested_order_id"]) && !empty($_GET["requested_order_id"]) ){
                         </div>
                     </div>
 
-                    <?php
-                    if( $order[0]["isTournament"] == 0 ){
-                        ?>
                     <div class="col-lg-5 mt_40">
                         <div class="right_succes">
                             <h2><?php echo direction($order[0]["enAcademy"],$order[0]["arAcademy"]) ?></h2>
@@ -111,6 +111,13 @@ if( isset($_GET["requested_order_id"]) && !empty($_GET["requested_order_id"]) ){
                         $tournament = selectDB("tournaments","`id` = '{$order[0]["tournamentId"]}'");
                         $area = selectDB("countries","`id` = '{$tournament[0]["area"]}'");
                         ?>
+                    <div class="col-lg-5 mt_40">
+                        <div class="left_succes">
+                            <h2><?php echo direction("Your Subscription is Confirmed ","تم تأكيد إشتراكك ") ?><img src="img/suc.svg" alt=""></h2>
+                            <h3><?php echo direction("Order Id: ","رقم الطلب: ") . " {$order[0]["id"]}" ?></h3>
+                        </div>
+                    </div>
+
                     <div class="col-12 p-3"><h5><?php echo direction("ORDER INFO","معلومات الحجز") ?></h5></div>  
 
                     <div class="col-12 p-3">
@@ -175,6 +182,9 @@ if( isset($_GET["requested_order_id"]) && !empty($_GET["requested_order_id"]) ){
                             ?>
                         </div>
                     </div>
+
+                    <div class="col-12"><p><?php echo direction("YOU WILL RECIVE A CONFIRMATION EMAIL SOON !<br>THANK YOU FOR USING <span>MY ACAD</span>","سوف يصلكم تأكيد الإشتراك على بريدكم الإلكتروني قريبا!<br>شكراً لأستخدامكم<span>MY ACAD</span>") ?></p>
+                    <a href="?v=Home" class="button"><?php echo direction("HOME","الرئيسية") ?></a></div>
                         <?php
                     }
                     ?>
