@@ -108,6 +108,7 @@ if( isset($_GET["requested_order_id"]) && !empty($_GET["requested_order_id"]) ){
                     <?php
                     }else{
                         $teamDetails = json_decode($order[0]["teamDetails"],true);
+                        $tournament = selectDB("tournaments","`id` = '{$teamDetails["tournamentId"]}'");
                         ?>
                     <div class="col-12 p-3"><h5><?php echo direction("ORDER INFO","معلومات الحجز") ?></h5></div>  
 
@@ -149,7 +150,7 @@ if( isset($_GET["requested_order_id"]) && !empty($_GET["requested_order_id"]) ){
                     <div class="col-12 p-3">
                         <div class="row m-0 w-100" style="border:1px solid #e2e2e2">
                             <div class="col-6 text-left p-3"><h5><?php echo direction("Team name","اسم الفريق") ?></h5></div>
-                            <div class="col-6 text-left p-3"><h5 style="color: black"><?php echo $order[0]["teamName"] ?></h5></div>
+                            <div class="col-6 text-left p-3"><h5 style="color: black"><?php echo $teamDetails["teamName"] ?></h5></div>
                         </div>
                     </div>
 
