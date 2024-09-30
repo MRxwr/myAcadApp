@@ -28,6 +28,19 @@ if( $response["error"] == 1 ){
 }else{
 	$tournament = $response["data"]["tournament"];
 }
+
+if( getLoginStatusResponse() == 0 ){
+	?>
+	<script>
+	window.onload = function() {
+		alert("<?php echo direction("Please login, to continue subscribing.","الرجاء التسجيل أولا لمتابعة الحجز.") ?>");
+		window.location.href = "?v=Login" ;
+	};
+	</script>
+	<?php
+    die();
+}
+
 ?>
 
 <style>
