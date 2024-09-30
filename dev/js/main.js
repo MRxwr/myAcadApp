@@ -136,14 +136,30 @@
 		});
 
         $('#submitTeam').on('click', function (event) {
-            event.preventDefault();
             var langCookieValue = $.cookie("CREATEkwLANG");
+            var selectedLanguage = (langCookieValue === undefined || langCookieValue === "" || langCookieValue === "EN") ? "Please fill all feilds" : "يرجى ملء جميع الحقول";
             var isValid = true;
 
             // do ajax check in input name="teamName" to check if exists
             var teamName = $("input[name='teamName']").val();
             var tournamentId = $("input[name='tournamentId']").val();
-            
+            var settings = {
+                "url": "requests/index.php?a=CheckTeamName&teamName="+teamName+"&tournamentId="+tournamentId,
+                "method": "GET",
+                "timeout": 0,
+                "headers": {
+                    "myacadheader": "myAcadAppCreate"
+                },
+            };  
+            $.ajax(settings).done(function (response) {
+                if (response.error === "1" ) {
+                    var selectedLanguageTeam = (langCookieValue === undefined || langCookieValue === "" || langCookieValue === "EN") ? "Team name already exists" : "اسم الفريق موجود بالفعل";
+                    alert(selectedLanguageTeam);
+                    isValid = false;
+                    return false;
+                }
+            })
+        
             // Check players[] fields
             $("input[name='players[]']").each(function() {
                 if ($(this).val() === "") {
@@ -152,35 +168,19 @@
             });
         
             // Check teamName field
-            var teamName1 = $("input[name='teamName']").val();
-            if (teamName1 === "") {
+            var teamName = $("input[name='teamName[]']").val();
+            if (teamName === "") {
                 isValid = false;
             }
         
-            if (isValid){
-                var settings = {
-                    "url": "requests/index.php?a=CheckTeamName&teamName="+teamName+"&tournamentId="+tournamentId,
-                    "method": "GET",
-                    "timeout": 0,
-                    "headers": {
-                        "myacadheader": "myAcadAppCreate"
-                    },
-                }; 
-                $.ajax(settings).done(function (response) {
-                    if (response.error === "1" ) {
-                        var selectedLanguageTeam = (langCookieValue === undefined || langCookieValue === "" || langCookieValue === "EN") ? "Team name already exists" : "اسم الفريق موجود بالفعل";
-                        alert(selectedLanguageTeam);
-                        isValid = false;
-                        return false;
-                    }else{
-                        $('#teamInitForm').submit();
-                        return true;
-                    }
-                })
-            }else{
-                var selectedLanguage = (langCookieValue === undefined || langCookieValue === "" || langCookieValue === "EN") ? "Please fill all feilds" : "يرجى ملء جميع الحقول";
+            if (isValid) {
+                $('#teamInitForm').submit();
+                return true;
+            } else {
+                event.preventDefault();
                 alert(selectedLanguage);
                 return false;
+                
             }
         });
 
