@@ -80,11 +80,11 @@ function expiredSubscription(){
 
 function emailBody($order){
 	if( $order[0]["paymentMethod"] == 1 ){
-		$method = "KNET";
-	}elseif( $order[0]["paymentMethod"] == 2 ){
-		$method = "Credit Card";
-	}else{
+		$method = "Online Payment";
+	}elseif( $order[0]["paymentMethod"] == 3 ){
 		$method = "WALLET";
+	}else{
+		$method = "FREE";
 	}
 	$body = '<table style="width:100%">
 			<tr>
@@ -100,14 +100,23 @@ function emailBody($order){
 			<td><hr>Item<hr></td>
 			<td><hr>Price<hr></td>
 			</tr>';
-	$body .= "<tr>
+		if( $order[0]["isTournament"] == 0 ){
+			$body .= "<tr>
 			<td>{$order[0]["subscriptionQuantity"]}x {$order[0]["enSession"]} - {$order[0]["enSubscription"]}</td>
 			<td>".numTo3Float($order[0]["totalSubscriptionPrice"])."KD</td>
 			</tr>";
-	$body .= "<tr>
+			$body .= "<tr>
 			<td>{$order[0]["jersyQuantity"]}x Jersey of {$order[0]["enAcademy"]}</td>
 			<td>".numTo3Float($order[0]["totalJersyPrice"])."KD</td>
 			</tr>";
+		}else{
+			$tournament = json_decode($order[0]["teamDetails"],true);
+			$body .= "<tr>
+			<td>1x {$tournament["enTournament"]} - {$order[0]["teamName"]}</td>
+			<td>".numTo3Float($order[0]["total"])."KD</td>
+			</tr>";
+		}
+	
 	if ( isset($order[0]["voucher"]) && !empty($order[0]["voucher"]) ){
 		$body .= '
 				<tr>
