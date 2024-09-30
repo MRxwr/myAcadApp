@@ -138,7 +138,6 @@
         $('#submitTeam').on('click', function (event) {
             event.preventDefault();
             var langCookieValue = $.cookie("CREATEkwLANG");
-            var selectedLanguage = (langCookieValue === undefined || langCookieValue === "" || langCookieValue === "EN") ? "Please fill all feilds" : "يرجى ملء جميع الحقول";
             var isValid = true;
 
             // do ajax check in input name="teamName" to check if exists
@@ -152,15 +151,7 @@
                     "myacadheader": "myAcadAppCreate"
                 },
             };  
-            $.ajax(settings).done(function (response) {
-                if (response.error === "1" ) {
-                    var selectedLanguageTeam = (langCookieValue === undefined || langCookieValue === "" || langCookieValue === "EN") ? "Team name already exists" : "اسم الفريق موجود بالفعل";
-                    alert(selectedLanguageTeam);
-                    isValid = false;
-                    return false;
-                }
-            })
-        
+            
             // Check players[] fields
             $("input[name='players[]']").each(function() {
                 if ($(this).val() === "") {
@@ -174,10 +165,20 @@
                 isValid = false;
             }
         
-            if (isValid) {
-                $('#teamInitForm').submit();
-                return true;
-            } else {
+            if (isValid){
+                $.ajax(settings).done(function (response) {
+                    if (response.error === "1" ) {
+                        var selectedLanguageTeam = (langCookieValue === undefined || langCookieValue === "" || langCookieValue === "EN") ? "Team name already exists" : "اسم الفريق موجود بالفعل";
+                        alert(selectedLanguageTeam);
+                        isValid = false;
+                        return false;
+                    }else{
+                        $('#teamInitForm').submit();
+                        return true;
+                    }
+                })
+            }else{
+                var selectedLanguage = (langCookieValue === undefined || langCookieValue === "" || langCookieValue === "EN") ? "Please fill all feilds" : "يرجى ملء جميع الحقول";
                 alert(selectedLanguage);
                 return false;
             }
