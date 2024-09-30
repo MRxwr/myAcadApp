@@ -6,14 +6,18 @@ if( isset($_GET["requested_order_id"]) && !empty($_GET["requested_order_id"]) ){
             if( $order2[0]["isTournament"] == 0 ){
                 $session = selectDB("sessions","`id` = '{$order2[0]["sessionId"]}'");
                 $quantity = $session[0]["quantity"] - $order2[0]["subscriptionQuantity"];
+                $academyEmail = selectDB("academies","`id` = '{$order2[0]["academyId"]}'");
+                $emailSent = $academyEmail[0]["email"];
                 updateDB("orders",array("gatewayLink"=>json_encode($_GET),"status"=>1),"`gatewayId` = '{$_GET["requested_order_id"]}'");
                 updateDB("sessions",array("quantity"=>$quantity),"`id` = '{$order2[0]["sessionId"]}'");
                 $subscription = selectDB("subscriptions","`id` = '{$order[0]["subscriptionId"]}'");
+            }else{
+                $tournamentEmail = selectDB("tournaments","`id` = '{$order2[0]["tournamentId"]}'");
+                $emailSent = $tournamentEmail[0]["email"];
             }
-            $academyEmail = selectDB("academies","`id` = '{$order2[0]["academyId"]}'");
             $settingsEmail = selectDB("settings","`id` = '1'");
             sendMails($order2,$order2[0]["email"]);
-            sendMails($order2,$academyEmail[0]["email"]);
+            sendMails($order2,$emailSent);
             sendMails($order2,$settingsEmail[0]["email"]);
         }
         if($order[0]["paymentMethod"] == 1 ){
