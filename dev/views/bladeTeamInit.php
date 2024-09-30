@@ -92,7 +92,7 @@ if( getLoginStatusResponse() == 0 ){
                                     <?php
                                 }
                                 ?>
-                                <div class="col-12 p-3 mb-5"><button class="button mt_55" id="submitTeam" ><?php echo direction("Continue","تابع") ?></button></div>
+                                <div class="col-12 p-3 mb-5 button mt_55" id="submitTeam" ><?php echo direction("Continue","تابع") ?></div>
                             </div>
                         </form>
                     </div>

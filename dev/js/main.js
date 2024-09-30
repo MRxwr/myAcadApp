@@ -167,7 +167,6 @@
         
             if (isValid) {
                 $.ajax(settings).done(function (response) {
-                    alert(response.error);
                     if (response.error === "1" ) {
                         var selectedLanguageTeam = (langCookieValue === undefined || langCookieValue === "" || langCookieValue === "EN") ? "Team name already exists" : "اسم الفريق موجود بالفعل";
                         event.preventDefault();
