@@ -180,7 +180,6 @@
             } else {
                 alert(selectedLanguage);
                 return false;
-                
             }
         });
 
