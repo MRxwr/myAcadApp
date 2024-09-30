@@ -19,8 +19,10 @@ if( !isset($_GET["userId"]) || empty($_GET["userId"]) ){
             $endDate = date("Y-m-d H:i:s", strtotime($orders[$i]["date"] . " +{$numberOfDays} days"));
             $endDateTimestamp = strtotime($endDate);
             $todaysDate = strtotime(date("Y-m-d H:i:s"));
-            if ($endDateTimestamp <= $todaysDate ) {
-                updateDB("orders", array("status" => 4), "`id` = '{$orders[$i]["id"]}'");
+            if( $orders[0]["isTournament"] == 0 ){
+                if ($endDateTimestamp <= $todaysDate ) {
+                    updateDB("orders", array("status" => 4), "`id` = '{$orders[$i]["id"]}'");
+                }
             }
         }
     }
