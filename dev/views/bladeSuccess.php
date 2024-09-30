@@ -3,10 +3,13 @@ if( isset($_GET["requested_order_id"]) && !empty($_GET["requested_order_id"]) ){
     if( $order = selectDB("orders","`gatewayId` = '{$_GET["requested_order_id"]}'") ){
         $order2 = selectDB("orders","`gatewayId` = '{$_GET["requested_order_id"]}'");
         if( $order2[0]["status"] == 0 ){
-            $session = selectDB("sessions","`id` = '{$order2[0]["sessionId"]}'");
-            $quantity = $session[0]["quantity"] - $order2[0]["subscriptionQuantity"];
-            updateDB("orders",array("gatewayLink"=>json_encode($_GET),"status"=>1),"`gatewayId` = '{$_GET["requested_order_id"]}'");
-            updateDB("sessions",array("quantity"=>$quantity),"`id` = '{$order2[0]["sessionId"]}'");
+            if( $order2[0]["isTournament"] == 0 ){
+                $session = selectDB("sessions","`id` = '{$order2[0]["sessionId"]}'");
+                $quantity = $session[0]["quantity"] - $order2[0]["subscriptionQuantity"];
+                updateDB("orders",array("gatewayLink"=>json_encode($_GET),"status"=>1),"`gatewayId` = '{$_GET["requested_order_id"]}'");
+                updateDB("sessions",array("quantity"=>$quantity),"`id` = '{$order2[0]["sessionId"]}'");
+                $subscription = selectDB("subscriptions","`id` = '{$order[0]["subscriptionId"]}'");
+            }
             $academyEmail = selectDB("academies","`id` = '{$order2[0]["academyId"]}'");
             $settingsEmail = selectDB("settings","`id` = '1'");
             sendMails($order2,$order2[0]["email"]);
@@ -22,7 +25,6 @@ if( isset($_GET["requested_order_id"]) && !empty($_GET["requested_order_id"]) ){
         }else{
             $paymentMethod = "FREE";
         }
-        $subscription = selectDB("subscriptions","`id` = '{$order[0]["subscriptionId"]}'");
     }else{
         ?>
         <script>
