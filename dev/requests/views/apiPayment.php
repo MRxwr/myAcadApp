@@ -337,7 +337,6 @@ if( !isset($_POST) ){
         ),
     ));
     $response = curl_exec($curl);
-    var_dump(array($response,$postBody));die();
     curl_close($curl);
     $response = json_decode($response,true);
 
@@ -364,7 +363,7 @@ if( !isset($_POST) ){
                 updateDB("users",array("wallet" => $newWallet),"`id` = {$_POST["userId"]}");
             }
         }
-        echo outputData($response);
+        echo outputData($response);die();
     }else{
         $response["msg"] = popupMsg($requestLang,'Error while proccessing payment','خطأ في عملية الدفع');
         echo outputError($response);
