@@ -151,15 +151,6 @@
                     "myacadheader": "myAcadAppCreate"
                 },
             };  
-            $.ajax(settings).done(function (response) {
-                alert(response.error);
-                if (response.error === "1" ) {
-                    var selectedLanguageTeam = (langCookieValue === undefined || langCookieValue === "" || langCookieValue === "EN") ? "Team name already exists" : "اسم الفريق موجود بالفعل";
-                    alert(selectedLanguageTeam);
-                    isValid = false;
-                    return false;
-                }
-            })
         
             // Check players[] fields
             $("input[name='players[]']").each(function() {
@@ -175,8 +166,18 @@
             }
         
             if (isValid) {
-                $('#teamInitForm').submit();
-                return true;
+                $.ajax(settings).done(function (response) {
+                    alert(response.error);
+                    if (response.error === "1" ) {
+                        var selectedLanguageTeam = (langCookieValue === undefined || langCookieValue === "" || langCookieValue === "EN") ? "Team name already exists" : "اسم الفريق موجود بالفعل";
+                        alert(selectedLanguageTeam);
+                        isValid = false;
+                        return false;
+                    }else{
+                        $('#teamInitForm').submit();
+                        return true;
+                    }
+                })
             } else {
                 event.preventDefault();
                 alert(selectedLanguage);
