@@ -136,6 +136,7 @@
 		});
 
         $('#submitTeam').on('click', function (event) {
+            event.preventDefault();
             var langCookieValue = $.cookie("CREATEkwLANG");
             var selectedLanguage = (langCookieValue === undefined || langCookieValue === "" || langCookieValue === "EN") ? "Please fill all feilds" : "يرجى ملء جميع الحقول";
             var isValid = true;
@@ -153,7 +154,6 @@
             };  
             $.ajax(settings).done(function (response) {
                 if (response.error === "1" ) {
-                    event.preventDefault();
                     var selectedLanguageTeam = (langCookieValue === undefined || langCookieValue === "" || langCookieValue === "EN") ? "Team name already exists" : "اسم الفريق موجود بالفعل";
                     alert(selectedLanguageTeam);
                     isValid = false;
@@ -178,7 +178,6 @@
                 $('#teamInitForm').submit();
                 return true;
             } else {
-                event.preventDefault();
                 alert(selectedLanguage);
                 return false;
                 
