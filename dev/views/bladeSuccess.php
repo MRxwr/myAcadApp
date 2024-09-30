@@ -63,6 +63,10 @@ if( isset($_GET["requested_order_id"]) && !empty($_GET["requested_order_id"]) ){
                             <a href="?v=Home" class="button"><?php echo direction("HOME","الرئيسية") ?></a>
                         </div>
                     </div>
+
+                    <?php
+                    if( $order[0]["isTournamnet"] == 0 ){
+                        ?>
                     <div class="col-lg-5 mt_40">
                         <div class="right_succes">
                             <h2><?php echo direction($order[0]["enAcademy"],$order[0]["arAcademy"]) ?></h2>
@@ -101,6 +105,77 @@ if( isset($_GET["requested_order_id"]) && !empty($_GET["requested_order_id"]) ){
                             </div>
                         </div>
                     </div>
+                    <?php
+                    }else{
+                        $teamDetails = json_decode($order[0]["teamDetails"],true);
+                        ?>
+                    <div class="col-12 p-3"><h5><?php echo direction("ORDER INFO","معلومات الحجز") ?></h5></div>  
+
+                    <div class="col-12 p-3">
+                        <div class="row m-0 w-100" style="border:1px solid #e2e2e2">
+                            <div class="col-6 text-left p-3"><h5><?php echo direction("Tournament Name","اسم البطولة") ?></h5></div>
+                            <div class="col-6 text-left p-3"><h5 style="color: black"><?php echo direction($teamDetails["enTournament"],$teamDetails["arTournament"]) ?></h5></div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 p-3">
+                        <div class="row m-0 w-100" style="border:1px solid #e2e2e2">
+                            <div class="col-6 text-left p-3"><h5><?php echo direction("Location","المكان") ?></h5></div>
+                            <div class="col-6 text-left p-3"><h5 style="color: black"><?php echo direction($teamDetails["enArea"],$teamDetails["arArea"]) ?></h5></div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 p-3">
+                        <div class="row m-0 w-100" style="border:1px solid #e2e2e2">
+                            <div class="col-6 text-left p-3"><h5><?php echo direction("Date","التاريخ") ?></h5></div>
+                            <div class="col-6 text-left p-3"><h5 style="color: black"><?php echo $teamDetails["gameDate"] ?></h5></div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 p-3">
+                        <div class="row m-0 w-100" style="border:1px solid #e2e2e2">
+                            <div class="col-6 text-left p-3"><h5><?php echo direction("Time","الوقت") ?></h5></div>
+                            <div class="col-6 text-left p-3"><h5 style="color: black"><?php echo $teamDetails["gameTime"] ?></h5></div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 p-3">
+                        <div class="row m-0 w-100" style="border:1px solid #e2e2e2">
+                            <div class="col-6 text-left p-3"><h5><?php echo direction("Price","السعر") ?></h5></div>
+                            <div class="col-6 text-left p-3"><h5 style="color: black"><?php echo $price = ( $teamDetails["price"] != 0 ) ? $teamDetails["price"] . " KD" : " Free"; ?></h5></div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 p-3">
+                        <div class="row m-0 w-100" style="border:1px solid #e2e2e2">
+                            <div class="col-6 text-left p-3"><h5><?php echo direction("Team name","اسم الفريق") ?></h5></div>
+                            <div class="col-6 text-left p-3"><h5 style="color: black"><?php echo $order[0]["teamName"] ?></h5></div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 p-3">
+                        <div class="row m-0 w-100" style="border:1px solid #e2e2e2">
+                            <div class="col-12 text-left p-3"><h5><?php echo direction("Team Members","اعضاء الفريق") ?></h5></div>
+                            <?php
+                            for( $i = 0; $i < count($teamDetails["players"]); $i++){
+                                ?>
+                                <div class="col-12 p-3"><h5 style="color: black"><?php echo $teamDetails["players"][$i] ?></h5></div>
+                                <?php
+                            }
+                            ?>
+                            <div class="col-12 text-left p-3"><h5><?php echo direction("Bench","الإحتياط") ?></h5></div>
+                            <?php
+                            for( $i = 0; $i < count($teamDetails["bench"]); $i++){
+                                ?>
+                                <div class="col-12 p-3"><h5 style="color: black"><?php echo $teamDetails["bench"][$i] ?></h5></div>
+                                <?php
+                            }
+                            ?>
+                        </div>
+                    </div>
+                        <?php
+                    }
+                    ?>
                 </div>
             </div>
         </div>
