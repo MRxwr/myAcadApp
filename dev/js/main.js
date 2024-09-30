@@ -152,7 +152,7 @@
                 },
             };  
             $.ajax(settings).done(function (response) {
-                if (response.data === 1) {
+                if (response.error === "1" ) {
                     var selectedLanguageTeam = (langCookieValue === undefined || langCookieValue === "" || langCookieValue === "EN") ? "Team name already exists" : "اسم الفريق موجود بالفعل";
                     alert(selectedLanguageTeam);
                     isValid = false;
