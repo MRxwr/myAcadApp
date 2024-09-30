@@ -118,53 +118,53 @@ if( isset($_GET["requested_order_id"]) && !empty($_GET["requested_order_id"]) ){
                         </div>
                     </div>
 
-                    <div class="col-12 p-3"><h5><?php echo direction("ORDER INFO","معلومات الحجز") ?></h5></div>  
+                    <div class="col-12 p-3"><h5 style="font-size: 15px;color: #ffa300;"><?php echo direction("ORDER INFO","معلومات الحجز") ?></h5></div>  
 
                     <div class="col-12 p-3">
                         <div class="row m-0 w-100" style="border:1px solid #e2e2e2">
-                            <div class="col-6 text-left p-3"><h5><?php echo direction("Tournament Name","اسم البطولة") ?></h5></div>
+                            <div class="col-6 text-left p-3"><h5 style="font-size: 15px;color: #ffa300;"><?php echo direction("Tournament Name","اسم البطولة") ?></h5></div>
                             <div class="col-6 text-left p-3"><h5 style="color: black"><?php echo direction($teamDetails["enTournament"],$teamDetails["arTournament"]) ?></h5></div>
                         </div>
                     </div>
 
                     <div class="col-12 p-3">
                         <div class="row m-0 w-100" style="border:1px solid #e2e2e2">
-                            <div class="col-6 text-left p-3"><h5><?php echo direction("Location","المكان") ?></h5></div>
+                            <div class="col-6 text-left p-3"><h5 style="font-size: 15px;color: #ffa300;"><?php echo direction("Location","المكان") ?></h5></div>
                             <div class="col-6 text-left p-3"><h5 style="color: black"><?php echo direction($area[0]["areaEnTitle"],$area[0]["areaArTitle"]) ?></h5></div>
                         </div>
                     </div>
 
                     <div class="col-12 p-3">
                         <div class="row m-0 w-100" style="border:1px solid #e2e2e2">
-                            <div class="col-6 text-left p-3"><h5><?php echo direction("Date","التاريخ") ?></h5></div>
+                            <div class="col-6 text-left p-3"><h5 style="font-size: 15px;color: #ffa300;"><?php echo direction("Date","التاريخ") ?></h5></div>
                             <div class="col-6 text-left p-3"><h5 style="color: black"><?php echo $tournament[0]["gameDate"] ?></h5></div>
                         </div>
                     </div>
 
                     <div class="col-12 p-3">
                         <div class="row m-0 w-100" style="border:1px solid #e2e2e2">
-                            <div class="col-6 text-left p-3"><h5><?php echo direction("Time","الوقت") ?></h5></div>
+                            <div class="col-6 text-left p-3"><h5 style="font-size: 15px;color: #ffa300;"><?php echo direction("Time","الوقت") ?></h5></div>
                             <div class="col-6 text-left p-3"><h5 style="color: black"><?php echo $tournament[0]["gameTime"] ?></h5></div>
                         </div>
                     </div>
 
                     <div class="col-12 p-3">
                         <div class="row m-0 w-100" style="border:1px solid #e2e2e2">
-                            <div class="col-6 text-left p-3"><h5><?php echo direction("Price","السعر") ?></h5></div>
+                            <div class="col-6 text-left p-3"><h5 style="font-size: 15px;color: #ffa300;"><?php echo direction("Price","السعر") ?></h5></div>
                             <div class="col-6 text-left p-3"><h5 style="color: black"><?php echo $price = ( $teamDetails["price"] != 0 ) ? $teamDetails["price"] . " KD" : " Free"; ?></h5></div>
                         </div>
                     </div>
 
                     <div class="col-12 p-3">
                         <div class="row m-0 w-100" style="border:1px solid #e2e2e2">
-                            <div class="col-6 text-left p-3"><h5><?php echo direction("Team name","اسم الفريق") ?></h5></div>
+                            <div class="col-6 text-left p-3"><h5 style="font-size: 15px;color: #ffa300;"><?php echo direction("Team name","اسم الفريق") ?></h5></div>
                             <div class="col-6 text-left p-3"><h5 style="color: black"><?php echo $teamDetails["teamName"] ?></h5></div>
                         </div>
                     </div>
 
                     <div class="col-12 p-3">
                         <div class="row m-0 w-100" style="border:1px solid #e2e2e2">
-                            <div class="col-12 text-left p-3"><h5><?php echo direction("Team Members","اعضاء الفريق") ?></h5></div>
+                            <div class="col-12 text-left p-3"><h5 style="font-size: 15px;color: #ffa300;"><?php echo direction("Team Members","اعضاء الفريق") ?></h5></div>
                             <?php
                             for( $i = 0; $i < count($teamDetails["players"]); $i++){
                                 ?>
@@ -172,7 +172,7 @@ if( isset($_GET["requested_order_id"]) && !empty($_GET["requested_order_id"]) ){
                                 <?php
                             }
                             ?>
-                            <div class="col-12 text-left p-3"><h5><?php echo direction("Bench","الإحتياط") ?></h5></div>
+                            <div class="col-12 text-left p-3"><h5 style="font-size: 15px;color: #ffa300;"><?php echo direction("Bench","الإحتياط") ?></h5></div>
                             <?php
                             for( $i = 0; $i < count($teamDetails["bench"]); $i++){
                                 ?>
@@ -183,8 +183,8 @@ if( isset($_GET["requested_order_id"]) && !empty($_GET["requested_order_id"]) ){
                         </div>
                     </div>
 
-                    <div class="col-12"><p><?php echo direction("YOU WILL RECIVE A CONFIRMATION EMAIL SOON !<br>THANK YOU FOR USING <span>MY ACAD</span>","سوف يصلكم تأكيد الإشتراك على بريدكم الإلكتروني قريبا!<br>شكراً لأستخدامكم<span>MY ACAD</span>") ?></p>
-                    <a href="?v=Home" class="button"><?php echo direction("HOME","الرئيسية") ?></a></div>
+                    <div class="col-12"><p><?php echo direction("YOU WILL RECIVE A CONFIRMATION EMAIL SOON !<br>THANK YOU FOR USING <span style='color: #ffa300;'>MY ACAD</span>","سوف يصلكم تأكيد الإشتراك على بريدكم الإلكتروني قريبا!<br>شكراً لأستخدامكم<span  style='color: #ffa300;'>MY ACAD</span>") ?></p>
+                    <a href="?v=Home" class="button" style="width: 100%;text-align: center;font-size: 18px;margin: 10px 0px 0px 0px;"><?php echo direction("HOME","الرئيسية") ?></a></div>
                         <?php
                     }
                     ?>
