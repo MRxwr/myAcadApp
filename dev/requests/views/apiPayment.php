@@ -264,6 +264,7 @@ if( !isset($_POST) ){
         $_POST["userId"] = "{$userData[0]["id"]}";
         $_POST["teamName"] = $teamName;
         $_POST["tournamentId"] = $tournaments[0]["id"];
+        $_POST["isTournament"] = 1;
         $_POST["teamDetails"]["enTournament"] = $tournaments[0]["enTitle"];
         $_POST["teamDetails"]["arTournament"] = $tournaments[0]["arTitle"];
         $_POST["teamDetails"]["teamName"] = $teamName;
