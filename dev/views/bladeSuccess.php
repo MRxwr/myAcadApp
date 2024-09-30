@@ -65,7 +65,7 @@ if( isset($_GET["requested_order_id"]) && !empty($_GET["requested_order_id"]) ){
                     </div>
 
                     <?php
-                    if( $order[0]["isTournamnet"] == 0 ){
+                    if( $order[0]["isTournament"] == 0 ){
                         ?>
                     <div class="col-lg-5 mt_40">
                         <div class="right_succes">
