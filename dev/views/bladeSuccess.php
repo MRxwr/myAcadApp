@@ -108,7 +108,8 @@ if( isset($_GET["requested_order_id"]) && !empty($_GET["requested_order_id"]) ){
                     <?php
                     }else{
                         $teamDetails = json_decode($order[0]["teamDetails"],true);
-                        $tournament = selectDB("tournaments","`id` = '{$teamDetails["tournamentId"]}'");
+                        $tournament = selectDB("tournaments","`id` = '{$order[0]["tournamentId"]}'");
+                        $area = selectDB("areas","`id` = '{$tournament[0]["area"]}'");
                         ?>
                     <div class="col-12 p-3"><h5><?php echo direction("ORDER INFO","معلومات الحجز") ?></h5></div>  
 
@@ -122,21 +123,21 @@ if( isset($_GET["requested_order_id"]) && !empty($_GET["requested_order_id"]) ){
                     <div class="col-12 p-3">
                         <div class="row m-0 w-100" style="border:1px solid #e2e2e2">
                             <div class="col-6 text-left p-3"><h5><?php echo direction("Location","المكان") ?></h5></div>
-                            <div class="col-6 text-left p-3"><h5 style="color: black"><?php echo direction($teamDetails["enArea"],$teamDetails["arArea"]) ?></h5></div>
+                            <div class="col-6 text-left p-3"><h5 style="color: black"><?php echo direction($area[0]["enArea"],$area[0]["arArea"]) ?></h5></div>
                         </div>
                     </div>
 
                     <div class="col-12 p-3">
                         <div class="row m-0 w-100" style="border:1px solid #e2e2e2">
                             <div class="col-6 text-left p-3"><h5><?php echo direction("Date","التاريخ") ?></h5></div>
-                            <div class="col-6 text-left p-3"><h5 style="color: black"><?php echo $teamDetails["gameDate"] ?></h5></div>
+                            <div class="col-6 text-left p-3"><h5 style="color: black"><?php echo $tournament[0]["gameDate"] ?></h5></div>
                         </div>
                     </div>
 
                     <div class="col-12 p-3">
                         <div class="row m-0 w-100" style="border:1px solid #e2e2e2">
                             <div class="col-6 text-left p-3"><h5><?php echo direction("Time","الوقت") ?></h5></div>
-                            <div class="col-6 text-left p-3"><h5 style="color: black"><?php echo $teamDetails["gameTime"] ?></h5></div>
+                            <div class="col-6 text-left p-3"><h5 style="color: black"><?php echo $tournament[0]["gameTime"] ?></h5></div>
                         </div>
                     </div>
 
