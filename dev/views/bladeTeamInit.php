@@ -71,7 +71,9 @@ if( getLoginStatusResponse() == 0 ){
                             <div class="row">
                                 <div class="col-12 p-3"><h5><?php echo direction("Team name","اسم الفريق") ?></h5></div>
                                 <div class="col-12 p-3"><input type="text" name="teamName" id="teamName" style="border: 1px #e2e2e2 solid !important;width: 100% !important;padding: 10px;" placeholder="Team Name"></div>
+
                                 <div class="col-6 text-left p-3"><h5><?php echo direction("Main Players","اللاعبين الأساسيين") ?></h5></div>
+                                
                                 <div class="col-6 text-right p-3"><h5 style="color: black"><?php echo "({$tournament["players"]}) " . direction("Players","اللاعبين") ?></h5></div>
                                 <?php
                                 for( $i = 0; $i < $tournament["players"]; $i++){
