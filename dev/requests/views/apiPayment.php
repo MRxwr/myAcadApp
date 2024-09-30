@@ -262,6 +262,7 @@ if( !isset($_POST) ){
         $_POST["phone"] = "{$userData[0]["phone"]}";
         $_POST["email"] = "{$userData[0]["email"]}";
         $_POST["userId"] = "{$userData[0]["id"]}";
+        $_POST["teamName"] = $teamName;
         $_POST["tournamentId"] = $tournaments[0]["id"];
         $_POST["teamDetails"]["enTournament"] = $tournaments[0]["enTitle"];
         $_POST["teamDetails"]["arTournament"] = $tournaments[0]["arTitle"];
