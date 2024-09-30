@@ -298,7 +298,7 @@ if( !isset($_POST) ){
             'order[id]' => $orderId,
             'order[currency]' => 'KWD',
             'order[amount]' => (string)$fullAmount,
-            'order[description]' => "order for {$tournaments[0]["enTitle"]}, {$teamName}, {$quantity}x Players: {$players} and Bench: {$bench}",
+            'order[description]' => "order for {$tournaments[0]["enTitle"]}, {$quantity}x {$teamName}",
             'reference[id]' => $orderId,
             'customer[name]' => "{$_POST["name"]}",
             'customer[email]' => "{$_POST["email"]}",
