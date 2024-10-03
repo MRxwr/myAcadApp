@@ -6,8 +6,8 @@ if( !isset($_POST["orderId"]) || empty($_POST["orderId"]) ){
 	if( $order = selectDB2("`id`, `date`, `isTournament`, `paymentMethod`, `enAcademy`, `arAcademy`, `enSession`, `arSession`, `enSubscription`, `arSubscription`, `subscriptionQuantity`, `jersyQuantity`, `totalSubscriptionPrice`, `totalJersyPrice`, `voucher`, `total`, `tournamentId`, `teamDetails`","orders","`id` = '{$_POST["orderId"]}'") ){
         if( $order[0]["isTournament"] == 1 ){
             $order[0]["teamDetails"] = json_decode($order[0]["teamDetails"],true);
-            $area = selectDB("countries","`id` = '{$tournament[0]["area"]}'");
             $tournaments = selectDB("tournaments","`id` = '{$order[0]["tournamentId"]}'");
+            $area = selectDB("countries","`id` = '{$tournaments[0]["area"]}'");
             $data["id"] = $order[0]["id"];
             $data["date"] = $order[0]["date"];
             $data["enTournament"] = $tournaments[0]["enTitle"];
