@@ -18,7 +18,7 @@ if( !isset($_POST["orderId"]) || empty($_POST["orderId"]) ){
             $data[0]["total"] = $order[0]["teamDetails"]["total"];
             $response = $data;
         }else{
-            unset($_POST["isTournament"],$_POST["tournamentId"],$_POST["teamDetails"]);
+            unset($order[0]["isTournament"],$order[0]["tournamentId"],$order[0]["teamDetails"]);
             $order2 = selectDB("orders","`id` = '{$_POST["orderId"]}'");
             $subscription = selectDB("subscriptions","`id` = '{$order2[0]["subscriptionId"]}'");
             $order[0]["endDate"] = date("Y-m-d H:i:s", strtotime($order[0]["date"] . " +{$subscription[0]["numberOfDays"]} days"));
