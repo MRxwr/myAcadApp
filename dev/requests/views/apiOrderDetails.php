@@ -10,6 +10,7 @@ if( !isset($_POST["orderId"]) || empty($_POST["orderId"]) ){
             $area = selectDB("countries","`id` = '{$tournaments[0]["area"]}'");
             $data["id"] = $order[0]["id"];
             $data["date"] = $order[0]["date"];
+            $data["isTournament"] = 1;
             $data["enTournament"] = $tournaments[0]["enTitle"];
             $data["arTournament"] = $tournaments[0]["arTitle"];
             $data["areaEnTitle"] = $area[0]["areaEnTitle"];
@@ -17,15 +18,17 @@ if( !isset($_POST["orderId"]) || empty($_POST["orderId"]) ){
             $data["gameDate"] = $tournaments[0]["gameDate"];
             $data["gameTime"] = $tournaments[0]["gameTime"];
             $data["teamName"] = $order[0]["teamDetails"]["teamName"];
-            $data["players"] = $order[0]["teamDetails"]["players"];
-            $data["bench"] = $order[0]["teamDetails"]["bench"];
             $data["quantity"] = $order[0]["teamDetails"]["quantity"];
             $data["price"] = $order[0]["teamDetails"]["price"];
-            $data["total"] = $order[0]["teamDetails"]["total"];            $response = $data;
+            $data["total"] = $order[0]["teamDetails"]["total"];   
+            $data["players"] = $order[0]["teamDetails"]["players"];
+            $data["bench"] = $order[0]["teamDetails"]["bench"];
+            $response = $data;
         }else{
             unset($order[0]["tournamentId"],$order[0]["teamDetails"]);
             $order2 = selectDB("orders","`id` = '{$_POST["orderId"]}'");
             $subscription = selectDB("subscriptions","`id` = '{$order2[0]["subscriptionId"]}'");
+            $order[0]["isTournament"] = 0;
             $order[0]["endDate"] = date("Y-m-d H:i:s", strtotime($order[0]["date"] . " +{$subscription[0]["numberOfDays"]} days"));
             $response = $order;
         }
