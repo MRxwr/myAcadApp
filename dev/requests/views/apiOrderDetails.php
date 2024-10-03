@@ -10,8 +10,8 @@ if( !isset($_POST["orderId"]) || empty($_POST["orderId"]) ){
             $data[0]["teamDetails"]["enTournament"] = $tournaments[0]["enTitle"];
             $data[0]["teamDetails"]["arTournament"] = $tournaments[0]["arTitle"];
             $data[0]["teamDetails"]["teamName"] = $order[0]["teamDetails"]["teamName"];
-            $data[0]["teamDetails"]["players"] = json_decode($order[0]["teamDetails"]["players"],true);
-            $data[0]["teamDetails"]["bench"] = json_decode($order[0]["teamDetails"]["bench"],true);
+            $data[0]["teamDetails"]["players"] = $order[0]["teamDetails"]["players"];
+            $data[0]["teamDetails"]["bench"] = $order[0]["teamDetails"]["bench"];
             $data[0]["teamDetails"]["quantity"] = $order[0]["teamDetails"]["quantity"];
             $data[0]["teamDetails"]["price"] = $order[0]["teamDetails"]["price"];
             $data[0]["teamDetails"]["total"] = $order[0]["teamDetails"]["total"];
