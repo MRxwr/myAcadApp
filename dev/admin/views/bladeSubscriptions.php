@@ -1,17 +1,3 @@
-<?php
-if( !in_array($userType, array(0,8)) ){
-	if( !in_array($_GET["code"],$academiesList) ){
-		?>
-		<script>
-			window.onload = function() {
-				alert("<?php echo direction("Wrong Subscription number","رقم الإشتراك خاطئ") ?>");
-				window.location.href = "?v=Academies";
-			}
-		</script>
-		<?php
-	}
-}
-?>
 <div class="col-sm-12">
 <div class="panel panel-default card-view">
 <div class="panel-heading">
