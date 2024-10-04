@@ -185,6 +185,32 @@
             }
         });
 
+        // redeem points 
+        $('#submitTeam').on('click', function (event) {
+            var langCookieValue = $.cookie("CREATEkwLANG");
+            var selectedLanguageTeam = (langCookieValue === undefined || langCookieValue === "" || langCookieValue === "EN") ? "Team name already exists" : "اسم الفريق موجود بالفعل";
+            // do ajax check in input name="teamName" to check if exists
+            var userId = $("#userIdProfile").val();
+            var settings = {
+                "url": "requests/index.php?a=Points&userId="+userId+"&lang="+langCookieValue,
+                "method": "GET",
+                "timeout": 0,
+                "headers": {
+                    "myacadheader": "myAcadAppCreate"
+                },
+            };  
+            $.ajax(settings).done(function (response) {
+                if (response.error === "1" ) {
+                    event.preventDefault();
+                    alert(response.data.msg);
+                    return false;
+                }else{
+                    alert(response.data.msg);
+                    return true;
+                }
+            })
+        });
+
         $('#btnSubmit').on('click', function (event) {
 			$('#formSubmit').submit();
 		}); 
