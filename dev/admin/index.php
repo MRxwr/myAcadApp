@@ -164,19 +164,6 @@ if ( isset($_GET["hide"]) || isset($_GET["show"]) || isset($_GET["delId"]) || is
 		}
 	}
 	if( isset($_GET["code"]) && !empty($_GET["code"]) ){
-        var_dump(!in_array($userType, $allowedEmpolyees));
-        if( !in_array($userType, $allowedEmpolyees) ){
-            if( !in_array($_GET["code"],$academiesList) ){
-                ?>
-                <script>
-                    window.onload = function() {
-                        alert("<?php echo direction("Wrong Operation","العملية غير صالحة") ?>");
-                        window.history.back();
-                    }
-                </script>
-                <?php
-            }
-        }
 		$countryCode = "&code={$_GET["code"]}";
 	}else{
 		$countryCode = "";
@@ -203,6 +190,19 @@ if ( isset($_GET["hide"]) || isset($_GET["show"]) || isset($_GET["delId"]) || is
 		window.location.replace("<?php echo "?v={$_GET["v"]}{$countryCode}" ?>");
 	</script>
 	<?php
+}
+
+if( !in_array($userType, $allowedEmpolyees) ){
+    if( isset($_GET["code"]) && !in_array($_GET["code"],$academiesList) ){
+        ?>
+        <script>
+            window.onload = function() {
+                alert("<?php echo direction("Wrong Operation","العملية غير صالحة") ?>");
+                window.history.back();
+            }
+        </script>
+        <?php
+    }
 }
 
 // get viewed page from pages folder \\
