@@ -40,7 +40,10 @@
 			$id = ( isset($academiesList[$z]) && !empty($academiesList[$z]) ) ? "AND `id` = '{$academiesList[$z]}'" : "AND `id` != '0'";
 			if( $academies = selectDB("academies","`status` = '0' {$id} ORDER BY `{$orderBy}` ASC") ){
 				for( $i = 0; $i < sizeof($academies); $i++ ){
-					echo "<option value='{$academies[$i]["id"]}'>".direction($academies[$i]["enTitle"],$academies[$i]["arTitle"])."</option>";
+					$area = selectDB("countries","`id` = '{$academy[$i]["area"]}'");
+					$areaTitle = direction($area[0]["areaEnTitle"],$area[0]["areaArTitle"]);
+					$academyTitle = direction($academies[$i]["enTitle"],$academies[$i]["arTitle"]);
+					echo "<option value='{$academies[$i]["id"]}'>{$academyTitle} - {$areaTitle} </option>";
 				}
 			}
 		}
