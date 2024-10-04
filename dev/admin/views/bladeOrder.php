@@ -77,6 +77,9 @@ td{
     <td style="text-align: left;" class="txt-dark"><?php echo direction("Price","السعر") ?></td>
     </tr>
     <tbody>
+        <?php 
+        if( $order[0]["isTournament"] == 0 ){
+            ?> 
         <tr>
             <td class='txt-dark' style='white-space: break-spaces;'>
                 <?php echo "{$order[0]["subscriptionQuantity"]}x " . direction($order[0]["enSession"],$order[0]["arSession"]) . " / " . direction($order[0]["enSubscription"],$order[0]["arSubscription"])?>
@@ -93,7 +96,32 @@ td{
                 <span class='Price txt-dark'><?php echo numTo3Float($order[0]["totalJersyPrice"]) ?>KD</span>
             </td>
         </tr>
-            
+        <?php
+        }else{
+            $tournament = selectDB("tournaments","`id` = '{$order[0]["tournamentId"]}'");
+            $teamData = json_decode($order[0]["teamDetails"],true);
+            ?>
+            <tr>
+                <td class='txt-dark' style='white-space: break-spaces;'>
+                    <?php echo "1x" . direction($tournament[0]["enTournament"],$tournament[0]["arTournament"]) . " - {$teamData["teamName"]}<br>" ?>
+                    <?php
+                    echo "Players: <br>";
+                    for( $i = 0; $i < sizeof($teamData["players"]); $i++ ){
+                        echo "- " . $teamData["players"][$i] . "<br>";
+                    }
+                    echo "Bench: <br>";
+                    for( $i = 0; $i < sizeof($teamData["bench"]); $i++ ){
+                        echo "- " . $teamData["bench"][$i] . "<br>";
+                    }
+                    ?>
+                </td>
+                <td>
+                    <span class='Price txt-dark'><?php echo numTo3Float($order[0]["price"]) ?>KD</span>
+                </td>
+            </tr>
+            <?php
+        }
+        ?> 
         <tr class='txt-dark'>
             <td><?php echo direction("Voucher","كود الخصم") ?></td>
             <td><?php echo $order[0]["voucher"] ?>
@@ -104,11 +132,11 @@ td{
             <td><?php echo direction("Payment Method","وسيلة الدفع") ?></td>
             <td><?php
                 if( $order[0]["paymentMethod"] == 1 ){
-                    $paymentMethod = "KNET";
-                }elseif( $order[0]["paymentMethod"] == 2 ){
-                    $paymentMethod = "VISA";
+                    $paymentMethod = "ONLINE PAYMENT";
+                }elseif( $order[0]["paymentMethod"] == 3 ){
+                    $paymentMethod = "WALLET";
                 }else{
-                    $paymentMethod = "Wallet";
+                    $paymentMethod = "FREE";
                 }
                 echo $paymentMethod ?>
             </td>
