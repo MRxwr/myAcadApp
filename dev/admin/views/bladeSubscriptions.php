@@ -14,7 +14,7 @@ if( $order = selectDB("subscriptions","`id` = '{$_GET["id"]}' {$id}") ){
 	?>
 	<script>
 		window.onload = function() {
-			alert("<?php echo direction("Wrong subscriptions number","رقم الإشتراك خاطئ") ?>");
+			alert("<?php echo direction("Wrong subscriptions number {$listOfAcademies}","رقم الإشتراك خاطئ") ?>");
 			window.location.href = "?v=Academies";
 		}
 	</script>
