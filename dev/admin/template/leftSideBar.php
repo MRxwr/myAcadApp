@@ -5,7 +5,7 @@
 			<i class="zmdi zmdi-more"></i>
 		</li>
 <?php 
-if( $pages = selectDB("pages","`status` = '0' AND `section` = '0' ORDER BY `order` ASC") ){
+if( $pages = selectDB("pages","`status` = '0' AND `hidden` = '0' AND `section` = '0' ORDER BY `order` ASC") ){
 	$listOfAllowedPages = "";
 	if( $roles = selectDB("roles","`id` = '{$userType}'") ){
 		$list = json_decode($roles[0]["pages"],true);
