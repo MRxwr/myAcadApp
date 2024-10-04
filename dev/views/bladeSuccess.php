@@ -4,7 +4,11 @@ if( isset($_GET["requested_order_id"]) && !empty($_GET["requested_order_id"]) ){
         $order2 = selectDB("orders","`gatewayId` = '{$_GET["requested_order_id"]}'");
         if( $order2[0]["status"] == 0 ){
             updateDB("orders",array("gatewayLink"=>json_encode($_GET),"status"=>1),"`gatewayId` = '{$_GET["requested_order_id"]}'");
+            $settingsEmail = selectDB("settings","`id` = '1'");
             if( $order2[0]["isTournament"] == 0 ){
+                $user = selectDB("users","`id` = '{$order2[0]["userId"]}'");
+                $points = $user[0]["points"] + $settingsEmail[0]["points"];
+                updateDB("users",array("points"=>$points),"`id` = '{$order2[0]["userId"]}'");
                 $session = selectDB("sessions","`id` = '{$order2[0]["sessionId"]}'");
                 $quantity = $session[0]["quantity"] - $order2[0]["subscriptionQuantity"];
                 $academyEmail = selectDB("academies","`id` = '{$order2[0]["academyId"]}'");
@@ -18,7 +22,6 @@ if( isset($_GET["requested_order_id"]) && !empty($_GET["requested_order_id"]) ){
                 $quantity = $tournament[0]["quantity"] - $tournamentEmail["quantity"];
                 updateDB("tournaments",array("quantity"=>$quantity),"`id` = '{$order2[0]["tournamentId"]}'");
             }
-            $settingsEmail = selectDB("settings","`id` = '1'");
             sendMails($order2,$order2[0]["email"]);
             sendMails($order2,$emailSent);
             sendMails($order2,$settingsEmail[0]["email"]);
