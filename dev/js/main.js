@@ -186,7 +186,7 @@
         });
 
         // redeem points 
-        $('#submitTeam').on('click', function (event) {
+        $('#redeemBtn').on('click', function (event) {
             var langCookieValue = $.cookie("CREATEkwLANG");
             var selectedLanguageTeam = (langCookieValue === undefined || langCookieValue === "" || langCookieValue === "EN") ? "Team name already exists" : "اسم الفريق موجود بالفعل";
             // do ajax check in input name="teamName" to check if exists
