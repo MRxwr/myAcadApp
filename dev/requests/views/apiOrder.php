@@ -44,7 +44,7 @@ if( !isset($_POST["invoiceId"]) || empty($_POST["invoiceId"]) ){
                 if( $order2[0]["isTournament"] == 1 ){
                     $teamDetails = json_decode($order2[0]["teamDetails"],true);
                     $tournament = selectDB("tournaments","`id` = '{$order[0]["tournamentId"]}'");
-                    $quantity = $tournament[0]["quantity"] - $teamDetails[0]["teamDetails"]["quantity"];
+                    $quantity = $tournament[0]["quantity"] - $teamDetails["quantity"];
                     updateDB("tournaments",array("quantity"=>$quantity),"`id` = '{$order2[0]["tournamentId"]}'");
                 }else{
                     $session = selectDB("sessions","`id` = '{$order2[0]["sessionId"]}'");
