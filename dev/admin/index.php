@@ -164,7 +164,7 @@ if ( isset($_GET["hide"]) || isset($_GET["show"]) || isset($_GET["delId"]) || is
 		}
 	}
 	if( isset($_GET["code"]) && !empty($_GET["code"]) ){
-        if( !in_array($userType, array(0,8)) ){
+        if( !in_array($userType, $allowedEmpolyees) ){
             if( !in_array($_GET["code"],$academiesList) ){
                 ?>
                 <script>

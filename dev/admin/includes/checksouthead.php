@@ -2,6 +2,7 @@
 require ("config.php");
 require ("translate.php");
 require ("functions.php");
+$allowedEmpolyees = array(0,8);
 if ( isset($_COOKIE[$cookieSession."A"]) && !empty($_COOKIE[$cookieSession."A"]) ){
 	session_start ();
 	$svdva = $_COOKIE[$cookieSession."A"];
