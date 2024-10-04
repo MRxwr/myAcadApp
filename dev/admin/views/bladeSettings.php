@@ -83,7 +83,7 @@ if( $settings = selectDB("settings","`id` = '1'")){
 	</div>
 
 	<!-- Points -->
-	<div class="col-md-6">
+	<div class="col-md-12">
 		<div class="panel panel-default card-view">
 			<div class="panel-heading">
 				<div class="pull-left">
