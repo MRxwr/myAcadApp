@@ -126,7 +126,7 @@ if( isset($_GET["cancel"]) && !empty($_GET["cancel"]) ){
                                         <img src="img/sub_4.svg" alt="">
                                         <h4><?php echo direction("Share","مشاركة") ?></h4>
                                     </a>
-                                    <a href="?v=Success&OrderID=<?php echo $result["data"][$i]["orderId"] ?>" class="item_sub">
+                                    <a href="?v=Success&requested_order_id=<?php echo $result["data"][$i]["orderId"] ?>" class="item_sub">
                                         <img src="img/sub_5.svg" alt="">
                                         <h4><?php echo direction("Invoice","الفاتورة") ?></h4>
                                         <h4 style="display:none" class="invoice<?php echo $result["data"][$i]["id"] ?>"><?php echo $result["data"][$i]["orderId"] ?></h4>
