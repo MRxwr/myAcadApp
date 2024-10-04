@@ -27,14 +27,6 @@
 		<?php 
             if( $logs = selectDB("logs","`id` != '0' ") ){
                 for( $i = 0; $i < sizeof($logs); $i++ ){
-                    $status = [direction("Pending","إنتظار"),direction("Successful","ناجحه"),direction("Failed","فاشلة"),direction("Cancelled","ملغية"),direction("Ended","إنتهى")];
-                    $statusColor = ["default","success","info","danger","warning"];
-                    for( $y = 0; $y < sizeof($status); $y++ ){
-                        if( $logs[$i]["status"] == $y ){
-                            $orderStatus = $status[$y];
-                            $orderBtnColor = $statusColor[$y];
-                        }
-                    }
                 ?>
                     <tr>
                     <td><?php echo sprintf("%05d", $logs[$i]["id"]) ?></td>
