@@ -125,7 +125,7 @@ function emailBody($order){
 				</tr>
 				';
 	}
-	$body .= '<td>Total<hr></td>
+	$body .= '<tr><td>Total<hr></td>
 	<td>'.numTo3Float($order[0]["total"]).'KD<hr></td>
 	</tr>
 	<tr>
