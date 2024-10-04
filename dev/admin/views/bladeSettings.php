@@ -94,7 +94,7 @@ if( $settings = selectDB("settings","`id` = '1'")){
 			<div class="panel-wrapper collapse in">
 				<div class="panel-body">
 					<div class="text">
-						<input class="form-control" type="text" name="points" placeholder="" value="<?php echo $settings[0]["points"] ?>">
+						<input class="form-control" type="number" step="any" min="0" name="points" placeholder="" value="<?php echo $settings[0]["points"] ?>">
 					</div>
 				</div>
 			</div>
