@@ -206,7 +206,7 @@
                     return false;
                 }else{
                     alert(response.data.msg);
-                    return true;
+                    window.location.reload();
                 }
             })
         });
