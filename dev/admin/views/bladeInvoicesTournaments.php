@@ -1,6 +1,3 @@
-<?php 
-$_GET["type"] = ( isset($_GET["type"]) ) ? $_GET["type"] : 0 ;
-?>
 <div class="col-sm-12">
 <div class="panel panel-default card-view">
 <div class="panel-heading">
@@ -33,7 +30,7 @@ $_GET["type"] = ( isset($_GET["type"]) ) ? $_GET["type"] : 0 ;
         $count = (is_array($academiesList) && !empty($academiesList)) ? count($academiesList) : 1;
 		for( $z = 0; $z < $count; $z++ ){
 			$id = ( isset($academiesList[$z]) && !empty($academiesList[$z]) ) ? "AND `academyId` = '{$academiesList[$z]}'" : "";
-            if( $orders = selectDB("orders","`id` != '0' {$id} AND `status` = '{$_GET["type"]}' AND `isTournament` = '0' ORDER BY `date` DESC") ){
+            if( $orders = selectDB("orders","`id` != '0' {$id} AND `status` = '{$_GET["type"]}' AND `isTournament` = '1' ORDER BY `date` DESC") ){
                 for( $i = 0; $i < sizeof($orders); $i++ ){
                     $status = [direction("Pending","إنتظار"),direction("Successful","ناجحه"),direction("Failed","فاشلة"),direction("Cancelled","ملغية"),direction("Ended","إنتهى")];
                     $statusColor = ["default","success","info","danger","warning"];
