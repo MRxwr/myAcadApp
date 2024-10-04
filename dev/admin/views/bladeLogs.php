@@ -44,7 +44,7 @@
                                     echo "<pre><code>  - $item</code></pre>";
                                 }
                             } else {
-                                echo "<pre><code>$key : $value</code></pre>";
+                                //echo "<pre><code>$key : $value</code></pre>";
                             }
                         }
                         ?>
