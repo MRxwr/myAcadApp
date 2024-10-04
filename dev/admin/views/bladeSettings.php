@@ -82,6 +82,25 @@ if( $settings = selectDB("settings","`id` = '1'")){
 		</div>
 	</div>
 
+	<!-- Points -->
+	<div class="col-md-6">
+		<div class="panel panel-default card-view">
+			<div class="panel-heading">
+				<div class="pull-left">
+					<h6 class="panel-title txt-dark">Points Against Subscription</h6>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+			<div class="panel-wrapper collapse in">
+				<div class="panel-body">
+					<div class="text">
+						<input class="form-control" type="text" name="points" placeholder="" value="<?php echo $settings[0]["points"] ?>">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	<!-- system en terms -->
 	<div class="col-md-6">
 		<div class="panel panel-default card-view">
