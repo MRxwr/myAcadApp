@@ -40,6 +40,7 @@ if( !isset($_POST["invoiceId"]) || empty($_POST["invoiceId"]) ){
         }
         if( $order2[0]["status"] == 0 ){
             updateDB("orders",array("gatewayLink"=>json_encode($_POST["url"]),"status"=>$_POST["status"]),"`gatewayId` = '{$_POST["invoiceId"]}'");
+            /*
             if ( $_POST["status"] == 1 ){
                 $settingsEmail = selectDB("settings","`id` = '1'");
                 if( $order2[0]["isTournament"] == 1 ){
@@ -59,6 +60,7 @@ if( !isset($_POST["invoiceId"]) || empty($_POST["invoiceId"]) ){
                 sendMails($order2,$targetEmail[0]["email"]);
                 sendMails($order2,$settingsEmail[0]["email"]);
             }
+                */
         }
     }else{
         $response["msg"] = popupMsg($requestLang,"we could not find this invoice id in out db.","لم يتم العثور على هذا الرقم في قاعدة بياناتنا");
