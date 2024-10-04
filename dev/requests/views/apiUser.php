@@ -201,7 +201,7 @@ if ( isset($_GET["type"]) && !empty($_GET["type"]) ){
 			);
 			if( $user = selectDBNew("users",[$_GET["userId"]],"`id` = ? ","" ) ){
 				if ( updateDB("users",$data,"`id` = '{$_GET["userId"]}'" ) ){
-					$user = selectDB2("`firstName`, `lastName`, `email`, `phone`, `gender`","users","`id` = '{$_GET["userId"]}' " );
+					$user = selectDB2("`firstName`, `lastName`, `email`, `phone`, `gender`, `points`","users","`id` = '{$_GET["userId"]}' " );
 					echo outputData(array('msg'=>popupMsg($requestLang,"profile has been updated successfully.","تم تحديث الملف الشخصي بنجاح"),"user"=>$user));
 				}
 			}else{
@@ -209,7 +209,7 @@ if ( isset($_GET["type"]) && !empty($_GET["type"]) ){
 				echo outputError($error);die();
 			}
 		}else{
-			if( $user = selectDB2("`firstName`, `lastName`, `email`, `phone`, `gender`","users","`id` = '{$_GET["userId"]}' " ) ){
+			if( $user = selectDB2("`firstName`, `lastName`, `email`, `phone`, `gender`, `points`","users","`id` = '{$_GET["userId"]}' " ) ){
 				echo outputData(array("user"=>$user));
 			}else{
 				$error = array("msg"=>"No user with this id");
