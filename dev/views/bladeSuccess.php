@@ -2,25 +2,28 @@
 if( isset($_GET["requested_order_id"]) && !empty($_GET["requested_order_id"]) ){
     if( $order = selectDB("orders","`gatewayId` = '{$_GET["requested_order_id"]}'") ){
         $order2 = selectDB("orders","`gatewayId` = '{$_GET["requested_order_id"]}'");
+        $settingsEmail = selectDB("settings","`id` = '1'");
+        if( $order2[0]["isTournament"] == 0 ){
+            $user = selectDB("users","`id` = '{$order2[0]["userId"]}'");
+            $subscription = selectDB("subscriptions","`id` = '{$order[0]["subscriptionId"]}'");
+            $session = selectDB("sessions","`id` = '{$order2[0]["sessionId"]}'");
+            $academyEmail = selectDB("academies","`id` = '{$order2[0]["academyId"]}'");
+            $emailSent = $academyEmail[0]["email"];
+        }else{
+            $tournamentEmail = selectDB("tournaments","`id` = '{$order2[0]["tournamentId"]}'");
+            $emailSent = $tournamentEmail[0]["email"];
+        }
         if( $order2[0]["status"] == 0 ){
-            updateDB("orders",array("gatewayLink"=>json_encode($_GET),"status"=>1),"`gatewayId` = '{$_GET["requested_order_id"]}'");
-            $settingsEmail = selectDB("settings","`id` = '1'");
+            updateDB2("orders",array("gatewayLink"=>json_encode($_GET),"status"=>1),"`gatewayId` = '{$_GET["requested_order_id"]}'");
             if( $order2[0]["isTournament"] == 0 ){
-                $user = selectDB("users","`id` = '{$order2[0]["userId"]}'");
                 $points = $user[0]["points"] + $settingsEmail[0]["points"];
-                updateDB("users",array("points"=>$points),"`id` = '{$order2[0]["userId"]}'");
-                $session = selectDB("sessions","`id` = '{$order2[0]["sessionId"]}'");
+                updateDB2("users",array("points"=>$points),"`id` = '{$order2[0]["userId"]}'");
                 $quantity = $session[0]["quantity"] - $order2[0]["subscriptionQuantity"];
-                $academyEmail = selectDB("academies","`id` = '{$order2[0]["academyId"]}'");
-                $emailSent = $academyEmail[0]["email"];
-                updateDB("sessions",array("quantity"=>$quantity),"`id` = '{$order2[0]["sessionId"]}'");
-                $subscription = selectDB("subscriptions","`id` = '{$order[0]["subscriptionId"]}'");
+                updateDB2("sessions",array("quantity"=>$quantity),"`id` = '{$order2[0]["sessionId"]}'");
             }else{
-                $tournamentEmail = selectDB("tournaments","`id` = '{$order2[0]["tournamentId"]}'");
-                $emailSent = $tournamentEmail[0]["email"];
                 $teamDetails = json_decode($order2[0]["teamDetails"],true);
                 $quantity = $tournament[0]["quantity"] - $tournamentEmail["quantity"];
-                updateDB("tournaments",array("quantity"=>$quantity),"`id` = '{$order2[0]["tournamentId"]}'");
+                updateDB2("tournaments",array("quantity"=>$quantity),"`id` = '{$order2[0]["tournamentId"]}'");
             }
             sendMails($order2,$order2[0]["email"]);
             sendMails($order2,$emailSent);
