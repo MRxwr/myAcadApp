@@ -103,7 +103,7 @@ td{
             ?>
             <tr>
                 <td class='txt-dark' style='white-space: break-spaces;'>
-                    <?php echo "1x" . direction($tournament[0]["enTournament"],$tournament[0]["arTournament"]) . " - {$teamData["teamName"]}<br>" ?>
+                    <?php echo "1x" . direction($tournament[0]["enTournament"],$tournament[0]["arTournament"]) . " / {$teamData["teamName"]}<br>" ?>
                     <?php
                     echo "Players: <br>";
                     for( $i = 0; $i < sizeof($teamData["players"]); $i++ ){
