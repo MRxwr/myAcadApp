@@ -116,7 +116,7 @@ td{
                     ?>
                 </td>
                 <td>
-                    <span class='Price txt-dark'><?php echo numTo3Float($order[0]["price"]) ?>KD</span>
+                    <span class='Price txt-dark'><?php echo numTo3Float($order[0]["total"]) ?>KD</span>
                 </td>
             </tr>
             <?php
