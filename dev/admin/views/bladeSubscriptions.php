@@ -1,24 +1,12 @@
 <?php
-$id = "";
-$listOfAcademies = "";
-$count = (is_array($academiesList) && !empty($academiesList)) ? count($academiesList) : 0;
-for( $z = 0; $z < $count; $z++ ){
-	$listOfAcademies .= "'{$academiesList[$z]}'";
-	if( isset($academiesList[$z+1]) && !empty($academiesList[$z+1]) ){
-		$listOfAcademies .= ",";
-	}
-}
-$id .= ( isset($academiesList[0]) && !empty($academiesList[0]) ) ? "AND `academyId` IN ($listOfAcademies)" : "";
-echo "`status` = '0' {$id}";
-if( $order = selectDB("subscriptions","`status` = '0' {$id}") ){
-}else{
+if( !in_array($_GET["code"],$academiesList)){
 	?>
 	<script>
-		window.onload = function() {
-			alert("<?php echo direction("Wrong subscriptions number {$listOfAcademies}","رقم الإشتراك خاطئ") ?>");
-			window.location.href = "?v=Academies";
-		}
-	</script>
+        window.onload = function() {
+            alert("<?php echo direction("Wrong Subscription number","رقم الإشتراك خاطئ") ?>");
+            window.location.href = "?v=Academies";
+        }
+    </script>
 	<?php
 }
 ?>
