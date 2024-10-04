@@ -2,7 +2,7 @@
 if( $user = selectDB2("`points`,`wallet`","users","`id` = '{$_GET["userId"]}' " ) ){
     $settings = selectDB("settings","`id` = 1");
     $points = $user[0]["points"];
-    var_dump($settings[0]["pointsRedeemMin"] > $points);
+    var_dump("{$settings[0]["pointsRedeemMin"]} - {$points}" . $settings[0]["pointsRedeemMin"] > $points);
     if( $settings[0]["pointsRedeemMin"] > $points ){
         $error["msg"] = popupMsg($requestLang,"Not enough points to redeem","ليس لديك نقاط كافية لتحويلها");
         echo outputError($error);die();
