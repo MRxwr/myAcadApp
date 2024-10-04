@@ -120,7 +120,7 @@
 				$type = ( $vouchers[$i]["type"] == 0 ) ? direction("Percentage","نسبة مؤوية") : direction("Fixed","قيمة ثابته") ;
 				var_dump($vouchers[$i]["academyId"]);
 				for( $j = 0; $j < sizeof($vouchers[$i]["academyId"]); $j++ ){
-					if( $academy = selectDB("academies","`id` = '{$vouchers[$i]["academyId"]}'") ){
+					if( $academy = selectDB("academies","`id` = '{$vouchers[$i]["academyId"][$j]}'") ){
 						$academy = direction($academy[0]["enTitle"],$academy[0]["arTitle"]) . " - ";
 					}else{
 						$academy = "";
