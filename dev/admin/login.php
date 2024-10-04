@@ -63,9 +63,9 @@ if ( isset ($_GET["error"]) )
       <header class="sp-header">
         <div class="sp-logo-wrap pull-left">
           <a href="index">
-            <img class="brand-img mr-10" src="#" alt="brand" />
+            <img class="brand-img mr-10" src="../img/logo.png" alt="brand" style="width:7.5rem"/>
             <span class="brand-text"
-              ><span style="font-size: 22px;">Create</span></span
+              ><span style="font-size: 22px;">MY ACAD Dashboard</span></span
             >
           </a>
         </div>
@@ -85,7 +85,7 @@ if ( isset ($_GET["error"]) )
                       <h3 class="text-center txt-dark mb-10">
                         Sign in to
                         <b>
-                          Create Cpanel
+                          MY ACAD Dashboard
                         </b>
                       </h3>
                       <h6 class="text-center nonecase-font txt-grey">
