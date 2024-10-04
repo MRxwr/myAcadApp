@@ -245,7 +245,7 @@ function updateDB($table, $data, $where) {
             "userId" => "{$userID}",
             "username" => "{$username}",
             "module" => "{$_GET["v"]}",
-            "action" => "INSERT",
+            "action" => "UPDATE",
             "sqlQuery" => json_encode(array("table"=>$table,"data"=>$sql,"where"=>$values)),
         );
         LogsHistory($array);
