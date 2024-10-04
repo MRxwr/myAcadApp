@@ -1,5 +1,5 @@
 <?php
-if( !in_array($userType, array(1,8)) ){
+if( !in_array($userType, array(0,8)) ){
 	if( !in_array($_GET["code"],$academiesList) ){
 		?>
 		<script>
