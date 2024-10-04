@@ -41,7 +41,7 @@
 			
 			<div class="col-md-4">
 			<label><?php echo direction("Academy","الأكادمية") ?></label>
-			<select name="academyId[]" class="form-control" id="mySelect" multiple>
+			<select name="academyIds[]" class="form-control" id="mySelect" multiple>
                 <option value='0'><?php echo direction("All","الكل") ?></option>
 				<?php
 				if( $academy = selectDB("academies","`status` = '0'") ){
@@ -119,12 +119,13 @@
 
 				$type = ( $vouchers[$i]["type"] == 0 ) ? direction("Percentage","نسبة مؤوية") : direction("Fixed","قيمة ثابته") ;
 
-				if( $academy = selectDB("academies","`id` = '{$vouchers[$i]["academyId"]}'") ){
-					$academy = direction($academy[0]["enTitle"],$academy[0]["arTitle"]);
-				}else{
-					$academy = "";
+				for( $j = 0; $j < sizeof($vouchers[$i]["academyId"]); $j++ ){
+					if( $academy = selectDB("academies","`id` = '{$vouchers[$i]["academyId"]}'") ){
+						$academy = direction($academy[0]["enTitle"],$academy[0]["arTitle"]) . " - ";
+					}else{
+						$academy = "";
+					}
 				}
-				
 				?>
 				<tr>
 				<td id="title<?php echo $vouchers[$i]["id"]?>" ><?php echo $vouchers[$i]["title"] ?></td>
