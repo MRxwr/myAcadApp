@@ -60,6 +60,13 @@ require_once("template/changePassword.php");
         <div class="profile_area">
             <h2><?php echo $user[0]["firstName"] . " " . $user[0]["lastName"] ?></h2>
             <ul>
+                <li>
+                    <div class="row">
+                        <div class="col-8"><a href="#"><img src="img/img_5.svg" alt=""><p><?php echo direction("Points","النقاط") ?> (<span><?php echo $user[0]["points"] ?></span>)</p></a></div>
+                        <div class="col-4"><a id="redeemBtn" class="button"><?php echo direction("Redeem Poitns","استبدال النقاط") ?></a></div>
+                    </div>
+                    
+                </li>
                 <li><a href="#"><img src="img/img_5.svg" alt=""><p><?php echo direction("Wallet amount","قيمة المحفظة") ?> (<span><?php echo $user[0]["wallet"] ?> KD</span>)</p></a></li>
                 <li><a href="#profile" data-toggle="modal"><img src="img/img_6.svg" alt=""><p><?php echo direction("Profile","الملف الشخصي") ?></p></a></li>
                 <li><a href="#changePassword" data-toggle="modal"><img src="img/img_6.svg" alt=""><p><?php echo direction("Change Password","تغيير كلمة المرور") ?></p></a></li>
