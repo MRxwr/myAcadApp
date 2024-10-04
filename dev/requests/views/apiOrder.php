@@ -42,7 +42,7 @@ if( !isset($_POST["invoiceId"]) || empty($_POST["invoiceId"]) ){
             updateDB("orders",array("gatewayLink"=>json_encode($_POST["url"]),"status"=>$_POST["status"]),"`gatewayId` = '{$_POST["invoiceId"]}'");
             if ( $_POST["status"] == 1 ){
                 if( $order2[0]["isTournament"] == 1 ){
-                    $teamDetails = json_decode($order[0]["teamDetails"],true);
+                    $teamDetails = json_decode($order2[0]["teamDetails"],true);
                     $tournament = selectDB("tournaments","`id` = '{$order[0]["tournamentId"]}'");
                     $quantity = $tournament[0]["quantity"] - $teamDetails[0]["teamDetails"]["quantity"];
                     updateDB("tournaments",array("quantity"=>$quantity),"`id` = '{$order2[0]["tournamentId"]}'");
