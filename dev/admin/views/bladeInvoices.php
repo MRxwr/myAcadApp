@@ -45,7 +45,7 @@
                     <td><?php echo sprintf("%05d", $orders[$i]["id"]) ?></td>
                     <td><?php echo $orders[$i]["date"] ?></td>
                     <td><?php echo $orders[$i]["name"] ?></td>
-                    <td><?php echo $orders[$i]["phone"] ?></td>
+                    <td><a href="https://wa.me/<?php echo $orders[$i]["phone"] ?>" target="_blank"><?php echo $orders[$i]["phone"] ?></a></td>
                     <td><?php echo direction($orders[$i]["enAcademy"],$orders[$i]["arAcademy"]) ?></td>
                     <td><?php echo $orders[$i]["total"] ?>KD</td>
                     <td><button class="btn btn-<?php echo $orderBtnColor ?>" style="width: 100%;"><?php echo $orderStatus ?></button></td>
