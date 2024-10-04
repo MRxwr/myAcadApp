@@ -9,6 +9,7 @@ for( $z = 0; $z < $count; $z++ ){
 	}
 }
 $id .= ( isset($academiesList[0]) && !empty($academiesList[0]) ) ? "AND `academyId` IN ($listOfAcademies)" : "";
+echo "`status` = '0' {$id}";
 if( $order = selectDB("subscriptions","`status` = '0' {$id}") ){
 }else{
 	?>
