@@ -44,11 +44,11 @@ if( !isset($_POST["invoiceId"]) || empty($_POST["invoiceId"]) ){
                     $targetEmail = selectDB("academies","`id` = '{$order2[0]["academyId"]}'");
                     $response = $order;
                 }
+                $settingsEmail = selectDB("settings","`id` = '1'");
+                sendMails($order2,$order2[0]["email"]);
+                sendMails($order2,$targetEmail[0]["email"]);
+                sendMails($order2,$settingsEmail[0]["email"]);
             }
-            $settingsEmail = selectDB("settings","`id` = '1'");
-            sendMails($order2,$order2[0]["email"]);
-            sendMails($order2,$targetEmail[0]["email"]);
-            sendMails($order2,$settingsEmail[0]["email"]);
         }else{
             if( $order2[0]["isTournament"] == 1 ){
                 $order[0]["teamDetails"] = json_decode($order[0]["teamDetails"],true);
