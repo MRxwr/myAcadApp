@@ -118,7 +118,8 @@
 				}
 
 				$type = ( $vouchers[$i]["type"] == 0 ) ? direction("Percentage","نسبة مؤوية") : direction("Fixed","قيمة ثابته") ;
-				$vouchers[$i]["academyId"] = explode(',', trim($vouchers[$i]["academyId"], '[]""'));
+				$cleanedAcademyId = str_replace(['[', ']', '"'], '', $vouchers[$i]["academyId"]);
+    			$vouchers[$i]["academyId"] = explode(',', $cleanedAcademyId);
 				for( $j = 0; $j < sizeof($vouchers[$i]["academyId"]); $j++ ){
 					echo $vouchers[$i]["academyId"][$j];
 					if( $academy = selectDB("academies","`id` = '{$vouchers[$i]["academyId"][$j]}'") ){
