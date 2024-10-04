@@ -37,7 +37,7 @@
                     <td>
                         <?php
                         // $logs[$i]["sqlQuery"] has json encoded data i want to decode them and reveal each in new line
-                        $data = json_decode($logs[$i]["data"]);
+                        $data = json_decode($logs[$i]["sqlQuery"], true);
                         foreach($data as $key => $value){
                             echo "<pre><code>$key : $value</code></pre>";
                         }
