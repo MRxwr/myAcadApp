@@ -1,4 +1,4 @@
-<div class="col-sm-12">
+<div class="col-sm-12" id="editDetails" style="display:none">
 <div class="panel panel-default card-view">
 <div class="panel-heading">
 <div class="pull-left">
@@ -362,6 +362,7 @@
 		});
 
 		$(document).on("click",".edit", function(){
+			$("#editDetails").show();
 			var id = $(this).attr("id");
 			$("input[name=enTitle]").val($("#enTitle"+id).html()).focus();
 			$("input[name=arTitle]").val($("#arTitle"+id).html());
