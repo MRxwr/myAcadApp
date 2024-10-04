@@ -37,9 +37,14 @@
                     <td>
                         <?php
                         // $logs[$i]["sqlQuery"] has json encoded data i want to decode them and reveal each in new line
+                        // this is an example of the data 
+                        /*
+                        {"table":"employees","data":["superadmin@myacad.app","882e6b78b48923425a78b6c96a8307df184dcc9d"],"where":"`email` LIKE ? AND `password` LIKE ? AND `hidden` != '1' AND `status` = '0'"}
+                        */
+
                         $data = json_decode($logs[$i]["sqlQuery"], true);
-                        foreach($data as $key => $value){
-                            echo "<pre><code>$key : $value</code></pre>";
+                        foreach ($data["data"] as $key => $value) {
+                            echo $value . "\n";
                         }
                         ?>
                     </td>
