@@ -39,8 +39,8 @@ if ( isset ($_GET["error"]) )
     <meta name="author" content="hencework" />
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="favicon.ico" />
-    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="../img/logo.png" />
+    <link rel="icon" href="../img/logo.png" type="image/x-icon" />
 
     <!-- vector map CSS -->
     <link
