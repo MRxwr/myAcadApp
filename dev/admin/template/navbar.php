@@ -1,5 +1,5 @@
-<nav class="navbar navbar-inverse navbar-fixed-top">
-			<div class="mobile-only-brand pull-left">
+<nav class="navbar navbar-inverse navbar-fixed-top" style="background-color: #012169 !important;">
+			<div class="mobile-only-brand pull-left" style="background-color: #012169 !important;">
 				<div class="nav-header pull-left">
 					<div class="logo-wrap">
 						<a href="index.php" style="white-space: nowrap;">
