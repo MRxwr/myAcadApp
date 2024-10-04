@@ -21,7 +21,7 @@ if ( isset($_GET["type"]) && !empty($_GET["type"]) ){
 				echo outputError($error);die();
 			}else{
 				$data = array("firebase" => "{$_POST["firebase"]}");
-				if( updateDB('users',$data,"`id` = '{$user[0]["id"]}'") ){
+				if( updateDB2('users',$data,"`id` = '{$user[0]["id"]}'") ){
 					
 				}
 				echo outputData(array('id'=>$user[0]["id"]));
@@ -36,7 +36,7 @@ if ( isset($_GET["type"]) && !empty($_GET["type"]) ){
 			echo outputError($error);die();
 		}elseif( $user = selectDB('users',"`id` = '{$_GET["userId"]}'") ){
 			$email = "DELETED - {$user[0]["email"]}";
-			updateDB('users',array("status"=>"2","email"=>$email),"`id` = '{$_GET["userId"]}'");
+			updateDB2('users',array("status"=>"2","email"=>$email),"`id` = '{$_GET["userId"]}'");
 			echo outputData(array('msg'=>popupMsg($requestLang,"User account has been removed successfully.","تم حذف حساب المستخدم بنجاح")));
 		}else{
 			$error = array("msg"=>"user id is wrong, please check user id.");
@@ -49,7 +49,7 @@ if ( isset($_GET["type"]) && !empty($_GET["type"]) ){
 		}
 	if( selectDBNew('users',[$_GET["email"]],"`email` LIKE ?","") ){
 			$random = rand(11111111,99999999);
-			updateDB('users',array("password"=>sha1($random)),"`email` LIKE '".$_GET["email"]."'");
+			updateDB2('users',array("password"=>sha1($random)),"`email` LIKE '".$_GET["email"]."'");
 			$curl = curl_init();
 			curl_setopt_array($curl, array(
 			  CURLOPT_URL => 'https://createid.link/api/v1/send/notify',
@@ -96,7 +96,7 @@ if ( isset($_GET["type"]) && !empty($_GET["type"]) ){
 			$newPass = sha1($_POST["newPassword"]);
 			$oldPass = sha1($_POST["oldPassword"]);
 			if ( $user = selectDB("users","`id` = '{$_GET["userId"]}' AND `password` = '{$oldPass}'" ) ){
-			updateDB('users',array("password"=>$newPass),"`id` = '{$_GET["userId"]}'");
+			updateDB2('users',array("password"=>$newPass),"`id` = '{$_GET["userId"]}'");
 				echo outputData(array('msg'=>popupMsg($requestLang,"Password has been changed successfully.","تم تغيير كلمة المرور بنجاح")));
 			}else{
 				$error = array("msg"=>popupMsg($requestLang,"Old password is wrong.","كلمة المرور القديمة غير صحيحة"));
@@ -145,13 +145,13 @@ if ( isset($_GET["type"]) && !empty($_GET["type"]) ){
 		$data = $_POST;
 		if( $user = selectDBNew('users',[$_POST["email"]],"`email` LIKE ?","") ){
 			if( $user[0]["status"] == 2 ){
-				updateDB("users",array("email" => "DELETED - {$user[0]["email"]}" ), "`id` = '{$user[0]["id"]}'");
+				updateDB2("users",array("email" => "DELETED - {$user[0]["email"]}" ), "`id` = '{$user[0]["id"]}'");
 			}else{
 				$error = array("msg"=>popupMsg($requestLang,"A user with this email is already registred.","يوجد مستخدم مسجل بهذا البريد الالكتروني"));
 				echo outputError($error);die();
 			}
 		}
-		if( insertDB('users',$data) ){
+		if( insertDB2('users',$data) ){
 		if ( $user = selectDBNew('users',[$_POST["email"],$_POST["password"]],"`email` LIKE ? AND `password` LIKE ?","") ){
 				if( $user[0]["hidden"] == 1 ){
 					$error = array("msg"=>popupMsg($requestLang,"Your account has been blocked. Please conatct administration.","تم قفل حسابك ، الرجاء التواصل مع الإداره"));
@@ -200,7 +200,7 @@ if ( isset($_GET["type"]) && !empty($_GET["type"]) ){
 				"gender"=>$_POST["gender"]
 			);
 			if( $user = selectDBNew("users",[$_GET["userId"]],"`id` = ? ","" ) ){
-				if ( updateDB("users",$data,"`id` = '{$_GET["userId"]}'" ) ){
+				if ( updateDB2("users",$data,"`id` = '{$_GET["userId"]}'" ) ){
 					$user = selectDB2("`firstName`, `lastName`, `email`, `phone`, `gender`, `points`","users","`id` = '{$_GET["userId"]}' " );
 					echo outputData(array('msg'=>popupMsg($requestLang,"profile has been updated successfully.","تم تحديث الملف الشخصي بنجاح"),"user"=>$user));
 				}
