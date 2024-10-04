@@ -15,6 +15,16 @@ if( !isset($_POST["invoiceId"]) || empty($_POST["invoiceId"]) ){
             updateDB("orders",array("gatewayLink"=>json_encode($_POST["url"]),"status"=>$_POST["status"]),"`gatewayId` = '{$_POST["invoiceId"]}'");
             if ( $_POST["status"] == 1 ){
                 if( $order2[0]["isTournament"] == 1 ){
+                    $teamDetails = json_decode($order[0]["teamDetails"],true);
+                    $tournaments = selectDB("tournaments","`id` = '{$order[0]["tournamentId"]}'");
+                    $quantity = $tournaments[0]["quantity"] - $teamDetails[0]["teamDetails"]["quantity"];
+                    updateDB("tournaments",array("quantity"=>$quantity),"`id` = '{$order2[0]["tournamentId"]}'");
+                }else{
+                    $session = selectDB("sessions","`id` = '{$order2[0]["sessionId"]}'");
+                    $quantity = $session[0]["quantity"] - $order2[0]["subscriptionQuantity"];
+                    updateDB("sessions",array("quantity"=>$quantity),"`id` = '{$order2[0]["sessionId"]}'");
+                }
+                if( $order2[0]["isTournament"] == 1 ){
                     $order[0]["teamDetails"] = json_decode($order[0]["teamDetails"],true);
                     $tournaments = selectDB("tournaments","`id` = '{$order[0]["tournamentId"]}'");
                     $area = selectDB("countries","`id` = '{$tournaments[0]["area"]}'");
@@ -36,9 +46,7 @@ if( !isset($_POST["invoiceId"]) || empty($_POST["invoiceId"]) ){
                     $targetEmail = selectDB("tournaments","`id` = '{$order2[0]["tournamentId"]}'");
                     $response = $data;
                 }else{
-                    $session = selectDB("sessions","`id` = '{$order2[0]["sessionId"]}'");
-                    $quantity = $session[0]["quantity"] - $order2[0]["subscriptionQuantity"];
-                    updateDB("sessions",array("quantity"=>$quantity),"`id` = '{$order2[0]["sessionId"]}'");
+                    
                     $subscription = selectDB("subscriptions","`id` = '{$order2[0]["subscriptionId"]}'");
                     $order[0]["endDate"] = date("Y-m-d H:i:s", strtotime($order[0]["date"] . " +{$subscription[0]["numberOfDays"]} days"));
                     $targetEmail = selectDB("academies","`id` = '{$order2[0]["academyId"]}'");
