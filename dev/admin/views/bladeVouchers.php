@@ -46,8 +46,10 @@
 				<?php
 				if( $academy = selectDB("academies","`status` = '0'") ){
 					for( $i = 0; $i < sizeof($academy); $i++ ){
+						$area = selectDB("countries","`id` = '{$academy[$i]["area"]}'");
+						$areaTitle = direction($area[0]["areaEnTitle"],$area[0]["areaArTitle"]);
 						$academyTitle = direction($academy[$i]["enTitle"],$academy[$i]["arTitle"]);
-						echo "<option value='{$academy[$i]["id"]}'>{$academyTitle}</option>";
+						echo "<option value='{$academy[$i]["id"]}'>{$academyTitle} - {$areaTitle} </option>";
 					}
 				}
 				?>
