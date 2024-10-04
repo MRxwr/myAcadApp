@@ -1,5 +1,5 @@
 <?php
-if( !in_array($_GET["code"],$academiesList)){
+if( !in_array($_GET["code"],$academiesList) ){
 	?>
 	<script>
         window.onload = function() {
