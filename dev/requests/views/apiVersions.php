@@ -13,7 +13,7 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
             "ios" => $_POST["ios"],
             "android" => $_POST["android"]
         );
-        if( updateDB("versions",$dataUpdate,"`id` = '1'") ){
+        if( updateDB2("versions",$dataUpdate,"`id` = '1'") ){
             $versions = selectDB2("`ios`,`android`","versions","`id` = '1'" );
             $response["versions"] = $versions[0];
             echo outputData($response);

@@ -72,7 +72,7 @@ function expiredSubscription(){
 					"firebase" => $user[0]["firebase"]
 				);
 				sendNotification($data);
-                updateDB("orders", array("isNotified" => 1), "`id` = '{$orders[$i]["id"]}'");
+                updateDB2("orders", array("isNotified" => 1), "`id` = '{$orders[$i]["id"]}'");
             }
         }
     }

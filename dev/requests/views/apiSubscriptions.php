@@ -21,28 +21,48 @@ if( !isset($_GET["userId"]) || empty($_GET["userId"]) ){
             $todaysDate = strtotime(date("Y-m-d H:i:s"));
             if( $orders[0]["isTournament"] == 0 ){
                 if ($endDateTimestamp <= $todaysDate ) {
-                    updateDB("orders", array("status" => 4), "`id` = '{$orders[$i]["id"]}'");
+                    updateDB2("orders", array("status" => 4), "`id` = '{$orders[$i]["id"]}'");
                 }
             }
         }
     }
-	if( $orders = selectDB2("`id`,`date`,`academyId`,`gatewayId`","orders","`userId` = '{$_GET["userId"]}' AND `status` = '{$_GET["type"]}'") ){
+	if( $orders = selectDB2("`id`, `date`, `academyId`, `gatewayId`, `isTournament`, `tournamentId`, `teamName`, `teamDetails`","orders","`userId` = '{$_GET["userId"]}' AND `status` = '{$_GET["type"]}'") ){
         for( $i = 0; $i < sizeof($orders); $i++ ){
-            $academy = selectDB2("`area`,`enTitle`,`arTitle`,`imageurl`,`location`,`sport`","academies","`id` = '{$orders[$i]["academyId"]}'");
-            $sport = selectDB2("`imageurl`","sports","`id` = '{$academy[0]["sport"]}'");
-            $area = selectDB2("`areaEnTitle`, `areaArTitle`","countries","`id` = '{$academy[0]["area"]}'");
-            $response[] = array(
-                "id" => $orders[$i]["id"],
-                "date" => $orders[$i]["date"],
-                "orderId" => $orders[$i]["gatewayId"],
-                "enTitle" => $academy[0]["enTitle"],
-                "arTitle" => $academy[0]["arTitle"],
-                "location" => $academy[0]["location"],
-                "enArea" => $area[0]["areaEnTitle"],
-                "arArea" => $area[0]["areaArTitle"],
-                "academyLogo" => $academy[0]["imageurl"],
-                "sportLogo" => $sport[0]["imageurl"],
-            );
+            if( $orders[$i]["isTournament"] == 0 ){
+                $academy = selectDB2("`area`,`enTitle`,`arTitle`,`imageurl`,`location`,`sport`","academies","`id` = '{$orders[$i]["academyId"]}'");
+                $sport = selectDB2("`imageurl`","sports","`id` = '{$academy[0]["sport"]}'");
+                $area = selectDB2("`areaEnTitle`, `areaArTitle`","countries","`id` = '{$academy[0]["area"]}'");
+                $response[] = array(
+                    "id" => $orders[$i]["id"],
+                    "date" => $orders[$i]["date"],
+                    "isTournament" => 0,
+                    "orderId" => $orders[$i]["gatewayId"],
+                    "enTitle" => $academy[0]["enTitle"],
+                    "arTitle" => $academy[0]["arTitle"],
+                    "location" => $academy[0]["location"],
+                    "enArea" => $area[0]["areaEnTitle"],
+                    "arArea" => $area[0]["areaArTitle"],
+                    "academyLogo" => $academy[0]["imageurl"],
+                    "sportLogo" => $sport[0]["imageurl"],
+                );
+            }else{
+                $tournaments = selectDB("tournaments","`id` = '{$orders[$i]["tournamentId"]}'");
+                $sport = selectDB2("`imageurl`","sports","`id` = '{$tournaments[0]["sport"]}'");
+                $area = selectDB("countries","`id` = '{$tournaments[0]["area"]}'");
+                $response[] = array(
+                    "id" => $orders[$i]["id"],
+                    "date" => $orders[$i]["date"],
+                    "isTournament" => 1,
+                    "orderId" => $orders[$i]["gatewayId"],
+                    "enTitle" => $tournaments[0]["enTitle"],
+                    "arTitle" => $tournaments[0]["arTitle"],
+                    "location" => $tournaments[0]["location"],
+                    "enArea" => $area[0]["areaEnTitle"],
+                    "arArea" => $area[0]["areaArTitle"],
+                    "academyLogo" => $tournaments[0]["imageurl"],
+                    "sportLogo" => $sport[0]["imageurl"],
+                );
+            }
         }
     }else{
         $response["msg"] = popupMsg($requestLang,"we could not find any order for this user id.","لم يتم العثور على طلبات لهذا المستخدم");

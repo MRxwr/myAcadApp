@@ -7,7 +7,7 @@ if( $user = selectDB2("`points`,`wallet`","users","`id` = '{$_GET["userId"]}' " 
         echo outputError($error);die();
     }else{
         $wallet = $points + $user[0]["wallet"];
-        updateDB("users",array("wallet"=>$wallet,"points"=>0),"`id` = '{$_GET["userId"]}'");
+        updateDB2("users",array("wallet"=>$wallet,"points"=>0),"`id` = '{$_GET["userId"]}'");
         $error["msg"] = popupMsg($requestLang,"Points transferred successfully","تم تحويل النقاط بنجاح");
 	    echo outputData($error);die();
     }

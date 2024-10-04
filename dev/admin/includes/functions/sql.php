@@ -152,7 +152,7 @@ function selectJoinDB($table, $joinData, $where){
 }
 
 function insertDB($table, $data){
-    GLOBAL $dbconnect;
+    GLOBAL $dbconnect, $username, $userID;
     $check = [';', '"'];
     foreach ($data as $key => $value) {
         if (is_array($value)) {
@@ -173,6 +173,14 @@ function insertDB($table, $data){
     $stmt = $dbconnect->prepare($sql);
     $types = str_repeat('s', count($data));
     $stmt->bind_param($types, ...array_values($data));
+    $array = array(
+        "userId" => "{$userID}",
+        "username" => "{$username}",
+        "module" => "{$_GET["v"]}",
+        "action" => "INSERT",
+        "sqlQuery" => json_encode(array("table"=>$table,"data"=>$sql)),
+    );
+    LogsHistory($array);
     if($stmt->execute()){
         return 1;
     }else{
@@ -209,6 +217,46 @@ function insertDB2($table, $data){
 }
 
 function updateDB($table, $data, $where) {
+    GLOBAL $dbconnect, $username, $userID;
+    $check = [';', '"']; 
+    foreach ($data as $key => $value) {
+        if (is_array($value)) {
+            $data[$key] = json_encode($value);
+        }
+    }
+    //$data = escapeString($data);
+    $where = str_replace($check, "", $where);
+    $keys = array_keys($data);
+    $sql = "UPDATE `" . $table . "` SET ";
+    $params = "";
+    for ($i = 0; $i < sizeof($data); $i++) {
+        $sql .= "`" . $keys[$i] . "` = ?";
+        if (isset($keys[$i + 1])) {
+            $sql .= ", ";
+        }
+        $params .= "s";
+    }
+    $sql .= " WHERE " . $where;
+    $stmt = $dbconnect->prepare($sql); 
+    $values = array_values($data);
+    $stmt->bind_param($params, ...$values);
+    if ($stmt->execute()) {
+        $array = array(
+            "userId" => "{$userID}",
+            "username" => "{$username}",
+            "module" => "{$_GET["v"]}",
+            "action" => "INSERT",
+            "sqlQuery" => json_encode(array("table"=>$table,"data"=>$sql)),
+        );
+        LogsHistory($array);
+        return 1;
+    } else {
+        $error = array("msg" => "update table error");
+        return outputError($error);
+    }
+}
+
+function updateDB2($table, $data, $where) {
     GLOBAL $dbconnect;
     $check = [';', '"']; 
     foreach ($data as $key => $value) {
@@ -276,7 +324,7 @@ function insertLogDB($table,$data){
     if($stmt->execute()){
         return 1;
     }else{
-        $error = array("msg"=>"insert table error");
+        $error = array("msg"=>"insert table error log");
         return outputError($error);
     }
 }
