@@ -11,7 +11,7 @@ if( $settings = selectDBNew("orders",[$_GET["orderId"]],"`gatewayId` = ?","" ) )
     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
     CURLOPT_CUSTOMREQUEST => 'POST',
     CURLOPT_POSTFIELDS => array(
-        'url' => 'createkw-0.com',
+        'url' => 'https://myacad.app/?v=Success&requested_order_id='.$_GET["orderId"],
         'logo_url' => '../../img/logo.png',
     ),
     ));
