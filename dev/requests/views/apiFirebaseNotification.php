@@ -13,6 +13,7 @@ function getAccessToken() {
     CURLOPT_POSTFIELDS => array('firebase_json'=> new CURLFILE('../../myacademy-bd81b-firebase-adminsdk-mdflj-3fbac4549d.json')),
     ));
     $response = curl_exec($curl);
+    var_dump($response);die();
     $response = json_decode($response, true);
     curl_close($curl);
     return $response["data"]['access_token'];
