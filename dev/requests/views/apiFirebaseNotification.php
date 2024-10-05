@@ -11,6 +11,9 @@ function getAccessToken() {
     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
     CURLOPT_CUSTOMREQUEST => 'POST',
     CURLOPT_POSTFIELDS => array('firebase_json'=> new CURLFILE('../../../myacademy-bd81b-firebase-adminsdk-mdflj-3fbac4549d.json')),
+    CURLOPT_HTTPHEADER => array(
+        'Accept: application/json'
+    ),
     ));
     $response = curl_exec($curl);
     $response = json_decode($response, true);
