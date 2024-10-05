@@ -52,7 +52,7 @@ if( $users = selectDB("users", "`id` = '500' GROUP BY `firebase` ORDER BY `id` A
           ),
         ));
         $response = curl_exec($curl);
-        var_dump($response);
+        echo json_encode($response);
         curl_close($curl);
     }
 }
