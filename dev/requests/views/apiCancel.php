@@ -11,13 +11,12 @@ if( !isset($_GET["userId"]) || empty($_GET["userId"]) ){
 	echo outputError($response);die();
 }else{
 	if( $orders = selectDB("orders","`id` = '{$_GET["orderId"]}' AND `userId` = '{$_GET["userId"]}' AND `status` = '1'") ){
-        updateDB2("orders",array("status" => 3),"`id` = '{$_GET["orderId"]}'");
+        updateDB2("orders",array("status" => 0),"`id` = '{$_GET["orderId"]}'");
         if( $order[0]["isTournament"] == 1 ){
             $EmailSent = selectDB("tournaments","`id` = '{$orders[0]["tournamentId"]}'");
         }else{
             $EmailSent = selectDB("academies","`id` = '{$orders[0]["academyId"]}'");
         }
-        
         $settingsEmail = selectDB("settings","`id` = '1'");
         sendMailsCancel($orders,$orders[0]["email"]);
         sendMailsCancel($orders,$EmailSent[0]["email"]);
