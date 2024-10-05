@@ -53,7 +53,7 @@
 		form.append("body", $("input[name='firebaseMsg']").val());
 		form.append("image", "");
 		var settings = {
-		"url": "https://dev.myacad.app/request?a=FirebaseNotification",
+		"url": "https://dev.myacad.app/request/index.php?a=FirebaseNotification",
 		"method": "POST",
 		"timeout": 0,
 		"headers": {
