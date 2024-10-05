@@ -45,3 +45,30 @@
 </div>
 </div>
 </div>
+
+<script>
+	$("form").on("submit", function(e) {
+		var form = new FormData();
+		form.append("title", $("input[name='firebaseTitle']").val());
+		form.append("body", $("input[name='firebaseMsg']").val());
+		form.append("image", "");
+		var settings = {
+		"url": "https://dev.myacad.app/request?a=FirebaseNotification",
+		"method": "POST",
+		"timeout": 0,
+		"headers": {
+			"myacadheader": "myAcadAppCreate"
+		},
+		"processData": false,
+		"mimeType": "multipart/form-data",
+		"contentType": false,
+		"data": form
+		};
+		$.ajax(settings).done(function (response) {
+			alert("Notification sent successfully");
+			$("input[name='firebaseTitle']").val("");
+			$("input[name='firebaseMsg']").val("");
+		});
+		return false
+	})
+</script>
