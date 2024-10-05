@@ -1,7 +1,4 @@
 <?php
-require_once("../../vendor/autoload.php");
-use Google\Client;
-
 function getAccessToken() {
     $curl = curl_init();
     curl_setopt_array($curl, array(
