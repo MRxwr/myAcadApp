@@ -32,7 +32,7 @@ $notificationData = array(
     )
 );
 
-echo $bearer;
+echo $bearer;die();
 
 if( $users = selectDB("users", "`id` = '500' GROUP BY `firebase` ORDER BY `id` ASC") ){
     for( $i = 0; $i < sizeof($users); $i++){
