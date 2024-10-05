@@ -90,7 +90,7 @@ $id .= ( isset($academiesList[0]) && !empty($academiesList[0]) ) ? "AND `academy
 		<div class="panel panel-default card-view">
 			<div class="panel-heading">
 				<div class="pull-left">
-					<h6 class="panel-title txt-dark"><?php echo direction("Weekley Subscriptions","إشتراكات الإسبوع") ?></h6>
+					<h6 class="panel-title txt-dark"><?php echo direction("Weekly Subscriptions","إشتراكات الإسبوع") ?></h6>
 				</div>
 				<div class="clearfix"></div>
 			</div>
