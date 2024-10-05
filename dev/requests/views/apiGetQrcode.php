@@ -1,5 +1,5 @@
 <?php 
-if( $settings = selectDBNew("orders",[$_GET["orderId"]],"`gatewayId` = ?","" ) ){
+if( $order = selectDBNew("orders",[$_GET["orderId"]],"`id` = ?","" ) ){
     $curl = curl_init();
     curl_setopt_array($curl, array(
     CURLOPT_URL => 'https://createid.link/api/v1/generate/qrcode',
@@ -11,7 +11,7 @@ if( $settings = selectDBNew("orders",[$_GET["orderId"]],"`gatewayId` = ?","" ) )
     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
     CURLOPT_CUSTOMREQUEST => 'POST',
     CURLOPT_POSTFIELDS => array(
-        'url' => 'https://myacad.app/?v=Success&requested_order_id='.$_GET["orderId"],
+        'url' => 'https://myacad.app/?v=Success&requested_order_id='.$order[0]["gatewayId"],
         'logo_url' => '../../img/logo.png',
     ),
     ));
@@ -19,7 +19,7 @@ if( $settings = selectDBNew("orders",[$_GET["orderId"]],"`gatewayId` = ?","" ) )
     curl_close($curl);
     $response = json_decode($response,true);
 	$response["qrcode"] = $response["data"];
-	echo outputData($response);
+	echo outputData($response);die();
 }else{
     $error["msg"] = popupMsg($requestLang,"Error while generating QrCode","خطأ أثناء إنشاء رمز الكيو آر");
 	echo outputError($error);die();
