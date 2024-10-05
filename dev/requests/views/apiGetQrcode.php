@@ -12,7 +12,7 @@ if( $order = selectDBNew("orders",[$_GET["orderId"]],"`id` = ?","" ) ){
     CURLOPT_CUSTOMREQUEST => 'POST',
     CURLOPT_POSTFIELDS => array(
         'url' => 'https://myacad.app/?v=Success&requested_order_id='.$order[0]["gatewayId"],
-        'logo_url' => 'https://myacad.app/img/logo.png',
+        'logo_url' => ""//'https://myacad.app/img/logo.png',
     ),
     ));
     $response = curl_exec($curl);
