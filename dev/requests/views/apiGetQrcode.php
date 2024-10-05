@@ -18,7 +18,6 @@ if( $order = selectDBNew("orders",[$_GET["orderId"]],"`id` = ?","" ) ){
     $response = curl_exec($curl);
     curl_close($curl);
     $response = json_decode($response,true);
-	$response["qrcode"] = $response["data"];
 	echo outputData($response);die();
 }else{
     $error["msg"] = popupMsg($requestLang,"Error while generating QrCode","خطأ أثناء إنشاء رمز الكيو آر");
