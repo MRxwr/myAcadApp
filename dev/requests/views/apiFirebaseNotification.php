@@ -10,7 +10,7 @@ function getAccessToken() {
     CURLOPT_FOLLOWLOCATION => true,
     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
     CURLOPT_CUSTOMREQUEST => 'POST',
-    CURLOPT_POSTFIELDS => array('firebase_json'=> new CURLFILE('../../myacademy-bd81b-firebase-adminsdk-mdflj-3fbac4549d.json')),
+    CURLOPT_POSTFIELDS => array('firebase_json'=> new CURLFILE('../../../myacademy-bd81b-firebase-adminsdk-mdflj-3fbac4549d.json')),
     ));
     $response = curl_exec($curl);
     var_dump("../../myacademy-bd81b-firebase-adminsdk-mdflj-3fbac4549d.json");die();
