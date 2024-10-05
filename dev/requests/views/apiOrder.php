@@ -39,21 +39,21 @@ if( !isset($_POST["invoiceId"]) || empty($_POST["invoiceId"]) ){
             $response = $order;
         }
         if( $order2[0]["status"] == 0 ){
-            updateDB("orders",array("gatewayLink"=>json_encode($_POST["url"]),"status"=>$_POST["status"]),"`gatewayId` = '{$_POST["invoiceId"]}'");
+            updateDB2("orders",array("gatewayLink"=>json_encode($_POST["url"]),"status"=>$_POST["status"]),"`gatewayId` = '{$_POST["invoiceId"]}'");
             if ( $_POST["status"] == 1 ){
                 $settingsEmail = selectDB("settings","`id` = '1'");
                 if( $order2[0]["isTournament"] == 1 ){
                     $teamDetails = json_decode($order2[0]["teamDetails"],true);
                     $tournament = selectDB("tournaments","`id` = '{$order[0]["tournamentId"]}'");
                     $quantity = $tournament[0]["quantity"] - $teamDetails["quantity"];
-                    updateDB("tournaments",array("quantity"=>$quantity),"`id` = '{$order2[0]["tournamentId"]}'");
+                    updateDB2("tournaments",array("quantity"=>$quantity),"`id` = '{$order2[0]["tournamentId"]}'");
                 }else{
                     $user = selectDB("users","`id` = '{$order2[0]["userId"]}'");
                     $points = $user[0]["points"] + $settingsEmail[0]["points"];
-                    updateDB("users",array("points"=>$points),"`id` = '{$order2[0]["userId"]}'");
+                    updateDB2("users",array("points"=>$points),"`id` = '{$order2[0]["userId"]}'");
                     $session = selectDB("sessions","`id` = '{$order2[0]["sessionId"]}'");
                     $quantity = $session[0]["quantity"] - $order2[0]["subscriptionQuantity"];
-                    updateDB("sessions",array("quantity"=>$quantity),"`id` = '{$order2[0]["sessionId"]}'");
+                    updateDB2("sessions",array("quantity"=>$quantity),"`id` = '{$order2[0]["sessionId"]}'");
                 }
                 sendMails($order2,$order2[0]["email"]);
                 sendMails($order2,$targetEmail[0]["email"]);
