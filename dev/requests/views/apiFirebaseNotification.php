@@ -13,7 +13,6 @@ function getAccessToken() {
     CURLOPT_POSTFIELDS => array('firebase_json'=> new CURLFILE('../../../myacademy-bd81b-firebase-adminsdk-mdflj-3fbac4549d.json')),
     ));
     $response = curl_exec($curl);
-    var_dump($response);die();
     $response = json_decode($response, true);
     curl_close($curl);
     return $response["data"]['access_token'];
@@ -29,8 +28,6 @@ $notificationData = array(
         )
     )
 );
-
-echo $bearer;die();
 
 if( $users = selectDB("users", "`id` = '500' GROUP BY `firebase` ORDER BY `id` ASC") ){
     for( $i = 0; $i < sizeof($users); $i++){
