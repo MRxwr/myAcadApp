@@ -325,6 +325,8 @@
         })
 		$('input[type="radio"]').on('click', function (event) {
 			event.preventDefault();
+            $("input[type=radio]").prop('checked', false);
+            $(this).prop('checked', true);
             var sessionId = $(this).val();
             var langCookieValue = $.cookie("CREATEkwLANG");
             var settings = {
