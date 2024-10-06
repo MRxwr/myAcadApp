@@ -94,11 +94,6 @@
           });
 
         })
-        $(document).on("click","input[type=radio]",function(){
-            var id = $(this).attr("id");
-            $("input[type=number]").val(0);
-            $("."+id).val(0);
-        })
         $(document).ready(function() {
             $('.share').on('click', function() {
                 var id = $(this).attr("id");
