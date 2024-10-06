@@ -325,9 +325,8 @@
         })
 		$('input[type="radio"]').on('click', function (event) {
             var id = $(this).attr("id");
-            $(this).attr('checked', true);
             $("input[type=radio]").attr('checked', false);
-            
+            $(this).attr('checked', true);
             $("input[type=number]").val(0);
             $("."+id).val(0);
 			event.preventDefault();
