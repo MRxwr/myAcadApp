@@ -95,7 +95,7 @@ $redirect = ($academy["isClothes"] == 1 ) ? "Jersy" : "Checkout" ;
 							<?php
 							if( $academy["sessions"] > 0 ){
 								for( $i = 0; $i < sizeof($academy["sessions"]); $i++ ){
-									$checked = ( $i == 0 ) ? "checked=''" : "" ;
+									$checked = ( $i == 0 ) ? "" : "" ;
 									$number = ( $i == 0 ) ? "0" : "0" ;
 									echo "
 									<div class='radi_wap'>
@@ -112,6 +112,7 @@ $redirect = ($academy["isClothes"] == 1 ) ? "Jersy" : "Checkout" ;
                             <h5><img src="img/ca.svg" alt=""><?php echo direction("Select Subsicription Period","إختر مدة الإتشراك") ?></h5>
                             <select name="checkout[subscription]" required>
 							<?php 
+                            /*
                             if ($academy["subscriptions"] > 0) {
                                 for ($s = 0; $s < sizeof($academy["subscriptions"]); $s++) {
                                     $subscription = $academy["subscriptions"][$s];
@@ -126,6 +127,7 @@ $redirect = ($academy["isClothes"] == 1 ) ? "Jersy" : "Checkout" ;
                                     echo "<option class='strike-through' value='{$subscription["id"]}' data-display='{$optionText}'>{$optionText}</option>";
                                 }
                             }
+                                */
                             ?>
                             </select>
                             <input type="hidden" step="1" name="checkout[jersy]" value="0" min="0">
