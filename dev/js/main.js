@@ -340,21 +340,19 @@
                 $select.empty();
                 var selectedLanguage = (langCookieValue === undefined || langCookieValue === "" || langCookieValue === "EN") ? "enTitle" : "arTitle";
                 $.each(response.data.subscriptions, function(index, outerItem) {
-                  $.each(outerItem, function(index, innerItem) {
-                    var title = innerItem[selectedLanguage];
-                    var price = innerItem.price;
-                    var priceAfterDiscount = innerItem.priceAfterDiscount;
+                    var title = outerItem[selectedLanguage];
+                    var price = outerItem.price;
+                    var priceAfterDiscount = outerItem.priceAfterDiscount;
                     var optionText = priceAfterDiscount > 0
                       ? `${title} <del>(${price}KD)</del> (${priceAfterDiscount}KD)`
                       : `${title} (${price}KD)`;
                     var $option = $('<option>', {
                       class: 'strike-through',
-                      value: innerItem.id,
+                      value: outerItem.id,
                       'data-display': optionText,
                       text: optionText
                     });
                     $select.append($option);
-                  });
                 });
                 $select.niceSelect('update');
               });
