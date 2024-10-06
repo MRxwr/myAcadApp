@@ -329,6 +329,8 @@
             $(this).attr('checked', true);
             $("input[type=number]").val(0);
             $("."+id).val(0);
+            $(".radi_wap input[type=radio] + label span").css("background-color", "white");
+            $(this).next("label").find("span").css("background-color", "#FFA300");
 			event.preventDefault();
             var sessionId = $(this).val();
             var langCookieValue = $.cookie("CREATEkwLANG");
