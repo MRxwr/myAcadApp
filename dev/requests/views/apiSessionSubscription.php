@@ -6,7 +6,7 @@ if( !isset($_GET["sessionId"]) || empty($_GET["sessionId"]) ){
 	if( $sessionSubscription = selectDB("session_subscription","`hidden` = '0' AND `status` = '0' AND `sessionId` = {$_GET["sessionId"]}") ){
         for ($i=0; $i < count($sessionSubscription); $i++) { 
             $subscriptions = selectDB2("`id`, `enTitle`, `arTitle`, `price`, `priceAfterDiscount`","subscriptions","`id` = '{$sessionSubscription[$i]["subscriptionId"]}' AND `status` = '0' AND `hidden` = '0' ORDER BY `price` ASC");
-            $response["subscriptions"][] = $subscriptions;
+            $response["subscriptions"] = $subscriptions;
         }
 	}else{
 		$response["msg"] = popupMsg($requestLang,"There is no subscriptions for this session","لا يوجد أشتراكات لهذا المحاضرة");
