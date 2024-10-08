@@ -99,12 +99,13 @@
                 var id = $(this).attr("id");
                 var title = $(".title"+id).html();
                 var invoice = $(".invoice"+id).html();
+                var isTournament = $(".isTournament"+id).html();
                 if (navigator.share) {
                     // Use the Web Share API
                     navigator.share({
                         title: 'MY ACAD',
                         text: title,
-                        url: 'index.php?v=Success&OrderID=' + invoice
+                        url: 'index.php?v=Success&requested_order_id=' + invoice + '&isTournament=' + isTournament
                     })
                     .then(() => {
                         console.log('Shared successfully');
