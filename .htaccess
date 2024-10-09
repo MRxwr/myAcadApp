@@ -8,12 +8,8 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}\.php -f
 RewriteRule ^(.*)$ $1.php
 
-RewriteCond %{REQUEST_URI} ^/.well-known/apple-app-site-association$
-RewriteCond %{REQUEST_METHOD} GET
-RewriteRule ^(.*)$ /.well-known/apple-app-site-association [L]
-
-<FilesMatch "^apple-app-site-association$">
-    SetHandler application/json
-    Header set Content-Type "application/json" env=APPLE_ASSOCIATION
-    SetEnv APPLE_ASSOCIATION 1
-</FilesMatch>
+<Directory /.well-known>
+    <Files "apple-app-site-association">
+        Header set Content-Type "application/json"
+    </Files>
+</Directory>
