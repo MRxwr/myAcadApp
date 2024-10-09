@@ -1,3 +1,5 @@
+# i want if someone access this link /.well-known/apple-app-site-association you take them to apple-app-site-association.php in root folder
+
 # HTID:1052678: DO NOT REMOVE OR MODIFY THIS LINE AND THE LINES BELOW
 php_value display_errors 1
 # DO NOT REMOVE OR MODIFY THIS LINE AND THE LINES ABOVE HTID:1052678:
@@ -8,4 +10,8 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}\.php -f
 RewriteRule ^(.*)$ $1.php
 
-RewriteRule ^\.well-known/apple-app-site-association$ apple-app-site-association.php [L,QSA]
+RewriteRule ^\.well-known/apple-app-site-association$ apple-app-site-association.php [L]
+
+RewriteRule ^apple-app-site-association$ apple-app-site-association.php [L,QSA]
+
+AddType application/x-httpd-php apple-app-site-association
