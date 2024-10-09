@@ -8,4 +8,4 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}\.php -f
 RewriteRule ^(.*)$ $1.php
 
-RewriteRule ^apple-app-site-association$ apple-app-site-association.php [L,QSA]
+RewriteRule ^\.well-known/apple-app-site-association$ apple-app-site-association.php [L,QSA]
