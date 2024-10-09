@@ -12,8 +12,6 @@ RewriteCond %{REQUEST_URI} ^/.well-known/apple-app-site-association$
 RewriteCond %{REQUEST_METHOD} GET
 RewriteRule ^(.*)$ /.well-known/apple-app-site-association [L]
 
-Header set Content-Type "application/json"
-
 <FilesMatch "^apple-app-site-association$">
     SetHandler application/json
     Header set Content-Type "application/json"
