@@ -10,8 +10,11 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}\.php -f
 RewriteRule ^(.*)$ $1.php
 
-RewriteRule ^(.*)\.well-known/apple-app-site-association$ /apple-app-site-association.php [L]
+RewriteCond %{REQUEST_URI} ^/.well-known/apple-app-site-association$
+RewriteCond %{REQUEST_METHOD} GET
+RewriteRule ^(.*)$ /.well-known/apple-app-site-association [L]
 
-RewriteRule ^apple-app-site-association$ apple-app-site-association.php [L,QSA]
-
-AddType application/x-httpd-php apple-app-site-association
+<FilesMatch "^apple-app-site-association$">
+    SetHandler application/json
+    Header set Content-Type "application/json"
+</FilesMatch>
