@@ -14,5 +14,6 @@ RewriteRule ^(.*)$ /.well-known/apple-app-site-association [L]
 
 <FilesMatch "^apple-app-site-association$">
     SetHandler application/json
-    Header set Content-Type "application/json"
+    Header set Content-Type "application/json" env=APPLE_ASSOCIATION
+    SetEnv APPLE_ASSOCIATION 1
 </FilesMatch>
