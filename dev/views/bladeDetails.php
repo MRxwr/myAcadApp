@@ -139,7 +139,7 @@ $redirect = ($academy["isClothes"] == 1 ) ? "Jersy" : "Checkout" ;
                             <input type="hidden" name="checkout[id]" value="<?php echo htmlspecialchars($_GET["id"]) ?>">
                             <div class="row m-0 mt-5">
                                 <div class="col-10 p-0"><button class="button" id="chooseBtn"><?php echo direction("Choose","إختر") ?></button></div>
-                                <div class="col-2 p-0 w-100 text-center"><div class="" id="shareButton" style="background-color: #ffa300;font-size: 2.4rem;border: 0px;width: 90%;height: 100%;border-radius: 2px;"><img src="img/share.svg" style="width: 15px;height: 15px;"></div></div>
+                                <div class="col-2 p-0 w-100 " style="text-align: -webkit-center;"><div class="" id="shareButton" style="background-color: #ffa300;font-size: 2.4rem;border: 0px;width: 90%;height: 100%;border-radius: 2px;"><img src="img/share.svg" style="width: 15px;height: 15px;"></div></div>
                             </div>
 							
                         </form>
