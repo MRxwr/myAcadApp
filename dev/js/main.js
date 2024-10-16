@@ -64,7 +64,7 @@
                 var selectedLanguage = (langCookieValue === undefined || langCookieValue === "" || langCookieValue === "EN") ? "genderEn" : "genderAr";
                 var $option = $('<option>', {
                     value: "",
-                    text: ( langCookieValue === undefined || langCookieValue === "" || langCookieValue === "EN") ? "SELECT GENDER" : "إختر الجنس "
+                    text: ( langCookieValue === undefined || langCookieValue === "" || langCookieValue === "EN") ? "SELECT GENDER" : "إختر الجنس"
                 });
                 $option.prop('disabled', true);
                 $option.prop('selected', true);
