@@ -90,7 +90,7 @@ require ("includes/checksouthead.php");
 			100% { transform: rotate(360deg); }
 		}
 		.activeSidebar{
-			color:#ffa300;
+			color:#ffa300 !important;
 		}
 	</style>
 
