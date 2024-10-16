@@ -326,6 +326,7 @@
 						<div style="display:none"><label id="cc_chargetype<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["cc_chargetype"] ?></label></div>
 						<div style="display:none"><label id="iban<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["iban"] ?></label></div>
 						<div style="display:none"><label id="isIndoor<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["isIndoor"] ?></label></div>
+						<div style="display:none"><label id="coach<?php echo $academies[$i]["id"]?>"><?php echo $academies[$i]["coach"] ?></label></div>
 					</td>
 					</tr>
 					<?php
@@ -389,6 +390,7 @@
 			$("select[name=chargeType]").val($("#chargeType"+id).html());
 			$("input[name=cc_charge]").val($("#cc_charge"+id).html());
 			$("select[name=cc_chargetype]").val($("#cc_chargetype"+id).html());
+			$("select[name=coach]").val($("#coach"+id).html());
 			$("input[name=iban]").val($("#iban"+id).html());
 			$("#logoImg").attr("src","../logos/"+$("#logo"+id).html());
 			$("#headerImg").attr("src","../logos/"+$("#header"+id).html());
