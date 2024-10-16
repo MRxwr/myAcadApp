@@ -43,7 +43,7 @@ if( $response["error"] == 1 ){
                             <div class="jersy_cont">
                                 <img src="logos/<?php echo $tournament["imageurl"] ?>" alt="logo_<?php echo $tournament["enTitle"]?>">
                                 <div>
-                                    <h2><?php echo direction($tournament["enTitle"],$tournament["arTitle"]) ?></h2>
+                                    <h2 id="academyTitle"><?php echo direction($tournament["enTitle"],$tournament["arTitle"]) ?></h2>
                                     <h3><?php echo direction($tournament["enArea"],$tournament["arArea"]) ?></h3>
                                 </div>
                             </div>
@@ -57,7 +57,12 @@ if( $response["error"] == 1 ){
                                 <?php echo direction($tournament["enTerms"],$tournament["arTerms"]) ?>
                             </p>
                             <input type="checkbox" id="checkTerms" ><span><?php echo direction("I agree to the terms and conditions","أوافق على الشروط والاحكام") ?></span>
-							<button class="button mt_55" id="goToTeamInit" disabled style="background: gray;color: black;"><?php echo direction("Choose","إختر") ?></button>
+							
+                            <div class="row m-0 mt-5">
+                                <div class="col-10 p-0"><button class="button" id="goToTeamInit" disabled style="background: gray;color: black;"><?php echo direction("Choose","إختر") ?></button></div>
+                                <div class="col-2 p-0 w-100 " style="text-align: -webkit-center;"><div class="shareButton" id="<?php echo $tournament["id"] ?>" style="background-color: #ffa300;font-size: 2.4rem;border: 0px;width: 90%;height: 100%;border-radius: 2px;align-content: center;"><img src="img/share.svg" style="width: 15px;height: 15px;"></div></div>
+                            </div>
+                            <input type="hidden" id="academyOrTournament" value="1">
                         </form>
                     </div>
                 </div>

@@ -76,7 +76,7 @@ $redirect = ($academy["isClothes"] == 1 ) ? "Jersy" : "Checkout" ;
                             <div class="jersy_cont">
                                 <img src="logos/<?php echo $academy["imageurl"] ?>" alt="logo_<?php echo $academy["enTitle"]?>">
                                 <div>
-                                    <h2><?php echo direction($academy["enTitle"],$academy["arTitle"]) ?></h2>
+                                    <h2 id="academyTitle"><?php echo direction($academy["enTitle"],$academy["arTitle"]) ?></h2>
                                     <h3><?php echo direction($academy["enArea"],$academy["arArea"]) ?></h3>
                                 </div>
                             </div>
@@ -137,11 +137,11 @@ $redirect = ($academy["isClothes"] == 1 ) ? "Jersy" : "Checkout" ;
                             </select>
                             <input type="hidden" step="1" name="checkout[jersy]" value="0" min="0">
                             <input type="hidden" name="checkout[id]" value="<?php echo htmlspecialchars($_GET["id"]) ?>">
+                            <input type="hidden" id="academyOrTournament" value="0">
                             <div class="row m-0 mt-5">
                                 <div class="col-10 p-0"><button class="button" id="chooseBtn"><?php echo direction("Choose","إختر") ?></button></div>
-                                <div class="col-2 p-0 w-100 " style="text-align: -webkit-center;"><div class="" id="shareButton" style="background-color: #ffa300;font-size: 2.4rem;border: 0px;width: 90%;height: 100%;border-radius: 2px;align-content: center;"><img src="img/share.svg" style="width: 15px;height: 15px;"></div></div>
+                                <div class="col-2 p-0 w-100 " style="text-align: -webkit-center;"><div class="shareButton" id="<?php echo $academy["id"] ?>" style="background-color: #ffa300;font-size: 2.4rem;border: 0px;width: 90%;height: 100%;border-radius: 2px;align-content: center;"><img src="img/share.svg" style="width: 15px;height: 15px;"></div></div>
                             </div>
-							
                         </form>
                     </div>
                 </div>

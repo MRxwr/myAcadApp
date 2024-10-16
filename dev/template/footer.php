@@ -119,6 +119,34 @@
                 }
             });
 
+            $('.shareButton').on('click', function() {
+                var id = $(this).attr("id");
+                var title = $("#academyTitle").html();
+                var isTournament = $("#academyOrTournament").val();
+                if (isTournament == 1) {
+                  var link = "index.php?v=TournamentDetails&id=" + id;
+                }else{
+                  var link = "index.php?v=Details&id=" + id;
+                }
+                if (navigator.share) {
+                    // Use the Web Share API
+                    navigator.share({
+                        title: 'MY ACAD',
+                        text: title,
+                        url: link
+                    })
+                    .then(() => {
+                        console.log('Shared successfully');
+                    })
+                    .catch((error) => {
+                        console.error('Error sharing:', error);
+                    });
+                } else {
+                    // Fallback behavior for browsers that do not support the Web Share API
+                    alert('Sharing is not supported on this device/browser.');
+                }
+            });
+
             $("#chooseBtn").click(function () {
               var allNumberInputs = $("input[type='number']");
               var passed = false;
