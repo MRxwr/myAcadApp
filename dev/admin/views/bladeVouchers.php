@@ -26,22 +26,32 @@
 			<input type="number" min="0" step="1" name="numberOfTimes" class="form-control" required>
 			</div>
 			
-			<div class="col-md-4">
+			<div class="col-md-3">
 			<label><?php echo direction("Amount","القيمة") ?></label>
 			<input type="number" name="amount" class="form-control" required>
 			</div>
 			
-			<div class="col-md-4">
+			<div class="col-md-3">
 			<label><?php echo direction("Type","النوع") ?></label>
 			<select name="type" class="form-control">
                 <option value='0'><?php echo direction("Percentage","نسبة مؤوية") ?></option>
                 <option value='1'><?php echo direction("Fixed","قيمة ثابته") ?></option>
 			</select>
 			</div>
-			
-			<div class="col-md-4">
+
+            <div class="col-md-3">
+			<label><?php echo direction("Start Date","تاريخ البداية") ?></label>
+			<input type="date" name="startDate" class="form-control" required>
+			</div>
+
+            <div class="col-md-3">
+			<label><?php echo direction("End Date","تاريخ الإنتهاء") ?></label>
+			<input type="date" name="endDate" class="form-control" required>
+			</div>
+
+			<div class="col-md-12">
 			<label><?php echo direction("Academy","الأكادمية") ?></label>
-			<select name="academyIds[]" class="form-control" id="mySelect" multiple>
+			<select name="academyIds[]" class="form-control" id="mySelect" multiple style="height: 200px">
                 <option value='0'><?php echo direction("All","الكل") ?></option>
 				<?php
 				if( $academy = selectDB("academies","`status` = '0'") ){
@@ -54,16 +64,6 @@
 				}
 				?>
 			</select>
-			</div>
-
-            <div class="col-md-6">
-			<label><?php echo direction("Start Date","تاريخ البداية") ?></label>
-			<input type="date" name="startDate" class="form-control" required>
-			</div>
-
-            <div class="col-md-6">
-			<label><?php echo direction("End Date","تاريخ الإنتهاء") ?></label>
-			<input type="date" name="endDate" class="form-control" required>
 			</div>
 			
 			<div class="col-md-6" style="margin-top:10px">
