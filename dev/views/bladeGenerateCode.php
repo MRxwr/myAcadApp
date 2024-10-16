@@ -67,16 +67,3 @@ if( $response["error"] == 1 ){
         </div>
     </div>
 </div>
-<!-- map_area -->
-<div class="map_area mt_30">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-10">
-                <h2><img src="img/map.svg" alt=""><?php echo direction("Location","الموقع") ?></h2>
-                <a href="<?php echo $academy["location"] ?>">
-                    <img src="<?php echo "logos/{$academy["locationImage"]}" ?>" style="width: 100%;height: 250px;" alt="">
-                </a>
-            </div>
-        </div>
-    </div>
-</div>
