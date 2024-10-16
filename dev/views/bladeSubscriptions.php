@@ -137,7 +137,7 @@ if( isset($_GET["cancel"]) && !empty($_GET["cancel"]) ){
                                         <h4 style="display:none" class="isTournament<?php echo $result["data"][$i]["id"] ?>"><?php echo $result["data"][$i]["isTournament"] ?></h4>
                                     </a>
                                     <?php
-                                    if( (date("Y-m-d H:i:s") < date("Y-m-d H:i:s", strtotime("+100 days", strtotime($result["data"][$i]["date"])))) && $TabType[$y] != 3 ){
+                                    if( (date("Y-m-d H:i:s") < date("Y-m-d H:i:s", strtotime("+2 days", strtotime($result["data"][$i]["date"])))) && $TabType[$y] != 3 ){
                                         // Invoice date from $result["data"][$i]["date"]
                                         $invoiceDate = strtotime($result["data"][$i]["date"]);
                                         $expirationDate = strtotime("+2 days", $invoiceDate);
