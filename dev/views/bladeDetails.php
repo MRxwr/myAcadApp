@@ -27,7 +27,7 @@ if( $response["error"] == 1 ){
 	<?php
 }else{
 	$academy = $response["data"]["academy"];
-    $academy["caoch"] = ( $academy["caoch"] == 0 ) ? direction("Male","ذكر") : direction("Female","انثى");
+    $academy["coach"] = ( $academy["coach"] == 0 ) ? direction("Male","ذكر") : direction("Female","انثى");
 }
 
 $redirect = ($academy["isClothes"] == 1 ) ? "Jersy" : "Checkout" ;
@@ -93,7 +93,7 @@ $redirect = ($academy["isClothes"] == 1 ) ? "Jersy" : "Checkout" ;
                         </div>
                         <div class="row m-0 mb-5" style="background-color: #012169;color: #ffa300;height: 30px;align-content: center;border-radius: 3px;border: 1px solid #bababa;">
                             <div class="col-6"><?php echo direction("Academy Coaches","مدربين الأكاديمية") ?></div>
-                            <div class="col-6 text-right"><?php echo $academy["caoch"] ?></div>
+                            <div class="col-6 text-right"><?php echo $academy["coach"] ?></div>
                         </div>
                         <form action="<?php echo "?v={$redirect}&id={$_GET["id"]}" ?>" method="POST" class="cup_area">
                             <h5><img src="img/cup_1.svg" alt=""><?php echo direction("Select Age & Session Time","إختر العمر و وقت الكلاس") ?></h5>
