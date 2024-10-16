@@ -258,6 +258,13 @@ if( !isset($_POST) ){
             $fullAmount = ( $voucherType == 0 ) ? ($fullAmount*(1-($voucherAmount/100))) : $fullAmount - $voucherAmount;
         }
 
+        //checking free payment
+        if( $paymentMethod == 4 ){
+            $paymentMethod = 1;
+            $freePayment = 1;
+            $newTotal = 1;
+        }
+
         $_POST["name"] = "{$userData[0]["firstName"]} {$userData[0]["lastName"]}";
         $_POST["phone"] = "{$userData[0]["phone"]}";
         $_POST["email"] = "{$userData[0]["email"]}";
