@@ -28,7 +28,12 @@ if( $response["error"] == 1 ){
 }else{
 	$code = $response["data"]["data"];
     $order = selectDBNew("orders",[$_GET["id"]],"`id` = ?","" );
-    $academy = selectDBNew("academies",[$order[0]["academyId"]],"`id` = ?","" );
+    if ( $order[0]["isTournament"] == 1 ){
+        $academy = selectDBNew("tournaments",[$order[0]["tournamentId"]],"`id` = ?","" );
+    }else{
+        $academy = selectDBNew("academies",[$order[0]["academyId"]],"`id` = ?","" );
+    }
+    $area = selectDBNew("countries",[$academy[0]["area"]],"`id` = ?","" );
 }
 ?>
 
@@ -55,11 +60,15 @@ if( $response["error"] == 1 ){
             <div class="col-lg-10">
                 <div class="row justify-content-between">
                     <div class="col-lg-12 order-lg-1 mt_40">
-                        <div class="detail_img_right d-lg-none mt_20">
-                            <img src="<?php echo $code ?>" alt="" class="w-100">
+                        <div class="text-center">
+                            <h2 style="color: #ffa300;"><?php echo direction("QR CODE","رمز المسح") ?></h2>
                         </div>
-                        <div>
-                            <h2><?php echo direction($academy[0]["enTitle"],$academy[0]["arTitle"]) ?></h2>
+                        <div class="detail_img_right d-lg-none mt_20 text-center">
+                            <img src="<?php echo $code ?>" alt="" style="width:200px;height:200px" >
+                        </div>
+                        <div class="text-center">
+                            <h2 style="color: #ffa300;"><?php echo direction($order[0]["enAcademy"],$order[0]["arAcademy"]) ?></h2>
+                            <h3><?php echo direction($area[0]["areaEnTitle"],$area[0]["areaArTitle"]) ?></h3>
                         </div>
                     </div>
                 </div>
