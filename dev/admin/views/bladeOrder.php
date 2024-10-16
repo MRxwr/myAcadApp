@@ -28,14 +28,6 @@ td{
 }
 </style>
 <div class="row" id="takeMeToPrint">
-<style>
-  @media print {
-    img {
-      display: block !important;
-      visibility: visible !important;
-    }
-  }
-</style>
 <div class="col-md-12">
 <div class="panel panel-default card-view">
 <div class="panel-heading">
@@ -186,6 +178,8 @@ td{
 <script>
     $(document).ready(function() {
         $('#print').click(function() {
+            window.print(true);
+            /*
             //get takeMeToPrint data and print it directly
             var printContents = document.getElementById('takeMeToPrint').innerHTML;
             var originalContents = document.body.innerHTML;
@@ -193,6 +187,7 @@ td{
             window.print(true);
             document.body.innerHTML = originalContents;
             location.reload();
+            */
         });
     });
 </script>
