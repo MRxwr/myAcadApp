@@ -2060,7 +2060,7 @@ a#toggle_mobile_nav {
 		&.pimary-color-green {
 			.fixed-sidebar-left .side-nav {
 				> li > a.active {
-					color:$green;
+					color:#ffa300/*$green*/;
 				}
 			}
 		}
