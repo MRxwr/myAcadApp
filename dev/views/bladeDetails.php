@@ -92,7 +92,7 @@ $redirect = ($academy["isClothes"] == 1 ) ? "Jersy" : "Checkout" ;
                             <iframe width="100%" height="400" src="<?php echo $academy["video"] ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                         </div>
                         <div class="row m-0 mb-5" style="background-color: #012169;color: #ffa300;height: 30px;align-content: center;border-radius: 3px;border: 1px solid #bababa;">
-                            <div class="col-6"><?php echo direction("Academy Coaches","مدربين الأكاديمية") ?></div>
+                            <div class="col-6"><img src="img/gender.svg" alt=""><?php echo direction("Academy Coaches","مدربين الأكاديمية") ?></div>
                             <div class="col-6 text-right"><?php echo $academy["coach"] ?></div>
                         </div>
                         <form action="<?php echo "?v={$redirect}&id={$_GET["id"]}" ?>" method="POST" class="cup_area">
