@@ -126,7 +126,7 @@ if( isset($_GET["cancel"]) && !empty($_GET["cancel"]) ){
                                         <img src="img/sub_4.svg" alt="">
                                         <h4><?php echo direction("Share","مشاركة") ?></h4>
                                     </a>
-                                    <a href ="?v=GenerateCode&id=<?php echo $result["data"][$i]["gatewayId"] ?>" class="item_sub">
+                                    <a href ="?v=GenerateCode&id=<?php echo $result["data"][$i]["id"] ?>" class="item_sub">
                                         <img src="img/qrcode.svg" alt="">
                                         <h4><?php echo direction("QR Code","رمز المسح") ?></h4>
                                     </a>
