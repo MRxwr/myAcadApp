@@ -27,7 +27,7 @@ td{
 	font-weight: 600;
 }
 </style>
-<div class="row">
+<div class="row" id="takeMeToPrint">
 <div class="col-md-12">
 <div class="panel panel-default card-view">
 <div class="panel-heading">
@@ -170,3 +170,20 @@ td{
 </div>
 </div>
 </div>
+
+<div class="row">
+    <div class="col-4"><button id="print" class="btn btn-primary btn-rounded btn-block"><i class="fa fa-print"></i> <?php echo direction("Print","طباعة") ?></button></div></div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $('#print').click(function() {
+            //get takeMeToPrint data and print it directly
+            var printContents = document.getElementById('takeMeToPrint').innerHTML;
+            var originalContents = document.body.innerHTML;
+            document.body.innerHTML = printContents;
+            window.print();
+            document.body.innerHTML = originalContents;
+        });
+    });
+</script>
