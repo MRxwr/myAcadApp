@@ -351,7 +351,7 @@
                     var price = outerItem.price;
                     var priceAfterDiscount = outerItem.priceAfterDiscount;
                     var optionText = priceAfterDiscount > 0
-                      ? `${title} <del>(${price}KD)</del> (${priceAfterDiscount}KD)`
+                      ? `${title} <label style="text-decoration-line: line-through;">(${price}KD)</label> (${priceAfterDiscount}KD)`
                       : `${title} (${price}KD)`;
                     var $option = $('<option>', {
                       class: 'strike-through',
