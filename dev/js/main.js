@@ -140,7 +140,7 @@
 		// change the view of select sport
 		$('select[name=governate]').on('change', function (event) {
 			event.preventDefault();
-            if ($(this).val() != 0) {
+            if ($(this).val() != "") {
                 $("select[name=governate]").prop("disabled",false);
 			    $("#homeBtnSubmit").prop("disabled",false).attr("style","");
             }else{
