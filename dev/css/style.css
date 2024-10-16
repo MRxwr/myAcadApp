@@ -820,7 +820,7 @@ span.select2-selection.select2-selection--single {
 }
 
 .promotion_box_reverse {
-	background-color: #cfcfcf;
+	background-color: #FFFFFF/*#cfcfcf*/;
 	padding: 0.6rem 2.4rem;
 	position: absolute;
 	right: 10px;
