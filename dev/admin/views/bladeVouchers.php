@@ -41,7 +41,7 @@
 			
 			<div class="col-md-4">
 			<label><?php echo direction("Academy","الأكادمية") ?></label>
-			<select name="academyIds[]" class="form-control selectpicker" id="" multiple>
+			<select name="academyIds[]" class="form-control" id="mySelect" multiple>
                 <option value='0'><?php echo direction("All","الكل") ?></option>
 				<?php
 				if( $academy = selectDB("academies","`status` = '0'") ){
