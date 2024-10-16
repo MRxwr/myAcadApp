@@ -171,7 +171,7 @@ td{
 </div>
 </div>
 
-<div class="row">
+<div class="row m-0">
     <div class="col-4"><button id="print" class="btn btn-primary btn-rounded btn-block"><i class="fa fa-print"></i> <?php echo direction("Print","طباعة") ?></button></div></div>
 </div>
 
@@ -184,6 +184,7 @@ td{
             document.body.innerHTML = printContents;
             window.print();
             document.body.innerHTML = originalContents;
+            location.reload();
         });
     });
 </script>
