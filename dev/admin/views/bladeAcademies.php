@@ -113,8 +113,16 @@
 			<label><?php echo direction("Location","الموقع") ?></label>
 			<input type="text" name="location" class="form-control" required>
 			</div>
+
+			<div class="col-md-3">
+			<label><?php echo direction("Coach ","المدرب") ?></label>
+			<select name="coach" class="form-control" required>
+				<option value="0" ><?php echo direction("Male","ذكر") ?></option>
+				<option value="1" ><?php echo direction("Female","انثى") ?></option>
+			</select>
+			</div>
 			
-			<div class="col-md-4">
+			<div class="col-md-3">
 			<label><?php echo direction("Gender","الجنس") ?></label>
 			<select name="gender" class="form-control" required>
 				<option value="1" ><?php echo direction("Man","رجل") ?></option>
@@ -126,12 +134,12 @@
 			</select>
 			</div>
 			
-			<div class="col-md-4">
+			<div class="col-md-3">
 			<label><?php echo direction("Video","الفيديو") ?></label>
 			<input type="text" name="video" class="form-control" required>
 			</div>
 
-			<div class="col-md-4">
+			<div class="col-md-3">
 			<label><?php echo direction("Promotion?","العرض؟") ?></label>
 			<select name="isPromotion" class="form-control" required>
 				<option value="0" ><?php echo direction("No","لا") ?></option>
