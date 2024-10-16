@@ -43,6 +43,9 @@ if( !isset($_POST["invoiceId"]) || empty($_POST["invoiceId"]) ){
             if ( $_POST["status"] == 1 ){
                 $settingsEmail = selectDB("settings","`id` = '1'");
                 if( $order2[0]["isTournament"] == 1 ){
+                    $user = selectDB("users","`id` = '{$order2[0]["userId"]}'");
+                    $points = $user[0]["points"] + $settingsEmail[0]["points"];
+                    updateDB2("users",array("points"=>$points),"`id` = '{$order2[0]["userId"]}'");
                     $teamDetails = json_decode($order2[0]["teamDetails"],true);
                     $tournament = selectDB("tournaments","`id` = '{$order[0]["tournamentId"]}'");
                     $quantity = $tournament[0]["quantity"] - $teamDetails["quantity"];
