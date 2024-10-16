@@ -239,12 +239,6 @@ if( !isset($_POST) ){
             $wallet = 1;
         }
 
-        //checking free payment
-        if( $paymentMethod == 4 ){
-            $paymentMethod = 1;
-            $freePayment = 1;
-        }
-
         //check tournemant Price
         if( $tournaments = selectDB("tournaments","`id` = '{$tournament}'") ){
             $price = $tournaments[0]["price"];
