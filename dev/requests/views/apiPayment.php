@@ -262,7 +262,8 @@ if( !isset($_POST) ){
         if( $paymentMethod == 4 ){
             $paymentMethod = 1;
             $freePayment = 1;
-            $newTotal = 2;
+            $newTotal = 1;
+            $fullAmount = 1;
         }
 
         $_POST["name"] = "{$userData[0]["firstName"]} {$userData[0]["lastName"]}";
