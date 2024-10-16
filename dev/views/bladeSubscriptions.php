@@ -126,6 +126,10 @@ if( isset($_GET["cancel"]) && !empty($_GET["cancel"]) ){
                                         <img src="img/sub_4.svg" alt="">
                                         <h4><?php echo direction("Share","مشاركة") ?></h4>
                                     </a>
+                                    <a href ="?v=GenerateQrCode&id=<?php echo $result["data"][$i]["id"] ?>" class="item_sub">
+                                        <img src="img/qrcode.svg" alt="">
+                                        <h4><?php echo direction("QR Code","رمز المسح") ?></h4>
+                                    </a>
                                     <a href="?v=Success&requested_order_id=<?php echo "{$result["data"][$i]["orderId"]}&isTournament={$result["data"][$i]["isTournament"]}" ?>" class="item_sub">
                                         <img src="img/sub_5.svg" alt="">
                                         <h4><?php echo direction("Invoice","الفاتورة") ?></h4>
