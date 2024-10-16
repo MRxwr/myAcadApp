@@ -61,14 +61,14 @@ if( $response["error"] == 1 ){
                 <div class="row justify-content-between">
                     <div class="col-lg-12 order-lg-1 mt_40">
                         <div class="text-center">
-                            <h2 style="color: #ffa300;"><?php echo direction("QR CODE","رمز المسح") ?></h2>
+                            <h1 style="color: #ffa300;"><?php echo direction("QR CODE","رمز المسح") ?></h2>
                         </div>
-                        <div class="detail_img_right d-lg-none mt_20 text-center">
+                        <div class="detail_img_right d-lg-none mt-5 mb-5 text-center">
                             <img src="<?php echo $code ?>" alt="" style="width:200px;height:200px" >
                         </div>
                         <div class="text-center">
-                            <h2 style="color: #ffa300;"><?php echo direction($order[0]["enAcademy"],$order[0]["arAcademy"]) ?></h2>
-                            <h3><?php echo direction($area[0]["areaEnTitle"],$area[0]["areaArTitle"]) ?></h3>
+                            <h1 style="color: #ffa300;"><?php echo direction($order[0]["enAcademy"],$order[0]["arAcademy"]) ?></h2>
+                            <h2 class="mt-2"><?php echo direction($area[0]["areaEnTitle"],$area[0]["areaArTitle"]) ?></h3>
                         </div>
                     </div>
                 </div>
