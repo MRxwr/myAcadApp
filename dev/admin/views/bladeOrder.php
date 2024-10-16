@@ -182,7 +182,7 @@ td{
             var printContents = document.getElementById('takeMeToPrint').innerHTML;
             var originalContents = document.body.innerHTML;
             document.body.innerHTML = printContents;
-            window.print();
+            window.print(true);
             document.body.innerHTML = originalContents;
             location.reload();
         });
