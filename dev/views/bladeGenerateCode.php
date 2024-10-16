@@ -28,7 +28,7 @@ if( $response["error"] == 1 ){
 }else{
 	$code = $response["data"]["data"];
     $order = selectDBNew("orders",[$_GET["id"]],"`id` = ?","" );
-    $academy = selectDB("academies",[$order[0]["academyId"]],"`id` = ?","" );
+    $academy = selectDBNew("academies",[$order[0]["academyId"]],"`id` = ?","" );
 }
 ?>
 
