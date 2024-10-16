@@ -38,6 +38,8 @@ require ("includes/checksouthead.php");
 	<!-- Bootstrap Datetimepicker CSS -->
 	<link href="../vendors/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css"/>
 
+	<!-- Custom CSS -->
+	<link href="dist/css/style.css" rel="stylesheet" type="text/css">
 	<!-- Favicon -->
 	<link rel="shortcut icon" href="../img/logo.png">
 	<link rel="icon" href="../img/logo.png" type="image/x-icon">
@@ -57,7 +59,7 @@ require ("includes/checksouthead.php");
     <link href="../vendors/bower_components/morris.js/morris.css" rel="stylesheet" type="text/css"/>
 	
 	<!-- Custom CSS -->
-	<link href="dist/css/style.css?x=123t" rel="stylesheet" type="text/css">
+	<link href="dist/css/style.css" rel="stylesheet" type="text/css">
 
 	<style>
 		body {
@@ -86,6 +88,9 @@ require ("includes/checksouthead.php");
 		@keyframes spin {
 			0% { transform: rotate(0deg); }
 			100% { transform: rotate(360deg); }
+		}
+		.activeSidebar{
+			color:#ffa300;
 		}
 	</style>
 

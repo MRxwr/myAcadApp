@@ -23,7 +23,7 @@ if( $pages = selectDB("pages","`status` = '0' AND `hidden` = '0' AND `section` =
 		$list = array();
 	}
 	for( $i = 0; $i < sizeof($pages); $i++ ){
-		$active = ( isset($_GET["v"]) && strtolower($pages[$i]["enTitle"]) == strtolower(str_replace("_"," ",$_GET["v"])) ) ? "active" : "";
+		$active = ( isset($_GET["v"]) && strtolower($pages[$i]["enTitle"]) == strtolower(str_replace("_"," ",$_GET["v"])) ) ? "activeSidebar" : "";
 		if ( $userType == '0' || in_array($pages[$i]["id"],$list) ){
 			if( $sections = selectDB("pages","`section` = '{$pages[$i]["id"]}' AND `status` != '1'") ){
 				$anchor = "href='javascript:void(0);' data-toggle='collapse' data-target='#".str_replace(" ","_",$pages[$i]["enTitle"])."' class='collapsed {$active}' aria-expanded='false'";
@@ -50,7 +50,7 @@ if( $pages = selectDB("pages","`status` = '0' AND `hidden` = '0' AND `section` =
 				<ul id="<?php echo str_replace(" ","_",$pages[$i]["enTitle"]) ?>" class="collapse-level-1 collapse" aria-expanded="true">
 				<?php
 				for( $y = 0; $y < sizeof($subSections); $y++ ){
-					$active = ( isset($_GET["v"]) && strtolower($pages[$i]["enTitle"]) == strtolower(str_replace("_"," ",$_GET["v"])) ) ? "active" : "";
+					$active = ( isset($_GET["v"]) && strtolower($pages[$i]["enTitle"]) == strtolower(str_replace("_"," ",$_GET["v"])) ) ? "activeSidebar" : "";
 					?>
 						<li>
 							<a href="<?php echo $subSections[$y]["fileName"] ?>" class="<?php echo $active ?>">
