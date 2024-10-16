@@ -17,12 +17,17 @@ if( !isset($_GET["isTournament"]) || empty($_GET["isTournament"]) ){
     $table = "tournaments";
 }
 if( !isset($_GET["genderId"]) || empty($_GET["genderId"]) ){
+    /*
     $response["data"] = array(
         "msg" => "genderId  is required"
     );
     echo json_encode($response);die();
+    */
+    $genderQuery = "";
+}else{
+    $genderQuery = "AND `gender` = '{$_GET["genderId"]}'";
 }
-if( $academies = selectDB2("`governate`","{$table}","`sport` = '{$_GET["sportId"]}' AND `country` LIKE '{$_GET["countryCode"]}' AND `gender` = '{$_GET["genderId"]}' AND `hidden` = '0' AND `status` = '0' GROUP BY `governate`") ){
+if( $academies = selectDB2("`governate`","{$table}","`sport` = '{$_GET["sportId"]}' AND `country` LIKE '{$_GET["countryCode"]}' {$genderQuery} AND `hidden` = '0' AND `status` = '0' GROUP BY `governate`") ){
     $response["governates"][0] = array(
         "id" => 0,
         "enGovernate" => "SELECT ALL",
