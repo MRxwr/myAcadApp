@@ -172,25 +172,15 @@ td{
 </div>
 
 <div class="row m-0">
-    <div class="col-4"><button id="print" class="btn btn-primary btn-rounded btn-block"><i class="fa fa-print"></i> <?php echo direction("Print","طباعة") ?></button></div></div>
+    <div class="col-md-3"><button id="print" class="btn btn-primary btn-rounded btn-block"><i class="fa fa-print"></i> <?php echo direction("Print","طباعة") ?></button></div></div>
 </div>
 
 <script>
     $(document).ready(function() {
         $('#print').click(function() {
-            // remove header and footer and #print
             $("#print").hide();
             window.print(true);
             $("#print").show();
-            /*
-            //get takeMeToPrint data and print it directly
-            var printContents = document.getElementById('takeMeToPrint').innerHTML;
-            var originalContents = document.body.innerHTML;
-            document.body.innerHTML = printContents;
-            window.print(true);
-            document.body.innerHTML = originalContents;
-            location.reload();
-            */
         });
     });
 </script>
