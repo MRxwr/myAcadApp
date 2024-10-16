@@ -181,6 +181,7 @@ td{
             // remove header and footer and #print
             $("#print").hide();
             window.print(true);
+            $("#print").show();
             /*
             //get takeMeToPrint data and print it directly
             var printContents = document.getElementById('takeMeToPrint').innerHTML;
