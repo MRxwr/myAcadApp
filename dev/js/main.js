@@ -62,6 +62,13 @@
                 var $select = $('select[name=gender]');
                 $select.empty();
                 var selectedLanguage = (langCookieValue === undefined || langCookieValue === "" || langCookieValue === "EN") ? "genderEn" : "genderAr";
+                var $option = $('<option>', {
+                    value: "",
+                    text: ( langCookieValue === undefined || langCookieValue === "" || langCookieValue === "EN") ? "SELECT GENDER" : "إختر الجنس "
+                });
+                $option.prop('disabled', true);
+                $option.prop('selected', true);
+                $select.append($option);
                 $.each(response.data.genders, function(index, item) {
                     var $option = $('<option>', {
                         value: item.id,
