@@ -122,6 +122,7 @@
     			$vouchers[$i]["academyId"] = explode(',', $cleanedAcademyId);
 				for( $j = 0; $j < sizeof($vouchers[$i]["academyId"]); $j++ ){
 					if( $academyData = selectDB("academies","`id` = '{$vouchers[$i]["academyId"][$j]}'") ){
+						var_dump($academyData);
 						$academy .= direction($academyData[0]["enTitle"],$academyData[0]["arTitle"]) . " - ";
 					}else{
 						$academy .= "";
