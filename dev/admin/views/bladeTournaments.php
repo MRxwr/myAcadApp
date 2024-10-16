@@ -147,7 +147,7 @@
 			</div>
 
             <div class="col-md-3">
-			<label><?php echo direction("Bnech","الإحتياط") ?></label>
+			<label><?php echo direction("Bench","الإحتياط") ?></label>
 			<input type="number" step="any" name="bench" class="form-control" required>
 			</div>
 
