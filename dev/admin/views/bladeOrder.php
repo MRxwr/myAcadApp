@@ -44,7 +44,7 @@ td{
 <table style="width:100%">
 	<tr>
 		<td style="text-align: center">
-			<img src="../img/logo.png" style="width:150px; height:150px">
+			<img src="<?php echo $printImageUrl ?>/img/logo.png" style="width:150px; height:150px">
 		</td>
 	</tr>
 	<tr>
