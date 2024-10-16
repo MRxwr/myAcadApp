@@ -178,6 +178,8 @@ td{
 <script>
     $(document).ready(function() {
         $('#print').click(function() {
+            // remove header and footer and #print
+            $("#print").hide();
             window.print(true);
             /*
             //get takeMeToPrint data and print it directly
