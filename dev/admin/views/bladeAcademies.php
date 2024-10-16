@@ -1,4 +1,4 @@
-<div class="col-sm-12" id="editDetails" style="display:none">
+<div class="col-sm-12" id="editDetails" style="<?php echo $userType = ( $userType == 0 ) ? "display:block" : "display:none" ?>">
 <div class="panel panel-default card-view">
 <div class="panel-heading">
 <div class="pull-left">
