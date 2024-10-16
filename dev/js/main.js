@@ -76,7 +76,7 @@
                     });
                     if (item.id === 0) {
                         //$option.prop('disabled', true);
-                        $option.prop('selected', true);
+                        //$option.prop('selected', true);
                     }
                     $select.append($option);
                 });
