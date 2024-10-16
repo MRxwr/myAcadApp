@@ -351,8 +351,8 @@
                     var price = outerItem.price;
                     var priceAfterDiscount = outerItem.priceAfterDiscount;
                     var optionText = priceAfterDiscount > 0
-                        ? `${title} &#x20AC; (${price}KD) (${priceAfterDiscount}KD)`
-                        : `${title} (${price}KD)`;
+                      ? `${title} <del>(${price}KD)</del> (${priceAfterDiscount}KD)`
+                      : `${title} (${price}KD)`;
                     var $option = $('<option>', {
                       class: 'strike-through',
                       value: outerItem.id,
@@ -366,6 +366,10 @@
 			$('select[name="checkout[subscription]"]').prop("disabled",false);
 			$('select[name="checkout[subscription]"]').prop("required",true);
 		});
+
+        $('select[name="checkout[subscription]"]').on('change', function (event) {
+            $select.niceSelect('update');
+        })
     });
 
 })(jQuery);
