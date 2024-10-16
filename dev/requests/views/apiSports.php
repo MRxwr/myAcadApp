@@ -17,7 +17,7 @@ if( $sports = selectDB2("`sports`","{$table}","`country` LIKE '{$_GET["countryCo
             "id" => $sport[0]["id"],
             "sportEn" => $sport[0]["enTitle"],
             "sportAr" => $sport[0]["arTitle"],
-            "icon" => $sport[0]["imageurl"]
+            "imageurl" => $sport[0]["imageurl"]
         );
     }
 }else{
