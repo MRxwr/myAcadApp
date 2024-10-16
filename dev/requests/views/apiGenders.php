@@ -24,7 +24,7 @@ if( $academies = selectDB2("`gender`","{$table}","`sport` = '{$_GET["sportId"]}'
         "genderEn" => $gendersEn[0],
         "genderAr" => $gendersAr[0]
     );
-    for( $i = 0; $i < sizeof($academies); $i++ ){
+    for( $i = 1; $i < sizeof($academies); $i++ ){
         $response["genders"][] = array(
             "id" => $academies[$i]["gender"],
             "genderEn" => $gendersEn[$academies[$i]["gender"]],
