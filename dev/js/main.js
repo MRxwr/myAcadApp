@@ -269,7 +269,7 @@
         $('.select').select2();
         
         // nice select
-        $('select').niceSelect();
+       // $('select').niceSelect();
 
         // telephone
         $("#phn").intlTelInput({
@@ -361,7 +361,7 @@
                     });
                     $select.append($option);
                 });
-                //$select.niceSelect('update');
+                $select.niceSelect('update');
               });
 			$('select[name="checkout[subscription]"]').prop("disabled",false);
 			$('select[name="checkout[subscription]"]').prop("required",true);
