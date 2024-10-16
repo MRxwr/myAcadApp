@@ -112,6 +112,13 @@
                 var $select = $('select[name=governate]');
                 $select.empty();
                 var selectedLanguage = (langCookieValue === undefined || langCookieValue === "" || langCookieValue === "EN") ? "enGovernate" : "arGovernate";
+                var $option = $('<option>', {
+                    value: "",
+                    text: ( langCookieValue === undefined || langCookieValue === "" || langCookieValue === "EN") ? "SELECT GOVERNATE" : "إختر المحافظة"
+                });
+                $option.prop('disabled', true);
+                $option.prop('selected', true);
+                $select.append($option);
                 $.each(response.data.governates, function(index, item) {
                     var $option = $('<option>', {
                         value: item.id,
@@ -119,7 +126,7 @@
                     });
                     if (item.id === 0) {
                         //$option.prop('disabled', true);
-                        $option.prop('selected', true);
+                        //$option.prop('selected', true);
                     }
                     $select.append($option);
                 });
