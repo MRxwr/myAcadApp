@@ -402,13 +402,12 @@
 			$('select[name="checkout[subscription]"]').prop("required",true);
 		});
     });
-/*
+
     // redeem points 
     $('.mainType').on('click', function (event) {
         event.preventDefault();
         var langCookieValue = $.cookie("CREATEkwLANG");
-        var id = $(this).val();
-        
+        var id = $(this).attr("id");
         var countryCode = $.cookie("createmyacadcountry");
         console.log(countryCode);
         var settings = {
@@ -436,5 +435,5 @@
             } 
         })
     });
-*/
+
 })(jQuery);
