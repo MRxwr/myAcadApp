@@ -326,8 +326,10 @@ if( !isset($_POST) ){
             );
 
         $_POST["total"] = ( $freePayment == 1 ) ? 0 : $_POST["total"];
-        $_POST["teamDetails"]["price"] = ( $freePayment == 1 ) ? 0 : $_POST["teamDetails"]["price"];
-        $_POST["teamDetails"]["total"] = ( $freePayment == 1 ) ? 0 : $_POST["teamDetails"]["total"];
+        $_POST["teamDetails"]["price"] = ( $freePayment == 1 ) ? 0 :
+        $_POST["teamDetails"]["price"];
+        $_POST["teamDetails"]["total"] = ( $freePayment == 1 ) ? 0 :
+        $_POST["teamDetails"]["total"];
     }
     
     $curl = curl_init();
