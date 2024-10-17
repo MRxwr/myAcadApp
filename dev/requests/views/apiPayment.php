@@ -273,9 +273,16 @@ if( !isset($_POST) ){
         $_POST["teamDetails"]["players"] = json_decode($players,true);
         $_POST["teamDetails"]["bench"] = json_decode($bench,true);
         $_POST["teamDetails"]["quantity"] = $quantity;
-        $_POST["teamDetails"]["price"] = $price;
-        $_POST["teamDetails"]["total"] = $newTotal;
-        $_POST["total"] = $newTotal;
+        if ( $freePayment == 1 ){
+            $_POST["teamDetails"]["price"] = 0;
+            $_POST["teamDetails"]["total"] = 0;
+            $_POST["total"] = 0;
+        }else{
+            $_POST["teamDetails"]["price"] = $price;
+            $_POST["teamDetails"]["total"] = $newTotal;
+            $_POST["total"] = $newTotal;
+        }
+        
         $_POST["paymentMethod"] = $paymentMethod;
         $_POST["voucher"] = $data["voucher"];
 
@@ -324,12 +331,6 @@ if( !isset($_POST) ){
             'extraMerchantData[1][ccChargeType]' => 'fixed',
             'extraMerchantData[1][ibanNumber]' => "{$tournamentData[0]["iban"]}",
             );
-
-        $_POST["total"] = ( $freePayment == 1 ) ? 0 : $_POST["total"];
-        $_POST["teamDetails"]["price"] = ( $freePayment == 1 ) ? 0 :
-        $_POST["teamDetails"]["price"];
-        $_POST["teamDetails"]["total"] = ( $freePayment == 1 ) ? 0 :
-        $_POST["teamDetails"]["total"];
     }
     
     $curl = curl_init();
