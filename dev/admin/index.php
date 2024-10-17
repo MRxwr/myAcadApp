@@ -12,6 +12,9 @@ if ( isset($_GET["hide"]) || isset($_GET["show"]) || isset($_GET["delId"]) || is
         if( updateDB("{$table}",array('charges'=> $_POST["setDefaultPrice"]),"`id` != '0'") ){}
     }elseif( isset($_POST["update"]) ){
 		$id = $_POST["update"];unset($_POST["update"]);
+        if( isset($_POST["academyIds"]) ){
+            $_POST["academyIds"] = json_encode($_POST["academyIds"]);
+        }
 		if ( $id == 0 ){
             if( isset($_FILES['imageurl']) && is_uploaded_file($_FILES['imageurl']['tmp_name']) ){
                 $directory = "../logos/";
