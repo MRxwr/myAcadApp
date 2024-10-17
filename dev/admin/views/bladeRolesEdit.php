@@ -25,7 +25,7 @@ if( isset($_GET["id"]) && !empty($_GET["id"]) && $role = selectDB("roles","`id` 
 	<form class="?v=RolesEdit&id=<?php echo $_GET["id"] ?>" method="POST" action="" enctype="multipart/form-data">
 		<div class="row m-0">
             <?php
-            if( $pages = selectDB("pages","`status` = '0' AND `hidden` = '0'") ){
+            if( $pages = selectDB("pages","`status` = '0' ") ){
                 $list = json_decode($role[0]["pages"],true);
                 for( $i = 0; $i < sizeof($pages); $i++ ){
                     $checked = (isset($list) && in_array($pages[$i]["id"],$list)) ? "checked" : "";
