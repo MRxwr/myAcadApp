@@ -41,7 +41,7 @@
         });
 
 		// change the view of select gender
-		$('.selectSport').on('click', function (event) {
+		$(document).on('click','.selectSport', function (event) {
 			event.preventDefault();
 			var id = $(this).attr("id");
             //get country code from cookie
@@ -91,7 +91,7 @@
 		});
 
         // change the view of select governates
-		$(document).on('change', '.selectGender', function (event) {
+		$('.selectGender').on('change', function (event) {
 			event.preventDefault();
 			var id = $(this).val();
             var countryCode = $.cookie("createmyacadcountry");
