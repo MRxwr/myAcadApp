@@ -335,7 +335,7 @@
             } else {
                 $('#goToTeamInit').prop('disabled', true);
                 $('#goToTeamInit').attr('style', "background: gray;color: black;");
-            }
+            } 
         })
 		$('input[type="radio"]').on('click', function (event) {
             var id = $(this).attr("id");
@@ -371,7 +371,7 @@
                       class: 'strike-through',
                       value: outerItem.id,
                       'data-display': optionText,
-                      text: optionText
+                      html: optionText
                     });
                     $select.append($option);
                 });
