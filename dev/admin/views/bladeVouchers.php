@@ -147,7 +147,7 @@
 				</a>
 				<div style="display:none">
 					<label id="type<?php echo $vouchers[$i]["id"]?>"><?php echo $vouchers[$i]["type"] ?></label>
-					<label id="academy<?php echo $vouchers[$i]["id"]?>"><?php echo $vouchers[$i]["academyId"] ?></label>			
+					<label id="academy<?php echo $vouchers[$i]["id"]?>"><?php echo json_encode($vouchers[$i]["academyId"]) ?></label>			
                 </div>				
 				</td>
 				</tr>
