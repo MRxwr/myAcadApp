@@ -317,6 +317,8 @@ $statsDate = [
 	<input id="failedText" value="<?php echo $title2 ?>">
 	<input id="cancelled" value="<?php echo $size3 ?>">
 	<input id="cancelledText" value="<?php echo $title3 ?>">
+	<input id="ended" value="<?php echo $size4 ?>">
+	<input id="endedText" value="<?php echo $title4 ?>">
 	<?php
 	for( $i = 0; $i < sizeof($statsDate); $i++){
 		if( $orders = selectDB("orders","`status` = '1' AND `date` LIKE '%{$statsDate[$i]}%' {$id}") ){
