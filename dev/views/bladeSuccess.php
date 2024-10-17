@@ -3,8 +3,8 @@ if( isset($_GET["requested_order_id"]) && !empty($_GET["requested_order_id"]) ){
     if( $order = selectDB("orders","`gatewayId` = '{$_GET["requested_order_id"]}'") ){
         $order2 = selectDB("orders","`gatewayId` = '{$_GET["requested_order_id"]}'");
         $settingsEmail = selectDB("settings","`id` = '1'");
+        $user = selectDB("users","`id` = '{$order2[0]["userId"]}'");
         if( $order2[0]["isTournament"] == 0 ){
-            $user = selectDB("users","`id` = '{$order2[0]["userId"]}'");
             $subscription = selectDB("subscriptions","`id` = '{$order[0]["subscriptionId"]}'");
             $session = selectDB("sessions","`id` = '{$order2[0]["sessionId"]}'");
             $academyEmail = selectDB("academies","`id` = '{$order2[0]["academyId"]}'");
