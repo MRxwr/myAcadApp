@@ -406,7 +406,7 @@
     });
 
     // redeem points 
-    $('#mainType').on('click', function (event) {
+    $('.mainType').on('click', function (event) {
         event.preventDefault();
         var langCookieValue = $.cookie("CREATEkwLANG");
         var id = $(this).val();
@@ -422,12 +422,17 @@
         $.ajax(settings).done(function (response) {
             if (response.error === "1" ) {
                 event.preventDefault();
-                alert(response.data.msg);
+                alert(response.status);
                 return false;
             }else{
-                alert(response.data.msg);
-                window.location.reload();
-            }
+                var sportsData = document.getElementById("sportsData");
+                sportsData.innerHTML = "";
+                response.data.forEach(function(sport, i) {
+                var sportTtitle = (langCookieValue === undefined || langCookieValue === "" || langCookieValue === "EN") ? sport.sportEn : sport.sportAr;
+                    var html = '<div class="col-lg-3 col-sm-4 col-4 mt_30"><a href="#" id="'+sport.id+'" class="selectSport"><div class="sport_model"><img src="logos/'+sport.imageurl+'" id="sportImage'+sport.id+'" alt="'+sport.enTitle+'"></div><h3 id="sportTitle'+sport.id+'">'+sportTtitle+'</h3></a></div>';
+                    sportsData.innerHTML += html;
+                });
+            } 
         })
     });
 

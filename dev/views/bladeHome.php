@@ -35,10 +35,10 @@ require("template/bannersSlider.php");
 			<input type="hidden" name="keyword" value="">
 
 			<div class="row w-100 m-0 p-0">
-				<div class="col-6 p-0 pr-4 text-center">
+				<div class="col-6 p-0 pr-4 text-center mainType" id="0">
 					<div id="homeAcadimes" class="homeSelectButtons homeSelected"><?php echo direction("Academies","الأكادميات") ?></div>
 				</div>
-				<div class="col-6 p-0 pl-4 text-center">
+				<div class="col-6 p-0 pl-4 text-center mainType" id="1">
 					<div id="homeTournaments" class="homeSelectButtons"><?php echo direction("Tournaments","البطولات") ?></div>
 				</div>
 			</div>
