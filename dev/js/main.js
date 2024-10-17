@@ -326,7 +326,6 @@
         $('#checkTerms').on('change', function (event) {
             event.preventDefault();
             var goToTeamInit = $(this).prop('checked');
-            console.log(goToTeamInit);
             if (goToTeamInit) {
                 $('#goToTeamInit').prop('disabled', false);
                 $('#goToTeamInit').attr('style', "");
@@ -409,7 +408,6 @@
         var langCookieValue = $.cookie("CREATEkwLANG");
         var id = $(this).attr("id");
         var countryCode = $.cookie("createmyacadcountry");
-        console.log(id + " " + countryCode);
         var settings = {
             "url": "requests/index.php?a=Sports&countryCode="+countryCode+"&isTournament="+id,
             "method": "GET",
@@ -419,7 +417,6 @@
             },
         };  
         $.ajax(settings).done(function (response) {
-            console.log(response);
             if (response.error === "1" ) {
                 event.preventDefault();
                 alert("No Sports available");
@@ -450,7 +447,6 @@
             },
         };  
         $.ajax(settings).done(function (response) {
-            console.log(response);
             if (response.error === "1" ) {
                 event.preventDefault();
                 alert("No Sports available");
