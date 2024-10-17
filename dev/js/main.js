@@ -8,7 +8,35 @@
     });
 
     $(document).ready(function () {
-        //$('select[name="checkout[subscription]"]').select2();
+        $(body).on('load', function (event) {
+            event.preventDefault();
+            var langCookieValue = $.cookie("CREATEkwLANG");
+            var countryCode = $.cookie("createmyacadcountry");
+            var settings = {
+                "url": "requests/index.php?a=Sports&countryCode="+countryCode+"&isTournament=0",
+                "method": "GET",
+                "timeout": 0,
+                "headers": {
+                    "myacadheader": "myAcadAppCreate"
+                },
+            };  
+            $.ajax(settings).done(function (response) {
+                console.log(response);
+                if (response.error === "1" ) {
+                    event.preventDefault();
+                    alert("No Sports available");
+                    return false;
+                }else{
+                    var sportsData = document.getElementById("sportsData");
+                    sportsData.innerHTML = "";
+                    response.data.sports.forEach(function(sport, i) {
+                    var sportTtitle = (langCookieValue === undefined || langCookieValue === "" || langCookieValue === "EN") ? sport.sportEn : sport.sportAr;
+                        var html = '<div class="col-lg-3 col-sm-4 col-4 mt_30"><a href="#" id="'+sport.id+'" class="selectSport"><div class="sport_model"><img src="logos/'+sport.imageurl+'" id="sportImage'+sport.id+'" alt="'+sport.enTitle+'"></div><h3 id="sportTitle'+sport.id+'">'+sportTtitle+'</h3></a></div>';
+                        sportsData.innerHTML += html;
+                    });
+                } 
+            })
+        });
 
         //05. sticky header
         function sticky_header(){
@@ -435,36 +463,4 @@
             } 
         })
     });
-
-    // redeem points 
-    $(body).on('load', function (event) {
-        event.preventDefault();
-        var langCookieValue = $.cookie("CREATEkwLANG");
-        var countryCode = $.cookie("createmyacadcountry");
-        var settings = {
-            "url": "requests/index.php?a=Sports&countryCode="+countryCode+"&isTournament=0",
-            "method": "GET",
-            "timeout": 0,
-            "headers": {
-                "myacadheader": "myAcadAppCreate"
-            },
-        };  
-        $.ajax(settings).done(function (response) {
-            console.log(response);
-            if (response.error === "1" ) {
-                event.preventDefault();
-                alert("No Sports available");
-                return false;
-            }else{
-                var sportsData = document.getElementById("sportsData");
-                sportsData.innerHTML = "";
-                response.data.sports.forEach(function(sport, i) {
-                var sportTtitle = (langCookieValue === undefined || langCookieValue === "" || langCookieValue === "EN") ? sport.sportEn : sport.sportAr;
-                    var html = '<div class="col-lg-3 col-sm-4 col-4 mt_30"><a href="#" id="'+sport.id+'" class="selectSport"><div class="sport_model"><img src="logos/'+sport.imageurl+'" id="sportImage'+sport.id+'" alt="'+sport.enTitle+'"></div><h3 id="sportTitle'+sport.id+'">'+sportTtitle+'</h3></a></div>';
-                    sportsData.innerHTML += html;
-                });
-            } 
-        })
-    });
-
 })(jQuery);
