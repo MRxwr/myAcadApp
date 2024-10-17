@@ -410,6 +410,7 @@
         event.preventDefault();
         var langCookieValue = $.cookie("CREATEkwLANG");
         var id = $(this).val();
+        console.log(id);
         var countryCode = $.cookie("createmyacadcountry");
         var settings = {
             "url": "requests/index.php?a=Sports&countryCode="+countryCode+"&isTournament="+id,
