@@ -118,10 +118,10 @@
 				}
 				$academy = "";
 				$type = ( $vouchers[$i]["type"] == 0 ) ? direction("Percentage","نسبة مؤوية") : direction("Fixed","قيمة ثابته") ;
-				$cleanedAcademyId = str_replace(['[', ']', '"'], '', $vouchers[$i]["academyId"]);
+				$cleanedAcademyId = str_replace(['[', ']', '"'], '', $vouchers[$i]["academyIds"]);
     			$vouchers[$i]["academyIds"] = explode(',', $cleanedAcademyId);
-				for( $j = 0; $j < sizeof($vouchers[$i]["academyId"]); $j++ ){
-					if( $academyData = selectDB("academies","`id` = '{$vouchers[$i]["academyId"][$j]}'") ){
+				for( $j = 0; $j < sizeof($vouchers[$i]["academyIds"]); $j++ ){
+					if( $academyData = selectDB("academies","`id` = '{$vouchers[$i]["academyIds"][$j]}'") ){
 						$academy .= direction($academyData[0]["enTitle"],$academyData[0]["arTitle"]) . " - ";
 					}else{
 						$academy .= "";
