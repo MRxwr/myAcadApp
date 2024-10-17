@@ -404,7 +404,7 @@
 			$('select[name="checkout[subscription]"]').prop("required",true);
 		});
     });
-
+/*
     // redeem points 
     $('.mainType').on('click', function (event) {
         event.preventDefault();
@@ -438,5 +438,5 @@
             } 
         })
     });
-
+*/
 })(jQuery);
