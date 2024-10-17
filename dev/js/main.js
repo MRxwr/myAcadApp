@@ -437,7 +437,7 @@
     });
 
     // redeem points 
-    $(document).on('load', function (event) {
+    $(window).on('load', function (event) {
         event.preventDefault();
         var langCookieValue = $.cookie("CREATEkwLANG");
         var countryCode = $.cookie("createmyacadcountry");
