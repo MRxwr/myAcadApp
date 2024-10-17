@@ -15,14 +15,14 @@ if( isset($_GET["requested_order_id"]) && !empty($_GET["requested_order_id"]) ){
         }
         if( $order2[0]["status"] == 0 ){
             updateDB2("orders",array("gatewayLink"=>json_encode($_GET),"status"=>1),"`gatewayId` = '{$_GET["requested_order_id"]}'");
+            $points = $user[0]["points"] + $settingsEmail[0]["points"];
+            updateDB2("users",array("points"=>$points),"`id` = '{$order2[0]["userId"]}'");
             if( $order2[0]["isTournament"] == 0 ){
-                $points = $user[0]["points"] + $settingsEmail[0]["points"];
-                updateDB2("users",array("points"=>$points),"`id` = '{$order2[0]["userId"]}'");
                 $quantity = $session[0]["quantity"] - $order2[0]["subscriptionQuantity"];
                 updateDB2("sessions",array("quantity"=>$quantity),"`id` = '{$order2[0]["sessionId"]}'");
             }else{
                 $teamDetails = json_decode($order2[0]["teamDetails"],true);
-                $quantity = $tournament[0]["quantity"] - $tournamentEmail["quantity"];
+                $quantity = $teamDetails["quantity"] - $tournamentEmail["quantity"];
                 updateDB2("tournaments",array("quantity"=>$quantity),"`id` = '{$order2[0]["tournamentId"]}'");
             }
             sendMails($order2,$order2[0]["email"]);
