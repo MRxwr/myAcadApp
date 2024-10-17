@@ -422,7 +422,7 @@
             console.log(response);
             if (response.error === "1" ) {
                 event.preventDefault();
-                alert(response.status);
+                alert("No Sports available");
                 return false;
             }else{
                 var sportsData = document.getElementById("sportsData");
