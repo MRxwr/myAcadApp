@@ -22,7 +22,7 @@ if( isset($_GET["requested_order_id"]) && !empty($_GET["requested_order_id"]) ){
                 updateDB2("sessions",array("quantity"=>$quantity),"`id` = '{$order2[0]["sessionId"]}'");
             }else{
                 $teamDetails = json_decode($order2[0]["teamDetails"],true);
-                var_dump($teamDetails);
+                var_dump($teamDetails["quantity"]);
                 $quantity = (int)$teamDetails["quantity"] - $tournamentEmail["quantity"];
                 updateDB2("tournaments",array("quantity"=>$quantity),"`id` = '{$order2[0]["tournamentId"]}'");
             }
