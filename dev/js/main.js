@@ -428,7 +428,7 @@
             }else{
                 var sportsData = document.getElementById("sportsData");
                 sportsData.innerHTML = "";
-                response.data.forEach(function(sport, i) {
+                response.data.sports.forEach(function(sport, i) {
                 var sportTtitle = (langCookieValue === undefined || langCookieValue === "" || langCookieValue === "EN") ? sport.sportEn : sport.sportAr;
                     var html = '<div class="col-lg-3 col-sm-4 col-4 mt_30"><a href="#" id="'+sport.id+'" class="selectSport"><div class="sport_model"><img src="logos/'+sport.imageurl+'" id="sportImage'+sport.id+'" alt="'+sport.enTitle+'"></div><h3 id="sportTitle'+sport.id+'">'+sportTtitle+'</h3></a></div>';
                     sportsData.innerHTML += html;
