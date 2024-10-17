@@ -360,23 +360,46 @@
                 var $select = $('select[name="checkout[subscription]"]');
                 $select.empty();
                 var selectedLanguage = (langCookieValue === undefined || langCookieValue === "" || langCookieValue === "EN") ? "enTitle" : "arTitle";
+                
+                // Iterate over each subscription item to create options
                 $.each(response.data.subscriptions, function(index, outerItem) {
                     var title = outerItem[selectedLanguage];
                     var price = outerItem.price;
                     var priceAfterDiscount = outerItem.priceAfterDiscount;
+                    
+                    // Construct the option text with HTML tags
                     var optionText = priceAfterDiscount > 0
-                      ? `${title} <del>(${price}KD)</del> (${priceAfterDiscount}KD)`
-                      : `${title} (${price}KD)`;
+                        ? `${title} <del>(${price}KD)</del> (${priceAfterDiscount}KD)`
+                        : `${title} (${price}KD)`;
+            
+                    // Create an option element
                     var $option = $('<option>', {
-                      class: 'strike-through',
-                      value: outerItem.id,
-                      'data-display': optionText,
-                      html: optionText
+                        class: 'strike-through',
+                        value: outerItem.id,
+                        'data-display': optionText, // Store HTML formatted string in data attribute
+                        text: title // Only display the title as plain text for the actual option
                     });
+            
+                    // Append the option to the select element
                     $select.append($option);
                 });
+            
+                // Update the niceSelect dropdown to refresh the displayed items
                 $select.niceSelect('update');
-              });
+            
+                // Modify how the niceSelect displays selected option to use the data-display
+                $select.on('change', function() {
+                    var selectedOption = $(this).find('option:selected');
+                    var displayText = selectedOption.attr('data-display');
+                    
+                    // Update the selected niceSelect display with HTML content
+                    $(this).next('.nice-select').find('.current').html(displayText);
+                });
+            
+                // Trigger change to ensure the first item is displayed correctly after loading
+                $select.trigger('change');
+            });
+            
 			$('select[name="checkout[subscription]"]').prop("disabled",false);
 			$('select[name="checkout[subscription]"]').prop("required",true);
 		});
