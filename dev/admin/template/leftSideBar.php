@@ -15,7 +15,7 @@ if( $pages = selectDB("pages","`status` = '0' AND `hidden` = '0' AND `section` =
 				$listOfAllowedPages .= ",";
 			}
 		}
-		if( selectDB("pages","`enTitle` LIKE '{$_GET["v"]}' AND `id` IN ({$listOfAllowedPages})") ){
+		if( selectDB("pages","`fileName` LIKE '?v={$_GET["v"]}' AND `id` IN ({$listOfAllowedPages})") ){
 		}else{
 			header("LOCATION: ?v=Home");die();
 		}
