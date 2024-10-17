@@ -158,7 +158,7 @@ for ( $y = 1; $y < 2; $y++){
 	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center statsHeading"><?php echo $statTitle[$y] ?></div>
 	<?php
 	$size = 0;
-	for( $i=0; $i < 4 ; $i++){
+	for( $i=0; $i < 3 ; $i++){
 		if ( $i == 0 ){
 			if ($call = selectDB("orders","`status` = '1' {$statsDate[$y]} {$id}")){
 				$size = sizeof($call);
@@ -317,8 +317,8 @@ $statsDate = [
 	<input id="failedText" value="<?php echo $title2 ?>">
 	<input id="cancelled" value="<?php echo $size3 ?>">
 	<input id="cancelledText" value="<?php echo $title3 ?>">
-	<input id="ended" value="<?php echo $size4 ?>">
-	<input id="endedText" value="<?php echo $title4 ?>">
+	<!--<input id="ended" value="<?php echo $size4 ?>">
+	<input id="endedText" value="<?php echo $title4 ?>">-->
 	<?php
 	for( $i = 0; $i < sizeof($statsDate); $i++){
 		if( $orders = selectDB("orders","`status` = '1' AND `date` LIKE '%{$statsDate[$i]}%' {$id}") ){
