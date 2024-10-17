@@ -185,7 +185,7 @@ for ( $y = 1; $y < 2; $y++){
 			$icon = "pe-7s-clock text-warning";
 		}
 	?>
-	<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+	<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
 	<div class="panel panel-default card-view pa-0">
 	<div class="panel-wrapper collapse in">
 	<div class="panel-body pa-0">
@@ -317,8 +317,6 @@ $statsDate = [
 	<input id="failedText" value="<?php echo $title2 ?>">
 	<input id="cancelled" value="<?php echo $size3 ?>">
 	<input id="cancelledText" value="<?php echo $title3 ?>">
-	<!--<input id="ended" value="<?php echo $size4 ?>">
-	<input id="endedText" value="<?php echo $title4 ?>">-->
 	<?php
 	for( $i = 0; $i < sizeof($statsDate); $i++){
 		if( $orders = selectDB("orders","`status` = '1' AND `date` LIKE '%{$statsDate[$i]}%' {$id}") ){
