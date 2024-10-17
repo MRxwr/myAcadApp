@@ -405,4 +405,30 @@
 		});
     });
 
+    // redeem points 
+    $('#mainType').on('click', function (event) {
+        event.preventDefault();
+        var langCookieValue = $.cookie("CREATEkwLANG");
+        var id = $(this).val();
+        var countryCode = $.cookie("createmyacadcountry");
+        var settings = {
+            "url": "requests/index.php?a=Sports&countryCode="+countryCode+"&isTournament="+id,
+            "method": "GET",
+            "timeout": 0,
+            "headers": {
+                "myacadheader": "myAcadAppCreate"
+            },
+        };  
+        $.ajax(settings).done(function (response) {
+            if (response.error === "1" ) {
+                event.preventDefault();
+                alert(response.data.msg);
+                return false;
+            }else{
+                alert(response.data.msg);
+                window.location.reload();
+            }
+        })
+    });
+
 })(jQuery);
