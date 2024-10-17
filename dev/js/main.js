@@ -420,6 +420,7 @@
             },
         };  
         $.ajax(settings).done(function (response) {
+            console.log(response);
             if (response.error === "1" ) {
                 event.preventDefault();
                 alert(response.status);
