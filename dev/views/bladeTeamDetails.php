@@ -114,10 +114,12 @@ if( $response["error"] == 1 ){
                                         ?>
                                         <div class="col-12 text-left p-3"><h5><?php echo direction("Bench","الإحتياط") ?></h5></div>
                                         <?php
-                                        for( $i = 0; $i < count($_POST["bench"]); $i++){
+                                        if ( isset($_POST["bench"]) && !empty($_POST["bench"]) ){
+                                            for( $i = 0; $i < count($_POST["bench"]); $i++){
                                             ?>
                                             <div class="col-12 p-3"><h5 style="color: black"><?php echo $_POST["bench"][$i] ?></h5></div>
                                             <?php
+                                            }
                                         }
                                         ?>
                                     </div>
