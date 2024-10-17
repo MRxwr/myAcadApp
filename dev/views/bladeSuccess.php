@@ -189,10 +189,12 @@ if( isset($_GET["requested_order_id"]) && !empty($_GET["requested_order_id"]) ){
                             ?>
                             <div class="col-12 text-left p-3"><h5 style="font-size: 15px;color: #ffa300;"><?php echo direction("Bench","الإحتياط") ?></h5></div>
                             <?php
-                            for( $i = 0; $i < count($teamDetails["bench"]); $i++){
-                                ?>
-                                <div class="col-12 p-3"><h5 style="color: black;font-size: 15px;"><?php echo $teamDetails["bench"][$i] ?></h5></div>
-                                <?php
+                            if ( isset($teamDetails["bench"]) && !empty($teamDetails["bench"]) ){
+                                for( $i = 0; $i < count($teamDetails["bench"]); $i++){
+                                    ?>
+                                    <div class="col-12 p-3"><h5 style="color: black;font-size: 15px;"><?php echo $teamDetails["bench"][$i] ?></h5></div>
+                                    <?php
+                                }
                             }
                             ?>
                         </div>
