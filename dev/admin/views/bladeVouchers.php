@@ -191,7 +191,9 @@
 		$("input[name=endDate]").val(endDate);
 		$("input[name=title]").val(title);
 		$("select[name=type]").val(type);
-		$("select[name=academyId]").val(academy).trigger('change');;
+		// academy is json objext with list of ids 
+		var academy = JSON.parse(academy);
+		$("#mySelect").val(academy).trigger('change');
         $("input[name=title]").focus();
 	})
 </script>
