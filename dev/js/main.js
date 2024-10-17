@@ -70,13 +70,11 @@
                 $option.prop('selected', true);
                 $select.append($option);
                 $.each(response.data.genders, function(index, item) {
-                    var $option = $('<option>', {
-                        value: item.id,
-                        text: item[selectedLanguage]
-                    });
-                    if (item.id === 0) {
-                        $option.prop('disabled', true);
-                        $option.prop('selected', true);
+                    if (item.id != 0) {
+                        var $option = $('<option>', {
+                            value: item.id,
+                            text: item[selectedLanguage]
+                        });
                     }
                     $select.append($option);
                 });
