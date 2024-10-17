@@ -377,7 +377,7 @@
                         class: 'strike-through',
                         value: outerItem.id,
                         'data-display': optionText, // Store HTML formatted string in data attribute
-                        text: title // Only display the title as plain text for the actual option
+                        text: optionText // Only display the title as plain text for the actual option
                     });
             
                     // Append the option to the select element
