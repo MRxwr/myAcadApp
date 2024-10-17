@@ -169,7 +169,7 @@
         $(document).ready(function() {
 			$('#mySelect').select2();
 			// set overflow:Auto to #mySelect
-			$('#mySelect').css('overflow', 'auto');
+			$('.select2').css('overflow', 'auto');
 		});
 
 	$(document).on("click",".edit", function(){
