@@ -355,7 +355,7 @@
               };
               $.ajax(settings).done(function (response) {
                 var $select = $('select[name="checkout[subscription]"]');
-                $("input[name='checkout[sesseion]']").attr("value",id);
+                $("input[name='checkout[session]']").attr("value",id);
                 $select.empty();
                 var selectedLanguage = (langCookieValue === undefined || langCookieValue === "" || langCookieValue === "EN") ? "enTitle" : "arTitle";
                 
