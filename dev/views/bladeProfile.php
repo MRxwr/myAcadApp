@@ -64,7 +64,7 @@ require_once("template/changePassword.php");
                 <li>
                     <div class="row">
                         <div class="col-8"><a href="#"><img src="img/points.svg" alt=""><p><?php echo direction("Points","النقاط") ?> (<span><?php echo $user[0]["points"] ?></span>)</p></a></div>
-                        <div class="col-4"><a id="redeemBtn" class="button" style="border-radius: 10px;font-size: 12px;padding: 10px;"><?php echo direction("Redeem Poitns","استبدال النقاط") ?></a></div>
+                        <div class="col-4"><a id="redeemBtn" style="border-radius: 10px;font-size: 12px;padding: 10px;font-weight: 300;background-color: #FFA300;border: none;outline: none;"><?php echo direction("Redeem Poitns","استبدال النقاط") ?></a></div>
                     </div>
                 </li>
                 <li><a href="#"><img src="img/img_5.svg" alt=""><p><?php echo direction("Wallet amount","قيمة المحفظة") ?> (<span><?php echo $user[0]["wallet"] ?> KD</span>)</p></a></li>
