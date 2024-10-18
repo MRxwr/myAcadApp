@@ -338,6 +338,7 @@
             var id = $(this).attr("id");
             $("input[type=radio]").attr('checked', false);
             $(this).attr('checked', true);
+            $("input[name=checkout[sesseion]]").val(id);
             $("input[type=number]").val(0);
             $("."+id).val(0);
             $(".radi_wap input[type=radio] + label span").css("background-color", "white");

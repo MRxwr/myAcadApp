@@ -105,7 +105,7 @@ $redirect = ($academy["isClothes"] == 1 ) ? "Jersy" : "Checkout" ;
 									echo "
 									<div class='radi_wap'>
 										<div class='red_items'>
-											<input type='radio' name='checkout[session]' id='sty_{$i}' value='{$academy["sessions"][$i]["id"]}'>
+											<input type='radio' id='sty_{$i}' value='{$academy["sessions"][$i]["id"]}'>
 											<label for='sty_{$i}'><span></span>".direction($academy["sessions"][$i]["enTitle"],$academy["sessions"][$i]["arTitle"])."</label>
 										</div>
 										<input type='number' step='1' class='sty_{$i}' name='checkout[quantity][]' value='{$number}'  min='0' max='{$academy["sessions"][$i]["quantity"]}' readonly>
@@ -137,6 +137,7 @@ $redirect = ($academy["isClothes"] == 1 ) ? "Jersy" : "Checkout" ;
                             </select>
                             <input type="hidden" step="1" name="checkout[jersy]" value="0" min="0">
                             <input type="hidden" name="checkout[id]" value="<?php echo htmlspecialchars($_GET["id"]) ?>">
+                            <input type="hidden" name="checkout[session]" value="">
                             <input type="hidden" id="academyOrTournament" value="0">
                             <div class="row m-0 mt-5">
                                 <div class="col-10 p-0"><button class="button" id="chooseBtn"><?php echo direction("Choose","إختر") ?></button></div>
