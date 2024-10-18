@@ -41,7 +41,7 @@ if( getLoginStatusResponse() == 0 ){
     die();
 }
 
-var_dump($_POST["checkout"]);
+var_dump($_POST);
 
 if( isset($_POST["checkout"]["jersy"]) && !empty($_POST["checkout"]["jersy"]) ){
     $jersyPrice = (float)$academy["clothesPrice"]*(float)$_POST["checkout"]["jersy"];
