@@ -336,6 +336,7 @@
         })
 		$('input[type="radio"]').on('click', function (event) {
             var id = $(this).attr("id");
+            var value = $(this).attr("value");
             $("input[type=radio]").attr('checked', false);
             $(this).attr('checked', true);
             $("input[type=number]").val(0);
@@ -355,7 +356,7 @@
               };
               $.ajax(settings).done(function (response) {
                 var $select = $('select[name="checkout[subscription]"]');
-                $("input[name='checkout[session]']").attr("value",id);
+                $("input[name='checkout[session]']").attr("value",value);
                 $select.empty();
                 var selectedLanguage = (langCookieValue === undefined || langCookieValue === "" || langCookieValue === "EN") ? "enTitle" : "arTitle";
                 
