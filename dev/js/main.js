@@ -200,7 +200,7 @@
         // redeem points 
         $('#redeemBtn').on('click', function (event) {
             var langCookieValue = $.cookie("CREATEkwLANG");
-            var selectedLanguageTeam = (langCookieValue === undefined || langCookieValue === "" || langCookieValue === "EN") ? "Team name already exists" : "اسم الفريق موجود بالفعل";
+            var selectedLanguageTeam = (langCookieValue === undefined || langCookieValue === "" || langCookieValue === "EN") ? "Not enough points to redeem, You need at least 20" : "لا يوجد نقاط كافيه للتحويل، تحتاج على الأقل 20";
             // do ajax check in input name="teamName" to check if exists
             var userId = $("#userIdProfile").val();
             var settings = {
@@ -214,7 +214,7 @@
             $.ajax(settings).done(function (response) {
                 if (response.error === "1" ) {
                     event.preventDefault();
-                    alert(response.data.msg);
+                    alert(selectedLanguageTeam);
                     return false;
                 }else{
                     alert(response.data.msg);
