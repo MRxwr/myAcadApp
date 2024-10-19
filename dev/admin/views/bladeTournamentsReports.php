@@ -154,7 +154,7 @@ if ( isset($_POST["endDate"]) && $orders = selectDB("orders",$where) ){
 	for( $i = 0; $i < sizeof($orders); $i++ ){
 		$status = [direction("Pending","إنتظار"),direction("Successful","ناجحه"),direction("Failed","فاشلة"),direction("Cancelled","ملغية"),direction("Ended","إنتهى")];
         $statusColor = ["default","success","info","danger","warning"];
-		$paymentMethods = ["","KNET","VISA","WALLET"];
+		$paymentMethods = ["","KNET","VISA","WALLET","FREE"];
 		for( $y = 0; $y < sizeof($status); $y++ ){
 			if( $orders[$i]["status"] == $y ){
 				$orderStatus = $status[$y];
