@@ -2,7 +2,7 @@
 <div class="panel panel-default card-view">
 <div class="panel-heading">
 <div class="pull-left">
-	<h6 class="panel-title txt-dark"><?php echo direction("Academy Details","تفاصيل الأكادمية") ?></h6>
+	<h6 class="panel-title txt-dark"><?php echo direction("Tournament Details","تفاصيل البطولة") ?></h6>
 </div>
 	<div class="clearfix"></div>
 </div>
@@ -247,7 +247,7 @@
 <div class="panel panel-default card-view">
 <div class="panel-heading">
 <div class="pull-left">
-<h6 class="panel-title txt-dark"><?php echo direction("List of Academies","قائمة الأكاديمات") ?></h6>
+<h6 class="panel-title txt-dark"><?php echo direction("List of Tournaments","قائمة البطولات") ?></h6>
 </div>
 <div class="clearfix"></div>
 </div>
