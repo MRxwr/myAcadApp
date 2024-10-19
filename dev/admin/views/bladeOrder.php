@@ -99,10 +99,11 @@ td{
         <?php
         }else{
             $tournament = selectDB("tournaments","`id` = '{$order[0]["tournamentId"]}'");
+            $order[0]["teamDetails"] = mb_convert_encoding($order[0]["teamDetails"], 'UTF-8', 'auto');
             $teamData = json_decode($order[0]["teamDetails"],true);
             ?>
             <tr>
-                <td class='txt-dark' style='white-space: break-spaces;'>
+                <td class='txt-dark' >
                     <?php echo "1x" . direction($tournament[0]["enTitle"],$tournament[0]["arTitle"]) . " / {$teamData["teamName"]}<br>" ?>
                     <?php
                     echo "Players: <br>";
