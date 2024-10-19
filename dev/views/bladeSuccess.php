@@ -71,7 +71,17 @@ if( isset($_GET["requested_order_id"]) && !empty($_GET["requested_order_id"]) ){
                         ?>
                     <div class="col-lg-5 mt_40">
                         <div class="left_succes">
-                            <h2><?php echo direction("Your Subscription is Confirmed ","تم تأكيد إشتراكك ") ?><img src="img/suc.svg" alt=""></h2>
+                            <?php
+                            if( $order[0]["status"] == 2 ){
+                                ?>
+                                <h2><?php echo direction("Payment Failed","فشل الدفع") ?><img src="img/close.svg" alt=""></h2>
+                                <?php
+                            }else{
+                                ?>
+                                <h2><?php echo direction("Your Subscription is Confirmed ","تم تأكيد إشتراكك ") ?><img src="img/suc.svg" alt=""></h2>
+                                <?php
+                            }
+                            ?>
                             <h3><?php echo direction("Order Id: ","رقم الطلب: ") . " {$order[0]["id"]}" ?></h3>
                             <div class="wap_date">
                                 <h4><?php echo direction("Start: ","البدايه: ") . substr($order[0]["date"],0,11)?></h4>
@@ -128,7 +138,17 @@ if( isset($_GET["requested_order_id"]) && !empty($_GET["requested_order_id"]) ){
                         ?>
                     <div class="col-lg-5 mt_40">
                         <div class="left_succes">
-                            <h2><?php echo direction("Your Subscription is Confirmed ","تم تأكيد إشتراكك ") ?><img src="img/suc.svg" alt=""></h2>
+                        <?php
+                            if( $order[0]["status"] == 2 ){
+                                ?>
+                                <h2><?php echo direction("Payment Failed","فشل الدفع") ?><img src="img/close.svg" alt=""></h2>
+                                <?php
+                            }else{
+                                ?>
+                                <h2><?php echo direction("Your Subscription is Confirmed ","تم تأكيد إشتراكك ") ?><img src="img/suc.svg" alt=""></h2>
+                                <?php
+                            }
+                        ?>
                             <h3><?php echo direction("Order Id: ","رقم الطلب: ") . " {$order[0]["id"]}" ?></h3>
                         </div>
                     </div>
