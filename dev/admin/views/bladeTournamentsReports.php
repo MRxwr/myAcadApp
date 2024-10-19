@@ -141,8 +141,7 @@ if ( isset($_POST["endDate"]) && $orders = selectDB("orders",$where) ){
 		<th><?php echo direction("Date","التاريخ") ?></th>
 		<th><?php echo direction("Name","الإسم") ?></th>
 		<th><?php echo direction("Mobile","الهاتف") ?></th>
-		<th><?php echo direction("Academy","الأكادميه") ?></th>
-		<th><?php echo direction("Voucher","كود الخصم") ?></th>
+		<th><?php echo direction("Tournament","البطولة") ?></th>
 		<th><?php echo direction("Total","المجموع") ?></th>
 		<th><?php echo direction("Payment","الدفع") ?></th>
 		<th><?php echo direction("Status","الحالة") ?></th>
@@ -155,6 +154,7 @@ if ( isset($_POST["endDate"]) && $orders = selectDB("orders",$where) ){
 		$status = [direction("Pending","إنتظار"),direction("Successful","ناجحه"),direction("Failed","فاشلة"),direction("Cancelled","ملغية"),direction("Ended","إنتهى")];
         $statusColor = ["default","success","info","danger","warning"];
 		$paymentMethods = ["","KNET","VISA","WALLET","FREE"];
+        $teamDetails = json_decode($orders[$i]["teamDetails"],true);
 		for( $y = 0; $y < sizeof($status); $y++ ){
 			if( $orders[$i]["status"] == $y ){
 				$orderStatus = $status[$y];
@@ -172,8 +172,7 @@ if ( isset($_POST["endDate"]) && $orders = selectDB("orders",$where) ){
 	<td><?php echo $orders[$i]["date"] ?></td>
 	<td><?php echo $orders[$i]["name"] ?></td>
 	<td><?php echo $orders[$i]["phone"] ?></td>
-	<td><?php echo direction($orders[$i]["enAcademy"],$orders[$i]["arAcademy"]) ?></td>
-	<td><?php echo $orders[$i]["voucher"] ?></td>
+	<td><?php echo direction($teamDetails["enTournament"],$teamDetails["arTournament"]) ?></td>
 	<td><?php echo $orders[$i]["total"] ?>KD</td>
 	<td><?php echo $paymentMethod ?></td>
 	<td><button class="btn btn-<?php echo $orderBtnColor ?>" style="width: 100%;"><?php echo $orderStatus ?></button></td>
