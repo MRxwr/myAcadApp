@@ -28,6 +28,13 @@ if( $response["error"] == 1 ){
 }else{
 	$academy = $response["data"]["academy"];
     $academy["coach"] = ( $academy["coach"] == 0 ) ? direction("Male","ذكر") : direction("Female","انثى");
+    if ( $academy["coach"] == 0 ){
+        $academy["coach"] = direction("Male","رجال");
+    }elseif( $academy["coach"] == 1 ){
+        $academy["coach"] = direction("Female","نساء");
+    }else{
+        $academy["coach"] = direction("Mix Male / Female","رجال و نساء");
+    }
 }
 
 $redirect = ($academy["isClothes"] == 1 ) ? "Jersy" : "Checkout" ;

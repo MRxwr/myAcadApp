@@ -117,8 +117,9 @@
 			<div class="col-md-3">
 			<label><?php echo direction("Coach ","المدرب") ?></label>
 			<select name="coach" class="form-control" required>
-				<option value="0" ><?php echo direction("Male","ذكر") ?></option>
-				<option value="1" ><?php echo direction("Female","انثى") ?></option>
+				<option value="0" ><?php echo direction("Male","رجال") ?></option>
+				<option value="1" ><?php echo direction("Female","نساء") ?></option>
+				<option value="2" ><?php echo direction("Mix Male / Female","رجال و نساء") ?></option>
 			</select>
 			</div>
 			
