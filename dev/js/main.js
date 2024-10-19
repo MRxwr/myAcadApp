@@ -421,6 +421,8 @@
         $.ajax(settings).done(function (response) {
             if (response.error === "1" ) {
                 event.preventDefault();
+                var sportsData = document.getElementById("sportsData");
+                sportsData.innerHTML = "";
                 alert("No Sports available");
                 return false;
             }else{
