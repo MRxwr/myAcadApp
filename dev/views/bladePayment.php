@@ -12,7 +12,7 @@ if( isset($_POST) && !empty($_POST) ){
             'voucher' => "{$_POST["voucher"]}",
             'paymentMethod' => "{$_POST["paymentMethod"]}"
         );
-    }elseif( isset($incommingData["tournamentId"]) && !empty($incommingData["tournamentId"]) ){
+    }elseif( isset($_POST["tournamentId"]) && !empty($_POST["tournamentId"]) ){
         $user = selectDB("users","`keepMeAlive` LIKE '{$_COOKIE["createmyacad"]}'");
         $data = array(    
             "user" => $user[0]["id"],
@@ -25,7 +25,6 @@ if( isset($_POST) && !empty($_POST) ){
             "voucher" => "",
         );
     }
-    var_dump($data);
     $curl = curl_init();
     curl_setopt_array($curl, array(
       CURLOPT_URL => "{$baseURL}/index.php?a=Payment",
