@@ -154,7 +154,7 @@ if ( isset($_POST["endDate"]) && $orders = selectDB("orders",$where) ){
 		$status = [direction("Pending","إنتظار"),direction("Successful","ناجحه"),direction("Failed","فاشلة"),direction("Cancelled","ملغية"),direction("Ended","إنتهى")];
         $statusColor = ["default","success","info","danger","warning"];
 		$paymentMethods = ["","KNET","VISA","WALLET","FREE"];
-        $teamDetails = ( !isset($orders[$i]["teamDetails"]) || empty($orders[$i]["teamDetails"])) ? "" : json_decode($orders[$i]["teamDetails"],true);
+        $teamDetails = ( !isset($orders[$i]["teamDetails"]) || empty($orders[$i]["teamDetails"])) ? array("enTournament" => "", "arTournament" => "") : json_decode($orders[$i]["teamDetails"],true);
 		for( $y = 0; $y < sizeof($status); $y++ ){
 			if( $orders[$i]["status"] == $y ){
 				$orderStatus = $status[$y];
