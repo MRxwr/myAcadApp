@@ -1,5 +1,6 @@
 <?php
 if( isset($_POST) && !empty($_POST) ){
+    var_dump($_POST);
     if( isset($_POST["academy"]) && !empty($_POST["academy"]) ){
         $incommingData = json_decode($_POST["data"],true);
         $data = array(
