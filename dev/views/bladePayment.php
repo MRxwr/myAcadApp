@@ -1,7 +1,7 @@
 <?php
 if( isset($_POST) && !empty($_POST) ){
-    if( isset($_POST["academy"]) && !empty($_POST["academy"]) ){
-        $incommingData = json_decode($_POST["data"],true);
+    $incommingData = json_decode($_POST["data"],true);
+    if( isset($incommingData["academy"]) && !empty($incommingData["academy"]) ){
         $data = array(
             'user' => "{$incommingData["user"]}",
             'academy' => "{$incommingData["academy"]}",
@@ -12,7 +12,7 @@ if( isset($_POST) && !empty($_POST) ){
             'voucher' => "{$_POST["voucher"]}",
             'paymentMethod' => "{$_POST["paymentMethod"]}"
         );
-    }elseif( isset($_POST["tournamentId"]) && !empty($_POST["tournamentId"]) ){
+    }elseif( isset($incommingData["tournamentId"]) && !empty($incommingData["tournamentId"]) ){
         $user = selectDB("users","`keepMeAlive` LIKE '{$_COOKIE["createmyacad"]}'");
         $data = array(    
             "user" => $user[0]["id"],
