@@ -110,8 +110,10 @@ td{
                         echo "- " . $teamData["players"][$i] . "<br>";
                     }
                     echo "Bench: <br>";
-                    for( $i = 0; $i < sizeof($teamData["bench"]); $i++ ){
-                        echo "- " . $teamData["bench"][$i] . "<br>";
+                    if( isset($teamData["bench"]) && !empty($teamData["bench"]) ){
+                        for( $i = 0; $i < sizeof($teamData["bench"]); $i++ ){
+                            echo "- " . $teamData["bench"][$i] . "<br>";
+                        }
                     }
                     ?>
                 </td>
