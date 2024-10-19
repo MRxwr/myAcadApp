@@ -29,8 +29,8 @@
 		<?php 
         $count = (is_array($academiesList) && !empty($academiesList)) ? count($academiesList) : 1;
 		for( $z = 0; $z < $count; $z++ ){
-			$id = ( isset($academiesList[$z]) && !empty($academiesList[$z]) ) ? "AND `academyId` = '{$academiesList[$z]}'" : "";
-            if( $orders = selectDB("orders","`id` != '0' {$id} AND `isTournament` = '1' ORDER BY `date` DESC") ){
+			$id = ( isset($academiesList[$z]) && !empty($academiesList[$z]) ) ? "AND `tournamentId` = '{$academiesList[$z]}'" : "";
+            if( $orders = selectDBNew("orders",[$id,$_GET["type"]],"`id` != '0' {$id} AND `isTournament` = '1' AND `status` = ?","`date` DESC") ){
                 for( $i = 0; $i < sizeof($orders); $i++ ){
                     $status = [direction("Pending","إنتظار"),direction("Successful","ناجحه"),direction("Failed","فاشلة"),direction("Cancelled","ملغية"),direction("Ended","إنتهى")];
                     $statusColor = ["default","success","info","danger","warning"];
