@@ -34,7 +34,7 @@
     </div>	
 
     <div class="col-md-12">
-    <button type="submit" class="btn btn-success mr-10"><?php echo direction("Submit","أرسل") ?></button>
+    <button type="submit" class="btn btn-primary mr-10"><?php echo direction("Submit","أرسل") ?></button>
     </div>
 </form>
 

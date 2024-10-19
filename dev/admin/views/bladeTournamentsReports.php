@@ -97,7 +97,7 @@
 	
 	<div class="col-md-12">
 	<div class="form-group">
-	<button class="btn  btn-success">Submit</button>
+	<button class="btn  btn-primary">Submit</button>
 	</div>
 	</div>
 <?php
