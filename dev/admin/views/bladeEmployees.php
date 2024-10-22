@@ -45,7 +45,7 @@
 			</div>
 			
 			<div class="col-md-6">
-			<label><?php echo direction("Academies / Tournaments","الأكاديميات / البطولات") ?></label>
+			<label><?php echo direction("Academy","الأكادمية") ?></label>
 			<select name="academyId[]" class="form-control" id="academyList" multiple>
 				<?php
 				if( $academy = selectDB("academies","`status` = '0'") ){
@@ -55,6 +55,12 @@
 					}
 				}
 				?>
+			</select>
+			</div>
+
+			<div class="col-md-6">
+			<label><?php echo direction("Tournament","البطوله") ?></label>
+			<select name="tournamentId[]" class="form-control" id="tournamentList" multiple>
 				<?php
 				if( $academy = selectDB("tournaments","`status` = '0'") ){
 					for( $i = 0; $i < sizeof($academy); $i++ ){
@@ -144,7 +150,8 @@
 				</a>
 				<div style="display:none">
 					<label id="type<?php echo $employees[$i]["id"]?>"><?php echo $employees[$i]["empType"] ?></label>
-					<label id="academy<?php echo $employees[$i]["id"]?>"><?php echo $employees[$i]["academyId"] ?></label></div>				
+					<label id="academy<?php echo $employees[$i]["id"]?>"><?php echo $employees[$i]["academyId"] ?></label></div>			
+					<label id="tournament<?php echo $employees[$i]["id"]?>"><?php echo $employees[$i]["tournamentId"] ?></label></div>			
 				</td>
 				</tr>
 				<?php
@@ -171,6 +178,7 @@
 		var mobile = $("#mobile"+id).html();
 		var type = $("#type"+id).html();
 		var academyList = $("#academy"+id).html();
+		var tournamentList = $("#tournament"+id).html();
 		var logo = $("#logo"+id).html();
 		$("input[name=password]").prop("required",false);
 		$("input[name=email]").val(email);
@@ -180,8 +188,11 @@
 		$("input[name=fullName]").focus();
 		$("select[name=empType]").val(type);
 		var academyListArray = JSON.parse(academyList);
+		var tournamentListArray = JSON.parse(tournamentList);
 		$('#academyList').val(null).trigger('change');
+		$('#tournamentList').val(null).trigger('change');
 		setSelectedOptions(academyListArray, "academyList");
+		setSelectedOptions(tournamentListArray, "tournamentList");
 	})
 	function setSelectedOptions(ids, selectId) {
 		var $select = $('#' + selectId);

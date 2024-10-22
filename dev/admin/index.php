@@ -208,6 +208,19 @@ if( !in_array($userType, $allowedEmpolyees) ){
     }
 }
 
+if( !in_array($userType, $allowedEmpolyees) ){
+    if( isset($_GET["code"]) && !in_array($_GET["code"],$tournamentsList) ){
+        ?>
+        <script>
+            window.onload = function() {
+                alert("<?php echo direction("Wrong Operation","العملية غير صالحة") ?>");
+                window.history.back();
+            }
+        </script>
+        <?php
+    }
+}
+
 // get viewed page from pages folder \\
 if( isset($_GET["v"]) && searchFile("views","blade{$_GET["v"]}.php") ){
 	require_once("views/".searchFile("views","blade{$_GET["v"]}.php"));

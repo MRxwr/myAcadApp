@@ -12,6 +12,7 @@ if ( isset($_COOKIE[$cookieSession."A"]) && !empty($_COOKIE[$cookieSession."A"])
 		$username = $user[0]["fullName"];
 		$userType = ( $user[0]["empType"] == 8 || $user[0]["empType"] == 16 ) ? 0 : $user[0]["empType"];
 		$academiesList = ( is_array($user[0]["academyId"]) && empty($user[0]["academyId"]) ) ? array() : json_decode($user[0]["academyId"],true);
+		$tournamentsList = ( is_array($user[0]["tournamentId"]) && empty($user[0]["tournamentId"]) ) ? array() : json_decode($user[0]["tournamentId"],true);
 		$_SESSION[$cookieSession."A"] = $email;	
 	}else{
 		header("Location: logout.php");die();
