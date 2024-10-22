@@ -34,10 +34,10 @@
 		if( $userType == 0 || $userType == 8 ){
 			echo "<option value='0' selected>".direction("All","الكل")."</option>";
 		}
-		$count = (is_array($academiesList) && !empty($academiesList)) ? count($academiesList) : 1;
+		$count = (is_array($tournamentsList) && !empty($tournamentsList)) ? count($tournamentsList) : 1;
 		$orderBy = direction("enTitle","arTitle");
 		for( $z = 0; $z < $count; $z++ ){
-			$id = ( isset($academiesList[$z]) && !empty($academiesList[$z]) ) ? "AND `id` = '{$academiesList[$z]}'" : "AND `id` != '0'";
+			$id = ( isset($tournamentsList[$z]) && !empty($tournamentsList[$z]) ) ? "AND `id` = '{$tournamentsList[$z]}'" : "AND `id` != '0'";
 			if( $tournaments = selectDB("tournaments","`status` = '0' {$id} ORDER BY `{$orderBy}` ASC") ){
 				for( $i = 0; $i < sizeof($tournaments); $i++ ){
 					$area = selectDB("countries","`id` = '{$tournaments[$i]["area"]}'");
