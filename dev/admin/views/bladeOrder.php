@@ -9,6 +9,15 @@ for( $z = 0; $z < $count; $z++ ){
 	}
 }
 $id .= ( isset($academiesList[0]) && !empty($academiesList[0]) ) ? "AND `academyId` IN ($listOfAcademies)" : "";
+
+$count = (is_array($tournamentsList) && !empty($tournamentsList)) ? count($tournamentsList) : 0;
+for( $z = 0; $z < $count; $z++ ){
+	$listOfAcademies .= "'{$tournamentsList[$z]}'";
+	if( isset($tournamentsList[$z+1]) && !empty($tournamentsList[$z+1]) ){
+		$listOfAcademies .= ",";
+	}
+}
+$id .= ( isset($tournamentsList[0]) && !empty($tournamentsList[0]) ) ? "AND `tournamentId` IN ($listOfAcademies)" : "";
 if( $order = selectDB("orders","`id` = '{$_GET["id"]}' {$id}") ){
 }else{
     ?>
