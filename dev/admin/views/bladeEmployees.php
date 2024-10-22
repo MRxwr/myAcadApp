@@ -191,10 +191,10 @@
 		$("input[name=fullName]").focus();
 		$("select[name=empType]").val(type);
 		var academyListArray = JSON.parse(academyList);
-		var tournamentListArray = JSON.parse(tournamentList);
 		$('#academyList').val(null).trigger('change');
-		$('#tournamentList').val(null).trigger('change');
 		setSelectedOptions(academyListArray, "academyList");
+		var tournamentListArray = JSON.parse(tournamentList);
+		$('#tournamentList').val(null).trigger('change');
 		setSelectedOptions(tournamentListArray, "tournamentList");
 	})
 	function setSelectedOptions(ids, selectId) {
