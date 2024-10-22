@@ -45,10 +45,18 @@
 			</div>
 			
 			<div class="col-md-6">
-			<label><?php echo direction("Academy","الأكادمية") ?></label>
+			<label><?php echo direction("Academies / Tournaments","الأكاديميات / البطولات") ?></label>
 			<select name="academyId[]" class="form-control" id="academyList" multiple>
 				<?php
 				if( $academy = selectDB("academies","`status` = '0'") ){
+					for( $i = 0; $i < sizeof($academy); $i++ ){
+						$academyTitle = direction($academy[$i]["enTitle"],$academy[$i]["arTitle"]);
+						echo "<option value='{$academy[$i]["id"]}'>{$academyTitle}</option>";
+					}
+				}
+				?>
+				<?php
+				if( $academy = selectDB("tournaments","`status` = '0'") ){
 					for( $i = 0; $i < sizeof($academy); $i++ ){
 						$academyTitle = direction($academy[$i]["enTitle"],$academy[$i]["arTitle"]);
 						echo "<option value='{$academy[$i]["id"]}'>{$academyTitle}</option>";
