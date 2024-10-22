@@ -24,7 +24,7 @@ if( $order = selectDB("orders","`id` = '{$_GET["id"]}' {$id}") ){
     <script>
         window.onload = function() {
             alert("<?php echo direction("Wrong order number","رقم طلب خاطئ") ?>");
-            window.location.href = "?v=Invoices";
+            window.location.href = "?v=Home";
         }
     </script>
     <?php
