@@ -171,6 +171,9 @@
 	$(document).ready(function(){
 		$('#academyList').select2();
 	})
+	$(document).ready(function(){
+		$('#tournamentList').select2();
+	})
 	$(document).on("click",".edit", function(){
 		var id = $(this).attr("id");
 		var email = $("#email"+id).html();
