@@ -27,9 +27,9 @@
 		
 		<tbody>
 		<?php 
-        $count = (is_array($academiesList) && !empty($academiesList)) ? count($academiesList) : 1;
+        $count = (is_array($tournamentsList) && !empty($tournamentsList)) ? count($tournamentsList) : 1;
 		for( $z = 0; $z < $count; $z++ ){
-			$id = ( isset($academiesList[$z]) && !empty($academiesList[$z]) ) ? "AND `tournamentId` = '{$academiesList[$z]}'" : "";
+			$id = ( isset($tournamentsList[$z]) && !empty($tournamentsList[$z]) ) ? "AND `tournamentId` = '{$tournamentsList[$z]}'" : "";
             if( $orders = selectDBNew("orders",[$_GET["type"]],"`id` != '0' {$id} AND `isTournament` = '1' AND `status` = ?","`date` DESC") ){
                 for( $i = 0; $i < sizeof($orders); $i++ ){
                     $status = [direction("Pending","إنتظار"),direction("Successful","ناجحه"),direction("Failed","فاشلة"),direction("Cancelled","ملغية"),direction("Ended","إنتهى")];
