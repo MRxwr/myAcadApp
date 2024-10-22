@@ -150,8 +150,9 @@
 				</a>
 				<div style="display:none">
 					<label id="type<?php echo $employees[$i]["id"]?>"><?php echo $employees[$i]["empType"] ?></label>
-					<label id="academy<?php echo $employees[$i]["id"]?>"><?php echo $employees[$i]["academyId"] ?></label></div>			
-					<label id="tournament<?php echo $employees[$i]["id"]?>"><?php echo $employees[$i]["tournamentId"] ?></label></div>			
+					<label id="academy<?php echo $employees[$i]["id"]?>"><?php echo $employees[$i]["academyId"] ?></label>		
+					<label id="tournament<?php echo $employees[$i]["id"]?>"><?php echo $employees[$i]["tournamentId"] ?></label>
+				</div>			
 				</td>
 				</tr>
 				<?php
