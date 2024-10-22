@@ -423,7 +423,8 @@
                 event.preventDefault();
                 var sportsData = document.getElementById("sportsData");
                 sportsData.innerHTML = "";
-                alert("No Sports available");
+                var selectedLanguage = (langCookieValue === undefined || langCookieValue === "" || langCookieValue === "EN") ? "No Tournaments available" : "لا توجد بطولات متاحة";
+                alert(selectedLanguage);
                 return false;
             }else{
                 var sportsData = document.getElementById("sportsData");
