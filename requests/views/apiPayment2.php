@@ -367,9 +367,7 @@ if( !isset($_POST) ){
                 updateDB("users",array("wallet" => $newWallet),"`id` = {$_POST["userId"]}");
             }
         }
-        //echo outputData($response);
-        $response["msg"] = popupMsg($requestLang,'Error while proccessing payment','خطأ في عملية الدفع');
-        echo outputError($response);
+        echo outputData($response);
     }else{
         $response["msg"] = popupMsg($requestLang,'Error while proccessing payment','خطأ في عملية الدفع');
         echo outputError($response);
