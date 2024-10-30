@@ -145,7 +145,7 @@ if( !isset($_POST) ){
         //preparing upayment payload and creating order
         $postBody = array(
             'language' => 'en',
-            'paymentGateway[src]' => "{$paymentGateway}",
+            //'paymentGateway[src]' => "{$paymentGateway}",
             'order[id]' => $orderId,
             'order[currency]' => 'KWD',
             'order[amount]' => (string)$fullAmount,
