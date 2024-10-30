@@ -7,6 +7,7 @@ if( !isset($_POST) ){
     $wallet = 0;
     $freePayment = 0;
     $data = $_POST;
+    var_dump($data);
     unset($_POST);
     if( isset($data["academy"]) && !empty($data["academy"]) ){
         $user = $data["user"];
