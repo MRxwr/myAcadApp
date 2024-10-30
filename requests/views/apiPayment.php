@@ -7,7 +7,6 @@ if( !isset($_POST) ){
     $wallet = 0;
     $freePayment = 0;
     $data = $_POST;
-    var_dump($data);
     unset($_POST);
     if( isset($data["academy"]) && !empty($data["academy"]) ){
         $user = $data["user"];
@@ -340,7 +339,6 @@ if( !isset($_POST) ){
     $response = curl_exec($curl);
     curl_close($curl);
     $response = json_decode($response,true);
-    var_dump($response);
 
     //saving info and redirecting to payment pages
     if( $response["status"] == true && isset($response["data"]["link"]) && !empty($response["data"]["link"]) ){
