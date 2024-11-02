@@ -275,9 +275,9 @@
 			"1" => direction("Man","رجل"),
 			"2" => direction("Woman","إمرأه"),
 			"3" => direction("Boy","ولد"),
-			"4" => direction("Girl","أمرة"),
-			"5" => direction("Mix Adults","مختلط كبار"),
-			"6" => direction("Mix Children","مختلط الطفل"),
+			"4" => direction("Girl","بنت"),
+			"5" => direction("Mix Adults","مختلط الكبار"),
+			"6" => direction("Mix Children","مختلط الاطفال"),
 		);
 		for( $z = 0; $z < $count; $z++ ){
 			$id = ( isset($academiesList[$z]) && !empty($academiesList[$z]) ) ? "AND `id` = '{$academiesList[$z]}'" : "";
