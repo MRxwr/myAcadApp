@@ -6851,7 +6851,6 @@ class JLang {
                         // If it doesn't exist, add the parameter
                         urlParams.append(parameterName, parameterValue);
                     }
-    
                     // Construct the updated URL with the modified parameters
                     let updatedUrl = currentUrl.split('?')[0] + '?' + urlParams.toString();
                     // Navigate to the updated URL
