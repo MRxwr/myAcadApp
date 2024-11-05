@@ -26,42 +26,44 @@
 			<input type="number" min="0" step="1" name="numberOfTimes" class="form-control" required>
 			</div>
 			
-			<div class="col-md-4">
+			<div class="col-md-3">
 			<label><?php echo direction("Amount","القيمة") ?></label>
 			<input type="number" name="amount" class="form-control" required>
 			</div>
 			
-			<div class="col-md-4">
+			<div class="col-md-3">
 			<label><?php echo direction("Type","النوع") ?></label>
 			<select name="type" class="form-control">
                 <option value='0'><?php echo direction("Percentage","نسبة مؤوية") ?></option>
                 <option value='1'><?php echo direction("Fixed","قيمة ثابته") ?></option>
 			</select>
 			</div>
-			
-			<div class="col-md-4">
-			<label><?php echo direction("Academy","الأكادمية") ?></label>
-			<select name="academyId" class="form-control" id="mySelect">
-                <option value='0'><?php echo direction("All","الكل") ?></option>
-				<?php
-				if( $academy = selectDB("academies","`status` = '0'") ){
-					for( $i = 0; $i < sizeof($academy); $i++ ){
-						$academyTitle = direction($academy[$i]["enTitle"],$academy[$i]["arTitle"]);
-						echo "<option value='{$academy[$i]["id"]}'>{$academyTitle}</option>";
-					}
-				}
-				?>
-			</select>
-			</div>
 
-            <div class="col-md-6">
+            <div class="col-md-3">
 			<label><?php echo direction("Start Date","تاريخ البداية") ?></label>
 			<input type="date" name="startDate" class="form-control" required>
 			</div>
 
-            <div class="col-md-6">
+            <div class="col-md-3">
 			<label><?php echo direction("End Date","تاريخ الإنتهاء") ?></label>
 			<input type="date" name="endDate" class="form-control" required>
+			</div>
+
+			<div class="col-md-12">
+			<label><?php echo direction("Academy","الأكادمية") ?></label>
+			<select name="academyIds[]" class="form-control" id="mySelect" multiple style="height: 200px">
+                <option value='0'><?php echo direction("All","الكل") ?></option>
+				<?php
+				if( $academy = selectDB("academies","`status` = '0'") ){
+					for( $i = 0; $i < sizeof($academy); $i++ ){
+						$area = selectDB("countries","`id` = '{$academy[$i]["area"]}'");
+						$areaTitle = direction($area[0]["areaEnTitle"],$area[0]["areaArTitle"]);
+						$academyTitle = direction($academy[$i]["enTitle"],$academy[$i]["arTitle"]);
+						echo "<option value='{$academy[$i]["id"]}'>{$academyTitle} - {$areaTitle} </option>";
+					}
+				}
+				?>
+			</select>
 			</div>
 			
 			<div class="col-md-6" style="margin-top:10px">
@@ -114,15 +116,17 @@
 					$link = "?v={$_GET["v"]}&hide={$vouchers[$i]["id"]}";
 					$hide = direction("Lock","قفل الكود");
 				}
-
+				$academy = "";
 				$type = ( $vouchers[$i]["type"] == 0 ) ? direction("Percentage","نسبة مؤوية") : direction("Fixed","قيمة ثابته") ;
-
-				if( $academy = selectDB("academies","`id` = '{$vouchers[$i]["academyId"]}'") ){
-					$academy = direction($academy[0]["enTitle"],$academy[0]["arTitle"]);
-				}else{
-					$academy = "";
+				$cleanedAcademyId = str_replace(['[', ']', '"'], '', $vouchers[$i]["academyIds"]);
+    			$vouchers[$i]["academyIds"] = explode(',', $cleanedAcademyId);
+				for( $j = 0; $j < sizeof($vouchers[$i]["academyIds"]); $j++ ){
+					if( $academyData = selectDB("academies","`id` = '{$vouchers[$i]["academyIds"][$j]}'") ){
+						$academy .= direction($academyData[0]["enTitle"],$academyData[0]["arTitle"]) . " - ";
+					}else{
+						$academy .= "";
+					}
 				}
-				
 				?>
 				<tr>
 				<td id="title<?php echo $vouchers[$i]["id"]?>" ><?php echo $vouchers[$i]["title"] ?></td>
@@ -143,7 +147,7 @@
 				</a>
 				<div style="display:none">
 					<label id="type<?php echo $vouchers[$i]["id"]?>"><?php echo $vouchers[$i]["type"] ?></label>
-					<label id="academy<?php echo $vouchers[$i]["id"]?>"><?php echo $vouchers[$i]["academyId"] ?></label>			
+					<label id="academy<?php echo $vouchers[$i]["id"]?>"><?php echo json_encode($vouchers[$i]["academyIds"]) ?></label>			
                 </div>				
 				</td>
 				</tr>
@@ -164,6 +168,8 @@
 
         $(document).ready(function() {
 			$('#mySelect').select2();
+			// set overflow:Auto to #mySelect
+			$('.select2').css('overflow', 'auto');
 		});
 
 	$(document).on("click",".edit", function(){
@@ -185,7 +191,9 @@
 		$("input[name=endDate]").val(endDate);
 		$("input[name=title]").val(title);
 		$("select[name=type]").val(type);
-		$("select[name=academyId]").val(academy).trigger('change');;
+		// academy is json objext with list of ids 
+		var academy = JSON.parse(academy);
+		$("#mySelect").val(academy).trigger('change');
         $("input[name=title]").focus();
 	})
 </script>

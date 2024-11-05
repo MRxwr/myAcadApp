@@ -57,6 +57,20 @@
 				?>
 			</select>
 			</div>
+
+			<div class="col-md-6">
+			<label><?php echo direction("Tournament","البطوله") ?></label>
+			<select name="tournamentId[]" class="form-control" id="tournamentList" multiple>
+				<?php
+				if( $academy = selectDB("tournaments","`status` = '0'") ){
+					for( $i = 0; $i < sizeof($academy); $i++ ){
+						$academyTitle = direction($academy[$i]["enTitle"],$academy[$i]["arTitle"]);
+						echo "<option value='{$academy[$i]["id"]}'>{$academyTitle}</option>";
+					}
+				}
+				?>
+			</select>
+			</div>
 			
 			<div class="col-md-6" style="margin-top:10px">
 			<input type="submit" class="btn btn-primary" value="<?php echo direction("Submit","أرسل") ?>">
@@ -136,7 +150,9 @@
 				</a>
 				<div style="display:none">
 					<label id="type<?php echo $employees[$i]["id"]?>"><?php echo $employees[$i]["empType"] ?></label>
-					<label id="academy<?php echo $employees[$i]["id"]?>"><?php echo $employees[$i]["academyId"] ?></label></div>				
+					<label id="academy<?php echo $employees[$i]["id"]?>"><?php echo $employees[$i]["academyId"] ?></label>		
+					<label id="tournament<?php echo $employees[$i]["id"]?>"><?php echo $employees[$i]["tournamentId"] ?></label>
+				</div>			
 				</td>
 				</tr>
 				<?php
@@ -156,6 +172,9 @@
 	$(document).ready(function(){
 		$('#academyList').select2();
 	})
+	$(document).ready(function(){
+		$('#tournamentList').select2();
+	})
 	$(document).on("click",".edit", function(){
 		var id = $(this).attr("id");
 		var email = $("#email"+id).html();
@@ -163,6 +182,7 @@
 		var mobile = $("#mobile"+id).html();
 		var type = $("#type"+id).html();
 		var academyList = $("#academy"+id).html();
+		var tournamentList = $("#tournament"+id).html();
 		var logo = $("#logo"+id).html();
 		$("input[name=password]").prop("required",false);
 		$("input[name=email]").val(email);
@@ -174,6 +194,9 @@
 		var academyListArray = JSON.parse(academyList);
 		$('#academyList').val(null).trigger('change');
 		setSelectedOptions(academyListArray, "academyList");
+		var tournamentListArray = JSON.parse(tournamentList);
+		$('#tournamentList').val(null).trigger('change');
+		setSelectedOptions(tournamentListArray, "tournamentList");
 	})
 	function setSelectedOptions(ids, selectId) {
 		var $select = $('#' + selectId);

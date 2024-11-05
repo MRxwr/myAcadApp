@@ -1,7 +1,7 @@
 <?php
 $curl = curl_init();
 curl_setopt_array($curl, array(
-  CURLOPT_URL => "https://myacad.app/requests?a=Academy&academyId={$_POST["checkout"]["id"]}",
+  CURLOPT_URL => "{$baseURL}?a=Academy&academyId={$_POST["checkout"]["id"]}",
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => '',
   CURLOPT_MAXREDIRS => 10,
@@ -40,6 +40,7 @@ if( getLoginStatusResponse() == 0 ){
 	<?php
     die();
 }
+
 
 if( isset($_POST["checkout"]["jersy"]) && !empty($_POST["checkout"]["jersy"]) ){
     $jersyPrice = (float)$academy["clothesPrice"]*(float)$_POST["checkout"]["jersy"];

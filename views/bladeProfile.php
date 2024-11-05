@@ -20,7 +20,7 @@ if( isset($_POST["changePass"]) && !empty($_POST["changePass"]) ){
     }
     $curl = curl_init();
     curl_setopt_array($curl, array(
-    CURLOPT_URL => "https://myacad.app/requests/index.php?a=User&type=changePassword&userId={$user[0]["id"]}",
+    CURLOPT_URL => "{$baseURL}/index.php?a=User&type=changePassword&userId={$user[0]["id"]}",
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_ENCODING => '',
     CURLOPT_MAXREDIRS => 10,
@@ -59,7 +59,14 @@ require_once("template/changePassword.php");
     <div class="left_side">
         <div class="profile_area">
             <h2><?php echo $user[0]["firstName"] . " " . $user[0]["lastName"] ?></h2>
+            <input type="hidden" name="userId" value="<?php echo getLoginStatusResponse() ?>" id="userIdProfile">
             <ul>
+                <li>
+                    <div class="row">
+                        <div class="col-8"><a href="#"><img src="img/points.svg" alt=""><p><?php echo direction("Points","النقاط") ?> (<span><?php echo $user[0]["points"] ?></span>)</p></a></div>
+                        <div class="col-4"><a id="redeemBtn" style="border-radius: 10px;font-size: 12px;padding: 10px;font-weight: 300;background-color: #FFA300;border: none;outline: none;"><?php echo direction("Redeem Poitns","استبدال النقاط") ?></a></div>
+                    </div>
+                </li>
                 <li><a href="#"><img src="img/img_5.svg" alt=""><p><?php echo direction("Wallet amount","قيمة المحفظة") ?> (<span><?php echo $user[0]["wallet"] ?> KD</span>)</p></a></li>
                 <li><a href="#profile" data-toggle="modal"><img src="img/img_6.svg" alt=""><p><?php echo direction("Profile","الملف الشخصي") ?></p></a></li>
                 <li><a href="#changePassword" data-toggle="modal"><img src="img/img_6.svg" alt=""><p><?php echo direction("Change Password","تغيير كلمة المرور") ?></p></a></li>

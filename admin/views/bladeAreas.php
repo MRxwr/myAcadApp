@@ -86,7 +86,7 @@ if( isset($_GET["delIdArea"]) && !empty($_GET["delIdArea"]) && updateDB("countri
 		<tbody>
 		<?php 
 		$orderBy = direction("areaEnTitle","areaArTitle");
-		if( $areas = selectDB("countries","`status` = '1' AND `countryCode` LIKE '{$_GET["code"]}' ORDER BY `{$orderBy}` ASC") ){
+		if( $areas = selectDB("countries","`status` = '1' AND `countryCode` LIKE '{$_GET["code"]}' ORDER BY `{$orderBy}` ASC LIMIT 0,200") ){
 			for( $i = 0; $i < sizeof($areas); $i++ ){
 				if( $governate = selectDB("governates","`id` = '{$areas[$i]["governateId"]}'") ){
 					$governateTitle = direction($governate[0]["enTitle"],$governate[0]["arTitle"]);
@@ -133,13 +133,9 @@ if( isset($_GET["delIdArea"]) && !empty($_GET["delIdArea"]) && updateDB("countri
 	<script>
 		$(document).on("click",".edit", function(){
 			var id = $(this).attr("id");
-			var enTitle = $("#enTitle"+id).html();
-			var arTitle = $("#arTitle"+id).html();
-			var governateId = $("#governateId"+id).html();
-			$("input[name=areaEnTitle]").val(enTitle);
-			$("select[name=governateId]").val(governateId);
+			$("input[name=areaEnTitle]").val($("#enTitle"+id).html()).focus();
+			$("input[name=areaArTitle]").val($("#arTitle"+id).html());
+			$("select[name=governateId]").val($("#governateId"+id).html());
 			$("input[name=update]").val(id);
-			$("input[name=areaArTitle]").val(arTitle);
-			$("input[name=areaEnTitle]").focus()
 		})
 	</script>

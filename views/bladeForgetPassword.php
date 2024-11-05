@@ -2,7 +2,7 @@
 if( isset($_POST["email"]) AND !empty($_POST["email"]) ){
     $curl = curl_init();
     curl_setopt_array($curl, array(
-      CURLOPT_URL => "https://myacad.app/requests?a=User&type=forgetPassword&email={$_POST["email"]}",
+      CURLOPT_URL => "{$baseURL}?a=User&type=forgetPassword&email={$_POST["email"]}",
       CURLOPT_RETURNTRANSFER => true,
       CURLOPT_ENCODING => '',
       CURLOPT_MAXREDIRS => 10,

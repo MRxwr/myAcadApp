@@ -1,5 +1,6 @@
 <?php
 function mySubscriptions($type){
+    global $baseURL;
     if( getLoginStatusResponse() == 0 ){
         ?>
         <script>window.location.href = "?v=Login&error=3";</script>
@@ -9,7 +10,7 @@ function mySubscriptions($type){
     $userId = getLoginStatusResponse();
     $curl = curl_init();
     curl_setopt_array($curl, array(
-        CURLOPT_URL => "https://myacad.app/requests?a=Subscriptions&userId={$userId}&type={$type}",
+        CURLOPT_URL => "{$baseURL}?a=Subscriptions&userId={$userId}&type={$type}",
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => '',
         CURLOPT_MAXREDIRS => 10,
@@ -31,7 +32,7 @@ if( isset($_GET["cancel"]) && !empty($_GET["cancel"]) ){
     $orderId = selectDB2("`id`","orders","`gatewayId` = '{$_GET["cancel"]}'");
     $curl = curl_init();
     curl_setopt_array($curl, array(
-    CURLOPT_URL => "https://myacad.app/requests?a=Cancel&userId={$userId}&orderId={$orderId[0]["id"]}",
+    CURLOPT_URL => "{$baseURL}?a=Cancel&userId={$userId}&orderId={$orderId[0]["id"]}",
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_ENCODING => '',
     CURLOPT_MAXREDIRS => 10,
@@ -125,10 +126,15 @@ if( isset($_GET["cancel"]) && !empty($_GET["cancel"]) ){
                                         <img src="img/sub_4.svg" alt="">
                                         <h4><?php echo direction("Share","مشاركة") ?></h4>
                                     </a>
-                                    <a href="?v=Success&OrderID=<?php echo $result["data"][$i]["orderId"] ?>" class="item_sub">
+                                    <a href ="?v=GenerateCode&id=<?php echo $result["data"][$i]["id"] ?>" class="item_sub">
+                                        <img src="img/qrcode.svg" alt="">
+                                        <h4><?php echo direction("QR Code","رمز المسح") ?></h4>
+                                    </a>
+                                    <a href="?v=Success&requested_order_id=<?php echo "{$result["data"][$i]["orderId"]}&isTournament={$result["data"][$i]["isTournament"]}" ?>" class="item_sub">
                                         <img src="img/sub_5.svg" alt="">
                                         <h4><?php echo direction("Invoice","الفاتورة") ?></h4>
                                         <h4 style="display:none" class="invoice<?php echo $result["data"][$i]["id"] ?>"><?php echo $result["data"][$i]["orderId"] ?></h4>
+                                        <h4 style="display:none" class="isTournament<?php echo $result["data"][$i]["id"] ?>"><?php echo $result["data"][$i]["isTournament"] ?></h4>
                                     </a>
                                     <?php
                                     if( (date("Y-m-d H:i:s") < date("Y-m-d H:i:s", strtotime("+2 days", strtotime($result["data"][$i]["date"])))) && $TabType[$y] != 3 ){

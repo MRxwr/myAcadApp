@@ -8,6 +8,8 @@
     });
 
     $(document).ready(function () {
+        //$('select[name="checkout[subscription]"]').select2();
+
         //05. sticky header
         function sticky_header(){
             var wind = $(window);
@@ -24,15 +26,32 @@
         sticky_header();
         //===== Back to top
 		
-		// change the view of select sport
-		$('.selectSport').on('click', function (event) {
+        $('#homeAcadimes').on('click', function (event) {
+            $("input[name=isTournament]").val(0);
+            $("#homeForm").attr("action","?v=Listing");
+            $("#homeTournaments").removeClass("homeSelected");
+            $("#homeAcadimes").addClass("homeSelected");
+        });
+
+        $('#homeTournaments').on('click', function (event) {
+            $("input[name=isTournament]").val(1);
+            $("#homeForm").attr("action","?v=Tournaments");
+            $("#homeAcadimes").removeClass("homeSelected");
+            $("#homeTournaments").addClass("homeSelected");
+        });
+
+		// change the view of select gender
+		$(document).on('click','.selectSport', function (event) {
 			event.preventDefault();
 			var id = $(this).attr("id");
+            //get country code from cookie
+            var countryCode = $.cookie("createmyacadcountry");
 			var sportImage = $("#sportImage"+id).attr("src");
 			var sportTitle = $("#sportTitle"+id).html();
+			var isTournament = $("input[name=isTournament]").val();
             var langCookieValue = $.cookie("CREATEkwLANG");
             var settings = {
-                "url": "requests/index.php?a=Genders&sportId="+id,
+                "url": "requests/index.php?a=Genders&sportId="+id+"&countryCode="+countryCode+"&isTournament="+isTournament,
                 "method": "GET",
                 "timeout": 0,
                 "headers": {
@@ -43,14 +62,19 @@
                 var $select = $('select[name=gender]');
                 $select.empty();
                 var selectedLanguage = (langCookieValue === undefined || langCookieValue === "" || langCookieValue === "EN") ? "genderEn" : "genderAr";
+                var $option = $('<option>', {
+                    value: "",
+                    text: ( langCookieValue === undefined || langCookieValue === "" || langCookieValue === "EN") ? "SELECT GENDER" : "إختر الجنس"
+                });
+                $option.prop('disabled', true);
+                $option.prop('selected', true);
+                $select.append($option);
                 $.each(response.data.genders, function(index, item) {
-                    var $option = $('<option>', {
-                        value: item.id,
-                        text: item[selectedLanguage]
-                    });
-                    if (item.id === 0) {
-                        $option.prop('disabled', true);
-                        $option.prop('selected', true);
+                    if (item.id != 0) {
+                        var $option = $('<option>', {
+                            value: item.id,
+                            text: item[selectedLanguage]
+                        });
                     }
                     $select.append($option);
                 });
@@ -65,11 +89,56 @@
             $("#homeBtnSubmit").prop("disabled",true).attr("style","background: gray;color: black;");
 			$('#sport').modal('toggle');
 		});
+
+        // change the view of select governates
+		$('.selectGender').on('change', function (event) {
+			event.preventDefault();
+			var id = $(this).val();
+            var countryCode = $.cookie("createmyacadcountry");
+            var sportId = $("input[name=sport]").val();
+            var langCookieValue = $.cookie("CREATEkwLANG");
+            var isTournament = $("input[name=isTournament]").val();
+            var settings = {
+                "url": "requests/index.php?a=Governates&sportId="+sportId+"&countryCode="+countryCode+"&genderId="+id+"&isTournament="+isTournament,
+                "method": "GET",
+                "timeout": 0,
+                "headers": {
+                  "myacadheader": "myAcadAppCreate"
+                },
+              };
+              $.ajax(settings).done(function (response) {
+                var $select = $('select[name=governate]');
+                $select.empty();
+                var selectedLanguage = (langCookieValue === undefined || langCookieValue === "" || langCookieValue === "EN") ? "enGovernate" : "arGovernate";
+                var $option = $('<option>', {
+                    value: "",
+                    text: ( langCookieValue === undefined || langCookieValue === "" || langCookieValue === "EN") ? "SELECT GOVERNATE" : "إختر المحافظة"
+                });
+                $option.prop('disabled', true);
+                $option.prop('selected', true);
+                $select.append($option);
+                $.each(response.data.governates, function(index, item) {
+                    var $option = $('<option>', {
+                        value: item.id,
+                        text: item[selectedLanguage]
+                    });
+                    if (item.id === 0) {
+                        //$option.prop('disabled', true);
+                        //$option.prop('selected', true);
+                    }
+                    $select.append($option);
+                });
+                $select.select2();
+                $select.trigger('change.select2');
+              });
+			$("select[name=governate]").prop("disabled",false);
+			$("select[name=governate]").prop("required",true);
+		});
 		
 		// change the view of select sport
-		$('select[name=gender]').on('change', function (event) {
+		$('select[name=governate]').on('change', function (event) {
 			event.preventDefault();
-            if ($(this).val() != 0) {
+            if ($(this).val() != "") {
                 $("select[name=governate]").prop("disabled",false);
 			    $("#homeBtnSubmit").prop("disabled",false).attr("style","");
             }else{
@@ -78,21 +147,81 @@
             }
 		});
 
-		// change the view of select sport
-		$('.governateSelect').on('change', function () {
-			var selectedGovernate = $(this).val();
-			var governateDiv = $('#governate' + selectedGovernate);
-			
-			// Hide all "area" selects first
-			$('.areaSelect').prop('disabled', true);
-			
-			if (governateDiv.length) {
-				var areas = governateDiv.html();
-				$('.areaSelect').html(areas);
-				$('.areaSelect').prop('disabled', false);
-			}
-		});
-		
+        $('#submitTeam').on('click', function (event) {
+            var langCookieValue = $.cookie("CREATEkwLANG");
+            var selectedLanguage = (langCookieValue === undefined || langCookieValue === "" || langCookieValue === "EN") ? "Please fill all feilds" : "يرجى ملء جميع الحقول";
+            var isValid = true;
+
+            // do ajax check in input name="teamName" to check if exists
+            var teamName = $("input[name='teamName']").val();
+            var tournamentId = $("input[name='tournamentId']").val();
+            var settings = {
+                "url": "requests/index.php?a=CheckTeamName&teamName="+teamName+"&tournamentId="+tournamentId,
+                "method": "GET",
+                "timeout": 0,
+                "headers": {
+                    "myacadheader": "myAcadAppCreate"
+                },
+            };  
+        
+            // Check players[] fields
+            $("input[name='players[]']").each(function() {
+                if ($(this).val() === "") {
+                    isValid = false;
+                }
+            });
+        
+            // Check teamName field
+            var teamName = $("input[name='teamName']").val();
+            if (teamName === "") {
+                isValid = false;
+            }
+        
+            if (isValid) {
+                $.ajax(settings).done(function (response) {
+                    if (response.error === "1" ) {
+                        var selectedLanguageTeam = (langCookieValue === undefined || langCookieValue === "" || langCookieValue === "EN") ? "Team name already exists" : "اسم الفريق موجود بالفعل";
+                        event.preventDefault();
+                        alert(selectedLanguageTeam);
+                        return false;
+                    }else{
+                        $('#teamInitForm').submit();
+                        return true;
+                    }
+                })
+            } else {
+                event.preventDefault();
+                alert(selectedLanguage);
+                return false;
+                
+            }
+        });
+
+        // redeem points 
+        $('#redeemBtn').on('click', function (event) {
+            var langCookieValue = $.cookie("CREATEkwLANG");
+            var selectedLanguageTeam = (langCookieValue === undefined || langCookieValue === "" || langCookieValue === "EN") ? "Not enough points to redeem, You need at least 20" : "لا يوجد نقاط كافيه للتحويل، تحتاج على الأقل 20";
+            // do ajax check in input name="teamName" to check if exists
+            var userId = $("#userIdProfile").val();
+            var settings = {
+                "url": "requests/index.php?a=Points&userId="+userId+"&lang="+langCookieValue,
+                "method": "GET",
+                "timeout": 0,
+                "headers": {
+                    "myacadheader": "myAcadAppCreate"
+                },
+            };  
+            $.ajax(settings).done(function (response) {
+                if (response.error === "1" ) {
+                    event.preventDefault();
+                    alert(selectedLanguageTeam);
+                    return false;
+                }else{
+                    alert(response.data.msg);
+                    window.location.reload();
+                }
+            })
+        });
 
         $('#btnSubmit').on('click', function (event) {
 			$('#formSubmit').submit();
@@ -194,7 +323,149 @@
                 nav: false,
                 dots: true,
             });
-     
+        $('#checkTerms').on('change', function (event) {
+            event.preventDefault();
+            var goToTeamInit = $(this).prop('checked');
+            if (goToTeamInit) {
+                $('#goToTeamInit').prop('disabled', false);
+                $('#goToTeamInit').attr('style', "");
+            } else {
+                $('#goToTeamInit').prop('disabled', true);
+                $('#goToTeamInit').attr('style', "background: gray;color: black;");
+            } 
+        })
+		$('input[type="radio"]').on('click', function (event) {
+            var id = $(this).attr("id");
+            var value = $(this).attr("value");
+            $("input[type=radio]").attr('checked', false);
+            $(this).attr('checked', true);
+            $("input[type=number]").val(0);
+            $("."+id).val(0);
+            $(".radi_wap input[type=radio] + label span").css("background-color", "white");
+            $(this).next("label").find("span").css("background-color", "#FFA300");
+			event.preventDefault();
+            var sessionId = $(this).val();
+            var langCookieValue = $.cookie("CREATEkwLANG");
+            var settings = {
+                "url": "requests/index.php?a=SessionSubscription&sessionId="+sessionId,
+                "method": "GET",
+                "timeout": 0,
+                "headers": {
+                  "myacadheader": "myAcadAppCreate"
+                },
+              };
+              $.ajax(settings).done(function (response) {
+                var $select = $('select[name="checkout[subscription]"]');
+                $("input[name='checkout[session]']").attr("value",value);
+                $select.empty();
+                var selectedLanguage = (langCookieValue === undefined || langCookieValue === "" || langCookieValue === "EN") ? "enTitle" : "arTitle";
+                
+                // Iterate over each subscription item to create options
+                $.each(response.data.subscriptions, function(index, outerItem) {
+                    var title = outerItem[selectedLanguage];
+                    var price = outerItem.price;
+                    var priceAfterDiscount = outerItem.priceAfterDiscount;
+                    
+                    // Construct the option text with HTML tags
+                    var optionText = priceAfterDiscount > 0
+                        ? `${title} <del>(${price}KD)</del> (${priceAfterDiscount}KD)`
+                        : `${title} (${price}KD)`;
+            
+                    // Create an option element
+                    var $option = $('<option>', {
+                        class: 'strike-through',
+                        value: outerItem.id,
+                        'data-display': optionText, // Store HTML formatted string in data attribute
+                        text: optionText // Only display the title as plain text for the actual option
+                    });
+            
+                    // Append the option to the select element
+                    $select.append($option);
+                });
+            
+                // Update the niceSelect dropdown to refresh the displayed items
+                $select.niceSelect('update');
+            
+                // Modify how the niceSelect displays selected option to use the data-display
+                $select.on('change', function() {
+                    var selectedOption = $(this).find('option:selected');
+                    var displayText = selectedOption.attr('data-display');
+                    
+                    // Update the selected niceSelect display with HTML content
+                    $(this).next('.nice-select').find('.current').html(displayText);
+                });
+            
+                // Trigger change to ensure the first item is displayed correctly after loading
+                $select.trigger('change');
+            });
+            
+			$('select[name="checkout[subscription]"]').prop("disabled",false);
+			$('select[name="checkout[subscription]"]').prop("required",true);
+		});
+    });
+
+    // redeem points 
+    $('.mainType').on('click', function (event) {
+        event.preventDefault();
+        var langCookieValue = $.cookie("CREATEkwLANG");
+        var id = $(this).attr("id");
+        var countryCode = $.cookie("createmyacadcountry");
+        var settings = {
+            "url": "requests/index.php?a=Sports&countryCode="+countryCode+"&isTournament="+id,
+            "method": "GET",
+            "timeout": 0,
+            "headers": {
+                "myacadheader": "myAcadAppCreate"
+            },
+        };  
+        $.ajax(settings).done(function (response) {
+            if (response.error === "1" ) {
+                event.preventDefault();
+                var sportsData = document.getElementById("sportsData");
+                sportsData.innerHTML = "";
+                var selectedLanguage = (langCookieValue === undefined || langCookieValue === "" || langCookieValue === "EN") ? "No Tournaments available" : "لا توجد بطولات متاحة";
+                alert(selectedLanguage);
+                return false;
+            }else{
+                var sportsData = document.getElementById("sportsData");
+                sportsData.innerHTML = "";
+                response.data.sports.forEach(function(sport, i) {
+                var sportTtitle = (langCookieValue === undefined || langCookieValue === "" || langCookieValue === "EN") ? sport.sportEn : sport.sportAr;
+                    var html = '<div class="col-lg-3 col-sm-4 col-4 mt_30"><a href="#" id="'+sport.id+'" class="selectSport"><div class="sport_model"><img src="logos/'+sport.imageurl+'" id="sportImage'+sport.id+'" alt="'+sport.enTitle+'"></div><h3 id="sportTitle'+sport.id+'">'+sportTtitle+'</h3></a></div>';
+                    sportsData.innerHTML += html;
+                });
+            } 
+        })
+    });
+
+    // redeem points 
+    $(window).on('load', function (event) {
+        event.preventDefault();
+        var langCookieValue = $.cookie("CREATEkwLANG");
+        var countryCode = $.cookie("createmyacadcountry");
+        var settings = {
+            "url": "requests/index.php?a=Sports&countryCode="+countryCode+"&isTournament=0",
+            "method": "GET",
+            "timeout": 0,
+            "headers": {
+                "myacadheader": "myAcadAppCreate"
+            },
+        };  
+        $.ajax(settings).done(function (response) {
+            if (response.error === "1" ) {
+                event.preventDefault();
+                alert("No Sports available");
+                return false;
+            }else{
+                var sportsData = document.getElementById("sportsData");
+                sportsData.innerHTML = "";
+                response.data.sports.forEach(function(sport, i) {
+                var sportTtitle = (langCookieValue === undefined || langCookieValue === "" || langCookieValue === "EN") ? sport.sportEn : sport.sportAr;
+                    var html = '<div class="col-lg-3 col-sm-4 col-4 mt_30"><a href="#" id="'+sport.id+'" class="selectSport"><div class="sport_model"><img src="logos/'+sport.imageurl+'" id="sportImage'+sport.id+'" alt="'+sport.enTitle+'"></div><h3 id="sportTitle'+sport.id+'">'+sportTtitle+'</h3></a></div>';
+                    sportsData.innerHTML += html;
+                });
+            } 
+        })
     });
 
 })(jQuery);

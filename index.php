@@ -1,10 +1,10 @@
 <?php
+//$_GET["result"] == "CANCELED" || $_GET["result"] == "ERROR" || $_GET["result"] == "NOT CAPTURED"
 if( isset($_GET["result"]) ){
-	if( $_GET["result"] == "CANCELED" || $_GET["result"] == "ERROR" || $_GET["result"] == "NOT CAPTURED" ){
-		$_GET["v"] = "Fail";
-	}elseif( $_GET["result"] == "CAPTURED" ){
-		sleep(5);
+	if( $_GET["result"] == "CAPTURED"){
 		$_GET["v"] = "Success";
+	}else{
+		$_GET["v"] = "Fail";
 	}
 }
 // Set headers before any output

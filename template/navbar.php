@@ -1,10 +1,11 @@
 <?php
+if( !isset($_COOKIE["createmyacadcountry"]) ){
+    setcookie("createmyacadcountry", "KW", time() + (86400*30 ), "/");
+    header("location: ?v=Home");die();
+}
 if( isset($_GET["country"]) && !empty($_GET["country"]) ){
     setcookie("createmyacadcountry", $_GET["country"], time() + (86400*30 ), "/");
-    $_COOKIE["createmyacadcountry"] = $_GET["country"];
-}else{
-    setcookie("createmyacadcountry", "KW", time() + (86400*30 ), "/");
-    $_COOKIE["createmyacadcountry"] = "KW";
+    header("location: ?v=Home");die();
 }
 ?>
 
@@ -27,12 +28,6 @@ if( isset($_GET["country"]) && !empty($_GET["country"]) ){
                     }
                     
                     ?>
-                       <!-- <div data-lang-code="en-EN" data-lang-name="English" data-src="img/32/England.png">English</div>
-                        <div data-lang-code="es-ES" data-lang-name="Español" data-src="img/32/Spain.png">Español</div>
-                        <div data-lang-code="it-IT" data-lang-name="Italian" data-src="img/32/Italy.png">Italian</div>
-                        <div data-lang-code="de-DE" data-lang-name="Deutsche" data-src="img/32/Germany.png">Deutsche</div>
-                        <div data-lang-code="fr-FR" data-lang-name="French" data-src="img/32/France.png">French</div>
-                        <div data-lang-code="kw-KW" data-lang-name="Kuwait" data-src="img/32/Kuwait.png">sssss</div>  -->
                     </div>
                     <?php echo getLoginStatus() ?>
                 </div>

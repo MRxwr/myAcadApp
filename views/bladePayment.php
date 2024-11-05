@@ -1,19 +1,33 @@
 <?php
-if( isset($_POST["data"]) && !empty($_POST["data"]) ){
+if( isset($_POST) && !empty($_POST) ){
     $incommingData = json_decode($_POST["data"],true);
-    $data = array(
-        'user' => "{$incommingData["user"]}",
-        'academy' => "{$incommingData["academy"]}",
-        'session' => "{$incommingData["session"]}",
-        'subscription' => "{$incommingData["subscription"]}",
-        'subscriptionQuantity' => "{$incommingData["subscriptionQuantity"]}",
-        'jersyQuantity' => "{$incommingData["jersyQuantity"]}",
-        'voucher' => "{$_POST["voucher"]}",
-        'paymentMethod' => "{$_POST["paymentMethod"]}"
-    );
+    if( isset($incommingData["academy"]) && !empty($incommingData["academy"]) ){
+        $data = array(
+            'user' => "{$incommingData["user"]}",
+            'academy' => "{$incommingData["academy"]}",
+            'session' => "{$incommingData["session"]}",
+            'subscription' => "{$incommingData["subscription"]}",
+            'subscriptionQuantity' => "{$incommingData["subscriptionQuantity"]}",
+            'jersyQuantity' => "{$incommingData["jersyQuantity"]}",
+            'voucher' => "{$_POST["voucher"]}",
+            'paymentMethod' => "{$_POST["paymentMethod"]}"
+        );
+    }elseif( isset($_POST["tournamentId"]) && !empty($_POST["tournamentId"]) ){
+        $user = selectDB("users","`keepMeAlive` LIKE '{$_COOKIE["createmyacad"]}'");
+        $data = array(    
+            "user" => $user[0]["id"],
+            "tournament" => $_POST["tournamentId"],
+            "teamName" => $_POST["teamName"],
+            "players" => $_POST["players"],
+            "bench" => $_POST["bench"],
+            "quantity" => 1,
+            "paymentMethod" => $_POST["paymentMethod"],
+            "voucher" => "",
+        );
+    }
     $curl = curl_init();
     curl_setopt_array($curl, array(
-      CURLOPT_URL => 'https://myacad.app/requests/index.php?a=Payment2',
+      CURLOPT_URL => "{$baseURL}/index.php?a=Payment",
       CURLOPT_RETURNTRANSFER => true,
       CURLOPT_ENCODING => '',
       CURLOPT_MAXREDIRS => 10,
@@ -26,7 +40,7 @@ if( isset($_POST["data"]) && !empty($_POST["data"]) ){
         'myacadheader: myAcadAppCreate'
       ),
     ));
-    $response = curl_exec($curl);
+    echo $response = curl_exec($curl);
     curl_close($curl);
     $response = json_decode($response,true);
     if( $response["error"] == 0 ){

@@ -239,12 +239,6 @@ if( !isset($_POST) ){
             $wallet = 1;
         }
 
-        //checking free payment
-        if( $paymentMethod == 4 ){
-            $paymentMethod = 1;
-            $freePayment = 1;
-        }
-
         //check tournemant Price
         if( $tournaments = selectDB("tournaments","`id` = '{$tournament}'") ){
             $price = $tournaments[0]["price"];
@@ -258,31 +252,47 @@ if( !isset($_POST) ){
             $fullAmount = ( $voucherType == 0 ) ? ($fullAmount*(1-($voucherAmount/100))) : $fullAmount - $voucherAmount;
         }
 
+        //checking free payment
+        if( $paymentMethod == 4 ){
+            $paymentMethod = 1;
+            $freePayment = 1;
+            $newTotal = 2;
+            $fullAmount = 2;
+        }
+
         $_POST["name"] = "{$userData[0]["firstName"]} {$userData[0]["lastName"]}";
         $_POST["phone"] = "{$userData[0]["phone"]}";
         $_POST["email"] = "{$userData[0]["email"]}";
         $_POST["userId"] = "{$userData[0]["id"]}";
+        $_POST["teamName"] = $teamName;
         $_POST["tournamentId"] = $tournaments[0]["id"];
+        $_POST["isTournament"] = 1;
         $_POST["teamDetails"]["enTournament"] = $tournaments[0]["enTitle"];
         $_POST["teamDetails"]["arTournament"] = $tournaments[0]["arTitle"];
         $_POST["teamDetails"]["teamName"] = $teamName;
-        $_POST["teamDetails"]["players"] = $players;
-        $_POST["teamDetails"]["bench"] = $bench;
+        $_POST["teamDetails"]["players"] = json_decode($players,true);
+        $_POST["teamDetails"]["bench"] = json_decode($bench,true);
         $_POST["teamDetails"]["quantity"] = $quantity;
-        $_POST["teamDetails"]["price"] = $price;
-        $_POST["teamDetails"]["total"] = $newTotal;
+        if ( $freePayment == 1 ){
+            $_POST["teamDetails"]["price"] = 0;
+            $_POST["teamDetails"]["total"] = 0;
+            $_POST["total"] = 0;
+        }else{
+            $_POST["teamDetails"]["price"] = $price;
+            $_POST["teamDetails"]["total"] = $newTotal;
+            $_POST["total"] = $newTotal;
+        }
         $_POST["paymentMethod"] = $paymentMethod;
         $_POST["voucher"] = $data["voucher"];
-
-        $_POST["teamDetails"] = json_encode($_POST["teamDetails"]);
+        $_POST["teamDetails"] = json_encode($_POST["teamDetails"],JSON_UNESCAPED_UNICODE);
 
         //calculate totals prices that should be sent to upayments 
         if( $data["paymentMethod"] == 1 ){
-            $myacadDeposit = ( $academyData[0]["chargeType"] == "fixed" ) ? $academyData[0]["charges"] : $newTotal * ( $academyData[0]["charges"] / 100 );
+            $myacadDeposit = ( $tournaments[0]["chargeType"] == "fixed" ) ? $tournaments[0]["charges"] : $newTotal * ( $tournaments[0]["charges"] / 100 );
             $newTotal = $newTotal - $myacadDeposit;
             $paymentGateway = "knet";
         }elseif( $data["paymentMethod"] == 2 ){
-            $myacadDeposit = ( $academyData[0]["cc_chargetype"] == "fixed" ) ? $academyData[0]["cc_charge"] : $newTotal * ( $academyData[0]["cc_charge"] / 100 );
+            $myacadDeposit = ( $tournaments[0]["cc_chargetype"] == "fixed" ) ? $tournaments[0]["cc_charge"] : $newTotal * ( $tournaments[0]["cc_charge"] / 100 );
             $newTotal = $newTotal - $myacadDeposit;
             $paymentGateway = "cc";
         }else{
@@ -298,7 +308,7 @@ if( !isset($_POST) ){
             'order[id]' => $orderId,
             'order[currency]' => 'KWD',
             'order[amount]' => (string)$fullAmount,
-            'order[description]' => "order for {$tournaments[0]["enTitle"]}, {$teamName}, {$quantity}x Players: {$players} and Bench: {$bench}",
+            'order[description]' => "order for {$tournaments[0]["enTitle"]}, {$quantity}x {$teamName}",
             'reference[id]' => $orderId,
             'customer[name]' => "{$_POST["name"]}",
             'customer[email]' => "{$_POST["email"]}",
@@ -320,7 +330,7 @@ if( !isset($_POST) ){
             'extraMerchantData[1][ibanNumber]' => "{$tournamentData[0]["iban"]}",
             );
     }
-
+    
     $curl = curl_init();
     curl_setopt_array($curl, array(
         CURLOPT_URL => 'https://uapi.upayments.com/api/v1/charge',
@@ -341,38 +351,33 @@ if( !isset($_POST) ){
     $response = json_decode($response,true);
 
     //saving info and redirecting to payment pages
-    if( $response["status"] == true && isset($response["data"]["link"]) && !empty($response["data"]["link"]) ){
+    if( isset($response["status"]) && $response["status"] == true && isset($response["data"]["link"]) && !empty($response["data"]["link"]) ){
         $_POST["gatewayId"]     = $orderId;
         $_POST["gatewayURL"]    = $response["data"]["link"];
         $_POST["apiPayload"]    = json_encode($postBody);
         $_POST["apiResponse"]   = json_encode($response);
         $_POST["paymentMethod"] = ( $wallet == 1 ) ? 3 : $paymentMethod;
         $_POST["paymentMethod"] = ( $freePayment == 1 ) ? 4 : $_POST["paymentMethod"];
-        $response["paymentURL"] = $response["data"]["link"];
         $response["data"] = array(
             "paymentURL" => $response["data"]["link"],
             "InvoiceId"  => $orderId
         );
-        $response["msg"] = "DATA RECEIVED SUCCESSFULLY";
-        $response["status"] = "true";
-        //insertDB2("orders",$_POST);
+        insertDB2("orders",$_POST);
         if( $wallet == 1 || $freePayment == 1){
             $response["data"] = array(
                 "paymentURL"    => "index.php?v=Success&requested_order_id={$_POST["gatewayId"]}&result=CAPTURED",
                 "InvoiceId"     => $orderId
             );
-            $response["paymentURL"] = "index.php?v=Success&requested_order_id={$_POST["gatewayId"]}&result=CAPTURED";
             if( $user = selectDB("users","`id` = {$_POST["userId"]}") ){
-                $newWallet = $user[0]["wallet"] - $fullAmount;
-                updateDB("users",array("wallet" => $newWallet),"`id` = {$_POST["userId"]}");
+                $newWallet = $user[0]["wallet"] - $newTotal;
+                updateDB2("users",array("wallet" => $newWallet),"`id` = {$_POST["userId"]}");
             }
         }
-        //echo outputData($response);
-        $response["msg"] = popupMsg($requestLang,'Error while proccessing payment','خطأ في عملية الدفع');
-        echo outputError($response);
+        echo outputData($response);
     }else{
         $response["msg"] = popupMsg($requestLang,'Error while proccessing payment','خطأ في عملية الدفع');
         echo outputError($response);
     }
+    
 }
 ?>

@@ -9,13 +9,22 @@ for( $z = 0; $z < $count; $z++ ){
 	}
 }
 $id .= ( isset($academiesList[0]) && !empty($academiesList[0]) ) ? "AND `academyId` IN ($listOfAcademies)" : "";
+
+$count = (is_array($tournamentsList) && !empty($tournamentsList)) ? count($tournamentsList) : 0;
+for( $z = 0; $z < $count; $z++ ){
+	$listOfAcademies .= "'{$tournamentsList[$z]}'";
+	if( isset($tournamentsList[$z+1]) && !empty($tournamentsList[$z+1]) ){
+		$listOfAcademies .= ",";
+	}
+}
+$id .= ( isset($tournamentsList[0]) && !empty($tournamentsList[0]) ) ? "AND `tournamentId` IN ($listOfAcademies)" : "";
 if( $order = selectDB("orders","`id` = '{$_GET["id"]}' {$id}") ){
 }else{
     ?>
     <script>
         window.onload = function() {
             alert("<?php echo direction("Wrong order number","رقم طلب خاطئ") ?>");
-            window.location.href = "?v=Invoices";
+            window.location.href = "?v=Home";
         }
     </script>
     <?php
@@ -27,7 +36,7 @@ td{
 	font-weight: 600;
 }
 </style>
-<div class="row">
+<div class="row" id="takeMeToPrint">
 <div class="col-md-12">
 <div class="panel panel-default card-view">
 <div class="panel-heading">
@@ -44,7 +53,7 @@ td{
 <table style="width:100%">
 	<tr>
 		<td style="text-align: center">
-			<img src="../img/logo.png" style="width:150px; height:150px">
+			<img src="<?php echo $printImageUrl ?>/img/logo.png" style="width:150px; height:150px">
 		</td>
 	</tr>
 	<tr>
@@ -77,6 +86,9 @@ td{
     <td style="text-align: left;" class="txt-dark"><?php echo direction("Price","السعر") ?></td>
     </tr>
     <tbody>
+        <?php 
+        if( $order[0]["isTournament"] == 0 ){
+            ?> 
         <tr>
             <td class='txt-dark' style='white-space: break-spaces;'>
                 <?php echo "{$order[0]["subscriptionQuantity"]}x " . direction($order[0]["enSession"],$order[0]["arSession"]) . " / " . direction($order[0]["enSubscription"],$order[0]["arSubscription"])?>
@@ -93,7 +105,35 @@ td{
                 <span class='Price txt-dark'><?php echo numTo3Float($order[0]["totalJersyPrice"]) ?>KD</span>
             </td>
         </tr>
-            
+        <?php
+        }else{
+            $tournament = selectDB("tournaments","`id` = '{$order[0]["tournamentId"]}'");
+            $order[0]["teamDetails"] = mb_convert_encoding($order[0]["teamDetails"], 'UTF-8', 'auto');
+            $teamData = json_decode($order[0]["teamDetails"],true);
+            ?>
+            <tr>
+                <td class='txt-dark' >
+                    <?php echo "1x" . direction($tournament[0]["enTitle"],$tournament[0]["arTitle"]) . " / {$teamData["teamName"]}<br>" ?>
+                    <?php
+                    echo "Players: <br>";
+                    for( $i = 0; $i < sizeof($teamData["players"]); $i++ ){
+                        echo "- " . $teamData["players"][$i] . "<br>";
+                    }
+                    echo "Bench: <br>";
+                    if( isset($teamData["bench"]) && !empty($teamData["bench"]) ){
+                        for( $i = 0; $i < sizeof($teamData["bench"]); $i++ ){
+                            echo "- " . $teamData["bench"][$i] . "<br>";
+                        }
+                    }
+                    ?>
+                </td>
+                <td>
+                    <span class='Price txt-dark'><?php echo numTo3Float($order[0]["total"]) ?>KD</span>
+                </td>
+            </tr>
+            <?php
+        }
+        ?> 
         <tr class='txt-dark'>
             <td><?php echo direction("Voucher","كود الخصم") ?></td>
             <td><?php echo $order[0]["voucher"] ?>
@@ -104,11 +144,11 @@ td{
             <td><?php echo direction("Payment Method","وسيلة الدفع") ?></td>
             <td><?php
                 if( $order[0]["paymentMethod"] == 1 ){
-                    $paymentMethod = "KNET";
-                }elseif( $order[0]["paymentMethod"] == 2 ){
-                    $paymentMethod = "VISA";
+                    $paymentMethod = "ONLINE PAYMENT";
+                }elseif( $order[0]["paymentMethod"] == 3 ){
+                    $paymentMethod = "WALLET";
                 }else{
-                    $paymentMethod = "Wallet";
+                    $paymentMethod = "FREE";
                 }
                 echo $paymentMethod ?>
             </td>
@@ -142,3 +182,17 @@ td{
 </div>
 </div>
 </div>
+
+<div class="row m-0">
+    <div class="col-md-3"><button id="print" class="btn btn-primary btn-rounded btn-block"><i class="fa fa-print"></i> <?php echo direction("Print","طباعة") ?></button></div></div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $('#print').click(function() {
+            $("#print").hide();
+            window.print(true);
+            $("#print").show();
+        });
+    });
+</script>

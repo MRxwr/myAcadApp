@@ -90,7 +90,7 @@ $id .= ( isset($academiesList[0]) && !empty($academiesList[0]) ) ? "AND `academy
 		<div class="panel panel-default card-view">
 			<div class="panel-heading">
 				<div class="pull-left">
-					<h6 class="panel-title txt-dark"><?php echo direction("ًWeekley Subscriptions","إشتراكات الإسبوع") ?></h6>
+					<h6 class="panel-title txt-dark"><?php echo direction("Weekly Subscriptions","إشتراكات الإسبوع") ?></h6>
 				</div>
 				<div class="clearfix"></div>
 			</div>
@@ -158,7 +158,7 @@ for ( $y = 1; $y < 2; $y++){
 	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center statsHeading"><?php echo $statTitle[$y] ?></div>
 	<?php
 	$size = 0;
-	for( $i=0; $i < 4 ; $i++){
+	for( $i=0; $i < 3 ; $i++){
 		if ( $i == 0 ){
 			if ($call = selectDB("orders","`status` = '1' {$statsDate[$y]} {$id}")){
 				$size = sizeof($call);
@@ -185,7 +185,7 @@ for ( $y = 1; $y < 2; $y++){
 			$icon = "pe-7s-clock text-warning";
 		}
 	?>
-	<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+	<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
 	<div class="panel panel-default card-view pa-0">
 	<div class="panel-wrapper collapse in">
 	<div class="panel-body pa-0">

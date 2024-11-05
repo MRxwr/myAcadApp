@@ -1,3 +1,6 @@
+<?php 
+$_GET["type"] = ( isset($_GET["type"]) ) ? $_GET["type"] : 0 ;
+?>
 <div class="col-sm-12">
 <div class="panel panel-default card-view">
 <div class="panel-heading">
@@ -30,7 +33,7 @@
         $count = (is_array($academiesList) && !empty($academiesList)) ? count($academiesList) : 1;
 		for( $z = 0; $z < $count; $z++ ){
 			$id = ( isset($academiesList[$z]) && !empty($academiesList[$z]) ) ? "AND `academyId` = '{$academiesList[$z]}'" : "";
-            if( $orders = selectDB("orders","`id` != '0' {$id} ORDER BY `date` DESC") ){
+            if( $orders = selectDB("orders","`id` != '0' {$id} AND `status` = '{$_GET["type"]}' AND `isTournament` = '0' ORDER BY `date` DESC") ){
                 for( $i = 0; $i < sizeof($orders); $i++ ){
                     $status = [direction("Pending","إنتظار"),direction("Successful","ناجحه"),direction("Failed","فاشلة"),direction("Cancelled","ملغية"),direction("Ended","إنتهى")];
                     $statusColor = ["default","success","info","danger","warning"];
@@ -45,7 +48,7 @@
                     <td><?php echo sprintf("%05d", $orders[$i]["id"]) ?></td>
                     <td><?php echo $orders[$i]["date"] ?></td>
                     <td><?php echo $orders[$i]["name"] ?></td>
-                    <td><?php echo $orders[$i]["phone"] ?></td>
+                    <td><a href="https://wa.me/<?php echo $orders[$i]["phone"] ?>" target="_blank"><?php echo $orders[$i]["phone"] ?></a></td>
                     <td><?php echo direction($orders[$i]["enAcademy"],$orders[$i]["arAcademy"]) ?></td>
                     <td><?php echo $orders[$i]["total"] ?>KD</td>
                     <td><button class="btn btn-<?php echo $orderBtnColor ?>" style="width: 100%;"><?php echo $orderStatus ?></button></td>

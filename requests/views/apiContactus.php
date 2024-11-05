@@ -4,7 +4,7 @@ if(
 ( isset($_POST["email"]) && !empty($_POST["email"]) ) &&
 ( isset($_POST["phone"]) && !empty($_POST["phone"]) ) &&
 ( isset($_POST["message"]) && !empty($_POST["message"]) ) &&
-insertDB("contact_us",$_POST) 
+insertDB2("contact_us",$_POST) 
 ){
 	$response["msg"] = popupMsg($requestLang,"message sent successfully","تم ارسال الرسالة بنجاح");
 	echo outputData($response);

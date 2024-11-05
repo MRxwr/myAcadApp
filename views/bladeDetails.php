@@ -1,7 +1,7 @@
 <?php
 $curl = curl_init();
 curl_setopt_array($curl, array(
-  CURLOPT_URL => "https://myacad.app/requests?a=Academy&academyId={$_GET["id"]}",
+  CURLOPT_URL => "{$baseURL}?a=Academy&academyId={$_GET["id"]}",
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => '',
   CURLOPT_MAXREDIRS => 10,
@@ -27,6 +27,14 @@ if( $response["error"] == 1 ){
 	<?php
 }else{
 	$academy = $response["data"]["academy"];
+    $academy["coach"] = ( $academy["coach"] == 0 ) ? direction("Male","ذكر") : direction("Female","انثى");
+    if ( $academy["coach"] == 0 ){
+        $academy["coach"] = direction("Male","رجال");
+    }elseif( $academy["coach"] == 1 ){
+        $academy["coach"] = direction("Female","نساء");
+    }else{
+        $academy["coach"] = direction("Mix Male / Female","رجال و نساء");
+    }
 }
 
 $redirect = ($academy["isClothes"] == 1 ) ? "Jersy" : "Checkout" ;
@@ -75,7 +83,7 @@ $redirect = ($academy["isClothes"] == 1 ) ? "Jersy" : "Checkout" ;
                             <div class="jersy_cont">
                                 <img src="logos/<?php echo $academy["imageurl"] ?>" alt="logo_<?php echo $academy["enTitle"]?>">
                                 <div>
-                                    <h2><?php echo direction($academy["enTitle"],$academy["arTitle"]) ?></h2>
+                                    <h2 id="academyTitle"><?php echo direction($academy["enTitle"],$academy["arTitle"]) ?></h2>
                                     <h3><?php echo direction($academy["enArea"],$academy["arArea"]) ?></h3>
                                 </div>
                             </div>
@@ -90,6 +98,10 @@ $redirect = ($academy["isClothes"] == 1 ) ? "Jersy" : "Checkout" ;
                         <div class="d-lg-none mt_20 mb_20">
                             <iframe width="100%" height="400" src="<?php echo $academy["video"] ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                         </div>
+                        <div class="row m-0 mb-5" style="background-color: #012169;color: #ffa300;height: 30px;align-content: center;border-radius: 3px;border: 1px solid #bababa;">
+                            <div class="col-6"><img src="img/gender.svg" style="margin-right: 5px;"><?php echo direction("Academy Coaches","مدربين الأكاديمية") ?></div>
+                            <div class="col-6 text-right"><?php echo $academy["coach"] ?></div>
+                        </div>
                         <form action="<?php echo "?v={$redirect}&id={$_GET["id"]}" ?>" method="POST" class="cup_area">
                             <h5><img src="img/cup_1.svg" alt=""><?php echo direction("Select Age & Session Time","إختر العمر و وقت الكلاس") ?></h5>
 							<?php
@@ -100,7 +112,7 @@ $redirect = ($academy["isClothes"] == 1 ) ? "Jersy" : "Checkout" ;
 									echo "
 									<div class='radi_wap'>
 										<div class='red_items'>
-											<input type='radio' {$checked} name='checkout[session]' id='sty_{$i}' value='{$academy["sessions"][$i]["id"]}'>
+											<input type='radio' id='sty_{$i}' value='{$academy["sessions"][$i]["id"]}'>
 											<label for='sty_{$i}'><span></span>".direction($academy["sessions"][$i]["enTitle"],$academy["sessions"][$i]["arTitle"])."</label>
 										</div>
 										<input type='number' step='1' class='sty_{$i}' name='checkout[quantity][]' value='{$number}'  min='0' max='{$academy["sessions"][$i]["quantity"]}' readonly>
@@ -112,6 +124,7 @@ $redirect = ($academy["isClothes"] == 1 ) ? "Jersy" : "Checkout" ;
                             <h5><img src="img/ca.svg" alt=""><?php echo direction("Select Subsicription Period","إختر مدة الإتشراك") ?></h5>
                             <select name="checkout[subscription]" required>
 							<?php 
+                            /*
                             if ($academy["subscriptions"] > 0) {
                                 for ($s = 0; $s < sizeof($academy["subscriptions"]); $s++) {
                                     $subscription = $academy["subscriptions"][$s];
@@ -126,11 +139,17 @@ $redirect = ($academy["isClothes"] == 1 ) ? "Jersy" : "Checkout" ;
                                     echo "<option class='strike-through' value='{$subscription["id"]}' data-display='{$optionText}'>{$optionText}</option>";
                                 }
                             }
+                                */
                             ?>
                             </select>
                             <input type="hidden" step="1" name="checkout[jersy]" value="0" min="0">
                             <input type="hidden" name="checkout[id]" value="<?php echo htmlspecialchars($_GET["id"]) ?>">
-							<button class="button mt_55" id="chooseBtn"><?php echo direction("Choose","إختر") ?></button>
+                            <input type="hidden" name="checkout[session]" value="">
+                            <input type="hidden" id="academyOrTournament" value="0">
+                            <div class="row m-0 mt-5">
+                                <div class="col-10 p-0"><button class="button" id="chooseBtn"><?php echo direction("Choose","إختر") ?></button></div>
+                                <div class="col-2 p-0 w-100 " style="text-align: -webkit-center;"><div class="shareButton" id="<?php echo $academy["id"] ?>" style="background-color: #ffa300;font-size: 2.4rem;border: 0px;width: 90%;height: 100%;border-radius: 2px;align-content: center;"><img src="img/share.svg" style="width: 15px;height: 15px;"></div></div>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -151,4 +170,3 @@ $redirect = ($academy["isClothes"] == 1 ) ? "Jersy" : "Checkout" ;
         </div>
     </div>
 </div>
-

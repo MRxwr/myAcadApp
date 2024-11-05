@@ -72,7 +72,7 @@ if( !isset($_POST) ){
             "paymentURL" => $response["data"]["link"],
             "InvoiceId"  => $orderId
         );
-        updateDB("purchases",$_POST,"`id` = '{$data["id"]}'");
+        updateDB2("purchases",$_POST,"`id` = '{$data["id"]}'");
         echo outputData($response);
     }else{
         $response["msg"] = popupMsg($requestLang,'Error while proccessing payment','خطأ في عملية الدفع');

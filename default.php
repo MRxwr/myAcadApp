@@ -13,7 +13,8 @@
         <style>
             body {
                 margin: 0px;
-                display: flex; 
+                display: flex;
+                flex-direction: column;
                 align-items: center;
                 justify-content: center;
                 width: 100vw;

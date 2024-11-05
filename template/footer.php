@@ -1,9 +1,9 @@
 </main>
-    <!-- footer -->
+<!-- footer -->
     <?php
     $curl = curl_init();
     curl_setopt_array($curl, array(
-      CURLOPT_URL => 'https://myacad.app/requests?a=Settings',
+      CURLOPT_URL => "{$baseURL}?a=Settings",
       CURLOPT_RETURNTRANSFER => true,
       CURLOPT_ENCODING => '',
       CURLOPT_MAXREDIRS => 10,
@@ -74,7 +74,7 @@
           form.append("academyId", academy);
 
           var settings = {
-            "url": "https://myacad.app/requests/index.php?a=Voucher",
+            "url": "requests/index.php?a=Voucher",
             "method": "POST",
             "timeout": 0,
             "headers": {
@@ -94,22 +94,46 @@
           });
 
         })
-        $(document).on("click","input[type=radio]",function(){
-            var id = $(this).attr("id");
-            $("input[type=number]").val(0);
-            $("."+id).val(0);
-        })
         $(document).ready(function() {
             $('.share').on('click', function() {
                 var id = $(this).attr("id");
                 var title = $(".title"+id).html();
                 var invoice = $(".invoice"+id).html();
+                var isTournament = $(".isTournament"+id).html();
                 if (navigator.share) {
                     // Use the Web Share API
                     navigator.share({
                         title: 'MY ACAD',
                         text: title,
-                        url: 'https://myacad.app/?v=Success&OrderID=' + invoice
+                        url: 'index.php?v=Success&requested_order_id=' + invoice + '&isTournament=' + isTournament
+                    })
+                    .then(() => {
+                        console.log('Shared successfully');
+                    })
+                    .catch((error) => {
+                        console.error('Error sharing:', error);
+                    });
+                } else {
+                    // Fallback behavior for browsers that do not support the Web Share API
+                    alert('Sharing is not supported on this device/browser.');
+                }
+            });
+
+            $('.shareButton').on('click', function() {
+                var id = $(this).attr("id");
+                var title = $("#academyTitle").html();
+                var isTournament = $("#academyOrTournament").val();
+                if (isTournament == 1) {
+                  var link = "index.php?v=TournamentDetails&id=" + id;
+                }else{
+                  var link = "index.php?v=Details&id=" + id;
+                }
+                if (navigator.share) {
+                    // Use the Web Share API
+                    navigator.share({
+                        title: 'MY ACAD',
+                        text: title,
+                        url: link
                     })
                     .then(() => {
                         console.log('Shared successfully');

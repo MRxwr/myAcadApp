@@ -3,7 +3,7 @@ if( !isset($_GET["academyId"]) || empty($_GET["academyId"]) ){
 	$response = array("msg"=>"Please set academy id");
 	echo outputError($response);die();
 }else{
-	if( $academy = selectDB2("`id`, `imageurl`, `enTitle`, `arTitle`, `area`, `video`, `location`, `isClothes`, `clothesPrice`, `clothesImage`, `locationImage`","academies","`hidden` = '0' AND `status` = '0' AND `id` = {$_GET["academyId"]}") ){
+	if( $academy = selectDB2("`id`, `imageurl`, `enTitle`, `arTitle`, `area`, `video`, `location`, `isClothes`,`coach`, `clothesPrice`, `clothesImage`, `locationImage`","academies","`hidden` = '0' AND `status` = '0' AND `id` = {$_GET["academyId"]}") ){
 		$response["academy"] = $academy[0];
 		$response["academy"]["video"] = "https://www.youtube.com/embed/{$academy[0]["video"]}";
 		if( $area = selectDB("countries","`id` = '{$academy[0]["area"]}'") ){

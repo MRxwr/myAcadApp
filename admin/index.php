@@ -12,6 +12,9 @@ if ( isset($_GET["hide"]) || isset($_GET["show"]) || isset($_GET["delId"]) || is
         if( updateDB("{$table}",array('charges'=> $_POST["setDefaultPrice"]),"`id` != '0'") ){}
     }elseif( isset($_POST["update"]) ){
 		$id = $_POST["update"];unset($_POST["update"]);
+        if( isset($_POST["academyIds"]) ){
+            $_POST["academyIds"] = json_encode($_POST["academyIds"]);
+        }
 		if ( $id == 0 ){
             if( isset($_FILES['imageurl']) && is_uploaded_file($_FILES['imageurl']['tmp_name']) ){
                 $directory = "../logos/";
@@ -168,6 +171,11 @@ if ( isset($_GET["hide"]) || isset($_GET["show"]) || isset($_GET["delId"]) || is
 	}else{
 		$countryCode = "";
 	}
+    if( isset($_GET["sessionId"]) && !empty($_GET["sessionId"]) ){
+		$countryCode .= "&sessionId={$_GET["sessionId"]}";
+	}else{
+		$countryCode .= "";
+	}
     if ( isset($_POST["firebaseTitle"]) && !empty($_POST["firebaseTitle"]) ){
         if( $users = selectDB("users","`id` != '0' GROUP BY `firebase`")){
             for( $i = 0; $i < sizeof($users); $i++ ){
@@ -185,6 +193,32 @@ if ( isset($_GET["hide"]) || isset($_GET["show"]) || isset($_GET["delId"]) || is
 		window.location.replace("<?php echo "?v={$_GET["v"]}{$countryCode}" ?>");
 	</script>
 	<?php
+}
+
+if( !in_array($userType, $allowedEmpolyees) ){
+    if( isset($_GET["code"]) && !in_array($_GET["code"],$academiesList) ){
+        ?>
+        <script>
+            window.onload = function() {
+                alert("<?php echo direction("Wrong Operation","العملية غير صالحة") ?>");
+                window.history.back();
+            }
+        </script>
+        <?php
+    }
+}
+
+if( !in_array($userType, $allowedEmpolyees) ){
+    if( isset($_GET["code"]) && !in_array($_GET["code"],$tournamentsList) ){
+        ?>
+        <script>
+            window.onload = function() {
+                alert("<?php echo direction("Wrong Operation","العملية غير صالحة") ?>");
+                window.history.back();
+            }
+        </script>
+        <?php
+    }
 }
 
 // get viewed page from pages folder \\

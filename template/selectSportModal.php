@@ -7,7 +7,7 @@
             <div class="modal-body text-center">
                 <h2><?php echo direction("SELECT SPORT","إختر الرياضة") ?></h2>
                 <div class="extra_scr" data-simplebar>
-                    <div class="row">
+                    <div class="row" id="sportsData">
 					<?php
 					if( $sports = selectDB("sports","`hidden` = '0' AND `status` = '0' ORDER BY `order` ASC") ){
 						for( $i = 0; $i < sizeof($sports); $i++){
