@@ -1,5 +1,6 @@
 <?php 
 if( $order = selectDBNew("orders",[$_GET["orderId"]],"`id` = ?","" ) ){
+    /*
     $curl = curl_init();
     curl_setopt_array($curl, array(
     CURLOPT_URL => 'https://createid.link/api/v1/generate/qrcode',
@@ -18,7 +19,10 @@ if( $order = selectDBNew("orders",[$_GET["orderId"]],"`id` = ?","" ) ){
     $response = curl_exec($curl);
     curl_close($curl);
     $response = json_decode($response,true);
-	echo outputData($response);die();
+	*/
+    $url = urlencode('https://myacad.app/?v=Success&requested_order_id='.$order[0]["gatewayId"]);
+    $reaponse = "https://api.qrserver.com/v1/create-qr-code/?size=450x450&data={$url}";
+    echo outputData($response);die();
 }else{
     $error["msg"] = popupMsg($requestLang,"Error while generating QrCode","خطأ أثناء إنشاء رمز الكيو آر");
 	echo outputError($error);die();
