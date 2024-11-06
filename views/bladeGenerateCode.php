@@ -26,7 +26,7 @@ if( $response["error"] == 1 ){
 	</script>
 	<?php
 }else{
-	echo $code = urldecode($response["data"]["data"]);
+	echo $code = file_get_contents(urldecode($response["data"]["data"]));
     $order = selectDBNew("orders",[$_GET["id"]],"`id` = ?","" );
     if ( $order[0]["isTournament"] == 1 ){
         $academy = selectDBNew("tournaments",[$order[0]["tournamentId"]],"`id` = ?","" );
