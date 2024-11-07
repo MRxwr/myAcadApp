@@ -11,7 +11,7 @@ if( $order = selectDBNew("orders",[$_GET["orderId"]],"`id` = ?","" ) ){
     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
     CURLOPT_CUSTOMREQUEST => 'POST',
     CURLOPT_POSTFIELDS => array(
-        'url' => 'https://myacad.app/?v=Success&requested_order_id='.$order[0]["gatewayId"],
+        'url' => urlencode('https://myacad.app/?v=Success&requested_order_id='.$order[0]["gatewayId"]),
         'logo_url' => ""//'https://myacad.app/img/logo.png',
     ),
     ));
@@ -19,6 +19,11 @@ if( $order = selectDBNew("orders",[$_GET["orderId"]],"`id` = ?","" ) ){
     curl_close($curl);
     $response = json_decode($response,true);
 	echo outputData($response);die();
+
+    // $url = urlencode('https://myacad.app/?v=Success&requested_order_id='.$order[0]["gatewayId"]);
+    // $response["data"] = "https://api.qrserver.com/v1/create-qr-code/?size=450x450&data={$url}";
+    // echo outputData($response);die();
+    
 }else{
     $error["msg"] = popupMsg($requestLang,"Error while generating QrCode","خطأ أثناء إنشاء رمز الكيو آر");
 	echo outputError($error);die();
