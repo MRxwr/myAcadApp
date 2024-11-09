@@ -31,6 +31,28 @@ if( !isset($_GET["sportId"]) || empty($_GET["sportId"]) ){
 				$response["academies"][$i]["enArea"] = "";
 				$response["academies"][$i]["arArea"] = "";
 			}
+$sql = "
+WITH academy_orders AS (
+    SELECT academyId, COUNT(*) AS order_count
+    FROM orders
+    GROUP BY academyId
+),
+max_orders AS (
+    SELECT MAX(order_count) AS max_order_count
+    FROM academy_orders
+)
+SELECT 
+    CASE 
+        WHEN max_orders.max_order_count > 0 THEN 
+            ROUND((COALESCE(ao.order_count, 0) / max_orders.max_order_count) * 5, 2)
+        ELSE 0 
+    END AS rating_out_of_5
+FROM academies a
+LEFT JOIN academy_orders ao ON a.id = ao.academyId
+CROSS JOIN max_orders
+WHERE a.id = {$response["academies"][$i]["id"]};
+";
+
 			$response["academies"][$i]["rating"] = 0;
 		}
 	}else{
