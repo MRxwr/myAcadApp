@@ -1,7 +1,8 @@
 <?php
 if( !isset($_COOKIE["createmyacadcountry"]) ){
     setcookie("createmyacadcountry", "KW", time() + (86400*30 ), "/");
-    header("location: ?v=Home");die();
+    //header("location: ?v=Home");die();
+    $_COOKIE["createmyacadcountry"] = "KW";
 }
 if( isset($_GET["country"]) && !empty($_GET["country"]) ){
     setcookie("createmyacadcountry", $_GET["country"], time() + (86400*30 ), "/");
