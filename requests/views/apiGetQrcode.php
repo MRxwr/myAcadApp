@@ -20,7 +20,7 @@ if( $order = selectDBNew("orders",[$_GET["orderId"]],"`id` = ?","" ) ){
     curl_close($curl);
     $response = json_decode($response,true);
 	*/
-    $url = urlencode('https://myacad.app/?v=Success&requested_order_id='.$order[0]["gatewayId"]);
+    $url = urlencode('https://myacad.app/?v=Success&requested_order_id='.$order[0]["gatewayId"].'&isTournament='.$order[0]["isTournament"]);
     $response["data"] = "https://api.qrserver.com/v1/create-qr-code/?size=450x450&data={$url}";
     echo outputData($response);die();
 }else{
