@@ -13,7 +13,7 @@ if( !isset($_GET["academyId"]) || empty($_GET["academyId"]) ){
 			$response["academy"]["enArea"] = "";
 			$response["academy"]["arArea"] = "";
 		}
-		if( $sessions = selectDB2("`id`, `enTitle`, `arTitle`, `quantity`","sessions","`academyId` = '{$academy[0]["id"]}' AND `status` = '0' AND `hidden` = '0' AND `quantity` >= '0'") ){
+		if( $sessions = selectDB2("`id`, `enTitle`, `arTitle`, `quantity`","sessions","`academyId` = '{$academy[0]["id"]}' AND `status` = '0' AND `hidden` = '0' AND `quantity` > '0'") ){
 			$response["academy"]["sessions"] = $sessions;
 		}else{
 			$response["academy"]["sessions"] = array();
