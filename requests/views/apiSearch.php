@@ -52,7 +52,9 @@ LEFT JOIN academy_orders ao ON a.id = ao.academyId
 CROSS JOIN max_orders
 WHERE a.id = {$response["academies"][$i]["id"]};
 ";
-
+$result = $dbconnect->query($sql);
+$row = $result->fetch_assoc();
+var_dump($row);
 			$response["academies"][$i]["rating"] = 0;
 		}
 	}else{
