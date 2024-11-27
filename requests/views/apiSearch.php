@@ -55,7 +55,7 @@ WHERE a.id = {$response["academies"][$i]["id"]};
 $result = $dbconnect->query($sql);
 $row = $result->fetch_assoc();
 var_dump($row);
-			$response["academies"][$i]["rating"] = 0;
+			$response["academies"][$i]["rating"] = $row[0]["rating_out_of_5"];
 		}
 	}else{
 		$response["msg"] = popupMsg($requestLang,"No academies found","لا يوجد أكاديميات");
