@@ -65,7 +65,7 @@ if( $response["error"] == 1 ){
                             <h1 style="color: #ffa300;"><?php echo direction("QR CODE","رمز المسح") ?></h2>
                         </div>
                         <div class="detail_img_right d-lg-none mt-5 mb-5 text-center">
-                            <img src="<?php echo $code ?>" alt="" style="width:200px;height:200px" >
+                            <img src="<?php echo urlencode($code) ?>" alt="" style="width:200px;height:200px" >
                         </div>
                         <div class="text-center">
                             <h1 style="color: #ffa300;"><?php echo direction($order[0]["enAcademy"],$order[0]["arAcademy"]) ?></h2>
