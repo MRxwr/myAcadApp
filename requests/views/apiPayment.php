@@ -157,12 +157,6 @@ if( !isset($_POST) ){
             'returnUrl' => 'https://myacad.app/index.php',
             'cancelUrl' => 'https://myacad.app/index.php',
             'notificationUrl' => 'https://myacad.app/index.php',
-            'extraMerchantData[0][amount]' => (string)$myacadDeposit,
-            'extraMerchantData[0][knetCharge]' => '0.25',
-            'extraMerchantData[0][knetChargeType]' => 'fixed',
-            'extraMerchantData[0][ccCharge]' => '0.25',
-            'extraMerchantData[0][ccChargeType]' => 'fixed',
-            'extraMerchantData[0][ibanNumber]' => "{$AdminSettings[0]["mainIban"]}",
             );
             
     }else{
