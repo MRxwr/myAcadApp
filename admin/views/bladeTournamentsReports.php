@@ -115,6 +115,7 @@ if ( isset($_POST["endDate"]) ){
 	if ( isset($_POST["status"]) && !empty($_POST["status"]) ){
 		$where .= " AND `status` = '{$_POST["status"]}'";
 	}
+	$where .= " AND `isTournament` = '1' ";
 }
 ?>
 </div>
