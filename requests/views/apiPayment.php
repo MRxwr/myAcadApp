@@ -157,18 +157,12 @@ if( !isset($_POST) ){
             'returnUrl' => 'https://myacad.app/index.php',
             'cancelUrl' => 'https://myacad.app/index.php',
             'notificationUrl' => 'https://myacad.app/index.php',
-            'extraMerchantData[0][amount]' => (string)$myacadDeposit,
+            'extraMerchantData[0][amount]' => (string)$fullAmount,
             'extraMerchantData[0][knetCharge]' => '0.25',
             'extraMerchantData[0][knetChargeType]' => 'fixed',
             'extraMerchantData[0][ccCharge]' => '0.25',
             'extraMerchantData[0][ccChargeType]' => 'fixed',
-            'extraMerchantData[0][ibanNumber]' => "{$AdminSettings[0]["mainIban"]}",
-            'extraMerchantData[1][amount]' => (string)($newTotal+(float)$jersyPrice),
-            'extraMerchantData[1][knetCharge]' => '0.25',
-            'extraMerchantData[1][knetChargeType]' => 'fixed',
-            'extraMerchantData[1][ccCharge]' => '0.25',
-            'extraMerchantData[1][ccChargeType]' => 'fixed',
-            'extraMerchantData[1][ibanNumber]' => "{$academyData[0]["iban"]}",
+            'extraMerchantData[0][ibanNumber]' => "{$academyData[0]["iban"]}",
             );
             
     }else{
@@ -350,6 +344,8 @@ if( !isset($_POST) ){
     curl_close($curl);
     $response = json_decode($response,true);
     
+    var_dump($response);
+    var_dump($postBody);
     //saving info and redirecting to payment pages
     if( isset($response["status"]) && $response["status"] == true && isset($response["data"]["link"]) && !empty($response["data"]["link"]) ){
         $_POST["gatewayId"]     = $orderId;
