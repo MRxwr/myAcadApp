@@ -161,7 +161,7 @@
 			<input type="number" step="any" name="clothesPrice" class="form-control" required>
 			</div>
 
-<div class="academyHide" style="<?php echo ( $userType != '0' ) ? "display:none;" : ""; ?>">
+<div class="academyHide" style="<?php echo ( $userType != 0 ) ? "display:none;" : ""; ?>">
 			<div class="col-md-12">
 			<label><?php echo direction("IBAN","الأيبان") ?></label>
 			<input type="text" name="iban" class="form-control" required>
