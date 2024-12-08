@@ -161,6 +161,7 @@
 			<input type="number" step="any" name="clothesPrice" class="form-control" required>
 			</div>
 
+<div class="academyHide" style="display:none;">
 			<div class="col-md-12">
 			<label><?php echo direction("IBAN","الأيبان") ?></label>
 			<input type="text" name="iban" class="form-control" required>
@@ -229,7 +230,7 @@
 				<img id="clothesImg" src="" style="width:250px;height:250px">
 				</div>
 			</div>
-			
+</div>			
 			<div class="col-md-6" style="margin-top:10px">
 			<input type="submit" class="btn btn-primary" value="<?php echo direction("Submit","أرسل") ?>">
 			<input type="hidden" name="update" value="0">
