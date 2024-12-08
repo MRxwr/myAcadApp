@@ -49,21 +49,31 @@
 			<input type="date" name="endDate" class="form-control" required>
 			</div>
 
+
 			<div class="col-md-12">
-			<label><?php echo direction("Academy","الأكادمية") ?></label>
-			<select name="academyIds[]" class="form-control" id="mySelect" multiple style="height: 200px">
-                <option value='0'><?php echo direction("All","الكل") ?></option>
+			<div class="form-group">
+			<label class="control-label mb-10"><?php echo direction("Academy","الأكادمية") ?></label>
+			<select class="form-control" name="academyIds[]" class="form-control" id="mySelect" multiple style="height: 200px">
 				<?php
-				if( $academy = selectDB("academies","`status` = '0'") ){
-					for( $i = 0; $i < sizeof($academy); $i++ ){
-						$area = selectDB("countries","`id` = '{$academy[$i]["area"]}'");
-						$areaTitle = direction($area[0]["areaEnTitle"],$area[0]["areaArTitle"]);
-						$academyTitle = direction($academy[$i]["enTitle"],$academy[$i]["arTitle"]);
-						echo "<option value='{$academy[$i]["id"]}'>{$academyTitle} - {$areaTitle} </option>";
+				if( $userType == 0 || $userType == 8 ){
+					echo "<option value='0' selected>".direction("All","الكل")."</option>";
+				}
+				$count = (is_array($academiesList) && !empty($academiesList)) ? count($academiesList) : 1;
+				$orderBy = direction("enTitle","arTitle");
+				for( $z = 0; $z < $count; $z++ ){
+					$id = ( isset($academiesList[$z]) && !empty($academiesList[$z]) ) ? "AND `id` = '{$academiesList[$z]}'" : "AND `id` != '0'";
+					if( $academies = selectDB("academies","`status` = '0' {$id} ORDER BY `{$orderBy}` ASC") ){
+						for( $i = 0; $i < sizeof($academies); $i++ ){
+							$area = selectDB("countries","`id` = '{$academies[$i]["area"]}'");
+							$areaTitle = direction($area[0]["areaEnTitle"],$area[0]["areaArTitle"]);
+							$academyTitle = direction($academies[$i]["enTitle"],$academies[$i]["arTitle"]);
+							echo "<option value='{$academies[$i]["id"]}'>{$academyTitle} - {$areaTitle} </option>";
+						}
 					}
 				}
 				?>
 			</select>
+			</div>	
 			</div>
 			
 			<div class="col-md-6" style="margin-top:10px">
