@@ -115,7 +115,8 @@
 		
 		<tbody>
 		<?php 
-		if( $vouchers = selectDB("vouchers","`status` = '0' AND `hidden` != '2'") ){
+		$id = ( isset($academiesList[$z]) && !empty($academiesList[$z]) ) ? "AND `academyIds` = '{$academiesList[$z]}'" : "AND `id` != '0'";
+		if( $vouchers = selectDB("vouchers","`status` = '0' AND `hidden` != '2' AND {$id}") ){
 			for( $i = 0; $i < sizeof($vouchers); $i++ ){
 				if ( $vouchers[$i]["hidden"] == 1 ){
 					$icon = "fa fa-unlock";
