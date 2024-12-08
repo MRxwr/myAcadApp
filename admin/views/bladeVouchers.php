@@ -116,6 +116,7 @@
 		<tbody>
 		<?php 
 		$count = (is_array($academiesList) && !empty($academiesList)) ? count($academiesList) : 1;
+		var_dump($academiesList);
 		for( $z = 0; $z < $count; $z++ ){
 			$id = ( isset($academiesList[$z]) && !empty($academiesList[$z]) ) ? "AND `academyIds` = '{$academiesList[$z]}'" : "AND `id` != '0'";
 		if( $vouchers = selectDB("vouchers","`status` = '0' AND `hidden` != '2' AND {$id}") ){
