@@ -17,6 +17,7 @@ function getAccessToken() {
     ));
     $response = curl_exec($curl);
     $response = json_decode($response, true);
+    var_Dump($response);
     curl_close($curl);
     return $response["data"]['access_token'];
 }
