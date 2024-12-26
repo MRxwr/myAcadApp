@@ -18,7 +18,6 @@ function getAccessToken() {
     $response = curl_exec($curl);
     $response = json_decode($response, true);
     curl_close($curl);
-    echo $response["data"]['access_token'];
     return $response["data"]['access_token'];
 }
 
@@ -54,7 +53,6 @@ if( $users = selectDB("users", "`id` = '6' GROUP BY `firebase` ORDER BY `id` ASC
         ));
         $response = curl_exec($curl);
         curl_close($curl);
-        echo $response;
     }
 }
 ?>
