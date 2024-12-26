@@ -53,6 +53,7 @@ if( $users = selectDB("users", "`id` = '6' GROUP BY `firebase` ORDER BY `id` ASC
         ));
         $response = curl_exec($curl);
         curl_close($curl);
+        echo $response;
     }
 }
 ?>
