@@ -79,6 +79,7 @@
 			<div class="col-md-6" style="margin-top:10px">
 			<input type="submit" class="btn btn-primary" value="<?php echo direction("Submit","أرسل") ?>">
 			<input type="hidden" name="update" value="0">
+			<input type="hidden" name="typeOfVoucher" value="1">
 			</div>
 		</div>
 	</form>
@@ -118,7 +119,7 @@
 		$voucherIds = array();
 		$count = (is_array($tournamentsList) && !empty($tournamentsList)) ? count($tournamentsList) : 1;
 		for( $z = 0; $z < $count; $z++ ){
-			$id = ( isset($tournamentsList[$z]) && !empty($tournamentsList[$z]) ) ? "AND `tournamentIds` LIKE '%{$tournamentsList[$z]}%'" : "AND `id` != '0'";
+			$id = ( isset($tournamentsList[$z]) && !empty($tournamentsList[$z]) ) ? "AND `tournamentIds` LIKE '%{$tournamentsList[$z]}%'" : "";
 			if( $vouchers = selectDB("vouchers","`status` = '0' AND `hidden` != '2' {$id}") ){
 				for( $i = 0; $i < sizeof($vouchers); $i++ ){
 					if ( !in_array($vouchers[$i]["id"],$voucherIds) ){
