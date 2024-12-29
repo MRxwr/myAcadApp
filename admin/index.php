@@ -5,6 +5,9 @@ if ( isset($_GET["hide"]) || isset($_GET["show"]) || isset($_GET["delId"]) || is
 	if( strtolower($_GET["v"]) == "areas" ){
 		$table = strtolower("countries");
 	}
+    if( strtolower($_GET["v"]) == "tournamentsvouchers" ){
+		$table = strtolower("vouchers");
+	}
 	if( isset($_GET["hide"]) && !empty($_GET["hide"]) && updateDB("{$table}",array('hidden'=> '1'),"`id` = '{$_GET["hide"]}'") ){
 	}elseif( isset($_GET["show"]) && !empty($_GET["show"]) && updateDB("{$table}",array('hidden'=> '0'),"`id` = '{$_GET["show"]}'") ){
 	}elseif( isset($_GET["delId"]) && !empty($_GET["delId"]) && updateDB("{$table}",array('status'=> "1"),"`id` = '{$_GET["delId"]}'") ){
