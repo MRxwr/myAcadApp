@@ -120,7 +120,7 @@
 		$count = (is_array($tournamentsList) && !empty($tournamentsList)) ? count($tournamentsList) : 1;
 		for( $z = 0; $z < $count; $z++ ){
 			$id = ( isset($tournamentsList[$z]) && !empty($tournamentsList[$z]) ) ? "AND `tournamentIds` LIKE '%{$tournamentsList[$z]}%'" : "";
-			if( $vouchers = selectDB("vouchers","`status` = '0' AND `hidden` != '2' {$id}") ){
+			if( $vouchers = selectDB("vouchers","`status` = '0' AND `hidden` != '2' AND `typeOfVoucher` = '1' {$id}") ){
 				for( $i = 0; $i < sizeof($vouchers); $i++ ){
 					if ( !in_array($vouchers[$i]["id"],$voucherIds) ){
 						array_push($voucherIds, $vouchers[$i]["id"]);
