@@ -2,7 +2,7 @@
 <div class="panel panel-default card-view">
 <div class="panel-heading">
 <div class="pull-left">
-	<h6 class="panel-title txt-dark"><?php echo direction("Academy Voucher Details","تفاصيل كود الخصم للأكادمية") ?></h6>
+	<h6 class="panel-title txt-dark"><?php echo direction("Tournament Voucher Details","تفاصيل كود الخصم للبطوله") ?></h6>
 </div>
 	<div class="clearfix"></div>
 </div>
@@ -52,22 +52,22 @@
 
 			<div class="col-md-12">
 			<div class="form-group">
-			<label class="control-label mb-10"><?php echo direction("Academy","الأكادمية") ?></label>
-			<select class="form-control" name="academyIds[]" class="form-control" id="mySelect" multiple style="height: 200px">
+			<label class="control-label mb-10"><?php echo direction("Tournament","البطولة") ?></label>
+			<select class="form-control" name="tournamentIds[]" class="form-control" id="mySelect" multiple style="height: 200px">
 				<?php
 				if( $userType == 0 || $userType == 8 ){
 					echo "<option value='0' selected>".direction("All","الكل")."</option>";
 				}
-				$count = (is_array($academiesList) && !empty($academiesList)) ? count($academiesList) : 1;
+				$count = (is_array($tournamentsList) && !empty($tournamentsList)) ? count($tournamentsList) : 1;
 				$orderBy = direction("enTitle","arTitle");
 				for( $z = 0; $z < $count; $z++ ){
-					$id = ( isset($academiesList[$z]) && !empty($academiesList[$z]) ) ? "AND `id` = '{$academiesList[$z]}'" : "AND `id` != '0'";
-					if( $academies = selectDB("academies","`status` = '0' {$id} ORDER BY `{$orderBy}` ASC") ){
-						for( $i = 0; $i < sizeof($academies); $i++ ){
-							$area = selectDB("countries","`id` = '{$academies[$i]["area"]}'");
+					$id = ( isset($tournamentsList[$z]) && !empty($tournamentsList[$z]) ) ? "AND `id` = '{$tournamentsList[$z]}'" : "AND `id` != '0'";
+					if( $tournaments = selectDB("tournaments","`status` = '0' {$id} ORDER BY `{$orderBy}` ASC") ){
+						for( $i = 0; $i < sizeof($tournaments); $i++ ){
+							$area = selectDB("countries","`id` = '{$tournaments[$i]["area"]}'");
 							$areaTitle = direction($area[0]["areaEnTitle"],$area[0]["areaArTitle"]);
-							$academyTitle = direction($academies[$i]["enTitle"],$academies[$i]["arTitle"]);
-							echo "<option value='{$academies[$i]["id"]}'>{$academyTitle} - {$areaTitle} </option>";
+							$tournamentTitle = direction($tournaments[$i]["enTitle"],$tournaments[$i]["arTitle"]);
+							echo "<option value='{$tournaments[$i]["id"]}'>{$tournamentTitle} - {$areaTitle} </option>";
 						}
 					}
 				}
@@ -91,7 +91,7 @@
 <div class="col-sm-12">
 <div class="panel panel-default card-view">
 <div class="panel-heading">
-	<div class="pull-left"><h6 class="panel-title txt-dark"><?php echo direction("List of Academy Vouchers","قائمة كوبونات الأكادمية") ?></h6></div>
+	<div class="pull-left"><h6 class="panel-title txt-dark"><?php echo direction("List of Vouchers","قائمة الكوبونات") ?></h6></div>
 	<div class="clearfix"></div>
 </div>
 <div class="panel-wrapper collapse in">
@@ -116,9 +116,9 @@
 		<tbody>
 		<?php 
 		$voucherIds = array();
-		$count = (is_array($academiesList) && !empty($academiesList)) ? count($academiesList) : 1;
+		$count = (is_array($tournamentsList) && !empty($tournamentsList)) ? count($tournamentsList) : 1;
 		for( $z = 0; $z < $count; $z++ ){
-			$id = ( isset($academiesList[$z]) && !empty($academiesList[$z]) ) ? "AND `academyIds` LIKE '%{$academiesList[$z]}%'" : "AND `id` != '0'";
+			$id = ( isset($tournamentsList[$z]) && !empty($tournamentsList[$z]) ) ? "AND `academyIds` LIKE '%{$tournamentsList[$z]}%'" : "AND `id` != '0'";
 			if( $vouchers = selectDB("vouchers","`status` = '0' AND `hidden` != '2' {$id}") ){
 				for( $i = 0; $i < sizeof($vouchers); $i++ ){
 					if ( !in_array($vouchers[$i]["id"],$voucherIds) ){
@@ -132,15 +132,15 @@
 						$link = "?v={$_GET["v"]}&hide={$vouchers[$i]["id"]}";
 						$hide = direction("Lock","قفل الكود");
 					}
-					$academy = "";
+					$tournament = "";
 					$type = ( $vouchers[$i]["type"] == 0 ) ? direction("Percentage","نسبة مؤوية") : direction("Fixed","قيمة ثابته") ;
-					$cleanedAcademyId = str_replace(['[', ']', '"'], '', $vouchers[$i]["academyIds"]);
-					$vouchers[$i]["academyIds"] = explode(',', $cleanedAcademyId);
-					for( $j = 0; $j < sizeof($vouchers[$i]["academyIds"]); $j++ ){
-						if( $academyData = selectDB("academies","`id` = '{$vouchers[$i]["academyIds"][$j]}'") ){
-							$academy .= direction($academyData[0]["enTitle"],$academyData[0]["arTitle"]) . " - ";
+					$cleanedTournamentId = str_replace(['[', ']', '"'], '', $vouchers[$i]["tournamentIds"]);
+					$vouchers[$i]["tournamentIds"] = explode(',', $cleanedTournamentId);
+					for( $j = 0; $j < sizeof($vouchers[$i]["tournamentIds"]); $j++ ){
+						if( $tournamentData = selectDB("tournaments","`id` = '{$vouchers[$i]["tournamentIds"][$j]}'") ){
+							$tournament .= direction($tournamentData[0]["enTitle"],$tournamentData[0]["arTitle"]) . " - ";
 						}else{
-							$academy .= "";
+							$tournament .= "";
 						}
 					}
 					?>
@@ -150,7 +150,7 @@
 					<td id="numberOfTimes<?php echo $vouchers[$i]["id"]?>" ><?php echo $vouchers[$i]["numberOfTimes"] ?></td>
 					<td id="amount<?php echo $vouchers[$i]["id"]?>" ><?php echo $vouchers[$i]["amount"] ?></td>
 					<td><?php echo $type ?></td>
-					<td><?php echo $academy ?></td>
+					<td><?php echo $tournament ?></td>
 					<td id="startDate<?php echo $vouchers[$i]["id"]?>" ><?php echo substr($vouchers[$i]["startDate"],0,10) ?></td>
 					<td id="endDate<?php echo $vouchers[$i]["id"]?>" ><?php echo substr($vouchers[$i]["endDate"],0,10) ?></td>
 					<td class="text-nowrap">
@@ -163,7 +163,7 @@
 					</a>
 					<div style="display:none">
 						<label id="type<?php echo $vouchers[$i]["id"]?>"><?php echo $vouchers[$i]["type"] ?></label>
-						<label id="academy<?php echo $vouchers[$i]["id"]?>"><?php echo json_encode($vouchers[$i]["academyIds"]) ?></label>			
+						<label id="tournament<?php echo $vouchers[$i]["id"]?>"><?php echo json_encode($vouchers[$i]["tournamentIds"]) ?></label>
 					</div>				
 					</td>
 					</tr>
@@ -192,26 +192,16 @@
 
 	$(document).on("click",".edit", function(){
 		var id = $(this).attr("id");
-		var code = $("#code"+id).html();
-		var title = $("#title"+id).html();
-		var numberOfTimes = $("#numberOfTimes"+id).html();
-		var amount = $("#amount"+id).html();
-		var startDate = $("#startDate"+id).html();
-		var endDate = $("#endDate"+id).html();
-		var amount = $("#amount"+id).html();
-		var type = $("#type"+id).html();
-		var academy = $("#academy"+id).html();
         $("input[name=update]").val(id);
-		$("input[name=code]").val(code);
-		$("input[name=numberOfTimes]").val(numberOfTimes);
-		$("input[name=amount]").val(amount);
-		$("input[name=startDate]").val(startDate);
-		$("input[name=endDate]").val(endDate);
-		$("input[name=title]").val(title);
-		$("select[name=type]").val(type);
-		// academy is json objext with list of ids 
-		var academy = JSON.parse(academy);
-		$("#mySelect").val(academy).trigger('change');
+		$("input[name=code]").val($("#code"+id).html());
+		$("input[name=numberOfTimes]").val($("#numberOfTimes"+id).html());
+		$("input[name=amount]").val($("#amount"+id).html());
+		$("input[name=startDate]").val($("#startDate"+id).html());
+		$("input[name=endDate]").val($("#endDate"+id).html());
+		$("input[name=title]").val($("#title"+id).html());
+		$("select[name=type]").val($("#type"+id).html());
+		var tournament = JSON.parse($("#tournament"+id).html());
+		$("#mySelect").val(tournament).trigger('change');
         $("input[name=title]").focus();
 	})
 </script>
