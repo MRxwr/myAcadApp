@@ -36,7 +36,7 @@ if( isset($_POST["code"]) && !empty($_POST["code"]) && $voucher = selectDB("vouc
     
     if( $voucher[0]["tournamentIds"] != 0 ){
         $voucher[0]["tournamentIds"] = json_decode($voucher[0]["tournamentIds"],true);
-        if(  in_array($_POST["tournamentIds"],$voucher[0]["tournamentIds"]) ){
+        if(  in_array($_POST["tournamentId"],$voucher[0]["tournamentIds"]) ){
             $tournamentApproved = true;
         }else{
             $tournamentApproved = false;
