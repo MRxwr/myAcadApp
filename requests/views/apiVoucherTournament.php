@@ -2,7 +2,7 @@
 $numberOfTimesAvalability = false;
 $academyAprroved = false;
 $dateApproved = false;
-if( isset($_POST["code"]) && !empty($_POST["code"]) && $voucher = selectDB("vouchers","`code` = '{$_POST["code"]}' AND `typeOfVoucher` = '0' AND `hidden` = '0' AND `status` = '0'")){
+if( isset($_POST["code"]) && !empty($_POST["code"]) && $voucher = selectDB("vouchers","`code` = '{$_POST["code"]}' AND `typeOfVoucher` = '1' AND `hidden` = '0' AND `status` = '0'")){
     $currentDate = date("Y-m-d");
     if( (substr($voucher[0]["startDate"],0,10) <= $currentDate) && (substr($voucher[0]["endDate"],0,10) >= $currentDate) ){
         $dateApproved = true;
