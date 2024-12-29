@@ -36,7 +36,6 @@ if( isset($_POST["code"]) && !empty($_POST["code"]) && $voucher = selectDB("vouc
     
     if( !empty($voucher[0]["academyIds"]) ){
         $voucher[0]["academyIds"] = json_decode($voucher[0]["academyIds"],true);
-        var_dump($voucher[0]["academyIds"]);die();
         if( in_array($_POST["academyId"],$voucher[0]["academyIds"]) ){
             $academyAprroved = true;
         }else{
