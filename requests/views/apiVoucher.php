@@ -46,7 +46,7 @@ if( isset($_POST["code"]) && !empty($_POST["code"]) && $voucher = selectDB("vouc
             );
             echo outputError($response);die();
         }
-    }elseif( $voucher[0]["academyId"] == 0 ){
+    }elseif( $voucher[0]["academyIds"] == 0 ){
         $academyAprroved = true;
     }
     
