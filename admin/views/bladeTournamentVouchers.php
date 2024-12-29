@@ -91,7 +91,7 @@
 <div class="col-sm-12">
 <div class="panel panel-default card-view">
 <div class="panel-heading">
-	<div class="pull-left"><h6 class="panel-title txt-dark"><?php echo direction("List of Vouchers","قائمة الكوبونات") ?></h6></div>
+	<div class="pull-left"><h6 class="panel-title txt-dark"><?php echo direction("List of Tournament Vouchers","قائمة كوبونات البطوله") ?></h6></div>
 	<div class="clearfix"></div>
 </div>
 <div class="panel-wrapper collapse in">
@@ -118,7 +118,7 @@
 		$voucherIds = array();
 		$count = (is_array($tournamentsList) && !empty($tournamentsList)) ? count($tournamentsList) : 1;
 		for( $z = 0; $z < $count; $z++ ){
-			$id = ( isset($tournamentsList[$z]) && !empty($tournamentsList[$z]) ) ? "AND `academyIds` LIKE '%{$tournamentsList[$z]}%'" : "AND `id` != '0'";
+			$id = ( isset($tournamentsList[$z]) && !empty($tournamentsList[$z]) ) ? "AND `tournamentIds` LIKE '%{$tournamentsList[$z]}%'" : "AND `id` != '0'";
 			if( $vouchers = selectDB("vouchers","`status` = '0' AND `hidden` != '2' {$id}") ){
 				for( $i = 0; $i < sizeof($vouchers); $i++ ){
 					if ( !in_array($vouchers[$i]["id"],$voucherIds) ){
