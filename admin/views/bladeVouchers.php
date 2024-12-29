@@ -119,7 +119,7 @@
 		$count = (is_array($academiesList) && !empty($academiesList)) ? count($academiesList) : 1;
 		for( $z = 0; $z < $count; $z++ ){
 			$id = ( isset($academiesList[$z]) && !empty($academiesList[$z]) ) ? "AND `academyIds` LIKE '%{$academiesList[$z]}%'" : "AND `id` != '0'";
-			if( $vouchers = selectDB("vouchers","`status` = '0' AND `hidden` != '2' {$id}") ){
+			if( $vouchers = selectDB("vouchers","`status` = '0' AND `hidden` != '2' AND `typeOfVoucher` = '0' {$id}") ){
 				for( $i = 0; $i < sizeof($vouchers); $i++ ){
 					if ( !in_array($vouchers[$i]["id"],$voucherIds) ){
 						array_push($voucherIds, $vouchers[$i]["id"]);
