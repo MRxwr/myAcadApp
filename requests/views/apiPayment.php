@@ -45,13 +45,14 @@ if( !isset($_POST) ){
                 }
             }
             
-            if( $voucher[0]["academyId"] != 0 ){
-                if( $voucher[0]["academyId"] == $academy ){
+            if( !empty($voucher[0]["academyIds"]) ){
+                $voucher[0]["academyIds"] = json_decode($voucher[0]["academyIds"],true);
+                if(  in_array($academy,$voucher[0]["academyIds"]) ){
                     $academyAprroved = true;
                 }else{
                     $academyAprroved = false;
                 }
-            }elseif( $voucher[0]["academyId"] == 0 ){
+            }elseif( $voucher[0]["academyIds"] == 0 ){
                 $academyAprroved = true;
             }
             
@@ -208,13 +209,14 @@ if( !isset($_POST) ){
                 }
             }
             
-            if( $voucher[0]["tournamentId"] != 0 ){
-                if( $voucher[0]["tournamentId"] == $tournament ){
+            if( !empty($voucher[0]["tournamentIds"]) ){
+                $voucher[0]["tournamentIds"] = json_decode($voucher[0]["tournamentIds"],true);
+                if( in_array($tournament,$voucher[0]["tournamentIds"]) ){
                     $tournamentAprroved = true;
                 }else{
                     $tournamentAprroved = false;
                 }
-            }elseif( $voucher[0]["tournamentId"] == 0 ){
+            }elseif( $voucher[0]["tournamentIds"] == 0 ){
                 $tournamentAprroved = true;
             }
             
