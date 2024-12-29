@@ -1,6 +1,6 @@
 <?php 
 $numberOfTimesAvalability = false;
-$academyAprroved = false;
+$tournamentApproved = false;
 $dateApproved = false;
 if( isset($_POST["code"]) && !empty($_POST["code"]) && $voucher = selectDB("vouchers","`code` = '{$_POST["code"]}' AND `typeOfVoucher` = '1' AND `hidden` = '0' AND `status` = '0'")){
     $currentDate = date("Y-m-d");
@@ -34,23 +34,23 @@ if( isset($_POST["code"]) && !empty($_POST["code"]) && $voucher = selectDB("vouc
         }
     }
     
-    if( $voucher[0]["academyIds"] != 0 ){
-        $voucher[0]["academyIds"] = json_decode($voucher[0]["academyIds"],true);
-        if(  in_array($_POST["academyIds"],$voucher[0]["academyIds"]) ){
-            $academyAprroved = true;
+    if( $voucher[0]["tournamentIds"] != 0 ){
+        $voucher[0]["tournamentIds"] = json_decode($voucher[0]["tournamentIds"],true);
+        if(  in_array($_POST["tournamentIds"],$voucher[0]["tournamentIds"]) ){
+            $tournamentApproved = true;
         }else{
-            $academyAprroved = false;
+            $tournamentApproved = false;
             $response = array(
-                "msg" => 'voucher is not valid for this academy.',
-                "msgAr" => 'لا يمكن تطبيق هذا الكود على هذه الأكادمية',
+                "msg" => 'voucher is not valid for this tournament.',
+                "msgAr" => 'لا يمكن تطبيق هذا الكود على هذه البطولة',
             );
             echo outputError($response);die();
         }
-    }elseif( $voucher[0]["academyId"] == 0 ){
-        $academyAprroved = true;
+    }elseif( $voucher[0]["tournamentIds"] == 0 ){
+        $tournamentApproved = true;
     }
     
-    if( $numberOfTimesAvalability && $academyAprroved && $dateApproved ){
+    if( $numberOfTimesAvalability && $tournamentApproved && $dateApproved ){
             $voucherType = ($voucher[0]["type"] == 0) ? 0 : 1;
             $voucherAmount = $voucher[0]["amount"];
             $newTotal = ( $voucherType == 0 ) ? ($_POST["total"]*(1-($voucherAmount/100))) : $_POST["total"] - $voucherAmount;
