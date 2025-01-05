@@ -1,4 +1,45 @@
 <?php
+function getCredentialsFromFile($filePath) {
+  if (!file_exists($filePath)) {
+    die("Service account key file not found: " . $filePath);
+  }
+
+  $content = file_get_contents($filePath);
+  $credentials = json_decode($content, true);
+
+  if (json_last_error() !== JSON_ERROR_NONE) {
+    die("Error parsing service account key file: " . json_last_error_msg());
+  }
+
+  return $credentials;
+}
+
+function getAccessToken($credentials) {
+    $url = 'https://oauth2.googleapis.com/token';
+    $data = [
+        'grant_type' => 'urn:ietf:params:oauth2.0:client_credentials',
+        'audience' => 'https://www.googleapis.com/auth/firebase.messaging'
+    ];
+
+    $options = [
+        'http' => [
+            'method' => 'POST',
+            'header' => "Content-Type: application/x-www-form-urlencoded\r\n",
+            'content' => http_build_query($data)
+        ]
+    ];
+
+    $context = stream_context_create($options);
+    $response = file_get_contents($url, false, $context);
+    $response = json_decode($response, true);
+
+    if (isset($response['access_token'])) {
+        return $response['access_token'];
+    } else {
+        die("Error getting access token: " . json_encode($response));
+    }
+}
+
 function subscribeToTopic($deviceToken, $topic, $accessToken) {
     $url = "https://iid.googleapis.com/iid/v1/{$deviceToken}/rel/topics/{$topic}";
 
@@ -28,27 +69,14 @@ function subscribeToTopic($deviceToken, $topic, $accessToken) {
     curl_close($ch);
 }
 
-function getAccessToken() {
-    $curl = curl_init();
-    curl_setopt_array($curl, array(
-    CURLOPT_URL => 'https://createapi.link/api/v1/request_token',
-    CURLOPT_RETURNTRANSFER => true,
-    CURLOPT_ENCODING => '',
-    CURLOPT_MAXREDIRS => 10,
-    CURLOPT_TIMEOUT => 0,
-    CURLOPT_FOLLOWLOCATION => true,
-    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-    CURLOPT_CUSTOMREQUEST => 'POST',
-    CURLOPT_POSTFIELDS => array('firebase_json'=> new CURLFILE('../../myacademy-bd81b-firebase-adminsdk-mdflj-3fbac4549d.json')),
-    CURLOPT_HTTPHEADER => array(
-        'Accept: application/json'
-    ),
-    ));
-    $response = curl_exec($curl);
-    $response = json_decode($response, true);
-    curl_close($curl);
-    return $response["data"]['access_token'];
-}
+// Replace with the path to your service account key file
+$keyFilePath = '../../myacademy-bd81b-firebase-adminsdk-mdflj-3fbac4549d.json'; 
+
+// Get credentials from the file
+$credentials = getCredentialsFromFile($keyFilePath);
+
+// Get access token
+$accessToken = getAccessToken($credentials);
 
 if( $users = selectDB("users", "`id` = '6' GROUP BY `firebase` ORDER BY `id` ASC") ){
     $bearer = getAccessToken();
