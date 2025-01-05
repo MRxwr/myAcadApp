@@ -31,7 +31,7 @@ function subscribeToTopic($deviceToken, $topic, $accessToken)
     $url = "https://iid.googleapis.com/iid/v1/{$deviceToken}/rel/topics/{$topic}";
 
     $headers = [
-        "Authorization: Bearer $accessToken",
+        "Authorization: Bearer ya29.c.c0ASRK0GaS4DxS9mr3BjZmfZdCJO4jncRJ_JQSyKpOYJYSgNehu2LabDjkpNyccOC7lvM2HAVoPYtaABtryjv4_xI5Ty_DWVFnivoO9kTQ2kqTwlXLEc8z8ENYGXRYYSyp8_XBw8ztxSpt1LDYm7UMg-wYPZ1SEf4cC5N3vQqETiRL7BXxhXk0DkjMc9t2QlLpUe_ZsJkMGol5LKQNQuVpESlLIqaHyc80Erv-qVRE6PGhWO-dEPYe_aq7MEptoUD4NClfIJBZlTlE7qPFysuoKMKNNB0vqgR1NxnlIgKvE8ov8Jk400Yri2Bhx4krsdEoV3xBVIAC2fl0B8_wGQX6GdWLnXabWUqgwmBTsPcoOLtRbPJ4hiOv9ZEWdQG387Dfxj_9JpWShd5di1laX5ZxjVfSMeIjakv4Mh5BafuFOBbaJxYxROFJ-4UtxS7p8nUzZ6mO5eqRh8w3c7SgQVuB2V_WsFJmx-cdqwl42FW61fxth2R661UZs7js7ZIV7b8VB_537hBnigerd2B4txlhIik1Sbwv0RIgYFgodzBq1Ugs6lcz4pw4X9xgFxlUrrRem0YbU1kqIQo2c2qb6d6qadM4OZf-aUOacnMyholtuvuVZzz9IJi7BjzB5zknm5B0tpUO9Jw9eanj13wQR2ShjUuRh2Og4pkSjM5StsfF6lvdh2jhXB5aaM1WvhQn4iQo_Bbfs00Mx8l9ourJSkFt2xpB3rR5Sv8l1cRwXp4Qt6p366lv8zB3o9p3ls_4dFlij-gaVfZUaolatWJ14o_cJg-_k5mpjyWBXgV9z9pUqlI3gRRxJ2rVgZsgzUkfOiFmhtvBhge3U109BgqpkXZI0s1b6jRFFph8URYMeni4RxnJx3tlq0sBshem7ioYzpsV5p51XpoU0Vuv3xYu525VQvw1ByyVssi9z2wvfafW8OtlQwf_Icb9eOeIMJqmlh4tSg7qsF7ibafqqof6wbn-bvn817wcnBx5g-tBJkeYFkhe6Qh845Z2xWz",
         "Content-Type: application/json",
     ];
 
