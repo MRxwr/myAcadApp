@@ -18,7 +18,9 @@ function getAccessToken($credentials) {
     $url = 'https://oauth2.googleapis.com/token';
     $data = [
         'grant_type' => 'urn:ietf:params:oauth2.0:client_credentials',
-        'audience' => 'https://www.googleapis.com/auth/firebase.messaging'
+        'audience' => 'https://www.googleapis.com/auth/firebase.messaging',
+        'client_email' => $credentials['client_email'],
+        'private_key' => $credentials['private_key']
     ];
 
     $options = [
