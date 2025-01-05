@@ -31,12 +31,12 @@ function getAccessToken($credentials) {
         ]
     ];
 
-    $context = json_encode($options);
+    $context = stream_context_create($options);
     //use curl post
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_POST, true);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, $context);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $options);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
