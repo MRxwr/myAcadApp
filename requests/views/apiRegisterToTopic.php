@@ -31,7 +31,7 @@ function getAccessToken($credentials) {
         ]
     ];
 
-    $context = stream_context_create($options);
+    $context = json_encode($options);
     //use curl post
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $url);
