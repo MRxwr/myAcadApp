@@ -15,7 +15,6 @@ function getCredentialsFromFile($filePath) {
 }
 
 function getAccessToken($credentials) {
-    var_dump($credentials);
     $url = 'https://oauth2.googleapis.com/token';
     $data = [
         'grant_type' => 'urn:ietf:params:oauth2.0:client_credentials',
