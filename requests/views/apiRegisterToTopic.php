@@ -17,40 +17,32 @@ function getCredentialsFromFile($filePath) {
 function getAccessToken($credentials) {
     $url = 'https://oauth2.googleapis.com/token';
     $data = [
-        'grant_type' => 'urn:ietf:params:oauth2.0:client_credentials',
-        'audience' => 'https://www.googleapis.com/auth/firebase.messaging',
-        'client_email' => $credentials['client_email'],
-        'private_key' => $credentials['private_key']
+      'grant_type' => 'urn:ietf:params:oauth2.0:client_credentials',
+      'audience' => 'https://www.googleapis.com/auth/firebase.messaging',
+      'client_email' => $credentials['client_email'],
+      'private_key' => $credentials['private_key'],
     ];
-
-    $options = [
-        'http' => [
-            'method' => 'POST',
-            'header' => "Content-Type: application/x-www-form-urlencoded\r\n",
-            'content' => http_build_query($data)
-        ]
-    ];
-
-    $context = stream_context_create($options);
-    //use curl post
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, $url);
+    $ch = curl_init($url);
     curl_setopt($ch, CURLOPT_POST, true);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, $options);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, [
+      "Content-Type: application/x-www-form-urlencoded",
+    ]);
     curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
-    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
     $response = curl_exec($ch);
+    $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
     curl_close($ch);
-    $response = json_decode($response, true);
-
-    if (isset($response['access_token'])) {
-        return $response['access_token'];
-    } else {
-        die("Error getting access token: " . json_encode($response));
+    if ($httpCode !== 200) {
+      $error = json_decode($response, true);
+      die("Error getting access token: " . (isset($error['error']) ? $error['error'] . ": " . $error['error_description'] : "HTTP status code $httpCode"));
     }
-}
+    $response = json_decode($response, true);
+    if (isset($response['access_token'])) {
+      return $response['access_token'];
+    } else {
+      die("Error getting access token: " . json_encode($response));
+    }
+  }
 
 function subscribeToTopic($deviceToken, $topic, $accessToken) {
     $url = "https://iid.googleapis.com/iid/v1/{$deviceToken}/rel/topics/{$topic}";
