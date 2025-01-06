@@ -34,6 +34,9 @@ if( isset($_GET["action"]) & !empty($_GET["action"]) ){
         if( !isset($_POST["body"]) || empty($_POST["body"]) ){
             $error["msg"] = popupMsg($requestLang,"Please enter body","الرجاء ادخال الوصف");
             echo outputError($error);die();
+        }
+        if( !isset($_POST["image"]) || empty($_POST["image"]) ){
+            $_POST["image"] = "";
         }else{
             $curl = curl_init();
             curl_setopt_array($curl, array(
@@ -50,7 +53,7 @@ if( isset($_GET["action"]) & !empty($_GET["action"]) ){
                 'topic' => 'news',
                 'title' => "{$_POST["title"]}",
                 'body' => "{$_POST["body"]}",
-                'image'=> new CURLFILE('/C:/Users/nasse/OneDrive/Pictures/002.jpg')
+                'image'=> "{$_POST["image"]}"
             ),
             ));
             $response = curl_exec($curl);
