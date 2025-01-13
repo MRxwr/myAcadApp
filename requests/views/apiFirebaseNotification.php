@@ -1,6 +1,6 @@
 <?php
 function sendToTopic($data){
-    /*
+    
     $curl = curl_init();
     curl_setopt_array($curl, array(
     CURLOPT_URL => 'https://createapi.link/api/v1/send_to_topic.php',
@@ -21,7 +21,7 @@ function sendToTopic($data){
     $response = curl_exec($curl);
     curl_close($curl);
     return  $response;
-*/
+/*
     $curl = curl_init();
     curl_setopt_array($curl, array(
     CURLOPT_URL => 'https://myacad.app/requests?a=Firebase&action=sendNotification',
@@ -44,6 +44,7 @@ function sendToTopic($data){
     $response = curl_exec($curl);
     curl_close($curl);
     return $response;
+    */
 }
 
 sendToTopic($_POST);
