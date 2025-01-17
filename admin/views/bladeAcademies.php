@@ -23,12 +23,12 @@
 			</select>
 			</div>
 
-			<div class="col-md-3">
+			<div class="col-md-3" style="<?php echo $userType ?>">
 			<label><?php echo direction("English Title","الإسم الإنجليزي") ?></label>
 			<input type="text" name="enTitle" class="form-control" required>
 			</div>
 			
-			<div class="col-md-3">
+			<div class="col-md-3" style="<?php echo $userType ?>">
 			<label><?php echo direction("Arabic Title","الإسم العربي") ?></label>
 			<input type="text" name="arTitle" class="form-control" required>
 			</div>
@@ -135,7 +135,7 @@
 			</select>
 			</div>
 			
-			<div class="col-md-3">
+			<div class="col-md-3" style="<?php echo $userType ?>">
 			<label><?php echo direction("Video","الفيديو") ?></label>
 			<input type="text" name="video" class="form-control" required>
 			</div>
@@ -161,7 +161,7 @@
 			<input type="number" step="any" name="clothesPrice" class="form-control" required>
 			</div>
 
-<div class="academyHide" style="<?php echo $userType ?>">
+			<div class="academyHide" style="<?php echo $userType ?>">
 			<div class="col-md-12">
 			<label><?php echo direction("IBAN","الأيبان") ?></label>
 			<input type="text" name="iban" class="form-control" required>
