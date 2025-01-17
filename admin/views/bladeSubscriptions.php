@@ -35,6 +35,15 @@
 			<label><?php echo direction("Price after discount","السعر بعد الخصم") ?></label>
 			<input type="number" step="any" name="priceAfterDiscount" class="form-control" value="0" required>
 			</div>
+
+			<div class="col-md-12">
+			<label><?php echo direction("Please stick with the titles naming as below:","يرجى استخدام الأمثله التاليه لكتاية العناوين:") ?></label>
+			<p>1 Month - Sat, Mon, Wed / ١ شهر- السبت, الاثنين, الاربعاء</p>
+			<p>1 Month - (8 Classes) for students / ١ شهر - (٨ حصص) للطلاب</p>
+			<p>1 Month - (8 Classes) for employees / ١ شهر - (٨ حصص) للموظفين</p>
+			<p>(12 Classes) - Sun, Tue, Thu / (١٢ حصه) - الاحد, الثلاثاء, الخميس</p>
+			<p>(12 Classes) - Sat, Mon, Wed / (١٢ حصه) - السبت, الاثنين, الاربعاء</p>
+			</div>
 			
 			<div class="col-md-12" style="margin-top:10px">
 			<input type="submit" class="btn btn-primary" value="<?php echo direction("Submit","أرسل") ?>">
