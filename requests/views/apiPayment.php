@@ -349,7 +349,7 @@ if( !isset($_POST) ){
         ),
     ));
     $response = curl_exec($curl);
-    echo json_encode($postBody);die();
+    print_r($response);die();
     curl_close($curl);
     $response = json_decode($response,true);
     
