@@ -345,10 +345,11 @@ if( !isset($_POST) ){
         CURLOPT_CUSTOMREQUEST => 'POST',
         CURLOPT_POSTFIELDS => $postBody,
         CURLOPT_HTTPHEADER => array(
-            'Authorization: Bearer afmceR6nHQaIehhpOel036LBhC8hihuB8iNh9ACF',
+            'Authorization: Bearer 779475522c0938b3c0774da98197e0727fefe464',
         ),
     ));
     $response = curl_exec($curl);
+    var_dump($response);
     curl_close($curl);
     $response = json_decode($response,true);
     
