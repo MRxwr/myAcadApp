@@ -158,11 +158,11 @@ if( !isset($_POST) ){
             'returnUrl' => 'https://myacad.app/index.php',
             'cancelUrl' => 'https://myacad.app/index.php',
             'notificationUrl' => 'https://myacad.app/index.php',
-            'extraMerchantData[0][amount]' => (string)($newTotal+(float)$jersyPrice+$myacadDeposit),
-            'extraMerchantData[0][knetCharge]' => '0.25',
-            'extraMerchantData[0][knetChargeType]' => 'fixed',
-            'extraMerchantData[0][ccCharge]' => '0.25',
-            'extraMerchantData[0][ccChargeType]' => 'fixed',
+            'extraMerchantData[0][amount]' => (string)($fullAmount),
+            'extraMerchantData[0][knetCharge]' => "{$academyData[0]["charges"]}",
+            'extraMerchantData[0][knetChargeType]' => "{$academyData[0]["chargeType"]}",
+            'extraMerchantData[0][ccCharge]' => "{$academyData[0]["cc_charge"]}",
+            'extraMerchantData[0][ccChargeType]' => "{$tournaments[0]["cc_chargetype"]}",
             'extraMerchantData[0][ibanNumber]' => "{$academyData[0]["iban"]}",
             );
             
@@ -312,11 +312,11 @@ if( !isset($_POST) ){
             'returnUrl' => 'https://myacad.app/index.php',
             'cancelUrl' => 'https://myacad.app/index.php',
             'notificationUrl' => 'https://myacad.app/index.php',
-            'extraMerchantData[0][amount]' => (string)($newTotal+$myacadDeposit),
-            'extraMerchantData[0][knetCharge]' => '0.25',
-            'extraMerchantData[0][knetChargeType]' => 'fixed',
-            'extraMerchantData[0][ccCharge]' => '0.25',
-            'extraMerchantData[0][ccChargeType]' => 'fixed',
+            'extraMerchantData[0][amount]' => (string)($fullAmount),
+            'extraMerchantData[0][knetCharge]' => "{$tournaments[0]["charges"]}",
+            'extraMerchantData[0][knetChargeType]' => "{$tournaments[0]["chargeType"]}",
+            'extraMerchantData[0][ccCharge]' => "{$tournaments[0]["cc_charge"]}",
+            'extraMerchantData[0][ccChargeType]' => "{$tournaments[0]["cc_chargetype"]}",
             'extraMerchantData[0][ibanNumber]' => "{$tournamentData[0]["iban"]}",
             );
     }
