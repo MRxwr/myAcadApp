@@ -162,7 +162,7 @@ if( !isset($_POST) ){
             'extraMerchantData[0][knetCharge]' => "{$academyData[0]["charges"]}",
             'extraMerchantData[0][knetChargeType]' => "{$academyData[0]["chargeType"]}",
             'extraMerchantData[0][ccCharge]' => "{$academyData[0]["cc_charge"]}",
-            'extraMerchantData[0][ccChargeType]' => "{$tournaments[0]["cc_chargetype"]}",
+            'extraMerchantData[0][ccChargeType]' => "{$academyData[0]["cc_chargetype"]}",
             'extraMerchantData[0][ibanNumber]' => "{$academyData[0]["iban"]}",
             );
             
