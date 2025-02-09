@@ -23,12 +23,12 @@
 		<tbody>
 		<?php 
         $joinData = array(
-            "select" => ["t.enTitle","t.arTitle","t.area","t.gender","t2.areaEnTitle","t2.areaArTitle"],
-            "join" => ["orders","countries"],
-            "on" => ["ON t1.academyId = t.id AND t1.status IN ('1','4') AND t1.tournamentId = '0' AND t1.date > DATE_SUB(NOW(), INTERVAL 30 DAY)","t.area = t2.id"]
+            "select" => ["t.enTitle","t.arTitle","t.area","t.gender","t1.areaEnTitle","t1.areaArTitle"],
+            "join" => ["countries"],
+            "on" => ["t.area = t1.id"]
         );
         // add where to the quesy to check if the data passed 30 days or not
-			if( $academies = selectJoinDB("academies",$joinData,"t1.id IS NULL") ){
+			if( $academies = selectJoinDB("academies",$joinData,"NOT EXISTS (SELECT 1 FROM orders oWHERE o.academyId = a.id AND o.status IN ('1','4') AND o.tournamentId = '0' AND o.date > DATE_SUB(NOW(), INTERVAL 30 DAY))") ){
                 $gendersList = array(
                     "1" => direction("Man","رجل"),
                     "2" => direction("Woman","إمرأه"),
