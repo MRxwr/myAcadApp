@@ -26,12 +26,12 @@
 		<tbody>
 		<?php 
         $joinData = array(
-            "select" => ["t.arAcademy","t.enAcademy","t.id","t.date","t1.area","t1.gender","t2.areaEnTitle","t2.areaArTitle"],
+            "select" => ["t.arAcademy","t.enAcademy","MAX(t.id)","t.date","t1.area","t1.gender","t2.areaEnTitle","t2.areaArTitle"],
             "join" => ["academies","countries"],
             "on" => ["t.academyId = t1.id","t1.area = t2.id"]
         );
         // add where to the quesy to check if the data passed 30 days or not
-			if( $academies = selectJoinDB("orders",$joinData,"t.date <= DATE_SUB(NOW(), INTERVAL 30 DAY) AND (t.status = '1' OR t.status = '4') AND t.tournamentId = '0' AND t1.status = '0' AND t1.hidden = '1'") ){
+			if( $academies = selectJoinDB("orders",$joinData,"t.date <= DATE_SUB(NOW(), INTERVAL 30 DAY) AND (t.status = '1' OR t.status = '4') AND t.tournamentId = '0' GROUP BY t.academyId ORDER BY t1.id DESC") ){
                 $gendersList = array(
                     "1" => direction("Man","رجل"),
                     "2" => direction("Woman","إمرأه"),
