@@ -145,7 +145,9 @@
 				</a>
 				<a href="<?php echo "?v={$_GET["v"]}&delId={$users[$i]["id"]}&delStatus={$delStatus}" ?>" data-toggle="tooltip" data-original-title="<?php echo $statusText ?>" class="btn btn-danger"><i class="<?php echo $statusIcon ?> text-inverse"></i>
 				</a>
-				<div style="display:none"><label id="points<?php echo $users[$i]["id"]?>"><?php echo $users[$i]["points"] ?></label></div>	
+				<div style="display:none">
+					<label id="points<?php echo $users[$i]["id"]?>"><?php echo $users[$i]["points"] ?></label>
+				</div>	
 				</td>
 				</tr>
 				<?php
