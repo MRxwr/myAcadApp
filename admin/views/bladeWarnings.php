@@ -26,7 +26,7 @@
 		<tbody>
 		<?php 
         $joinData = array(
-            "select" => ["t.arAcademy","t.enAcademy","MAX(t.id) as id","t.date","t1.area","t1.gender","t2.areaEnTitle","t2.areaArTitle"],
+            "select" => ["t.arAcademy","t.enAcademy","MAX(t.id) as id","MAX(t.date) as date","t1.area","t1.gender","t2.areaEnTitle","t2.areaArTitle"],
             "join" => ["academies","countries"],
             "on" => ["t.academyId = t1.id","t1.area = t2.id"]
         );
