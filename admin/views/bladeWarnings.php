@@ -23,7 +23,7 @@
 		<tbody>
 		<?php 
         $joinData = array(
-            "select" => ["t.enTitle","t.arTitle","MAX(t.id) as id","MAX(t.date) as date","t1.area","t1.gender","t2.areaEnTitle","t2.areaArTitle"],
+            "select" => ["t.enTitle","t.arTitle","t.area","t.gender","t2.areaEnTitle","t2.areaArTitle"],
             "join" => ["orders","countries"],
             "on" => ["ON t1.academyId = t.id AND t1.status IN ('1','4') AND t1.tournamentId = '0' AND t1.date > DATE_SUB(NOW(), INTERVAL 30 DAY)","t.area = t2.id"]
         );
