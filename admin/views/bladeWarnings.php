@@ -31,7 +31,7 @@
             "on" => ["t.academyId = t1.id","t1.area = t2.id"]
         );
         // add where to the quesy to check if the data passed 30 days or not
-			if( $academies = selectJoinDB("orders",$joinData,"t.date <= DATE_SUB(NOW(), INTERVAL 30 DAY) AND (t.status = '1' OR t.status = '4') AND t.tournamentId = '0 AND t1.status = '0' AND t1.hidden = '1'") ){
+			if( $academies = selectJoinDB("orders",$joinData,"t.date <= DATE_SUB(NOW(), INTERVAL 30 DAY) AND (t.status = '1' OR t.status = '4') AND t.tournamentId = '0' AND t1.status = '0' AND t1.hidden = '1'") ){
                 $gendersList = array(
                     "1" => direction("Man","رجل"),
                     "2" => direction("Woman","إمرأه"),
