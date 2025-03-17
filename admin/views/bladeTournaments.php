@@ -1,4 +1,4 @@
-<div class="col-sm-12">
+<div class="col-sm-12" id="editDetails" style="<?php echo $userType = ( $userType == 0 ) ? "display:block" : "display:none" ?>">
 <div class="panel panel-default card-view">
 <div class="panel-heading">
 <div class="pull-left">
@@ -161,17 +161,17 @@
 			<input type="time" name="gameTime" class="form-control" required>
 			</div>
 
-			<div class="col-md-12">
+			<div class="col-md-12" style="<?php echo $userType ?>">
 			<label><?php echo direction("IBAN","الأيبان") ?></label>
 			<input type="text" name="iban" class="form-control" required>
 			</div>
 
-			<div class="col-md-3">
+			<div class="col-md-3" style="<?php echo $userType ?>">
 			<label><?php echo direction("KNET Charge","عمولة الكي نت") ?></label>
 			<input type="number" step="any" name="charges" class="form-control" required>
 			</div>
 
-			<div class="col-md-3">
+			<div class="col-md-3" style="<?php echo $userType ?>">
 			<label><?php echo direction("KNET charge type","نوع خصم الكي نت") ?></label>
 			<select name="chargeType" class="form-control" required>
 				<option value='fixed'>fixed</option>
@@ -179,12 +179,12 @@
 			</select>
 			</div>
 
-			<div class="col-md-3">
+			<div class="col-md-3" style="<?php echo $userType ?>">
 			<label><?php echo direction("Visa Charge","عمولة الفيزا") ?></label>
 			<input type="number" step="any" name="cc_charge" class="form-control" required>
 			</div>
 
-			<div class="col-md-3">
+			<div class="col-md-3" style="<?php echo $userType ?>">
 			<label><?php echo direction("VISA charge type","نوع خصم الفيزا") ?></label>
 			<select name="cc_chargetype" class="form-control" required>
 				<option value='fixed'>fixed</option>
@@ -386,6 +386,7 @@
 		});
 
 		$(document).on("click",".edit", function(){
+			$("#editDetails").show();
 			var id = $(this).attr("id");
 			$("input[name=enTitle]").val($("#enTitle"+id).html()).focus();
 			$("input[name=arTitle]").val($("#arTitle"+id).html());
