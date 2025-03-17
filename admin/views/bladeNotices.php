@@ -30,10 +30,10 @@
         // add where to the quesy to check if the data passed 30 days or not
 			if( $academies = selectJoinDB("academies",$joinData,"NOT EXISTS (SELECT 1 FROM orders as o WHERE o.academyId = t.id AND o.status IN ('1','4') AND o.tournamentId = '0' AND o.date > DATE_SUB(NOW(), INTERVAL 30 DAY))") ){
                 $gendersList = array(
-                    "1" => direction("Man","رجل"),
-                    "2" => direction("Woman","إمرأه"),
-                    "3" => direction("Boy","ولد"),
-                    "4" => direction("Girl","بنت"),
+                    "1" => direction("Man","رجال"),
+                    "2" => direction("Woman","سيدات"),
+                    "3" => direction("Boy","أولاد"),
+                    "4" => direction("Girl","بنات"),
                     "5" => direction("Mix Adults","مختلط الكبار"),
                     "6" => direction("Mix Children","مختلط الاطفال"),
                 );
