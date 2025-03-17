@@ -126,10 +126,10 @@
 			<div class="col-md-3">
 			<label><?php echo direction("Gender","الجنس") ?></label>
 			<select name="gender" class="form-control" required>
-				<option value="1" ><?php echo direction("Man","رجل") ?></option>
-				<option value="2" ><?php echo direction("Woman","أنثى") ?></option>
-				<option value="3" ><?php echo direction("Boy","ولد") ?></option>
-				<option value="4" ><?php echo direction("Girl","بنت") ?></option>
+				<option value="1" ><?php echo direction("Man","رجال") ?></option>
+				<option value="2" ><?php echo direction("Woman","سيدات") ?></option>
+				<option value="3" ><?php echo direction("Boy","أولاد") ?></option>
+				<option value="4" ><?php echo direction("Girl","بنات") ?></option>
 				<option value="5" ><?php echo direction("Mix Adults","مختلط كبار") ?></option>
 				<option value="6" ><?php echo direction("Mix Kids","مختلط الاطفال") ?></option>
 			</select>
@@ -273,10 +273,10 @@
 		<?php 
 		$count = (is_array($academiesList) && !empty($academiesList)) ? count($academiesList) : 1;
 		$gendersList = array(
-			"1" => direction("Man","رجل"),
-			"2" => direction("Woman","إمرأه"),
-			"3" => direction("Boy","ولد"),
-			"4" => direction("Girl","بنت"),
+			"1" => direction("Man","رجال"),
+			"2" => direction("Woman","سيدات"),
+			"3" => direction("Boy","أولاد"),
+			"4" => direction("Girl","بنات"),
 			"5" => direction("Mix Adults","مختلط الكبار"),
 			"6" => direction("Mix Children","مختلط الاطفال"),
 		);
