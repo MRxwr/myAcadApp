@@ -117,10 +117,10 @@
 			<div class="col-md-6">
 			<label><?php echo direction("Gender","الجنس") ?></label>
 			<select name="gender" class="form-control" required>
-				<option value="1" ><?php echo direction("Man","رجل") ?></option>
-				<option value="2" ><?php echo direction("Woman","أنثى") ?></option>
-				<option value="3" ><?php echo direction("Boy","ولد") ?></option>
-				<option value="4" ><?php echo direction("Girl","بنت") ?></option>
+				<option value="1" ><?php echo direction("Man","رجال") ?></option>
+				<option value="2" ><?php echo direction("Woman","سيدات") ?></option>
+				<option value="3" ><?php echo direction("Boy","أولاد") ?></option>
+				<option value="4" ><?php echo direction("Girl","بنات") ?></option>
 				<option value="5" ><?php echo direction("Mix Adults","مختلط كبار") ?></option>
 				<option value="6" ><?php echo direction("Mix Kids","مختلط الاطفال") ?></option>
 			</select>
@@ -285,13 +285,13 @@
 				$locationText = ( !empty($tournaments[$i]["location"]) ) ? direction("View","إعرض") : "";
 				$price = ( empty($tournaments[$i]["price"]) )? direction("Free","مجانا") : $tournaments[$i]["price"];
                 if ( $tournaments[$i]["gender"] == 1 ){
-                    $genderText = direction("Man","رجل");
+                    $genderText = direction("Man","رجال");
                 }elseif( $tournaments[$i]["gender"] == 2 ){
-                    $genderText = direction("Woman","إمرأه");
+                    $genderText = direction("Woman","سيدات");
                 }elseif( $tournaments[$i]["gender"] == 3 ){
-                    $genderText = direction("Boy","ولد");
+                    $genderText = direction("Boy","أولاد");
                 }elseif( $tournaments[$i]["gender"] == 4 ){
-                    $genderText = direction("Girl","بنت");
+                    $genderText = direction("Girl","بنات");
                 }elseif( $tournaments[$i]["gender"] == 5 ){
                     $genderText = direction("Mixed Adults","مختلط كبار");
                 }elseif( $tournaments[$i]["gender"] == 6 ){
