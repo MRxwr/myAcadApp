@@ -12,7 +12,7 @@ if( isset($_GET["s"]) && !empty($_GET["s"]) && $link = selectDB("purchases","`ga
     </script>
     <?php
     die();
-}elseif( !isset($_GET["OrderID"]) ){
+}elseif( !isset($_GET["requested_order_id"]) ){
     ?>
     <script>
         window.location.href = "index?v=Home"; 
@@ -21,17 +21,17 @@ if( isset($_GET["s"]) && !empty($_GET["s"]) && $link = selectDB("purchases","`ga
     die();
 }
 
-if( isset($_GET["Result"]) ){
-    $order = selectDB("purchases","`gatewayId` = '{$_GET["OrderID"]}'");
+if( isset($_GET["result"]) ){
+    $order = selectDB("purchases","`gatewayId` = '{$_GET["requested_order_id"]}'");
     if( $order[0]["status"] == 0 ){
-        if( $_GET["Result"] == "CAPTURED" ){
+        if( $_GET["result"] == "CAPTURED" ){
             $message = direction("Your payment is Confirmed ","تم تأكيد عملية الدفع بنجاح ");
             $icon = "suc";
-            updateDB("purchases",array("status"=>1,"gatewayResponse"=>json_encode($_GET)),"`gatewayId` = '{$_GET["OrderID"]}'");
+            updateDB("purchases",array("status"=>1,"gatewayResponse"=>json_encode($_GET)),"`gatewayId` = '{$_GET["requested_order_id"]}'");
         }else{
             $message = direction("Your payment has failed","عملية دفع فاشلة");
             $icon = "close";
-            updateDB("purchases",array("status"=>2,"gatewayResponse"=>json_encode($_GET)),"`gatewayId` = '{$_GET["OrderID"]}'");
+            updateDB("purchases",array("status"=>2,"gatewayResponse"=>json_encode($_GET)),"`gatewayId` = '{$_GET["requested_order_id"]}'");
         }
     }elseif( $order[0]["status"] == 1 ){
         $message = direction("Your payment is Confirmed ","تم تأكيد عملية الدفع بنجاح ");
