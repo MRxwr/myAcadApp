@@ -83,14 +83,15 @@ if ( isset($_GET["hide"]) || isset($_GET["show"]) || isset($_GET["delId"]) || is
 				$_POST["password"] = sha1($_POST["password"]);
 			}
 			
-			if( insertDB("{$table}", $_POST) ){
+			if( $userType == 0 && insertDB("{$table}", $_POST) ){
+			}elseif( $userType != 0 && insertDB("modifications", array("empId" => $userID, "postId" => $id, "tableTitle" => $table, "contents" => json_encode($_POST)) ) ){
 			}else{
-			?>
-			<script>
-				alert("Could not process your request, Please try again.");
-			</script>
-			<?php
-			}
+            ?>
+            <script>
+                alert("Could not process your request, Please try again.");
+            </script>
+            <?php
+            }
 		}else{
             if( isset($_FILES['imageurl']) && is_uploaded_file($_FILES['imageurl']['tmp_name']) ){
                 $directory = "../logos/";
@@ -160,8 +161,9 @@ if ( isset($_GET["hide"]) || isset($_GET["show"]) || isset($_GET["delId"]) || is
 				}
 			}
 			
-			if( updateDB("{$table}", $_POST, "`id` = '{$id}'") ){
-			}else{
+			if( $userType == 0 && updateDB("{$table}", $_POST, "`id` = '{$id}'") ){
+			}elseif( $userType != 0 && insertDB("modifications", array("empId" => $userID,"postId" => $id, "tableTitle" => $table, "contents" => json_encode($_POST)) ) ){
+            }else{
 			?>
 			<script>
 				alert("Could not process your request, Please try again.");
