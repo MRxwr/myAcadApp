@@ -161,7 +161,10 @@ if ( isset($_GET["hide"]) || isset($_GET["show"]) || isset($_GET["delId"]) || is
 				}
 			}
 			
-            if( $getOld = selectDB("{$table}","`id` = '{$id}'") ){}
+            if( $getOld = selectDB("{$table}","`id` = '{$id}'") ){
+                unset($getOld[0]["id"]);
+                unset($getOld[0]["date"]);
+            }
 
 			if( $userType == 0 && updateDB("{$table}", $_POST, "`id` = '{$id}'") ){
 			}elseif( $userType != 0 && insertDB("modifications", array("empId" => $userID,"postId" => $id, "tableTitle" => $table, "contents" => json_encode($_POST), "oldContents" => json_encode($getOld[0])) ) ){
