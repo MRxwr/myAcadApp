@@ -36,13 +36,17 @@ if( !isset($_POST) ){
         'returnUrl' => 'https://myacad.app/Purchase.php',
         'cancelUrl' => 'https://myacad.app/Purchase.php',
         'notificationUrl' => 'https://myacad.app/Purchase.php',
-        'extraMerchantData[0][amount]' => (string)$fullAmount,
-        'extraMerchantData[0][knetCharge]' => '0.25',
-        'extraMerchantData[0][knetChargeType]' => 'fixed',
-        'extraMerchantData[0][ccCharge]' => '0.25',
-        'extraMerchantData[0][ccChargeType]' => 'fixed',
-        'extraMerchantData[0][ibanNumber]' => "{$iban}",
         );
+    if( $purchase[0]["isMyacad"] == 1 ){
+        array_push($postBody["extraMerchantData"][0],array(
+            'amount' => (string)$fullAmount,
+            'knetCharge' => '0.200',
+            'knetChargeType' => 'fixed',
+            'ccCharge' => '0.200',
+            'ccChargeType' => 'fixed',
+            'ibanNumber' => "{$iban}"
+        ));
+    }
 
 	$curl = curl_init();
     curl_setopt_array($curl, array(
