@@ -92,7 +92,7 @@ $dataJoin = array(
 );
 if( $modifications = selectJoinDB("modifications",$dataJoin,"t.hidden = '0' AND t1.id = '{$userID}' ORDER BY t.id DESC") ){
 ?>
-<div class="col-sm-12">
+<div class="col-sm-12 pd-5">
 <div class="panel panel-default card-view">
 <div class="panel-heading">
 <div class="pull-left">
