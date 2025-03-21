@@ -65,6 +65,15 @@ if( isset($_GET["status"]) && isset($_GET["id"]) && !empty($_GET["status"]) && !
         max-height: 500px;
         overflow-y: auto;
     }
+    .old-data .form-control {
+        background-color: #f8d7da;
+    }
+    .new-data .form-control {
+        background-color: #d4edda;
+    }
+    .changed {
+        border: 2px solid #ffc107;
+    }
 </style>
 <div class="col-sm-12">
 <div class="panel panel-default card-view">
@@ -145,20 +154,23 @@ if( isset($_GET["status"]) && isset($_GET["id"]) && !empty($_GET["status"]) && !
                                 $data = json_decode($modifications[$i]["contents"], true);
                                 ksort($data);
                                 foreach ($data as $key => $value) {
-                                    echo "<div class='form-group'>";
+                                    $oldValue = isset($modifications[$i]["oldContents"][$key]) ? $modifications[$i]["oldContents"][$key] : null;
+                                    $isChanged = $oldValue !== $value;
+                                    $changedClass = $isChanged ? 'changed' : '';
+                                    echo "<div class='form-group $changedClass'>";
                                     if (is_array($value)) {
                                         echo "<label class='control-label'><strong>$key</strong></label>";
                                         foreach ($value as $item) {
-                                            echo "<input type='text' readonly value='$item' class='form-control'>";
+                                            echo "<input type='text' readonly value='$item' class='form-control $changedClass'>";
                                         }
                                     } else {
                                         echo "<label class='control-label'><strong>$key</strong></label>";
                                         if ($key == 'arTerms' || $key == 'enTerms') {
-                                            echo "<div class='form-control' style='height:auto;min-height:34px;'>$value</div>";
+                                            echo "<div class='form-control $changedClass' style='height:auto;min-height:34px;'>$value</div>";
                                         } elseif ($key == 'imageurl' || $key == 'locationImage' || $key == 'header') {
-                                            echo "<img src='../logos/$value' alt='$key' class='img-responsive' style='max-width: 100%; height: auto;'>";
+                                            echo "<img src='../logos/$value' alt='$key' class='img-responsive $changedClass' style='max-width: 100%; height: auto;'>";
                                         } else {
-                                            echo "<input type='text' readonly value='$value' class='form-control'>";
+                                            echo "<input type='text' readonly value='$value' class='form-control $changedClass'>";
                                         }
                                     }
                                     echo "</div>";
