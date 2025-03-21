@@ -84,9 +84,7 @@ if( isset($_GET["status"]) && isset($_GET["id"]) && !empty($_GET["status"]) && !
                     <td>
                         <?php
                         $data = json_decode($modifications[$i]["oldContents"], true);
-                        ksort($data);
-                        unset($data["status"]);
-                        unset($data["hidden"]);
+                        ksort($data);unset($data["status"]);unset($data["hidden"]);
                         foreach ($data as $key => $value) {
                             if (is_array($value)) {
                                 echo "<pre><code>$key :</code></pre>";
@@ -102,16 +100,15 @@ if( isset($_GET["status"]) && isset($_GET["id"]) && !empty($_GET["status"]) && !
                     <td>
                         <?php
                         $data = json_decode($modifications[$i]["contents"], true);
-                        // rearrange keys alphabetically
                         ksort($data);
                         foreach ($data as $key => $value) {
                             if (is_array($value)) {
-                                echo "<pre><code>$key :</code></pre>";
+                                echo "<label>$key</label>";
                                 foreach ($value as $item) {
-                                    echo "<pre><code>  - $item</code></pre>";
+                                    echo "<input type='text' readonly value='$item' class='form-control'>";
                                 }
                             } else {
-                                echo "<pre><code>$key : $value</code></pre>";
+                                echo "<input type='text' readonly value='$value' class='form-control'>";
                             }
                         }
                         ?>
