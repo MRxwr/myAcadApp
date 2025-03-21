@@ -60,14 +60,27 @@
 <?php
 $id = "";
 $listOfAcademies = "";
-$count = (is_array($academiesList) && !empty($academiesList)) ? count($academiesList) : 0;
-for( $z = 0; $z < $count; $z++ ){
-	$listOfAcademies .= "'{$academiesList[$z]}'";
-	if( isset($academiesList[$z+1]) && !empty($academiesList[$z+1]) ){
-		$listOfAcademies .= ",";
+$listOfTournaments = "";
+if ( $isTournamentUser ){
+	$count = (is_array($tournamentsList) && !empty($tournamentsList)) ? count($tournamentsList) : 0;
+	for( $z = 0; $z < $count; $z++ ){
+		$listOfTournaments .= "'{$tournamentsList[$z]}'";
+		if( isset($tournamentsList[$z+1]) && !empty($tournamentsList[$z+1]) ){
+			$listOfTournaments .= ",";
+		}
 	}
+	$id .= ( isset($tournamentsList[0]) && !empty($tournamentsList[0]) ) ? "AND `tournamentId` IN ($listOfTournaments)" : "";
+}else{
+	$count = (is_array($academiesList) && !empty($academiesList)) ? count($academiesList) : 0;
+	for( $z = 0; $z < $count; $z++ ){
+		$listOfAcademies .= "'{$academiesList[$z]}'";
+		if( isset($academiesList[$z+1]) && !empty($academiesList[$z+1]) ){
+			$listOfAcademies .= ",";
+		}
+	}
+	$id .= ( isset($academiesList[0]) && !empty($academiesList[0]) ) ? "AND `academyId` IN ($listOfAcademies)" : "";
 }
-$id .= ( isset($academiesList[0]) && !empty($academiesList[0]) ) ? "AND `academyId` IN ($listOfAcademies)" : "";
+
 ?>
 <div class="row" style="padding:16px">
 	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
