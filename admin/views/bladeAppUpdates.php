@@ -58,8 +58,6 @@ if( isset($_GET["status"]) && isset($_GET["id"]) && !empty($_GET["status"]) && !
 		<th><?php echo direction("Username","اسم المستخدم") ?></th>
 		<th><?php echo direction("Type","النوع") ?></th>
 		<th><?php echo direction("Where","من") ?></th>
-		<th><?php echo direction("Old","القديم") ?></th>
-		<th><?php echo direction("New","الجديد") ?></th>
 		<th><?php echo direction("Action","العملية") ?></th>
 		</tr>
 		</thead>
