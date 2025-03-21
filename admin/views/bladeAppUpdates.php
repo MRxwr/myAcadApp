@@ -81,7 +81,7 @@ if( isset($_GET["status"]) && isset($_GET["id"]) && !empty($_GET["status"]) && !
                     <td><?php echo $modifications[$i]["fullName"] ?></td>
                     <td><?php echo $type ?></td>
                     <td><?php echo $modifications[$i]["tableTitle"] ?></td>
-                    <div style="display: none;" id="new<?php echo $modifications[$i]["id"]?>"></div>
+                    <div style="display: none;" id="new<?php echo $modifications[$i]["id"]?>">
                         <div>
                             <?php
                             $data = json_decode($modifications[$i]["oldContents"], true);
