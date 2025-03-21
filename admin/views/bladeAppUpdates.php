@@ -85,6 +85,8 @@ if( isset($_GET["status"]) && isset($_GET["id"]) && !empty($_GET["status"]) && !
                         <?php
                         $data = json_decode($modifications[$i]["oldContents"], true);
                         ksort($data);
+                        unset($data["status"]);
+                        unset($data["hidden"]);
                         foreach ($data as $key => $value) {
                             if (is_array($value)) {
                                 echo "<pre><code>$key :</code></pre>";
