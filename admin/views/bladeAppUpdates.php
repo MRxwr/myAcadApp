@@ -179,7 +179,7 @@ if( isset($_GET["status"]) && isset($_GET["id"]) && !empty($_GET["status"]) && !
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+        <h4 class="modal-title" id="myModalLabel"><?php echo direction("Comparison", "مقارنة") ?></h4>
       </div>
       <div class="modal-body">
         <table id="modal-example-1" class="table" data-paging="true" data-filtering="true" data-sorting="true"></table>
