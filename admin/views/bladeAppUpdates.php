@@ -116,7 +116,7 @@ if( isset($_GET["status"]) && isset($_GET["id"]) && !empty($_GET["status"]) && !
                         </div>
                     </div>
                     <td>
-                        <a onclick='showUpdate(<?php echo $modifications[$i]["id"] ?>)' class="btn btn-warning"><?php echo direction("Show","اظهار") ?></a>
+                        <a onclick='showUpdate(<?php echo "new{$modifications[$i]["id"]}" ?>)' class="btn btn-warning"><?php echo direction("Show","اظهار") ?></a>
                         <a href="<?php echo "?v={$_GET["v"]}&id={$modifications[$i]["id"]}&status=1" ?>" class="btn btn-success"><?php echo direction("Approve","موافقة" ) ?></a>
                         <a href="<?php echo "?v={$_GET["v"]}&id={$modifications[$i]["id"]}&status=2" ?>" class="btn btn-danger"><?php echo direction("Cancel","الغاء") ?></a>
                     </td>
