@@ -80,7 +80,7 @@ if( isset($_GET["status"]) && isset($_GET["id"]) && !empty($_GET["status"]) && !
                     <td><?php echo $type ?></td>
                     <td><?php echo $modifications[$i]["tableTitle"] ?></td>
                     <td>
-                        <a onclick='showUpdate(<?php echo "new{$modifications[$i]["id"]}" ?>)' class="btn btn-warning"><?php echo direction("Show","اظهار") ?></a>
+                        <a onclick='showUpdate(<?php echo $modifications[$i]["id"] ?>)' class="btn btn-warning"><?php echo direction("Show","اظهار") ?></a>
                         <a href="<?php echo "?v={$_GET["v"]}&id={$modifications[$i]["id"]}&status=1" ?>" class="btn btn-success"><?php echo direction("Approve","موافقة" ) ?></a>
                         <a href="<?php echo "?v={$_GET["v"]}&id={$modifications[$i]["id"]}&status=2" ?>" class="btn btn-danger"><?php echo direction("Cancel","الغاء") ?></a>
                         <div style="display: none;" id="new<?php echo $modifications[$i]["id"]?>">
@@ -152,7 +152,7 @@ if( isset($_GET["status"]) && isset($_GET["id"]) && !empty($_GET["status"]) && !
 
 <script>
 function showUpdate(id){
-    var newContent = document.getElementById(id).innerHTML;
+    var newContent = document.getElementById("new"+id).innerHTML;
     document.getElementById("modal-example-1").innerHTML = newContent;
     $('#myModal').modal('show');
 }
