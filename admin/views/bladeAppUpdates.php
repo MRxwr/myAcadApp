@@ -79,44 +79,44 @@ if( isset($_GET["status"]) && isset($_GET["id"]) && !empty($_GET["status"]) && !
                     <td><?php echo $modifications[$i]["fullName"] ?></td>
                     <td><?php echo $type ?></td>
                     <td><?php echo $modifications[$i]["tableTitle"] ?></td>
-                    <div style="display: none;" id="new<?php echo $modifications[$i]["id"]?>">
-                        <div>
-                            <?php
-                            $data = json_decode($modifications[$i]["oldContents"], true);
-                            ksort($data);unset($data["status"]);unset($data["hidden"]);
-                            foreach ($data as $key => $value) {
-                                if (is_array($value)) {
-                                    echo "<label>$key</label>";
-                                    foreach ($value as $item) {
-                                        echo "<input type='text' readonly value='$item' class='form-control'>";
-                                    }
-                                } else {
-                                    echo "<input type='text' readonly value='$value' class='form-control'>";
-                                }
-                            }
-                            ?>
-                        </div>
-                        <div>
-                            <?php
-                            $data = json_decode($modifications[$i]["contents"], true);
-                            ksort($data);
-                            foreach ($data as $key => $value) {
-                                if (is_array($value)) {
-                                    echo "<label>$key</label>";
-                                    foreach ($value as $item) {
-                                        echo "<input type='text' readonly value='$item' class='form-control'>";
-                                    }
-                                } else {
-                                    echo "<input type='text' readonly value='$value' class='form-control'>";
-                                }
-                            }
-                            ?>
-                        </div>
-                    </div>
                     <td>
                         <a onclick='showUpdate(<?php echo "new{$modifications[$i]["id"]}" ?>)' class="btn btn-warning"><?php echo direction("Show","اظهار") ?></a>
                         <a href="<?php echo "?v={$_GET["v"]}&id={$modifications[$i]["id"]}&status=1" ?>" class="btn btn-success"><?php echo direction("Approve","موافقة" ) ?></a>
                         <a href="<?php echo "?v={$_GET["v"]}&id={$modifications[$i]["id"]}&status=2" ?>" class="btn btn-danger"><?php echo direction("Cancel","الغاء") ?></a>
+                        <div style="display: none;" id="new<?php echo $modifications[$i]["id"]?>">
+                            <div>
+                                <?php
+                                $data = json_decode($modifications[$i]["oldContents"], true);
+                                ksort($data);unset($data["status"]);unset($data["hidden"]);
+                                foreach ($data as $key => $value) {
+                                    if (is_array($value)) {
+                                        echo "<label>$key</label>";
+                                        foreach ($value as $item) {
+                                            echo "<input type='text' readonly value='$item' class='form-control'>";
+                                        }
+                                    } else {
+                                        echo "<input type='text' readonly value='$value' class='form-control'>";
+                                    }
+                                }
+                                ?>
+                            </div>
+                            <div>
+                                <?php
+                                $data = json_decode($modifications[$i]["contents"], true);
+                                ksort($data);
+                                foreach ($data as $key => $value) {
+                                    if (is_array($value)) {
+                                        echo "<label>$key</label>";
+                                        foreach ($value as $item) {
+                                            echo "<input type='text' readonly value='$item' class='form-control'>";
+                                        }
+                                    } else {
+                                        echo "<input type='text' readonly value='$value' class='form-control'>";
+                                    }
+                                }
+                                ?>
+                            </div>
+                        </div>
                     </td>
                     </tr>
                 <?php
