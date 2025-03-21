@@ -61,6 +61,10 @@ if( isset($_GET["status"]) && isset($_GET["id"]) && !empty($_GET["status"]) && !
         margin-bottom: 5px;
         color: #333;
     }
+    .modal-body {
+        max-height: 500px;
+        overflow-y: auto;
+    }
 </style>
 <div class="col-sm-12">
 <div class="panel panel-default card-view">
