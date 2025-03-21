@@ -65,16 +65,6 @@ if( isset($_GET["status"]) && isset($_GET["id"]) && !empty($_GET["status"]) && !
         max-height: 500px;
         overflow-y: auto;
     }
-    .old-data .form-control {
-        background-color: #f8d7da;
-    }
-    .new-data .form-control {
-        background-color: #d4edda;
-    }
-    .changed {
-        border: 2px solid #ffc107 !important;
-        box-shadow: 0 0 5px rgba(255, 193, 7, 0.5);
-    }
 </style>
 <div class="col-sm-12">
 <div class="panel panel-default card-view">
@@ -123,20 +113,12 @@ if( isset($_GET["status"]) && isset($_GET["id"]) && !empty($_GET["status"]) && !
                         <a href="<?php echo "?v={$_GET["v"]}&id={$modifications[$i]["id"]}&status=1" ?>" class="btn btn-success"><?php echo direction("Approve","موافقة" ) ?></a>
                         <a href="<?php echo "?v={$_GET["v"]}&id={$modifications[$i]["id"]}&status=2" ?>" class="btn btn-danger"><?php echo direction("Cancel","الغاء") ?></a>
                         <div style="display: none;" id="new<?php echo $modifications[$i]["id"]?>">
-                            <?php
-                            $oldContent = json_decode($modifications[$i]["oldContents"], true);
-                            $newContent = json_decode($modifications[$i]["contents"], true);
-                            ?>
                             <div class="comparison-column old-data">
                                 <h4><?php echo direction("Previous Data", "البيانات السابقة") ?></h4>
                                 <?php
-                                $data = $oldContent;
+                                $data = json_decode($modifications[$i]["oldContents"], true);
                                 ksort($data);unset($data["status"]);unset($data["hidden"]);
                                 foreach ($data as $key => $value) {
-                                    $newValue = isset($newContent[$key]) ? $newContent[$key] : null;
-                                    $isChanged = $value !== $newValue;
-                                    $changedClass = $isChanged ? 'changed' : '';
-                                    
                                     echo "<div class='form-group'>";
                                     if (is_array($value)) {
                                         echo "<label class='control-label'><strong>$key</strong></label>";
@@ -146,11 +128,11 @@ if( isset($_GET["status"]) && isset($_GET["id"]) && !empty($_GET["status"]) && !
                                     } else {
                                         echo "<label class='control-label'><strong>$key</strong></label>";
                                         if ($key == 'arTerms' || $key == 'enTerms') {
-                                            echo "<div class='form-control $changedClass' style='height:auto;min-height:34px;'>$value</div>";
-                                        } elseif ($key == 'imageurl' || $key == 'locationImage' || $key == 'header') {
-                                            echo "<img src='../logos/$value' alt='$key' class='img-responsive $changedClass' style='max-width: 100%; height: auto;'>";
+                                            echo "<div class='form-control' style='height:auto;min-height:34px;'>$value</div>";
+                                        } elseif ($key == 'imageurl' || $key == 'locationImage' || $key == 'header' || $key == 'clothesImage') {
+                                            echo "<img src='../logos/$value' alt='$key' class='img-responsive' style='max-width: 100%; height: auto;'>";
                                         } else {
-                                            echo "<input type='text' readonly value='$value' class='form-control $changedClass'>";
+                                            echo "<input type='text' readonly value='$value' class='form-control'>";
                                         }
                                     }
                                     echo "</div>";
@@ -160,13 +142,9 @@ if( isset($_GET["status"]) && isset($_GET["id"]) && !empty($_GET["status"]) && !
                             <div class="comparison-column new-data">
                                 <h4><?php echo direction("New Data", "البيانات الجديدة") ?></h4>
                                 <?php
-                                $data = $newContent;
+                                $data = json_decode($modifications[$i]["contents"], true);
                                 ksort($data);
                                 foreach ($data as $key => $value) {
-                                    $oldValue = isset($oldContent[$key]) ? $oldContent[$key] : null;
-                                    $isChanged = $value !== $oldValue;
-                                    $changedClass = $isChanged ? 'changed' : '';
-                                    
                                     echo "<div class='form-group'>";
                                     if (is_array($value)) {
                                         echo "<label class='control-label'><strong>$key</strong></label>";
@@ -176,11 +154,11 @@ if( isset($_GET["status"]) && isset($_GET["id"]) && !empty($_GET["status"]) && !
                                     } else {
                                         echo "<label class='control-label'><strong>$key</strong></label>";
                                         if ($key == 'arTerms' || $key == 'enTerms') {
-                                            echo "<div class='form-control $changedClass' style='height:auto;min-height:34px;'>$value</div>";
-                                        } elseif ($key == 'imageurl' || $key == 'locationImage' || $key == 'header') {
-                                            echo "<img src='../logos/$value' alt='$key' class='img-responsive $changedClass' style='max-width: 100%; height: auto;'>";
+                                            echo "<div class='form-control' style='height:auto;min-height:34px;'>$value</div>";
+                                        } elseif ($key == 'imageurl' || $key == 'locationImage' || $key == 'header' || $key == 'clothesImage') {
+                                            echo "<img src='../logos/$value' alt='$key' class='img-responsive' style='max-width: 100%; height: auto;'>";
                                         } else {
-                                            echo "<input type='text' readonly value='$value' class='form-control $changedClass'>";
+                                            echo "<input type='text' readonly value='$value' class='form-control'>";
                                         }
                                     }
                                     echo "</div>";
