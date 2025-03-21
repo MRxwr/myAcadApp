@@ -123,7 +123,11 @@ if( isset($_GET["status"]) && isset($_GET["id"]) && !empty($_GET["status"]) && !
                                         }
                                     } else {
                                         echo "<label class='control-label'><strong>$key</strong></label>";
-                                        echo "<input type='text' readonly value='$value' class='form-control'>";
+                                        if ($key == 'arTerms' || $key == 'enTerms') {
+                                            echo "<div class='form-control' style='height:auto;min-height:34px;'>$value</div>";
+                                        } else {
+                                            echo "<input type='text' readonly value='$value' class='form-control'>";
+                                        }
                                     }
                                     echo "</div>";
                                 }
@@ -143,7 +147,11 @@ if( isset($_GET["status"]) && isset($_GET["id"]) && !empty($_GET["status"]) && !
                                         }
                                     } else {
                                         echo "<label class='control-label'><strong>$key</strong></label>";
-                                        echo "<input type='text' readonly value='$value' class='form-control'>";
+                                        if ($key == 'arTerms' || $key == 'enTerms') {
+                                            echo "<div class='form-control' style='height:auto;min-height:34px;'>$value</div>";
+                                        } else {
+                                            echo "<input type='text' readonly value='$value' class='form-control'>";
+                                        }
                                     }
                                     echo "</div>";
                                 }
