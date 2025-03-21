@@ -116,26 +116,28 @@ if( isset($_GET["status"]) && isset($_GET["id"]) && !empty($_GET["status"]) && !
                             <div class="comparison-column old-data">
                                 <h4><?php echo direction("Previous Data", "البيانات السابقة") ?></h4>
                                 <?php
-                                $data = json_decode($modifications[$i]["oldContents"], true);
-                                ksort($data);unset($data["status"]);unset($data["hidden"]);
-                                foreach ($data as $key => $value) {
-                                    echo "<div class='form-group'>";
-                                    if (is_array($value)) {
-                                        echo "<label class='control-label'><strong>$key</strong></label>";
-                                        foreach ($value as $item) {
-                                            echo "<input type='text' readonly value='$item' class='form-control'>";
-                                        }
-                                    } else {
-                                        echo "<label class='control-label'><strong>$key</strong></label>";
-                                        if ($key == 'arTerms' || $key == 'enTerms') {
-                                            echo "<div class='form-control' style='height:auto;min-height:34px;'>$value</div>";
-                                        } elseif ($key == 'imageurl' || $key == 'locationImage' || $key == 'header' || $key == 'clothesImage') {
-                                            echo "<img src='../logos/$value' alt='$key' class='img-responsive' style='max-width: 100%; height: auto;'>";
+                                if( !empty($modifications[$i]["oldContents"]) ){
+                                    $data = json_decode($modifications[$i]["oldContents"], true);
+                                    ksort($data);unset($data["status"]);unset($data["hidden"]);
+                                    foreach ($data as $key => $value) {
+                                        echo "<div class='form-group'>";
+                                        if (is_array($value)) {
+                                            echo "<label class='control-label'><strong>$key</strong></label>";
+                                            foreach ($value as $item) {
+                                                echo "<input type='text' readonly value='$item' class='form-control'>";
+                                            }
                                         } else {
-                                            echo "<input type='text' readonly value='$value' class='form-control'>";
+                                            echo "<label class='control-label'><strong>$key</strong></label>";
+                                            if ($key == 'arTerms' || $key == 'enTerms') {
+                                                echo "<div class='form-control' style='height:auto;min-height:34px;'>$value</div>";
+                                            } elseif ($key == 'imageurl' || $key == 'locationImage' || $key == 'header' || $key == 'clothesImage') {
+                                                echo "<img src='../logos/$value' alt='$key' class='img-responsive' style='max-width: 100%; height: auto;'>";
+                                            } else {
+                                                echo "<input type='text' readonly value='$value' class='form-control'>";
+                                            }
                                         }
+                                        echo "</div>";
                                     }
-                                    echo "</div>";
                                 }
                                 ?>
                             </div>
