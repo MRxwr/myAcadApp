@@ -125,6 +125,8 @@ if( isset($_GET["status"]) && isset($_GET["id"]) && !empty($_GET["status"]) && !
                                         echo "<label class='control-label'><strong>$key</strong></label>";
                                         if ($key == 'arTerms' || $key == 'enTerms') {
                                             echo "<div class='form-control' style='height:auto;min-height:34px;'>$value</div>";
+                                        } elseif ($key == 'imageurl' || $key == 'locationImage' || $key == 'header') {
+                                            echo "<img src='../logoes/$value' alt='$key' class='img-responsive' style='max-width: 100%; height: auto;'>";
                                         } else {
                                             echo "<input type='text' readonly value='$value' class='form-control'>";
                                         }
@@ -149,6 +151,8 @@ if( isset($_GET["status"]) && isset($_GET["id"]) && !empty($_GET["status"]) && !
                                         echo "<label class='control-label'><strong>$key</strong></label>";
                                         if ($key == 'arTerms' || $key == 'enTerms') {
                                             echo "<div class='form-control' style='height:auto;min-height:34px;'>$value</div>";
+                                        } elseif ($key == 'imageurl' || $key == 'locationImage' || $key == 'header') {
+                                            echo "<img src='../logoes/$value' alt='$key' class='img-responsive' style='max-width: 100%; height: auto;'>";
                                         } else {
                                             echo "<input type='text' readonly value='$value' class='form-control'>";
                                         }
