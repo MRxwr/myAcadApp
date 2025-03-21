@@ -90,7 +90,7 @@ $dataJoin = array(
 	"join" => ["employees"],
 	"on" => ["t.empId = t1.id"],
 );
-if( $modifications = selectJoinDB("modifications",$dataJoin,"t.hidden = '0' AND t1.empId = '{$userID}' ORDER BY t.id DESC") ){
+if( $modifications = selectJoinDB("modifications",$dataJoin,"t.hidden = '0' AND t1.id = '{$userID}' ORDER BY t.id DESC") ){
 ?>
 <div class="col-sm-12">
 <div class="panel panel-default card-view">
