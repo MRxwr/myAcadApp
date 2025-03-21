@@ -177,7 +177,62 @@ if( $modifications = selectJoinDB("modifications",$dataJoin,"t.hidden = '0' AND 
 				<td><?php echo $type ?></td>
 				<td><?php echo $modifications[$i]["tableTitle"] ?></td>
 				<td>
+					<a onclick='showUpdate(<?php echo $modifications[$i]["id"] ?>)' class="btn btn-warning"><?php echo direction("Show","اظهار") ?></a>
 					<a href="<?php echo $link ?>" class="btn btn-<?php echo $statusColor ?>"><?php echo $statusText ?></a>
+					<div style="display: none;" id="new<?php echo $modifications[$i]["id"]?>">
+						<div class="comparison-column old-data">
+							<h4><?php echo direction("Previous Data", "البيانات السابقة") ?></h4>
+							<?php
+							$data = json_decode($modifications[$i]["oldContents"], true);
+							ksort($data);unset($data["status"]);unset($data["hidden"]);
+							foreach ($data as $key => $value) {
+								echo "<div class='form-group'>";
+								if (is_array($value)) {
+									echo "<label class='control-label'><strong>$key</strong></label>";
+									foreach ($value as $item) {
+										echo "<input type='text' readonly value='$item' class='form-control'>";
+									}
+								} else {
+									echo "<label class='control-label'><strong>$key</strong></label>";
+									if ($key == 'arTerms' || $key == 'enTerms') {
+										echo "<div class='form-control' style='height:auto;min-height:34px;'>$value</div>";
+									} elseif ($key == 'imageurl' || $key == 'locationImage' || $key == 'header' || $key == 'clothesImage') {
+										echo "<img src='../logos/$value' alt='$key' class='img-responsive' style='max-width: 100%; height: auto;'>";
+									} else {
+										echo "<input type='text' readonly value='$value' class='form-control'>";
+									}
+								}
+								echo "</div>";
+							}
+							?>
+						</div>
+						<div class="comparison-column new-data">
+							<h4><?php echo direction("New Data", "البيانات الجديدة") ?></h4>
+							<?php
+							$data = json_decode($modifications[$i]["contents"], true);
+							ksort($data);
+							foreach ($data as $key => $value) {
+								echo "<div class='form-group'>";
+								if (is_array($value)) {
+									echo "<label class='control-label'><strong>$key</strong></label>";
+									foreach ($value as $item) {
+										echo "<input type='text' readonly value='$item' class='form-control'>";
+									}
+								} else {
+									echo "<label class='control-label'><strong>$key</strong></label>";
+									if ($key == 'arTerms' || $key == 'enTerms') {
+										echo "<div class='form-control' style='height:auto;min-height:34px;'>$value</div>";
+									} elseif ($key == 'imageurl' || $key == 'locationImage' || $key == 'header' || $key == 'clothesImage') {
+										echo "<img src='../logos/$value' alt='$key' class='img-responsive' style='max-width: 100%; height: auto;'>";
+									} else {
+										echo "<input type='text' readonly value='$value' class='form-control'>";
+									}
+								}
+								echo "</div>";
+							}
+							?>
+						</div>
+					</div>
 				</td>
 				</tr>
 			<?php
