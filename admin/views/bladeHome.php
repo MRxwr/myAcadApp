@@ -56,6 +56,33 @@
 	border-radius: 10px;
     margin-bottom: 10px;
 }
+	.comparison-container {
+        display: flex;
+        width: 100%;
+    }
+    .comparison-column {
+        flex: 1;
+        padding: 10px;
+        border: 1px solid #ddd;
+        margin: 5px;
+    }
+    .comparison-column h4 {
+        margin-bottom: 15px;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 5px;
+    }
+    .form-group {
+        margin-bottom: 15px;
+    }
+    .control-label {
+        display: block;
+        margin-bottom: 5px;
+        color: #333;
+    }
+    .modal-body {
+        max-height: 500px;
+        overflow-y: auto;
+    }
 </style>
 <?php
 $id = "";
@@ -430,3 +457,28 @@ $statsDate = [
 	}
 	?>
 </div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel"><?php echo direction("Comparison", "مقارنة") ?></h4>
+      </div>
+      <div class="modal-body">
+        <table id="modal-example-1" class="table" data-paging="true" data-filtering="true" data-sorting="true"></table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function showUpdate(id){
+    var newContent = document.getElementById("new"+id).innerHTML;
+    document.querySelector(".modal-body").innerHTML = '<div class="row comparison-container">' + newContent + '</div>';
+    $('#myModal').modal('show');
+}
+</script>
