@@ -37,6 +37,31 @@ if( isset($_GET["status"]) && isset($_GET["id"]) && !empty($_GET["status"]) && !
     <?php
 }
 ?>
+<style>
+    .comparison-container {
+        display: flex;
+        width: 100%;
+    }
+    .comparison-column {
+        flex: 1;
+        padding: 10px;
+        border: 1px solid #ddd;
+        margin: 5px;
+    }
+    .comparison-column h4 {
+        margin-bottom: 15px;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 5px;
+    }
+    .form-group {
+        margin-bottom: 15px;
+    }
+    .control-label {
+        display: block;
+        margin-bottom: 5px;
+        color: #333;
+    }
+</style>
 <div class="col-sm-12">
 <div class="panel panel-default card-view">
 <div class="panel-heading">
@@ -84,35 +109,43 @@ if( isset($_GET["status"]) && isset($_GET["id"]) && !empty($_GET["status"]) && !
                         <a href="<?php echo "?v={$_GET["v"]}&id={$modifications[$i]["id"]}&status=1" ?>" class="btn btn-success"><?php echo direction("Approve","موافقة" ) ?></a>
                         <a href="<?php echo "?v={$_GET["v"]}&id={$modifications[$i]["id"]}&status=2" ?>" class="btn btn-danger"><?php echo direction("Cancel","الغاء") ?></a>
                         <div style="display: none;" id="new<?php echo $modifications[$i]["id"]?>">
-                            <div>
+                            <div class="comparison-column old-data">
+                                <h4><?php echo direction("Previous Data", "البيانات السابقة") ?></h4>
                                 <?php
                                 $data = json_decode($modifications[$i]["oldContents"], true);
                                 ksort($data);unset($data["status"]);unset($data["hidden"]);
                                 foreach ($data as $key => $value) {
+                                    echo "<div class='form-group'>";
                                     if (is_array($value)) {
-                                        echo "<label>$key</label>";
+                                        echo "<label class='control-label'><strong>$key</strong></label>";
                                         foreach ($value as $item) {
                                             echo "<input type='text' readonly value='$item' class='form-control'>";
                                         }
                                     } else {
+                                        echo "<label class='control-label'><strong>$key</strong></label>";
                                         echo "<input type='text' readonly value='$value' class='form-control'>";
                                     }
+                                    echo "</div>";
                                 }
                                 ?>
                             </div>
-                            <div>
+                            <div class="comparison-column new-data">
+                                <h4><?php echo direction("New Data", "البيانات الجديدة") ?></h4>
                                 <?php
                                 $data = json_decode($modifications[$i]["contents"], true);
                                 ksort($data);
                                 foreach ($data as $key => $value) {
+                                    echo "<div class='form-group'>";
                                     if (is_array($value)) {
-                                        echo "<label>$key</label>";
+                                        echo "<label class='control-label'><strong>$key</strong></label>";
                                         foreach ($value as $item) {
                                             echo "<input type='text' readonly value='$item' class='form-control'>";
                                         }
                                     } else {
+                                        echo "<label class='control-label'><strong>$key</strong></label>";
                                         echo "<input type='text' readonly value='$value' class='form-control'>";
                                     }
+                                    echo "</div>";
                                 }
                                 ?>
                             </div>
@@ -153,8 +186,7 @@ if( isset($_GET["status"]) && isset($_GET["id"]) && !empty($_GET["status"]) && !
 <script>
 function showUpdate(id){
     var newContent = document.getElementById("new"+id).innerHTML;
-    document.getElementById("modal-example-1").innerHTML = newContent;
+    document.querySelector(".modal-body").innerHTML = '<div class="row comparison-container">' + newContent + '</div>';
     $('#myModal').modal('show');
 }
-
 </script>
