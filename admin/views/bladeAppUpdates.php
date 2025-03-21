@@ -14,12 +14,24 @@ if( isset($_GET["status"]) && isset($_GET["id"]) && !empty($_GET["status"]) && !
                 "status" => "1",
             );
             updateDB("modifications",$data,"id = '$id'");
+            ?>
+            <script>
+                alert(<?php echo direction("The update has been approved", "تم الموافقة على التحديث") ?>);
+                window.location.href = "?v=AppUpdates";
+            </script>
+            <?php
         }
     }elseif( $status == "2" ){
         $data = array(
             "status" => "2",
         );
         updateDB("modifications",$data,"id = '$id'");
+        ?>
+        <script>
+            alert(<?php echo direction("The update has been canceled", "تم الغاء التحديث") ?>);
+            window.location.href = "?v=AppUpdates";
+        </script>
+        <?php
     }else{
         ?>
         <script>
