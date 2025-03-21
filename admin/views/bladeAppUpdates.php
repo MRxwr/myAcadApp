@@ -154,7 +154,7 @@ if( isset($_GET["status"]) && isset($_GET["id"]) && !empty($_GET["status"]) && !
 
 <script>
 function showUpdate(id){
-    var newContent = document.getElementById("new"+id).innerHTML;
+    var newContent = document.getElementById(id).innerHTML;
     document.getElementById("modal-example-1").innerHTML = newContent;
     $('#myModal').modal('show');
 }
