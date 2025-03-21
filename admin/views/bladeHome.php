@@ -80,7 +80,17 @@ if ( $isTournamentUser ){
 	}
 	$id .= ( isset($academiesList[0]) && !empty($academiesList[0]) ) ? "AND `academyId` IN ($listOfAcademies)" : "";
 }
-
+if( isset($_GET["hideModification"]) && !empty($_GET["hideModification"]) ){
+	$data = array(
+		"hidden" => $_GET["hideModification"],
+	);
+	updateDB("modifications",$data,"id = '{$_GET["id"]}'");
+	?>
+	<script>
+		window.location.href = "?v=Home";
+	</script>
+	<?php
+}
 ?>
 <div class="row" style="padding:16px">
 
