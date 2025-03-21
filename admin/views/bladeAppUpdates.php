@@ -81,39 +81,42 @@ if( isset($_GET["status"]) && isset($_GET["id"]) && !empty($_GET["status"]) && !
                     <td><?php echo $modifications[$i]["fullName"] ?></td>
                     <td><?php echo $type ?></td>
                     <td><?php echo $modifications[$i]["tableTitle"] ?></td>
-                    <td>
-                        <?php
-                        $data = json_decode($modifications[$i]["oldContents"], true);
-                        ksort($data);unset($data["status"]);unset($data["hidden"]);
-                        foreach ($data as $key => $value) {
-                            if (is_array($value)) {
-                                echo "<label>$key</label>";
-                                foreach ($value as $item) {
-                                    echo "<input type='text' readonly value='$item' class='form-control'>";
+                    <div style="display: none;" id="new<?php echo $modifications[$i]["id"]?>"></div>
+                        <div>
+                            <?php
+                            $data = json_decode($modifications[$i]["oldContents"], true);
+                            ksort($data);unset($data["status"]);unset($data["hidden"]);
+                            foreach ($data as $key => $value) {
+                                if (is_array($value)) {
+                                    echo "<label>$key</label>";
+                                    foreach ($value as $item) {
+                                        echo "<input type='text' readonly value='$item' class='form-control'>";
+                                    }
+                                } else {
+                                    echo "<input type='text' readonly value='$value' class='form-control'>";
                                 }
-                            } else {
-                                echo "<input type='text' readonly value='$value' class='form-control'>";
                             }
-                        }
-                        ?>
-                    </td>
-                    <td>
-                        <?php
-                        $data = json_decode($modifications[$i]["contents"], true);
-                        ksort($data);
-                        foreach ($data as $key => $value) {
-                            if (is_array($value)) {
-                                echo "<label>$key</label>";
-                                foreach ($value as $item) {
-                                    echo "<input type='text' readonly value='$item' class='form-control'>";
+                            ?>
+                        </div>
+                        <div>
+                            <?php
+                            $data = json_decode($modifications[$i]["contents"], true);
+                            ksort($data);
+                            foreach ($data as $key => $value) {
+                                if (is_array($value)) {
+                                    echo "<label>$key</label>";
+                                    foreach ($value as $item) {
+                                        echo "<input type='text' readonly value='$item' class='form-control'>";
+                                    }
+                                } else {
+                                    echo "<input type='text' readonly value='$value' class='form-control'>";
                                 }
-                            } else {
-                                echo "<input type='text' readonly value='$value' class='form-control'>";
                             }
-                        }
-                        ?>
-                    </td>
+                            ?>
+                        </div>
+                    </div>
                     <td>
+                        <a onclick='showUpdate(<?php echo $modifications[$i]["id"] ?>)' class="btn btn-warning"><?php echo direction("Show","اظهار") ?></a>
                         <a href="<?php echo "?v={$_GET["v"]}&id={$modifications[$i]["id"]}&status=1" ?>" class="btn btn-success"><?php echo direction("Approve","موافقة" ) ?></a>
                         <a href="<?php echo "?v={$_GET["v"]}&id={$modifications[$i]["id"]}&status=2" ?>" class="btn btn-danger"><?php echo direction("Cancel","الغاء") ?></a>
                     </td>
@@ -131,3 +134,30 @@ if( isset($_GET["status"]) && isset($_GET["id"]) && !empty($_GET["status"]) && !
 </div>
 </div>
 </div>
+
+//add bootstrap modal to load the data
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        <table id="modal-example-1" class="table" data-paging="true" data-filtering="true" data-sorting="true"></table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function showUpdate(id){
+    var newContent = document.getElementById("new"+id).innerHTML;
+    document.getElementById("modal-example-1").innerHTML = newContent;
+    $('#myModal').modal('show');
+}
+
+</script>
