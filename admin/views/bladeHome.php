@@ -83,6 +83,81 @@ if ( $isTournamentUser ){
 
 ?>
 <div class="row" style="padding:16px">
+
+<?php
+$dataJoin = array(
+	"select" => ["t.*","t1.fullName"],
+	"join" => ["employees"],
+	"on" => ["t.empId = t1.id"],
+);
+if( $modifications = selectJoinDB("modifications",$dataJoin,"t.hidden = '0' AND t1.empId = '{$userID}' ORDER BY t.id DESC") ){
+?>
+<div class="col-sm-12">
+<div class="panel panel-default card-view">
+<div class="panel-heading">
+<div class="pull-left">
+<h6 class="panel-title txt-dark"><?php echo direction("List of Updates", "قائمة التحديثات") ?></h6>
+</div>
+<div class="clearfix"></div>
+</div>
+<div class="panel-wrapper collapse in">
+<div class="panel-body">
+<div class="table-wrap">
+<div class="table-responsive">
+	<table class="table display responsive product-overview mb-30" id="myTable">
+		<thead>
+		<tr>
+		<th>#</th>
+		<th><?php echo direction("Date","التاريخ") ?></th>
+		<th><?php echo direction("Username","اسم المستخدم") ?></th>
+		<th><?php echo direction("Type","النوع") ?></th>
+		<th><?php echo direction("Where","من") ?></th>
+		<th><?php echo direction("Action","العملية") ?></th>
+		</tr>
+		</thead>
+		<tbody>
+		<?php 
+			for( $i = 0; $i < sizeof($modifications); $i++ ){
+				$type = ( $modifications[$i]["postId"] == "0" ) ? "New" : "Update";
+				if( $modifications[$i]["status"] == 0 ){
+					$statusText = direction("Pending","إنتظار");
+					$statusColor = "default";
+					$link = "#";
+				}elseif( $modifications[$i]["status"] == 1 ){
+					$statusText = direction("Approved","موافقة");
+					$statusColor = "success";
+					$link = "?v={$_GET["v"]}&id={$modifications[$i]["id"]}&hideModification=1";
+				}elseif( $modifications[$i]["status"] == 2 ){
+					$statusText = direction("Cancelled","ملغية");
+					$statusColor = "danger";
+					$link = "?v={$_GET["v"]}&id={$modifications[$i]["id"]}&hideModification=2";
+				}
+			?>
+				<tr>
+				<td><?php echo sprintf("%05d", $modifications[$i]["id"]) ?></td>
+				<td><?php echo $modifications[$i]["date"] ?></td>
+				<td><?php echo $modifications[$i]["fullName"] ?></td>
+				<td><?php echo $type ?></td>
+				<td><?php echo $modifications[$i]["tableTitle"] ?></td>
+				<td>
+					<a href="<?php echo $link ?>" class="btn btn-<?php echo $statusColor ?>"><?php echo $statusText ?></a>
+				</td>
+				</tr>
+			<?php
+			}
+		?>
+		</tbody>
+	</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<?php
+}
+?>
+
 	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 			<div class="panel panel-default card-view">
 			<div class="panel-heading">
