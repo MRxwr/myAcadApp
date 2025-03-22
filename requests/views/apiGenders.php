@@ -17,7 +17,7 @@ if( !isset($_GET["countryCode"]) || empty($_GET["countryCode"]) ){
     echo json_encode($response);die();
 }
 if( $academies = selectDB2("`gender`","{$table}","`sport` = '{$_GET["sportId"]}' AND `country` LIKE '{$_GET["countryCode"]}' AND `hidden` = '0' AND `status` = '0' GROUP BY `gender`") ){
-    $gendersEn = ["SELECT Gender","Man","Woman","Boy","Girl","Mix Adults","Mix Kids"];
+    $gendersEn = ["SELECT Gender","Men","Women","Boys","Girls","Mix Adults","Mix Kids"];
     $gendersAr = ["إختيار الجنس","رجال","سيدات","أولاد","بنات","مختلط كبار","مختلط الاطفال"];
     $response["genders"][0] = array(
         "id" => 0,
