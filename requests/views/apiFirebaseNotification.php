@@ -1,6 +1,5 @@
 <?php
 function sendToTopic($data){
-    
     $curl = curl_init();
     curl_setopt_array($curl, array(
     CURLOPT_URL => 'https://createapi.link/api/v1/send_to_topic.php',
@@ -47,9 +46,8 @@ function sendToTopic($data){
     */
 }
 
-sendToTopic($_POST);
+//sendToTopic($_POST);
 
-/*
 function getAccessToken() {
     $curl = curl_init();
     curl_setopt_array($curl, array(
@@ -105,6 +103,6 @@ if( $users = selectDB("users", "`id` != '0' GROUP BY `firebase` ORDER BY `id` AS
         $response = curl_exec($curl);
         curl_close($curl);
     }
+    return $response;
 }
-    */
 ?>
