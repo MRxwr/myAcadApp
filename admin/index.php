@@ -211,28 +211,32 @@ if ( isset($_GET["hide"]) || isset($_GET["show"]) || isset($_GET["delId"]) || is
 }
 
 if( !in_array($userType, $allowedEmpolyees) ){
-    if( isset($_GET["code"]) && !empty($academiesList) && !in_array($_GET["code"],$academiesList) ){
-        ?>
-        <script>
-            window.onload = function() {
-                alert("<?php echo direction("Wrong Operation","العملية غير صالحة") ?>");
-                window.history.back();
-            }
-        </script>
-        <?php
+    if( !empty($academiesList) ){
+        if( isset($_GET["code"]) && !in_array($_GET["code"],$academiesList) ){
+            ?>
+            <script>
+                window.onload = function() {
+                    alert("<?php echo direction("Wrong Operation","العملية غير صالحة") ?>");
+                    window.history.back();
+                }
+            </script>
+            <?php
+        }
     }
 }
 
 if( !in_array($userType, $allowedEmpolyees) ){
-    if( isset($_GET["code"]) && !empty($tournamentsList) && !in_array($_GET["code"],$tournamentsList) ){
-        ?>
-        <script>
-            window.onload = function() {
-                alert("<?php echo direction("Wrong Operation","العملية غير صالحة") ?>");
-                window.history.back();
-            }
-        </script>
-        <?php
+    if ( !empty($tournamentsList) ){
+        if( isset($_GET["code"]) && !in_array($_GET["code"],$tournamentsList) ){
+            ?>
+            <script>
+                window.onload = function() {
+                    alert("<?php echo direction("Wrong Operation","العملية غير صالحة") ?>");
+                    window.history.back();
+                }
+            </script>
+            <?php
+        }
     }
 }
 
