@@ -213,7 +213,7 @@ if ( isset($_GET["hide"]) || isset($_GET["show"]) || isset($_GET["delId"]) || is
 if( !in_array($userType, $allowedEmpolyees) ){
     var_dump($_GET["code"]);
     var_dump($academiesList);
-    var_dump(in_array($_GET["code"],$academiesList));die();
+    var_dump(!in_array($_GET["code"],$academiesList));die();
     if( isset($_GET["code"]) && !in_array($_GET["code"],$academiesList) ){
         ?>
         <script>
