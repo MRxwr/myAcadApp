@@ -211,6 +211,7 @@ if ( isset($_GET["hide"]) || isset($_GET["show"]) || isset($_GET["delId"]) || is
 }
 
 if( !in_array($userType, $allowedEmpolyees) ){
+    var_dump($_GET["code"]);die();
     if( isset($_GET["code"]) && !in_array($_GET["code"],$academiesList) ){
         ?>
         <script>
@@ -219,7 +220,7 @@ if( !in_array($userType, $allowedEmpolyees) ){
                 window.history.back();
             }
         </script>
-        <?php
+        <?php 
     }
 }
 
