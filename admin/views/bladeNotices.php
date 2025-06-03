@@ -15,6 +15,7 @@
 		<thead>
 		<tr>
 		<th>#</th>
+		<th><?php echo direction("Date","التاريخ") ?></th>
 		<th><?php echo direction("Title","العنوان") ?></th>
 		<th><?php echo direction("Area","المنطقة") ?></th>
 		<th><?php echo direction("Gender","الجنس") ?></th>
@@ -23,12 +24,12 @@
 		<tbody>
 		<?php 
         $joinData = array(
-            "select" => ["t.enTitle","t.arTitle","t.area","t.gender","t1.areaEnTitle","t1.areaArTitle"],
+            "select" => ["t.enTitle","t.arTitle","t.area","t.gender","t1.areaEnTitle","t1.areaArTitle","( SELECT MAX(o.date) FROM orders o WHERE o.academyId = t.id AND o.status IN ('1','4') AND o.tournamentId = '0' ) AS lastOrderDate"],
             "join" => ["countries"],
             "on" => ["t.area = t1.id"]
         );
         // add where to the quesy to check if the data passed 30 days or not
-			if( $academies = selectJoinDB("academies",$joinData,"NOT EXISTS (SELECT 1 FROM orders as o WHERE o.academyId = t.id AND o.status IN ('1','4') AND o.tournamentId = '0' AND o.date > DATE_SUB(NOW(), INTERVAL 30 DAY)) AND t.status = '0'") ){
+			if( $academies = selectJoinDB("academies",$joinData,"t.status = '0'") ){
                 $gendersList = array(
                     "1" => direction("Man","رجال"),
                     "2" => direction("Woman","سيدات"),
@@ -41,6 +42,7 @@
 					?>
 					<tr>
 					<td><?php echo str_pad(1 + $i, 5 ,'0', STR_PAD_LEFT) ?></td>
+					<td><?php echo $academies[$i]["lastOrderDate"] ?></td>
 					<td><?php echo direction($academies[$i]["enTitle"],$academies[$i]["arTitle"]) ?></td>
 					<td><?php echo direction($academies[$i]["areaEnTitle"],$academies[$i]["areaArTitle"]) ?></td>
 					<td><?php echo $gendersList[$academies[$i]["gender"]] ?></td>
