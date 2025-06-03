@@ -155,6 +155,7 @@ if ( isset($_GET["type"]) && !empty($_GET["type"]) ){
 			$error = array("msg"=>popupMsg($requestLang,"Passwords does not match. Please try again.","كلمة المرور غير متطابقة ، الرجاء المحاولة مرة اخرى"));
 			echo outputError($error);die();
 		}
+		$_POST["keepMeAlive"] = sha1(rand(000000,999999)+time());
 	
 		$_POST["password"] = sha1($_POST["password"]);		
 		unset($_POST["confirmPassword"]);
