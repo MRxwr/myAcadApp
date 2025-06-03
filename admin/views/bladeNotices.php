@@ -15,7 +15,6 @@
 		<thead>
 		<tr>
 		<th>#</th>
-		<th><?php echo direction("Date","التاريخ") ?></th>
 		<th><?php echo direction("Title","العنوان") ?></th>
 		<th><?php echo direction("Area","المنطقة") ?></th>
 		<th><?php echo direction("Gender","الجنس") ?></th>
@@ -42,7 +41,6 @@
 					?>
 					<tr>
 					<td><?php echo str_pad(1 + $i, 5 ,'0', STR_PAD_LEFT) ?></td>
-					<td><?php echo $academies[$i]["date"] ?></td>
 					<td><?php echo direction($academies[$i]["enTitle"],$academies[$i]["arTitle"]) ?></td>
 					<td><?php echo direction($academies[$i]["areaEnTitle"],$academies[$i]["areaArTitle"]) ?></td>
 					<td><?php echo $gendersList[$academies[$i]["gender"]] ?></td>
