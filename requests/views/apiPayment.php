@@ -339,6 +339,8 @@ if( !isset($_POST) ){
     $response = curl_exec($curl);
     curl_close($curl);
     $response = json_decode($response,true);
+    $responsePg = json_decode($response,true);
+
     
     //saving info and redirecting to payment pages
     if( isset($response["status"]) && $response["status"] == true && isset($response["data"]["link"]) && !empty($response["data"]["link"]) ){
@@ -366,7 +368,7 @@ if( !isset($_POST) ){
         echo outputData($response);
     }else{
         $response["msg"] = popupMsg($requestLang,'Error while proccessing payment','خطأ في عملية الدفع');
-        $response["paymentGatewayResponse"] = $response;
+        $response["paymentGatewayResponse"] = $responsePg;
         echo outputError($response);
     }
     
