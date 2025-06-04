@@ -366,6 +366,7 @@ if( !isset($_POST) ){
         echo outputData($response);
     }else{
         $response["msg"] = popupMsg($requestLang,'Error while proccessing payment','خطأ في عملية الدفع');
+        $response["paymentGatewayResponse"] = $response;
         echo outputError($response);
     }
     
