@@ -333,12 +333,11 @@ if( !isset($_POST) ){
         CURLOPT_CUSTOMREQUEST => 'POST',
         CURLOPT_POSTFIELDS => $postBody,
         CURLOPT_HTTPHEADER => array(
-            'Authorization: Bearer afmceR6nHQaIehhpOel036LBhC8hihuB8iNh9ACF',
+            'Authorization: Bearer 779475522c0938b3c0774da98197e0727fefe464',
         ),
     ));
     $response = curl_exec($curl);
     curl_close($curl);
-    $responsePg = json_decode($response,true);
     $response = json_decode($response,true);
     
     //saving info and redirecting to payment pages
@@ -367,7 +366,6 @@ if( !isset($_POST) ){
         echo outputData($response);
     }else{
         $response["msg"] = popupMsg($requestLang,'Error while proccessing payment','خطأ في عملية الدفع');
-        $response["paymentGatewayResponse"] = $responsePg;
         echo outputError($response);
     }
     
