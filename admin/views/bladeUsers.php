@@ -85,6 +85,7 @@
 	<table class="table display responsive product-overview mb-30" id="myTable">
 		<thead>
 		<tr>
+<th><?php echo direction("Date","التاريخ") ?></th>
 		<th><?php echo direction("First Name","الإسم الأول") ?></th>
 		<th><?php echo direction("Last Name","الإسم الأخير") ?></th>
 		<th><?php echo direction("Email","الإيميل") ?></th>
@@ -130,6 +131,7 @@
 				
 				?>
 				<tr>
+<td><?php echo $users[$i]["date"] ?></td>
 				<td id="firstName<?php echo $users[$i]["id"]?>" ><?php echo $users[$i]["firstName"] ?></td>
 				<td id="lastName<?php echo $users[$i]["id"]?>" ><?php echo $users[$i]["lastName"] ?></td>
 				<td id="email<?php echo $users[$i]["id"]?>" ><?php echo $users[$i]["email"] ?></td>
