@@ -143,7 +143,7 @@ td{
         <tr class="txt-dark">
             <td><?php echo direction("Payment Method","وسيلة الدفع") ?></td>
             <td><?php
-                if( $order[0]["paymentMethod"] == 1 ){
+                if( $order[0]["paymentMethod"] == 1 || $order[0]["paymentMethod"] == 2 ){
                     $paymentMethod = "ONLINE PAYMENT";
                 }elseif( $order[0]["paymentMethod"] == 3 ){
                     $paymentMethod = "WALLET";

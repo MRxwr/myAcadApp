@@ -79,7 +79,7 @@ function expiredSubscription(){
 }
 
 function emailBody($order){
-	if( $order[0]["paymentMethod"] == 1 ){
+	if( $order[0]["paymentMethod"] == 1 || $order[0]["paymentMethod"] == 2 ){
 		$method = "Online Payment";
 	}elseif( $order[0]["paymentMethod"] == 3 ){
 		$method = "WALLET";
