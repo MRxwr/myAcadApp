@@ -186,6 +186,9 @@ td{
 <div class="row m-0">
     <div class="col-md-3"><button id="print" class="btn btn-primary btn-rounded btn-block"><i class="fa fa-print"></i> <?php echo direction("Print","طباعة") ?></button></div></div>
 </div>
+<?php
+var_dump($order);
+?>
 
 <script>
     $(document).ready(function() {
