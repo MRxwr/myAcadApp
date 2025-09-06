@@ -85,7 +85,20 @@
 	<select class="form-control" name="voucher">
 		<option value="0" selected><?php echo direction("None","لا يوجد") ?></option>
 		<?php
-			if( $vouchers = selectDB("vouchers","`id` != '0' AND `status` = '0'")){
+			$voucherQuery = "`id` != '0' AND `status` = '0'";
+			
+			// Filter by tournament access for non-admin users
+			if( $userType != 0 && $userType != 8 && !empty($tournamentsList) ){
+				$tournamentConditions = array();
+				foreach( $tournamentsList as $tournamentId ){
+					$tournamentConditions[] = "`tournamentIds` LIKE '%\"{$tournamentId}\"%'";
+				}
+				if( !empty($tournamentConditions) ){
+					$voucherQuery .= " AND (" . implode(" OR ", $tournamentConditions) . ")";
+				}
+			}
+			
+			if( $vouchers = selectDB("vouchers", $voucherQuery) ){
 				for( $i = 0; $i < sizeof($vouchers); $i++ ){
 					echo "<option value='{$vouchers[$i]["code"]}'>{$vouchers[$i]["code"]}</option>";
 				}
