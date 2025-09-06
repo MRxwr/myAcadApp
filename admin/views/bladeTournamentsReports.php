@@ -38,7 +38,7 @@
 		$orderBy = direction("enTitle","arTitle");
 		for( $z = 0; $z < $count; $z++ ){
 			$id = ( isset($tournamentsList[$z]) && !empty($tournamentsList[$z]) ) ? "AND `id` = '{$tournamentsList[$z]}'" : "AND `id` != '0'";
-			if( $tournaments = selectDB("tournaments","`status` = '0' {$id} ORDER BY `{$orderBy}` ASC") ){
+			if( $tournaments = selectDB("tournaments","`status` != '4' {$id} ORDER BY `{$orderBy}` ASC") ){
 				for( $i = 0; $i < sizeof($tournaments); $i++ ){
 					$area = selectDB("countries","`id` = '{$tournaments[$i]["area"]}'");
 					$areaTitle = direction($area[0]["areaEnTitle"],$area[0]["areaArTitle"]);
@@ -85,7 +85,7 @@
 	<select class="form-control" name="voucher">
 		<option value="0" selected><?php echo direction("None","لا يوجد") ?></option>
 		<?php
-			$voucherQuery = "`id` != '0' AND `status` = '0'";
+			$voucherQuery = "`id` != '0'";
 			
 			// Filter by tournament access for non-admin users
 			if( $userType != 0 && $userType != 8 && !empty($tournamentsList) ){
