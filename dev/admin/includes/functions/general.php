@@ -1,6 +1,7 @@
 <?php
-// search for file name inside a folder \\
+// search for file name inside a folder and its subdirectories \\
 function searchFile($path, $fileName) {
+	// Check in main directory first
 	if ($handle = opendir($path)) {
 		while (false !== ($entry = readdir($handle))) {
 			if ($entry == $fileName) {
@@ -10,6 +11,20 @@ function searchFile($path, $fileName) {
 		}
 		closedir($handle);
 	}
+	
+	// Search in subdirectories
+	if ($handle = opendir($path)) {
+		while (false !== ($entry = readdir($handle))) {
+			if ($entry != '.' && $entry != '..' && is_dir("{$path}/{$entry}")) {
+				if (file_exists("{$path}/{$entry}/{$fileName}")) {
+					closedir($handle);
+					return "{$entry}/{$fileName}";
+				}
+			}
+		}
+		closedir($handle);
+	}
+	
 	return false;
 }
 // general \\
