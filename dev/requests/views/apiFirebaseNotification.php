@@ -1,4 +1,53 @@
 <?php
+function sendToTopic($data){
+    $curl = curl_init();
+    curl_setopt_array($curl, array(
+    CURLOPT_URL => 'https://createapi.link/api/v1/send_to_topic.php',
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_ENCODING => '',
+    CURLOPT_MAXREDIRS => 10,
+    CURLOPT_TIMEOUT => 0,
+    CURLOPT_FOLLOWLOCATION => true,
+    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+    CURLOPT_CUSTOMREQUEST => 'POST',
+    CURLOPT_POSTFIELDS => array(
+        'firebase_json'=> new CURLFILE('../../myacademy-bd81b-firebase-adminsdk-mdflj-3fbac4549d.json'),
+        'topic' => 'news',
+        'title' => "{$data["title"]}",
+        'body' => "{$data["body"]}",
+    ),
+    ));
+    $response = curl_exec($curl);
+    curl_close($curl);
+    return  $response;
+/*
+    $curl = curl_init();
+    curl_setopt_array($curl, array(
+    CURLOPT_URL => 'https://myacad.app/requests?a=Firebase&action=sendNotification',
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_ENCODING => '',
+    CURLOPT_MAXREDIRS => 10,
+    CURLOPT_TIMEOUT => 0,
+    CURLOPT_FOLLOWLOCATION => true,
+    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+    CURLOPT_CUSTOMREQUEST => 'POST',
+    CURLOPT_POSTFIELDS => array(
+        'title' => "{$data["title"]}",
+        'body' => "{$data["body"]}",
+        'image' => "",
+    ),
+    CURLOPT_HTTPHEADER => array(
+        'myacadheader: myAcadAppCreate'
+    ),
+    ));
+    $response = curl_exec($curl);
+    curl_close($curl);
+    return $response;
+    */
+}
+
+//sendToTopic($_POST);
+
 function getAccessToken() {
     $curl = curl_init();
     curl_setopt_array($curl, array(
@@ -10,7 +59,7 @@ function getAccessToken() {
     CURLOPT_FOLLOWLOCATION => true,
     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
     CURLOPT_CUSTOMREQUEST => 'POST',
-    CURLOPT_POSTFIELDS => array('firebase_json'=> new CURLFILE('../../../myacademy-bd81b-firebase-adminsdk-mdflj-3fbac4549d.json')),
+    CURLOPT_POSTFIELDS => array('firebase_json'=> new CURLFILE('../../myacademy-bd81b-firebase-adminsdk-mdflj-3fbac4549d.json')),
     CURLOPT_HTTPHEADER => array(
         'Accept: application/json'
     ),
@@ -32,7 +81,7 @@ $notificationData = array(
     )
 );
 
-if( $users = selectDB("users", "`id` = '500' GROUP BY `firebase` ORDER BY `id` ASC") ){
+if( $users = selectDB("users", "`id` = '665' GROUP BY `firebase` ORDER BY `id` ASC") ){
     for( $i = 0; $i < sizeof($users); $i++){
         $notificationData["message"]["token"] = $users[$i]["firebase"];
         $curl = curl_init();
@@ -54,5 +103,6 @@ if( $users = selectDB("users", "`id` = '500' GROUP BY `firebase` ORDER BY `id` A
         $response = curl_exec($curl);
         curl_close($curl);
     }
+    return $response;
 }
 ?>

@@ -1,3 +1,8 @@
+<?php
+/*
+SELECT t.enTitle, t.arTitle, t.area, t.gender, t1.areaEnTitle, t1.areaArTitle FROM `academies` as t JOIN `countries` as t1 ON t.area = t1.id WHERE NOT EXISTS (SELECT 1 FROM orders as o WHERE o.academyId = t.id AND o.status IN ('1','4') AND o.tournamentId = '0' AND o.date > DATE_SUB(NOW(), INTERVAL 30 DAY)) AND t.status = '0';
+*/
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>

@@ -109,13 +109,14 @@ $redirect = ($academy["isClothes"] == 1 ) ? "Jersy" : "Checkout" ;
 								for( $i = 0; $i < sizeof($academy["sessions"]); $i++ ){
 									$checked = ( $i == 0 ) ? "checked=''" : "" ;
 									$number = ( $i == 0 ) ? "0" : "0" ;
+$disabledSession = ( $academy["sessions"][$i]["quantity"] > 0 ) ? "" : "disabled";
 									echo "
 									<div class='radi_wap'>
 										<div class='red_items'>
 											<input type='radio' id='sty_{$i}' value='{$academy["sessions"][$i]["id"]}'>
 											<label for='sty_{$i}'><span></span>".direction($academy["sessions"][$i]["enTitle"],$academy["sessions"][$i]["arTitle"])."</label>
 										</div>
-										<input type='number' step='1' class='sty_{$i}' name='checkout[quantity][]' value='{$number}'  min='0' max='{$academy["sessions"][$i]["quantity"]}' readonly>
+										<input type='number' step='1' class='sty_{$i}' name='checkout[quantity][]' value='{$number}'  min='0' max='{$academy["sessions"][$i]["quantity"]}' readonly {$disabledSession} >
 									</div>
 									";
 								}

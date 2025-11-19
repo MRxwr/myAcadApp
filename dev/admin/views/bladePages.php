@@ -110,7 +110,7 @@
 		?>
 		<tr>
 		<td>
-            <input name="order[]" class="form-control" type="number" value="<?php echo $pages[$i]["order"] ?>">
+            <input name="order[]" class="form-control" type="number" value="<?php echo str_pad($pages[$i]["order"], 3, "0", STR_PAD_LEFT) ?>">
             <input name="id[]" class="form-control" type="hidden" value="<?php echo $pages[$i]["id"] ?>">
 		</td>
 		<td id="section<?php echo $pages[$i]["id"]?>" ><?php echo direction($section[0]["enTitle"],$section[0]["arTitle"]) ?><label id="sectionHidden<?php echo $pages[$i]["id"]?>" style="display:none"><?php echo $pages[$i]["section"]?></label></td>

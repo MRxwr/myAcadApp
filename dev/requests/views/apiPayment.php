@@ -45,13 +45,14 @@ if( !isset($_POST) ){
                 }
             }
             
-            if( $voucher[0]["academyId"] != 0 ){
-                if( $voucher[0]["academyId"] == $academy ){
+            if( !empty($voucher[0]["academyIds"]) ){
+                $voucher[0]["academyIds"] = json_decode($voucher[0]["academyIds"],true);
+                if(  in_array($academy,$voucher[0]["academyIds"]) ){
                     $academyAprroved = true;
                 }else{
                     $academyAprroved = false;
                 }
-            }elseif( $voucher[0]["academyId"] == 0 ){
+            }elseif( $voucher[0]["academyIds"] == 0 ){
                 $academyAprroved = true;
             }
             
@@ -157,18 +158,12 @@ if( !isset($_POST) ){
             'returnUrl' => 'https://myacad.app/index.php',
             'cancelUrl' => 'https://myacad.app/index.php',
             'notificationUrl' => 'https://myacad.app/index.php',
-            'extraMerchantData[0][amount]' => (string)$myacadDeposit,
-            'extraMerchantData[0][knetCharge]' => '0.25',
-            'extraMerchantData[0][knetChargeType]' => 'fixed',
-            'extraMerchantData[0][ccCharge]' => '0.25',
-            'extraMerchantData[0][ccChargeType]' => 'fixed',
-            'extraMerchantData[0][ibanNumber]' => "{$AdminSettings[0]["mainIban"]}",
-            'extraMerchantData[1][amount]' => (string)($newTotal+(float)$jersyPrice),
-            'extraMerchantData[1][knetCharge]' => '0.25',
-            'extraMerchantData[1][knetChargeType]' => 'fixed',
-            'extraMerchantData[1][ccCharge]' => '0.25',
-            'extraMerchantData[1][ccChargeType]' => 'fixed',
-            'extraMerchantData[1][ibanNumber]' => "{$academyData[0]["iban"]}",
+            'extraMerchantData[0][amount]' => (string)($fullAmount),
+            'extraMerchantData[0][knetCharge]' => "{$academyData[0]["charges"]}",
+            'extraMerchantData[0][knetChargeType]' => "{$academyData[0]["chargeType"]}",
+            'extraMerchantData[0][ccCharge]' => "{$academyData[0]["cc_charge"]}",
+            'extraMerchantData[0][ccChargeType]' => "{$academyData[0]["cc_chargetype"]}",
+            'extraMerchantData[0][ibanNumber]' => "{$academyData[0]["iban"]}",
             );
             
     }else{
@@ -208,13 +203,14 @@ if( !isset($_POST) ){
                 }
             }
             
-            if( $voucher[0]["tournamentId"] != 0 ){
-                if( $voucher[0]["tournamentId"] == $tournament ){
+            if( !empty($voucher[0]["tournamentIds"]) ){
+                $voucher[0]["tournamentIds"] = json_decode($voucher[0]["tournamentIds"],true);
+                if( in_array($tournament,$voucher[0]["tournamentIds"]) ){
                     $tournamentAprroved = true;
                 }else{
                     $tournamentAprroved = false;
                 }
-            }elseif( $voucher[0]["tournamentId"] == 0 ){
+            }elseif( $voucher[0]["tournamentIds"] == 0 ){
                 $tournamentAprroved = true;
             }
             
@@ -316,18 +312,12 @@ if( !isset($_POST) ){
             'returnUrl' => 'https://myacad.app/index.php',
             'cancelUrl' => 'https://myacad.app/index.php',
             'notificationUrl' => 'https://myacad.app/index.php',
-            'extraMerchantData[0][amount]' => (string)$myacadDeposit,
-            'extraMerchantData[0][knetCharge]' => '0.25',
-            'extraMerchantData[0][knetChargeType]' => 'fixed',
-            'extraMerchantData[0][ccCharge]' => '0.25',
-            'extraMerchantData[0][ccChargeType]' => 'fixed',
-            'extraMerchantData[0][ibanNumber]' => "{$AdminSettings[0]["mainIban"]}",
-            'extraMerchantData[1][amount]' => (string)($newTotal),
-            'extraMerchantData[1][knetCharge]' => '0.25',
-            'extraMerchantData[1][knetChargeType]' => 'fixed',
-            'extraMerchantData[1][ccCharge]' => '0.25',
-            'extraMerchantData[1][ccChargeType]' => 'fixed',
-            'extraMerchantData[1][ibanNumber]' => "{$tournamentData[0]["iban"]}",
+            'extraMerchantData[0][amount]' => (string)($fullAmount),
+            'extraMerchantData[0][knetCharge]' => "{$tournaments[0]["charges"]}",
+            'extraMerchantData[0][knetChargeType]' => "{$tournaments[0]["chargeType"]}",
+            'extraMerchantData[0][ccCharge]' => "{$tournaments[0]["cc_charge"]}",
+            'extraMerchantData[0][ccChargeType]' => "{$tournaments[0]["cc_chargetype"]}",
+            'extraMerchantData[0][ibanNumber]' => "{$tournamentData[0]["iban"]}",
             );
     }
     
@@ -343,13 +333,13 @@ if( !isset($_POST) ){
         CURLOPT_CUSTOMREQUEST => 'POST',
         CURLOPT_POSTFIELDS => $postBody,
         CURLOPT_HTTPHEADER => array(
-            'Authorization: Bearer afmceR6nHQaIehhpOel036LBhC8hihuB8iNh9ACF',
+            'Authorization: Bearer 779475522c0938b3c0774da98197e0727fefe464',
         ),
     ));
     $response = curl_exec($curl);
     curl_close($curl);
     $response = json_decode($response,true);
-
+    
     //saving info and redirecting to payment pages
     if( isset($response["status"]) && $response["status"] == true && isset($response["data"]["link"]) && !empty($response["data"]["link"]) ){
         $_POST["gatewayId"]     = $orderId;

@@ -24,6 +24,13 @@
 			<label><?php echo direction("Quantity","الكمية") ?></label>
 			<input type="number" step="1" min="0" name="quantity" class="form-control" required>
 			</div>
+
+			<div class="col-md-12">
+			<label><?php echo direction("Please stick with the titles naming as below:","يرجى استخدام الأمثله التاليه لكتاية العناوين:") ?></label>
+			<p>7-15 years, At 5:00pm - 6:00pm / ٧-١٥ سنة, من٥:٠٠م - ٦:٠٠م</p>
+			<p>15 and above, Time by agreement / ١٥ وما فوق، الوقت بالاتفاق</p>
+			<p>12 and above, At 6:30pm - 8:00pm / ١٢ومافوق, من ٦:٣٠م - ٨:٠٠م</p>
+			</div>
 			
 			<div class="col-md-12" style="margin-top:10px">
 			<input type="submit" class="btn btn-primary" value="<?php echo direction("Submit","أرسل") ?>">

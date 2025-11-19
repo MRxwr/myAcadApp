@@ -23,12 +23,12 @@
 			</select>
 			</div>
 
-			<div class="col-md-3">
+			<div class="col-md-3" style="<?php echo $userType ?>">
 			<label><?php echo direction("English Title","الإسم الإنجليزي") ?></label>
 			<input type="text" name="enTitle" class="form-control" required>
 			</div>
 			
-			<div class="col-md-3">
+			<div class="col-md-3" style="<?php echo $userType ?>">
 			<label><?php echo direction("Arabic Title","الإسم العربي") ?></label>
 			<input type="text" name="arTitle" class="form-control" required>
 			</div>
@@ -126,16 +126,16 @@
 			<div class="col-md-3">
 			<label><?php echo direction("Gender","الجنس") ?></label>
 			<select name="gender" class="form-control" required>
-				<option value="1" ><?php echo direction("Man","رجل") ?></option>
-				<option value="2" ><?php echo direction("Woman","أنثى") ?></option>
-				<option value="3" ><?php echo direction("Boy","ولد") ?></option>
-				<option value="4" ><?php echo direction("Girl","بنت") ?></option>
+				<option value="1" ><?php echo direction("Man","رجال") ?></option>
+				<option value="2" ><?php echo direction("Woman","سيدات") ?></option>
+				<option value="3" ><?php echo direction("Boy","أولاد") ?></option>
+				<option value="4" ><?php echo direction("Girl","بنات") ?></option>
 				<option value="5" ><?php echo direction("Mix Adults","مختلط كبار") ?></option>
 				<option value="6" ><?php echo direction("Mix Kids","مختلط الاطفال") ?></option>
 			</select>
 			</div>
 			
-			<div class="col-md-3">
+			<div class="col-md-3" style="<?php echo $userType ?>">
 			<label><?php echo direction("Video","الفيديو") ?></label>
 			<input type="text" name="video" class="form-control" required>
 			</div>
@@ -161,6 +161,7 @@
 			<input type="number" step="any" name="clothesPrice" class="form-control" required>
 			</div>
 
+			<div class="academyHide" style="<?php echo $userType ?>">
 			<div class="col-md-12">
 			<label><?php echo direction("IBAN","الأيبان") ?></label>
 			<input type="text" name="iban" class="form-control" required>
@@ -229,7 +230,7 @@
 				<img id="clothesImg" src="" style="width:250px;height:250px">
 				</div>
 			</div>
-			
+</div>			
 			<div class="col-md-6" style="margin-top:10px">
 			<input type="submit" class="btn btn-primary" value="<?php echo direction("Submit","أرسل") ?>">
 			<input type="hidden" name="update" value="0">
@@ -272,10 +273,10 @@
 		<?php 
 		$count = (is_array($academiesList) && !empty($academiesList)) ? count($academiesList) : 1;
 		$gendersList = array(
-			"1" => direction("Man","رجل"),
-			"2" => direction("Woman","إمرأه"),
-			"3" => direction("Boy","ولد"),
-			"4" => direction("Girl","بنت"),
+			"1" => direction("Man","رجال"),
+			"2" => direction("Woman","سيدات"),
+			"3" => direction("Boy","أولاد"),
+			"4" => direction("Girl","بنات"),
 			"5" => direction("Mix Adults","مختلط الكبار"),
 			"6" => direction("Mix Children","مختلط الاطفال"),
 		);

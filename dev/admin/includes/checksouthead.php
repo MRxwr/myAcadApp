@@ -14,6 +14,7 @@ if ( isset($_COOKIE[$cookieSession."A"]) && !empty($_COOKIE[$cookieSession."A"])
 		$academiesList = ( is_array($user[0]["academyId"]) && empty($user[0]["academyId"]) ) ? array() : json_decode($user[0]["academyId"],true);
 		$tournamentsList = ( is_array($user[0]["tournamentId"]) && empty($user[0]["tournamentId"]) ) ? array() : json_decode($user[0]["tournamentId"],true);
 		$_SESSION[$cookieSession."A"] = $email;	
+		$isTournamentUser = ( empty($user[0]["tournamentId"]) ) ? 0 : 1;
 	}else{
 		header("Location: logout.php");die();
 	}

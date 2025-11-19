@@ -56,20 +56,202 @@
 	border-radius: 10px;
     margin-bottom: 10px;
 }
+	.comparison-container {
+        display: flex;
+        width: 100%;
+    }
+    .comparison-column {
+        flex: 1;
+        padding: 10px;
+        border: 1px solid #ddd;
+        margin: 5px;
+    }
+    .comparison-column h4 {
+        margin-bottom: 15px;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 5px;
+    }
+    .form-group {
+        margin-bottom: 15px;
+    }
+    .control-label {
+        display: block;
+        margin-bottom: 5px;
+        color: #333;
+    }
+    .modal-body {
+        max-height: 500px;
+        overflow-y: auto;
+    }
 </style>
 <?php
 $id = "";
 $listOfAcademies = "";
-$count = (is_array($academiesList) && !empty($academiesList)) ? count($academiesList) : 0;
-for( $z = 0; $z < $count; $z++ ){
-	$listOfAcademies .= "'{$academiesList[$z]}'";
-	if( isset($academiesList[$z+1]) && !empty($academiesList[$z+1]) ){
-		$listOfAcademies .= ",";
+$listOfTournaments = "";
+if ( $isTournamentUser ){
+	$count = (is_array($tournamentsList) && !empty($tournamentsList)) ? count($tournamentsList) : 0;
+	for( $z = 0; $z < $count; $z++ ){
+		$listOfTournaments .= "'{$tournamentsList[$z]}'";
+		if( isset($tournamentsList[$z+1]) && !empty($tournamentsList[$z+1]) ){
+			$listOfTournaments .= ",";
+		}
 	}
+	$id .= ( isset($tournamentsList[0]) && !empty($tournamentsList[0]) ) ? "AND `tournamentId` IN ($listOfTournaments)" : "";
+}else{
+	$count = (is_array($academiesList) && !empty($academiesList)) ? count($academiesList) : 0;
+	for( $z = 0; $z < $count; $z++ ){
+		$listOfAcademies .= "'{$academiesList[$z]}'";
+		if( isset($academiesList[$z+1]) && !empty($academiesList[$z+1]) ){
+			$listOfAcademies .= ",";
+		}
+	}
+	$id .= ( isset($academiesList[0]) && !empty($academiesList[0]) ) ? "AND `academyId` IN ($listOfAcademies)" : "";
 }
-$id .= ( isset($academiesList[0]) && !empty($academiesList[0]) ) ? "AND `academyId` IN ($listOfAcademies)" : "";
+if( isset($_GET["hideModification"]) && !empty($_GET["hideModification"]) ){
+	$data = array(
+		"hidden" => $_GET["hideModification"],
+	);
+	updateDB("modifications",$data,"id = '{$_GET["id"]}'");
+	?>
+	<script>
+		window.location.href = "?v=Home";
+	</script>
+	<?php
+}
 ?>
 <div class="row" style="padding:16px">
+
+<?php
+$dataJoin = array(
+	"select" => ["t.*","t1.fullName"],
+	"join" => ["employees"],
+	"on" => ["t.empId = t1.id"],
+);
+if( $modifications = selectJoinDB("modifications",$dataJoin,"t.hidden = '0' AND t1.id = '{$userID}' ORDER BY t.id DESC") ){
+?>
+<div class="col-sm-12" style="padding-bottom: 20px;">
+<div class="panel panel-default card-view">
+<div class="panel-heading">
+<div class="pull-left">
+<h6 class="panel-title txt-dark"><?php echo direction("List of Updates", "قائمة التحديثات") ?></h6>
+</div>
+<div class="clearfix"></div>
+</div>
+<div class="panel-wrapper collapse in">
+<div class="panel-body">
+<div class="table-wrap">
+<div class="table-responsive">
+	<table class="table display responsive product-overview mb-30" id="myTable">
+		<thead>
+		<tr>
+		<th>#</th>
+		<th><?php echo direction("Date","التاريخ") ?></th>
+		<th><?php echo direction("Username","اسم المستخدم") ?></th>
+		<th><?php echo direction("Type","النوع") ?></th>
+		<th><?php echo direction("Where","من") ?></th>
+		<th><?php echo direction("Action","العملية") ?></th>
+		</tr>
+		</thead>
+		<tbody>
+		<?php 
+			for( $i = 0; $i < sizeof($modifications); $i++ ){
+				$type = ( $modifications[$i]["postId"] == "0" ) ? "New" : "Update";
+				if( $modifications[$i]["status"] == 0 ){
+					$statusText = direction("Pending","إنتظار");
+					$statusColor = "default";
+					$link = "#";
+				}elseif( $modifications[$i]["status"] == 1 ){
+					$statusText = direction("Approved","موافقة");
+					$statusColor = "success";
+					$link = "?v={$_GET["v"]}&id={$modifications[$i]["id"]}&hideModification=1";
+				}elseif( $modifications[$i]["status"] == 2 ){
+					$statusText = direction("Cancelled","ملغية");
+					$statusColor = "danger";
+					$link = "?v={$_GET["v"]}&id={$modifications[$i]["id"]}&hideModification=2";
+				}
+			?>
+				<tr>
+				<td><?php echo sprintf("%05d", $modifications[$i]["id"]) ?></td>
+				<td><?php echo $modifications[$i]["date"] ?></td>
+				<td><?php echo $modifications[$i]["fullName"] ?></td>
+				<td><?php echo $type ?></td>
+				<td><?php echo $modifications[$i]["tableTitle"] ?></td>
+				<td>
+					<a onclick='showUpdate(<?php echo $modifications[$i]["id"] ?>)' class="btn btn-warning"><?php echo direction("Show","اظهار") ?></a>
+					<a href="<?php echo $link ?>" class="btn btn-<?php echo $statusColor ?>"><?php echo $statusText ?></a>
+					<div style="display: none;" id="new<?php echo $modifications[$i]["id"]?>">
+						<div class="comparison-column old-data">
+							<h4><?php echo direction("Previous Data", "البيانات السابقة") ?></h4>
+							<?php
+							if( !empty($modifications[$i]["oldContents"]) ){
+								$data = json_decode($modifications[$i]["oldContents"], true);
+								ksort($data);unset($data["status"]);unset($data["hidden"]);
+								foreach ($data as $key => $value) {
+									echo "<div class='form-group'>";
+									if (is_array($value)) {
+										echo "<label class='control-label'><strong>$key</strong></label>";
+										foreach ($value as $item) {
+											echo "<input type='text' readonly value='$item' class='form-control'>";
+										}
+									} else {
+										echo "<label class='control-label'><strong>$key</strong></label>";
+										if ($key == 'arTerms' || $key == 'enTerms') {
+											echo "<div class='form-control' style='height:auto;min-height:34px;'>$value</div>";
+										} elseif ($key == 'imageurl' || $key == 'locationImage' || $key == 'header' || $key == 'clothesImage') {
+											echo "<img src='../logos/$value' alt='$key' class='img-responsive' style='max-width: 100%; height: auto;'>";
+										} else {
+											echo "<input type='text' readonly value='$value' class='form-control'>";
+										}
+									}
+									echo "</div>";
+								}
+							}
+							?>
+						</div>
+						<div class="comparison-column new-data">
+							<h4><?php echo direction("New Data", "البيانات الجديدة") ?></h4>
+							<?php
+							$data = json_decode($modifications[$i]["contents"], true);
+							ksort($data);
+							foreach ($data as $key => $value) {
+								echo "<div class='form-group'>";
+								if (is_array($value)) {
+									echo "<label class='control-label'><strong>$key</strong></label>";
+									foreach ($value as $item) {
+										echo "<input type='text' readonly value='$item' class='form-control'>";
+									}
+								} else {
+									echo "<label class='control-label'><strong>$key</strong></label>";
+									if ($key == 'arTerms' || $key == 'enTerms') {
+										echo "<div class='form-control' style='height:auto;min-height:34px;'>$value</div>";
+									} elseif ($key == 'imageurl' || $key == 'locationImage' || $key == 'header' || $key == 'clothesImage') {
+										echo "<img src='../logos/$value' alt='$key' class='img-responsive' style='max-width: 100%; height: auto;'>";
+									} else {
+										echo "<input type='text' readonly value='$value' class='form-control'>";
+									}
+								}
+								echo "</div>";
+							}
+							?>
+						</div>
+					</div>
+				</td>
+				</tr>
+			<?php
+			}
+		?>
+		</tbody>
+	</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<?php
+}
+?>
+
 	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 			<div class="panel panel-default card-view">
 			<div class="panel-heading">
@@ -332,3 +514,28 @@ $statsDate = [
 	}
 	?>
 </div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel"><?php echo direction("Comparison", "مقارنة") ?></h4>
+      </div>
+      <div class="modal-body">
+        <table id="modal-example-1" class="table" data-paging="true" data-filtering="true" data-sorting="true"></table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function showUpdate(id){
+    var newContent = document.getElementById("new"+id).innerHTML;
+    document.querySelector(".modal-body").innerHTML = '<div class="row comparison-container">' + newContent + '</div>';
+    $('#myModal').modal('show');
+}
+</script>

@@ -22,7 +22,23 @@ if ( isset($_GET["type"]) && !empty($_GET["type"]) ){
 			}else{
 				$data = array("firebase" => "{$_POST["firebase"]}");
 				if( updateDB2('users',$data,"`id` = '{$user[0]["id"]}'") ){
-					
+					$curl = curl_init();
+					curl_setopt_array($curl, array(
+					CURLOPT_URL => 'https://myacad.app/requests?a=Firebase&action=register',
+					CURLOPT_RETURNTRANSFER => true,
+					CURLOPT_ENCODING => '',
+					CURLOPT_MAXREDIRS => 10,
+					CURLOPT_TIMEOUT => 0,
+					CURLOPT_FOLLOWLOCATION => true,
+					CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+					CURLOPT_CUSTOMREQUEST => 'POST',
+					CURLOPT_POSTFIELDS => array('deviceToken' => "{$_POST["firebase"]}",),
+					CURLOPT_HTTPHEADER => array(
+						'myacadheader: myAcadAppCreate'
+					),
+					));
+					$response = curl_exec($curl);
+					curl_close($curl);
 				}
 				echo outputData(array('id'=>$user[0]["id"]));
 			}
@@ -139,6 +155,7 @@ if ( isset($_GET["type"]) && !empty($_GET["type"]) ){
 			$error = array("msg"=>popupMsg($requestLang,"Passwords does not match. Please try again.","كلمة المرور غير متطابقة ، الرجاء المحاولة مرة اخرى"));
 			echo outputError($error);die();
 		}
+		$_POST["keepMeAlive"] = sha1(rand(000000,999999)+time());
 	
 		$_POST["password"] = sha1($_POST["password"]);		
 		unset($_POST["confirmPassword"]);
@@ -160,6 +177,23 @@ if ( isset($_GET["type"]) && !empty($_GET["type"]) ){
 					$error["msg"] = popupMsg($requestLang,"Your email has been banned permenantly, Please contact administration.","تم حظر بريدك الالكتروني ، الرجاء التواصل مع الإداره");
 					echo outputError($error);die();
 				}
+				$curl = curl_init();
+					curl_setopt_array($curl, array(
+					CURLOPT_URL => 'https://myacad.app/requests?a=Firebase&action=register',
+					CURLOPT_RETURNTRANSFER => true,
+					CURLOPT_ENCODING => '',
+					CURLOPT_MAXREDIRS => 10,
+					CURLOPT_TIMEOUT => 0,
+					CURLOPT_FOLLOWLOCATION => true,
+					CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+					CURLOPT_CUSTOMREQUEST => 'POST',
+					CURLOPT_POSTFIELDS => array('deviceToken' => "{$_POST["firebase"]}",),
+					CURLOPT_HTTPHEADER => array(
+						'myacadheader: myAcadAppCreate'
+					),
+					));
+					$response = curl_exec($curl);
+					curl_close($curl);
 				echo outputData(array('id'=>$user[0]["id"]));
 			}
 		}else{

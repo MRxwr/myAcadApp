@@ -31,8 +31,35 @@ if( !isset($_GET["sportId"]) || empty($_GET["sportId"]) ){
 				$response["academies"][$i]["enArea"] = "";
 				$response["academies"][$i]["arArea"] = "";
 			}
-			$response["academies"][$i]["rating"] = 0;
+$sql = "
+WITH academy_orders AS (
+    SELECT academyId, COUNT(*) AS order_count
+    FROM orders
+    GROUP BY academyId
+),
+max_orders AS (
+    SELECT MAX(order_count) AS max_order_count
+    FROM academy_orders
+)
+SELECT 
+    CASE 
+        WHEN max_orders.max_order_count > 0 THEN 
+            ROUND((COALESCE(ao.order_count, 0) / max_orders.max_order_count) * 5, 2)
+        ELSE 0 
+    END AS rating_out_of_5
+FROM academies a
+LEFT JOIN academy_orders ao ON a.id = ao.academyId
+CROSS JOIN max_orders
+WHERE a.id = {$response["academies"][$i]["id"]};
+";
+$result = $dbconnect->query($sql);
+$row = $result->fetch_assoc();
+			$response["academies"][$i]["rating"] = $row["rating_out_of_5"];
 		}
+		// rearrange the array on the rating desc
+		usort($response["academies"], function($a, $b) {
+			return $b["rating"] <=> $a["rating"];
+		});
 	}else{
 		$response["msg"] = popupMsg($requestLang,"No academies found","لا يوجد أكاديميات");
 		$response["academies"] = array();

@@ -26,7 +26,10 @@ if( $response["error"] == 1 ){
 	</script>
 	<?php
 }else{
-	$code = $response["data"]["data"];
+    $code = urldecode($response["data"]["data"]);
+    $url = explode("data=", $code);
+    $realURL = $url[1];
+    $fullURL = $url[0] . "data=" . urlencode($realURL);
     $order = selectDBNew("orders",[$_GET["id"]],"`id` = ?","" );
     if ( $order[0]["isTournament"] == 1 ){
         $academy = selectDBNew("tournaments",[$order[0]["tournamentId"]],"`id` = ?","" );
@@ -64,7 +67,7 @@ if( $response["error"] == 1 ){
                             <h1 style="color: #ffa300;"><?php echo direction("QR CODE","رمز المسح") ?></h2>
                         </div>
                         <div class="detail_img_right d-lg-none mt-5 mb-5 text-center">
-                            <img src="<?php echo $code ?>" alt="" style="width:200px;height:200px" >
+                            <img src="<?php echo $fullURL ?>" alt="" style="width:200px;height:200px" >
                         </div>
                         <div class="text-center">
                             <h1 style="color: #ffa300;"><?php echo direction($order[0]["enAcademy"],$order[0]["arAcademy"]) ?></h2>

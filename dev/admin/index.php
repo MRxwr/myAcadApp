@@ -5,9 +5,17 @@ if ( isset($_GET["hide"]) || isset($_GET["show"]) || isset($_GET["delId"]) || is
 	if( strtolower($_GET["v"]) == "areas" ){
 		$table = strtolower("countries");
 	}
+    if( strtolower($_GET["v"]) == "tournamentvouchers" ){
+		$table = strtolower("vouchers");
+	}
 	if( isset($_GET["hide"]) && !empty($_GET["hide"]) && updateDB("{$table}",array('hidden'=> '1'),"`id` = '{$_GET["hide"]}'") ){
 	}elseif( isset($_GET["show"]) && !empty($_GET["show"]) && updateDB("{$table}",array('hidden'=> '0'),"`id` = '{$_GET["show"]}'") ){
-	}elseif( isset($_GET["delId"]) && !empty($_GET["delId"]) && updateDB("{$table}",array('status'=> "1"),"`id` = '{$_GET["delId"]}'") ){
+	}elseif( isset($_GET["delId"]) && !empty($_GET["delId"]) ){
+        if( isset($_GET["delStatus"]) && !empty($_GET["delStatus"]) ){
+            updateDB("{$table}",array('status'=> "{$_GET["delStatus"]}"),"`id` = '{$_GET["delId"]}'");
+        }else{
+            updateDB("{$table}",array('status'=> "1"),"`id` = '{$_GET["delId"]}'");
+        }
 	}elseif( isset($_POST["setDefaultPrice"]) && !empty($_POST["setDefaultPrice"]) ){
         if( updateDB("{$table}",array('charges'=> $_POST["setDefaultPrice"]),"`id` != '0'") ){}
     }elseif( isset($_POST["update"]) ){
@@ -75,14 +83,15 @@ if ( isset($_GET["hide"]) || isset($_GET["show"]) || isset($_GET["delId"]) || is
 				$_POST["password"] = sha1($_POST["password"]);
 			}
 			
-			if( insertDB("{$table}", $_POST) ){
+			if( $userType == 0 && insertDB("{$table}", $_POST) ){
+			}elseif( $userType != 0 && insertDB("modifications", array("empId" => $userID, "postId" => $id, "tableTitle" => $table, "contents" => json_encode($_POST)) ) ){
 			}else{
-			?>
-			<script>
-				alert("Could not process your request, Please try again.");
-			</script>
-			<?php
-			}
+            ?>
+            <script>
+                alert("Could not process your request, Please try again.");
+            </script>
+            <?php
+            }
 		}else{
             if( isset($_FILES['imageurl']) && is_uploaded_file($_FILES['imageurl']['tmp_name']) ){
                 $directory = "../logos/";
@@ -152,8 +161,14 @@ if ( isset($_GET["hide"]) || isset($_GET["show"]) || isset($_GET["delId"]) || is
 				}
 			}
 			
-			if( updateDB("{$table}", $_POST, "`id` = '{$id}'") ){
-			}else{
+            if( $getOld = selectDB("{$table}","`id` = '{$id}'") ){
+                unset($getOld[0]["id"]);
+                unset($getOld[0]["date"]);
+            }
+
+			if( $userType == 0 && updateDB("{$table}", $_POST, "`id` = '{$id}'") ){
+			}elseif( $userType != 0 && insertDB("modifications", array("empId" => $userID,"postId" => $id, "tableTitle" => $table, "contents" => json_encode($_POST), "oldContents" => json_encode($getOld[0])) ) ){
+            }else{
 			?>
 			<script>
 				alert("Could not process your request, Please try again.");
@@ -196,28 +211,32 @@ if ( isset($_GET["hide"]) || isset($_GET["show"]) || isset($_GET["delId"]) || is
 }
 
 if( !in_array($userType, $allowedEmpolyees) ){
-    if( isset($_GET["code"]) && !in_array($_GET["code"],$academiesList) ){
-        ?>
-        <script>
-            window.onload = function() {
-                alert("<?php echo direction("Wrong Operation","العملية غير صالحة") ?>");
-                window.history.back();
-            }
-        </script>
-        <?php
+    if( !empty($academiesList) ){
+        if( isset($_GET["code"]) && !in_array($_GET["code"],$academiesList) ){
+            ?>
+            <script>
+                window.onload = function() {
+                    alert("<?php echo direction("Wrong Operation","العملية غير صالحة") ?>");
+                    window.history.back();
+                }
+            </script>
+            <?php
+        }
     }
 }
 
 if( !in_array($userType, $allowedEmpolyees) ){
-    if( isset($_GET["code"]) && !in_array($_GET["code"],$tournamentsList) ){
-        ?>
-        <script>
-            window.onload = function() {
-                alert("<?php echo direction("Wrong Operation","العملية غير صالحة") ?>");
-                window.history.back();
-            }
-        </script>
-        <?php
+    if ( !empty($tournamentsList) ){
+        if( isset($_GET["code"]) && !in_array($_GET["code"],$tournamentsList) ){
+            ?>
+            <script>
+                window.onload = function() {
+                    alert("<?php echo direction("Wrong Operation","العملية غير صالحة") ?>");
+                    window.history.back();
+                }
+            </script>
+            <?php
+        }
     }
 }
 
