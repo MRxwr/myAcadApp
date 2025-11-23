@@ -1,8 +1,8 @@
 <?php
 $servername = "localhost";
-$usernameDB = "u800348178_myacad2USER";
-$password = "N@b$90949089";
-$dbname = "u800348178_myacadv2DB";
+$usernameDB = "u800348178_myacadDev";
+$password = "Hostinger@90949089";
+$dbname = "u800348178_myacadDev";
 $baseURL = "https://dev.myacad.app/requests";
 $printImageUrl = "https://dev.myacad.app";
 $dbconnect = new MySQLi($servername,$usernameDB,$password,$dbname);
