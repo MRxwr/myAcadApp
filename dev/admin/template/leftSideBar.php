@@ -23,13 +23,16 @@ if( $pages = selectDB("pages","`status` = '0' AND `hidden` = '0' AND `section` =
 		$list = array();
 	}
 	for( $i = 0; $i < sizeof($pages); $i++ ){
-		$active = ( isset($_GET["v"]) && strtolower($pages[$i]["enTitle"]) == strtolower(str_replace("_"," ",$_GET["v"])) ) ? "activeSidebar" : "";
+		$currentPage = isset($_GET["v"]) ? strtolower(str_replace("_","",$_GET["v"])) : "";
+		$pageTitle = strtolower(str_replace(" ","",$pages[$i]["enTitle"]));
+		$active = ( $currentPage && $pageTitle == $currentPage ) ? "activeSidebar" : "";
 		if ( $userType == '0' || in_array($pages[$i]["id"],$list) ){
 			if( $sections = selectDB("pages","`section` = '{$pages[$i]["id"]}' AND `status` != '1'") ){
 				// Check if any subsection is currently active
 				$isSubActive = false;
 				foreach($sections as $section){
-					if( isset($_GET["v"]) && strtolower($section["enTitle"]) == strtolower(str_replace("_"," ",$_GET["v"])) ){
+					$sectionTitle = strtolower(str_replace(" ","",$section["enTitle"]));
+					if( $currentPage && $sectionTitle == $currentPage ){
 						$isSubActive = true;
 						$active = "activeSidebar";
 						break;
@@ -60,7 +63,8 @@ if( $pages = selectDB("pages","`status` = '0' AND `hidden` = '0' AND `section` =
 				// Check if any subsection is active to keep parent expanded
 				$subActive = false;
 				foreach($subSections as $subSection){
-					if( isset($_GET["v"]) && strtolower($subSection["enTitle"]) == strtolower(str_replace("_"," ",$_GET["v"])) ){
+					$subSectionTitle = strtolower(str_replace(" ","",$subSection["enTitle"]));
+					if( $currentPage && $subSectionTitle == $currentPage ){
 						$subActive = true;
 						break;
 					}
@@ -70,7 +74,8 @@ if( $pages = selectDB("pages","`status` = '0' AND `hidden` = '0' AND `section` =
 				<ul id="<?php echo str_replace(" ","_",$pages[$i]["enTitle"]) ?>" class="collapse-level-1 collapse <?php echo $expandClass ?>" aria-expanded="<?php echo $subActive ? 'true' : 'false' ?>">
 				<?php
 				for( $y = 0; $y < sizeof($subSections); $y++ ){
-					$active = ( isset($_GET["v"]) && strtolower($subSections[$y]["enTitle"]) == strtolower(str_replace("_"," ",$_GET["v"])) ) ? "activeSidebar" : "";
+					$subTitle = strtolower(str_replace(" ","",$subSections[$y]["enTitle"]));
+					$active = ( $currentPage && $subTitle == $currentPage ) ? "activeSidebar" : "";
 					?>
 						<li>
 							<a href="<?php echo $subSections[$y]["fileName"] ?>" class="<?php echo $active ?>">
