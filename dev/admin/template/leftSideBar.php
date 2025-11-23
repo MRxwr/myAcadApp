@@ -31,14 +31,8 @@ if( $pages = selectDB("pages","`status` = '0' AND `hidden` = '0' AND `section` =
 				// Check if any subsection is currently active OR if parent itself is active
 				$isSubActive = false;
 				foreach($sections as $section){
-					$sectionTitle = strtolower(str_replace(array(" ","_"),"",$section["enTitle"]));
-					// Also check if fileName matches (e.g., ?v=Tournaments)
+					// Check if fileName matches (e.g., ?v=Tournaments)
 					if( isset($_GET["v"]) && $section["fileName"] == "?v={$_GET["v"]}" ){
-						$isSubActive = true;
-						$active = "activeSidebar";
-						break;
-					}
-					if( $currentPage && $sectionTitle == $currentPage ){
 						$isSubActive = true;
 						$active = "activeSidebar";
 						break;
@@ -73,13 +67,8 @@ if( $pages = selectDB("pages","`status` = '0' AND `hidden` = '0' AND `section` =
 				// Check if any subsection is active to keep parent expanded
 				$subActive = false;
 				foreach($subSections as $subSection){
-					$subSectionTitle = strtolower(str_replace(array(" ","_"),"",$subSection["enTitle"]));
-					// Also check if fileName matches (e.g., ?v=Tournaments)
+					// Check if fileName matches (e.g., ?v=Tournaments)
 					if( isset($_GET["v"]) && $subSection["fileName"] == "?v={$_GET["v"]}" ){
-						$subActive = true;
-						break;
-					}
-					if( $currentPage && $subSectionTitle == $currentPage ){
 						$subActive = true;
 						break;
 					}
@@ -89,12 +78,9 @@ if( $pages = selectDB("pages","`status` = '0' AND `hidden` = '0' AND `section` =
 				<ul id="<?php echo str_replace(" ","_",$pages[$i]["enTitle"]) ?>" class="collapse-level-1 collapse <?php echo $expandClass ?>" aria-expanded="<?php echo $subActive ? 'true' : 'false' ?>">
 				<?php
 				for( $y = 0; $y < sizeof($subSections); $y++ ){
-					$subTitle = strtolower(str_replace(array(" ","_"),"",$subSections[$y]["enTitle"]));
 					$active = "";
 					// Check if fileName matches current URL
 					if( isset($_GET["v"]) && $subSections[$y]["fileName"] == "?v={$_GET["v"]}" ){
-						$active = "activeSidebar";
-					}elseif( $currentPage && $subTitle == $currentPage ){
 						$active = "activeSidebar";
 					}
 					?>
