@@ -26,7 +26,18 @@ if( $pages = selectDB("pages","`status` = '0' AND `hidden` = '0' AND `section` =
 		$active = ( isset($_GET["v"]) && strtolower($pages[$i]["enTitle"]) == strtolower(str_replace("_"," ",$_GET["v"])) ) ? "activeSidebar" : "";
 		if ( $userType == '0' || in_array($pages[$i]["id"],$list) ){
 			if( $sections = selectDB("pages","`section` = '{$pages[$i]["id"]}' AND `status` != '1'") ){
-				$anchor = "href='javascript:void(0);' data-toggle='collapse' data-target='#".str_replace(" ","_",$pages[$i]["enTitle"])."' class='collapsed {$active}' aria-expanded='false'";
+				// Check if any subsection is currently active
+				$isSubActive = false;
+				foreach($sections as $section){
+					if( isset($_GET["v"]) && strtolower($section["enTitle"]) == strtolower(str_replace("_"," ",$_GET["v"])) ){
+						$isSubActive = true;
+						$active = "activeSidebar";
+						break;
+					}
+				}
+				$collapseClass = $isSubActive ? "" : "collapsed";
+				$ariaExpanded = $isSubActive ? "true" : "false";
+				$anchor = "href='javascript:void(0);' data-toggle='collapse' data-target='#".str_replace(" ","_",$pages[$i]["enTitle"])."' class='{$collapseClass} {$active}' aria-expanded='{$ariaExpanded}'";
 				$arrowDown = "<i class='zmdi zmdi-caret-down'></i>";
 			}else{
 				$anchor = "href='{$pages[$i]["fileName"]}' class='{$active}'";
@@ -46,8 +57,17 @@ if( $pages = selectDB("pages","`status` = '0' AND `hidden` = '0' AND `section` =
 				</a>
 			<?php
 			if ( $subSections = selectDB("pages","`section` = '{$pages[$i]["id"]}' AND `status` != '1' ORDER BY `order` ASC") ){
+				// Check if any subsection is active to keep parent expanded
+				$subActive = false;
+				foreach($subSections as $subSection){
+					if( isset($_GET["v"]) && strtolower($subSection["enTitle"]) == strtolower(str_replace("_"," ",$_GET["v"])) ){
+						$subActive = true;
+						break;
+					}
+				}
+				$expandClass = $subActive ? "in" : "";
 				?>
-				<ul id="<?php echo str_replace(" ","_",$pages[$i]["enTitle"]) ?>" class="collapse-level-1 collapse" aria-expanded="true">
+				<ul id="<?php echo str_replace(" ","_",$pages[$i]["enTitle"]) ?>" class="collapse-level-1 collapse <?php echo $expandClass ?>" aria-expanded="<?php echo $subActive ? 'true' : 'false' ?>">
 				<?php
 				for( $y = 0; $y < sizeof($subSections); $y++ ){
 					$active = ( isset($_GET["v"]) && strtolower($subSections[$y]["enTitle"]) == strtolower(str_replace("_"," ",$_GET["v"])) ) ? "activeSidebar" : "";
