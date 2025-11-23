@@ -23,15 +23,15 @@ if( $pages = selectDB("pages","`status` = '0' AND `hidden` = '0' AND `section` =
 		$list = array();
 	}
 	for( $i = 0; $i < sizeof($pages); $i++ ){
-		$currentPage = isset($_GET["v"]) ? strtolower(str_replace("_","",$_GET["v"])) : "";
-		$pageTitle = strtolower(str_replace(" ","",$pages[$i]["enTitle"]));
+		$currentPage = isset($_GET["v"]) ? strtolower(str_replace(array(" ","_"),"",$_GET["v"])) : "";
+		$pageTitle = strtolower(str_replace(array(" ","_"),"",$pages[$i]["enTitle"]));
 		$active = ( $currentPage && $pageTitle == $currentPage ) ? "activeSidebar" : "";
 		if ( $userType == '0' || in_array($pages[$i]["id"],$list) ){
 			if( $sections = selectDB("pages","`section` = '{$pages[$i]["id"]}' AND `status` != '1'") ){
 				// Check if any subsection is currently active
 				$isSubActive = false;
 				foreach($sections as $section){
-					$sectionTitle = strtolower(str_replace(" ","",$section["enTitle"]));
+					$sectionTitle = strtolower(str_replace(array(" ","_"),"",$section["enTitle"]));
 					if( $currentPage && $sectionTitle == $currentPage ){
 						$isSubActive = true;
 						$active = "activeSidebar";
@@ -63,7 +63,7 @@ if( $pages = selectDB("pages","`status` = '0' AND `hidden` = '0' AND `section` =
 				// Check if any subsection is active to keep parent expanded
 				$subActive = false;
 				foreach($subSections as $subSection){
-					$subSectionTitle = strtolower(str_replace(" ","",$subSection["enTitle"]));
+					$subSectionTitle = strtolower(str_replace(array(" ","_"),"",$subSection["enTitle"]));
 					if( $currentPage && $subSectionTitle == $currentPage ){
 						$subActive = true;
 						break;
@@ -74,7 +74,7 @@ if( $pages = selectDB("pages","`status` = '0' AND `hidden` = '0' AND `section` =
 				<ul id="<?php echo str_replace(" ","_",$pages[$i]["enTitle"]) ?>" class="collapse-level-1 collapse <?php echo $expandClass ?>" aria-expanded="<?php echo $subActive ? 'true' : 'false' ?>">
 				<?php
 				for( $y = 0; $y < sizeof($subSections); $y++ ){
-					$subTitle = strtolower(str_replace(" ","",$subSections[$y]["enTitle"]));
+					$subTitle = strtolower(str_replace(array(" ","_"),"",$subSections[$y]["enTitle"]));
 					$active = ( $currentPage && $subTitle == $currentPage ) ? "activeSidebar" : "";
 					?>
 						<li>
