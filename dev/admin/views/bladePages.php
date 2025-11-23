@@ -15,7 +15,7 @@
                 <label><?php echo direction("Section","التصنيف") ?></label>
                 <select name="section" class="form-control">
                     <?php
-                    if( $sections = selectDB("pages","`section` = '0' AND `status` = '0'") ){
+                    if( $sections = selectDB("pages","`section` = '0' AND `status` = '0' ORDER BY `order` ASC") ){
                         echo "<option value='0'>".direction("Main","رئيسي")."</option>";
                         for( $i = 0; $i < sizeof($sections); $i++){
                             echo "<option value='{$sections[$i]["id"]}'>".direction($sections[$i]["enTitle"],$sections[$i]["arTitle"])."</option>";
