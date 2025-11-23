@@ -50,7 +50,7 @@ if( $pages = selectDB("pages","`status` = '0' AND `hidden` = '0' AND `section` =
 				<ul id="<?php echo str_replace(" ","_",$pages[$i]["enTitle"]) ?>" class="collapse-level-1 collapse" aria-expanded="true">
 				<?php
 				for( $y = 0; $y < sizeof($subSections); $y++ ){
-					$active = ( isset($_GET["v"]) && strtolower($pages[$i]["enTitle"]) == strtolower(str_replace("_"," ",$_GET["v"])) ) ? "activeSidebar" : "";
+					$active = ( isset($_GET["v"]) && strtolower($subSections[$y]["enTitle"]) == strtolower(str_replace("_"," ",$_GET["v"])) ) ? "activeSidebar" : "";
 					?>
 						<li>
 							<a href="<?php echo $subSections[$y]["fileName"] ?>" class="<?php echo $active ?>">
