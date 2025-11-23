@@ -33,12 +33,14 @@ if( $pages = selectDB("pages","`status` = '0' AND `hidden` = '0' AND `section` =
 				foreach($sections as $section){
 					$sectionTitle = strtolower(str_replace(array(" ","_"),"",$section["enTitle"]));
 					// Also check if fileName matches (e.g., ?v=Tournaments)
-					if( isset($_GET["v"]) && strpos($section["fileName"], "?v={$_GET["v"]}") !== false ){
+					if( isset($_GET["v"]) && $section["fileName"] == "?v={$_GET["v"]}" ){
 						$isSubActive = true;
+						$active = "activeSidebar";
 						break;
 					}
 					if( $currentPage && $sectionTitle == $currentPage ){
 						$isSubActive = true;
+						$active = "activeSidebar";
 						break;
 					}
 				}
@@ -73,7 +75,7 @@ if( $pages = selectDB("pages","`status` = '0' AND `hidden` = '0' AND `section` =
 				foreach($subSections as $subSection){
 					$subSectionTitle = strtolower(str_replace(array(" ","_"),"",$subSection["enTitle"]));
 					// Also check if fileName matches (e.g., ?v=Tournaments)
-					if( isset($_GET["v"]) && strpos($subSection["fileName"], "?v={$_GET["v"]}") !== false ){
+					if( isset($_GET["v"]) && $subSection["fileName"] == "?v={$_GET["v"]}" ){
 						$subActive = true;
 						break;
 					}
@@ -90,7 +92,7 @@ if( $pages = selectDB("pages","`status` = '0' AND `hidden` = '0' AND `section` =
 					$subTitle = strtolower(str_replace(array(" ","_"),"",$subSections[$y]["enTitle"]));
 					$active = "";
 					// Check if fileName matches current URL
-					if( isset($_GET["v"]) && strpos($subSections[$y]["fileName"], "?v={$_GET["v"]}") !== false ){
+					if( isset($_GET["v"]) && $subSections[$y]["fileName"] == "?v={$_GET["v"]}" ){
 						$active = "activeSidebar";
 					}elseif( $currentPage && $subTitle == $currentPage ){
 						$active = "activeSidebar";
