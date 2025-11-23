@@ -32,6 +32,11 @@ if( $pages = selectDB("pages","`status` = '0' AND `hidden` = '0' AND `section` =
 				$isSubActive = false;
 				foreach($sections as $section){
 					$sectionTitle = strtolower(str_replace(array(" ","_"),"",$section["enTitle"]));
+					// Also check if fileName matches (e.g., ?v=Tournaments)
+					if( isset($_GET["v"]) && strpos($section["fileName"], "?v={$_GET["v"]}") !== false ){
+						$isSubActive = true;
+						break;
+					}
 					if( $currentPage && $sectionTitle == $currentPage ){
 						$isSubActive = true;
 						break;
@@ -67,6 +72,11 @@ if( $pages = selectDB("pages","`status` = '0' AND `hidden` = '0' AND `section` =
 				$subActive = false;
 				foreach($subSections as $subSection){
 					$subSectionTitle = strtolower(str_replace(array(" ","_"),"",$subSection["enTitle"]));
+					// Also check if fileName matches (e.g., ?v=Tournaments)
+					if( isset($_GET["v"]) && strpos($subSection["fileName"], "?v={$_GET["v"]}") !== false ){
+						$subActive = true;
+						break;
+					}
 					if( $currentPage && $subSectionTitle == $currentPage ){
 						$subActive = true;
 						break;
@@ -78,7 +88,13 @@ if( $pages = selectDB("pages","`status` = '0' AND `hidden` = '0' AND `section` =
 				<?php
 				for( $y = 0; $y < sizeof($subSections); $y++ ){
 					$subTitle = strtolower(str_replace(array(" ","_"),"",$subSections[$y]["enTitle"]));
-					$active = ( $currentPage && $subTitle == $currentPage ) ? "activeSidebar" : "";
+					$active = "";
+					// Check if fileName matches current URL
+					if( isset($_GET["v"]) && strpos($subSections[$y]["fileName"], "?v={$_GET["v"]}") !== false ){
+						$active = "activeSidebar";
+					}elseif( $currentPage && $subTitle == $currentPage ){
+						$active = "activeSidebar";
+					}
 					?>
 						<li>
 							<a href="<?php echo $subSections[$y]["fileName"] ?>" class="<?php echo $active ?>">
