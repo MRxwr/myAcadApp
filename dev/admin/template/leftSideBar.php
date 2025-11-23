@@ -28,15 +28,18 @@ if( $pages = selectDB("pages","`status` = '0' AND `hidden` = '0' AND `section` =
 		$active = ( $currentPage && $pageTitle == $currentPage ) ? "activeSidebar" : "";
 		if ( $userType == '0' || in_array($pages[$i]["id"],$list) ){
 			if( $sections = selectDB("pages","`section` = '{$pages[$i]["id"]}' AND `status` != '1'") ){
-				// Check if any subsection is currently active
+				// Check if any subsection is currently active OR if parent itself is active
 				$isSubActive = false;
 				foreach($sections as $section){
 					$sectionTitle = strtolower(str_replace(array(" ","_"),"",$section["enTitle"]));
 					if( $currentPage && $sectionTitle == $currentPage ){
 						$isSubActive = true;
-						$active = "activeSidebar";
 						break;
 					}
+				}
+				// Also check if the parent page itself is being viewed
+				if( $currentPage && $pageTitle == $currentPage ){
+					$isSubActive = true;
 				}
 				$collapseClass = $isSubActive ? "" : "collapsed";
 				$ariaExpanded = $isSubActive ? "true" : "false";
