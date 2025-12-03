@@ -273,7 +273,7 @@
 		$count = (is_array($tournamentsList) && !empty($tournamentsList)) ? count($tournamentsList) : 1;
 		for( $z = 0; $z < $count; $z++ ){
 			$id = ( isset($tournamentsList[$z]) && !empty($tournamentsList[$z]) ) ? "AND `id` = '{$tournamentsList[$z]}'" : "";
-		if( $tournaments = selectDB("tournaments","`status` = '0' {$id}") ){
+		if( $tournaments = selectDB("tabs_list","`status` = '0' {$id}") ){
 			for( $i = 0; $i < sizeof($tournaments); $i++ ){
 				$sport = selectDB("sports","`id` = '{$tournaments[$i]["sport"]}'");
 				$academyTitle = direction($tournaments[$i]["enTitle"],$tournaments[$i]["arTitle"]);
