@@ -388,10 +388,10 @@ if( !isset($_POST) ){
             $wallet = 1;
         }
 
-        // get feilds details to add to order
+        // get fields details to add to order
         $eventData = array();
         foreach( $fieldIds as $index => $fieldId ){
-            if( $fieldInfo = selectDB("event_fields","`id` = '{$fieldId}'") ){
+            if( $fieldInfo = selectDB("tabs_fields","`id` = '{$fieldId}'") ){
                 $eventData[] = array(
                     "fieldId" => $fieldId,
                     "enFieldTitle" => $fieldInfo[0]["enTitle"],
