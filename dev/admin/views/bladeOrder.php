@@ -18,6 +18,16 @@ for( $z = 0; $z < $count; $z++ ){
 	}
 }
 $id .= ( isset($tournamentsList[0]) && !empty($tournamentsList[0]) ) ? "AND `tournamentId` IN ($listOfAcademies)" : "";
+
+$count = (is_array($eventsList) && !empty($eventsList)) ? count($eventsList) : 0;
+for( $z = 0; $z < $count; $z++ ){
+    $listOfAcademies .= "'{$eventsList[$z]}'";
+    if( isset($eventsList[$z+1]) && !empty($eventsList[$z+1]) ){
+        $listOfAcademies .= ",";
+    }
+}
+$id .= ( isset($eventsList[0]) && !empty($eventsList[0]) ) ? "AND `eventId` IN ($listOfAcademies)" : "";
+
 if( $order = selectDB("orders","`id` = '{$_GET["id"]}' {$id}") ){
 }else{
     ?>
