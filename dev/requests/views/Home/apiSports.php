@@ -9,7 +9,7 @@ if( !isset($_GET["tabId"]) || empty($_GET["tabId"]) ){
     }elseif( $_GET["tabId"] == "2" ){
         $table = "tournaments";
     }else{
-        $table = "tabs";
+        $table = "tabs_list";
         $where = "AND `tabId` = '{$_GET["tabId"]}'";
     }
 }
