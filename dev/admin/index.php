@@ -5,7 +5,7 @@ if ( isset($_GET["hide"]) || isset($_GET["show"]) || isset($_GET["delId"]) || is
 	if( strtolower($_GET["v"]) == "areas" ){
 		$table = strtolower("countries");
 	}
-    if( strtolower($_GET["v"]) == "tournamentvouchers" ){
+    if( strtolower($_GET["v"]) == "tournamentvouchers" || strtolower($_GET["v"]) == "eventvouchers" ){
 		$table = strtolower("vouchers");
 	}
 	if( isset($_GET["hide"]) && !empty($_GET["hide"]) && updateDB("{$table}",array('hidden'=> '1'),"`id` = '{$_GET["hide"]}'") ){
