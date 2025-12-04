@@ -400,7 +400,7 @@ if( !isset($_POST) ){
                 );
             }
         }
-        $_POST["eventDetails"]["fields"] = json_encode($eventData,JSON_UNESCAPED_UNICODE);
+        $_POST["eventDetails"]["fields"] = $eventData;
 
         //calulation of total prices
         $newTotal = (float)$price;
@@ -437,7 +437,7 @@ if( !isset($_POST) ){
         }
         $_POST["paymentMethod"] = $paymentMethod;
         $_POST["voucher"] = $data["voucher"];
-        $_POST["eventDetails"] = $_POST["eventDetails"];
+        $_POST["eventDetails"] = json_encode($_POST["eventDetails"],JSON_UNESCAPED_UNICODE);
 
         //calculate totals prices that should be sent to upayments 
         if( $data["paymentMethod"] == 1 ){
