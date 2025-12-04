@@ -119,8 +119,8 @@ if ( isset($_POST["endDate"]) ){
 	if ( !empty($_POST["voucher"]) ){
 		$where .= " AND `voucher` LIKE '%{$_POST["voucher"]}%'";
 	}
-	if ( !empty($_POST["tournamentId"]) ){
-		$where .= " AND `tournamentId` = '{$_POST["tournamentId"]}'";
+	if ( !empty($_POST["eventId"]) ){
+		$where .= " AND `eventId` = '{$_POST["eventId"]}'";
 	}
 	if ( !empty($_POST["paymentMethod"]) ){
 		$where .= " AND `paymentMethod` = '{$_POST["paymentMethod"]}'";
@@ -128,7 +128,7 @@ if ( isset($_POST["endDate"]) ){
 	if ( isset($_POST["status"]) && !empty($_POST["status"]) ){
 		$where .= " AND `status` = '{$_POST["status"]}'";
 	}
-	$where .= " AND `isTournament` = '1' ";
+	$where .= " AND `isTournament` = '2' ";
 }
 ?>
 </div>
@@ -168,7 +168,7 @@ if ( isset($_POST["endDate"]) && $orders = selectDB("orders",$where) ){
 		$status = [direction("Pending","إنتظار"),direction("Successful","ناجحه"),direction("Failed","فاشلة"),direction("Cancelled","ملغية"),direction("Ended","إنتهى")];
         $statusColor = ["default","success","info","danger","warning"];
 		$paymentMethods = ["","KNET","VISA","WALLET","FREE"];
-        $teamDetails = ( !isset($orders[$i]["teamDetails"]) || empty($orders[$i]["teamDetails"])) ? array("enTournament" => "", "arTournament" => "") : json_decode($orders[$i]["teamDetails"],true);
+        $eventDetails = ( !isset($orders[$i]["eventDetails"]) || empty($orders[$i]["eventDetails"])) ? array("enEvent" => "", "arEvent" => "") : json_decode($orders[$i]["eventDetails"],true);
 		for( $y = 0; $y < sizeof($status); $y++ ){
 			if( $orders[$i]["status"] == $y ){
 				$orderStatus = $status[$y];
@@ -186,7 +186,7 @@ if ( isset($_POST["endDate"]) && $orders = selectDB("orders",$where) ){
 	<td><?php echo $orders[$i]["date"] ?></td>
 	<td><?php echo $orders[$i]["name"] ?></td>
 	<td><?php echo $orders[$i]["phone"] ?></td>
-	<td><?php echo direction($teamDetails["enTournament"],$teamDetails["arTournament"]) ?></td>
+	<td><?php echo direction($eventDetails["enEvent"],$eventDetails["arEvent"]) ?></td>
 	<td><?php echo $orders[$i]["total"] ?>KD</td>
 	<td><?php echo $paymentMethod ?></td>
 	<td><button class="btn btn-<?php echo $orderBtnColor ?>" style="width: 100%;"><?php echo $orderStatus ?></button></td>
