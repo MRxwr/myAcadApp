@@ -134,19 +134,7 @@
 			</select>
 			</div>
 			
-			<div class="col-md-6">
-			<label><?php echo direction("Registration Fields","حقول التسجيل") ?></label>
-			<select id="mySelect5" name="fieldsIds[]" class="form-control" multiple>
-				<?php
-				if( $fieldsList = selectDB("tabs_fields","`status` = '0' AND `hidden` != '2' ORDER BY `rank` ASC") ){
-					for( $i =0; $i < sizeof($fieldsList); $i++ ){
-						echo "<option value='{$fieldsList[$i]["id"]}>" . direction($fieldsList[$i]["enTitle"],$fieldsList[$i]["arTitle"]) . "</option>";
-					}
-				}
-				?>
-			</select>
-			<small class="form-text text-muted"><?php echo direction("Hold Ctrl (Windows) or Cmd (Mac) to select multiple fields","اضغط Ctrl (ويندوز) أو Cmd (ماك) لاختيار حقول متعددة") ?></small>
-			</div>
+			
 
 			<div class="col-md-6">
 			<label><?php echo direction("Event Date","تاريخ البطولة") ?></label>
