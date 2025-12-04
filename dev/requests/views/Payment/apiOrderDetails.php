@@ -32,6 +32,10 @@ if( !isset($_POST["orderId"]) || empty($_POST["orderId"]) ){
             $data[0]["date"] = $order[0]["date"];
             $data[0]["enTitle"] = $eventDetails["enEvent"];
             $data[0]["arTitle"] = $eventDetails["arEvent"];
+            $data[0]["imageurl"] = $event[0]["imageurl"];
+            $data[0]["header"] = $event[0]["header"];
+            $data[0]["location"] = $event[0]["location"];
+            $data[0]["locationImage"] = $event[0]["locationImage"];
             $data[0]["gateDate"] = $event[0]["gameDate"];
             $data[0]["gateTime"] = $event[0]["gameTime"];
             $data[0]["price"] = $eventDetails["price"];
@@ -41,7 +45,7 @@ if( !isset($_POST["orderId"]) || empty($_POST["orderId"]) ){
             $data[0]["arena"] = ( empty($event[0]["isIndoor"]) || $event[0]["isIndoor"] == 0 ) ? popupMsg($requestLang,"Outdoor","خارجي") : popupMsg($requestLang,"Indoor","داخلي");
             $response = $data;
         }else{
-            unset($order[0]["tournamentId"],$order[0]["teamDetails"],$order[0]["eventId"],$order[0]["eventDetails"]));
+            unset($order[0]["tournamentId"],$order[0]["teamDetails"],$order[0]["eventId"],$order[0]["eventDetails"]);
             $order2 = selectDB("orders","`id` = '{$_POST["orderId"]}'");
             $subscription = selectDB("subscriptions","`id` = '{$order2[0]["subscriptionId"]}'");
             $order[0]["isTournament"] = 0;
