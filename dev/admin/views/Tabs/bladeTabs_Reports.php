@@ -28,22 +28,22 @@
 
 	<div class="col-md-4">
 	<div class="form-group">
-	<label class="control-label mb-10">Select Tournament</label>
-	<select class="form-control" name="tournamentId">
+	<label class="control-label mb-10">Select Event</label>
+	<select class="form-control" name="eventId">
 		<?php
 		if( $userType == 0 || $userType == 8 ){
 			echo "<option value='0' selected>".direction("All","الكل")."</option>";
 		}
-		$count = (is_array($tournamentsList) && !empty($tournamentsList)) ? count($tournamentsList) : 1;
+		$count = (is_array($eventsList) && !empty($eventsList)) ? count($eventsList) : 1;
 		$orderBy = direction("enTitle","arTitle");
 		for( $z = 0; $z < $count; $z++ ){
-			$id = ( isset($tournamentsList[$z]) && !empty($tournamentsList[$z]) ) ? "AND `id` = '{$tournamentsList[$z]}'" : "AND `id` != '0'";
-			if( $tournaments = selectDB("tournaments","`status` != '4' {$id} ORDER BY `{$orderBy}` ASC") ){
-				for( $i = 0; $i < sizeof($tournaments); $i++ ){
-					$area = selectDB("countries","`id` = '{$tournaments[$i]["area"]}'");
+			$id = ( isset($eventsList[$z]) && !empty($eventsList[$z]) ) ? "AND `id` = '{$eventsList[$z]}'" : "AND `id` != '0'";
+			if( $events = selectDB("tabs_list","`status` != '4' {$id} ORDER BY `{$orderBy}` ASC") ){
+				for( $i = 0; $i < sizeof($events); $i++ ){
+					$area = selectDB("countries","`id` = '{$events[$i]["area"]}'");
 					$areaTitle = direction($area[0]["areaEnTitle"],$area[0]["areaArTitle"]);
-					$academyTitle = direction($tournaments[$i]["enTitle"],$tournaments[$i]["arTitle"]);
-					echo "<option value='{$tournaments[$i]["id"]}'>{$academyTitle} - {$areaTitle} </option>";
+					$academyTitle = direction($events[$i]["enTitle"],$events[$i]["arTitle"]);
+					echo "<option value='{$events[$i]["id"]}'>{$academyTitle} - {$areaTitle} </option>";
 				}
 			}
 		}
@@ -85,16 +85,16 @@
 	<select class="form-control" name="voucher">
 		<option value="0" selected><?php echo direction("None","لا يوجد") ?></option>
 		<?php
-			$voucherQuery = "`id` != '0' AND `typeOfVoucher` = '1' ";
+			$voucherQuery = "`id` != '0' AND `typeOfVoucher` = '2' ";
 			
 			// Filter by tournament access for non-admin users
-			if( $userType != 0 && $userType != 8 && !empty($tournamentsList) ){
-				$tournamentConditions = array();
-				foreach( $tournamentsList as $tournamentId ){
-					$tournamentConditions[] = "`tournamentIds` LIKE '%\"{$tournamentId}\"%'";
+			if( $userType != 0 && $userType != 8 && !empty($eventsList) ){
+				$eventConditions = array();
+				foreach( $eventsList as $eventId ){
+					$eventConditions[] = "`eventIds` LIKE '%\"{$eventId}\"%'";
 				}
-				if( !empty($tournamentConditions) ){
-					$voucherQuery .= " AND (" . implode(" OR ", $tournamentConditions) . ")";
+				if( !empty($eventConditions) ){
+					$voucherQuery .= " AND (" . implode(" OR ", $eventConditions) . ")";
 				}
 			}
 			
