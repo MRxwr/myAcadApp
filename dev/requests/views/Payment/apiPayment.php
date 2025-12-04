@@ -418,6 +418,24 @@ if( !isset($_POST) ){
             $fullAmount = 2;
         }
 
+        // Handle file upload for event
+        if (isset($_FILES['file']) && $_FILES['file']['error'] === UPLOAD_ERR_OK) {
+            $fileTmpPath = $_FILES['file']['tmp_name'];
+            $fileName = $_FILES['file']['name'];
+            $fileSize = $_FILES['file']['size'];
+            $fileType = $_FILES['file']['type'];
+            $fileNameCmps = explode(".", $fileName);
+            $fileExtension = strtolower(end($fileNameCmps));
+            $allowedfileExtensions = array('jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp');
+            if (in_array($fileExtension, $allowedfileExtensions) && strpos($fileType, 'image') === 0) {
+                $newFileName = uniqid('event_', true) . '.' . $fileExtension;
+                $dest_path = __DIR__ . '/../../../files/' . $newFileName;
+                if(move_uploaded_file($fileTmpPath, $dest_path)) {
+                    $_POST["eventDetails"]["uploadedImage"] = 'files/' . $newFileName;
+                }
+            }
+        }
+
         $_POST["name"] = "{$userData[0]["firstName"]} {$userData[0]["lastName"]}";
         $_POST["phone"] = "{$userData[0]["phone"]}";
         $_POST["email"] = "{$userData[0]["email"]}";
