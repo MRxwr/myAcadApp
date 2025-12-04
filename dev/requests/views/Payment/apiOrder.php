@@ -9,7 +9,7 @@ if( !isset($_POST["invoiceId"]) || empty($_POST["invoiceId"]) ){
     $response = array("msg"=>"Please set url");
 	echo outputError($response);die();
 }else{
-	if( $order = selectDB2("`id`, `date`, `isTournament`, `paymentMethod`, `enAcademy`, `arAcademy`, `enSession`, `arSession`, `enSubscription`, `arSubscription`, `subscriptionQuantity`, `jersyQuantity`, `totalSubscriptionPrice`, `totalJersyPrice`,`voucher`, `total`, `tournamentId`, `teamDetails`","orders","`gatewayId` = '{$_POST["invoiceId"]}'") ){
+	if( $order = selectDB2("`id`, `date`, `isTournament`, `paymentMethod`, `enAcademy`, `arAcademy`, `enSession`, `arSession`, `enSubscription`, `arSubscription`, `subscriptionQuantity`, `jersyQuantity`, `totalSubscriptionPrice`, `totalJersyPrice`,`voucher`, `total`, `tournamentId`, `teamDetails`, `eventId`, `eventDetails`","orders","`gatewayId` = '{$_POST["invoiceId"]}'") ){
         $order2 = selectDB("orders","`gatewayId` = '{$_POST["invoiceId"]}'");
         if( $order2[0]["isTournament"] == 1 ){
             $order[0]["teamDetails"] = json_decode($order[0]["teamDetails"],true);
