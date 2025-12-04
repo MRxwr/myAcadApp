@@ -418,25 +418,25 @@
 			$("input[name=iban]").val($("#iban"+id).html());
 			$("input[name=price]").val($("#price"+id).html());
 			$("input[name=gameDate]").val($("#gameDate"+id).html());
-		$("input[name=gameTime]").val($("#gameTime"+id).html());
-		tinymce.get("enTerms").setContent($("#enTerms"+id).html());
-        tinymce.get("arTerms").setContent($("#arTerms"+id).html());
-		
-		// Set selected fields
-		var fieldsIds = $("#fieldsIds"+id).html();
-		if( fieldsIds ){
-			try {
-				var fieldsArray = JSON.parse(fieldsIds);
-				$("select[name='fieldsIds[]']").val(fieldsArray).trigger('change');
-			} catch(e) {
-				console.log("Error parsing fieldsIds", e);
+			$("input[name=gameTime]").val($("#gameTime"+id).html());
+			tinymce.get("enTerms").setContent($("#enTerms"+id).html());
+			tinymce.get("arTerms").setContent($("#arTerms"+id).html());
+			
+			// Set selected fields
+			var fieldsIds = $("#fieldsIds"+id).html();
+			if( fieldsIds ){
+				try {
+					var fieldsArray = JSON.parse(fieldsIds);
+					$("select[name='fieldsIds[]']").val(fieldsArray).trigger('change');
+				} catch(e) {
+					console.log("Error parsing fieldsIds", e);
+				}
 			}
-		}
-		
-		$("#logoImg").attr("src","../logos/"+$("#logo"+id).html());
-		$("#headerImg").attr("src","../logos/"+$("#header"+id).html());
-		$("#locationImg").attr("src","../logos/"+$("#locationImg"+id).html());
-		$("#images").attr("style","margin-top:10px;display:block");
-		$("input[name=update]").val(id);
+			
+			$("#logoImg").attr("src","../logos/"+$("#logo"+id).html());
+			$("#headerImg").attr("src","../logos/"+$("#header"+id).html());
+			$("#locationImg").attr("src","../logos/"+$("#locationImg"+id).html());
+			$("#images").attr("style","margin-top:10px;display:block");
+			$("input[name=update]").val(id);
 		})
 	</script>
