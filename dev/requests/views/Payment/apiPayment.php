@@ -326,6 +326,7 @@ if( !isset($_POST) ){
         $voucher = $data["voucher"];
         $fieldIds = json_decode($data["fieldIds"],true);
         $fieldData = json_decode($data["fieldData"],true);
+        $quantity = $data["quantity"];
         
         //checking voucher
         $numberOfTimesAvalability = false;
@@ -444,6 +445,7 @@ if( !isset($_POST) ){
         $_POST["isTournament"] = 2;
         $_POST["eventDetails"]["enEvent"] = $event[0]["enTitle"];
         $_POST["eventDetails"]["arEvent"] = $event[0]["arTitle"];
+        $_POST["eventDetails"]["quantity"] = $quantity;
         if ( $freePayment == 1 ){
             $_POST["eventDetails"]["price"] = 0;
             $_POST["eventDetails"]["total"] = 0;
