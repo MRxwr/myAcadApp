@@ -378,17 +378,14 @@ if( !isset($_POST) ){
         if( $AdminSettings = selectDB("settings","`id` = '1'") ){}
 
         //checking Event Information
-        if( $event = selectDB("tabs_list","`id` = '{$event}'")){}
+        if( $event = selectDB("tabs_list","`id` = '{$event}'")){
+            $price = $event[0]["price"];
+        }
 
         //checking payment method
         if( $paymentMethod == 3 ){
             $paymentMethod = 1;
             $wallet = 1;
-        }
-
-        //check event Price
-        if( $events = selectDB("tabs_list","`id` = '{$event}'") ){
-            $price = $events[0]["price"];
         }
 
         // get feilds details to add to order
@@ -425,11 +422,10 @@ if( !isset($_POST) ){
         $_POST["phone"] = "{$userData[0]["phone"]}";
         $_POST["email"] = "{$userData[0]["email"]}";
         $_POST["userId"] = "{$userData[0]["id"]}";
-        $_POST["teamName"] = $teamName;
         $_POST["eventId"] = $events[0]["id"];
         $_POST["isTournament"] = 1;
-        $_POST["eventDetails"]["enEvent"] = $events[0]["enTitle"];
-        $_POST["eventDetails"]["arEvent"] = $events[0]["arTitle"];
+        $_POST["eventDetails"]["enEvent"] = $event[0]["enTitle"];
+        $_POST["eventDetails"]["arEvent"] = $event[0]["arTitle"];
         if ( $freePayment == 1 ){
             $_POST["eventDetails"]["price"] = 0;
             $_POST["eventDetails"]["total"] = 0;
@@ -445,11 +441,11 @@ if( !isset($_POST) ){
 
         //calculate totals prices that should be sent to upayments 
         if( $data["paymentMethod"] == 1 ){
-            $myacadDeposit = ( $events[0]["chargeType"] == "fixed" ) ? $events[0]["charges"] : $newTotal * ( $events[0]["charges"] / 100 );
+            $myacadDeposit = ( $event[0]["chargeType"] == "fixed" ) ? $event[0]["charges"] : $newTotal * ( $event[0]["charges"] / 100 );
             $newTotal = $newTotal - $myacadDeposit;
             $paymentGateway = "knet";
         }elseif( $data["paymentMethod"] == 2 ){
-            $myacadDeposit = ( $events[0]["cc_chargetype"] == "fixed" ) ? $events[0]["cc_charge"] : $newTotal * ( $events[0]["cc_charge"] / 100 );
+            $myacadDeposit = ( $event[0]["cc_chargetype"] == "fixed" ) ? $event[0]["cc_charge"] : $newTotal * ( $event[0]["cc_charge"] / 100 );
             $newTotal = $newTotal - $myacadDeposit;
             $paymentGateway = "cc";
         }else{
@@ -465,7 +461,7 @@ if( !isset($_POST) ){
             'order[id]' => $orderId,
             'order[currency]' => 'KWD',
             'order[amount]' => (string)$fullAmount,
-            'order[description]' => "order for {$events[0]["enTitle"]}, {$_POST["name"]}",
+            'order[description]' => "order for {$event[0]["enTitle"]}, {$_POST["name"]}",
             'reference[id]' => $orderId,
             'customer[name]' => "{$_POST["name"]}",
             'customer[email]' => "{$_POST["email"]}",
@@ -474,11 +470,11 @@ if( !isset($_POST) ){
             'cancelUrl' => 'https://dev.myacad.app/index.php',
             'notificationUrl' => 'https://dev.myacad.app/index.php',
             'extraMerchantData[0][amount]' => (string)($fullAmount),
-            'extraMerchantData[0][knetCharge]' => "{$events[0]["charges"]}",
-            'extraMerchantData[0][knetChargeType]' => "{$events[0]["chargeType"]}",
-            'extraMerchantData[0][ccCharge]' => "{$events[0]["cc_charge"]}",
-            'extraMerchantData[0][ccChargeType]' => "{$events[0]["cc_chargetype"]}",
-            'extraMerchantData[0][ibanNumber]' => "{$eventData[0]["iban"]}",
+            'extraMerchantData[0][knetCharge]' => "{$event[0]["charges"]}",
+            'extraMerchantData[0][knetChargeType]' => "{$event[0]["chargeType"]}",
+            'extraMerchantData[0][ccCharge]' => "{$event[0]["cc_charge"]}",
+            'extraMerchantData[0][ccChargeType]' => "{$event[0]["cc_chargetype"]}",
+            'extraMerchantData[0][ibanNumber]' => "{$event[0]["iban"]}",
             );
     }
     
