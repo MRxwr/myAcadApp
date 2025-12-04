@@ -41,7 +41,7 @@ if( !isset($_POST["orderId"]) || empty($_POST["orderId"]) ){
             $data[0]["price"] = $eventDetails["price"];
             $data[0]["total"] = $eventDetails["total"];
             $data[0]["voucher"] = $order[0]["voucher"];
-            $data[0]["fields"] = json_decode($eventDetails["fields"], true);
+            $data[0]["fields"] = $eventDetails["fields"];
             $data[0]["arena"] = ( empty($event[0]["isIndoor"]) || $event[0]["isIndoor"] == 0 ) ? popupMsg($requestLang,"Outdoor","خارجي") : popupMsg($requestLang,"Indoor","داخلي");
             $response = $data;
         }else{
