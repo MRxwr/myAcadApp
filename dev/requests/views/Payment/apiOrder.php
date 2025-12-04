@@ -32,6 +32,26 @@ if( !isset($_POST["invoiceId"]) || empty($_POST["invoiceId"]) ){
             $data[0]["bench"] = $order[0]["teamDetails"]["bench"];
             $targetEmail = selectDB("tournaments","`id` = '{$order2[0]["tournamentId"]}'");
             $response = $data;
+        }elseif($order[0]["isTournament"] == 2){
+            unset($order[0]["tournamentId"],$order[0]["teamDetails"]);
+            $event = selectDB("tabs_list","`id` = '{$order[0]["eventId"]}'");
+            $eventDetails = json_decode( $order[0]["eventDetails"], true );
+            $data[0]["id"] = $order[0]["id"];
+            $data[0]["date"] = $order[0]["date"];
+            $data[0]["enTitle"] = $event[0]["enTitle"];
+            $data[0]["arTitle"] = $event[0]["arTitle"];
+            $data[0]["imageurl"] = $event[0]["imageurl"];
+            $data[0]["header"] = $event[0]["header"];
+            $data[0]["location"] = $event[0]["location"];
+            $data[0]["locationImage"] = $event[0]["locationImage"];
+            $data[0]["gateDate"] = $event[0]["gameDate"];
+            $data[0]["gateTime"] = $event[0]["gameTime"];
+            $data[0]["price"] = $eventDetails["price"];
+            $data[0]["total"] = $eventDetails["total"];
+            $data[0]["voucher"] = $order[0]["voucher"];
+            $data[0]["fields"] = $eventDetails["fields"];
+            $data[0]["arena"] = ( empty($event[0]["isIndoor"]) || $event[0]["isIndoor"] == 0 ) ? popupMsg($requestLang,"Outdoor","خارجي") : popupMsg($requestLang,"Indoor","داخلي");
+            $response = $data;
         }else{
             $subscription = selectDB("subscriptions","`id` = '{$order2[0]["subscriptionId"]}'");
             $order[0]["endDate"] = date("Y-m-d H:i:s", strtotime($order[0]["date"] . " +{$subscription[0]["numberOfDays"]} days"));
