@@ -22,8 +22,10 @@ if( !isset($_GET["eventId"]) || empty($_GET["eventId"]) ){
                         "id" => $field[0]["id"],
                         "enTitle" => $field[0]["enTitle"],
                         "arTitle" => $field[0]["arTitle"],
+                        "enPlaceholder" => $field[0]["enPlaceholder"],
+                        "arPlaceholder" => $field[0]["arPlaceholder"],
                         "type" => $field[0]["type"],
-                        "options" => json_decode( $field[0]["options"], true )
+                        "isRequired" => $field[0]["isRequired"]
                     );
                 }
             }
