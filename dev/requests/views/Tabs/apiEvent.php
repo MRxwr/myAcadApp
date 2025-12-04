@@ -6,7 +6,7 @@ if( !isset($_GET["eventId"]) || empty($_GET["eventId"]) ){
 	if( $event = selectDB2("`id`, `imageurl`, `enTitle`, `arTitle`, `area`, `video`, `location`, `price`, `locationImage`, `enTerms`, `arTerms`, `gameDate`, `gameTime`","tabs_list","`hidden` = '0' AND `status` = '0' AND `id` = {$_GET["eventId"]}") ){
 		$response["event"] = $event[0];
 		$response["event"]["video"] = ( !empty($response["event"]["video"]) ) ? "https://www.youtube.com/embed/{$event[0]["video"]}" : "";
-        $feildsToBeFilled = json_decode( $event[0]["fieldIds"], true );
+        $feildsToBeFilled = json_decode( $event[0]["fieldsIds"], true );
 		if( $area = selectDB("countries","`id` = '{$event[0]["area"]}'") ){
 			$response["event"]["enArea"] = $area[0]["areaEnTitle"];
 			$response["event"]["arArea"] = $area[0]["areaArTitle"];
