@@ -10,7 +10,7 @@
 <div class="panel-body">
 	<form class="" method="POST" action="" enctype="multipart/form-data">
 		<div class="row m-0">
-			<div class="col-md-12">
+			<div class="col-md-6">
 			<label><?php echo direction("Tab","التحويله") ?></label>
 			<select id="mySelect4" name="tabId" class="form-control" required>
 				<?php
@@ -23,7 +23,7 @@
 			</select>
 			</div>
 
-            <div class="col-md-12">
+            <div class="col-md-6">
 			<label><?php echo direction("Sports","الرياضات") ?></label>
 			<select id="mySelect3" name="sport" class="form-control" required>
 				<?php
@@ -59,7 +59,7 @@
 			</select>
 			</div>
 
-			<div class="col-md-3">
+			<div class="col-md-4">
 			<label><?php echo direction("Country","البلد") ?></label>
 			<select id="mySelect" name="country" class="form-control countrySelect" required>
 				<option selected disabled value="0"><?php echo direction("SELECT COUNTRY","إختر البلد") ?></option>
@@ -74,7 +74,7 @@
 			</select>
 			</div>
 
-			<div class="col-md-3">
+			<div class="col-md-4">
 			<label><?php echo direction("Governates","المحافظات") ?></label>
 			<select id="mySelect1" class="form-control governateSelect" name="governate" required>
 				<option selected disabled value="0"><?php echo direction("SELECT GOVERNATE","إختر المحافظة") ?></option>
@@ -98,7 +98,7 @@
 			}
 			?>
 
-			<div class="col-md-3">
+			<div class="col-md-4">
 			<label><?php echo direction("Areas","المناطق") ?></label>
 			<select id="mySelect2" class="select areaSelect" name="area" required>
 				<option selected disabled value="0"><?php echo direction("SELECT AREA","إختر المنطقة") ?></option>
@@ -121,11 +121,6 @@
 				echo "</div>";
 			}
 			?>
-
-			<div class="col-md-3">
-			<label><?php echo direction("Location","الموقع") ?></label>
-			<input type="text" name="location" class="form-control" required>
-			</div>
 			
 			<div class="col-md-6">
 			<label><?php echo direction("Gender","الجنس") ?></label>
@@ -140,11 +135,6 @@
 			</div>
 			
 			<div class="col-md-6">
-			<label><?php echo direction("Video","الفيديو") ?></label>
-			<input type="text" name="video" class="form-control" required>
-			</div>
-			
-			<div class="col-md-12">
 			<label><?php echo direction("Registration Fields","حقول التسجيل") ?></label>
 			<select id="mySelect5" name="fieldsIds[]" class="form-control" multiple>
 				<?php
@@ -157,13 +147,8 @@
 			</select>
 			<small class="form-text text-muted"><?php echo direction("Hold Ctrl (Windows) or Cmd (Mac) to select multiple fields","اضغط Ctrl (ويندوز) أو Cmd (ماك) لاختيار حقول متعددة") ?></small>
 			</div>
-			
-			<div class="col-md-3">
-			<label><?php echo direction("Price","سعر") ?></label>
-			<input type="number" step="any" name="price" class="form-control" required>
-			</div>
 
-            <div class="col-md-6">
+			<div class="col-md-6">
 			<label><?php echo direction("Event Date","تاريخ البطولة") ?></label>
 			<input type="date" name="gameDate" class="form-control" required>
 			</div>
@@ -173,7 +158,22 @@
 			<input type="time" name="gameTime" class="form-control" required>
 			</div>
 
-			<div class="col-md-12" style="<?php echo $userType ?>">
+			<div class="col-md-3">
+			<label><?php echo direction("Location","الموقع") ?></label>
+			<input type="text" name="location" class="form-control" required>
+			</div>
+
+			<div class="col-md-3">
+			<label><?php echo direction("Video","الفيديو") ?></label>
+			<input type="text" name="video" class="form-control" required>
+			</div>
+			
+			<div class="col-md-3">
+			<label><?php echo direction("Price","سعر") ?></label>
+			<input type="number" step="any" name="price" class="form-control" required>
+			</div>
+
+			<div class="col-md-3" style="<?php echo $userType ?>">
 			<label><?php echo direction("IBAN","الأيبان") ?></label>
 			<input type="text" name="iban" class="form-control" required>
 			</div>
@@ -243,7 +243,7 @@
 				</div>
 			</div>
 			
-			<div class="col-md-6" style="margin-top:10px">
+			<div class="col-md-12" style="margin-top:10px">
 			<input type="submit" class="btn btn-primary" value="<?php echo direction("Submit","أرسل") ?>">
 			<input type="hidden" name="update" value="0">
 			</div>
