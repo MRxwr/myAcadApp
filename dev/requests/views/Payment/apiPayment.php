@@ -322,7 +322,6 @@ if( !isset($_POST) ){
     }elseif( isset($data["event"]) && !empty($data["event"]) ){
         $user = $data["user"];
         $event = $data["event"];
-        $quantity = $data["quantity"];
         $paymentMethod = $data["paymentMethod"];
         $voucher = $data["voucher"];
         $fieldIds = json_decode($data["fieldIds"],true);
