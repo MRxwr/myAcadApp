@@ -164,7 +164,7 @@
 					</a>
 					<div style="display:none">
 						<label id="type<?php echo $vouchers[$i]["id"]?>"><?php echo $vouchers[$i]["type"] ?></label>
-						<label id="tournament<?php echo $vouchers[$i]["id"]?>"><?php echo json_encode($vouchers[$i]["tournamentIds"]) ?></label>
+						<label id="eventIds<?php echo $vouchers[$i]["id"]?>"><?php echo json_encode($vouchers[$i]["eventIds"]) ?></label>
 					</div>				
 					</td>
 					</tr>
@@ -201,8 +201,8 @@
 		$("input[name=endDate]").val($("#endDate"+id).html());
 		$("input[name=title]").val($("#title"+id).html());
 		$("select[name=type]").val($("#type"+id).html());
-		var tournament = JSON.parse($("#tournament"+id).html());
-		$("#mySelect").val(tournament).trigger('change');
+		var eventIds = JSON.parse($("#eventIds"+id).html());
+		$("#mySelect").val(eventIds).trigger('change');
         $("input[name=title]").focus();
 	})
 </script>
