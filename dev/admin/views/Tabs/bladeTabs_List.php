@@ -165,7 +165,7 @@
 
 			<div class="col-md-3">
 			<label><?php echo direction("Video","الفيديو") ?></label>
-			<input type="text" name="video" class="form-control" required>
+			<input type="text" name="video" class="form-control">
 			</div>
 			
 			<div class="col-md-3">
