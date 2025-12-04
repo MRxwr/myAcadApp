@@ -144,6 +144,20 @@
 			<input type="text" name="video" class="form-control" required>
 			</div>
 			
+			<div class="col-md-12">
+			<label><?php echo direction("Registration Fields","حقول التسجيل") ?></label>
+			<select id="mySelect5" name="fieldsIds[]" class="form-control" multiple>
+				<?php
+				if( $fieldsList = selectDB("tabs_fields","`status` = '0' AND `hidden` != '2' ORDER BY `rank` ASC") ){
+					for( $i =0; $i < sizeof($fieldsList); $i++ ){
+						echo "<option value='{$fieldsList[$i]["id"]}>" . direction($fieldsList[$i]["enTitle"],$fieldsList[$i]["arTitle"]) . "</option>";
+					}
+				}
+				?>
+			</select>
+			<small class="form-text text-muted"><?php echo direction("Hold Ctrl (Windows) or Cmd (Mac) to select multiple fields","اضغط Ctrl (ويندوز) أو Cmd (ماك) لاختيار حقول متعددة") ?></small>
+			</div>
+			
 			<div class="col-md-3">
 			<label><?php echo direction("Price","سعر") ?></label>
 			<input type="number" step="any" name="price" class="form-control" required>
@@ -338,6 +352,7 @@
 					<div style="display:none"><label id="enTerms<?php echo $tournaments[$i]["id"]?>"><?php echo $tournaments[$i]["enTerms"] ?></label></div>
 					<div style="display:none"><label id="arTerms<?php echo $tournaments[$i]["id"]?>"><?php echo $tournaments[$i]["arTerms"] ?></label></div>
 					<div style="display:none"><label id="tabId<?php echo $tournaments[$i]["id"]?>"><?php echo $tournaments[$i]["tabId"] ?></label></div>
+					<div style="display:none"><label id="fieldsIds<?php echo $tournaments[$i]["id"]?>"><?php echo $tournaments[$i]["fieldsIds"] ?></label></div>
 				</td>
 				</tr>
 				<?php
@@ -361,6 +376,7 @@
 			$('#mySelect2').select2();
 			$('#mySelect3').select2();
 			$('#mySelect4').select2();
+			$('#mySelect5').select2();
 			// change the view of select sport
 			$('.governateSelect').on('change', function () {
 				var selectedGovernate = $(this).val();
@@ -402,13 +418,25 @@
 			$("input[name=iban]").val($("#iban"+id).html());
 			$("input[name=price]").val($("#price"+id).html());
 			$("input[name=gameDate]").val($("#gameDate"+id).html());
-			$("input[name=gameTime]").val($("#gameTime"+id).html());
-			tinymce.get("enTerms").setContent($("#enTerms"+id).html());
-            tinymce.get("arTerms").setContent($("#arTerms"+id).html());
-			$("#logoImg").attr("src","../logos/"+$("#logo"+id).html());
-			$("#headerImg").attr("src","../logos/"+$("#header"+id).html());
-			$("#locationImg").attr("src","../logos/"+$("#locationImg"+id).html());
-			$("#images").attr("style","margin-top:10px;display:block");
-			$("input[name=update]").val(id);
+		$("input[name=gameTime]").val($("#gameTime"+id).html());
+		tinymce.get("enTerms").setContent($("#enTerms"+id).html());
+        tinymce.get("arTerms").setContent($("#arTerms"+id).html());
+		
+		// Set selected fields
+		var fieldsIds = $("#fieldsIds"+id).html();
+		if( fieldsIds ){
+			try {
+				var fieldsArray = JSON.parse(fieldsIds);
+				$("select[name='fieldsIds[]']").val(fieldsArray).trigger('change');
+			} catch(e) {
+				console.log("Error parsing fieldsIds", e);
+			}
+		}
+		
+		$("#logoImg").attr("src","../logos/"+$("#logo"+id).html());
+		$("#headerImg").attr("src","../logos/"+$("#header"+id).html());
+		$("#locationImg").attr("src","../logos/"+$("#locationImg"+id).html());
+		$("#images").attr("style","margin-top:10px;display:block");
+		$("input[name=update]").val(id);
 		})
 	</script>

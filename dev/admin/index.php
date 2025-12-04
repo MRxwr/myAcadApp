@@ -23,6 +23,9 @@ if ( isset($_GET["hide"]) || isset($_GET["show"]) || isset($_GET["delId"]) || is
         if( isset($_POST["academyIds"]) ){
             $_POST["academyIds"] = json_encode($_POST["academyIds"]);
         }
+        if( isset($_POST["fieldsIds"]) ){
+            $_POST["fieldsIds"] = json_encode($_POST["fieldsIds"]);
+        }
 		if ( $id == 0 ){
             if( isset($_FILES['imageurl']) && is_uploaded_file($_FILES['imageurl']['tmp_name']) ){
                 $directory = "../logos/";
