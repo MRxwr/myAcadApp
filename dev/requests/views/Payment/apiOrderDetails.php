@@ -27,7 +27,6 @@ if( !isset($_POST["orderId"]) || empty($_POST["orderId"]) ){
         }elseif($order[0]["isTournament"] == 2){
             unset($order[0]["tournamentId"],$order[0]["teamDetails"]);
             $event = selectDB("tabs_list","`id` = '{$order[0]["eventId"]}'");
-            var_dump($order[0]["eventDetails"]);
             $eventDetails = json_decode( $order[0]["eventDetails"], true );
             $data[0]["id"] = $order[0]["id"];
             $data[0]["date"] = $order[0]["date"];
@@ -42,7 +41,7 @@ if( !isset($_POST["orderId"]) || empty($_POST["orderId"]) ){
             $data[0]["price"] = $eventDetails["price"];
             $data[0]["total"] = $eventDetails["total"];
             $data[0]["voucher"] = $order[0]["voucher"];
-            $data[0]["fields"] = $eventDetails["fields"];
+            $data[0]["fields"] = json_decode($eventDetails["fields"], true);
             $data[0]["arena"] = ( empty($event[0]["isIndoor"]) || $event[0]["isIndoor"] == 0 ) ? popupMsg($requestLang,"Outdoor","خارجي") : popupMsg($requestLang,"Indoor","داخلي");
             $response = $data;
         }else{
