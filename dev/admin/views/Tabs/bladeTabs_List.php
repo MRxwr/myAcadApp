@@ -358,6 +358,7 @@
 					<div style="display:none"><label id="arTerms<?php echo $tournaments[$i]["id"]?>"><?php echo $tournaments[$i]["arTerms"] ?></label></div>
 					<div style="display:none"><label id="tabId<?php echo $tournaments[$i]["id"]?>"><?php echo $tournaments[$i]["tabId"] ?></label></div>
 					<div style="display:none"><label id="fieldsIds<?php echo $tournaments[$i]["id"]?>"><?php echo $tournaments[$i]["fieldsIds"] ?></label></div>
+					<div style="display:none"><label id="quantity<?php echo $tournaments[$i]["id"]?>"><?php echo $tournaments[$i]["quantity"] ?></label></div>
 				</td>
 				</tr>
 				<?php
@@ -424,6 +425,7 @@
 			$("input[name=price]").val($("#price"+id).html());
 			$("input[name=gameDate]").val($("#gameDate"+id).html());
 			$("input[name=gameTime]").val($("#gameTime"+id).html());
+			$("input[name=quantity]").val($("#quantity"+id).html());
 			tinymce.get("enTerms").setContent($("#enTerms"+id).html());
 			tinymce.get("arTerms").setContent($("#arTerms"+id).html());
 			
