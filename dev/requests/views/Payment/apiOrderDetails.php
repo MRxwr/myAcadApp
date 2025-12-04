@@ -26,7 +26,7 @@ if( !isset($_POST["orderId"]) || empty($_POST["orderId"]) ){
             $response = $data;
         }elseif($order[0]["isTournament"] == 2){
             unset($order[0]["tournamentId"],$order[0]["teamDetails"]);
-            $event = selectDB("tabs_list","`id` = '{$_POST["eventId"]}'");
+            $event = selectDB("tabs_list","`id` = '{$order[0]["eventId"]}'");
             $eventDetails = json_decode( $order[0]["eventDetails"], true );
             $data[0]["id"] = $order[0]["id"];
             $data[0]["date"] = $order[0]["date"];
