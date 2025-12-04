@@ -437,7 +437,7 @@ if( !isset($_POST) ){
         }
         $_POST["paymentMethod"] = $paymentMethod;
         $_POST["voucher"] = $data["voucher"];
-        $_POST["eventDetails"] = json_encode($_POST["eventDetails"],JSON_UNESCAPED_UNICODE);
+        $_POST["eventDetails"] = $_POST["eventDetails"];
 
         //calculate totals prices that should be sent to upayments 
         if( $data["paymentMethod"] == 1 ){
