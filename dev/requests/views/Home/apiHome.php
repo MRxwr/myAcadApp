@@ -8,6 +8,12 @@ if( $banners = selectDB2("`id`, `type`, `imageurl`, `link`","banners","`hidden` 
     $response["banners"] = array();
 }
 
+if( $tabs = selectDB2("`id`, `enTitle`, `arTitle`","tabs","`hidden` = '0' AND `status` = '0' ORDER BY `rank` ASC") ){
+    $response["tabs"] = $tabs;
+}else{
+    $response["tabs"] = array();
+}
+
 if( $sports = selectDB2("`id`, `enTitle`, `arTitle`, `imageurl`","sports","`hidden` = '0' AND `status` = '0' ORDER BY `order` ASC") ){
     $response["sports"] = $sports;
 }else{
