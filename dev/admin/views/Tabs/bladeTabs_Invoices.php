@@ -1,3 +1,6 @@
+<?php 
+$_GET["type"] = ( isset($_GET["type"]) ) ? $_GET["type"] : 0 ;
+?>
 <div class="col-sm-12">
 <div class="panel panel-default card-view">
 <div class="panel-heading">
@@ -27,10 +30,10 @@
 		
 		<tbody>
 		<?php 
-        $count = (is_array($tournamentsList) && !empty($tournamentsList)) ? count($tournamentsList) : 1;
+        $count = (is_array($eventsList) && !empty($eventsList)) ? count($eventsList) : 1;
 		for( $z = 0; $z < $count; $z++ ){
-			$id = ( isset($tournamentsList[$z]) && !empty($tournamentsList[$z]) ) ? "AND `tournamentId` = '{$tournamentsList[$z]}'" : "";
-            if( $orders = selectDBNew("orders",[],"`id` != '0' {$id} AND `isTournament` = '1'","`date` DESC") ){
+			$id = ( isset($eventsList[$z]) && !empty($eventsList[$z]) ) ? "AND `eventId` = '{$eventsList[$z]}'" : "";
+            if( $orders = selectDB("orders","`id` != '0' {$id} AND `isTournament` = '2' ORDER BY `date` DESC") ){
                 for( $i = 0; $i < sizeof($orders); $i++ ){
                     $status = [direction("Pending","إنتظار"),direction("Successful","ناجحه"),direction("Failed","فاشلة"),direction("Cancelled","ملغية"),direction("Ended","إنتهى")];
                     $statusColor = ["default","success","info","danger","warning"];
