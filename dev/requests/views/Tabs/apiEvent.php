@@ -30,6 +30,7 @@ if( !isset($_GET["eventId"]) || empty($_GET["eventId"]) ){
                 }
             }
         }
+        unset( $response["event"]["fieldsIds"] );
 	}else{
 		$response["msg"] = popupMsg($requestLang,"there is no event with this id","لا يوجد حدث بهذا الرقم");
 		echo outputError($response);die();
