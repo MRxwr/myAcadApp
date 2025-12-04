@@ -85,7 +85,7 @@
 	<select class="form-control" name="voucher">
 		<option value="0" selected><?php echo direction("None","لا يوجد") ?></option>
 		<?php
-			$voucherQuery = "`id` != '0'";
+			$voucherQuery = "`id` != '0' AND `typeOfVoucher` = '0' ";
 			
 			// Filter by academy access for non-admin users
 			if( $userType != 0 && $userType != 8 && !empty($academiesList) ){
