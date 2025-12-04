@@ -70,7 +70,13 @@ if( !isset($_POST["invoiceId"]) || empty($_POST["invoiceId"]) ){
                     $tournament = selectDB("tournaments","`id` = '{$order[0]["tournamentId"]}'");
                     $quantity = $tournament[0]["quantity"] - $teamDetails["quantity"];
                     updateDB2("tournaments",array("quantity"=>$quantity),"`id` = '{$order2[0]["tournamentId"]}'");
-                }else{
+                }elseif( $order2[0]["isTournament"] == 2 ){
+                    $eventDetails = json_decode($order2[0]["eventDetails"],true);
+                    $events = selectDB("tabs_list","`id` = '{$order[0]["eventId"]}'");
+                    $quantity = $events[0]["quantity"] - $eventDetails["eventDetails"]["quantity"];
+                    updateDB2("tabs_list",array("quantity"=>$quantity),"`id` = '{$order2[0]["eventId"]}'");
+                }
+                else{
                     $user = selectDB("users","`id` = '{$order2[0]["userId"]}'");
                     $points = $user[0]["points"] + $settingsEmail[0]["points"];
                     updateDB2("users",array("points"=>$points),"`id` = '{$order2[0]["userId"]}'");
