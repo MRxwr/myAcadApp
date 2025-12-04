@@ -148,17 +148,17 @@
 			<small class="form-text text-muted"><?php echo direction("Hold Ctrl (Windows) or Cmd (Mac) to select multiple fields","اضغط Ctrl (ويندوز) أو Cmd (ماك) لاختيار حقول متعددة") ?></small>
 			</div>
 		
-			<div class="col-md-6">
+			<div class="col-md-4">
 			<label><?php echo direction("Event Date","تاريخ البطولة") ?></label>
 			<input type="date" name="gameDate" class="form-control" required>
 			</div>
 
-            <div class="col-md-6">
+            <div class="col-md-4">
 			<label><?php echo direction("Event Time","وقت البطولة") ?></label>
 			<input type="time" name="gameTime" class="form-control" required>
 			</div>
 
-			<div class="col-md-3">
+			<div class="col-md-4">
 			<label><?php echo direction("Location","الموقع") ?></label>
 			<input type="text" name="location" class="form-control" required>
 			</div>
@@ -171,6 +171,11 @@
 			<div class="col-md-3">
 			<label><?php echo direction("Price","سعر") ?></label>
 			<input type="number" step="any" name="price" class="form-control" required>
+			</div>
+
+			<div class="col-md-3">
+			<label><?php echo direction("Quantity","الكمية") ?></label>
+			<input type="number" step="any" name="quantity" class="form-control" required>
 			</div>
 
 			<div class="col-md-3" style="<?php echo $userType ?>">
