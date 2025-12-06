@@ -5,10 +5,19 @@ if( !isset($_GET["sportId"]) || empty($_GET["sportId"]) ){
     );
     echo json_encode($response);die();
 }
-if( !isset($_GET["isTournament"]) || empty($_GET["isTournament"]) ){
-    $table = "academies";
+if( !isset($_GET["tabId"]) || empty($_GET["tabId"]) ){
+    $response["genders"] = array();
+    echo outputError($response);die();
 }else{
-    $table = "tournaments";
+    $where = "";
+    if( $_GET["tabId"] == "1" ){
+        $table = "academies";
+    }elseif( $_GET["tabId"] == "2" ){
+        $table = "tournaments";
+    }else{
+        $table = "tabs_list";
+        $where = "AND `tabId` = '{$_GET["tabId"]}'";
+    }
 }
 if( !isset($_GET["countryCode"]) || empty($_GET["countryCode"]) ){
     $response["data"] = array(
@@ -16,7 +25,7 @@ if( !isset($_GET["countryCode"]) || empty($_GET["countryCode"]) ){
     );
     echo json_encode($response);die();
 }
-if( $academies = selectDB2("`gender`","{$table}","`sport` = '{$_GET["sportId"]}' AND `country` LIKE '{$_GET["countryCode"]}' AND `hidden` = '0' AND `status` = '0' GROUP BY `gender`") ){
+if( $academies = selectDB2("`gender`","{$table}","`sport` = '{$_GET["sportId"]}' {$where} AND `country` LIKE '{$_GET["countryCode"]}' AND `hidden` = '0' AND `status` = '0' GROUP BY `gender`") ){
     $gendersEn = ["SELECT Gender","Men","Women","Boys","Girls","Mix Adults","Mix Kids"];
     $gendersAr = ["إختيار الجنس","رجال","سيدات","أولاد","بنات","مختلط كبار","مختلط الاطفال"];
     $response["genders"][0] = array(
