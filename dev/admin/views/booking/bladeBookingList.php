@@ -261,7 +261,7 @@
 		$count = (is_array($fieldsList) && !empty($fieldsList)) ? count($fieldsList) : 1;
 		for( $z = 0; $z < $count; $z++ ){
 			$id = ( isset($fieldsList[$z]) && !empty($fieldsList[$z]) ) ? "AND `id` = '{$fieldsList[$z]}'" : "";
-		if( $fields = selectDB("tabs_list","`status` = '0' {$id}") ){
+		if( $fields = selectDB("fields_list","`status` = '0' {$id}") ){
 			for( $i = 0; $i < sizeof($fields); $i++ ){
 				$sport = selectDB("sports","`id` = '{$fields[$i]["sport"]}'");
 				$title = direction($fields[$i]["enTitle"],$fields[$i]["arTitle"]);
