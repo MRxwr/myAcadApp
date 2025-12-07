@@ -21,7 +21,7 @@
 				}
 				?>
 			</select>
-			</div>
+			</div> 
 
             <div class="col-md-6">
 			<label><?php echo direction("Sports","الرياضات") ?></label>
