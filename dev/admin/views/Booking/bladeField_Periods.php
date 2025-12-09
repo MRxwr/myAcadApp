@@ -2,6 +2,8 @@
 if( !isset($_GET["id"]) || empty($_GET["id"]) || !is_numeric($_GET["id"])  ){
     echo "<script>window.location='?v=Fields_List'</script>";
     die();
+}else{
+    $fieldDetails = selectDBNew("fields_list",[$_GET["id"]],"`id` = ?","");
 }
 ?>
 <div class="col-sm-12">
@@ -9,6 +11,9 @@ if( !isset($_GET["id"]) || empty($_GET["id"]) || !is_numeric($_GET["id"])  ){
 <div class="panel-heading">
 <div class="pull-left">
 	<h6 class="panel-title txt-dark"><?php echo direction("Period Details","تفاصيل الفترة") ?></h6>
+</div>
+<div class="pull-right">
+	<h6 class="panel-title txt-dark"><?php echo direction($fieldDetails[0]["enTitle"], $fieldDetails[0]["arTitle"]) ?></h6>
 </div>
 	<div class="clearfix"></div>
 </div>
