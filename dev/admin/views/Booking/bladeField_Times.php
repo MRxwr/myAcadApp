@@ -81,7 +81,7 @@ if( !isset($_GET["code"]) || empty($_GET["code"]) || !is_numeric($_GET["code"]) 
 		
 		<tbody>
 		<?php 
-		if( $days = selectDB("fields_times","`status` = '0' AND `fieldId` = {$_GET["code"]} ORDER BY `id` ASC") ){
+		if( $days = selectDB("field_times","`status` = '0' AND `fieldId` = {$_GET["code"]} ORDER BY `id` ASC") ){
             for( $i = 0; $i < sizeof($days); $i++ ){
                 if ( $days[$i]["hidden"] == 1 ){
                     $icon = "fa fa-eye";
