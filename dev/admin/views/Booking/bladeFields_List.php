@@ -333,8 +333,8 @@
 					<div style="display:none"><label id="tabId<?php echo $fields[$i]["id"]?>"><?php echo $fields[$i]["tabId"] ?></label></div>
 					<div style="display:none"><label id="fieldsIds<?php echo $fields[$i]["id"]?>"><?php echo $fields[$i]["fieldsIds"] ?></label></div>
 					<div style="display:none"><label id="quantity<?php echo $fields[$i]["id"]?>"><?php echo $fields[$i]["quantity"] ?></label></div>
-					<div style="display:none"><label id="openDate<?php echo $fields[$i]["id"]?>"><?php echo $fields[$i]["openDate"] ?></label></div>
-					<div style="display:none"><label id="closeDate<?php echo $fields[$i]["id"]?>"><?php echo $fields[$i]["closeDate"] ?></label></div>
+					<div style="display:none"><label id="openDate<?php echo $fields[$i]["id"]?>"><?php echo substr($fields[$i]["openDate"], 0, 10) ?></label></div>
+					<div style="display:none"><label id="closeDate<?php echo $fields[$i]["id"]?>"><?php echo substr($fields[$i]["closeDate"], 0, 10) ?></label></div>
 				</td>
 				</tr>
 				<?php
