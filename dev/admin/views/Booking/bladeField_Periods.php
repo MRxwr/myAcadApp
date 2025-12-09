@@ -1,9 +1,9 @@
 <?php
-if( !isset($_GET["id"]) || empty($_GET["id"]) || !is_numeric($_GET["id"])  ){
+if( !isset($_GET["code"]) || empty($_GET["code"]) || !is_numeric($_GET["code"])  ){
     echo "<script>window.location='?v=Fields_List'</script>";
     die();
 }else{
-    $fieldDetails = selectDBNew("fields_list",[$_GET["id"]],"`id` = ?","");
+    $fieldDetails = selectDBNew("fields_list",[$_GET["code"]],"`id` = ?","");
 }
 ?>
 <div class="col-sm-12">
@@ -39,7 +39,7 @@ if( !isset($_GET["id"]) || empty($_GET["id"]) || !is_numeric($_GET["id"])  ){
 			<div class="col-md-12" style="margin-top:10px">
 			    <input type="submit" class="btn btn-primary" value="<?php echo direction("Submit","أرسل") ?>">
 				<input type="hidden" name="update" value="0">
-				<input type="hidden" name="fieldId" value="<?php echo $_GET["id"] ?>">
+				<input type="hidden" name="fieldId" value="<?php echo $_GET["code"] ?>">
 			</div>
 		</div>
 	</form>

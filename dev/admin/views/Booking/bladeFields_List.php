@@ -307,8 +307,8 @@
 				<td><?php echo substr($fields[$i]["closeDate"], 0, 10) ?></td>
 				<td class="text-nowrap">
 					<a id="<?php echo $fields[$i]["id"] ?>" class="edit btn btn-warning" data-toggle="tooltip" data-original-title="<?php echo direction("Edit","تعديل")  ?>"> <i class="fa fa-pencil text-inverse m-r-10"></i></a>
-					<a href="<?php echo "?v=Field_Periods&id={$fields[$i]["id"]}" ?>" class="btn btn-primary" data-toggle="tooltip" data-original-title="<?php echo direction("Periods","الفترات") ?>"> <i class="fa fa-arrows-h text-inverse m-r-10"></i></a>
-					<a href="<?php echo "?v=Field_Times&id={$fields[$i]["id"]}" ?>" class="btn btn-info" data-toggle="tooltip" data-original-title="<?php echo direction("Time","الوقت") ?>"> <i class="fa fa-clock-o text-inverse m-r-10"></i></a>
+					<a href="<?php echo "?v=Field_Periods&code={$fields[$i]["id"]}" ?>" class="btn btn-primary" data-toggle="tooltip" data-original-title="<?php echo direction("Periods","الفترات") ?>"> <i class="fa fa-arrows-h text-inverse m-r-10"></i></a>
+					<a href="<?php echo "?v=Field_Times&code={$fields[$i]["id"]}" ?>" class="btn btn-info" data-toggle="tooltip" data-original-title="<?php echo direction("Time","الوقت") ?>"> <i class="fa fa-clock-o text-inverse m-r-10"></i></a>
 					<a href="<?php echo $link . "&v={$_GET["v"]}" ?>" class="btn btn-default" data-toggle="tooltip" data-original-title="<?php echo $hide ?>"> <i class="<?php echo $icon ?> text-inverse m-r-10"></i></a>
 					<a href="?delId=<?php echo $fields[$i]["id"] . "&v={$_GET["v"]}" ?>" data-toggle="tooltip" data-original-title="<?php echo direction("Delete","حذف")  ?>" class="btn btn-danger"><i class="fa fa-close text-inverse"></i></a>
 					<div style="display:none"><label id="locationImg<?php echo $fields[$i]["id"]?>"><?php echo $fields[$i]["locationImage"] ?></label></div>
