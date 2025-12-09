@@ -1,9 +1,9 @@
 <?php
-if( !isset($_GET["id"]) || empty($_GET["id"]) || !is_numeric($_GET["id"])  ){
+if( !isset($_GET["code"]) || empty($_GET["code"]) || !is_numeric($_GET["code"])  ){
     echo "<script>window.location='?v=Fields_List'</script>";
     die();
 }else{
-    $fieldDetails = selectDBNew("fields_list",[$_GET["id"]],"`id` = ?","");
+    $fieldDetails = selectDBNew("fields_list",[$_GET["code"]],"`id` = ?","");
 }
 ?>
 <div class="col-sm-12">
@@ -47,7 +47,7 @@ if( !isset($_GET["id"]) || empty($_GET["id"]) || !is_numeric($_GET["id"])  ){
 			<div class="col-md-12" style="margin-top:10px">
 			    <input type="submit" class="btn btn-primary" value="<?php echo direction("Submit","أرسل") ?>">
 				<input type="hidden" name="update" value="0">
-				<input type="hidden" name="fieldId" value="<?php echo $_GET["id"] ?>">
+				<input type="hidden" name="fieldId" value="<?php echo $_GET["code"] ?>">
 			</div>
 		</div>
 	</form>
@@ -81,7 +81,7 @@ if( !isset($_GET["id"]) || empty($_GET["id"]) || !is_numeric($_GET["id"])  ){
 		
 		<tbody>
 		<?php 
-		if( $days = selectDB("fields_times","`status` = '0' ORDER BY `id` ASC") ){
+		if( $days = selectDB("fields_times","`status` = '0' AND `fieldId` = {$_GET["code"]} ORDER BY `id` ASC") ){
             for( $i = 0; $i < sizeof($days); $i++ ){
                 if ( $days[$i]["hidden"] == 1 ){
                     $icon = "fa fa-eye";
@@ -98,9 +98,9 @@ if( !isset($_GET["id"]) || empty($_GET["id"]) || !is_numeric($_GET["id"])  ){
             <td id="openTime<?php echo $days[$i]["id"]?>" ><?php echo $days[$i]["openTime"] ?></td>
             <td id="closeTime<?php echo $days[$i]["id"]?>" ><?php echo $days[$i]["closeTime"] ?></td>
             <td class="text-nowrap">
-                <a id="<?php echo $days[$i]["id"] ?>" class="edit btn btn-warning" data-toggle="tooltip" data-original-title="<?php echo direction("Edit","تعديل")  ?>"> 
-                <a href="<?php echo $link . "&v={$_GET["v"]}" ?>" class="btn btn-default" data-toggle="tooltip" data-original-title="<?php echo $hide ?>"> <i class="<?php echo $icon ?> text-inverse m-r-10"></i></a>
-                <a href="?delId=<?php echo $days[$i]["id"] . "&v={$_GET["v"]}" ?>" data-toggle="tooltip" data-original-title="<?php echo direction("Delete","حذف") ?>" class="btn btn-danger"><i class="fa fa-close text-inverse"></i></a>
+                <a id="<?php echo $days[$i]["id"] ?>" class="edit btn btn-warning" data-toggle="tooltip" data-original-title="<?php echo direction("Edit","تعديل")  ?>"> <i class="fa fa-pencil text-inverse m-r-10"></i></a>
+                <a href="<?php echo $link . "&v={$_GET["v"]}&code={$_GET["code"]}" ?>" class="btn btn-default" data-toggle="tooltip" data-original-title="<?php echo $hide ?>"> <i class="<?php echo $icon ?> text-inverse m-r-10"></i></a>
+                <a href="?delId=<?php echo $days[$i]["id"] . "&v={$_GET["v"]}&code={$_GET["code"]}" ?>" data-toggle="tooltip" data-original-title="<?php echo direction("Delete","حذف") ?>" class="btn btn-danger"><i class="fa fa-close text-inverse"></i></a>
             </td>
             </tr>
             <?php
