@@ -90,9 +90,9 @@ if( !isset($_GET["code"]) || empty($_GET["code"]) || !is_numeric($_GET["code"]) 
             <td id="arTitle<?php echo $periods[$i]["id"]?>" ><?php echo $periods[$i]["arTitle"] ?></td>
             <td id="period<?php echo $periods[$i]["id"]?>" ><?php echo $periods[$i]["period"] ?></td>
             <td class="text-nowrap">
-                <a id="<?php echo $periods[$i]["id"] ?>" class="edit btn btn-warning" data-toggle="tooltip" data-original-title="<?php echo direction("Edit","تعديل")  ?>"> 
-                <a href="<?php echo $link . "&v={$_GET["v"]}" ?>" class="btn btn-default" data-toggle="tooltip" data-original-title="<?php echo $hide ?>"> <i class="<?php echo $icon ?> text-inverse m-r-10"></i></a>
-                <a href="?delId=<?php echo $periods[$i]["id"] . "&v={$_GET["v"]}" ?>" data-toggle="tooltip" data-original-title="<?php echo direction("Delete","حذف") ?>" class="btn btn-danger"><i class="fa fa-close text-inverse"></i></a>
+                <a id="<?php echo $periods[$i]["id"] ?>" class="edit btn btn-warning" data-toggle="tooltip" data-original-title="<?php echo direction("Edit","تعديل")  ?>"> <i class="fa fa-pencil text-inverse m-r-10"></i></a>
+                <a href="<?php echo $link . "&v={$_GET["v"]}&code={$_GET["code"]}" ?>" class="btn btn-default" data-toggle="tooltip" data-original-title="<?php echo $hide ?>"> <i class="<?php echo $icon ?> text-inverse m-r-10"></i></a>
+                <a href="?delId=<?php echo $periods[$i]["id"] . "&v={$_GET["v"]}&code={$_GET["code"]}" ?>" data-toggle="tooltip" data-original-title="<?php echo direction("Delete","حذف") ?>" class="btn btn-danger"><i class="fa fa-close text-inverse"></i></a>
             </td>
             </tr>
             <?php
