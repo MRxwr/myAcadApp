@@ -121,8 +121,18 @@
 				echo "</div>";
 			}
 			?>
-			
-			<div class="col-md-4">
+
+			<div class="col-md-6">
+			<label><?php echo direction("Open Date","تاريخ الفتح") ?></label>
+			<input type="date" name="openDate" class="form-control" required>
+			</div>
+
+			<div class="col-md-6">
+			<label><?php echo direction("Close Date","تاريخ الإغلاق") ?></label>
+			<input type="date" name="closeDate" class="form-control" required>
+			</div>
+
+			<div class="col-md-3">
 			<label><?php echo direction("Gender","الجنس") ?></label>
 			<select name="gender" class="form-control" required>
 				<option value="1" ><?php echo direction("Man","رجال") ?></option>
@@ -132,16 +142,6 @@
 				<option value="5" ><?php echo direction("Mix Adults","مختلط كبار") ?></option>
 				<option value="6" ><?php echo direction("Mix Kids","مختلط الاطفال") ?></option>
 			</select>
-			</div>
-
-			<div class="col-md-4">
-			<label><?php echo direction("Open Date","تاريخ الفتح") ?></label>
-			<input type="date" name="openDate" class="form-control" required>
-			</div>
-
-			<div class="col-md-4">
-			<label><?php echo direction("Close Date","تاريخ الإغلاق") ?></label>
-			<input type="date" name="closeDate" class="form-control" required>
 			</div>
 
 			<div class="col-md-3">
