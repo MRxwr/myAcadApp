@@ -92,9 +92,10 @@ if( !isset($_GET["code"]) || empty($_GET["code"]) || !is_numeric($_GET["code"]) 
                     $link = "?hide={$days[$i]["id"]}";
                     $hide = direction("Hide","إخفاء");
                 }
+                $day = ( $days[$i]["day"] == 0 ) ? direction("Sunday","الأحد") : ( ( $days[$i]["day"] == 1 ) ? direction("Monday","الإثنين") : ( ( $days[$i]["day"] == 2 ) ? direction("Tuesday","الثلاثاء") : ( ( $days[$i]["day"] == 3 ) ? direction("Wednesday","الأربعاء") : ( ( $days[$i]["day"] == 4 ) ? direction("Thursday","الخميس") : ( ( $days[$i]["day"] == 5 ) ? direction("Friday","الجمعة") : direction("Saturday","السبت") ) ) ) ) );
             ?>
             <tr>
-            <td id="day<?php echo $days[$i]["id"]?>" ><?php echo $days[$i]["day"] ?></td>
+            <td id="day<?php echo $days[$i]["id"]?>" ><?php echo $day ?></td>
             <td id="openTime<?php echo $days[$i]["id"]?>" ><?php echo $days[$i]["openTime"] ?></td>
             <td id="closeTime<?php echo $days[$i]["id"]?>" ><?php echo $days[$i]["closeTime"] ?></td>
             <td class="text-nowrap">
