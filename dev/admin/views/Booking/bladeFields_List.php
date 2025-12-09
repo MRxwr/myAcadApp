@@ -122,7 +122,7 @@
 			}
 			?>
 			
-			<div class="col-md-12">
+			<div class="col-md-4">
 			<label><?php echo direction("Gender","الجنس") ?></label>
 			<select name="gender" class="form-control" required>
 				<option value="1" ><?php echo direction("Man","رجال") ?></option>
@@ -134,14 +134,19 @@
 			</select>
 			</div>
 
+			<div class="col-md-4">
+			<label><?php echo direction("Open Date","تاريخ الفتح") ?></label>
+			<input type="date" name="openDate" class="form-control" required>
+			</div>
+
+			<div class="col-md-4">
+			<label><?php echo direction("Close Date","تاريخ الإغلاق") ?></label>
+			<input type="date" name="closeDate" class="form-control" required>
+			</div>
+
 			<div class="col-md-3">
 			<label><?php echo direction("Location","الموقع") ?></label>
 			<input type="text" name="location" class="form-control" required>
-			</div>
-			
-			<div class="col-md-3">
-			<label><?php echo direction("Price","سعر") ?></label>
-			<input type="number" step="any" name="price" class="form-control" required>
 			</div>
 
 			<div class="col-md-3">
@@ -251,7 +256,8 @@
 		<th><?php echo direction("Sport","الرياضة") ?></th>
 		<th><?php echo direction("Country","البلد") ?></th>
 		<th><?php echo direction("Gender","الجنس") ?></th>
-		<th><?php echo direction("Price","القيمة") ?></th>
+		<th><?php echo direction("Open Date","تاريخ الافتتاح") ?></th>
+		<th><?php echo direction("Close Date","تاريخ الإغلاق") ?></th>
 		<th class="text-nowrap"><?php echo direction("Actions","الخيارات") ?></th>
 		</tr>
 		</thead>
@@ -297,13 +303,14 @@
 				<td><?php echo direction($sport[0]["enTitle"],$sport[0]["arTitle"]) ?></td>
 				<td id="country<?php echo $fields[$i]["id"]?>" ><?php echo $fields[$i]["country"] ?></td>
 				<td><?php echo $genderText ?><label style="display:none" id="gender<?php echo $fields[$i]["id"]?>"  ><?php echo $fields[$i]["gender"] ?></label></td>
-				<td><?php echo $price ?><label style="display:none" id="price<?php echo $fields[$i]["id"]?>"  ><?php echo $fields[$i]["price"] ?></label></td>
+				<td><?php echo substr($fields[$i]["openDate"], 0, 10) ?></td>
+				<td><?php echo substr($fields[$i]["closeDate"], 0, 10) ?></td>
 				<td class="text-nowrap">
-					<a id="<?php echo $fields[$i]["id"] ?>" class="edit btn btn-warning" data-toggle="tooltip" data-original-title="<?php echo direction("Edit","تعديل")  ?>"> <i class="fa fa-pencil text-inverse m-r-10"></i>
-					</a>
+					<a id="<?php echo $fields[$i]["id"] ?>" class="edit btn btn-warning" data-toggle="tooltip" data-original-title="<?php echo direction("Edit","تعديل")  ?>"> <i class="fa fa-pencil text-inverse m-r-10"></i></a>
+					<a href="<?php echo "?v=Field_Periods&id={$fields[$i]["id"]}" ?>" class="btn btn-primary" data-toggle="tooltip" data-original-title="<?php echo direction("Periods","الفترات") ?>"> <i class="fa fa-arrow-h text-inverse m-r-10"></i></a>
+					<a href="<?php echo "?v=Field_Times&id={$fields[$i]["id"]}" ?>" class="btn btn-info" data-toggle="tooltip" data-original-title="<?php echo direction("Time","الوقت") ?>"> <i class="fa fa-clock text-inverse m-r-10"></i></a>
 					<a href="<?php echo $link . "&v={$_GET["v"]}" ?>" class="btn btn-default" data-toggle="tooltip" data-original-title="<?php echo $hide ?>"> <i class="<?php echo $icon ?> text-inverse m-r-10"></i></a>
-					<a href="?delId=<?php echo $fields[$i]["id"] . "&v={$_GET["v"]}" ?>" data-toggle="tooltip" data-original-title="<?php echo direction("Delete","حذف")  ?>" class="btn btn-danger"><i class="fa fa-close text-inverse"></i>
-					</a>
+					<a href="?delId=<?php echo $fields[$i]["id"] . "&v={$_GET["v"]}" ?>" data-toggle="tooltip" data-original-title="<?php echo direction("Delete","حذف")  ?>" class="btn btn-danger"><i class="fa fa-close text-inverse"></i></a>
 					<div style="display:none"><label id="locationImg<?php echo $fields[$i]["id"]?>"><?php echo $fields[$i]["locationImage"] ?></label></div>
 					<div style="display:none"><label id="logo<?php echo $fields[$i]["id"]?>"><?php echo $fields[$i]["imageurl"] ?></label></div>
 					<div style="display:none"><label id="header<?php echo $fields[$i]["id"]?>"><?php echo $fields[$i]["header"] ?></label></div>
@@ -326,8 +333,8 @@
 					<div style="display:none"><label id="tabId<?php echo $fields[$i]["id"]?>"><?php echo $fields[$i]["tabId"] ?></label></div>
 					<div style="display:none"><label id="fieldsIds<?php echo $fields[$i]["id"]?>"><?php echo $fields[$i]["fieldsIds"] ?></label></div>
 					<div style="display:none"><label id="quantity<?php echo $fields[$i]["id"]?>"><?php echo $fields[$i]["quantity"] ?></label></div>
-					<div style="display:none"><label id="gameDate<?php echo $fields[$i]["id"]?>"><?php echo $fields[$i]["gameDate"] ?></label></div>
-					<div style="display:none"><label id="gameTime<?php echo $fields[$i]["id"]?>"><?php echo $fields[$i]["gameTime"] ?></label></div>
+					<div style="display:none"><label id="openDate<?php echo $fields[$i]["id"]?>"><?php echo $fields[$i]["openDate"] ?></label></div>
+					<div style="display:none"><label id="closeDate<?php echo $fields[$i]["id"]?>"><?php echo $fields[$i]["closeDate"] ?></label></div>
 				</td>
 				</tr>
 				<?php
@@ -391,9 +398,8 @@
 			$("input[name=cc_charge]").val($("#cc_charge"+id).html());
 			$("select[name=cc_chargetype]").val($("#cc_chargetype"+id).html());
 			$("input[name=iban]").val($("#iban"+id).html());
-			$("input[name=price]").val($("#price"+id).html());
-			$("input[name=gameDate]").val($("#gameDate"+id).html());
-			$("input[name=gameTime]").val($("#gameTime"+id).html());
+			$("input[name=openDate]").val($("#openDate"+id).html());
+			$("input[name=closeDate]").val($("#closeDate"+id).html());
 			$("input[name=quantity]").val($("#quantity"+id).html());
 			tinymce.get("enTerms").setContent($("#enTerms"+id).html());
 			tinymce.get("arTerms").setContent($("#arTerms"+id).html());
