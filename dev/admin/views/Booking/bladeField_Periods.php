@@ -73,7 +73,7 @@ if( !isset($_GET["code"]) || empty($_GET["code"]) || !is_numeric($_GET["code"]) 
 		
 		<tbody>
 		<?php 
-		if( $periods = selectDB("fields_periods","`status` = '0' ORDER BY `id` ASC") ){
+		if( $periods = selectDB("field_periods","`status` = '0' AND `fieldId` = {$_GET["code"]} ORDER BY `id` ASC") ){
             for( $i = 0; $i < sizeof($periods); $i++ ){
                 if ( $periods[$i]["hidden"] == 1 ){
                     $icon = "fa fa-eye";
