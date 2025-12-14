@@ -27,6 +27,17 @@ if ( isset($_GET["hide"]) || isset($_GET["show"]) || isset($_GET["delId"]) || is
             $_POST["fieldsIds"] = json_encode($_POST["fieldsIds"]);
         }
 		if ( $id == 0 ){
+            if( isset($_FILES['icon']) && is_uploaded_file($_FILES['icon']['tmp_name']) ){
+                $directory = "../logos/facilities/";
+                $originalfile = $directory . date("d-m-y") . time() .  round(microtime(true)). "L." . getFileExtension($_FILES["icon"]["name"]);
+                move_uploaded_file($_FILES["icon"]["tmp_name"], $originalfile);
+                $_POST["icon"] = str_replace("../logos/facilities/",'',$originalfile);
+            }else{
+                if ( isset($_FILES['icon']) ){
+                    $_POST["icon"] = "";
+                }
+            }
+
             if( isset($_FILES['imageurl']) && is_uploaded_file($_FILES['imageurl']['tmp_name']) ){
                 $directory = "../logos/";
                 $originalfile = $directory . date("d-m-y") . time() .  round(microtime(true)). "L." . getFileExtension($_FILES["imageurl"]["name"]);
@@ -96,6 +107,18 @@ if ( isset($_GET["hide"]) || isset($_GET["show"]) || isset($_GET["delId"]) || is
             <?php
             }
 		}else{
+            if( isset($_FILES['icon']) && is_uploaded_file($_FILES['icon']['tmp_name']) ){
+                $directory = "../logos/facilities/";
+                $originalfile = $directory . date("d-m-y") . time() .  round(microtime(true)). "L." . getFileExtension($_FILES["icon"]["name"]);
+                move_uploaded_file($_FILES["icon"]["tmp_name"], $originalfile);
+                $_POST["icon"] = str_replace("../logos/facilities/",'',$originalfile);
+            }else{
+                if( isset($_FILES['icon']) ){
+                    $imageurl = selectDB("{$table}","`id` = '{$id}'");
+                    $_POST["icon"] = $imageurl[0]["icon"];
+                }
+            }
+
             if( isset($_FILES['imageurl']) && is_uploaded_file($_FILES['imageurl']['tmp_name']) ){
                 $directory = "../logos/";
                 $originalfile = $directory . date("d-m-y") . time() .  round(microtime(true)). "L." . getFileExtension($_FILES["imageurl"]["name"]);
