@@ -36,29 +36,6 @@ if( !isset($_GET["fieldId"]) || empty($_GET["fieldId"]) ){
 			}
 		}
 		
-		// Get field times
-		$response["field"]["times"] = array();
-		if( $times = selectDB("field_times","`fieldId` = '{$_GET["fieldId"]}' AND `status` = '0' AND `hidden` = '0'") ){
-			foreach( $times as $time ){
-				$dayNames = array(
-					direction("Sunday","الأحد"),
-					direction("Monday","الإثنين"),
-					direction("Tuesday","الثلاثاء"),
-					direction("Wednesday","الأربعاء"),
-					direction("Thursday","الخميس"),
-					direction("Friday","الجمعة"),
-					direction("Saturday","السبت")
-				);
-				$response["field"]["times"][] = array(
-					"id" => $time["id"],
-					"day" => $time["day"],
-					"dayName" => $dayNames[$time["day"]],
-					"openTime" => $time["openTime"],
-					"closeTime" => $time["closeTime"]
-				);
-			}
-		}
-		
 		if( $area = selectDB("countries","`id` = '{$field[0]["area"]}'") ){
 			$response["field"]["enArea"] = $area[0]["areaEnTitle"];
 			$response["field"]["arArea"] = $area[0]["areaArTitle"];
