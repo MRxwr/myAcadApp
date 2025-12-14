@@ -15,6 +15,13 @@ if( !preg_match('/^\d{4}-\d{2}-\d{2}$/', $_GET["date"]) ){
 	echo outputError($response);die();
 }
 
+// Validate date is today or in the future
+$today = date('Y-m-d');
+if( $_GET["date"] < $today ){
+	$response = array("msg"=>popupMsg($requestLang,"Date must be today or in the future","يجب أن يكون التاريخ اليوم أو في المستقبل"));
+	echo outputError($response);die();
+}
+
 if( !isset($_GET["periodId"]) || empty($_GET["periodId"]) ){
 	$response = array("msg"=>"Please set period id");
 	echo outputError($response);die();
@@ -23,6 +30,9 @@ if( !isset($_GET["periodId"]) || empty($_GET["periodId"]) ){
 $fieldId = intval($_GET["fieldId"]);
 $date = $_GET["date"];
 $periodId = intval($_GET["periodId"]);
+$isToday = ($date === $today);
+$currentDateTime = time();
+$minBookingTime = $currentDateTime + (2 * 60 * 60); // 2 hours from now
 
 // Get day of week from date (0 = Sunday, 6 = Saturday)
 $dayOfWeek = date('w', strtotime($date));
@@ -66,10 +76,20 @@ while( $currentTime < $endTime ){
 		break;
 	}
 	
-	// Check if this slot is already booked
-	$booking = selectDB("bookings", "`fieldId` = '{$fieldId}' AND `date` = '{$date}' AND `startTime` = '{$slotStart}' AND `status` = '0'");
+	// If booking is for today, check if slot is at least 2 hours from now
+	$isAvailable = true;
+	if( $isToday ){
+		$slotDateTime = strtotime($date . ' ' . $slotStart);
+		if( $slotDateTime < $minBookingTime ){
+			$isAvailable = false;
+		}
+	}
 	
-	$isAvailable = empty($booking);
+	// Check if this slot is already booked (only if initially available)
+	if( $isAvailable ){
+		$booking = selectDB("bookings", "`fieldId` = '{$fieldId}' AND `date` = '{$date}' AND `startTime` = '{$slotStart}' AND `status` = '0'");
+		$isAvailable = empty($booking);
+	}
 	
 	$response["timeSlots"][] = array(
 		"startTime" => $slotStart,
