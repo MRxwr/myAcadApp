@@ -6,10 +6,8 @@ if( !isset($_POST) ){
     $orderId = time();
     $freePayment = 0;
     $data = $_POST;
-    var_dump($_REQUEST);
     unset($_POST);
     if( isset($data["fieldId"]) && !empty($data["fieldId"]) ){
-        var_dump($data);
         $user = $data["user"];
         $paymentMethod = $data["paymentMethod"];
     
