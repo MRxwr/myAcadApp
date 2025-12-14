@@ -107,7 +107,7 @@ while( $currentTime < $endTime ){
 	
 	// Check if this slot is already booked (only if initially available)
 	if( $isAvailable ){
-		$booking = selectDB("bookings", "`fieldId` = '{$fieldId}' AND `date` = '{$date}' AND `startTime` = '{$slotStart}' AND `status` = '0'");
+		$booking = selectDB("bookings", "`fieldId` = '{$fieldId}' AND `date` = '%{$date}%' AND `startTime` LIKE '%{$slotStart}%'");
 		$isAvailable = empty($booking);
 	}
 	
