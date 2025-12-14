@@ -52,6 +52,11 @@ $response["timeSlots"] = array();
 $currentTime = strtotime($openTime);
 $endTime = strtotime($closeTime);
 
+// If closeTime is earlier than openTime (e.g., 00:00:00), it means next day
+if( $endTime <= $currentTime ){
+	$endTime += 86400; // Add 24 hours
+}
+
 while( $currentTime < $endTime ){
 	$slotStart = date('H:i:s', $currentTime);
 	$slotEnd = date('H:i:s', $currentTime + ($periodMinutes * 60));
