@@ -21,6 +21,19 @@
 				}
 				?>
 			</select>
+			</div>
+
+			<div class="col-md-6">
+			<label><?php echo direction("Facilities","المرافق") ?></label>
+			<select id="mySelect5" name="facilitiesIds[]" class="form-control" multiple>
+				<?php
+				if( $FacilitiesList = selectDB("field_facilities","`status` = '0' AND `hidden` = '0' ORDER BY `enTitle` ASC") ){
+					for( $i =0; $i < sizeof($FacilitiesList); $i++ ){
+						echo "<option value='{$FacilitiesList[$i]["id"]}'>{$FacilitiesList[$i]["enTitle"]}</option>";
+					}
+				}
+				?>
+			</select>
 			</div> 
 
             <div class="col-md-6">
@@ -332,6 +345,7 @@
 					<div style="display:none"><label id="arTerms<?php echo $fields[$i]["id"]?>"><?php echo $fields[$i]["arTerms"] ?></label></div>
 					<div style="display:none"><label id="tabId<?php echo $fields[$i]["id"]?>"><?php echo $fields[$i]["tabId"] ?></label></div>
 					<div style="display:none"><label id="fieldsIds<?php echo $fields[$i]["id"]?>"><?php echo $fields[$i]["fieldsIds"] ?></label></div>
+					<div style="display:none"><label id="facilitiesIds<?php echo $fields[$i]["id"]?>"><?php echo $fields[$i]["facilitiesIds"] ?></label></div>
 					<div style="display:none"><label id="quantity<?php echo $fields[$i]["id"]?>"><?php echo $fields[$i]["quantity"] ?></label></div>
 					<div style="display:none"><label id="openDate<?php echo $fields[$i]["id"]?>"><?php echo substr($fields[$i]["openDate"], 0, 10) ?></label></div>
 					<div style="display:none"><label id="closeDate<?php echo $fields[$i]["id"]?>"><?php echo substr($fields[$i]["closeDate"], 0, 10) ?></label></div>
@@ -412,6 +426,17 @@
 					$("select[name='fieldsIds[]']").val(fieldsArray).trigger('change');
 				} catch(e) {
 					console.log("Error parsing fieldsIds", e);
+				}
+			}
+			
+			// Set selected facilities
+			var facilitiesIds = $("#facilitiesIds"+id).html();
+			if( facilitiesIds ){
+				try {
+					var facilitiesArray = JSON.parse(facilitiesIds);
+					$("select[name='facilitiesIds[]']").val(facilitiesArray).trigger('change');
+				} catch(e) {
+					console.log("Error parsing facilitiesIds", e);
 				}
 			}
 			
