@@ -15,24 +15,32 @@ if( !preg_match('/^\d{4}-\d{2}-\d{2}$/', $_GET["date"]) ){
 	echo outputError($response);die();
 }
 
-// Validate date is today or in the future
-$today = date('Y-m-d');
-if( $_GET["date"] < $today ){
-	$response = array("msg"=>popupMsg($requestLang,"Date must be today or in the future","يجب أن يكون التاريخ اليوم أو في المستقبل"));
-	echo outputError($response);die();
-}
+
 
 if( !isset($_GET["periodId"]) || empty($_GET["periodId"]) ){
 	$response = array("msg"=>"Please set period id");
 	echo outputError($response);die();
 }
 
+// Get client/device current time (timestamp)
+if( !isset($_GET["currentTime"]) || empty($_GET["currentTime"]) ){
+	$response = array("msg"=>"Please set current device time (timestamp)");
+	echo outputError($response);die();
+}
+
 $fieldId = intval($_GET["fieldId"]);
 $date = $_GET["date"];
 $periodId = intval($_GET["periodId"]);
-$isToday = ($date === $today);
-$currentDateTime = time();
-$minBookingTime = $currentDateTime + (2 * 60 * 60); // 2 hours from now
+$currentDateTime = intval($_GET["currentTime"]); // Device timestamp
+$deviceToday = date('Y-m-d', $currentDateTime);
+$isToday = ($date === $deviceToday);
+$minBookingTime = $currentDateTime + (2 * 60 * 60); // 2 hours from device time
+
+// Validate date is today or in the future (based on device time)
+if( $_GET["date"] < $deviceToday ){
+	$response = array("msg"=>popupMsg($requestLang,"Date must be today or in the future","يجب أن يكون التاريخ اليوم أو في المستقبل"));
+	echo outputError($response);die();
+}
 
 // Get day of week from date (0 = Sunday, 6 = Saturday)
 $dayOfWeek = date('w', strtotime($date));
