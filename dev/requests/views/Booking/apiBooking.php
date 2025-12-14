@@ -7,6 +7,7 @@ if( !isset($_GET["fieldId"]) || empty($_GET["fieldId"]) ){
 		$response["field"] = $field[0];
 		$response["field"]["video"] = ( !empty($response["field"]["video"]) ) ? "https://www.youtube.com/embed/{$field[0]["video"]}" : "";
         $facilities = json_decode( $field[0]["facilitiesIds"], true );
+        unset( $response["field"]["facilitiesIds"] );
         $response["field"]["facilities"] = array();
         if( !empty( $facilities ) && is_array( $facilities ) ){
             $facilityIds = implode(',', array_map('intval', $facilities));
