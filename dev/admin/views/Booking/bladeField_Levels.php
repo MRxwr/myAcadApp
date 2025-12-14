@@ -4,9 +4,6 @@
 <div class="pull-left">
 	<h6 class="panel-title txt-dark"><?php echo direction("Level Details","تفاصيل المستوى") ?></h6>
 </div>
-<div class="pull-right">
-	<h6 class="panel-title txt-dark"><?php echo direction($fieldDetails[0]["enTitle"], $fieldDetails[0]["arTitle"]) ?></h6>
-</div>
 	<div class="clearfix"></div>
 </div>
 <div class="panel-wrapper collapse in">
