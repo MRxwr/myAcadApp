@@ -85,8 +85,8 @@
             <td id="arTitle<?php echo $levels[$i]["id"]?>" ><?php echo $levels[$i]["arTitle"] ?></td>
             <td class="text-nowrap">
                 <a id="<?php echo $levels[$i]["id"] ?>" class="edit btn btn-warning" data-toggle="tooltip" data-original-title="<?php echo direction("Edit","تعديل")  ?>"> <i class="fa fa-pencil text-inverse m-r-10"></i></a>
-                <a href="<?php echo $link . "&v={$_GET["v"]}&code={$_GET["code"]}" ?>" class="btn btn-default" data-toggle="tooltip" data-original-title="<?php echo $hide ?>"> <i class="<?php echo $icon ?> text-inverse m-r-10"></i></a>
-                <a href="?delId=<?php echo $levels[$i]["id"] . "&v={$_GET["v"]}&code={$_GET["code"]}" ?>" data-toggle="tooltip" data-original-title="<?php echo direction("Delete","حذف") ?>" class="btn btn-danger"><i class="fa fa-close text-inverse"></i></a>
+                <a href="<?php echo $link . "&v={$_GET["v"]}" ?>" class="btn btn-default" data-toggle="tooltip" data-original-title="<?php echo $hide ?>"> <i class="<?php echo $icon ?> text-inverse m-r-10"></i></a>
+                <a href="?delId=<?php echo $levels[$i]["id"] . "&v={$_GET["v"]}" ?>" data-toggle="tooltip" data-original-title="<?php echo direction("Delete","حذف") ?>" class="btn btn-danger"><i class="fa fa-close text-inverse"></i></a>
                 <div style="display:none">
                     <span id="enDetails<?php echo $levels[$i]["id"]?>" ><?php echo $levels[$i]["enDetails"] ?></span>
                     <span id="arDetails<?php echo $levels[$i]["id"]?>" ><?php echo $levels[$i]["arDetails"] ?></span>
