@@ -500,7 +500,7 @@ if( !isset($_POST) ){
     
     $curl = curl_init();
     curl_setopt_array($curl, array(
-        CURLOPT_URL => 'https://sandboxapi.upayments.com/api/v1/charge',
+        CURLOPT_URL => 'https://uapi.upayments.com/api/v1/charge',
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => '',
         CURLOPT_MAXREDIRS => 10,
@@ -510,7 +510,7 @@ if( !isset($_POST) ){
         CURLOPT_CUSTOMREQUEST => 'POST',
         CURLOPT_POSTFIELDS => $postBody,
         CURLOPT_HTTPHEADER => array(
-            'Authorization: Bearer e66a94d579cf75fba327ff716ad68c53aae11528',
+            'Authorization: Bearer 779475522c0938b3c0774da98197e0727fefe464',
         ),
     ));
     $response = curl_exec($curl);
