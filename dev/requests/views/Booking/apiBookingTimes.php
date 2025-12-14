@@ -9,6 +9,12 @@ if( !isset($_GET["date"]) || empty($_GET["date"]) ){
 	echo outputError($response);die();
 }
 
+// Validate date format (YYYY-MM-DD)
+if( !preg_match('/^\d{4}-\d{2}-\d{2}$/', $_GET["date"]) ){
+	$response = array("msg"=>"Invalid date format. Use YYYY-MM-DD (e.g., 2025-12-16)");
+	echo outputError($response);die();
+}
+
 if( !isset($_GET["periodId"]) || empty($_GET["periodId"]) ){
 	$response = array("msg"=>"Please set period id");
 	echo outputError($response);die();
