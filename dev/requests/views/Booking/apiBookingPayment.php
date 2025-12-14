@@ -7,6 +7,7 @@ if( !isset($_POST) ){
     $freePayment = 0;
     $data = $_POST;
     unset($_POST);
+    var_dump($data);
     if( isset($data["fieldId"]) && !empty($data["fieldId"]) ){
         var_dump($data);
         $user = $data["user"];
