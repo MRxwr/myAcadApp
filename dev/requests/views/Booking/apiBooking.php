@@ -3,7 +3,7 @@ if( !isset($_GET["fieldId"]) || empty($_GET["fieldId"]) ){
 	$response = array("msg"=>"Please set field id");
 	echo outputError($response);die();
 }else{
-	if( $field = selectDB2("`id`, `imageurl`, `enTitle`, `arTitle`, `area`, `video`, `location`, `price`, `locationImage`, `enTerms`, `arTerms`, `gameDate`, `gameTime`, `fieldsIds`","fields_list","`hidden` = '0' AND `status` = '0' AND `id` = {$_GET["fieldId"]}") ){
+	if( $field = selectDB2("`id`, `imageurl`, `enTitle`, `arTitle`, `area`, `video`, `location`, `price`, `locationImage`, `enTerms`, `arTerms`, `openDate`, `closeDate`, `fieldsIds`","fields_list","`hidden` = '0' AND `status` = '0' AND `id` = {$_GET["fieldId"]}") ){
 		$response["field"] = $field[0];
 		$response["field"]["video"] = ( !empty($response["field"]["video"]) ) ? "https://www.youtube.com/embed/{$field[0]["video"]}" : "";
         $fieldsToBeFilled = json_decode( $field[0]["fieldsIds"], true );
