@@ -1,4 +1,5 @@
 <?php
+print_r(json_encode($_REQUEST));die();
 if( !isset($_POST) ){
     $response["msg"] = popupMsg($requestLang,"Please make sure you send post data before submitting.","يرجى التأكد من ارسال بيانات POST قبل الارسال");
 	echo outputError($response);die();
