@@ -11,7 +11,7 @@
 	<form class="" method="POST" action="" enctype="multipart/form-data">
 		<div class="row m-0">
 
-			<div class="col-md-12">
+			<div class="col-md-6">
 			<label><?php echo direction("Facilities","المرافق") ?></label>
 			<select id="mySelect5" name="facilitiesIds[]" class="form-control" multiple>
 				<?php
