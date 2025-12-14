@@ -8,6 +8,7 @@ if( !isset($_POST) ){
     $data = $_POST;
     unset($_POST);
     if( isset($data["fieldId"]) && !empty($data["fieldId"]) ){
+        var_dump($data);
         $user = $data["user"];
         $paymentMethod = $data["paymentMethod"];
     
