@@ -87,8 +87,20 @@ while( $currentTime < $endTime ){
 	// If booking is for today, check if slot is at least 2 hours from now
 	$isAvailable = true;
 	if( $isToday ){
-		$slotDateTime = strtotime($date . ' ' . $slotStart);
-		if( $slotDateTime < $minBookingTime ){
+		// Get device's current hour and minute
+		$deviceHour = date('G', $currentDateTime);
+		$deviceMinute = date('i', $currentDateTime);
+		$deviceSecondsSinceMidnight = ($deviceHour * 3600) + ($deviceMinute * 60);
+		
+		// Get slot's hour and minute
+		$slotParts = explode(':', $slotStart);
+		$slotHour = intval($slotParts[0]);
+		$slotMinute = intval($slotParts[1]);
+		$slotSecondsSinceMidnight = ($slotHour * 3600) + ($slotMinute * 60);
+		
+		// Check if slot is at least 2 hours (7200 seconds) from current device time
+		$timeDifference = $slotSecondsSinceMidnight - $deviceSecondsSinceMidnight;
+		if( $timeDifference < 7200 ){
 			$isAvailable = false;
 		}
 	}
