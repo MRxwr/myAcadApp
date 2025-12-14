@@ -96,7 +96,6 @@ if ( isset($_GET["hide"]) || isset($_GET["show"]) || isset($_GET["delId"]) || is
 			if( isset($_POST["password"]) && !empty($_POST["password"]) ){
 				$_POST["password"] = sha1($_POST["password"]);
 			}
-			var_dump($_POST);
 			if( $userType == 0 && insertDB("{$table}", $_POST) ){
 			}elseif( $userType != 0 && insertDB("modifications", array("empId" => $userID, "postId" => $id, "tableTitle" => $table, "contents" => json_encode($_POST)) ) ){
 			}else{

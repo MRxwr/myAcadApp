@@ -115,5 +115,6 @@
         $("input[name=enTitle]").val($("#enTitle"+id).html()).focus();
         $("input[name=arTitle]").val($("#arTitle"+id).html());
         $("#iconPreview").attr("src", "../logos/facilities/" + $("#icon"+id).html()).show();
+        $("input[name=icon]").removeAttr("required");
     })
 </script>
