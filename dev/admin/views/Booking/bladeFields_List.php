@@ -10,20 +10,8 @@
 <div class="panel-body">
 	<form class="" method="POST" action="" enctype="multipart/form-data">
 		<div class="row m-0">
-			<div class="col-md-6">
-			<label><?php echo direction("Tab","التحويله") ?></label>
-			<select id="mySelect4" name="tabId" class="form-control" required>
-				<?php
-				if( $TabsList = selectDB("tabs","`status` = '0' AND `hidden` = '0' AND `id` NOT IN (1,2) ORDER BY `enTitle` ASC") ){
-					for( $i =0; $i < sizeof($TabsList); $i++ ){
-						echo "<option value='{$TabsList[$i]["id"]}'>{$TabsList[$i]["enTitle"]}</option>";
-					}
-				}
-				?>
-			</select>
-			</div>
 
-			<div class="col-md-6">
+			<div class="col-md-12">
 			<label><?php echo direction("Facilities","المرافق") ?></label>
 			<select id="mySelect5" name="facilitiesIds[]" class="form-control" multiple>
 				<?php
@@ -240,6 +228,7 @@
 			<div class="col-md-12" style="margin-top:10px">
 			<input type="submit" class="btn btn-primary" value="<?php echo direction("Submit","أرسل") ?>">
 			<input type="hidden" name="update" value="0">
+			<input type="hidden" name="tabId" value="4">
 			</div>
 		</div>
 	</form>
