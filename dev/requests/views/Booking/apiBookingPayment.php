@@ -7,6 +7,7 @@ if( !isset($_POST) ){
     $freePayment = 0;
     $data = $_POST;
     unset($_POST);
+    print_r(json_encode($data));die();
     if( isset($data["fieldId"]) && !empty($data["fieldId"]) ){
         $user = $data["user"];
         $paymentMethod = $data["paymentMethod"];
