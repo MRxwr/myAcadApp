@@ -41,7 +41,7 @@ if( !isset($_POST) ){
         $_POST["phone"] = "{$userData[0]["phone"]}";
         $_POST["email"] = "{$userData[0]["email"]}";
         $_POST["userId"] = "{$userData[0]["id"]}";
-        $_POST["fieldId"] = $data["id"];
+        $_POST["fieldId"] = $data["fieldId"];
         $_POST["periodId"] = $data["periodId"];
         $_POST["bookingDate"] = $data["bookingDate"];
         $_POST["startTime"] = $data["startTime"];
@@ -49,7 +49,6 @@ if( !isset($_POST) ){
         $_POST["levels"] = $data["levels"];
         $_POST["ages"] = $data["ages"];
         $_POST["notes"] = $data["notes"];
-        $_POST["total"] = $data["total"];
         $_POST["isTbari"] = $data["isTbari"];
         $_POST["total"] = $fullAmount;
         $_POST["paymentMethod"] = $paymentMethod;
