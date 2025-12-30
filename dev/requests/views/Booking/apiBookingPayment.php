@@ -7,9 +7,8 @@ if( !isset($_POST) ){
     $freePayment = 0;
     $data = $_POST;
     unset($_POST);
-    print_r(json_encode($data));die();
     if( isset($data["fieldId"]) && !empty($data["fieldId"]) ){
-        $user = $data["user"];
+        $user = $data["userId"];
         $paymentMethod = $data["paymentMethod"];
     
         // checking user data
@@ -25,6 +24,12 @@ if( !isset($_POST) ){
         if( $paymentMethod == 3 ){
             $paymentMethod = 1;
             $wallet = 1;
+        }
+
+        //trabi payment method
+        if( $paymentMethod == 4 ){
+            $paymentMethod = 1;
+            $freePayment = 1;
         }
 
         //calulation of total prices
@@ -112,8 +117,8 @@ if( !isset($_POST) ){
         $_POST["gatewayURL"]    = $response["data"]["link"];
         $_POST["apiPayload"]    = json_encode($postBody);
         $_POST["apiResponse"]   = json_encode($response);
-        $_POST["paymentMethod"] = ( $wallet == 1 ) ? 3 : $paymentMethod;
-        $_POST["paymentMethod"] = ( $freePayment == 1 ) ? 4 : $_POST["paymentMethod"];
+        $_POST["paymentMethod"] = ( $wallet == 1 ) ? 3 : $data["paymentMethod"];
+        $_POST["paymentMethod"] = ( $freePayment == 1 ) ? 4 : $data["paymentMethod"];
         $response["data"] = array(
             "paymentURL" => $response["data"]["link"],
             "InvoiceId"  => $orderId
