@@ -83,7 +83,7 @@ if( !isset($_POST) ){
             'returnUrl' => 'https://dev.myacad.app/index.php',
             'cancelUrl' => 'https://dev.myacad.app/index.php',
             'notificationUrl' => 'https://dev.myacad.app/index.php',
-            'extraMerchantData[0][amount]' => (string)($fullAmount),
+            'extraMerchantData[0][amount]' => (string)($newTotal),
             'extraMerchantData[0][knetCharge]' => "{$fieldData[0]["charges"]}",
             'extraMerchantData[0][knetChargeType]' => "{$fieldData[0]["chargeType"]}",
             'extraMerchantData[0][ccCharge]' => "{$fieldData[0]["cc_charge"]}",
@@ -91,7 +91,7 @@ if( !isset($_POST) ){
             'extraMerchantData[0][ibanNumber]' => "{$fieldData[0]["iban"]}",
             );
     }
-    print_r(json_encode($postBody));die();
+
     $curl = curl_init();
     curl_setopt_array($curl, array(
         CURLOPT_URL => 'https://uapi.upayments.com/api/v1/charge',
