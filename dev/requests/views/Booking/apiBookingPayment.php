@@ -5,6 +5,7 @@ if( !isset($_POST) ){
 }else{
     $orderId = time();
     $freePayment = 0;
+    $wallet = 0;
     $data = $_POST;
     unset($_POST);
     if( isset($data["fieldId"]) && !empty($data["fieldId"]) ){
