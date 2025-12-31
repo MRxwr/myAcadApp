@@ -15,7 +15,7 @@ if( $pendingBooking = selectJoinDB("fields_booking", $dataJoin, "t.id = '{$data[
     $pendingBooking[0]["facilities"] = array();
     if( !empty($facilities) && is_array($facilities) ){
         $facilitiesIds = implode(',', array_map('intval', $facilities));
-        $pendingBooking[0]["facilities"] = selectDB2("enTitle, arTitle, imageurl","field_facilities","`id` IN ({$facilitiesIds})");
+        $pendingBooking[0]["facilities"] = selectDB2("enTitle, arTitle, icon","field_facilities","`id` IN ({$facilitiesIds})");
     }
     $response["pendingBooking"] = $pendingBooking[0];
 }else{
