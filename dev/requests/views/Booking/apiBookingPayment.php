@@ -10,7 +10,7 @@ if( !isset($_POST) ){
     unset($_POST);
     if( isset($data["bookingId"]) && !empty($data["bookingId"]) ){
         $bookingData = selectDB("fields_booking","`id` LIKE '{$data["bookingId"]}'");
-        if( $bookingData ){
+        if( $bookingData && $bookingData[0]["status"] != 2 && $bookingData[0]["status"] != 4 ){
             $data["fieldId"] = $bookingData[0]["fieldId"];
             $data["periodId"] = $bookingData[0]["periodId"];
             $data["bookingDate"] = $bookingData[0]["bookingDate"];
@@ -21,6 +21,9 @@ if( !isset($_POST) ){
             $data["notes"] = $bookingData[0]["notes"];
             $data["isTbari"] = $bookingData[0]["isTbari"];
             $data["total"] = $bookingData[0]["total"];
+        }else{
+            echo outputError(array("msg" => popupMsg($requestLang,"Booking Already Paid or Cancelled","تم الدفع أو إلغاء الحجز")));
+            die();
         }
     }else{
         $data["bookingId"] = 0;
