@@ -17,6 +17,7 @@ if( $pendingBooking = selectJoinDB("fields_booking", $dataJoin, "t.id = '{$data[
         $facilitiesIds = implode(',', array_map('intval', $facilities));
         $pendingBooking[0]["facilities"] = selectDB2("enTitle, arTitle, icon","field_facilities","`id` IN ({$facilitiesIds})");
     }
+    unset($pendingBooking[0]["facilitiesIds"]);
     $response["pendingBooking"] = $pendingBooking[0];
 }else{
     $response["msg"] = popupMsg($requestLang,"No Bookings available","لا يوجد مباريات متاحة");
