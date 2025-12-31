@@ -2,7 +2,7 @@
 $dataJoin = array(
     "select" => ["t.bookingDate","t.startTime","t.endTime","t1.enTitle as fieldEnTitle","t1.arTitle as fieldArTitle","t2.enTitle as ageEnTitle","t2.arTitle as ageArTitle","t3.enTitle as levelEnTitle","t3.arTitle as levelArTitle","t4.areaEnTitle as areaEnTitle","t4.areaArTitle as areaArTitle","t5.enTitle as sportEnTitle","t5.arTitle as sportArTitle"],
     "join" => ["fields_list","field_ages","field_levels","countries","sports"],
-    "on" => ["t.fieldId = t1.id","t.ageId = t2.id","t.levelId = t3.id","t1.area = t4.id","t1.sport = t5.id"],
+    "on" => ["t.fieldId = t1.id","t.ages = t2.id","t.levels = t3.id","t1.area = t4.id","t1.sport = t5.id"],
 );
 if( $pendingBookings = selectJoinDB("fields_booking", $dataJoin, "t.hidden = '0' AND t.status = '0' AND t.isTbari = '1'") ){
     $response["pendingBookings"] = $pendingBookings;
