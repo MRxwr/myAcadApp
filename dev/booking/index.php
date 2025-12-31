@@ -1,7 +1,7 @@
 <?php
-require_once("../../admin/includes/config.php");
-require_once("../../admin/includes/translate.php");
-require_once("../../admin/includes/functions.php");
+require_once("../admin/includes/config.php");
+require_once("../admin/includes/translate.php");
+require_once("../admin/includes/functions.php");
 
 if( isset($_GET["requested_order_id"]) && !empty($_GET["requested_order_id"]) ){
     if( $booking = selectDBNew("fields_booking",[$_GET["requested_order_id"]],"gatewayId = ?","") ){
