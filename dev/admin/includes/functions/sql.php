@@ -126,7 +126,8 @@ function selectJoinDB($table, $joinData, $where){
     $sql .=" FROM `$table` as t ";
     for($i = 0 ; $i < sizeof($joinData["join"]) ; $i++ ){
         $counter = $i+1;
-        $sql .= " JOIN `".$joinData["join"][$i]."` as t{$counter} ";
+        $type = (isset($joinData["type"][$i]) && !empty($joinData["type"][$i])) ? strtoupper($joinData["type"][$i]) : "LEFT";
+        $sql .= " {$type} JOIN `".$joinData["join"][$i]."` as t{$counter} ";
         if( isset($joinData["on"][$i]) && !empty($joinData["on"][$i]) ){
             $sql .= " ON ".$joinData["on"][$i]." ";
         }
