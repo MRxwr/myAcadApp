@@ -11,7 +11,6 @@ if( !isset($_POST) ){
     if( isset($data["bookingId"]) && !empty($data["bookingId"]) ){
         $bookingData = selectDB("fields_booking","`id` LIKE '{$data["bookingId"]}'");
         if( $bookingData ){
-            $bookingData[0]["total"] = (float)$bookingData[0]["total"]/2;
             $data["fieldId"] = $bookingData[0]["fieldId"];
             $data["periodId"] = $bookingData[0]["periodId"];
             $data["bookingDate"] = $bookingData[0]["bookingDate"];
@@ -39,6 +38,11 @@ if( !isset($_POST) ){
         //checking field Information
         if( $fieldData = selectDB("fields_list","`id` = '{$data["fieldId"]}'") ){
             $data["price"] = (float)$fieldData[0]["price"];
+            if( $data["bookingId"] != 0 ){
+                $data["price"] = (float)$bookingData[0]["total"] / 2;
+            }else{
+                $data["price"] = (float)$data["total"];
+            }
         }
             
         //checking payment method
