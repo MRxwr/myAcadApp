@@ -43,8 +43,6 @@ if( !isset($_POST) ){
             $data["price"] = (float)$fieldData[0]["price"];
             if( $data["bookingId"] != 0 ){
                 $data["price"] = (float)$bookingData[0]["total"] / 2;
-            }else{
-                $data["price"] = (float)$data["total"];
             }
         }
             
