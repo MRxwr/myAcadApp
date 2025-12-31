@@ -23,6 +23,8 @@ if( !isset($_POST) ){
             $data["isTbari"] = $bookingData[0]["isTbari"];
             $data["total"] = $bookingData[0]["total"];
         }
+    }else{
+        $data["bookingId"] = 0;
     }
     if( isset($data["fieldId"]) && !empty($data["fieldId"]) ){
         $user = $data["userId"];
@@ -55,6 +57,7 @@ if( !isset($_POST) ){
         $newTotal = (float)$data["price"];
         $fullAmount = (float)$data["price"];
 
+        $_POST["bookingId"] = $data["bookingId"];
         $_POST["name"] = "{$userData[0]["firstName"]} {$userData[0]["lastName"]}";
         $_POST["phone"] = "{$userData[0]["phone"]}";
         $_POST["email"] = "{$userData[0]["email"]}";
