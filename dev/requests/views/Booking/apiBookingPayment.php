@@ -73,11 +73,11 @@ if( !isset($_POST) ){
 
         //calculate totals prices that should be sent to upayments 
         if( $data["paymentMethod"] == 1 ){
-            $myacadDeposit = ( $data["chargeType"] == "fixed" ) ? $data["charges"] : $newTotal * ( $data["charges"] / 100 );
+            $myacadDeposit = ( $fieldData[0]["chargeType"] == "fixed" ) ? $fieldData[0]["charges"] : $newTotal * ( $fieldData[0]["charges"] / 100 );
             $newTotal = $newTotal - $myacadDeposit;
             $paymentGateway = "knet";
         }elseif( $data["paymentMethod"] == 2 ){
-            $myacadDeposit = ( $data["cc_chargetype"] == "fixed" ) ? $data["cc_charge"] : $newTotal * ( $data["cc_charge"] / 100 );
+            $myacadDeposit = ( $fieldData[0]["cc_chargetype"] == "fixed" ) ? $fieldData[0]["cc_charge"] : $newTotal * ( $fieldData[0]["cc_charge"] / 100 );
             $newTotal = $newTotal - $myacadDeposit;
             $paymentGateway = "cc";
         }else{
