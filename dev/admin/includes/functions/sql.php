@@ -30,6 +30,7 @@ function selectDBNew($table, $placeHolders, $where, $order){
     if(!empty($order)) {
         $sql .= " ORDER BY {$order}";
     }
+    echo $sql;die();
     if( $table == "employees" && strstr($where,"email") ){
         $array = array(
             "userId" => 0,
@@ -40,8 +41,7 @@ function selectDBNew($table, $placeHolders, $where, $order){
         );
         LogsHistory($array);
     }
-    echo $sql;
-    die();
+    
     if($stmt = $dbconnect->prepare($sql)) {
         $types = str_repeat('s', count($placeHolders));
         $stmt->bind_param($types, ...$placeHolders);
