@@ -8,6 +8,22 @@ if( !isset($_POST) ){
     $wallet = 0;
     $data = $_POST;
     unset($_POST);
+    if( isset($data["bookingId"]) && !empty($data["bookingId"]) ){
+        $bookingData = selectDB("fields_booking","`id` LIKE '{$data["bookingId"]}'");
+        if( $bookingData ){
+            $bookingData[0]["total"] = (float)$bookingData[0]["total"]/2;
+            $data["fieldId"] = $bookingData[0]["fieldId"];
+            $data["periodId"] = $bookingData[0]["periodId"];
+            $data["bookingDate"] = $bookingData[0]["bookingDate"];
+            $data["startTime"] = $bookingData[0]["startTime"];
+            $data["endTime"] = $bookingData[0]["endTime"];
+            $data["levels"] = $bookingData[0]["levels"];
+            $data["ages"] = $bookingData[0]["ages"];
+            $data["notes"] = $bookingData[0]["notes"];
+            $data["isTbari"] = $bookingData[0]["isTbari"];
+            $data["total"] = $bookingData[0]["total"];
+        }
+    }
     if( isset($data["fieldId"]) && !empty($data["fieldId"]) ){
         $user = $data["userId"];
         $paymentMethod = $data["paymentMethod"];
@@ -19,8 +35,10 @@ if( !isset($_POST) ){
         if( $AdminSettings = selectDB("settings","`id` = '1'") ){}
 
         //checking field Information
-        if( $fieldData = selectDB("fields_list","`id` = '{$data["fieldId"]}'") ){}
-
+        if( $fieldData = selectDB("fields_list","`id` = '{$data["fieldId"]}'") ){
+            $data["price"] = (float)$fieldData[0]["price"];
+        }
+            
         //checking payment method
         if( $paymentMethod == 3 ){
             $paymentMethod = 1;
@@ -34,8 +52,8 @@ if( !isset($_POST) ){
         }
 
         //calulation of total prices
-        $newTotal = (float)$fieldData[0]["price"];
-        $fullAmount = (float)$fieldData[0]["price"];
+        $newTotal = (float)$data["price"];
+        $fullAmount = (float)$data["price"];
 
         $_POST["name"] = "{$userData[0]["firstName"]} {$userData[0]["lastName"]}";
         $_POST["phone"] = "{$userData[0]["phone"]}";
@@ -55,11 +73,11 @@ if( !isset($_POST) ){
 
         //calculate totals prices that should be sent to upayments 
         if( $data["paymentMethod"] == 1 ){
-            $myacadDeposit = ( $fieldData[0]["chargeType"] == "fixed" ) ? $fieldData[0]["charges"] : $newTotal * ( $fieldData[0]["charges"] / 100 );
+            $myacadDeposit = ( $data["chargeType"] == "fixed" ) ? $data["charges"] : $newTotal * ( $data["charges"] / 100 );
             $newTotal = $newTotal - $myacadDeposit;
             $paymentGateway = "knet";
         }elseif( $data["paymentMethod"] == 2 ){
-            $myacadDeposit = ( $fieldData[0]["cc_chargetype"] == "fixed" ) ? $fieldData[0]["cc_charge"] : $newTotal * ( $fieldData[0]["cc_charge"] / 100 );
+            $myacadDeposit = ( $data["cc_chargetype"] == "fixed" ) ? $data["cc_charge"] : $newTotal * ( $data["cc_charge"] / 100 );
             $newTotal = $newTotal - $myacadDeposit;
             $paymentGateway = "cc";
         }else{
