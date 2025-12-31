@@ -6,7 +6,7 @@ require_once("../admin/includes/functions.php");
 if( isset($_GET["requested_order_id"]) && !empty($_GET["requested_order_id"]) ){
     if( $booking = selectDBNew("fields_booking",[$_GET["requested_order_id"]],"gatewayId = ?","") ){
         if( isset($_GET["result"]) && !empty($_GET["result"]) ){
-            if( $_GET["result"] == "CAPTURED" ){
+            if( $_GET["result"] == "CAPTURED" AND $booking[0]["status"] == 0 ){
                 updateDB("fields_booking",array("status" => 2),"`gatewayId` = '{$_GET["requested_order_id"]}'");
                 if( $booking[0]["isTbari"] == 1 ){
                     if( $bookingOriginal = selectDBNew("fields_booking",[$booking[0]["bookingId"]],"id = ?","") ){
