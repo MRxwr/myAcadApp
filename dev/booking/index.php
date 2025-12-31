@@ -9,7 +9,7 @@ if( isset($_GET["requested_order_id"]) && !empty($_GET["requested_order_id"]) ){
             if( $_GET["result"] == "CAPTURED" ){
                 updateDB("fields_booking",array("status" => 2),"`gatewayId` = '{$_GET["requested_order_id"]}'");
                 if( $booking[0]["isTbari"] == 1 ){
-                    if( $bookingOriginal = selectDBNew("fields_booking",[$booking[0]["bookingId"]],"`id` = ?","") ){
+                    if( $bookingOriginal = selectDBNew("fields_booking",["{$booking[0]["bookingId"]}"],"`id` = ?","") ){
                         if( $bookingOriginal[0]["status"] == 0 ){
                             updateDB("fields_booking",array("status" => 1),"`id` = '{$bookingOriginal[0]["id"]}'");
                         }elseif( $bookingOriginal[0]["status"] == 1 ){
