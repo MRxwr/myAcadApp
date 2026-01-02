@@ -31,22 +31,20 @@ if (!isset($_GET["periodId"]) || empty($_GET["periodId"])) {
 if (!isset($_GET["currentTime"]) || empty($_GET["currentTime"])) {
 	$response = array("msg" => "Please set current device time (timestamp)");
 	echo outputError($response);
-	die();
-}
-
 $fieldId = intval($_GET["fieldId"]);
 $date = $_GET["date"];
 $periodId = intval($_GET["periodId"]);
-$currentDateTime = intval($_GET["currentTime"]); // Device timestamp
-$deviceToday = date('Y-m-d', $currentDateTime); // this should = to now in users device not server
-$isToday = ($date === $deviceToday);
-$minBookingTime = $currentDateTime + (2 * 60 * 60); // 2 hours from device time
 
-// Validate date is today or in the future (based on device time)
-if ($_GET["date"] < $deviceToday) {
-	$response = array("msg" => popupMsg($requestLang, "Date must be today or in the future", "يجب أن يكون التاريخ اليوم أو في المستقبل"));
-	echo outputError($response);
-	die();
+// Use server time as the absolute source of truth to prevent spoofing
+// and ensure the 15 vs 17 timezone discrepancy is resolved.
+$serverNow = time();
+$serverToday = date('Y-m-d');
+$isToday = ($date === $serverToday);
+
+// Validate date is today or in the future (based on actual server date)
+if( $date < $serverToday ){
+	$response = array("msg"=>popupMsg($requestLang,"Date must be today or in the future","يجب أن يكون التاريخ اليوم أو في المستقبل"));
+	echo outputError($response);die();
 }
 
 // Get day of week from date (0 = Sunday, 6 = Saturday)
@@ -95,21 +93,21 @@ while ($currentTime < $endTime) {
 
 	// If booking is for today, check if slot is at least 2 hours from now
 	$isAvailable = true;
-	if ($isToday) {
-		// Get device's current hour and minute
-		$deviceHour = date('G', $currentDateTime);
-		$deviceMinute = date('i', $currentDateTime);
-		$deviceSecondsSinceMidnight = ($deviceHour * 3600) + ($deviceMinute * 60);
-
+	if( $isToday ){
+		// Get current hour and minute from server
+		$serverHour = date('G', $serverNow);
+		$serverMinute = date('i', $serverNow);
+		$serverSecondsSinceMidnight = ($serverHour * 3600) + ($serverMinute * 60);
+		
 		// Get slot's hour and minute
 		$slotParts = explode(':', $slotStart);
 		$slotHour = intval($slotParts[0]);
 		$slotMinute = intval($slotParts[1]);
 		$slotSecondsSinceMidnight = ($slotHour * 3600) + ($slotMinute * 60);
-
-		// Check if slot is at least 2 hours (7200 seconds) from current device time
-		$timeDifference = $slotSecondsSinceMidnight - $deviceSecondsSinceMidnight;
-		if ($timeDifference < 7200) {
+		
+		// Check if slot is at least 2 hours (7200 seconds) from server time
+		$timeDifference = $slotSecondsSinceMidnight - $serverSecondsSinceMidnight;
+		if( $timeDifference < 7200 ){
 			$isAvailable = false;
 		}
 	}
