@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set("Asia/Kuwait");
 if (!isset($_GET["fieldId"]) || empty($_GET["fieldId"])) {
 	$response = array("msg" => "Please set field id");
 	echo outputError($response);
@@ -38,8 +39,6 @@ $date = $_GET["date"];
 $periodId = intval($_GET["periodId"]);
 $currentDateTime = intval($_GET["currentTime"]); // Device timestamp
 $deviceToday = date('Y-m-d', $currentDateTime); // this should = to now in users device not server
-$deviceNow = date('H:i:s', $currentDateTime);
-echo $deviceNow . "<br>" . $deviceToday . "<br>" . $date;
 $isToday = ($date === $deviceToday);
 $minBookingTime = $currentDateTime + (2 * 60 * 60); // 2 hours from device time
 
