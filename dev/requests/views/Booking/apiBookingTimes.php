@@ -37,6 +37,8 @@ $fieldId = intval($_GET["fieldId"]);
 echo $date = $_GET["date"];
 $periodId = intval($_GET["periodId"]);
 $currentDateTime = intval($_GET["currentTime"]); // Device timestamp
+$currentTime = date('Y-m-d H:i:s', $currentDateTime);
+echo $currentTime;
 echo $deviceToday = date('Y-m-d', $currentDateTime);
 $isToday = ($date === $deviceToday);
 $minBookingTime = $currentDateTime + (2 * 60 * 60); // 2 hours from device time
