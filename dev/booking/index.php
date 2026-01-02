@@ -27,7 +27,7 @@ if (isset($_GET["requested_order_id"]) && !empty($_GET["requested_order_id"])) {
                     updateDB("fields_booking", array("status" => 4, "gatewayLink" => $gatewayLink), "`gatewayId` = '{$_GET["requested_order_id"]}'");
                 }
             } else {
-                die("404 Not Found [ Booking Status Has been set ]");
+                die("404 Not Found [ Booking Status Has Been Set ]");
             }
         } else {
             die("404 Not Found [ Result Not Found ]");
