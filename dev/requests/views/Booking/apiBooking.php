@@ -17,7 +17,7 @@ if( !isset($_GET["fieldId"]) || empty($_GET["fieldId"]) ){
                         "id" => $facility["id"],
                         "enTitle" => $facility["enTitle"],
                         "arTitle" => $facility["arTitle"],
-                        "icon" => $facility["icon"]
+                        "icon" => "facilities/".$facility["icon"]
                     );
                 }
             }
