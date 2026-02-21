@@ -3,7 +3,13 @@ if( !isset($_GET["fieldId"]) || empty($_GET["fieldId"]) ){
 	$response = array("msg"=>"Please set field id");
 	echo outputError($response);die();
 }else{
-	if( $field = selectDB2("`id`, `imageurl`, `enTitle`, `arTitle`, `area`, `video`, `location`, `price`, `locationImage`, `enTerms`, `arTerms`, `openDate`, `closeDate`, `facilitiesIds`","fields_list","`hidden` = '0' AND `status` = '0' AND `id` = {$_GET["fieldId"]}") ){
+	if( $field = selectDB2("`id`, `imageurl`, `enTitle`, `arTitle`, `area`, `video`, `location`, `price`, `locationImage`, `enTerms`, `arTerms`, `openDate`, `closeDate`, `facilitiesIds`, `header`","fields_list","`hidden` = '0' AND `status` = '0' AND `id` = {$_GET["fieldId"]}") ){
+		$header = json_decode($field[0]["header"], true);
+		if( is_array($header) ){
+			$field[0]["header"] = $header;
+		}else{
+			$field[0]["header"] = ( !empty($field[0]["header"]) ) ? [$field[0]["header"]] : [];
+		}
 		$response["field"] = $field[0];
 		$response["field"]["video"] = ( !empty($response["field"]["video"]) ) ? "https://www.youtube.com/embed/{$field[0]["video"]}" : "";
         $facilities = json_decode( $field[0]["facilitiesIds"], true );

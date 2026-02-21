@@ -21,7 +21,7 @@ if( !isset($_GET["sportId"]) || empty($_GET["sportId"]) ){
 	}else{
 		$where .= " AND `country` = 'KW'";
 	}
-	if( $events = selectDB2("`id`, `imageurl`, `header`, `enTitle`, `arTitle`, `area`, `price`, `isIndoor`","fields_list","`hidden` = '0' AND `status` = '0' {$where}") ){
+	if( $events = selectDB2("`id`, `imageurl`, (CASE WHEN JSON_VALID(`header`) THEN JSON_UNQUOTE(JSON_EXTRACT(`header`, '$[0]')) ELSE `header` END) as `header`, `enTitle`, `arTitle`, `area`, `price`, `isIndoor`","fields_list","`hidden` = '0' AND `status` = '0' {$where}") ){
 		for( $i = 0; $i < sizeof($events); $i++){
 			$response["fields"][$i] = $events[$i];
 			if( $area = selectDB("countries","`id` = '{$events[$i]["area"]}'") ){
