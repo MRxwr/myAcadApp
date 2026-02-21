@@ -43,7 +43,7 @@ if( !isset($_GET["userId"]) || empty($_GET["userId"]) ){
                     "academyLogo" => $academy[0]["imageurl"],
                     "sportLogo" => $sport[0]["imageurl"],
                     "type" => popupMsg($requestLang,"Subscription","اشتراك"),
-                    "status" => ( $orders[$i]["status"] == 1 ) ? popupMsg($requestLang,"Live","مفعلة") : ( ( $orders[$i]["status"] == 2 ) ? popupMsg($requestLang,"Cancelled","ملغاة") : ( ( $orders[$i]["status"] == 3 ) ? popupMsg($requestLang,"Refunded","مستردة") : ( ( $orders[$i]["status"] == 4 ) ? popupMsg($requestLang,"Ended","منتهية") : "" ) ) )
+                    "status" => ( $orders[$i]["status"] == 1 ) ? popupMsg($requestLang,"Live","مفعلة") : ( ( $orders[$i]["status"] == 2 ) ? popupMsg($requestLang,"Cancelled","ملغاة") : ( ( $orders[$i]["status"] == 3 ) ? popupMsg($requestLang,"Refunded","مستردة") : ( ( $orders[$i]["status"] == 4 ) ? popupMsg($requestLang,"Ended","منتهية") : popupMsg($requestLang,"Pending","قيد الانتظار") ) ) )
                 );
             }elseif( $orders[$i]["isTournament"] == 1 ){
                 $tournaments = selectDB("tournaments","`id` = '{$orders[$i]["tournamentId"]}'");
