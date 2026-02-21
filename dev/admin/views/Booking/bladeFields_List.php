@@ -215,17 +215,21 @@
 			</div>
 
 			<div id="images" style="margin-top: 10px; display:none">
-				<div class="col-md-4">
-				<img id="locationImg" src="" style="width:250px;height:250px">
+				<div class="col-md-3">
+				<label><?php echo direction("Logo Preview","معاينة الشعار") ?></label>
+				<img id="logoImg" src="" style="width:100%;height:200px;object-fit:contain;border:1px solid #ddd;padding:5px;border-radius:5px">
 				</div>
 
-				<div class="col-md-4">
-				<img id="logoImg" src="" style="width:250px;height:250px">
+				<div class="col-md-3">
+				<label><?php echo direction("Map Preview","معاينة الخريطة") ?></label>
+				<img id="locationImg" src="" style="width:100%;height:200px;object-fit:contain;border:1px solid #ddd;padding:5px;border-radius:5px">
 				</div>
 
-				<div class="col-md-4" id="header_previews_container">
-				<!-- Header images will be listed here or just showing the first one as preview -->
-				<img id="headerImg" src="" style="width:250px;height:250px">
+				<div class="col-md-6">
+				<label><?php echo direction("Header Images","صور الهيدر") ?></label>
+				<div id="header_previews_container" class="row">
+					<!-- Header images will be listed here -->
+				</div>
 				</div>
 			</div>
 			
@@ -259,6 +263,7 @@
 		<tr>
 		<th>#</th>
 		<th><?php echo direction("Title","العنوان") ?></th>
+		<th><?php echo direction("Header","صورة") ?></th>
 		<th><?php echo direction("Sport","الرياضة") ?></th>
 		<th><?php echo direction("Country","البلد") ?></th>
 		<th><?php echo direction("Gender","الجنس") ?></th>
@@ -306,6 +311,19 @@
 				<tr>
 				<td><?php echo str_pad(1 + $i, 3 ,'0', STR_PAD_LEFT) ?></td>
 				<td><?php echo $title ?></td>
+				<td>
+				<?php 
+				$headerImgs = json_decode($fields[$i]["header"], true);
+				if (is_array($headerImgs) && !empty($headerImgs)) {
+					$firstImg = $headerImgs[0];
+				} else {
+					$firstImg = $fields[$i]["header"];
+				}
+				if (!empty($firstImg)) {
+					echo "<img src='../logos/{$firstImg}' style='width:50px;height:50px;border-radius:5px'>";
+				}
+				?>
+				</td>
 				<td><?php echo direction($sport[0]["enTitle"],$sport[0]["arTitle"]) ?></td>
 				<td id="country<?php echo $fields[$i]["id"]?>" ><?php echo $fields[$i]["country"] ?></td>
 				<td><?php echo $genderText ?><label style="display:none" id="gender<?php echo $fields[$i]["id"]?>"  ><?php echo $fields[$i]["gender"] ?></label></td>
@@ -417,10 +435,14 @@
 		var headerImages = [];
 
 		function renderHeaderImages() {
-			var container = $("#header_images_list");
-			container.empty();
+			var modalContainer = $("#header_images_list");
+			var previewContainer = $("#header_previews_container");
+			modalContainer.empty();
+			previewContainer.empty();
+			
 			headerImages.forEach(function(img, index) {
-				var html = `
+				// For Modal
+				var modalHtml = `
 					<div class="col-md-3 text-center" style="margin-bottom: 20px; position: relative;" id="h_img_${index}">
 						<div style="padding: 5px; border: 1px solid #eee; border-radius: 5px; background: #f9f9f9; transition: all 0.3s ease;" class="img-thumbnail-wrapper">
 							<img src="../logos/${img}" style="width: 100%; height: 100px; object-fit: cover; border-radius: 3px;">
@@ -430,15 +452,17 @@
 						</div>
 					</div>
 				`;
-				container.append(html);
+				modalContainer.append(modalHtml);
+
+				// For Details Preview
+				var previewHtml = `
+					<div class="col-md-3" style="margin-bottom:10px">
+						<img src="../logos/${img}" style="width: 100%; height: 80px; object-fit: cover; border: 1px solid #ddd; padding: 2px; border-radius: 3px;">
+					</div>
+				`;
+				previewContainer.append(previewHtml);
 			});
 			$("#header_json_input").val(JSON.stringify(headerImages));
-			
-			if (headerImages.length > 0) {
-				$("#headerImg").attr("src", "../logos/" + headerImages[0]).show();
-			} else {
-				$("#headerImg").attr("src", "").hide();
-			}
 		}
 
 		$(document).on("click", ".delete-h-img", function() {
