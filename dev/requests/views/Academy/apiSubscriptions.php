@@ -27,63 +27,66 @@ if( !isset($_GET["userId"]) || empty($_GET["userId"]) ){
 	if( $orders = selectDB2("`id`, `date`, `academyId`, `gatewayId`, `isTournament`, `tournamentId`, `teamName`, `teamDetails`, `eventId`, `status`","orders","`userId` = '{$_GET["userId"]}' ORDER BY `id` DESC LIMIT {$limit} OFFSET {$offset}") ){
         for( $i = 0; $i < sizeof($orders); $i++ ){
             if( $orders[$i]["isTournament"] == 0 ){
-                $academy = selectDB2("`area`,`enTitle`,`arTitle`,`imageurl`,`location`,`sport`","academies","`id` = '{$orders[$i]["academyId"]}'");
-                @$sport = selectDB2("`imageurl`","sports","`id` = '{$academy[0]["sport"]}'");
-                @$area = selectDB2("`areaEnTitle`, `areaArTitle`","countries","`id` = '{$academy[0]["area"]}'");
-                $response[] = array(
-                    "id" => $orders[$i]["id"],
-                    "date" => $orders[$i]["date"],
-                    "isTournament" => 0,
-                    "orderId" => $orders[$i]["gatewayId"],
-                    "enTitle" => $academy[0]["enTitle"],
-                    "arTitle" => $academy[0]["arTitle"],
-                    "location" => $academy[0]["location"],
-                    "enArea" => $area[0]["areaEnTitle"],
-                    "arArea" => $area[0]["areaArTitle"],
-                    "academyLogo" => $academy[0]["imageurl"],
-                    "sportLogo" => $sport[0]["imageurl"],
-                    "type" => popupMsg($requestLang,"Subscription","اشتراك"),
-                    "status" => ( $orders[$i]["status"] == 1 ) ? popupMsg($requestLang,"Live","مفعلة") : ( ( $orders[$i]["status"] == 2 ) ? popupMsg($requestLang,"Cancelled","ملغاة") : ( ( $orders[$i]["status"] == 3 ) ? popupMsg($requestLang,"Refunded","مستردة") : ( ( $orders[$i]["status"] == 4 ) ? popupMsg($requestLang,"Ended","منتهية") : popupMsg($requestLang,"Pending","قيد الانتظار") ) ) )
-                );
+                if($academy = selectDB2("`area`,`enTitle`,`arTitle`,`imageurl`,`location`,`sport`","academies","`id` = '{$orders[$i]["academyId"]}'")){
+                    $sport = selectDB2("`imageurl`","sports","`id` = '{$academy[0]["sport"]}'");
+                    $area = selectDB2("`areaEnTitle`, `areaArTitle`","countries","`id` = '{$academy[0]["area"]}'");
+                    $response[] = array(
+                        "id" => $orders[$i]["id"],
+                        "date" => $orders[$i]["date"],
+                        "isTournament" => 0,
+                        "orderId" => $orders[$i]["gatewayId"],
+                        "enTitle" => $academy[0]["enTitle"],
+                        "arTitle" => $academy[0]["arTitle"],
+                        "location" => $academy[0]["location"],
+                        "enArea" => $area[0]["areaEnTitle"],
+                        "arArea" => $area[0]["areaArTitle"],
+                        "academyLogo" => $academy[0]["imageurl"],
+                        "sportLogo" => $sport[0]["imageurl"],
+                        "type" => popupMsg($requestLang,"Subscription","اشتراك"),
+                        "status" => ( $orders[$i]["status"] == 1 ) ? popupMsg($requestLang,"Live","مفعلة") : ( ( $orders[$i]["status"] == 2 ) ? popupMsg($requestLang,"Cancelled","ملغاة") : ( ( $orders[$i]["status"] == 3 ) ? popupMsg($requestLang,"Refunded","مستردة") : ( ( $orders[$i]["status"] == 4 ) ? popupMsg($requestLang,"Ended","منتهية") : popupMsg($requestLang,"Pending","قيد الانتظار") ) ) )
+                    );
+                }
             }elseif( $orders[$i]["isTournament"] == 1 ){
-                $tournaments = selectDB("tournaments","`id` = '{$orders[$i]["tournamentId"]}'");
-                @$sport = selectDB2("`imageurl`","sports","`id` = '{$tournaments[0]["sport"]}'");
-                @$area = selectDB("countries","`id` = '{$tournaments[0]["area"]}'");
-                $response[] = array(
-                    "id" => $orders[$i]["id"],
-                    "date" => $orders[$i]["date"],
-                    "isTournament" => 1,
-                    "orderId" => $orders[$i]["gatewayId"],
-                    "enTitle" => $tournaments[0]["enTitle"],
-                    "arTitle" => $tournaments[0]["arTitle"],
-                    "location" => $tournaments[0]["location"],
-                    "enArea" => $area[0]["areaEnTitle"],
-                    "arArea" => $area[0]["areaArTitle"],
-                    "academyLogo" => $tournaments[0]["imageurl"],
-                    "sportLogo" => $sport[0]["imageurl"],
-                    "type" => popupMsg($requestLang,"Tournament","بطولة"),
-                    "status" => ( $orders[$i]["status"] == 1 ) ? popupMsg($requestLang,"Successful","ناجحة") : popupMsg($requestLang,"Cancelled","ملغاة")
-                );
+                if($tournaments = selectDB("tournaments","`id` = '{$orders[$i]["tournamentId"]}'")){
+                    $sport = selectDB2("`imageurl`","sports","`id` = '{$tournaments[0]["sport"]}'");
+                    $area = selectDB("countries","`id` = '{$tournaments[0]["area"]}'");
+                    $response[] = array(
+                        "id" => $orders[$i]["id"],
+                        "date" => $orders[$i]["date"],
+                        "isTournament" => 1,
+                        "orderId" => $orders[$i]["gatewayId"],
+                        "enTitle" => $tournaments[0]["enTitle"],
+                        "arTitle" => $tournaments[0]["arTitle"],
+                        "location" => $tournaments[0]["location"],
+                        "enArea" => $area[0]["areaEnTitle"],
+                        "arArea" => $area[0]["areaArTitle"],
+                        "academyLogo" => $tournaments[0]["imageurl"],
+                        "sportLogo" => $sport[0]["imageurl"],
+                        "type" => popupMsg($requestLang,"Tournament","بطولة"),
+                        "status" => ( $orders[$i]["status"] == 1 ) ? popupMsg($requestLang,"Successful","ناجحة") : popupMsg($requestLang,"Cancelled","ملغاة")
+                    );
+                }
             }elseif( $orders[$i]["isTournament"] == 2 ){
-                $event = selectDB("tabs_list","`id` = '{$orders[$i]["eventId"]}'");
-                @$sport = selectDB2("`imageurl`","sports","`id` = '{$event[0]["sport"]}'");
-                @$area = selectDB("countries","`id` = '{$event[0]["area"]}'");
-                @$tab = selectDB("tabs","`id` = '{$event[0]["tabId"]}'");
-                $response[] = array(
-                    "id" => $orders[$i]["id"],
-                    "date" => $orders[$i]["date"],
-                    "isTournament" => 0,
-                    "orderId" => $orders[$i]["gatewayId"],
-                    "enTitle" => $event[0]["enTitle"],
-                    "arTitle" => $event[0]["arTitle"],
-                    "location" => $event[0]["location"],
-                    "enArea" => $area[0]["areaEnTitle"],
-                    "arArea" => $area[0]["areaArTitle"],
-                    "academyLogo" => $event[0]["imageurl"],
-                    "sportLogo" => $sport[0]["imageurl"],
-                    "type" => popupMsg($requestLang,$tab[0]["enTitle"],$tab[0]["arTitle"]),
-                    "status" => ( $orders[$i]["status"] == 1 ) ? popupMsg($requestLang,"Successful","ناجحة") : popupMsg($requestLang,"Cancelled","ملغاة")
-                );
+                if($event = selectDB("tabs_list","`id` = '{$orders[$i]["eventId"]}'")){
+                    $sport = selectDB2("`imageurl`","sports","`id` = '{$event[0]["sport"]}'");
+                    $area = selectDB("countries","`id` = '{$event[0]["area"]}'");
+                    $tab = selectDB("tabs","`id` = '{$event[0]["tabId"]}'");
+                    $response[] = array(
+                        "id" => $orders[$i]["id"],
+                        "date" => $orders[$i]["date"],
+                        "isTournament" => 0,
+                        "orderId" => $orders[$i]["gatewayId"],
+                        "enTitle" => $event[0]["enTitle"],
+                        "arTitle" => $event[0]["arTitle"],
+                        "location" => $event[0]["location"],
+                        "enArea" => $area[0]["areaEnTitle"],
+                        "arArea" => $area[0]["areaArTitle"],
+                        "academyLogo" => $event[0]["imageurl"],
+                        "sportLogo" => $sport[0]["imageurl"],
+                        "type" => popupMsg($requestLang,$tab[0]["enTitle"],$tab[0]["arTitle"]),
+                        "status" => ( $orders[$i]["status"] == 1 ) ? popupMsg($requestLang,"Successful","ناجحة") : popupMsg($requestLang,"Cancelled","ملغاة")
+                    );
+                }
             }
         }
     }else{
