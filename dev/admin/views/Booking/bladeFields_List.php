@@ -214,22 +214,24 @@
 			<input type="hidden" name="header" id="header_json_input">
 			</div>
 
-			<div id="images" style="margin-top: 10px; display:none">
-				<div class="col-md-4">
-				<label><?php echo direction("Logo Preview","معاينة الشعار") ?></label>
-				<img id="logoImg" src="" style="width:100%;height:200px;object-fit:contain;border:1px solid #ddd;padding:5px;border-radius:5px">
-				</div>
+			<div id="images" class="col-md-12" style="margin-top: 10px; display:none">
+				<div class="row">
+					<div class="col-md-4">
+					<label><?php echo direction("Logo Preview","معاينة الشعار") ?></label>
+					<img id="logoImg" src="" style="width:100%;height:200px;object-fit:contain;border:1px solid #ddd;padding:5px;border-radius:5px">
+					</div>
 
-				<div class="col-md-4">
-				<label><?php echo direction("Map Preview","معاينة الخريطة") ?></label>
-				<img id="locationImg" src="" style="width:100%;height:200px;object-fit:contain;border:1px solid #ddd;padding:5px;border-radius:5px">
-				</div>
+					<div class="col-md-4">
+					<label><?php echo direction("Map Preview","معاينة الخريطة") ?></label>
+					<img id="locationImg" src="" style="width:100%;height:200px;object-fit:contain;border:1px solid #ddd;padding:5px;border-radius:5px">
+					</div>
 
-				<div class="col-md-4">
-				<label><?php echo direction("Header Images","صور الهيدر") ?></label>
-				<div id="header_previews_container" class="row">
-					<!-- Header images will be listed here -->
-				</div>
+					<div class="col-md-4">
+					<label><?php echo direction("Header Images","صور الهيدر") ?></label>
+					<div id="header_previews_container" class="row">
+						<!-- Header images will be listed here -->
+					</div>
+					</div>
 				</div>
 			</div>
 			
