@@ -47,8 +47,8 @@ if( !isset($_GET["userId"]) || empty($_GET["userId"]) ){
                 );
             }elseif( $orders[$i]["isTournament"] == 1 ){
                 $tournaments = selectDB("tournaments","`id` = '{$orders[$i]["tournamentId"]}'");
-                $sport = selectDB2("`imageurl`","sports","`id` = '{$tournaments[0]["sport"]}'");
-                $area = selectDB("countries","`id` = '{$tournaments[0]["area"]}'");
+                @$sport = selectDB2("`imageurl`","sports","`id` = '{$tournaments[0]["sport"]}'");
+                @$area = selectDB("countries","`id` = '{$tournaments[0]["area"]}'");
                 $response[] = array(
                     "id" => $orders[$i]["id"],
                     "date" => $orders[$i]["date"],
@@ -66,9 +66,9 @@ if( !isset($_GET["userId"]) || empty($_GET["userId"]) ){
                 );
             }elseif( $orders[$i]["isTournament"] == 2 ){
                 $event = selectDB("tabs_list","`id` = '{$orders[$i]["eventId"]}'");
-                $sport = selectDB2("`imageurl`","sports","`id` = '{$event[0]["sport"]}'");
-                $area = selectDB("countries","`id` = '{$event[0]["area"]}'");
-                $tab = selectDB("tabs","`id` = '{$event[0]["tabId"]}'");
+                @$sport = selectDB2("`imageurl`","sports","`id` = '{$event[0]["sport"]}'");
+                @$area = selectDB("countries","`id` = '{$event[0]["area"]}'");
+                @$tab = selectDB("tabs","`id` = '{$event[0]["tabId"]}'");
                 $response[] = array(
                     "id" => $orders[$i]["id"],
                     "date" => $orders[$i]["date"],
