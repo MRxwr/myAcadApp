@@ -12,6 +12,9 @@ if( !isset($_GET["userId"]) || empty($_GET["userId"]) ){
     }else{
         $_GET["type"] = $_GET["type"];
     }
+    $page = ( isset($_GET["page"]) && !empty($_GET["page"]) ) ? intval($_GET["page"]) : 1;
+    $limit = 10;
+    $offset = ($page - 1) * $limit;
     if ($orders = selectDB("orders", "`userId` = '{$_GET["userId"]}' AND `status` = '1' AND `isTournament` = '0'")) {
         for ($i = 0; $i < sizeof($orders); $i++) {
             $subscriptions = selectDB("subscriptions", "`id` = '{$orders[$i]["subscriptionId"]}'");
@@ -26,7 +29,7 @@ if( !isset($_GET["userId"]) || empty($_GET["userId"]) ){
             }
         }
     }
-	if( $orders = selectDB2("`id`, `date`, `academyId`, `gatewayId`, `isTournament`, `tournamentId`, `teamName`, `teamDetails`","orders","`userId` = '{$_GET["userId"]}' AND `status` = '{$_GET["type"]}' ORDER BY `id` DESC") ){
+	if( $orders = selectDB2("`id`, `date`, `academyId`, `gatewayId`, `isTournament`, `tournamentId`, `teamName`, `teamDetails`","orders","`userId` = '{$_GET["userId"]}' ORDER BY `id` DESC LIMIT {$limit} OFFSET {$offset}") ){
         for( $i = 0; $i < sizeof($orders); $i++ ){
             if( $orders[$i]["isTournament"] == 0 ){
                 $academy = selectDB2("`area`,`enTitle`,`arTitle`,`imageurl`,`location`,`sport`","academies","`id` = '{$orders[$i]["academyId"]}'");
@@ -44,6 +47,7 @@ if( !isset($_GET["userId"]) || empty($_GET["userId"]) ){
                     "arArea" => $area[0]["areaArTitle"],
                     "academyLogo" => $academy[0]["imageurl"],
                     "sportLogo" => $sport[0]["imageurl"],
+                    "status" => ( $_GET["type"] == 1 ) ? popupMsg($requestLang,"Live","مفعلة") : ( ( $_GET["type"] == 2 ) ? popupMsg($requestLang,"Cancelled","ملغاة") : ( ( $_GET["type"] == 3 ) ? popupMsg($requestLang,"Refunded","مستردة") : ( ( $_GET["type"] == 4 ) ? popupMsg($requestLang,"Ended","منتهية") : "" ) ) )
                 );
             }else{
                 $tournaments = selectDB("tournaments","`id` = '{$orders[$i]["tournamentId"]}'");
@@ -61,6 +65,7 @@ if( !isset($_GET["userId"]) || empty($_GET["userId"]) ){
                     "arArea" => $area[0]["areaArTitle"],
                     "academyLogo" => $tournaments[0]["imageurl"],
                     "sportLogo" => $sport[0]["imageurl"],
+                    "status" => ( $_GET["type"] == 1 ) ? popupMsg($requestLang,"Live","مفعلة") : ( ( $_GET["type"] == 2 ) ? popupMsg($requestLang,"Cancelled","ملغاة") : ( ( $_GET["type"] == 3 ) ? popupMsg($requestLang,"Refunded","مستردة") : ( ( $_GET["type"] == 4 ) ? popupMsg($requestLang,"Ended","منتهية") : "" ) ) )
                 );
             }
         }
