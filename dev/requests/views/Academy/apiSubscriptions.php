@@ -47,6 +47,7 @@ if( !isset($_GET["userId"]) || empty($_GET["userId"]) ){
                     "arArea" => $area[0]["areaArTitle"],
                     "academyLogo" => $academy[0]["imageurl"],
                     "sportLogo" => $sport[0]["imageurl"],
+                    "type" => popupMsg($requestLang,"Subscription","اشتراك"),
                     "status" => ( $_GET["type"] == 1 ) ? popupMsg($requestLang,"Live","مفعلة") : ( ( $_GET["type"] == 2 ) ? popupMsg($requestLang,"Cancelled","ملغاة") : ( ( $_GET["type"] == 3 ) ? popupMsg($requestLang,"Refunded","مستردة") : ( ( $_GET["type"] == 4 ) ? popupMsg($requestLang,"Ended","منتهية") : "" ) ) )
                 );
             }elseif( $orders[$i]["isTournament"] == 1 ){
@@ -65,12 +66,14 @@ if( !isset($_GET["userId"]) || empty($_GET["userId"]) ){
                     "arArea" => $area[0]["areaArTitle"],
                     "academyLogo" => $tournaments[0]["imageurl"],
                     "sportLogo" => $sport[0]["imageurl"],
+                    "type" => popupMsg($requestLang,"Tournament","بطولة"),
                     "status" => ( $_GET["type"] == 1 ) ? popupMsg($requestLang,"Live","مفعلة") : ( ( $_GET["type"] == 2 ) ? popupMsg($requestLang,"Cancelled","ملغاة") : ( ( $_GET["type"] == 3 ) ? popupMsg($requestLang,"Refunded","مستردة") : ( ( $_GET["type"] == 4 ) ? popupMsg($requestLang,"Ended","منتهية") : "" ) ) )
                 );
             }elseif( $orders[$i]["isTournament"] == 2 ){
                 $event = selectDB("tabs_list","`id` = '{$orders[$i]["eventId"]}'");
                 $sport = selectDB2("`imageurl`","sports","`id` = '{$event[0]["sport"]}'");
                 $area = selectDB("countries","`id` = '{$event[0]["area"]}'");
+                $tab = selectDB("tabs","`id` = '{$event[0]["tabId"]}'");
                 $response[] = array(
                     "id" => $orders[$i]["id"],
                     "date" => $orders[$i]["date"],
@@ -83,6 +86,7 @@ if( !isset($_GET["userId"]) || empty($_GET["userId"]) ){
                     "arArea" => $area[0]["areaArTitle"],
                     "academyLogo" => $event[0]["imageurl"],
                     "sportLogo" => $sport[0]["imageurl"],
+                    "type" => popupMsg($requestLang,$tab[0]["enTitle"],$tab[0]["arTitle"]),
                     "status" => ( $_GET["type"] == 1 ) ? popupMsg($requestLang,"Live","مفعلة") : ( ( $_GET["type"] == 2 ) ? popupMsg($requestLang,"Cancelled","ملغاة") : ( ( $_GET["type"] == 3 ) ? popupMsg($requestLang,"Refunded","مستردة") : ( ( $_GET["type"] == 4 ) ? popupMsg($requestLang,"Ended","منتهية") : "" ) ) )
                 );
             }
