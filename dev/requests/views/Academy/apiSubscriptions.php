@@ -7,11 +7,6 @@ if( !isset($_GET["userId"]) || empty($_GET["userId"]) ){
 	$response = array("msg"=>"Please set user id");
 	echo outputError($response);die();
 }else{
-    if( !isset($_GET["type"]) || empty($_GET["type"]) ){
-        $_GET["type"] = 1;
-    }else{
-        $_GET["type"] = $_GET["type"];
-    }
     $page = ( isset($_GET["page"]) && !empty($_GET["page"]) ) ? intval($_GET["page"]) : 1;
     $limit = 10;
     $offset = ($page - 1) * $limit;
@@ -29,7 +24,7 @@ if( !isset($_GET["userId"]) || empty($_GET["userId"]) ){
             }
         }
     }
-	if( $orders = selectDB2("`id`, `date`, `academyId`, `gatewayId`, `isTournament`, `tournamentId`, `teamName`, `teamDetails`, `eventId`","orders","`userId` = '{$_GET["userId"]}' ORDER BY `id` DESC LIMIT {$limit} OFFSET {$offset}") ){
+	if( $orders = selectDB2("`id`, `date`, `academyId`, `gatewayId`, `isTournament`, `tournamentId`, `teamName`, `teamDetails`, `eventId`, `status`","orders","`userId` = '{$_GET["userId"]}' ORDER BY `id` DESC LIMIT {$limit} OFFSET {$offset}") ){
         for( $i = 0; $i < sizeof($orders); $i++ ){
             if( $orders[$i]["isTournament"] == 0 ){
                 $academy = selectDB2("`area`,`enTitle`,`arTitle`,`imageurl`,`location`,`sport`","academies","`id` = '{$orders[$i]["academyId"]}'");
@@ -48,7 +43,7 @@ if( !isset($_GET["userId"]) || empty($_GET["userId"]) ){
                     "academyLogo" => $academy[0]["imageurl"],
                     "sportLogo" => $sport[0]["imageurl"],
                     "type" => popupMsg($requestLang,"Subscription","اشتراك"),
-                    "status" => ( $_GET["type"] == 1 ) ? popupMsg($requestLang,"Live","مفعلة") : ( ( $_GET["type"] == 2 ) ? popupMsg($requestLang,"Cancelled","ملغاة") : ( ( $_GET["type"] == 3 ) ? popupMsg($requestLang,"Refunded","مستردة") : ( ( $_GET["type"] == 4 ) ? popupMsg($requestLang,"Ended","منتهية") : "" ) ) )
+                    "status" => ( $_GET["status"] == 1 ) ? popupMsg($requestLang,"Live","مفعلة") : ( ( $_GET["status"] == 2 ) ? popupMsg($requestLang,"Cancelled","ملغاة") : ( ( $_GET["status"] == 3 ) ? popupMsg($requestLang,"Refunded","مستردة") : ( ( $_GET["status"] == 4 ) ? popupMsg($requestLang,"Ended","منتهية") : "" ) ) )
                 );
             }elseif( $orders[$i]["isTournament"] == 1 ){
                 $tournaments = selectDB("tournaments","`id` = '{$orders[$i]["tournamentId"]}'");
@@ -67,7 +62,7 @@ if( !isset($_GET["userId"]) || empty($_GET["userId"]) ){
                     "academyLogo" => $tournaments[0]["imageurl"],
                     "sportLogo" => $sport[0]["imageurl"],
                     "type" => popupMsg($requestLang,"Tournament","بطولة"),
-                    "status" => ( $_GET["type"] == 1 ) ? popupMsg($requestLang,"Live","مفعلة") : ( ( $_GET["type"] == 2 ) ? popupMsg($requestLang,"Cancelled","ملغاة") : ( ( $_GET["type"] == 3 ) ? popupMsg($requestLang,"Refunded","مستردة") : ( ( $_GET["type"] == 4 ) ? popupMsg($requestLang,"Ended","منتهية") : "" ) ) )
+                    "status" => ( $_GET["status"] == 1 ) ? popupMsg($requestLang,"Successful","ناجحة") : popupMsg($requestLang,"Cancelled","ملغاة")
                 );
             }elseif( $orders[$i]["isTournament"] == 2 ){
                 $event = selectDB("tabs_list","`id` = '{$orders[$i]["eventId"]}'");
@@ -87,7 +82,7 @@ if( !isset($_GET["userId"]) || empty($_GET["userId"]) ){
                     "academyLogo" => $event[0]["imageurl"],
                     "sportLogo" => $sport[0]["imageurl"],
                     "type" => popupMsg($requestLang,$tab[0]["enTitle"],$tab[0]["arTitle"]),
-                    "status" => ( $_GET["type"] == 1 ) ? popupMsg($requestLang,"Live","مفعلة") : ( ( $_GET["type"] == 2 ) ? popupMsg($requestLang,"Cancelled","ملغاة") : ( ( $_GET["type"] == 3 ) ? popupMsg($requestLang,"Refunded","مستردة") : ( ( $_GET["type"] == 4 ) ? popupMsg($requestLang,"Ended","منتهية") : "" ) ) )
+                    "status" => ( $_GET["status"] == 1 ) ? popupMsg($requestLang,"Successful","ناجحة") : popupMsg($requestLang,"Cancelled","ملغاة")
                 );
             }
         }
