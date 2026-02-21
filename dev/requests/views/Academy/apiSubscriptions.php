@@ -43,7 +43,7 @@ if( !isset($_GET["userId"]) || empty($_GET["userId"]) ){
                     "academyLogo" => $academy[0]["imageurl"],
                     "sportLogo" => $sport[0]["imageurl"],
                     "type" => popupMsg($requestLang,"Subscription","اشتراك"),
-                    "status" => ( $_GET["status"] == 1 ) ? popupMsg($requestLang,"Live","مفعلة") : ( ( $_GET["status"] == 2 ) ? popupMsg($requestLang,"Cancelled","ملغاة") : ( ( $_GET["status"] == 3 ) ? popupMsg($requestLang,"Refunded","مستردة") : ( ( $_GET["status"] == 4 ) ? popupMsg($requestLang,"Ended","منتهية") : "" ) ) )
+                    "status" => ( $orders[$i]["status"] == 1 ) ? popupMsg($requestLang,"Live","مفعلة") : ( ( $orders[$i]["status"] == 2 ) ? popupMsg($requestLang,"Cancelled","ملغاة") : ( ( $orders[$i]["status"] == 3 ) ? popupMsg($requestLang,"Refunded","مستردة") : ( ( $orders[$i]["status"] == 4 ) ? popupMsg($requestLang,"Ended","منتهية") : "" ) ) )
                 );
             }elseif( $orders[$i]["isTournament"] == 1 ){
                 $tournaments = selectDB("tournaments","`id` = '{$orders[$i]["tournamentId"]}'");
@@ -62,7 +62,7 @@ if( !isset($_GET["userId"]) || empty($_GET["userId"]) ){
                     "academyLogo" => $tournaments[0]["imageurl"],
                     "sportLogo" => $sport[0]["imageurl"],
                     "type" => popupMsg($requestLang,"Tournament","بطولة"),
-                    "status" => ( $_GET["status"] == 1 ) ? popupMsg($requestLang,"Successful","ناجحة") : popupMsg($requestLang,"Cancelled","ملغاة")
+                    "status" => ( $orders[$i]["status"] == 1 ) ? popupMsg($requestLang,"Successful","ناجحة") : popupMsg($requestLang,"Cancelled","ملغاة")
                 );
             }elseif( $orders[$i]["isTournament"] == 2 ){
                 $event = selectDB("tabs_list","`id` = '{$orders[$i]["eventId"]}'");
@@ -82,7 +82,7 @@ if( !isset($_GET["userId"]) || empty($_GET["userId"]) ){
                     "academyLogo" => $event[0]["imageurl"],
                     "sportLogo" => $sport[0]["imageurl"],
                     "type" => popupMsg($requestLang,$tab[0]["enTitle"],$tab[0]["arTitle"]),
-                    "status" => ( $_GET["status"] == 1 ) ? popupMsg($requestLang,"Successful","ناجحة") : popupMsg($requestLang,"Cancelled","ملغاة")
+                    "status" => ( $orders[$i]["status"] == 1 ) ? popupMsg($requestLang,"Successful","ناجحة") : popupMsg($requestLang,"Cancelled","ملغاة")
                 );
             }
         }
