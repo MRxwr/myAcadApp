@@ -29,7 +29,7 @@ if( !isset($_GET["userId"]) || empty($_GET["userId"]) ){
             }
         }
     }
-	if( $orders = selectDB2("`id`, `date`, `academyId`, `gatewayId`, `isTournament`, `tournamentId`, `teamName`, `teamDetails`","orders","`userId` = '{$_GET["userId"]}' ORDER BY `id` DESC LIMIT {$limit} OFFSET {$offset}") ){
+	if( $orders = selectDB2("`id`, `date`, `academyId`, `gatewayId`, `isTournament`, `tournamentId`, `teamName`, `teamDetails`, `eventId`","orders","`userId` = '{$_GET["userId"]}' ORDER BY `id` DESC LIMIT {$limit} OFFSET {$offset}") ){
         for( $i = 0; $i < sizeof($orders); $i++ ){
             if( $orders[$i]["isTournament"] == 0 ){
                 $academy = selectDB2("`area`,`enTitle`,`arTitle`,`imageurl`,`location`,`sport`","academies","`id` = '{$orders[$i]["academyId"]}'");
