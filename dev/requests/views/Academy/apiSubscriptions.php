@@ -28,8 +28,8 @@ if( !isset($_GET["userId"]) || empty($_GET["userId"]) ){
         for( $i = 0; $i < sizeof($orders); $i++ ){
             if( $orders[$i]["isTournament"] == 0 ){
                 $academy = selectDB2("`area`,`enTitle`,`arTitle`,`imageurl`,`location`,`sport`","academies","`id` = '{$orders[$i]["academyId"]}'");
-                $sport = selectDB2("`imageurl`","sports","`id` = '{$academy[0]["sport"]}'");
-                $area = selectDB2("`areaEnTitle`, `areaArTitle`","countries","`id` = '{$academy[0]["area"]}'");
+                @$sport = selectDB2("`imageurl`","sports","`id` = '{$academy[0]["sport"]}'");
+                @$area = selectDB2("`areaEnTitle`, `areaArTitle`","countries","`id` = '{$academy[0]["area"]}'");
                 $response[] = array(
                     "id" => $orders[$i]["id"],
                     "date" => $orders[$i]["date"],
