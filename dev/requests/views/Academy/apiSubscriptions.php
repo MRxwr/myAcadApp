@@ -49,7 +49,7 @@ if( !isset($_GET["userId"]) || empty($_GET["userId"]) ){
                     "sportLogo" => $sport[0]["imageurl"],
                     "status" => ( $_GET["type"] == 1 ) ? popupMsg($requestLang,"Live","مفعلة") : ( ( $_GET["type"] == 2 ) ? popupMsg($requestLang,"Cancelled","ملغاة") : ( ( $_GET["type"] == 3 ) ? popupMsg($requestLang,"Refunded","مستردة") : ( ( $_GET["type"] == 4 ) ? popupMsg($requestLang,"Ended","منتهية") : "" ) ) )
                 );
-            }else{
+            }elseif( $orders[$i]["isTournament"] == 1 ){
                 $tournaments = selectDB("tournaments","`id` = '{$orders[$i]["tournamentId"]}'");
                 $sport = selectDB2("`imageurl`","sports","`id` = '{$tournaments[0]["sport"]}'");
                 $area = selectDB("countries","`id` = '{$tournaments[0]["area"]}'");
