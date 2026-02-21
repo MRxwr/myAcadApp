@@ -208,7 +208,10 @@
 
 			<div class="col-md-4">
 			<label><?php echo direction("Header","الصورة الكبيرة") ?></label>
-			<input type="file" name="header" class="form-control" >
+			<button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#headerImagesModal">
+				<i class="fa fa-image"></i> <?php echo direction("Manage Header Images", "إدارة صور الهيدر") ?>
+			</button>
+			<input type="hidden" name="header" id="header_json_input">
 			</div>
 
 			<div id="images" style="margin-top: 10px; display:none">
@@ -220,7 +223,8 @@
 				<img id="logoImg" src="" style="width:250px;height:250px">
 				</div>
 
-				<div class="col-md-4">
+				<div class="col-md-4" id="header_previews_container">
+				<!-- Header images will be listed here or just showing the first one as preview -->
 				<img id="headerImg" src="" style="width:250px;height:250px">
 				</div>
 			</div>
@@ -353,8 +357,132 @@
 </div>
 </div>
 </div>
+
+<style>
+	.img-thumbnail-wrapper:hover {
+		transform: scale(1.05);
+		box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+		border-color: #2196F3 !important;
+	}
+	.img-thumbnail-wrapper {
+		transition: all 0.3s ease;
+		cursor: pointer;
+	}
+	#header_images_list .col-md-3 {
+		animation: fadeIn 0.5s ease;
+	}
+	@keyframes fadeIn {
+		from { opacity: 0; transform: translateY(10px); }
+		to { opacity: 1; transform: translateY(0); }
+	}
+</style>
+
+<!-- Header Images Modal -->
+<div id="headerImagesModal" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title"><?php echo direction("Manage Header Images", "إدارة صور الهيدر") ?></h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label><?php echo direction("Upload New Image", "رفع صورة جديدة") ?></label>
+                    <input type="file" id="ajax_header_upload" class="form-control" accept="image/*">
+                    <div id="upload_progress" style="display:none; margin-top: 10px;">
+                        <div class="progress">
+                          <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                            Uploading...
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div id="header_images_list" class="row">
+            <!-- Images will be appended here -->
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo direction("Close", "إغلاق") ?></button>
+      </div>
+    </div>
+  </div>
 </div>
+
 	<script>
+		var headerImages = [];
+
+		function renderHeaderImages() {
+			var container = $("#header_images_list");
+			container.empty();
+			headerImages.forEach(function(img, index) {
+				var html = `
+					<div class="col-md-3 text-center" style="margin-bottom: 20px; position: relative;" id="h_img_${index}">
+						<div style="padding: 5px; border: 1px solid #eee; border-radius: 5px; background: #f9f9f9; transition: all 0.3s ease;" class="img-thumbnail-wrapper">
+							<img src="../logos/${img}" style="width: 100%; height: 100px; object-fit: cover; border-radius: 3px;">
+							<button type="button" class="btn btn-danger btn-xs delete-h-img" data-index="${index}" style="position: absolute; top: 0; right: 15px; border-radius: 50%; width: 22px; height: 22px; padding: 0; line-height: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.2);">
+								<i class="fa fa-times"></i>
+							</button>
+						</div>
+					</div>
+				`;
+				container.append(html);
+			});
+			$("#header_json_input").val(JSON.stringify(headerImages));
+			
+			if (headerImages.length > 0) {
+				$("#headerImg").attr("src", "../logos/" + headerImages[0]).show();
+			} else {
+				$("#headerImg").attr("src", "").hide();
+			}
+		}
+
+		$(document).on("click", ".delete-h-img", function() {
+			var index = $(this).data("index");
+			var $el = $(`#h_img_${index}`);
+			$el.fadeOut(300, function() {
+				headerImages.splice(index, 1);
+				renderHeaderImages();
+			});
+		});
+
+		$("#ajax_header_upload").on("change", function() {
+			var file_data = $(this).prop("files")[0];
+			if (!file_data) return;
+			
+			var form_data = new FormData();
+			form_data.append("file", file_data);
+			
+			$("#upload_progress").fadeIn();
+			
+			$.ajax({
+				url: "header_images_handler.php",
+				type: "POST",
+				data: form_data,
+				contentType: false,
+				cache: false,
+				processData: false,
+				success: function(response) {
+					$("#upload_progress").fadeOut();
+					$("#ajax_header_upload").val("");
+					if (response.status === "success") {
+						headerImages.push(response.filename);
+						renderHeaderImages();
+					} else {
+						alert(response.message || "Upload failed");
+					}
+				},
+				error: function() {
+					$("#upload_progress").fadeOut();
+					alert("An error occurred during upload.");
+				}
+			});
+		});
+
 		$(document).ready(function() {
 			$('#mySelect').select2();
 			$('#mySelect1').select2();
@@ -430,7 +558,27 @@
 			}
 			
 			$("#logoImg").attr("src","../logos/"+$("#logo"+id).html());
-			$("#headerImg").attr("src","../logos/"+$("#header"+id).html());
+			
+			// Handle multiple header images
+			var headerVal = $("#header"+id).html();
+			try {
+				headerImages = JSON.parse(headerVal);
+				if (!Array.isArray(headerImages)) {
+					if(headerVal && headerVal !== ""){
+						headerImages = [headerVal];
+					} else {
+						headerImages = [];
+					}
+				}
+			} catch(e) {
+				if(headerVal && headerVal !== ""){
+					headerImages = [headerVal];
+				} else {
+					headerImages = [];
+				}
+			}
+			renderHeaderImages();
+
 			$("#locationImg").attr("src","../logos/"+$("#locationImg"+id).html());
 			$("#images").attr("style","margin-top:10px;display:block");
 			$("input[name=update]").val(id);
