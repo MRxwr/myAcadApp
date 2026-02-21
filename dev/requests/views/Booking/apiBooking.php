@@ -3,10 +3,7 @@ if( !isset($_GET["fieldId"]) || empty($_GET["fieldId"]) ){
 	$response = array("msg"=>"Please set field id");
 	echo outputError($response);die();
 }else{
-	$page = ( isset($_GET["page"]) && !empty($_GET["page"]) ) ? intval($_GET["page"]) : 1;
-    $limit = 10;
-    $offset = ($page - 1) * $limit;
-	if( $field = selectDB2("`id`, `imageurl`, `enTitle`, `arTitle`, `area`, `video`, `location`, `price`, `locationImage`, `enTerms`, `arTerms`, `openDate`, `closeDate`, `facilitiesIds`, `header`","fields_list","`hidden` = '0' AND `status` = '0' AND `id` = {$_GET["fieldId"]} ORDER BY `id` DESC LIMIT {$limit} OFFSET {$offset}") ){
+	if( $field = selectDB2("`id`, `imageurl`, `enTitle`, `arTitle`, `area`, `video`, `location`, `price`, `locationImage`, `enTerms`, `arTerms`, `openDate`, `closeDate`, `facilitiesIds`, `header`","fields_list","`hidden` = '0' AND `status` = '0' AND `id` = {$_GET["fieldId"]}") ){
 		$header = json_decode($field[0]["header"], true);
 		if( is_array($header) ){
 			$field[0]["header"] = $header;
