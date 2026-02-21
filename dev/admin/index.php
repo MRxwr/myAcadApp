@@ -62,7 +62,7 @@ if ( isset($_GET["hide"]) || isset($_GET["show"]) || isset($_GET["delId"]) || is
             
             if( isset($_FILES['locationImage']) && is_uploaded_file($_FILES['locationImage']['tmp_name']) ){
                 $directory = "../logos/";
-                $originalfile1 = $directory . date("d-m-y") . time() .  round(microtime(true)). "H." . getFileExtension($_FILES["locationImage"]["name"]);
+                $originalfile1 = $directory . date("d-m-y") . time() .  round(microtime(true)). "M." . getFileExtension($_FILES["locationImage"]["name"]);
                 move_uploaded_file($_FILES["locationImage"]["tmp_name"], $originalfile1);
                 $_POST["locationImage"] = str_replace("../logos/",'',$originalfile1);
             }else{
@@ -144,7 +144,7 @@ if ( isset($_GET["hide"]) || isset($_GET["show"]) || isset($_GET["delId"]) || is
             
             if( isset($_FILES['locationImage']) && is_uploaded_file($_FILES['locationImage']['tmp_name']) ){
                 $directory = "../logos/";
-                $originalfile1 = $directory . date("d-m-y") . time() .  round(microtime(true)). "H." . getFileExtension($_FILES["header"]["name"]);
+                $originalfile1 = $directory . date("d-m-y") . time() .  round(microtime(true)). "M." . getFileExtension($_FILES["locationImage"]["name"]);
                 move_uploaded_file($_FILES["locationImage"]["tmp_name"], $originalfile1);
                 $_POST["locationImage"] = str_replace("../logos/",'',$originalfile1);
             }else{
