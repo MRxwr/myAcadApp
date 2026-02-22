@@ -1,0 +1,74 @@
+<?php 
+if( isset($_GET["type"]) && !empty($_GET["type"]) ){
+    if( !isset($_POST["userId"]) || empty($_POST["userId"]) ){
+        $response["msg"] = "Please provide a user ID.";
+        echo outputError($response);die();
+    }
+    if( $_GET["type"] == "requestOTP" ){
+        if( !isset($_POST["mobile"]) || empty($_POST["mobile"]) ){
+            $response["msg"] = "Please provide a mobile number.";
+            echo outputError($response);die();
+        }
+        if( $userMobile = selectDBNew("user", [$_POST["mobile"]], "`mobile` LIKE CONCAT('%', ?, '%') AND `isVerified` = '1'","") ){
+            $response["msg"] = "Mobile number is already in use.";
+            echo outputError($response);die();
+        }
+        if( $user = selectDB2("`mobile`, `isVerified`", "user", "`id` = '{$_POST["userId"]}'") ){
+            if( $user[0]["isVerified"] == 1 ){
+                $response["msg"] = "User is already verified.";
+                echo outputData($response);die();
+            }else{
+                $otp = rand(1000, 9999);
+                if( updateDB("user", ["otp" => $otp], "`id` = '{$_POST["userId"]}'" ) ){
+                    whatsappUltraMsgVerify($_POST["mobile"], $otp);
+                    $response["msg"] = "OTP sent to your mobile.";
+                    echo outputData($response);die();
+                }else{
+                    $response["msg"] = "Failed to send OTP.";
+                    echo outputError($response);die();
+                }
+            }
+        }else{
+            $response["msg"] = "User not found.";
+            echo outputError($response);die();
+        }
+    }elseif( $_GET["type"] == "checkOTP" ){
+        if( !isset($_POST["otp"]) || empty($_POST["otp"]) ){
+            $response["msg"] = "Please provide an OTP.";
+            echo outputError($response);die();
+        }
+        if( !isset($_POST["mobile"]) || empty($_POST["mobile"]) ){
+            $response["msg"] = "Please provide a mobile number.";
+            echo outputError($response);die();
+        }
+        if( $user = selectDB2("`otp`, `isVerified`", "user", "`id` = '{$_POST["userId"]}'") ){
+            if( $user[0]["isVerified"] == 1 ){
+                $response["msg"] = "User is already verified.";
+                echo outputData($response);die();
+            }else{
+                if( $user[0]["otp"] == $_POST["otp"] ){
+                    // Extract country code from mobile number
+                    $countryCode = getCountryCodeFromNumber($_POST["mobile"]);
+                    
+                    if( updateDB("user", ["isVerified" => 1, "otp" => "", "mobile" => $_POST["mobile"], "countryCode" => $countryCode], "`id` = '{$_POST["userId"]}'" ) ){
+                        $response["msg"] = "User verified successfully.";
+                        echo outputData($response);die();
+                    }else{
+                        $response["msg"] = "Failed to verify user.";
+                        echo outputError($response);die();
+                    }
+                }else{
+                    $response["msg"] = "Invalid OTP.";
+                    echo outputError($response);die();
+                }
+            }
+        }
+    }else{
+        $response["msg"] = "Invalid request type.";
+        echo outputError($response);die();
+    }
+}else{
+    $response["msg"] = "request type is required.";
+    echo outputError($response);die();
+}
+?>
