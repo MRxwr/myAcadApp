@@ -514,8 +514,6 @@ if( !isset($_POST) ){
         ),
     ));
     $response = curl_exec($curl);
-    print_r($postBody);
-    print_r($response);die();
     curl_close($curl);
     $response = json_decode($response,true);
     
