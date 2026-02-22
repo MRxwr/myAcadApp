@@ -52,7 +52,7 @@ if( isset($_GET["type"]) && !empty($_GET["type"]) ){
                         CURLOPT_FOLLOWLOCATION => true,
                         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
                         CURLOPT_CUSTOMREQUEST => 'POST',
-                        CURLOPT_POSTFIELDS => array('deviceToken' => "{$_POST["firebase"]}",),
+                        CURLOPT_POSTFIELDS => array('deviceToken' => "{$data["firebase"]}",),
                         CURLOPT_HTTPHEADER => array(
                             'myacadheader: myAcadAppCreate'
                         ),
