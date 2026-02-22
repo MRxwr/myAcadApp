@@ -9,7 +9,7 @@ if( isset($_GET["type"]) && !empty($_GET["type"]) ){
             $response["msg"] = "Please provide a mobile number.";
             echo outputError($response);die();
         }
-        if( $user = selectDB2("`mobile`, `isVerified`", "user", "`id` = '{$_POST["userId"]}'") ){
+        if( $user = selectDBNew("user", [$_POST["userId"]], "`id` = ?", "") ){
             $otp = rand(1000, 9999);
             if( updateDB("user", ["otp" => $otp], "`id` = '{$_POST["userId"]}'" ) ){
                 whatsappUltraMsgVerify($_POST["mobile"], $otp);
@@ -32,27 +32,48 @@ if( isset($_GET["type"]) && !empty($_GET["type"]) ){
             $response["msg"] = "Please provide a mobile number.";
             echo outputError($response);die();
         }
-        if( $user = selectDB2("`otp`, `isVerified`", "user", "`id` = '{$_POST["userId"]}'") ){
-            if( $user[0]["isVerified"] == 1 ){
-                $response["msg"] = "User is already verified.";
-                echo outputData($response);die();
-            }else{
-                if( $user[0]["otp"] == $_POST["otp"] ){
-                    // Extract country code from mobile number
-                    $countryCode = getCountryCodeFromNumber($_POST["mobile"]);
-                    
-                    if( updateDB("user", ["isVerified" => 1, "otp" => "", "mobile" => $_POST["mobile"], "countryCode" => $countryCode], "`id` = '{$_POST["userId"]}'" ) ){
-                        $response["msg"] = "User verified successfully.";
-                        echo outputData($response);die();
-                    }else{
-                        $response["msg"] = "Failed to verify user.";
-                        echo outputError($response);die();
+        if( !isset($_POST["firebase"]) || empty($_POST["firebase"]) ){
+            $response["msg"] = "Please provide a Firebase token.";
+            echo outputError($response);die();
+        }
+        if( $user = selectDBNew("user", [$_POST["userId"]], "`id` = ?", "") ){
+            if( $user[0]["otp"] == $_POST["otp"] ){
+                $countryCode = getCountryCodeFromNumber($_POST["mobile"]);
+                if( updateDB("user", ["otp" => "", "mobile" => $_POST["mobile"], "countryCode" => $countryCode], "`id` = '{$_POST["userId"]}'" ) ){
+                    $data = array("firebase" => "{$_POST["firebase"]}");
+                    if( updateDB2('users',$data,"`id` = '{$user[0]["id"]}'") ){
+                        $curl = curl_init();
+                        curl_setopt_array($curl, array(
+                        CURLOPT_URL => 'https://myacad.app/requests?a=Firebase&action=register',
+                        CURLOPT_RETURNTRANSFER => true,
+                        CURLOPT_ENCODING => '',
+                        CURLOPT_MAXREDIRS => 10,
+                        CURLOPT_TIMEOUT => 0,
+                        CURLOPT_FOLLOWLOCATION => true,
+                        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                        CURLOPT_CUSTOMREQUEST => 'POST',
+                        CURLOPT_POSTFIELDS => array('deviceToken' => "{$_POST["firebase"]}",),
+                        CURLOPT_HTTPHEADER => array(
+                            'myacadheader: myAcadAppCreate'
+                        ),
+                        ));
+                        $response = curl_exec($curl);
+                        curl_close($curl);
                     }
+                    $response["id"] = $user[0]["id"];
+                    $response["msg"] = "User verified successfully.";
+                    echo outputData($response);die();
                 }else{
-                    $response["msg"] = "Invalid OTP.";
+                    $response["msg"] = "Failed to verify user.";
                     echo outputError($response);die();
                 }
+            }else{
+                $response["msg"] = "Invalid OTP.";
+                echo outputError($response);die();
             }
+        }else{
+            $response["msg"] = "User not found.";
+            echo outputError($response);die();
         }
     }else{
         $response["msg"] = "Invalid request type.";
