@@ -1,9 +1,8 @@
 <?php
 if( isset($_GET["action"]) & !empty($_GET["action"]) ){
     if( $_GET["action"] == "register" ){
-        print_r($_REQUEST);die();
         if( !isset($_POST["deviceToken"]) || empty($_POST["deviceToken"]) ){
-            $error["msg"] = popupMsg($requestLang,"Please enter device token . {$_POST["deviceToken"]}","الرجاء ادخال رمز الجهاز");
+            $error["msg"] = popupMsg($requestLang,"Please enter device token","الرجاء ادخال رمز الجهاز");
             echo outputError($error);die();
         }else{
             $curl = curl_init();
