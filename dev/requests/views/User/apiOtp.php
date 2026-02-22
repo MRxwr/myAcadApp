@@ -39,7 +39,7 @@ if( isset($_GET["type"]) && !empty($_GET["type"]) ){
         if( $user = selectDBNew("users", [$_POST["userId"]], "`id` = ?", "") ){
             if( $user[0]["otp"] == $_POST["otp"] ){
                 $countryCode = getCountryCodeFromNumber($_POST["mobile"]);
-                if( updateDB("users", ["otp" => "", "phone" => $_POST["mobile"], "countryCode" => $countryCode], "`id` = '{$_POST["userId"]}'" ) ){
+                if( updateDB("users", ["otp" => "", "phone" => $_POST["mobile"], "countryCode" => $countryCode, "isVerified" => 1], "`id` = '{$_POST["userId"]}'" ) ){
                     $data = array("firebase" => "{$_POST["firebase"]}");
                     if( updateDB2('users',$data,"`id` = '{$user[0]["id"]}'") ){
                         $curl = curl_init();
@@ -65,6 +65,11 @@ if( isset($_GET["type"]) && !empty($_GET["type"]) ){
                         "id" => $user[0]["id"],
                         "msg" => "User verified successfully."
                     );
+                    if( $user[0]["firstName"] != "" && $user[0]["lastName"] != "" ){
+                        $successResponse["isProfileComplete"] = true;
+                    }else{
+                        $successResponse["isProfileComplete"] = false;
+                    }
                     echo outputData($successResponse);die();
                 }else{
                     $response["msg"] = "Failed to verify user.";

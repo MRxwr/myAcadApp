@@ -214,6 +214,7 @@ if ( isset($_GET["type"]) && !empty($_GET["type"]) ){
     			$error = array("msg"=>"Please enter last name");
     			echo outputError($error);die();
     		}
+			/*
 			if ( !isset($_POST["email"]) || empty($_POST["email"]) ){
     			$error = array("msg"=>"Please enter email");
     			echo outputError($error);die();
@@ -222,6 +223,7 @@ if ( isset($_GET["type"]) && !empty($_GET["type"]) ){
     			$error = array("msg"=>"Please enter phone number");
     			echo outputError($error);die();
     		}
+			*/
     		if ( !isset($_POST["gender"]) ){
     			$error = array("msg"=>"Please enter gender");
     			echo outputError($error);die();
@@ -230,7 +232,7 @@ if ( isset($_GET["type"]) && !empty($_GET["type"]) ){
 				"firstName"=>$_POST["firstName"],
 				"lastName"=>$_POST["lastName"],
 				"email"=>$_POST["email"],
-				"phone"=>$_POST["phone"],
+				//"phone"=>$_POST["phone"],
 				"gender"=>$_POST["gender"]
 			);
 			if( $user = selectDBNew("users",[$_GET["userId"]],"`id` = ? ","" ) ){
