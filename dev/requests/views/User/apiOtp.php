@@ -39,7 +39,7 @@ if( isset($_GET["type"]) && !empty($_GET["type"]) ){
         if( $user = selectDBNew("users", [$_POST["userId"]], "`id` = ?", "") ){
             if( $user[0]["otp"] == $_POST["otp"] ){
                 $countryCode = getCountryCodeFromNumber($_POST["mobile"]);
-                if( updateDB("users", ["otp" => "", "mobile" => $_POST["mobile"], "countryCode" => $countryCode], "`id` = '{$_POST["userId"]}'" ) ){
+                if( updateDB("users", ["otp" => "", "phone" => $_POST["mobile"], "countryCode" => $countryCode], "`id` = '{$_POST["userId"]}'" ) ){
                     $data = array("firebase" => "{$_POST["firebase"]}");
                     if( updateDB2('users',$data,"`id` = '{$user[0]["id"]}'") ){
                         $curl = curl_init();
