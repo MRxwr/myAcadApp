@@ -1,6 +1,19 @@
 <?php 
 
 expiredSubscription();
+if( isset($_GET["userId"]) && !empty($_GET["userId"]) ){
+    if( $user = selectDBNew("users", [$_GET["userId"]], "`id` = ?", "") ){
+        if( $user[0]["isVerified"] == 0 ){
+            $response["isVerified"] = 0; // not verified
+        }else{
+            $response["isVerified"] = 1; // verified
+        }
+    }else{
+        $response["isVerified"] = 2; // guest user
+    }
+}else{
+    $response["isVerified"] = 2; // guest user
+}
 
 if( $banners = selectDB2("`id`, `type`, `imageurl`, `link`","banners","`hidden` = '0' AND `status` = '0' ORDER BY `order` ASC") ){
     $response["banners"] = $banners;
