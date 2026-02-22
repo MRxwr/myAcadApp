@@ -44,17 +44,18 @@ if( isset($_GET["type"]) && !empty($_GET["type"]) ){
                     if( updateDB2('users',$data,"`id` = '{$user[0]["id"]}'") ){
                         $curl = curl_init();
                         curl_setopt_array($curl, array(
-                        CURLOPT_URL => 'https://myacad.app/requests?a=Firebase&action=register',
+                        CURLOPT_URL => 'https://myacad.app/requests/index.php?a=Firebase&action=register',
                         CURLOPT_RETURNTRANSFER => true,
                         CURLOPT_ENCODING => '',
                         CURLOPT_MAXREDIRS => 10,
                         CURLOPT_TIMEOUT => 0,
                         CURLOPT_FOLLOWLOCATION => true,
                         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                        CURLOPT_CUSTOMREQUEST => 'POST',
-                        CURLOPT_POSTFIELDS => array('deviceToken' => "{$data["firebase"]}",),
+                        CURLOPT_POST => true,
+                        CURLOPT_POSTFIELDS => http_build_query(array('deviceToken' => $data["firebase"])),
                         CURLOPT_HTTPHEADER => array(
-                            'myacadheader: myAcadAppCreate'
+                            'myacadheader: myAcadAppCreate',
+                            'Content-Type: application/x-www-form-urlencoded'
                         ),
                         ));
                         $response = curl_exec($curl);
