@@ -58,12 +58,14 @@ if( isset($_GET["type"]) && !empty($_GET["type"]) ){
                             'Content-Type: application/x-www-form-urlencoded'
                         ),
                         ));
-                        $response = curl_exec($curl);
+                        $curlResponse = curl_exec($curl);
                         curl_close($curl);
                     }
-                    $response["id"] = $user[0]["id"];
-                    $response["msg"] = "User verified successfully.";
-                    echo outputData($response);die();
+                    $successResponse = array(
+                        "id" => $user[0]["id"],
+                        "msg" => "User verified successfully."
+                    );
+                    echo outputData($successResponse);die();
                 }else{
                     $response["msg"] = "Failed to verify user.";
                     echo outputError($response);die();
