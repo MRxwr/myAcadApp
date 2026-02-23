@@ -6,7 +6,7 @@ if( isset($_GET["type"]) && !empty($_GET["type"]) ){
             echo outputError($response);die();
         }
         $otp = rand(1000, 9999);
-        if( $user = selectDBNew("users", [$_POST["mobile"]], "`mobile` = ?", "") ){
+        if( $user = selectDBNew("users", [$_POST["mobile"]], "`phone` = ?", "") ){
             if( updateDB("users", ["otp" => $otp], "`id` = '{$user[0]["id"]}'" ) ){
                 whatsappUltraMsgVerify($_POST["mobile"], $otp);
                 $responsep["id"] = $user[0]["id"];
@@ -17,10 +17,10 @@ if( isset($_GET["type"]) && !empty($_GET["type"]) ){
                 echo outputError($response);die();
             }
         }else{
-            if( insertDB("users", ["otp" => $otp, "mobile" => $_POST["mobile"]] ) ){
+            if( insertDB("users", ["otp" => $otp, "phone" => $_POST["mobile"]] ) ){
                 whatsappUltraMsgVerify($_POST["mobile"], $otp);
                 //get the user id of the newly created user
-                $newUser = selectDBNew("users", [$_POST["mobile"]], "`mobile` = ?", "");
+                $newUser = selectDBNew("users", [$_POST["mobile"]], "`phone` = ?", "");
                 $response["id"] = $newUser[0]["id"];
                 $response["msg"] = "OTP sent to your mobile.";
                 echo outputData($response);die();
@@ -46,7 +46,7 @@ if( isset($_GET["type"]) && !empty($_GET["type"]) ){
             $response["msg"] = "Please provide a Firebase token.";
             echo outputError($response);die();
         }
-        if( $user = selectDBNew("users", [$_POST["mobile"]], "`mobile` = ?", "") ){
+        if( $user = selectDBNew("users", [$_POST["mobile"]], "`phone` = ?", "") ){
             if( $user[0]["otp"] == $_POST["otp"] ){
                 $countryCode = getCountryCodeFromNumber($_POST["mobile"]);
                 if( updateDB("users", ["otp" => "", "phone" => $_POST["mobile"], "countryCode" => $countryCode, "isVerified" => 1], "`id` = '{$user[0]["id"]}'" ) ){
