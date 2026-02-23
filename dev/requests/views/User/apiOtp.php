@@ -34,10 +34,6 @@ if( isset($_GET["type"]) && !empty($_GET["type"]) ){
             $response["msg"] = "Please provide an OTP.";
             echo outputError($response);die();
         }
-        if( !isset($_POST["userId"]) || empty($_POST["userId"]) ){
-            $response["msg"] = "Please provide a user ID.";
-            echo outputError($response);die();
-        }
         if( !isset($_POST["mobile"]) || empty($_POST["mobile"]) ){
             $response["msg"] = "Please provide a mobile number.";
             echo outputError($response);die();
