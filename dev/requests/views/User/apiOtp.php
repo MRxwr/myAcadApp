@@ -9,7 +9,7 @@ if( isset($_GET["type"]) && !empty($_GET["type"]) ){
         if( $user = selectDBNew("users", [$_POST["mobile"]], "`phone` = ?", "") ){
             if( updateDB("users", ["otp" => $otp], "`id` = '{$user[0]["id"]}'" ) ){
                 whatsappUltraMsgVerify($_POST["mobile"], $otp);
-                $responsep["id"] = $user[0]["id"];
+                $response["id"] = $user[0]["id"];
                 $response["msg"] = "OTP sent to your mobile.";
                 echo outputData($response);die();
             }else{
