@@ -118,24 +118,7 @@ if( !isset($_POST) ){
             );
     }
 
-    $curl = curl_init();
-    curl_setopt_array($curl, array(
-        CURLOPT_URL => 'https://uapi.upayments.com/api/v1/charge',
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_ENCODING => '',
-        CURLOPT_MAXREDIRS => 10,
-        CURLOPT_TIMEOUT => 0,
-        CURLOPT_FOLLOWLOCATION => true,
-        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        CURLOPT_CUSTOMREQUEST => 'POST',
-        CURLOPT_POSTFIELDS => $postBody,
-        CURLOPT_HTTPHEADER => array(
-            'Authorization: Bearer 779475522c0938b3c0774da98197e0727fefe464',
-        ),
-    ));
-    $response = curl_exec($curl);
-    curl_close($curl);
-    $response = json_decode($response,true);
+    $response = upaymentGateway($postBody);
 
     //saving info and redirecting to payment pages
     if( isset($response["status"]) && $response["status"] == true && isset($response["data"]["link"]) && !empty($response["data"]["link"]) ){
