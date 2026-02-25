@@ -13,30 +13,33 @@ if (isset($_GET["requested_order_id"]) && !empty($_GET["requested_order_id"])) {
                         if ($bookingOriginal = selectDBNew("fields_booking", [$booking[0]["bookingId"]], "id = ?", "")) {
                             if ($bookingOriginal[0]["status"] == 0) {
                                 updateDB("fields_booking", array("status" => 1, "gatewayLink" => $gatewayLink), "`id` = '{$bookingOriginal[0]["id"]}'");
-                                echo outputData(array("msg" => popupMsg($requestLang, "Payment Captured Successfully - Partially Paid", " مدفوع جزئياً / تم التقاط الدفع بنجاح"))); die();
+                                $response = outputData(array("msg" => popupMsg($requestLang, "Payment Captured Successfully - Partially Paid", " مدفوع جزئياً / تم التقاط الدفع بنجاح")));
                             } elseif ($bookingOriginal[0]["status"] == 1) {
                                 updateDB("fields_booking", array("status" => 2, "gatewayLink" => $gatewayLink), "`id` = '{$bookingOriginal[0]["id"]}'");
-                                echo outputData(array("msg" => popupMsg($requestLang, "Payment Captured Successfully - Fully Paid", "مدفوع بالكامل / تم التقاط الدفع بنجاح"))); die();
+                                $response = outputData(array("msg" => popupMsg($requestLang, "Payment Captured Successfully - Fully Paid", "مدفوع بالكامل / تم التقاط الدفع بنجاح")));
                             }
                         } else {
-                            echo outputError(array("msg" => popupMsg($requestLang, "Original Booking Not Found", "الحجز الأصلي غير موجود"))); die();
+                            $response = outputError(array("msg" => popupMsg($requestLang, "Original Booking Not Found", "الحجز الأصلي غير موجود")));
                         }
                     } else {
                         updateDB("fields_booking", array("status" => 2, "gatewayLink" => $gatewayLink), "`gatewayId` = '{$_GET["requested_order_id"]}'");
-                        echo outputData(array("msg" => popupMsg($requestLang, "Payment Captured Successfully - Fully Paid", "مدفوع بالكامل / تم التقاط الدفع بنجاح"))); die();
+                        $response = outputData(array("msg" => popupMsg($requestLang, "Payment Captured Successfully - Fully Paid", "مدفوع بالكامل / تم التقاط الدفع بنجاح"))); 
                     }
                 } else {
                     updateDB("fields_booking", array("status" => 4, "gatewayLink" => $gatewayLink), "`gatewayId` = '{$_GET["requested_order_id"]}'");
+                    $response = outputData(array("msg" => popupMsg($requestLang, "Payment Failed", "فشل الدفع"))); 
                 }
             } else {
-                echo outputError(array("msg" => popupMsg($requestLang, "Can Not Update Booking Status", "لا يمكن تحديث حالة الحجز"))); die();
+                $response = outputError(array("msg" => popupMsg($requestLang, "Can Not Update Booking Status", "لا يمكن تحديث حالة الحجز"))); 
             }
         } else {
-            echo outputError(array("msg" => popupMsg($requestLang, "Result Not Found", "النتيجة غير موجودة"))); die();
+            $response = outputError(array("msg" => popupMsg($requestLang, "Result Not Found", "النتيجة غير موجودة"))); 
         }
     } else {
-        echo outputError(array("msg" => popupMsg($requestLang, "Booking Not Found", "الحجز غير موجود"))); die();
+        $response = outputError(array("msg" => popupMsg($requestLang, "Booking Not Found", "الحجز غير موجود"))); 
     }
 } else {
-    echo outputError(array("msg" => popupMsg($requestLang, "Requested Order ID Not Found", "معرف الطلب المطلوب غير موجود"))); die();
+    $response = outputError(array("msg" => popupMsg($requestLang, "Requested Order ID Not Found", "معرف الطلب المطلوب غير موجود"))); 
 }
+
+echo $response;die();
