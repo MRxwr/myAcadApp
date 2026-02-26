@@ -6,7 +6,7 @@ require_once("../admin/includes/functions.php");
 if( isset($_GET["lang"]) && !empty($_GET["lang"]) ){
 	$requestLang = $_GET["lang"];
 }else{
-	$requestLang = "en";
+	$requestLang = "en"; 
 }
 
 if (isset($_GET["requested_order_id"]) && !empty($_GET["requested_order_id"])) {
