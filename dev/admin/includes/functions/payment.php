@@ -341,8 +341,8 @@ function sendOrderToAllowMENA($orderId){
 }
 
 function upaymentGateway($data){
-	$accessToken = "jtest123"; //"779475522c0938b3c0774da98197e0727fefe464"
-	$baseUrl = "https://sandboxapi.upayments.com/api/v1/charge"; //"https://uapi.upayments.com/api/v1/charge" : 
+	$accessToken = "779475522c0938b3c0774da98197e0727fefe464"; //"jtest123";
+	$baseUrl = "https://uapi.upayments.com/api/v1/charge"; //"https://sandboxapi.upayments.com/api/v1/charge";
 	unset($data["extraMerchantData"]);
 	$curl = curl_init();
     curl_setopt_array($curl, array(
