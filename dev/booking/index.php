@@ -55,4 +55,5 @@ if (isset($_GET["requested_order_id"]) && !empty($_GET["requested_order_id"])) {
     $response = outputError(array("msg" => popupMsg($requestLang, "Requested Order ID Not Found", "معرف الطلب المطلوب غير موجود"))); 
 }
 
-echo $response;die();
+//echo $response;
+die();
