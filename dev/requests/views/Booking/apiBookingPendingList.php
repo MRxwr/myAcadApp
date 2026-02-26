@@ -4,7 +4,7 @@ $dataJoin = array(
     "join" => ["fields_list","field_ages","field_levels","countries","sports"],
     "on" => ["t.fieldId = t1.id","t.ages = t2.id","t.levels = t3.id","t1.area = t4.id","t1.sport = t5.id"],
 );
-if( $pendingBookings = selectJoinDB("fields_booking", $dataJoin, "t.hidden = '0' AND t.status != '3' AND t.isTbari = '1' AND t.bookingId = '0'") ){
+if( $pendingBookings = selectJoinDB("fields_booking", $dataJoin, "t.hidden = '0' AND t.status = '0' AND t.isTbari = '1' AND t.bookingId = '0'") ){
     $response["pendingBookings"] = $pendingBookings;
 }else{
     $response["msg"] = popupMsg($requestLang,"No Bookings available","لا يوجد مباريات متاحة");
