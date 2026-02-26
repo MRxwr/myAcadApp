@@ -155,9 +155,9 @@ if( !isset($_POST) ){
             'customer[name]' => "{$_POST["name"]}",
             'customer[email]' => "{$_POST["email"]}",
             'customer[mobile]' => "{$_POST["phone"]}",
-            'returnUrl' => 'https://dev.myacad.app/index.php',
-            'cancelUrl' => 'https://dev.myacad.app/index.php',
-            'notificationUrl' => 'https://dev.myacad.app/index.php',
+            'returnUrl' => "{$paymentReturnURL}/index.php",
+            'cancelUrl' => "{$paymentReturnURL}/index.php",
+            'notificationUrl' => "{$paymentReturnURL}/index.php",
             'extraMerchantData[0][amount]' => (string)($fullAmount),
             'extraMerchantData[0][knetCharge]' => "{$academyData[0]["charges"]}",
             'extraMerchantData[0][knetChargeType]' => "{$academyData[0]["chargeType"]}",
@@ -309,9 +309,9 @@ if( !isset($_POST) ){
             'customer[name]' => "{$_POST["name"]}",
             'customer[email]' => "{$_POST["email"]}",
             'customer[mobile]' => "{$_POST["phone"]}",
-            'returnUrl' => 'https://dev.myacad.app/index.php',
-            'cancelUrl' => 'https://dev.myacad.app/index.php',
-            'notificationUrl' => 'https://dev.myacad.app/index.php',
+            'returnUrl' => "{$paymentReturnURL}/index.php",
+            'cancelUrl' => "{$paymentReturnURL}/index.php",
+            'notificationUrl' => "{$paymentReturnURL}/index.php",
             'extraMerchantData[0][amount]' => (string)($fullAmount),
             'extraMerchantData[0][knetCharge]' => "{$tournaments[0]["charges"]}",
             'extraMerchantData[0][knetChargeType]' => "{$tournaments[0]["chargeType"]}",
@@ -486,9 +486,9 @@ if( !isset($_POST) ){
             'customer[name]' => "{$_POST["name"]}",
             'customer[email]' => "{$_POST["email"]}",
             'customer[mobile]' => "{$_POST["phone"]}",
-            'returnUrl' => 'https://dev.myacad.app/index.php',
-            'cancelUrl' => 'https://dev.myacad.app/index.php',
-            'notificationUrl' => 'https://dev.myacad.app/index.php',
+            'returnUrl' => "{$paymentReturnURL}/index.php",
+            'cancelUrl' => "{$paymentReturnURL}/index.php",
+            'notificationUrl' => "{$paymentReturnURL}/index.php",
             'extraMerchantData[0][amount]' => (string)($fullAmount),
             'extraMerchantData[0][knetCharge]' => "{$event[0]["charges"]}",
             'extraMerchantData[0][knetChargeType]' => "{$event[0]["chargeType"]}",
@@ -498,24 +498,7 @@ if( !isset($_POST) ){
             );
     }
     
-    $curl = curl_init();
-    curl_setopt_array($curl, array(
-        CURLOPT_URL => 'https://uapi.upayments.com/api/v1/charge',
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_ENCODING => '',
-        CURLOPT_MAXREDIRS => 10,
-        CURLOPT_TIMEOUT => 0,
-        CURLOPT_FOLLOWLOCATION => true,
-        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        CURLOPT_CUSTOMREQUEST => 'POST',
-        CURLOPT_POSTFIELDS => $postBody,
-        CURLOPT_HTTPHEADER => array(
-            'Authorization: Bearer 779475522c0938b3c0774da98197e0727fefe464',
-        ),
-    ));
-    $response = curl_exec($curl);
-    curl_close($curl);
-    $response = json_decode($response,true);
+    $response = upaymentGateway($postBody);
     
     //saving info and redirecting to payment pages
     if( isset($response["status"]) && $response["status"] == true && isset($response["data"]["link"]) && !empty($response["data"]["link"]) ){
