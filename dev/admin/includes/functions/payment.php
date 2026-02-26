@@ -341,9 +341,11 @@ function sendOrderToAllowMENA($orderId){
 }
 
 function upaymentGateway($data){
+	$accessToken = "jtest123"; //"779475522c0938b3c0774da98197e0727fefe464"
+	$baseUrl = "https://sandboxapi.upayments.com/api/v1/charge"; //"https://uapi.upayments.com/api/v1/charge" : 
 	$curl = curl_init();
     curl_setopt_array($curl, array(
-        CURLOPT_URL => 'https://uapi.upayments.com/api/v1/charge',
+        CURLOPT_URL => "{$baseUrl}",
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => '',
         CURLOPT_MAXREDIRS => 10,
@@ -353,7 +355,7 @@ function upaymentGateway($data){
         CURLOPT_CUSTOMREQUEST => 'POST',
         CURLOPT_POSTFIELDS => $data,
         CURLOPT_HTTPHEADER => array(
-            'Authorization: Bearer 779475522c0938b3c0774da98197e0727fefe464',
+            "Authorization: Bearer {$accessToken}",
         ),
     ));
     $response = curl_exec($curl);
