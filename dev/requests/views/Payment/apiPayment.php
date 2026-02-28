@@ -420,20 +420,38 @@ if( !isset($_POST) ){
         }
 
         // Handle file upload for event
-        if (isset($_FILES['file']) && $_FILES['file']['error'] === UPLOAD_ERR_OK) {
-            $fileTmpPath = $_FILES['file']['tmp_name'];
-            $fileName = $_FILES['file']['name'];
-            $fileSize = $_FILES['file']['size'];
-            $fileType = $_FILES['file']['type'];
-            $fileNameCmps = explode(".", $fileName);
-            $fileExtension = strtolower(end($fileNameCmps));
-            $allowedfileExtensions = array('jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp');
-            if (in_array($fileExtension, $allowedfileExtensions) && strpos($fileType, 'image') === 0) {
-                $newFileName = uniqid('event_', true) . '.' . $fileExtension;
-                $dest_path = __DIR__ . '/../../../files/' . $newFileName;
-                if(move_uploaded_file($fileTmpPath, $dest_path)) {
-                    $_POST["eventDetails"]["uploadedImage"] = 'files/' . $newFileName;
+        if (isset($_FILES['file'])) {
+            $uploadedFiles = [];
+            $files = $_FILES['file'];
+            $fileCount = is_array($files['name']) ? count($files['name']) : 1;
+
+            for ($i = 0; $i < $fileCount; $i++) {
+                $fileError = is_array($files['error']) ? $files['error'][$i] : $files['error'];
+                if ($fileError === UPLOAD_ERR_OK) {
+                    $fileTmpPath = is_array($files['tmp_name']) ? $files['tmp_name'][$i] : $files['tmp_name'];
+                    $fileName = is_array($files['name']) ? $files['name'][$i] : $files['name'];
+                    $fileSize = is_array($files['size']) ? $files['size'][$i] : $files['size'];
+                    $fileType = is_array($files['type']) ? $files['type'][$i] : $files['type'];
+                    
+                    $fileNameCmps = explode(".", $fileName);
+                    $fileExtension = strtolower(end($fileNameCmps));
+                    $allowedExtensions = array('jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp', 'pdf');
+                    
+                    // Check extension, size (1MB = 1048576 bytes), and type
+                    $isImage = strpos($fileType, 'image') === 0;
+                    $isPDF = $fileType === 'application/pdf' || $fileExtension === 'pdf';
+
+                    if (in_array($fileExtension, $allowedExtensions) && ($isImage || $isPDF) && $fileSize <= 1048576) {
+                        $newFileName = uniqid('event_', true) . '.' . $fileExtension;
+                        $dest_path = __DIR__ . '/../../../files/' . $newFileName;
+                        if (move_uploaded_file($fileTmpPath, $dest_path)) {
+                            $uploadedFiles[] = 'files/' . $newFileName;
+                        }
+                    }
                 }
+            }
+            if (!empty($uploadedFiles)) {
+                $_POST["eventDetails"]["uploadedImages"] = $uploadedFiles;
             }
         }
 
