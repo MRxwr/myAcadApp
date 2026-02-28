@@ -1,6 +1,6 @@
 <?php 
 $numberOfTimesAvalability = false;
-$academyAprroved = false;
+$fieldAprroved = false;
 $dateApproved = false;
 if( isset($_POST["code"]) && !empty($_POST["code"]) && $voucher = selectDB("vouchers","`code` = '{$_POST["code"]}' AND `typeOfVoucher` = '0' AND `hidden` = '0' AND `status` = '0'")){
     if( !isset($_POST["fieldId"]) || empty($_POST["fieldId"]) ){
@@ -44,9 +44,9 @@ if( isset($_POST["code"]) && !empty($_POST["code"]) && $voucher = selectDB("vouc
     if( !empty($voucher[0]["fieldIds"]) ){
         $voucher[0]["fieldIds"] = json_decode($voucher[0]["fieldIds"],true);
         if( in_array($_POST["fieldId"],$voucher[0]["fieldIds"]) ){
-            $academyAprroved = true;
+            $fieldAprroved = true;
         }else{
-            $academyAprroved = false;
+            $fieldAprroved = false;
             $response = array(
                 "msg" => 'voucher is not valid for this field.',
                 "msgAr" => 'لا يمكن تطبيق هذا الكود على هذا الملعب',
@@ -54,10 +54,10 @@ if( isset($_POST["code"]) && !empty($_POST["code"]) && $voucher = selectDB("vouc
             echo outputError($response);die();
         }
     }elseif( $voucher[0]["fieldIds"] == 0 ){
-        $academyAprroved = true;
+        $fieldAprroved = true;
     }
     
-    if( $numberOfTimesAvalability && $academyAprroved && $dateApproved ){
+    if( $numberOfTimesAvalability && $fieldAprroved && $dateApproved ){
             $voucherType = ($voucher[0]["type"] == 0) ? 0 : 1;
             $voucherAmount = $voucher[0]["amount"];
             $newTotal = ( $voucherType == 0 ) ? ($_POST["total"]*(1-($voucherAmount/100))) : $_POST["total"] - $voucherAmount;
