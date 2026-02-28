@@ -77,7 +77,7 @@ if( !isset($_POST) ){
                     "msg" => 'field is required.',
                     "msgAr" => 'يجب إدخال الملعب',
                 );
-                echo outputError($response);die();
+                //echo outputError($response);die();
             }
             $currentDate = date("Y-m-d");
             if( (substr($voucher[0]["startDate"],0,10) <= $currentDate) && (substr($voucher[0]["endDate"],0,10) >= $currentDate) ){
@@ -87,9 +87,8 @@ if( !isset($_POST) ){
                     "msg" => 'voucher has been expired.',
                     "msgAr" => 'كود خصم منتهي الصلاحية',
                 );
-                echo outputError($response);die();
+                //echo outputError($response);die();
             }
-
             if( $voucher[0]["numberOfTimes"] == 0 ){
                 $numberOfTimesAvalability = true;
             }elseif( $voucher[0]["numberOfTimes"] != 0 ){
@@ -103,13 +102,12 @@ if( !isset($_POST) ){
                             "msg" => 'voucher limit has been fully used.',
                             "msgAr" => 'إنتهت إستخدامات كود الخصم',
                         );
-                        echo outputError($response);die();
+                        //echo outputError($response);die();
                     }
                 }else{
                     $numberOfTimesAvalability = true;
                 }
             }
-            
             if( !empty($voucher[0]["fieldIds"]) ){
                 $voucher[0]["fieldIds"] = json_decode($voucher[0]["fieldIds"],true);
                 if( in_array($data["fieldId"],$voucher[0]["fieldIds"]) ){
@@ -120,12 +118,11 @@ if( !isset($_POST) ){
                         "msg" => 'voucher is not valid for this field.',
                         "msgAr" => 'لا يمكن تطبيق هذا الكود على هذا الملعب',
                     );
-                    echo outputError($response);die();
+                    //echo outputError($response);die();
                 }
             }elseif( $voucher[0]["fieldIds"] == 0 ){
                 $fieldAprroved = true;
             }
-            
             if( $numberOfTimesAvalability && $fieldAprroved && $dateApproved ){
                     $voucherType = ($voucher[0]["type"] == 0) ? 0 : 1;
                     $voucherAmount = $voucher[0]["amount"];
@@ -142,14 +139,14 @@ if( !isset($_POST) ){
                     "msg" => 'voucher is not valid anymore.',
                     "msgAr" => 'لا يمكن إستخدام هذا الكود',
                 );
-                echo outputError($response);die();
+                //echo outputError($response);die();
             }
         }else{
             $response = array(
                 "msg" => 'voucher does not exist.',
                 "msgAr" => 'لا يوجد كود مثل هذا',
             );
-            echo outputError($response);die();
+            //echo outputError($response);die();
         }
 
         $_POST["bookingId"] = $data["bookingId"];
