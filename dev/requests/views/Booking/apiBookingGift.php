@@ -5,7 +5,7 @@ if( !isset($_POST["userId"]) || empty($_POST["userId"]) ){
 }
 $data = $_POST;
 unset($_POST);
-if( $bookingList = selectDBNew("fields_booking",[$data["userId"], $data["userId"]], "(`userId` = ? OR `id` IN (SELECT `bookingId` FROM `fields_booking` WHERE `userId` = ? AND `bookingId` != '0')) AND `status` = '2'","") ){
+if( $bookingList = selectDBNew("fields_booking", [$data["userId"], $data["userId"], $data["userId"]], "(`userId` = ? OR `id` IN (SELECT `bookingId` FROM `fields_booking` WHERE `userId` = ? AND `bookingId` != '0')) AND `status` = '2' AND `id` > COALESCE((SELECT MAX(`id`) FROM `fields_booking` WHERE `userId` = ? AND `paymentMethod` = '5'), 0)", "") ){
     $response["totalBookings"] = count($bookingList);
 }else{
     $response["totalBookings"] = 0;
