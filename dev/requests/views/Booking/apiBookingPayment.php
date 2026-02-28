@@ -58,6 +58,12 @@ if( !isset($_POST) ){
             $freePayment = 1;
         }
 
+        //gift payment method in case of 10 successfull previous bookings
+        if( $paymentMethod == 5 ){
+            $paymentMethod = 1;
+            $wallet = 1;
+        }
+
         //calulation of total prices
         $newTotal = (float)$data["price"];
         $fullAmount = (float)$data["price"];
