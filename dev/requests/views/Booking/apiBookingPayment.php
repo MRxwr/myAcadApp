@@ -58,10 +58,14 @@ if( !isset($_POST) ){
             $freePayment = 1;
         }
 
+        //calulation of total prices
+        $newTotal = (float)$data["price"];
+        $fullAmount = (float)$data["price"];
+
         $numberOfTimesAvalability = false;
         $fieldAprroved = false;
         $dateApproved = false;
-        if( isset($_POST["code"]) && !empty($_POST["code"]) && $voucher = selectDBNew("vouchers",[$_POST["code"]],"`code` = ? AND `typeOfVoucher` = '3' AND `hidden` = '0' AND `status` = '0'","") ) {
+        if( isset($_POST["voucher"]) && !empty($_POST["voucher"]) && $voucher = selectDBNew("vouchers",[$_POST["voucher"]],"`code` = ? AND `typeOfVoucher` = '3' AND `hidden` = '0' AND `status` = '0'","") ) {
             if( !isset($_POST["fieldId"]) || empty($_POST["fieldId"]) ){
                 $response = array(
                     "msg" => 'field is required.',
@@ -125,7 +129,8 @@ if( !isset($_POST) ){
                         "msgAr" => "تم تطبيق كود الخصم بنجاح",
                         "newTotal" => $newTotal,
                     );
-                    echo outputData($array);die();
+                    $newTotal = (float)$newTotal;
+                    $fullAmount = (float)$newTotal;
             }else{
                 $response = array(
                     "msg" => 'voucher is not valid anymore.',
@@ -141,10 +146,6 @@ if( !isset($_POST) ){
             echo outputError($response);die();
         }
 
-        //calulation of total prices
-        $newTotal = (float)$data["price"];
-        $fullAmount = (float)$data["price"];
-
         $_POST["bookingId"] = $data["bookingId"];
         $_POST["name"] = "{$userData[0]["firstName"]} {$userData[0]["lastName"]}";
         $_POST["phone"] = "{$userData[0]["phone"]}";
@@ -159,7 +160,7 @@ if( !isset($_POST) ){
         $_POST["ages"] = $data["ages"];
         $_POST["notes"] = $data["notes"];
         $_POST["isTbari"] = $data["isTbari"];
-        $_POST["voucher"] = ( isset($_POST["code"]) && !empty($_POST["code"]) ) ? $_POST["code"] : "";
+        $_POST["voucher"] = ( isset($_POST["voucher"]) && !empty($_POST["voucher"]) ) ? $_POST["voucher"] : "";
         $_POST["total"] = $fullAmount;
         $_POST["paymentMethod"] = $paymentMethod;
 
