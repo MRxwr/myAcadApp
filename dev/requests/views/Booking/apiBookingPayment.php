@@ -65,8 +65,8 @@ if( !isset($_POST) ){
         $numberOfTimesAvalability = false;
         $fieldAprroved = false;
         $dateApproved = false;
-        if( isset($_POST["voucher"]) && !empty($_POST["voucher"]) && $voucher = selectDBNew("vouchers",[$_POST["voucher"]],"`code` = ? AND `typeOfVoucher` = '3' AND `hidden` = '0' AND `status` = '0'","") ) {
-            if( !isset($_POST["fieldId"]) || empty($_POST["fieldId"]) ){
+        if( isset($data["voucher"]) && !empty($data["voucher"]) && $voucher = selectDBNew("vouchers",[$data["voucher"]],"`code` = ? AND `typeOfVoucher` = '3' AND `hidden` = '0' AND `status` = '0'","") ) {
+            if( !isset($data["fieldId"]) || empty($data["fieldId"]) ){
                 $response = array(
                     "msg" => 'field is required.',
                     "msgAr" => 'يجب إدخال الملعب',
@@ -106,7 +106,7 @@ if( !isset($_POST) ){
             
             if( !empty($voucher[0]["fieldIds"]) ){
                 $voucher[0]["fieldIds"] = json_decode($voucher[0]["fieldIds"],true);
-                if( in_array($_POST["fieldId"],$voucher[0]["fieldIds"]) ){
+                if( in_array($data["fieldId"],$voucher[0]["fieldIds"]) ){
                     $fieldAprroved = true;
                 }else{
                     $fieldAprroved = false;
@@ -160,7 +160,7 @@ if( !isset($_POST) ){
         $_POST["ages"] = $data["ages"];
         $_POST["notes"] = $data["notes"];
         $_POST["isTbari"] = $data["isTbari"];
-        $_POST["voucher"] = ( isset($_POST["voucher"]) && !empty($_POST["voucher"]) ) ? $_POST["voucher"] : "";
+        $_POST["voucher"] = ( isset($data["voucher"]) && !empty($data["voucher"]) ) ? $data["voucher"] : "";
         $_POST["total"] = $fullAmount;
         $_POST["paymentMethod"] = $paymentMethod;
 
