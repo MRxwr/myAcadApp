@@ -2,7 +2,7 @@
 $numberOfTimesAvalability = false;
 $fieldAprroved = false;
 $dateApproved = false;
-if( isset($_POST["code"]) && !empty($_POST["code"]) && $voucher = selectDB("vouchers","`code` = '{$_POST["code"]}' AND `typeOfVoucher` = '0' AND `hidden` = '0' AND `status` = '0'")){
+if( isset($_POST["code"]) && !empty($_POST["code"]) && $voucher = selectDBNew("vouchers",[$_POST["code"]],"`code` = ? AND `typeOfVoucher` = '3' AND `hidden` = '0' AND `status` = '0'","") ) {
     if( !isset($_POST["fieldId"]) || empty($_POST["fieldId"]) ){
         $response = array(
             "msg" => 'field is required.',
