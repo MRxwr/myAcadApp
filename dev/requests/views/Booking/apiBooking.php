@@ -49,6 +49,66 @@ if( !isset($_GET["fieldId"]) || empty($_GET["fieldId"]) ){
 			$response["field"]["enArea"] = "";
 			$response["field"]["arArea"] = "";
 		}
+
+		// Calculate fully booked dates (blocked dates)
+		$response["field"]["blockedDates"] = array();
+		if (!empty($field[0]["openDate"]) && !empty($field[0]["closeDate"])) {
+			$startDate = new DateTime($field[0]["openDate"]);
+			$endDate = new DateTime($field[0]["closeDate"]);
+			$interval = new DateInterval('P1D');
+			$dateRange = new DatePeriod($startDate, $interval, $endDate->modify('+1 day'));
+
+			foreach ($dateRange as $dateObj) {
+				$checkDate = $dateObj->format('Y-m-d');
+				$dayOfWeek = date('w', strtotime($checkDate));
+
+				// Check if field has working hours on this day
+				$fieldTimes = selectDB("field_times", "`fieldId` = '{$_GET["fieldId"]}' AND `day` = '{$dayOfWeek}' AND `status` = '0' AND `hidden` = '0'");
+				if (!$fieldTimes) {
+					continue;
+				}
+
+				// Check available periods for the field
+				$fieldPeriods = selectDB("field_periods", "`fieldId` = '{$_GET["fieldId"]}' AND `status` = '0' AND `hidden` = '0'");
+				if (!$fieldPeriods) {
+					continue;
+				}
+
+				$isFullyBooked = true;
+				foreach ($fieldPeriods as $period) {
+					$periodMinutes = intval($period["period"]);
+					$openTime = $fieldTimes[0]["openTime"];
+					$closeTime = $fieldTimes[0]["closeTime"];
+
+					$currentTime = strtotime($openTime);
+					$endTime = strtotime($closeTime);
+					if ($endTime <= $currentTime) {
+						$endTime += 86400; // Next day
+					}
+
+					while ($currentTime < $endTime) {
+						$slotStart = date('H:i:s', $currentTime);
+						$slotEnd = date('H:i:s', $currentTime + ($periodMinutes * 60));
+
+						if (strtotime($slotEnd) > $endTime) {
+							break;
+						}
+
+						// Check if this specific slot is available
+						$booking = selectDB("fields_booking", "`fieldId` = '{$_GET["fieldId"]}' AND `bookingDate` = '{$checkDate}' AND `startTime` = '{$slotStart}' AND `status` IN ('0','1','2') AND `hidden` = '0'");
+						if (empty($booking)) {
+							$isFullyBooked = false;
+							break 2; // Not fully booked for this date
+						}
+						$currentTime += ($periodMinutes * 60);
+					}
+				}
+
+				if ($isFullyBooked) {
+					$response["field"]["blockedDates"][] = $checkDate;
+				}
+			}
+		}
 	}else{
 		$response["msg"] = popupMsg($requestLang,"there is no field with this id","لا يوجد ملعب بهذا الرقم");
 		echo outputError($response);die();
