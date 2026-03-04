@@ -99,7 +99,7 @@
 				<td id="arTitle<?php echo $trainers[$i]["id"]?>" ><?php echo $trainers[$i]["arTitle"] ?></td>
 				<td id="enDetails<?php echo $trainers[$i]["id"]?>" ><?php echo $trainers[$i]["enDetails"] ?></td>
 				<td id="arDetails<?php echo $trainers[$i]["id"]?>" ><?php echo $trainers[$i]["arDetails"] ?></td>
-				<td><label id="trainerImage<?php echo $trainers[$i]["id"]?>" style="display:none"><?php echo $trainers[$i]["trainerImage"] ?></label><img src="<?php echo $trainers[$i]["trainerImage"] ?>" style="width:50px;height:50px"></td>
+				<td><label id="trainerImage<?php echo $trainers[$i]["id"]?>" style="display:none"><?php echo $trainers[$i]["trainerImage"] ?></label><img src="../logos/trainers/<?php echo $trainers[$i]["trainerImage"] ?>" style="width:50px;height:50px"></td>
 				<td class="text-nowrap">
 					<a id="<?php echo $trainers[$i]["id"] ?>" class="edit btn btn-warning" data-toggle="tooltip" data-original-title="<?php echo direction("Edit","تعديل") ?>"> <i class="fa fa-pencil text-inverse m-r-10"></i>
 					</a>
@@ -131,6 +131,6 @@
 			$("input[name=enDetails]").val($("#enDetails"+id).html());
 			$("input[name=arDetails]").val($("#arDetails"+id).html());
             $("#images").show();
-            $("#logoImg").attr("src","../logos"+$("#trainerImage"+id).html());
+            $("#logoImg").attr("src","../logos/trainers/"+$("#trainerImage"+id).html());
 		})
 	</script>
