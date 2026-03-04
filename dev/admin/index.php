@@ -42,7 +42,7 @@ if ( isset($_GET["hide"]) || isset($_GET["show"]) || isset($_GET["delId"]) || is
                 $directory = "../logos/trainers/";
                 $originalfile = $directory . date("d-m-y") . time() .  round(microtime(true)). "T." . getFileExtension($_FILES["trainerImage"]["name"]);
                 move_uploaded_file($_FILES["trainerImage"]["tmp_name"], $originalfile);
-                $_POST["trainerImage"] = str_replace("../logos/trainers/",'',$originalfile);
+                $_POST["trainerImage"] = $originalfile;
             }else{
                 if ( isset($_FILES['trainerImage']) ){
                     $_POST["trainerImage"] = "";
@@ -133,7 +133,7 @@ if ( isset($_GET["hide"]) || isset($_GET["show"]) || isset($_GET["delId"]) || is
                 $directory = "../logos/trainers/";
                 $originalfile = $directory . date("d-m-y") . time() .  round(microtime(true)). "T." . getFileExtension($_FILES["trainerImage"]["name"]);
                 move_uploaded_file($_FILES["trainerImage"]["tmp_name"], $originalfile);
-                $_POST["trainerImage"] = str_replace("../logos/trainers/",'',$originalfile);
+                $_POST["trainerImage"] = $originalfile;
             }else{
                 if( isset($_FILES['trainerImage']) ){
                     $imageurl = selectDB("{$table}","`id` = '{$id}'");
