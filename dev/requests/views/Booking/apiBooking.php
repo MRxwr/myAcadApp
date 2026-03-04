@@ -65,12 +65,14 @@ if( !isset($_GET["fieldId"]) || empty($_GET["fieldId"]) ){
 				// Check if field has working hours on this day
 				$fieldTimes = selectDB("field_times", "`fieldId` = '{$_GET["fieldId"]}' AND `day` = '{$dayOfWeek}' AND `status` = '0' AND `hidden` = '0'");
 				if (!$fieldTimes) {
+					$response["field"]["blockedDates"][] = $checkDate;
 					continue;
 				}
 
 				// Check available periods for the field
 				$fieldPeriods = selectDB("field_periods", "`fieldId` = '{$_GET["fieldId"]}' AND `status` = '0' AND `hidden` = '0'");
 				if (!$fieldPeriods) {
+					$response["field"]["blockedDates"][] = $checkDate;
 					continue;
 				}
 
