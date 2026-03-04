@@ -23,6 +23,11 @@ if( !isset($_GET["academyId"]) || empty($_GET["academyId"]) ){
 		}else{
 			$response["academy"]["subscriptions"] = array();
 		}
+		if( $trainers = selectDB2("`id`, `enTitle`, `arTitle`, `enDetails`, `arDetails`, `trainerImage`","trainers","`academyId` = '{$academy[0]["id"]}' AND `status` = '0' AND `hidden` = '0'") ){
+			$response["academy"]["trainers"] = $trainers;
+		}else{
+			$response["academy"]["trainers"] = array();
+		}
 		$response["academy"]["rating"] = 0;
 	}else{
 		$response["msg"] = popupMsg($requestLang,"there is no academy with this id","لا يوجد اكادمية بهذا الرقم");

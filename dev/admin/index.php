@@ -38,6 +38,17 @@ if ( isset($_GET["hide"]) || isset($_GET["show"]) || isset($_GET["delId"]) || is
                 }
             }
 
+            if( isset($_FILES['trainerImage']) && is_uploaded_file($_FILES['trainerImage']['tmp_name']) ){
+                $directory = "../logos/trainers/";
+                $originalfile = $directory . date("d-m-y") . time() .  round(microtime(true)). "L." . getFileExtension($_FILES["trainerImage"]["name"]);
+                move_uploaded_file($_FILES["trainerImage"]["tmp_name"], $originalfile);
+                $_POST["trainerImage"] = str_replace("../logos/trainers/",'',$originalfile);
+            }else{
+                if ( isset($_FILES['trainerImage']) ){
+                    $_POST["trainerImage"] = "";
+                }
+            }
+
             if( isset($_FILES['imageurl']) && is_uploaded_file($_FILES['imageurl']['tmp_name']) ){
                 $directory = "../logos/";
                 $originalfile = $directory . date("d-m-y") . time() .  round(microtime(true)). "L." . getFileExtension($_FILES["imageurl"]["name"]);
@@ -115,6 +126,18 @@ if ( isset($_GET["hide"]) || isset($_GET["show"]) || isset($_GET["delId"]) || is
                 if( isset($_FILES['icon']) ){
                     $imageurl = selectDB("{$table}","`id` = '{$id}'");
                     $_POST["icon"] = $imageurl[0]["icon"];
+                }
+            }
+
+            if( isset($_FILES['trainerImage']) && is_uploaded_file($_FILES['trainerImage']['tmp_name']) ){
+                $directory = "../logos/trainers/";
+                $originalfile = $directory . date("d-m-y") . time() .  round(microtime(true)). "L." . getFileExtension($_FILES["trainerImage"]["name"]);
+                move_uploaded_file($_FILES["trainerImage"]["tmp_name"], $originalfile);
+                $_POST["trainerImage"] = str_replace("../logos/trainers/",'',$originalfile);
+            }else{
+                if( isset($_FILES['trainerImage']) ){
+                    $imageurl = selectDB("{$table}","`id` = '{$id}'");
+                    $_POST["trainerImage"] = $imageurl[0]["trainerImage"];
                 }
             }
 
