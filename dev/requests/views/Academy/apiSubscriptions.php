@@ -44,7 +44,8 @@ if( !isset($_GET["userId"]) || empty($_GET["userId"]) ){
                         "sportLogo" => $sport[0]["imageurl"],
                         "type" => popupMsg($requestLang,"Subscription","اشتراك"),
                         "status" => $orders[$i]["status"],
-                        "statusText" => ( $orders[$i]["status"] == 1 ) ? popupMsg($requestLang,"Live","مفعلة") : ( ( $orders[$i]["status"] == 2 ) ? popupMsg($requestLang,"Cancelled","ملغاة") : ( ( $orders[$i]["status"] == 3 ) ? popupMsg($requestLang,"Refunded","مستردة") : ( ( $orders[$i]["status"] == 4 ) ? popupMsg($requestLang,"Ended","منتهية") : popupMsg($requestLang,"Pending","قيد الانتظار") ) ) )
+                        "statusText" => ( $orders[$i]["status"] == 1 ) ? popupMsg($requestLang,"Live","مفعلة") : ( ( $orders[$i]["status"] == 2 ) ? popupMsg($requestLang,"Cancelled","ملغاة") : ( ( $orders[$i]["status"] == 3 ) ? popupMsg($requestLang,"Refunded","مستردة") : ( ( $orders[$i]["status"] == 4 ) ? popupMsg($requestLang,"Ended","منتهية") : popupMsg($requestLang,"Pending","قيد الانتظار") ) ) ),
+                        "statusHexaColors" => ( $orders[$i]["status"] == 1 ) ? "#28a745" : ( ( $orders[$i]["status"] == 2 ) ? "#dc3545" : ( ( $orders[$i]["status"] == 3 ) ? "#ffc107" : ( ( $orders[$i]["status"] == 4 ) ? "#6c757d" : "#007bff" ) ) )
                     );
                 }
             }elseif( $orders[$i]["isTournament"] == 1 ){
@@ -65,7 +66,8 @@ if( !isset($_GET["userId"]) || empty($_GET["userId"]) ){
                         "sportLogo" => $sport[0]["imageurl"],
                         "type" => popupMsg($requestLang,"Tournament","بطولة"),
                         "status" => $orders[$i]["status"],
-                        "statusText" => ( $orders[$i]["status"] == 1 ) ? popupMsg($requestLang,"Successful","ناجحة") : popupMsg($requestLang,"Cancelled","ملغاة")
+                        "statusText" => ( $orders[$i]["status"] == 1 ) ? popupMsg($requestLang,"Successful","ناجحة") : popupMsg($requestLang,"Cancelled","ملغاة"),
+                        "statusHexaColors" => ( $orders[$i]["status"] == 1 ) ? "#28a745" : "#dc3545"
                     );
                 }
             }elseif( $orders[$i]["isTournament"] == 2 ){
@@ -87,7 +89,8 @@ if( !isset($_GET["userId"]) || empty($_GET["userId"]) ){
                         "sportLogo" => $sport[0]["imageurl"],
                         "type" => popupMsg($requestLang,$tab[0]["enTitle"],$tab[0]["arTitle"]),
                         "status" => $orders[$i]["status"],
-                        "statusText" => ( $orders[$i]["status"] == 1 ) ? popupMsg($requestLang,"Successful","ناجحة") : popupMsg($requestLang,"Cancelled","ملغاة")
+                        "statusText" => ( $orders[$i]["status"] == 1 ) ? popupMsg($requestLang,"Successful","ناجحة") : popupMsg($requestLang,"Cancelled","ملغاة"),
+                        "statusHexaColors" => ( $orders[$i]["status"] == 1 ) ? "#28a745" : "#dc3545"
                     );
                 }
             }
