@@ -39,8 +39,8 @@ if ( isset ($_GET["error"]) )
     <meta name="author" content="hencework" />
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="../img/logo.png" />
-    <link rel="icon" href="../img/logo.png" type="image/x-icon" />
+    <link rel="shortcut icon" href="../img/logoNew.png" />
+    <link rel="icon" href="../img/logoNew.png" type="image/x-icon" />
 
     <!-- vector map CSS -->
     <link
@@ -63,7 +63,7 @@ if ( isset ($_GET["error"]) )
       <header class="sp-header">
         <div class="sp-logo-wrap pull-left">
           <a href="index">
-            <img class="brand-img mr-10" src="../img/logo.png" alt="brand" style="width:50px;height:50px"/>
+            <img class="brand-img mr-10" src="../img/logoNew.png" alt="brand" style="width:50px;height:50px"/>
             <span class="brand-text"
               ><span style="font-size: 22px;">MY ACAD Dashboard</span></span
             >
