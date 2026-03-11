@@ -82,20 +82,20 @@ if ( isset ($_GET["error"]) )
                 <div class="row">
                   <div class="col-sm-12 col-xs-12">
                     <div class="mb-30">
-                      <h3 class="text-center txt-dark mb-10">
+                      <h3 class="text-center mb-10">
                         Sign in to
                         <b>
                           MY ACADEMY Dashboard
                         </b>
                       </h3>
-                      <h6 class="text-center nonecase-font txt-grey">
+                      <h6 class="text-center nonecase-font">
                         Enter your details below
                       </h6>
                       <?php 
 											if ( isset($_GET["temp"]) )
 											{
 												?>
-                      <div class="text-center" style="color: red;">
+                      <div class="text-center" style="color: gold;">
                         <?php echo $errormsg ?>
                       </div>
                       <?php
