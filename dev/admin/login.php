@@ -2,19 +2,14 @@
 require ("includes/config.php");
 require ("includes/translate.php");
 
-if ( isset($_COOKIE[$cookieSession."A"]) && !empty($_COOKIE[$cookieSession."A"]) )
-{
+if ( isset($_COOKIE[$cookieSession."A"]) && !empty($_COOKIE[$cookieSession."A"]) ){
 	header("Location: index");
 }
 
-if ( isset ($_GET["error"]) ) 
-{
-  if ( $_GET["error"] === "p" ) 
-  { 
+if ( isset ($_GET["error"]) ){
+  if ( $_GET["error"] === "p" ) { 
     $errormsg = "Please enter details correctly.";
-  } 
-  elseif ($_GET["error"] === "e" ) 
-  { 
+  }elseif ($_GET["error"] === "e" ) { 
     $errormsg = "Please enter email correctly."; 
   } 
 } 
@@ -23,32 +18,16 @@ if ( isset ($_GET["error"]) )
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>MY ACADEMY - CP.</title>
-    <meta
-      name="description"
-      content="Droopy is a Dashboard & Admin Site Responsive Template by hencework."
-    />
-    <meta
-      name="keywords"
-      content="admin, admin dashboard, admin template, cms, crm, Droopy Admin, Droopyadmin, premium admin templates, responsive admin, sass, panel, software, ui, visualization, web app, application"
-    />
+    <meta name="description" content="Droopy is a Dashboard & Admin Site Responsive Template by hencework." />
+    <meta name="keywords" content="admin, admin dashboard, admin template, cms, crm, Droopy Admin, Droopyadmin, premium admin templates, responsive admin, sass, panel, software, ui, visualization, web app, application" />
     <meta name="author" content="hencework" />
-
     <!-- Favicon -->
     <link rel="shortcut icon" href="../logos/logoNew.png" />
     <link rel="icon" href="../logos/logoNew.png" type="image/x-icon" />
-
     <!-- vector map CSS -->
-    <link
-      href="../vendors/bower_components/jasny-bootstrap/dist/css/jasny-bootstrap.min.css"
-      rel="stylesheet"
-      type="text/css"
-    />
-
+    <link href="../vendors/bower_components/jasny-bootstrap/dist/css/jasny-bootstrap.min.css" rel="stylesheet" type="text/css"/>
     <!-- Custom CSS -->
     <link href="dist/css/style.css" rel="stylesheet" type="text/css" />
   </head>
@@ -64,9 +43,7 @@ if ( isset ($_GET["error"]) )
         <div class="sp-logo-wrap pull-left">
           <a href="index">
             <img class="brand-img mr-10" src="../logos/logoNew.png" alt="brand" style="width:50px;height:50px"/>
-            <span class="brand-text"
-              ><span style="font-size: 22px; color: white;">MY ACADEMY Dashboard</span></span
-            >
+            <span class="brand-text"><span style="font-size: 22px; color: white;">MY ACADEMY</span></span>
           </a>
         </div>
         <div class="clearfix"></div>
@@ -82,96 +59,52 @@ if ( isset ($_GET["error"]) )
                 <div class="row">
                   <div class="col-sm-12 col-xs-12">
                     <div class="mb-30">
-                      <h3 class="text-center txt-light mb-10">
-                        Sign in to
-                        <b>
-                          MY ACADEMY Dashboard
-                        </b>
-                      </h3>
-                      <h6 class="text-center nonecase-font txt-light">
-                        Enter your details below
-                      </h6>
+                      <h3 class="text-center txt-light mb-10">Sign in to <b>MY ACADEMY Dashboard</b></h3>
+                      <h6 class="text-center nonecase-font txt-light">Enter your details below</h6>
                       <?php 
-											if ( isset($_GET["temp"]) )
-											{
+											if ( isset($_GET["temp"]) ){
 												?>
-                      <div class="text-center" style="color: gold;">
-                        <?php echo $errormsg ?>
-                      </div>
-                      <?php
+                        <div class="text-center" style="color: gold;"><?php echo $errormsg ?></div>
+                        <?php
 											}
 												?>
                     </div>
                     <div class="form-wrap">
                       <form action="includes/logindb.php" method="post">
                         <div class="form-group">
-                          <label
-                            class="control-label mb-10"
-                            for="exampleInputEmail_2"
-                            >Email address</label
-                          >
-                          <?php if ( isset($_GET["error"]) AND $_GET["error"] == "e" )
-													{
+                          <label class="control-label txt-light mb-10" for="exampleInputEmail_2">Email address</label>
+                          <?php 
+                          if( isset($_GET["error"]) AND $_GET["error"] == "e" ){
 														?>
-                          <div style="color: red;"><?php echo $errormsg ?></div>
-                          <?php
+                            <div style="color: red;"><?php echo $errormsg ?></div>
+                            <?php
 													}
 													?>
-                          <input
-                            type="email"
-                            name="email"
-                            class="form-control"
-                            required=""
-                            id="exampleInputEmail_2"
-                            placeholder="Enter email"
-                          />
+                          <input type="email" name="email" class="form-control" required="" id="exampleInputEmail_2" placeholder="Enter email" />
                         </div>
                         <div class="form-group">
-                          <label
-                            class="pull-left control-label mb-10"
-                            for="exampleInputpwd_2"
-                            >Password</label
-                          >
+                          <label class="pull-left text-light control-label mb-10" for="exampleInputpwd_2" >Password</label>
                           <div class="clearfix">
-                            <?php if ( isset($_GET["error"]) AND $_GET["error"] == "p" )
-													{
-														?>
-                            <div style="color: red;">
-                              <?php echo $errormsg ?>
-                            </div>
+                          <?php 
+                          if ( isset($_GET["error"]) AND $_GET["error"] == "p" ){
+                            ?> 
+                              <div style="color: red;"> <?php echo $errormsg ?></div>
                             <?php
 													}
 													?>
                           </div>
-                          <input
-                            type="password"
-                            name="password"
-                            class="form-control"
-                            required=""
-                            id="exampleInputpwd_2"
-                            placeholder="Enter pwd"
-                          />
+                          <input type="password" name="password" class="form-control" required="" id="exampleInputpwd_2" placeholder="Enter pwd" />
                         </div>
 
                         <div class="form-group">
-                          <div
-                            class="checkbox checkbox-primary pr-10 pull-left"
-                          >
-                            <input
-                              id="checkbox_2"
-                              type="checkbox"
-                            />
+                          <div class="checkbox checkbox-primary pr-10 pull-left">
+                            <input id="checkbox_2" type="checkbox"/>
                             <label for="checkbox_2"> Keep me logged in</label>
                           </div>
                           <div class="clearfix"></div>
                         </div>
                         <div class="form-group text-center">
-                          <button
-                            type="submit"
-                            class="btn btn-danger btn-rounded"
-                          >
-                            sign in
-                          </button>
+                          <button type="submit" class="btn btn-danger btn-rounded">Sign In</button>
                         </div>
                       </form>
                     </div>
