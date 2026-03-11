@@ -51,12 +51,6 @@ if ( isset ($_GET["error"]) )
 
     <!-- Custom CSS -->
     <link href="dist/css/style.css" rel="stylesheet" type="text/css" />
-    <style>
-      .page-wrapper .auth-page{
-        color: white !important;
-        background-color: #000d2c !important;
-      }
-    </style>
   </head>
   <body>
     <!--Preloader-->
@@ -79,7 +73,7 @@ if ( isset ($_GET["error"]) )
       </header>
 
       <!-- Main Content -->
-      <div class="page-wrapper pa-0 ma-0 auth-page">
+      <div class="page-wrapper pa-0 ma-0 auth-page" style="color: white !important;background-color: #000d2c !important;">
         <div class="container-fluid">
           <!-- Row -->
           <div class="table-struct full-width full-height">
