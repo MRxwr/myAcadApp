@@ -27,7 +27,7 @@ if ( isset ($_GET["error"]) )
       name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
-    <title>MY ACAD - CP.</title>
+    <title>MY ACADEMY - CP.</title>
     <meta
       name="description"
       content="Droopy is a Dashboard & Admin Site Responsive Template by hencework."
@@ -39,8 +39,8 @@ if ( isset ($_GET["error"]) )
     <meta name="author" content="hencework" />
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="../img/logoNew.png" />
-    <link rel="icon" href="../img/logoNew.png" type="image/x-icon" />
+    <link rel="shortcut icon" href="../logos/logoNew.png" />
+    <link rel="icon" href="../logos/logoNew.png" type="image/x-icon" />
 
     <!-- vector map CSS -->
     <link
@@ -51,6 +51,12 @@ if ( isset ($_GET["error"]) )
 
     <!-- Custom CSS -->
     <link href="dist/css/style.css" rel="stylesheet" type="text/css" />
+    <style>
+      body{
+        color: white !important;
+        background-color: #000d2c !important;
+      }
+    </style>
   </head>
   <body>
     <!--Preloader-->
@@ -63,9 +69,9 @@ if ( isset ($_GET["error"]) )
       <header class="sp-header">
         <div class="sp-logo-wrap pull-left">
           <a href="index">
-            <img class="brand-img mr-10" src="../img/logoNew.png" alt="brand" style="width:50px;height:50px"/>
+            <img class="brand-img mr-10" src="../logos/logoNew.png" alt="brand" style="width:50px;height:50px"/>
             <span class="brand-text"
-              ><span style="font-size: 22px;">MY ACAD Dashboard</span></span
+              ><span style="font-size: 22px;">MY ACADEMY Dashboard</span></span
             >
           </a>
         </div>
@@ -85,7 +91,7 @@ if ( isset ($_GET["error"]) )
                       <h3 class="text-center txt-dark mb-10">
                         Sign in to
                         <b>
-                          MY ACAD Dashboard
+                          MY ACADEMY Dashboard
                         </b>
                       </h3>
                       <h6 class="text-center nonecase-font txt-grey">
