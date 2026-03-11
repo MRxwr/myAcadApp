@@ -65,7 +65,7 @@ if ( isset ($_GET["error"]) )
           <a href="index">
             <img class="brand-img mr-10" src="../logos/logoNew.png" alt="brand" style="width:50px;height:50px"/>
             <span class="brand-text"
-              ><span style="font-size: 22px;">MY ACADEMY Dashboard</span></span
+              ><span style="font-size: 22px; color: white;">MY ACADEMY Dashboard</span></span
             >
           </a>
         </div>
@@ -82,13 +82,13 @@ if ( isset ($_GET["error"]) )
                 <div class="row">
                   <div class="col-sm-12 col-xs-12">
                     <div class="mb-30">
-                      <h3 class="text-center mb-10">
+                      <h3 class="text-center txt-light mb-10">
                         Sign in to
                         <b>
                           MY ACADEMY Dashboard
                         </b>
                       </h3>
-                      <h6 class="text-center nonecase-font">
+                      <h6 class="text-center nonecase-font txt-light">
                         Enter your details below
                       </h6>
                       <?php 
