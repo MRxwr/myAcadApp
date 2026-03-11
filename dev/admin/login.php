@@ -63,11 +63,9 @@ if ( isset ($_GET["error"]) ){
                       <h6 class="text-center nonecase-font txt-light">Enter your details below</h6>
                       <?php 
 											if ( isset($_GET["temp"]) ){
-												?>
-                        <div class="text-center" style="color: gold;"><?php echo $errormsg ?></div>
-                        <?php
+                        echo "<div class='text-center' style='color: gold;'>$errormsg</div>";
 											}
-												?>
+											?>
                     </div>
                     <div class="form-wrap">
                       <form action="includes/logindb.php" method="post">
@@ -75,9 +73,7 @@ if ( isset ($_GET["error"]) ){
                           <label class="control-label txt-light mb-10" for="exampleInputEmail_2">Email address</label>
                           <?php 
                           if( isset($_GET["error"]) AND $_GET["error"] == "e" ){
-														?>
-                            <div style="color: red;"><?php echo $errormsg ?></div>
-                            <?php
+                            echo "<div style='color: red;'>$errormsg</div>";
 													}
 													?>
                           <input type="email" name="email" class="form-control" required="" id="exampleInputEmail_2" placeholder="Enter email" />
@@ -87,15 +83,12 @@ if ( isset ($_GET["error"]) ){
                           <div class="clearfix">
                           <?php 
                           if ( isset($_GET["error"]) AND $_GET["error"] == "p" ){
-                            ?> 
-                              <div style="color: red;"> <?php echo $errormsg ?></div>
-                            <?php
+                              echo "<div style='color: red;'>$errormsg</div>";
 													}
 													?>
                           </div>
                           <input type="password" name="password" class="form-control" required="" id="exampleInputpwd_2" placeholder="Enter pwd" />
                         </div>
-
                         <div class="form-group">
                           <div class="checkbox checkbox-primary pr-10 pull-left">
                             <input id="checkbox_2" type="checkbox"/>
