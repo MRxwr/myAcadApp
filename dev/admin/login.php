@@ -52,7 +52,7 @@ if ( isset ($_GET["error"]) )
     <!-- Custom CSS -->
     <link href="dist/css/style.css" rel="stylesheet" type="text/css" />
     <style>
-      body{
+      .page-wrapper .auth-page{
         color: white !important;
         background-color: #000d2c !important;
       }
