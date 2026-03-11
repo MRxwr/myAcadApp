@@ -83,7 +83,7 @@ if ( isset ($_GET["error"]) ){
                           <input type="email" name="email" class="form-control" required="" id="exampleInputEmail_2" placeholder="Enter email" />
                         </div>
                         <div class="form-group">
-                          <label class="pull-left text-light control-label mb-10" for="exampleInputpwd_2" >Password</label>
+                          <label class="pull-left txt-light control-label mb-10" for="exampleInputpwd_2" >Password</label>
                           <div class="clearfix">
                           <?php 
                           if ( isset($_GET["error"]) AND $_GET["error"] == "p" ){
