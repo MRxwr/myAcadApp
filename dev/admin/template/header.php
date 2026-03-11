@@ -41,8 +41,8 @@ require ("includes/checksouthead.php");
 	<!-- Custom CSS -->
 	<link href="dist/css/style.css" rel="stylesheet" type="text/css">
 	<!-- Favicon -->
-	<link rel="shortcut icon" href="../img/logoNew.png">
-	<link rel="icon" href="../img/logoNew.png" type="image/x-icon">
+	<link rel="shortcut icon" href="../logos/logoNew.png">
+	<link rel="icon" href="../logos/logoNew.png" type="image/x-icon">
 
 	<!-- Data table CSS -->
 	<link href="../vendors/bower_components/datatables/media/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css"/>
