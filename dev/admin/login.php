@@ -19,7 +19,7 @@ if ( isset ($_GET["error"]) ){
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>MY ACADEMY - CP.</title>
+    <title>My Academy - CP.</title>
     <meta name="description" content="Droopy is a Dashboard & Admin Site Responsive Template by hencework." />
     <meta name="keywords" content="admin, admin dashboard, admin template, cms, crm, Droopy Admin, Droopyadmin, premium admin templates, responsive admin, sass, panel, software, ui, visualization, web app, application" />
     <meta name="author" content="hencework" />
@@ -43,7 +43,7 @@ if ( isset ($_GET["error"]) ){
         <div class="sp-logo-wrap pull-left">
           <a href="index">
             <img class="brand-img mr-10" src="../logos/logoNew.png" alt="brand" style="width:50px;height:50px"/>
-            <span class="brand-text"><span style="font-size: 22px; color: white;">MY ACADEMY</span></span>
+            <span class="brand-text"><span style="font-size: 22px; color: white;">My Academy</span></span>
           </a>
         </div>
         <div class="clearfix"></div>
@@ -59,7 +59,7 @@ if ( isset ($_GET["error"]) ){
                 <div class="row">
                   <div class="col-sm-12 col-xs-12">
                     <div class="mb-30">
-                      <h3 class="text-center txt-light mb-10">Sign in to <b>MY ACADEMY Dashboard</b></h3>
+                      <h3 class="text-center txt-light mb-10">Sign in to <b>My Academy Dashboard</b></h3>
                       <h6 class="text-center nonecase-font txt-light">Enter your details below</h6>
                       <?php 
 											if ( isset($_GET["temp"]) ){
