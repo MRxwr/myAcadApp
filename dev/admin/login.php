@@ -30,6 +30,76 @@ if ( isset ($_GET["error"]) ){
     <link href="../vendors/bower_components/jasny-bootstrap/dist/css/jasny-bootstrap.min.css" rel="stylesheet" type="text/css"/>
     <!-- Custom CSS -->
     <link href="dist/css/style.css" rel="stylesheet" type="text/css" />
+    <style>
+      body {
+        background-color: #011133 !important;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      }
+      .auth-page {
+        background-color: #011133 !important;
+      }
+      .auth-form {
+        max-width: 350px;
+        width: 100%;
+      }
+      .brand-img-center {
+        display: block;
+        margin: 0 auto 30px;
+        width: 120px;
+        height: auto;
+      }
+      h3 {
+        font-size: 28px;
+        font-weight: 600;
+        margin-bottom: 5px;
+        color: #ffffff;
+      }
+      h6 {
+        font-size: 16px;
+        color: #d1d1d1;
+        margin-bottom: 40px;
+      }
+      .form-group label {
+        font-weight: 400;
+        font-size: 14px;
+        margin-bottom: 8px;
+        color: #ffffff;
+      }
+      .form-control {
+        background-color: #ffffff !important;
+        border: none !important;
+        border-radius: 4px !important;
+        height: 45px !important;
+        color: #333 !important;
+        font-size: 16px !important;
+        padding: 10px 15px !important;
+      }
+      .form-control::placeholder {
+        color: #999 !important;
+      }
+      .checkbox label {
+        color: #ffffff !important;
+        font-size: 14px;
+      }
+      .btn-signin {
+        background-color: #e65132 !important;
+        border: none !important;
+        border-radius: 25px !important;
+        padding: 12px 0 !important;
+        font-size: 18px !important;
+        font-weight: 500 !important;
+        width: 70%;
+        margin-top: 20px;
+        color: #ffffff !important;
+        transition: background-color 0.3s;
+      }
+      .btn-signin:hover {
+        background-color: #f05a3c !important;
+      }
+      .sp-header {
+        display: none;
+      }
+    </style>
   </head>
   <body>
     <!--Preloader-->
@@ -50,7 +120,7 @@ if ( isset ($_GET["error"]) ){
       </header>
 
       <!-- Main Content -->
-      <div class="page-wrapper pa-0 ma-0 auth-page" style="color: white !important;background-color: #000d2c !important;">
+      <div class="page-wrapper pa-0 ma-0 auth-page">
         <div class="container-fluid">
           <!-- Row -->
           <div class="table-struct full-width full-height">
@@ -58,9 +128,10 @@ if ( isset ($_GET["error"]) ){
               <div class="auth-form ml-auto mr-auto no-float">
                 <div class="row">
                   <div class="col-sm-12 col-xs-12">
-                    <div class="mb-30">
-                      <h3 class="text-center txt-light mb-10">Sign in to <b>My Academy Dashboard</b></h3>
-                      <h6 class="text-center nonecase-font txt-light">Enter your details below</h6>
+                    <div class="mb-30 text-center">
+                      <img class="brand-img-center" src="../logos/logoNew.png" alt="brand" />
+                      <h3 class="txt-light">Sign in to My Academy Dashboard</h3>
+                      <h6 class="txt-light">Enter your details below</h6>
                       <?php 
 											if ( isset($_GET["temp"]) ){
                         echo "<div class='text-center' style='color: gold;'>$errormsg</div>";
@@ -70,16 +141,16 @@ if ( isset ($_GET["error"]) ){
                     <div class="form-wrap">
                       <form action="includes/logindb.php" method="post">
                         <div class="form-group">
-                          <label class="control-label txt-light mb-10" for="exampleInputEmail_2">Email address</label>
+                          <label class="control-label" for="exampleInputEmail_2">Email Address</label>
                           <?php 
                           if( isset($_GET["error"]) AND $_GET["error"] == "e" ){
                             echo "<div style='color: red;'>$errormsg</div>";
 													}
 													?>
-                          <input type="email" name="email" class="form-control" required="" id="exampleInputEmail_2" placeholder="Enter email" />
+                          <input type="email" name="email" class="form-control" required="" id="exampleInputEmail_2" placeholder="Enter Email" />
                         </div>
                         <div class="form-group">
-                          <label class="pull-left txt-light control-label mb-10" for="exampleInputpwd_2" >Password</label>
+                          <label class="control-label" for="exampleInputpwd_2" >Password</label>
                           <div class="clearfix">
                           <?php 
                           if ( isset($_GET["error"]) AND $_GET["error"] == "p" ){
@@ -87,7 +158,7 @@ if ( isset ($_GET["error"]) ){
 													}
 													?>
                           </div>
-                          <input type="password" name="password" class="form-control" required="" id="exampleInputpwd_2" placeholder="Enter pwd" />
+                          <input type="password" name="password" class="form-control" required="" id="exampleInputpwd_2" placeholder="Enter Pwd" />
                         </div>
                         <div class="form-group">
                           <div class="checkbox checkbox-primary pr-10 pull-left">
@@ -97,7 +168,7 @@ if ( isset ($_GET["error"]) ){
                           <div class="clearfix"></div>
                         </div>
                         <div class="form-group text-center">
-                          <button type="submit" class="btn btn-danger btn-rounded">Sign In</button>
+                          <button type="submit" class="btn btn-signin">Sign In</button>
                         </div>
                       </form>
                     </div>
