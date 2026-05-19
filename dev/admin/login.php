@@ -151,6 +151,7 @@ if ( isset ($_GET["error"]) ){
                         </div>
                         <div class="form-group">
                           <label class="control-label" for="exampleInputpwd_2" >Password</label>
+                          <a class="capitalize-font txt-danger block mb-10 pull-right font-12" href="forgot-password">forgot password?</a>
                           <div class="clearfix">
                           <?php 
                           if ( isset($_GET["error"]) AND $_GET["error"] == "p" ){
