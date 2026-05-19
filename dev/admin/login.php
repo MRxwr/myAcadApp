@@ -1,5 +1,6 @@
 <?php
 require ("includes/config.php");
+require("includes/functions.php");
 require ("includes/translate.php");
 
 if ( isset($_COOKIE[$cookieSession."A"]) && !empty($_COOKIE[$cookieSession."A"]) ){
@@ -134,7 +135,7 @@ if ( isset ($_GET["error"]) ){
                       <h6 class="txt-light">Enter your details below</h6>
                       <?php 
 											if ( isset($_GET["temp"]) ){
-                        echo "<div class='text-center' style='color: gold;'>$errormsg</div>";
+                        echo "<div class='text-center' style='color: gold;'>".direction("Password updated successfully","تم تحديث كلمة المرور بنجاح")."</div>";
 											}
 											?>
                     </div>
