@@ -131,8 +131,8 @@ if ( isset ($_GET["error"]) ){
                   <div class="col-sm-12 col-xs-12">
                     <div class="mb-30 text-center">
                       <img class="brand-img-center" src="../logos/logoNew.png" alt="brand" />
-                      <h3 class="txt-light">Sign in to My Academy Dashboard</h3>
-                      <h6 class="txt-light">Enter your details below</h6>
+                      <h3 class="txt-light"><?php echo direction("Sign in to My Academy Dashboard","تسجيل الدخول إلى لوحة إدارة أكاديمي"); ?></h3>
+                      <h6 class="txt-light"><?php echo direction("Enter your details below","أدخل تفاصيلك أدناه"); ?></h6>
                       <?php 
 											if ( isset($_GET["temp"]) ){
                         echo "<div class='text-center' style='color: gold;'>".direction("Password updated successfully","تم تحديث كلمة المرور بنجاح")."</div>";
@@ -142,17 +142,17 @@ if ( isset ($_GET["error"]) ){
                     <div class="form-wrap">
                       <form action="includes/logindb.php" method="post">
                         <div class="form-group">
-                          <label class="control-label" for="exampleInputEmail_2">Email Address</label>
+                          <label class="control-label" for="exampleInputEmail_2"><?php echo direction("Email Address","البريد الإلكتروني"); ?></label>
                           <?php 
                           if( isset($_GET["error"]) AND $_GET["error"] == "e" ){
                             echo "<div style='color: red;'>".direction("Invalid email","البريد الإلكتروني غير صالح")."</div>";
 													}
 													?>
-                          <input type="email" name="email" class="form-control" required="" id="exampleInputEmail_2" placeholder="Enter Email" />
+                          <input type="email" name="email" class="form-control" required="" id="exampleInputEmail_2" placeholder="<?php echo direction("Enter Email","أدخل البريد الإلكتروني"); ?>" />
                         </div>
                         <div class="form-group">
-                          <label class="control-label" for="exampleInputpwd_2" >Password</label>
-                          <a class="capitalize-font txt-danger block mb-10 pull-right font-12" href="forgot-password">forgot password?</a>
+                          <label class="control-label" for="exampleInputpwd_2" ><?php echo direction("Password","كلمة المرور"); ?></label>
+                          <a class="capitalize-font txt-danger block mb-10 pull-right font-12" href="forgot-password"><?php echo direction("forgot password?","نسيت كلمة المرور؟"); ?></a>
                           <div class="clearfix">
                           <?php 
                           if ( isset($_GET["error"]) AND $_GET["error"] == "p" ){
@@ -160,17 +160,17 @@ if ( isset ($_GET["error"]) ){
 													}
 													?>
                           </div>
-                          <input type="password" name="password" class="form-control" required="" id="exampleInputpwd_2" placeholder="Enter Pwd" />
+                          <input type="password" name="password" class="form-control" required="" id="exampleInputpwd_2" placeholder="<?php echo direction("Enter Password","أدخل كلمة المرور"); ?>" />
                         </div>
                         <div class="form-group">
                           <div class="checkbox checkbox-primary pr-10 pull-left">
                             <input id="checkbox_2" type="checkbox"/>
-                            <label for="checkbox_2"> Keep me logged in</label>
+                            <label for="checkbox_2"> <?php echo direction("Keep me logged in","ابقني مسجلاً الدخول"); ?></label>
                           </div>
                           <div class="clearfix"></div>
                         </div>
                         <div class="form-group text-center">
-                          <button type="submit" class="btn btn-signin">Sign In</button>
+                          <button type="submit" class="btn btn-signin"><?php echo direction("Sign In","تسجيل الدخول"); ?></button>
                         </div>
                       </form>
                     </div>
