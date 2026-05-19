@@ -43,7 +43,7 @@ if ( $_SERVER["REQUEST_METHOD"] == "POST" ) {
     } elseif ( $step == 2 ) {
         // Change Password
         $otpForm = $_POST["otp"];
-        $newPassword = $_POST["password"];
+        $newPassword = sha1($_POST["password"]);
         if ( $employee = selectDBNew("employees", [$email, $otpForm], "`email` = ? AND `otp` = ? AND `status` = '0'", "") ) {
             if ( updateDB("employees", ["password" => $newPassword, "otp" => ""], "`id` = '{$employee[0]["id"]}'") ) {
                 header("Location: login.php?temp=updated");
