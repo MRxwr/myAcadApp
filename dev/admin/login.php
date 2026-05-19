@@ -145,7 +145,7 @@ if ( isset ($_GET["error"]) ){
                           <label class="control-label" for="exampleInputEmail_2">Email Address</label>
                           <?php 
                           if( isset($_GET["error"]) AND $_GET["error"] == "e" ){
-                            echo "<div style='color: red;'>$errormsg</div>";
+                            echo "<div style='color: red;'>".direction("Invalid email","البريد الإلكتروني غير صالح")."</div>";
 													}
 													?>
                           <input type="email" name="email" class="form-control" required="" id="exampleInputEmail_2" placeholder="Enter Email" />
@@ -156,7 +156,7 @@ if ( isset ($_GET["error"]) ){
                           <div class="clearfix">
                           <?php 
                           if ( isset($_GET["error"]) AND $_GET["error"] == "p" ){
-                              echo "<div style='color: red;'>$errormsg</div>";
+                              echo "<div style='color: red;'>".direction("Invalid password","كلمة المرور غير صالحة")."</div>";
 													}
 													?>
                           </div>
