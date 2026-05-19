@@ -23,13 +23,13 @@ if ( $_SERVER["REQUEST_METHOD"] == "POST" ) {
                     header("Location: forgot-password.php?step=1&email=" . urlencode($email));
                     exit();
                 } else {
-                    $error = "Failed to process request.";
+                    $error = direction("Failed to send OTP. Please try again.","فشل في إرسال رمز التحقق. الرجاء المحاولة مرة أخرى.");
                 }
             } else {
-                $error = "Email not found.";
+                $error = direction("Email not found.","البريد الإلكتروني غير موجود.");
             }
         } else {
-            $error = "Please enter your email.";
+            $error = direction("Please enter your email.","الرجاء إدخال بريدك الإلكتروني.");
         }
     } elseif ( $step == 1 ) {
         // Verify OTP
@@ -38,7 +38,7 @@ if ( $_SERVER["REQUEST_METHOD"] == "POST" ) {
             header("Location: forgot-password.php?step=2&email=" . urlencode($email) . "&otp=" . urlencode($otpForm));
             exit();
         } else {
-            $error = "Invalid OTP.";
+            $error = direction("Invalid OTP.","رمز التحقق غير صالح.");
         }
     } elseif ( $step == 2 ) {
         // Change Password
@@ -148,14 +148,14 @@ if ( $_SERVER["REQUEST_METHOD"] == "POST" ) {
                                     <div class="mb-30 text-center">
                                         <img class="brand-img-center" src="../logos/logoNew.png" alt="brand" />
                                         <?php if ( $step == 0 ) { ?>
-                                            <h3 class="txt-light">Forgot Password</h3>
-                                            <h6 class="txt-light">Enter your email and we'll send an OTP to your WhatsApp!</h6>
+                                            <h3 class="txt-light"><?php echo direction("Forgot Password","نسيت كلمة المرور"); ?></h3>
+                                            <h6 class="txt-light"><?php echo direction("Enter your email and we'll send an OTP to your WhatsApp!","أدخل بريدك الإلكتروني وسنرسل رمز التحقق إلى WhatsApp الخاص بك!"); ?></h6>
                                         <?php } elseif ( $step == 1 ) { ?>
-                                            <h3 class="txt-light">Verify OTP</h3>
-                                            <h6 class="txt-light">Enter the code sent to your mobile.</h6>
+                                            <h3 class="txt-light"><?php echo direction("Verify OTP","تحقق من رمز التحقق"); ?></h3>
+                                            <h6 class="txt-light"><?php echo direction("Enter the code sent to your mobile.","أدخل الرمز المرسل إلى هاتفك المحمول."); ?></h6>
                                         <?php } elseif ( $step == 2 ) { ?>
-                                            <h3 class="txt-light">Reset Password</h3>
-                                            <h6 class="txt-light">Choose a new password for your account.</h6>
+                                            <h3 class="txt-light"><?php echo direction("Reset Password","إعادة تعيين كلمة المرور"); ?></h3>
+                                            <h6 class="txt-light"><?php echo direction("Choose a new password for your account.","اختر كلمة مرور جديدة لحسابك."); ?></h6>
                                         <?php } ?>
                                         
                                         <?php if ( !empty($error) ) { ?>
@@ -168,33 +168,33 @@ if ( $_SERVER["REQUEST_METHOD"] == "POST" ) {
                                             
                                             <?php if ( $step == 0 ) { ?>
                                                 <div class="form-group">
-                                                    <label class="control-label" for="exampleInputEmail_2">Email Address</label>
-                                                    <input type="email" name="email" class="form-control" required="" id="exampleInputEmail_2" placeholder="Enter Email" value="<?php echo htmlspecialchars($email); ?>" />
+                                                    <label class="control-label" for="exampleInputEmail_2"><?php echo direction("Email Address","البريد الإلكتروني"); ?></label>
+                                                    <input type="email" name="email" class="form-control" required="" id="exampleInputEmail_2" placeholder="<?php echo direction("Enter Email","أدخل البريد الإلكتروني"); ?>" value="<?php echo htmlspecialchars($email); ?>" />
                                                 </div>
                                                 <div class="form-group text-center">
-                                                    <button type="submit" class="btn btn-signin">Send OTP</button>
+                                                    <button type="submit" class="btn btn-signin"><?php echo direction("Send OTP","إرسال رمز التحقق"); ?></button>
                                                 </div>
                                             <?php } elseif ( $step == 1 ) { ?>
                                                 <div class="form-group">
-                                                    <label class="control-label" for="otp_input">OTP Code</label>
-                                                    <input type="text" name="otp" class="form-control" required="" id="otp_input" placeholder="Enter OTP" />
+                                                    <label class="control-label" for="otp_input"><?php echo direction("OTP Code","رمز التحقق"); ?></label>
+                                                    <input type="text" name="otp" class="form-control" required="" id="otp_input" placeholder="<?php echo direction("Enter OTP","أدخل رمز التحقق"); ?>" />
                                                 </div>
                                                 <div class="form-group text-center">
-                                                    <button type="submit" class="btn btn-signin">Verify OTP</button>
+                                                    <button type="submit" class="btn btn-signin"><?php echo direction("Verify OTP","تحقق من رمز التحقق"); ?></button>
                                                 </div>
                                             <?php } elseif ( $step == 2 ) { ?>
                                                 <input type="hidden" name="otp" value="<?php echo htmlspecialchars($_REQUEST["otp"]); ?>">
                                                 <div class="form-group">
-                                                    <label class="control-label" for="pwd_input">New Password</label>
-                                                    <input type="password" name="password" class="form-control" required="" id="pwd_input" placeholder="Enter New Password" />
+                                                    <label class="control-label" for="pwd_input"><?php echo direction("New Password","كلمة المرور الجديدة"); ?></label>
+                                                    <input type="password" name="password" class="form-control" required="" id="pwd_input" placeholder="<?php echo direction("Enter New Password","أدخل كلمة المرور الجديدة"); ?>" />
                                                 </div>
                                                 <div class="form-group text-center">
-                                                    <button type="submit" class="btn btn-signin">Update Password</button>
+                                                    <button type="submit" class="btn btn-signin"><?php echo direction("Update Password","تحديث كلمة المرور"); ?></button>
                                                 </div>
                                             <?php } ?>
                                         </form>
                                         <div class="text-center mt-20">
-                                            <a href="login" style="color: #d1d1d1; font-size: 14px;">Back to Sign In</a>
+                                            <a href="login" style="color: #d1d1d1; font-size: 14px;"><?php echo direction("Back to Sign In","العودة إلى تسجيل الدخول"); ?></a>
                                         </div>
                                     </div>
                                 </div>
