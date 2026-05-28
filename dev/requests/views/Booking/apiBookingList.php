@@ -14,7 +14,7 @@ $dataJoin = array(
     "on" => ["t.fieldId = t1.id","t.ages = t2.id","t.levels = t3.id","t1.area = t4.id","t1.sport = t5.id"],
     "type" => ["left","left","left","left","left","left"],
 );
-if( $bookingList = selectJoinDB("fields_booking", $dataJoin, "t.bookingId = '0' AND (t.userId = '{$data["userId"]}' OR t.id IN (SELECT bookingId FROM fields_booking WHERE userId = '{$data["userId"]}' AND bookingId != '0')) ORDER BY t.id DESC LIMIT {$limit} OFFSET {$offset}") ){
+if( $bookingList = selectJoinDB("fields_booking", $dataJoin, "t.bookingId = '0' AND t.status != '0' AND (t.userId = '{$data["userId"]}' OR t.id IN (SELECT bookingId FROM fields_booking WHERE userId = '{$data["userId"]}' AND bookingId != '0')) ORDER BY t.id DESC LIMIT {$limit} OFFSET {$offset}") ){
     $response["bookingList"] = $bookingList;
 }else{
     $response["msg"] = popupMsg($requestLang,"No Bookings available","لا يوجد مباريات متاحة");
