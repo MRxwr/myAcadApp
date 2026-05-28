@@ -1,7 +1,6 @@
 <?php 
 if( 
 ( isset($_POST["title"]) && !empty($_POST["title"]) ) &&
-( isset($_POST["email"]) && !empty($_POST["email"]) ) &&
 ( isset($_POST["phone"]) && !empty($_POST["phone"]) ) &&
 ( isset($_POST["message"]) && !empty($_POST["message"]) ) &&
 insertDB2("contact_us",$_POST) 
