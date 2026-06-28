@@ -42,7 +42,7 @@ if( !isset($_GET["userId"]) || empty($_GET["userId"]) ){
                         "arArea" => $area[0]["areaArTitle"],
                         "academyLogo" => $academy[0]["imageurl"],
                         "sportLogo" => $sport[0]["imageurl"],
-                        "type" => popupMsg($requestLang,"Subscription","اشتراك"),
+                        "type" => popupMsg($requestLang,"Academy","أكاديمية"),
                         "status" => $orders[$i]["status"],
                         "statusText" => ( $orders[$i]["status"] == 1 ) ? popupMsg($requestLang,"Live","مفعلة") : ( ( $orders[$i]["status"] == 2 ) ? popupMsg($requestLang,"Cancelled","ملغاة") : ( ( $orders[$i]["status"] == 3 ) ? popupMsg($requestLang,"Refunded","مستردة") : ( ( $orders[$i]["status"] == 4 ) ? popupMsg($requestLang,"Ended","منتهية") : popupMsg($requestLang,"Pending","قيد الانتظار") ) ) ),
                         "statusHexaColors" => ( $orders[$i]["status"] == 1 ) ? "#28a745" : ( ( $orders[$i]["status"] == 2 ) ? "#dc3545" : ( ( $orders[$i]["status"] == 3 ) ? "#ffc107" : ( ( $orders[$i]["status"] == 4 ) ? "#6c757d" : "#007bff" ) ) )
