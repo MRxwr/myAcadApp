@@ -14,9 +14,17 @@ if( isset($_GET["lang"]) && !empty($_GET["lang"]) ){
 	$requestLang = $_GET["lang"];
 }
 
-if ( isset(getallheaders()["myacadheader"]) ){
-	$headerAPI =  getallheaders()["myacadheader"];
-}else{
+$headerAPI = "";
+if ( isset($_SERVER["HTTP_MYACADHEADER"]) ){
+	$headerAPI = $_SERVER["HTTP_MYACADHEADER"];
+}elseif ( function_exists('getallheaders') ){
+    $headers = array_change_key_case(getallheaders(), CASE_LOWER);
+    if ( isset($headers["myacadheader"]) ){
+        $headerAPI = $headers["myacadheader"];
+    }
+}
+
+if ( empty($headerAPI) ){
 	$error = array("msg"=>"Please set headres");
 	echo outputError($error);die();
 }

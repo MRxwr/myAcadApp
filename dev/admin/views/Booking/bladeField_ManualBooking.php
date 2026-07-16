@@ -181,7 +181,7 @@ $(document).ready(function() {
                 },
                 success: function(response) {
                     var data = (typeof response === 'object') ? response : JSON.parse(response);
-                    if (data.status && data.data.timeSlots) {
+                    if (data.ok && data.data && data.data.timeSlots) {
                         var html = '';
                         var slots = data.data.timeSlots;
                         if (slots.length > 0) {
@@ -199,7 +199,10 @@ $(document).ready(function() {
                         }
                         $('#slotsList').html(html || '<div class="col-md-12 text-danger"><?php echo direction("No available slots for this date/period", "لا توجد فترات متاحة لهذا التاريخ/الفترة") ?></div>');
                     } else {
-                        $('#slotsList').html('<div class="col-md-12 text-danger">' + (data.msg || 'Error loading slots') + '</div>');
+                        var errorMsg = 'Error loading slots';
+                        if (data.data && data.data.msg) errorMsg = data.data.msg;
+                        else if (data.status) errorMsg = data.status;
+                        $('#slotsList').html('<div class="col-md-12 text-danger">' + errorMsg + '</div>');
                     }
                 },
                 error: function() {
