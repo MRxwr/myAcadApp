@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['manualBooking'])) {
                 "ages" => $ageId,
                 "notes" => $notes,
                 "total" => $fieldDetails[0]["price"],
-                "paymentMethod" => 0, // Cash
+                "paymentMethod" => 5, // Cash
                 "status" => 2, // Fully Paid
                 "date" => date("Y-m-d H:i:s")
             );
@@ -167,16 +167,20 @@ $(document).ready(function() {
             $('#slotsList').html('<div class="col-md-12">Loading...</div>');
             
             $.ajax({
-                url: '../requests/views/Booking/apiBookingTimes.php',
+                url: '../requests/index.php?a=BookingTimes',
                 type: 'GET',
+                headers: {
+                    "myacadheader": "myAcadAppCreate"
+                },
                 data: {
                     fieldId: fieldId,
                     date: date,
                     periodId: periodId,
+                    admin: 1,
                     currentTime: Math.floor(Date.now() / 1000)
                 },
                 success: function(response) {
-                    var data = JSON.parse(response);
+                    var data = (typeof response === 'object') ? response : JSON.parse(response);
                     if (data.status && data.data.timeSlots) {
                         var html = '';
                         var slots = data.data.timeSlots;

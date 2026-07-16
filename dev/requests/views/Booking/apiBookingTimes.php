@@ -96,7 +96,7 @@ while ($currentTime < $endTime) {
 
 	// If booking is for today, check if slot is at least 2 hours from now
 	$isAvailable = true;
-	if ($isToday) {
+	if ($isToday && !isset($_GET["admin"])) {
 		// Get current hour and minute from server
 		$serverHour = date('G', $serverNow);
 		$serverMinute = date('i', $serverNow);
