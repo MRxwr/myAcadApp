@@ -10,8 +10,6 @@ if( isset($_GET["result"]) ){
 // Set headers before any output
 header('Content-Type: text/html; charset=utf-8');
 
-
-
 // get viewed page from pages folder \\
 require_once("views/bladeMainView.php");
 /*
