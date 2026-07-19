@@ -10,17 +10,20 @@ if( isset($_GET["result"]) ){
 // Set headers before any output
 header('Content-Type: text/html; charset=utf-8');
 
-require("template/header.php");
-//require("template/navbar.php");
+
 
 // get viewed page from pages folder \\
 require_once("views/bladeMainView.php");
 /*
 if( isset($_GET["v"]) && searchFile("views","blade{$_GET["v"]}.php") ){
+	require("template/header.php");
+	require("template/navbar.php");
 	require_once("views/".searchFile("views","blade{$_GET["v"]}.php"));
+	require("template/footer.php");
 }else{
+	require("template/header.php");
+	require("template/navbar.php");
 	require_once("views/bladeMainView.php");
+	require("template/footer.php");
 } 
-*/
-require("template/footer.php");
 ?>
