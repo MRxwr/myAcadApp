@@ -234,7 +234,7 @@ if( !isset($_POST) ){
             // Send WhatsApp to User 1
             if ( $user1Data = selectDB("fields_booking","`id` = '{$data["bookingId"]}'") ) {
                 $paymentLink = "{$paymentReturnURL}/tbari.php?s={$user1Data[0]["gatewayId"]}";
-                $msg = popupMsg($requestLang, "A player has joined your match! Please pay to confirm: {$paymentLink}", "لقد انضم لاعب لمباراتك! يرجى الدفع للتأكيد: {$paymentLink}");
+                $msg = popupMsg($requestLang, "{$_POST["name"]} has joined your match! Please pay to confirm: {$paymentLink}", "{$_POST["name"]} انضم لمباراتك! يرجى الدفع للتأكيد: {$paymentLink}");
                 whatsappUltraMsg($user1Data[0]["phone"], $msg);
             }
 
