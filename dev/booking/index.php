@@ -23,7 +23,7 @@ if (isset($_GET["requested_order_id"]) && !empty($_GET["requested_order_id"])) {
                             if ( $booking2 = selectDB("fields_booking", "`bookingId` = '{$booking[0]["id"]}'") ) {
                                 // Send WhatsApp to User 2
                                 $paymentLink = "{$paymentReturnURL}/tbari.php?s={$booking2[0]["gatewayId"]}";
-                                $msg = popupMsg($requestLang, "User 1 has paid! Now it's your turn to confirm the match: {$paymentLink}", "قام اللاعب الأول بالدفع! الآن دورك لتأكيد المباراة: {$paymentLink}");
+                                $msg = popupMsg($requestLang, "{$booking[0]["name"]} has paid! Now it's your turn to confirm the match: {$paymentLink}", "{$booking[0]["name"]} قام بالدفع! الآن دورك لتأكيد المباراة: {$paymentLink}");
                                 whatsappUltraMsg($booking2[0]["phone"], $msg);
                             }
                             $response = outputData(array("msg" => popupMsg($requestLang, "Payment Captured Successfully - Partially Paid", " مدفوع جزئياً / تم التقاط الدفع بنجاح")));
