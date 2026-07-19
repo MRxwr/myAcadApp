@@ -40,6 +40,9 @@ if( isset($_GET["s"]) && !empty($_GET["s"]) && $booking = selectDBNew("fields_bo
     } elseif ( $booking[0]["status"] == 1 ) {
         $message = direction("You have paid. Waiting for the other player.", "لقد قمت بالدفع. بانتظار اللاعب الآخر.");
         $icon = "suc";
+    } elseif ( $booking[0]["status"] == 4 ) {
+        $message = direction("Payment Failed. Please try again.", "فشل عملية الدفع. يرجى المحاولة مرة أخرى.");
+        $icon = "close";
     } elseif ( $booking[0]["status"] == 5 ) {
         $message = direction("Match Ready! Please proceed to payment.", "المباراة جاهزة! يرجى إتمام عملية الدفع.");
         $icon = "suc";
@@ -71,7 +74,7 @@ if( isset($_GET["s"]) && !empty($_GET["s"]) && $booking = selectDBNew("fields_bo
                                 <h4><?php echo direction("Date: ","التاريخ: ") . $date ?></h4>
                                 <p><?php echo $startTime . " - " . $endTime ?></p>
                             </div>
-                            <?php if ( $booking[0]["status"] == 5 || ($booking[0]["status"] == 0 && $booking[0]["isTbari"] == 1) ) { ?>
+                            <?php if ( $booking[0]["status"] == 5 || $booking[0]["status"] == 4 || ($booking[0]["status"] == 0 && $booking[0]["isTbari"] == 1) ) { ?>
                             <form method="POST">
                                 <button type="submit" name="pay" class="button border-0 w-100"><?php echo direction("PAY NOW", "إدفع الآن") ?></button>
                             </form>

@@ -60,7 +60,15 @@ if (isset($_GET["requested_order_id"]) && !empty($_GET["requested_order_id"])) {
                     updateDB("fields_booking", array("status" => 4, "gatewayLink" => $gatewayLink), "`gatewayId` = '{$_GET["requested_order_id"]}'");
                     $response = outputData(array("msg" => popupMsg($requestLang, "Payment Failed", "فشل الدفع"))); 
                 }
+                if ($booking[0]["isTbari"] == 1) {
+                    header("Location: ../tbari.php?s=".$_GET["requested_order_id"]);
+                    die();
+                }
             } else {
+                if ($booking[0]["isTbari"] == 1) {
+                    header("Location: ../tbari.php?s=".$_GET["requested_order_id"]);
+                    die();
+                }
                 $response = outputError(array("msg" => popupMsg($requestLang, "Can Not Update Booking Status", "لا يمكن تحديث حالة الحجز"))); 
             }
         } else {
