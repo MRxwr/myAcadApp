@@ -41,8 +41,8 @@ if( !isset($_POST) ){
         //checking field Information
         if( $fieldData = selectDB("fields_list","`id` = '{$data["fieldId"]}'") ){
             $data["price"] = (float)$fieldData[0]["price"];
-            if( $data["bookingId"] != 0 ){
-                $data["price"] = (float)$bookingData[0]["total"] / 2;
+            if( $data["bookingId"] != 0 || $data["isTbari"] == 1 ){
+                $data["price"] = (float)$data["price"] / 2;
             }
         }
             
@@ -204,6 +204,50 @@ if( !isset($_POST) ){
             'extraMerchantData[0][ccChargeType]' => "{$fieldData[0]["cc_chargetype"]}",
             'extraMerchantData[0][ibanNumber]' => "{$fieldData[0]["iban"]}",
             );
+    }
+
+    if ( $data["isTbari"] == 1 ) {
+        $_POST["gatewayId"]     = $orderId;
+        $_POST["gatewayURL"]    = "";
+        $_POST["apiPayload"]    = json_encode($postBody);
+        $_POST["apiResponse"]   = "";
+        $_POST["paymentMethod"] = $data["paymentMethod"];
+        $_POST["status"]        = 0;
+        
+        if ( $data["bookingId"] == 0 ) {
+            // User 1 booked
+            insertDB2("fields_booking",$_POST);
+            $response = array(
+                "status" => true,
+                "data" => array(
+                    "paymentURL" => "index.php?v=Success&requested_order_id={$orderId}&result=SUCCESS_TBARI",
+                    "InvoiceId"  => $orderId
+                )
+            );
+        } else {
+            // User 2 joined
+            $_POST["status"] = 5;
+            insertDB2("fields_booking",$_POST);
+            
+            updateDB("fields_booking",array("status"=>5),"`id` = '{$data["bookingId"]}'");
+            
+            // Send WhatsApp to User 1
+            if ( $user1Data = selectDB("fields_booking","`id` = '{$data["bookingId"]}'") ) {
+                $paymentLink = "{$paymentReturnURL}/tbari.php?s={$user1Data[0]["gatewayId"]}";
+                $msg = popupMsg($requestLang, "A player has joined your match! Please pay to confirm: {$paymentLink}", "لقد انضم لاعب لمباراتك! يرجى الدفع للتأكيد: {$paymentLink}");
+                whatsappUltraMsg($user1Data[0]["phone"], $msg);
+            }
+
+            $response = array(
+                "status" => true,
+                "data" => array(
+                    "paymentURL" => "index.php?v=Success&requested_order_id={$orderId}&result=SUCCESS_TBARI_JOIN",
+                    "InvoiceId"  => $orderId
+                )
+            );
+        }
+        echo outputData($response);
+        die();
     }
 
     $response = upaymentGateway($postBody);
