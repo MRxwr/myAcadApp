@@ -5,6 +5,12 @@ require("admin/includes/config.php");
 require("admin/includes/translate.php");
 require("admin/includes/functions.php");
 
+if( isset($_GET["lang"]) && !empty($_GET["lang"]) ){
+	$requestLang = $_GET["lang"];
+}else{
+	$requestLang = "en"; 
+}
+
 $message = "";
 $icon = "close";
 $booking = array();
@@ -90,7 +96,7 @@ if( isset($_GET["s"]) && !empty($_GET["s"]) && $booking = selectDBNew("fields_bo
             width: 100%;
             padding: 40px;
             background: #021b4d;
-            border: 2px solid #d4af37;
+            border: 2px solid #dd9f22;
             border-radius: 20px;
             box-shadow: 0 15px 40px rgba(0,0,0,0.6);
             position: relative;
@@ -101,16 +107,16 @@ if( isset($_GET["s"]) && !empty($_GET["s"]) && $booking = selectDBNew("fields_bo
             right: 15px;
         }
         .lang-switch a {
-            color: #d4af37;
+            color: #dd9f22;
             text-decoration: none;
             font-weight: bold;
             font-size: 14px;
-            border: 1px solid #d4af37;
+            border: 1px solid #dd9f22;
             padding: 5px 10px;
             border-radius: 5px;
         }
         .invoice-header {
-            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+            border-bottom: 1px solid rgba(221, 159, 34, 0.3);
             padding-bottom: 25px;
             margin-bottom: 25px;
             display: flex;
@@ -121,7 +127,7 @@ if( isset($_GET["s"]) && !empty($_GET["s"]) && $booking = selectDBNew("fields_bo
             width: 70px;
         }
         .invoice-title {
-            color: #d4af37;
+            color: #dd9f22;
             font-size: 28px;
             font-weight: 800;
             text-align: right;
@@ -138,7 +144,7 @@ if( isset($_GET["s"]) && !empty($_GET["s"]) && $booking = selectDBNew("fields_bo
             background: rgba(255,255,255,0.03);
             text-align: center;
             margin-bottom: 30px;
-            border: 1px dashed rgba(212, 175, 55, 0.5);
+            border: 1px dashed rgba(221, 159, 34, 0.5);
         }
         .status-box h5 {
             margin: 0 0 10px;
@@ -151,7 +157,7 @@ if( isset($_GET["s"]) && !empty($_GET["s"]) && $booking = selectDBNew("fields_bo
             font-size: 18px;
             font-weight: 600;
         }
-        .text-gold { color: #d4af37; }
+        .text-gold { color: #dd9f22; }
         .text-success { color: #2ecc71; }
         .text-danger { color: #e74c3c; }
         .text-info { color: #3498db; }
@@ -163,7 +169,7 @@ if( isset($_GET["s"]) && !empty($_GET["s"]) && $booking = selectDBNew("fields_bo
             margin-bottom: 35px;
         }
         .detail-item h5 {
-            color: #d4af37;
+            color: #dd9f22;
             font-size: 12px;
             margin: 0 0 8px;
             text-transform: uppercase;
@@ -183,16 +189,16 @@ if( isset($_GET["s"]) && !empty($_GET["s"]) && $booking = selectDBNew("fields_bo
             border-bottom: 1px solid rgba(255,255,255,0.05);
         }
         .price-row.total {
-            border-top: 2px solid #d4af37;
+            border-top: 2px solid #dd9f22;
             border-bottom: none;
             margin-top: 15px;
             padding-top: 20px;
             font-size: 24px;
             font-weight: 800;
-            color: #d4af37;
+            color: #dd9f22;
         }
         .btn-pay {
-            background: #d4af37;
+            background: #dd9f22;
             color: #011133;
             width: 100%;
             border: none;
@@ -203,12 +209,12 @@ if( isset($_GET["s"]) && !empty($_GET["s"]) && $booking = selectDBNew("fields_bo
             cursor: pointer;
             text-transform: uppercase;
             transition: all 0.3s;
-            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+            box-shadow: 0 5px 15px rgba(221, 159, 34, 0.3);
         }
         .btn-pay:hover {
             background: #f1c40f;
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.5);
+            box-shadow: 0 8px 20px rgba(221, 159, 34, 0.5);
         }
         .footer-note {
             text-align: center;
@@ -248,7 +254,7 @@ if( isset($_GET["s"]) && !empty($_GET["s"]) && $booking = selectDBNew("fields_bo
             </div>
             <div class="detail-item">
                 <h5><?php echo direction("Date", "التاريخ") ?></h5>
-                <p><?php echo $date ?></p>
+                <p><?php echo substr($date, 0, 10) ?></p>
             </div>
             <div class="detail-item">
                 <h5><?php echo direction("Time", "الوقت") ?></h5>
