@@ -20,7 +20,7 @@ if ( isset ($_GET["error"]) ){
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>My Academy - CP.</title>
+    <title>My Academy</title>
     <meta name="description" content="Droopy is a Dashboard & Admin Site Responsive Template by hencework." />
     <meta name="keywords" content="admin, admin dashboard, admin template, cms, crm, Droopy Admin, Droopyadmin, premium admin templates, responsive admin, sass, panel, software, ui, visualization, web app, application" />
     <meta name="author" content="hencework" />
@@ -131,48 +131,7 @@ if ( isset ($_GET["error"]) ){
                   <div class="col-sm-12 col-xs-12">
                     <div class="mb-30 text-center">
                       <img class="brand-img-center" src="/logos/logoNew.png" alt="brand" />
-                      <h3 class="txt-light"><?php echo direction("Sign in to My Academy Dashboard","تسجيل الدخول إلى لوحة إدارة أكاديمي"); ?></h3>
-                      <h6 class="txt-light"><?php echo direction("Enter your details below","أدخل تفاصيلك أدناه"); ?></h6>
-                      <?php 
-											if ( isset($_GET["temp"]) ){
-                        echo "<div class='text-center' style='color: gold;'>".direction("Password updated successfully","تم تحديث كلمة المرور بنجاح")."</div>";
-											}
-											?>
-                    </div>
-                    <div class="form-wrap">
-                      <form action="includes/logindb.php" method="post">
-                        <div class="form-group">
-                          <label class="control-label" for="exampleInputEmail_2"><?php echo direction("Email Address","البريد الإلكتروني"); ?></label>
-                          <?php 
-                          if( isset($_GET["error"]) AND $_GET["error"] == "e" ){
-                            echo "<div style='color: red;'>".direction("Invalid email","البريد الإلكتروني غير صالح")."</div>";
-													}
-													?>
-                          <input type="email" name="email" class="form-control" required="" id="exampleInputEmail_2" placeholder="<?php echo direction("Enter Email","أدخل البريد الإلكتروني"); ?>" />
-                        </div>
-                        <div class="form-group">
-                          <label class="control-label" for="exampleInputpwd_2" ><?php echo direction("Password","كلمة المرور"); ?></label>
-                          <a class="capitalize-font txt-danger block mb-10 pull-right font-12" href="forgot-password"><?php echo direction("forgot password?","نسيت كلمة المرور؟"); ?></a>
-                          <div class="clearfix">
-                          <?php 
-                          if ( isset($_GET["error"]) AND $_GET["error"] == "p" ){
-                              echo "<div style='color: red;'>".direction("Invalid password","كلمة المرور غير صالحة")."</div>";
-													}
-													?>
-                          </div>
-                          <input type="password" name="password" class="form-control" required="" id="exampleInputpwd_2" placeholder="<?php echo direction("Enter Password","أدخل كلمة المرور"); ?>" />
-                        </div>
-                        <div class="form-group">
-                          <div class="checkbox checkbox-primary pr-10 pull-left">
-                            <input id="checkbox_2" type="checkbox"/>
-                            <label for="checkbox_2"> <?php echo direction("Keep me logged in","ابقني مسجلاً الدخول"); ?></label>
-                          </div>
-                          <div class="clearfix"></div>
-                        </div>
-                        <div class="form-group text-center">
-                          <button type="submit" class="btn btn-signin"><?php echo direction("Sign In","تسجيل الدخول"); ?></button>
-                        </div>
-                      </form>
+                      <h3 class="txt-light"><?php echo direction("My Academy","ماي أكاديمي"); ?></h3>
                     </div>
                   </div>
                 </div>
