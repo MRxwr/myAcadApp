@@ -21,7 +21,7 @@ if( isset($_GET["v"]) && searchFile("views","blade{$_GET["v"]}.php") ){
 }else{
 	require("template/header.php");
 	require("template/navbar.php");
-	require_once("views/bladeMainView.php");
+	require_once("views/bladeHome.php");
 	require("template/footer.php");
 } 
 ?>
