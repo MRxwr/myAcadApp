@@ -60,7 +60,7 @@ function expiredSubscription(){
         for ($i = 0; $i < sizeof($orders); $i++) {
             if ( $subscriptions = selectDB("subscriptions", "`id` = '{$orders[$i]["subscriptionId"]}'") ) {
 				$user = selectDB2("firebase","users","`id` = '{$orders[$i]["userId"]}'");
-				@@ $numberOfDays = ($subscriptions[0]["numberOfDays"]-2);
+				$numberOfDays = ($subscriptions[0]["numberOfDays"]-2);
 				$endDate = date("Y-m-d H:i:s", strtotime($orders[$i]["date"] . " +{$numberOfDays} days"));
 				$endDateTimestamp = strtotime($endDate);
 				$todayDate = date("Y-m-d H:i:s");
