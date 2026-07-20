@@ -21,7 +21,7 @@ $statusClass = "text-gold";
 if( isset($_GET["s"]) && !empty($_GET["s"]) && $booking = selectDBNew("fields_booking", [$_GET["s"]], "`gatewayId` = ?","") ){
     
     if ( isset($_POST["pay"]) ) {
-        // If status is 4 (Failed), create a new record attempt instead of reusing the failed one
+        // If status is 4 (Failed), create a new record attempt immediately
         if ( $booking[0]["status"] == 4 ) {
             $oldId = $booking[0]["id"];
             $newData = $booking[0];
@@ -36,8 +36,11 @@ if( isset($_GET["s"]) && !empty($_GET["s"]) && $booking = selectDBNew("fields_bo
             // Update the payment payload with the new Order ID
             $payload = json_decode($newData["apiPayload"], true);
             $payload["OrderId"] = $newGatewayId;
-            $newData["apiPayload"] = json_encode($payload);
+            // Also update the success/error URLs if they contain the old gatewayId
+            if (isset($payload["returnUrl"])) $payload["returnUrl"] = str_replace($booking[0]["gatewayId"], $newGatewayId, $payload["returnUrl"]);
+            if (isset($payload["errorUrl"])) $payload["errorUrl"] = str_replace($booking[0]["gatewayId"], $newGatewayId, $payload["errorUrl"]);
             
+            $newData["apiPayload"] = json_encode($payload);
             $newId = insertDB("fields_booking", $newData);
             
             // If this was User 1, update User 2 to point to the new parent ID
@@ -45,8 +48,8 @@ if( isset($_GET["s"]) && !empty($_GET["s"]) && $booking = selectDBNew("fields_bo
                 updateDB("fields_booking", array("bookingId" => $newId), "`bookingId` = '$oldId'");
             }
             
-            header("Location: tbari.php?s=" . $newGatewayId . (isset($_GET["Lang"]) ? "&Lang=".$_GET["Lang"] : ""));
-            die();
+            // Swap the active booking context to the new one so we proceed to payment immediately
+            $booking = selectDBNew("fields_booking", [$newId], "`id` = ?","");
         }
 
         $postBody = json_decode($booking[0]["apiPayload"], true);
