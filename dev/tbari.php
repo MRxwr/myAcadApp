@@ -116,7 +116,7 @@ if( isset($_GET["s"]) && !empty($_GET["s"]) && $booking = selectDBNew("fields_bo
         .lang-switch {
             position: absolute;
             top: 15px;
-            inset-inline-end: 15px;
+            right: 15px;
         }
         .lang-switch a {
             color: #dd9f22;
