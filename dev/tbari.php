@@ -7,6 +7,8 @@ require("admin/includes/functions.php");
 
 if( isset($_GET["Lang"]) && !empty($_GET["Lang"]) ){
 	$requestLang = $_GET["Lang"];
+}elseif( isset($_COOKIE["CREATEkwLANG"]) && !empty($_COOKIE["CREATEkwLANG"]) ){
+	$requestLang = $_COOKIE["CREATEkwLANG"];
 }else{
 	$requestLang = "EN"; 
 }
