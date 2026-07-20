@@ -21,6 +21,34 @@ $statusClass = "text-gold";
 if( isset($_GET["s"]) && !empty($_GET["s"]) && $booking = selectDBNew("fields_booking", [$_GET["s"]], "`gatewayId` = ?","") ){
     
     if ( isset($_POST["pay"]) ) {
+        // If status is 4 (Failed), create a new record attempt instead of reusing the failed one
+        if ( $booking[0]["status"] == 4 ) {
+            $oldId = $booking[0]["id"];
+            $newData = $booking[0];
+            unset($newData["id"]);
+            
+            // Generate a fresh unique gateway ID for the new attempt
+            $newGatewayId = "TBA" . time() . rand(100, 999);
+            $newData["gatewayId"] = $newGatewayId;
+            $newData["status"] = 5; // Reset to Match Ready
+            $newData["gatewayURL"] = "";
+            
+            // Update the payment payload with the new Order ID
+            $payload = json_decode($newData["apiPayload"], true);
+            $payload["OrderId"] = $newGatewayId;
+            $newData["apiPayload"] = json_encode($payload);
+            
+            $newId = insertDB("fields_booking", $newData);
+            
+            // If this was User 1, update User 2 to point to the new parent ID
+            if ( $booking[0]["bookingId"] == 0 ) {
+                updateDB("fields_booking", array("bookingId" => $newId), "`bookingId` = '$oldId'");
+            }
+            
+            header("Location: tbari.php?s=" . $newGatewayId . (isset($_GET["Lang"]) ? "&Lang=".$_GET["Lang"] : ""));
+            die();
+        }
+
         $postBody = json_decode($booking[0]["apiPayload"], true);
         $response = upaymentGateway($postBody);
         if ( isset($response["status"]) && $response["status"] == true && isset($response["data"]["link"]) ) {
