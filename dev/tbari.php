@@ -33,18 +33,33 @@ if( isset($_GET["s"]) && !empty($_GET["s"]) && $booking = selectDBNew("fields_bo
             $newData["status"] = 5; // Reset to Match Ready
             $newData["gatewayURL"] = "";
             
-            // Update the payment payload with the new Order ID and reset amounts if needed
-            $payload = json_decode($newData["apiPayload"], true);
-            $payload["OrderId"] = $newGatewayId;
+            // Reconstructing the payload exactly like apiBookingPayment.php
+            $fullAmount = $booking[0]["total"];
+            $paymentGateway = ($booking[0]["paymentMethod"] == 2) ? "cc" : "knet";
             
-            // Fix: Ensure the amount in the payload matches the booking total (prevent doubling)
-            $payload["total"] = $booking[0]["total"];
+            $postBody = array(
+                'language' => ($requestLang == "AR" ? "ar" : "en"),
+                'paymentGateway[src]' => "{$paymentGateway}",
+                'order[id]' => $newGatewayId,
+                'order[currency]' => 'KWD',
+                'order[amount]' => (string)$fullAmount,
+                'order[description]' => "Match Booking retry: " . $title,
+                'reference[id]' => $newGatewayId,
+                'customer[name]' => "{$booking[0]["name"]}",
+                'customer[email]' => "{$booking[0]["email"]}",
+                'customer[mobile]' => "{$booking[0]["phone"]}",
+                'returnUrl' => "{$paymentReturnURL}/booking/index.php",
+                'cancelUrl' => "{$paymentReturnURL}/booking/index.php",
+                'notificationUrl' => "{$paymentReturnURL}/booking/index.php",
+                'extraMerchantData[0][amount]' => (string)$fullAmount,
+                'extraMerchantData[0][knetCharge]' => "{$fieldData[0]["charges"]}",
+                'extraMerchantData[0][knetChargeType]' => "{$fieldData[0]["chargeType"]}",
+                'extraMerchantData[0][ccCharge]' => "{$fieldData[0]["cc_charge"]}",
+                'extraMerchantData[0][ccChargeType]' => "{$fieldData[0]["cc_chargetype"]}",
+                'extraMerchantData[0][ibanNumber]' => "{$fieldData[0]["iban"]}",
+            );
             
-            // Also update the success/error URLs if they contain the old gatewayId
-            if (isset($payload["returnUrl"])) $payload["returnUrl"] = str_replace($booking[0]["gatewayId"], $newGatewayId, $payload["returnUrl"]);
-            if (isset($payload["errorUrl"])) $payload["errorUrl"] = str_replace($booking[0]["gatewayId"], $newGatewayId, $payload["errorUrl"]);
-            
-            $newData["apiPayload"] = json_encode($payload);
+            $newData["apiPayload"] = json_encode($postBody);
             $newId = insertDB("fields_booking", $newData);
             
             // If this was User 1, update User 2 to point to the new parent ID
