@@ -80,6 +80,15 @@ if( isset($_GET["s"]) && !empty($_GET["s"]) && $booking = selectDBNew("fields_bo
     <title>Invoice - My Academy</title>
     <link rel="shortcut icon" href="logos/logoNew.png" />
     <style>
+        [dir="rtl"] .details-grid {
+            direction: rtl;
+        }
+        [dir="rtl"] .invoice-header {
+            flex-direction: row-reverse;
+        }
+        [dir="rtl"] .price-row {
+            flex-direction: row-reverse;
+        }
         body {
             background-color: #011133;
             color: #fff;
@@ -90,6 +99,7 @@ if( isset($_GET["s"]) && !empty($_GET["s"]) && $booking = selectDBNew("fields_bo
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            text-align: start;
         }
         .invoice-container {
             max-width: 500px;
@@ -104,7 +114,7 @@ if( isset($_GET["s"]) && !empty($_GET["s"]) && $booking = selectDBNew("fields_bo
         .lang-switch {
             position: absolute;
             top: 15px;
-            right: 15px;
+            inset-inline-end: 15px;
         }
         .lang-switch a {
             color: #dd9f22;
@@ -130,7 +140,7 @@ if( isset($_GET["s"]) && !empty($_GET["s"]) && $booking = selectDBNew("fields_bo
             color: #dd9f22;
             font-size: 28px;
             font-weight: 800;
-            text-align: right;
+            text-align: inherit;
         }
         .invoice-title small {
             display: block;
@@ -187,6 +197,7 @@ if( isset($_GET["s"]) && !empty($_GET["s"]) && $booking = selectDBNew("fields_bo
             justify-content: space-between;
             padding: 12px 0;
             border-bottom: 1px solid rgba(255,255,255,0.05);
+            flex-direction: row;
         }
         .price-row.total {
             border-top: 2px solid #dd9f22;
