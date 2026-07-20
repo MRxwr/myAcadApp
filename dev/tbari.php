@@ -227,8 +227,8 @@ if( isset($_GET["s"]) && !empty($_GET["s"]) && $booking = selectDBNew("fields_bo
 <body>
     <div class="invoice-container">
         <div class="lang-switch">
-            <a href="?s=<?php echo $_GET["s"] ?>&lang=<?php echo ($requestLang == 'en' ? 'ar' : 'en') ?>">
-                <?php echo ($requestLang == 'en' ? 'العربية' : 'English') ?>
+            <a href="?s=<?php echo $_GET["s"] ?>&lang=<?php echo ($requestLang == 'EN' ? 'AR' : 'EN') ?>">
+                <?php echo ($requestLang == 'EN' ? 'العربية' : 'English') ?>
             </a>
         </div>
 
