@@ -49,7 +49,7 @@ if( isset($_GET["s"]) && !empty($_GET["s"]) && $booking = selectDBNew("fields_bo
                     'bookingId'     => $booking[0]['bookingId'] // To keep it linked to the parent match
                 ),
                 CURLOPT_HTTPHEADER => array(
-                    'myacadheader: dev_123456789' // Replace with your actual header key if necessary
+                    'myacadheader: myAcadAppCreate' // Replace with your actual header key if necessary
                 ),
             ));
             
