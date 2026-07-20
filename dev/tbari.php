@@ -5,10 +5,10 @@ require("admin/includes/config.php");
 require("admin/includes/translate.php");
 require("admin/includes/functions.php");
 
-if( isset($_GET["lang"]) && !empty($_GET["lang"]) ){
-	$requestLang = $_GET["lang"];
+if( isset($_GET["Lang"]) && !empty($_GET["Lang"]) ){
+	$requestLang = $_GET["Lang"];
 }else{
-	$requestLang = "en"; 
+	$requestLang = "EN"; 
 }
 
 $message = "";
