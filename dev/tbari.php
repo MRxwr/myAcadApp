@@ -33,9 +33,13 @@ if( isset($_GET["s"]) && !empty($_GET["s"]) && $booking = selectDBNew("fields_bo
             $newData["status"] = 5; // Reset to Match Ready
             $newData["gatewayURL"] = "";
             
-            // Update the payment payload with the new Order ID
+            // Update the payment payload with the new Order ID and reset amounts if needed
             $payload = json_decode($newData["apiPayload"], true);
             $payload["OrderId"] = $newGatewayId;
+            
+            // Fix: Ensure the amount in the payload matches the booking total (prevent doubling)
+            $payload["total"] = $booking[0]["total"];
+            
             // Also update the success/error URLs if they contain the old gatewayId
             if (isset($payload["returnUrl"])) $payload["returnUrl"] = str_replace($booking[0]["gatewayId"], $newGatewayId, $payload["returnUrl"]);
             if (isset($payload["errorUrl"])) $payload["errorUrl"] = str_replace($booking[0]["gatewayId"], $newGatewayId, $payload["errorUrl"]);
@@ -55,10 +59,11 @@ if( isset($_GET["s"]) && !empty($_GET["s"]) && $booking = selectDBNew("fields_bo
         $postBody = json_decode($booking[0]["apiPayload"], true);
         $response = upaymentGateway($postBody);
         if ( isset($response["status"]) && $response["status"] == true && isset($response["data"]["link"]) ) {
-            updateDB("fields_booking", array("gatewayURL" => $response["data"]["link"]), "`id` = '{$booking[0]["id"]}'");
+            $gatewayURL = $response["data"]["link"];
+            updateDB("fields_booking", array("gatewayURL" => $gatewayURL), "`id` = '{$booking[0]["id"]}'");
             ?>
             <script>
-                window.location.href = "<?php echo $response["data"]["link"] ?>";
+                window.location.href = "<?php echo $gatewayURL ?>";
             </script>
             <?php
             die();
