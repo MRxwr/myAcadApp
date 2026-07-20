@@ -21,57 +21,54 @@ $statusClass = "text-gold";
 if( isset($_GET["s"]) && !empty($_GET["s"]) && $booking = selectDBNew("fields_booking", [$_GET["s"]], "`gatewayId` = ?","") ){
     
     if ( isset($_POST["pay"]) ) {
-        // If status is 4 (Failed), create a new record attempt immediately
+        // If status is 4 (Failed), create a new attempt via API
         if ( $booking[0]["status"] == 4 ) {
-            $oldId = $booking[0]["id"];
-            $newData = $booking[0];
-            unset($newData["id"]);
+            $curl = curl_init();
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => 'https://dev.myacad.app/requests/?a=BookingPayment',
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => '',
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 0,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => 'POST',
+                CURLOPT_POSTFIELDS => array(
+                    'paymentMethod' => $booking[0]['paymentMethod'],
+                    'isTbari'       => '1',
+                    'userId'        => $booking[0]['userId'],
+                    'fieldId'       => $booking[0]['fieldId'],
+                    'periodId'      => $booking[0]['periodId'],
+                    'bookingDate'   => substr($booking[0]['bookingDate'], 0, 10),
+                    'startTime'     => $booking[0]['startTime'],
+                    'endTime'       => $booking[0]['endTime'],
+                    'levels'        => $booking[0]['levels'],
+                    'ages'          => $booking[0]['ages'],
+                    'notes'         => $booking[0]['notes'],
+                    'voucher'       => $booking[0]['voucher'],
+                    'bookingId'     => $booking[0]['bookingId'] // To keep it linked to the parent match
+                ),
+                CURLOPT_HTTPHEADER => array(
+                    'myacadheader: dev_123456789' // Replace with your actual header key if necessary
+                ),
+            ));
             
-            // Generate a fresh unique gateway ID for the new attempt
-            $newGatewayId = "TBA" . time() . rand(100, 999);
-            $newData["gatewayId"] = $newGatewayId;
-            $newData["status"] = 5; // Reset to Match Ready
-            $newData["gatewayURL"] = "";
+            $responseJSON = curl_exec($curl);
+            curl_close($curl);
             
-            // Reconstructing the payload exactly like apiBookingPayment.php
-            $fullAmount = $booking[0]["total"];
-            $paymentGateway = ($booking[0]["paymentMethod"] == 2) ? "cc" : "knet";
+            $response = json_decode($responseJSON, true);
             
-            $postBody = array(
-                'language' => ($requestLang == "AR" ? "ar" : "en"),
-                'paymentGateway[src]' => "{$paymentGateway}",
-                'order[id]' => $newGatewayId,
-                'order[currency]' => 'KWD',
-                'order[amount]' => (string)$fullAmount,
-                'order[description]' => "Match Booking retry: " . $title,
-                'reference[id]' => $newGatewayId,
-                'customer[name]' => "{$booking[0]["name"]}",
-                'customer[email]' => "{$booking[0]["email"]}",
-                'customer[mobile]' => "{$booking[0]["phone"]}",
-                'returnUrl' => "{$paymentReturnURL}/booking/index.php",
-                'cancelUrl' => "{$paymentReturnURL}/booking/index.php",
-                'notificationUrl' => "{$paymentReturnURL}/booking/index.php",
-                'extraMerchantData[0][amount]' => (string)$fullAmount,
-                'extraMerchantData[0][knetCharge]' => "{$fieldData[0]["charges"]}",
-                'extraMerchantData[0][knetChargeType]' => "{$fieldData[0]["chargeType"]}",
-                'extraMerchantData[0][ccCharge]' => "{$fieldData[0]["cc_charge"]}",
-                'extraMerchantData[0][ccChargeType]' => "{$fieldData[0]["cc_chargetype"]}",
-                'extraMerchantData[0][ibanNumber]' => "{$fieldData[0]["iban"]}",
-            );
-            
-            $newData["apiPayload"] = json_encode($postBody);
-            $newId = insertDB("fields_booking", $newData);
-            
-            // If this was User 1, update User 2 to point to the new parent ID
-            if ( $booking[0]["bookingId"] == 0 ) {
-                updateDB("fields_booking", array("bookingId" => $newId), "`bookingId` = '$oldId'");
+            if ( isset($response["status"]) && $response["status"] == true && isset($response["data"]["paymentURL"]) ) {
+                header("Location: " . $response["data"]["paymentURL"]);
+                die();
+            } else {
+                $message = direction("Error: " . ($response["msg"] ?? "Unable to create new payment"), "خطأ: " . ($response["msgAr"] ?? "تعذر إنشاء دفع جديد"));
             }
-            
-            // Swap the active booking context to the new one so we proceed to payment immediately
-            $booking = selectDBNew("fields_booking", [$newId], "`id` = ?","");
         }
 
+        // Standard payment for status 5 or 0
         $postBody = json_decode($booking[0]["apiPayload"], true);
+        $response = upaymentGateway($postBody);
         $response = upaymentGateway($postBody);
         if ( isset($response["status"]) && $response["status"] == true && isset($response["data"]["link"]) ) {
             $gatewayURL = $response["data"]["link"];
