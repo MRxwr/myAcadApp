@@ -1,0 +1,551 @@
+<?php
+if( !isset($_POST) ){
+    $response["msg"] = popupMsg($requestLang,"Please make sure you send post data before submitting.","يرجى التأكد من ارسال بيانات POST قبل الارسال");
+	echo outputError($response);die();
+}else{
+    $orderId = time();
+    $wallet = 0;
+    $freePayment = 0;
+    $data = $_POST;
+    unset($_POST);
+    if( isset($data["academy"]) && !empty($data["academy"]) ){
+        $user = $data["user"];
+        $academy = $data["academy"];
+        $session = $data["session"];
+        $subscription = $data["subscription"];
+        $subscriptionQuantity = $data["subscriptionQuantity"]; 
+        $jersyQuantity = $data["jersyQuantity"];
+        $paymentMethod = $data["paymentMethod"];
+        $voucher = $data["voucher"];
+        
+        //checking voucher
+        $numberOfTimesAvalability = false;
+        $academyAprroved = false;
+        $dateApproved = false;
+        $voucherType = 0;
+        $voucherAmount = 0;
+        if( isset($voucher) && !empty($voucher) && $voucher = selectDB("vouchers","`code` = '{$data["voucher"]}' AND `hidden` = '0' AND `status` = '0'")){
+            $currentDate = date("Y-m-d");
+            if( (substr($voucher[0]["startDate"],0,10) <= $currentDate) && (substr($voucher[0]["endDate"],0,10) >= $currentDate) ){
+                $dateApproved = true;
+            }
+            
+            if( $voucher[0]["numberOfTimes"] == 0 ){
+                $numberOfTimesAvalability = true;
+            }elseif( $voucher[0]["numberOfTimes"] != 0 ){
+                if( $orders = selectDB("orders","`voucher` = '{$voucher[0]["id"]}'")){
+                    $numberOfUsage = sizeof($orders);
+                    if( $voucher[0]["numberOfTimes"] > $numberOfUsage ){
+                        $numberOfTimesAvalability = true;
+                    }else{
+                        $numberOfTimesAvalability = false;
+                    }
+                }else{
+                    $numberOfTimesAvalability = true;
+                }
+            }
+            
+            if( !empty($voucher[0]["academyIds"]) ){
+                $voucher[0]["academyIds"] = json_decode($voucher[0]["academyIds"],true);
+                if(  in_array($academy,$voucher[0]["academyIds"]) ){
+                    $academyAprroved = true;
+                }else{
+                    $academyAprroved = false;
+                }
+            }elseif( $voucher[0]["academyIds"] == 0 ){
+                $academyAprroved = true;
+            }
+            
+            if( $numberOfTimesAvalability && $academyAprroved && $dateApproved){
+                $voucherType = ($voucher[0]["type"] == 0) ? 0 : 1;
+                $voucherAmount = $voucher[0]["amount"];
+            }
+        }
+
+        //checking session information
+        if( $sessionData = selectDB("sessions","`id` = '{$session}' AND `quantity` >= '{$subscriptionQuantity}'")){}else{
+            $response["msg"] = popupMsg($requestLang,'No sessions available anymore.','لا يوجد كلاسات متاحة.');
+            echo outputError($response);die();
+        }
+
+        // checking user data
+        if( $userData = selectDB("users","`id` LIKE '{$user}'") ){}
+
+        //checking adamin settings for main IBAN
+        if( $AdminSettings = selectDB("settings","`id` = '1'") ){}
+
+        //checking jersy Inforamtion
+        if( $academyData = selectDB("academies","`id` = '{$academy}'")){
+            $jersyPrice = ( $jersyQuantity != 0 ) ? (float)$academyData[0]["clothesPrice"]*(float)$data["jersyQuantity"] : 0 ;
+        }
+
+        //checking subscription information
+        if( $subscriptionData = selectDB("subscriptions","`id` = '{$subscription}'")){
+            $price = ($subscriptionData[0]["priceAfterDiscount"] != 0 ) ? $subscriptionData[0]["priceAfterDiscount"] : $subscriptionData[0]["price"] ;
+            if( $numberOfTimesAvalability && $academyAprroved ){
+                $price = $subscriptionData[0]["price"];
+            }
+            $totalPrice = (float)$price*(float)$subscriptionQuantity;
+        }else{
+            $totalPrice = 0;
+            $price = 0;
+        }
+
+        //checking payment method
+        if( $paymentMethod == 3 ){
+            $paymentMethod = 1;
+            $wallet = 1;
+        }
+
+        //calulation of total prices
+        $newTotal = (float)$totalPrice;
+        $fullAmount = (float)$jersyPrice+(float)$totalPrice;
+        if( $numberOfTimesAvalability && $academyAprroved ){
+            $newTotal = ( $voucherType == 0 ) ? ($newTotal*(1-($voucherAmount/100))) : $newTotal - $voucherAmount;
+            $fullAmount = ( $voucherType == 0 ) ? ($fullAmount*(1-($voucherAmount/100))) : $fullAmount - $voucherAmount;
+        }
+
+        $_POST["name"] = "{$userData[0]["firstName"]} {$userData[0]["lastName"]}";
+        $_POST["phone"] = "{$userData[0]["phone"]}";
+        $_POST["email"] = "{$userData[0]["email"]}";
+        $_POST["userId"] = "{$userData[0]["id"]}";
+        $_POST["academyId"] = $academyData[0]["id"];
+        $_POST["enAcademy"] = $academyData[0]["enTitle"];
+        $_POST["arAcademy"] = $academyData[0]["arTitle"];
+        $_POST["sessionId"] = $sessionData[0]["id"];
+        $_POST["enSession"] = $sessionData[0]["enTitle"];
+        $_POST["arSession"] = $sessionData[0]["arTitle"];
+        $_POST["subscriptionId"] = $subscriptionData[0]["id"];
+        $_POST["enSubscription"] = $subscriptionData[0]["enTitle"];
+        $_POST["arSubscription"] = $subscriptionData[0]["arTitle"];
+        $_POST["subscriptionQuantity"] = $subscriptionQuantity;
+        $_POST["subscriptionPrice"] = $price;
+        $_POST["jersyQuantity"] = $jersyQuantity;
+        $_POST["jersyPrice"] = $academyData[0]["clothesPrice"];
+        $_POST["totalSubscriptionPrice"] = $totalPrice;
+        $_POST["totalJersyPrice"] = $jersyPrice;
+        $_POST["total"] = $fullAmount;
+        $_POST["paymentMethod"] = $paymentMethod;
+        $_POST["voucher"] = $data["voucher"];
+
+        //calculate totals prices that should be sent to upayments 
+        if( $data["paymentMethod"] == 1 ){
+            $myacadDeposit = ( $academyData[0]["chargeType"] == "fixed" ) ? $academyData[0]["charges"] : $newTotal * ( $academyData[0]["charges"] / 100 );
+            $newTotal = $newTotal - $myacadDeposit;
+            $paymentGateway = "knet";
+        }elseif( $data["paymentMethod"] == 2 ){
+            $myacadDeposit = ( $academyData[0]["cc_chargetype"] == "fixed" ) ? $academyData[0]["cc_charge"] : $newTotal * ( $academyData[0]["cc_charge"] / 100 );
+            $newTotal = $newTotal - $myacadDeposit;
+            $paymentGateway = "cc";
+        }else{
+            $myacadDeposit = 1;
+            $newTotal = $newTotal - $myacadDeposit;
+            $paymentGateway = "knet";
+        }
+
+        //preparing upayment payload and creating order
+        $postBody = array(
+            'language' => 'en',
+            'paymentGateway[src]' => "{$paymentGateway}",
+            'order[id]' => $orderId,
+            'order[currency]' => 'KWD',
+            'order[amount]' => (string)$fullAmount,
+            'order[description]' => "order for {$academyData[0]["enTitle"]}, {$sessionData[0]["enTitle"]}, {$subscriptionQuantity}x {$subscriptionData[0]["enTitle"]} and {$jersyQuantity}x jersy",
+            'reference[id]' => $orderId,
+            'customer[name]' => "{$_POST["name"]}",
+            'customer[email]' => "{$_POST["email"]}",
+            'customer[mobile]' => "{$_POST["phone"]}",
+            'returnUrl' => "{$paymentReturnURL}/index.php",
+            'cancelUrl' => "{$paymentReturnURL}/index.php",
+            'notificationUrl' => "{$paymentReturnURL}/index.php",
+            'extraMerchantData[0][amount]' => (string)($fullAmount),
+            'extraMerchantData[0][knetCharge]' => "{$academyData[0]["charges"]}",
+            'extraMerchantData[0][knetChargeType]' => "{$academyData[0]["chargeType"]}",
+            'extraMerchantData[0][ccCharge]' => "{$academyData[0]["cc_charge"]}",
+            'extraMerchantData[0][ccChargeType]' => "{$academyData[0]["cc_chargetype"]}",
+            'extraMerchantData[0][ibanNumber]' => "{$academyData[0]["iban"]}",
+            );
+            
+    }elseif( isset($data["tournament"]) && !empty($data["tournament"]) ){
+        $user = $data["user"];
+        $tournament = $data["tournament"];
+        $teamName = $data["teamName"];
+        $players = $data["players"];
+        $bench = $data["bench"];
+        $quantity = $data["quantity"];
+        $paymentMethod = $data["paymentMethod"];
+        $voucher = $data["voucher"];
+        
+        //checking voucher
+        $numberOfTimesAvalability = false;
+        $tournamentAprroved = false;
+        $dateApproved = false;
+        $voucherType = 0;
+        $voucherAmount = 0;
+        if( isset($voucher) && !empty($voucher) && $voucher = selectDB("vouchers","`code` = '{$data["voucher"]}' AND `hidden` = '0' AND `status` = '0'")){
+            $currentDate = date("Y-m-d");
+            if( (substr($voucher[0]["startDate"],0,10) <= $currentDate) && (substr($voucher[0]["endDate"],0,10) >= $currentDate) ){
+                $dateApproved = true;
+            }
+            
+            if( $voucher[0]["numberOfTimes"] == 0 ){
+                $numberOfTimesAvalability = true;
+            }elseif( $voucher[0]["numberOfTimes"] != 0 ){
+                if( $orders = selectDB("orders","`voucher` = '{$voucher[0]["id"]}' AND `isTournament` = 1") ){
+                    $numberOfUsage = sizeof($orders);
+                    if( $voucher[0]["numberOfTimes"] > $numberOfUsage ){
+                        $numberOfTimesAvalability = true;
+                    }else{
+                        $numberOfTimesAvalability = false;
+                    }
+                }else{
+                    $numberOfTimesAvalability = true;
+                }
+            }
+            
+            if( !empty($voucher[0]["tournamentIds"]) ){
+                $voucher[0]["tournamentIds"] = json_decode($voucher[0]["tournamentIds"],true);
+                if( in_array($tournament,$voucher[0]["tournamentIds"]) ){
+                    $tournamentAprroved = true;
+                }else{
+                    $tournamentAprroved = false;
+                }
+            }elseif( $voucher[0]["tournamentIds"] == 0 ){
+                $tournamentAprroved = true;
+            }
+            
+            if( $numberOfTimesAvalability && $tournamentAprroved && $dateApproved){
+                $voucherType = ($voucher[0]["type"] == 0) ? 0 : 1;
+                $voucherAmount = $voucher[0]["amount"];
+            }
+        }
+
+        // checking user data
+        if( $userData = selectDB("users","`id` LIKE '{$user}'") ){}
+
+        //checking adamin settings for main IBAN
+        if( $AdminSettings = selectDB("settings","`id` = '1'") ){}
+
+        //checking tournament Inforamtion
+        if( $tournamentData = selectDB("tournaments","`id` = '{$tournament}'")){}
+
+        //checking payment method
+        if( $paymentMethod == 3 ){
+            $paymentMethod = 1;
+            $wallet = 1;
+        }
+
+        //check tournemant Price
+        if( $tournaments = selectDB("tournaments","`id` = '{$tournament}'") ){
+            $price = $tournaments[0]["price"];
+        }
+
+        //calulation of total prices
+        $newTotal = (float)$price;
+        $fullAmount = (float)$price;
+        if( $numberOfTimesAvalability && $tournamentAprroved ){
+            $newTotal = ( $voucherType == 0 ) ? ($newTotal*(1-($voucherAmount/100))) : $newTotal - $voucherAmount;
+            $fullAmount = ( $voucherType == 0 ) ? ($fullAmount*(1-($voucherAmount/100))) : $fullAmount - $voucherAmount;
+        }
+
+        //checking free payment
+        if( $paymentMethod == 4 ){
+            $paymentMethod = 1;
+            $freePayment = 1;
+            $newTotal = 2;
+            $fullAmount = 2;
+        }
+
+        $_POST["name"] = "{$userData[0]["firstName"]} {$userData[0]["lastName"]}";
+        $_POST["phone"] = "{$userData[0]["phone"]}";
+        $_POST["email"] = "{$userData[0]["email"]}";
+        $_POST["userId"] = "{$userData[0]["id"]}";
+        $_POST["teamName"] = $teamName;
+        $_POST["tournamentId"] = $tournaments[0]["id"];
+        $_POST["isTournament"] = 1;
+        $_POST["teamDetails"]["enTournament"] = $tournaments[0]["enTitle"];
+        $_POST["teamDetails"]["arTournament"] = $tournaments[0]["arTitle"];
+        $_POST["teamDetails"]["teamName"] = $teamName;
+        $_POST["teamDetails"]["players"] = json_decode($players,true);
+        $_POST["teamDetails"]["bench"] = json_decode($bench,true);
+        $_POST["teamDetails"]["quantity"] = $quantity;
+        if ( $freePayment == 1 ){
+            $_POST["teamDetails"]["price"] = 0;
+            $_POST["teamDetails"]["total"] = 0;
+            $_POST["total"] = 0;
+        }else{
+            $_POST["teamDetails"]["price"] = $price;
+            $_POST["teamDetails"]["total"] = $newTotal;
+            $_POST["total"] = $newTotal;
+        }
+        $_POST["paymentMethod"] = $paymentMethod;
+        $_POST["voucher"] = $data["voucher"];
+        $_POST["teamDetails"] = json_encode($_POST["teamDetails"],JSON_UNESCAPED_UNICODE);
+
+        //calculate totals prices that should be sent to upayments 
+        if( $data["paymentMethod"] == 1 ){
+            $myacadDeposit = ( $tournaments[0]["chargeType"] == "fixed" ) ? $tournaments[0]["charges"] : $newTotal * ( $tournaments[0]["charges"] / 100 );
+            $newTotal = $newTotal - $myacadDeposit;
+            $paymentGateway = "knet";
+        }elseif( $data["paymentMethod"] == 2 ){
+            $myacadDeposit = ( $tournaments[0]["cc_chargetype"] == "fixed" ) ? $tournaments[0]["cc_charge"] : $newTotal * ( $tournaments[0]["cc_charge"] / 100 );
+            $newTotal = $newTotal - $myacadDeposit;
+            $paymentGateway = "cc";
+        }else{
+            $myacadDeposit = 1;
+            $newTotal = $newTotal - $myacadDeposit;
+            $paymentGateway = "knet";
+        }
+
+        //preparing upayment payload and creating order
+        $postBody = array(
+            'language' => 'en',
+            'paymentGateway[src]' => "{$paymentGateway}",
+            'order[id]' => $orderId,
+            'order[currency]' => 'KWD',
+            'order[amount]' => (string)$fullAmount,
+            'order[description]' => "order for {$tournaments[0]["enTitle"]}, {$quantity}x {$teamName}",
+            'reference[id]' => $orderId,
+            'customer[name]' => "{$_POST["name"]}",
+            'customer[email]' => "{$_POST["email"]}",
+            'customer[mobile]' => "{$_POST["phone"]}",
+            'returnUrl' => "{$paymentReturnURL}/index.php",
+            'cancelUrl' => "{$paymentReturnURL}/index.php",
+            'notificationUrl' => "{$paymentReturnURL}/index.php",
+            'extraMerchantData[0][amount]' => (string)($fullAmount),
+            'extraMerchantData[0][knetCharge]' => "{$tournaments[0]["charges"]}",
+            'extraMerchantData[0][knetChargeType]' => "{$tournaments[0]["chargeType"]}",
+            'extraMerchantData[0][ccCharge]' => "{$tournaments[0]["cc_charge"]}",
+            'extraMerchantData[0][ccChargeType]' => "{$tournaments[0]["cc_chargetype"]}",
+            'extraMerchantData[0][ibanNumber]' => "{$tournamentData[0]["iban"]}",
+            );
+    }elseif( isset($data["event"]) && !empty($data["event"]) ){
+        $user = $data["user"];
+        $event = $data["event"];
+        $paymentMethod = $data["paymentMethod"];
+        $voucher = $data["voucher"];
+        $fieldIds = json_decode($data["fieldIds"],true);
+        $fieldData = json_decode($data["fieldData"],true);
+        $quantity = $data["quantity"];
+        
+        //checking voucher
+        $numberOfTimesAvalability = false;
+        $eventApproved = false;
+        $dateApproved = false;
+        $voucherType = 0;
+        $voucherAmount = 0;
+        if( isset($voucher) && !empty($voucher) && $voucher = selectDB("vouchers","`code` = '{$data["voucher"]}' AND `hidden` = '0' AND `status` = '0'")){
+            $currentDate = date("Y-m-d");
+            if( (substr($voucher[0]["startDate"],0,10) <= $currentDate) && (substr($voucher[0]["endDate"],0,10) >= $currentDate) ){
+                $dateApproved = true;
+            }
+            
+            if( $voucher[0]["numberOfTimes"] == 0 ){
+                $numberOfTimesAvalability = true;
+            }elseif( $voucher[0]["numberOfTimes"] != 0 ){
+                if( $orders = selectDB("orders","`voucher` = '{$voucher[0]["id"]}' AND `isTournament` = 1") ){
+                    $numberOfUsage = sizeof($orders);
+                    if( $voucher[0]["numberOfTimes"] > $numberOfUsage ){
+                        $numberOfTimesAvalability = true;
+                    }else{
+                        $numberOfTimesAvalability = false;
+                    }
+                }else{
+                    $numberOfTimesAvalability = true;
+                }
+            }
+            
+            if( !empty($voucher[0]["eventIds"]) ){
+                $voucher[0]["eventIds"] = json_decode($voucher[0]["eventIds"],true);
+                if( in_array($event,$voucher[0]["eventIds"]) ){
+                    $eventApproved = true;
+                }else{
+                    $eventApproved = false;
+                }
+            }elseif( $voucher[0]["eventIds"] == 0 ){
+                $eventApproved = true;
+            }
+            
+            if( $numberOfTimesAvalability && $eventApproved && $dateApproved){
+                $voucherType = ($voucher[0]["type"] == 0) ? 0 : 1;
+                $voucherAmount = $voucher[0]["amount"];
+            }
+        }
+
+        // checking user data
+        if( $userData = selectDB("users","`id` LIKE '{$user}'") ){}
+
+        //checking adamin settings for main IBAN
+        if( $AdminSettings = selectDB("settings","`id` = '1'") ){}
+
+        //checking Event Information
+        if( $event = selectDB("tabs_list","`id` = '{$event}'")){
+            $price = $event[0]["price"];
+        }
+
+        //checking payment method
+        if( $paymentMethod == 3 ){
+            $paymentMethod = 1;
+            $wallet = 1;
+        }
+
+        // get fields details to add to order
+        $eventData = array();
+        foreach( $fieldIds as $index => $fieldId ){
+            if( $fieldInfo = selectDB("tabs_fields","`id` = '{$fieldId}'") ){
+                $eventData[] = array(
+                    "fieldId" => $fieldId,
+                    "enFieldTitle" => $fieldInfo[0]["enTitle"],
+                    "arFieldTitle" => $fieldInfo[0]["arTitle"],
+                    "value" => isset($fieldData[$index]) ? $fieldData[$index] : ""
+                );
+            }
+        }
+        $_POST["eventDetails"]["fields"] = $eventData;
+
+        //calulation of total prices
+        $newTotal = (float)$price;
+        $fullAmount = (float)$price;
+        if( $numberOfTimesAvalability && $eventApproved ){
+            $newTotal = ( $voucherType == 0 ) ? ($newTotal*(1-($voucherAmount/100))) : $newTotal - $voucherAmount;
+            $fullAmount = ( $voucherType == 0 ) ? ($fullAmount*(1-($voucherAmount/100))) : $fullAmount - $voucherAmount;
+        }
+
+        //checking free payment
+        if( $paymentMethod == 4 ){
+            $paymentMethod = 1;
+            $freePayment = 1;
+            $newTotal = 2;
+            $fullAmount = 2;
+        }
+
+        // Handle file upload for event
+        if (isset($_FILES['file'])) {
+            $uploadedFiles = [];
+            $files = $_FILES['file'];
+            $fileCount = is_array($files['name']) ? count($files['name']) : 1;
+
+            for ($i = 0; $i < $fileCount; $i++) {
+                $fileError = is_array($files['error']) ? $files['error'][$i] : $files['error'];
+                if ($fileError === UPLOAD_ERR_OK) {
+                    $fileTmpPath = is_array($files['tmp_name']) ? $files['tmp_name'][$i] : $files['tmp_name'];
+                    $fileName = is_array($files['name']) ? $files['name'][$i] : $files['name'];
+                    $fileSize = is_array($files['size']) ? $files['size'][$i] : $files['size'];
+                    $fileType = is_array($files['type']) ? $files['type'][$i] : $files['type'];
+                    
+                    $fileNameCmps = explode(".", $fileName);
+                    $fileExtension = strtolower(end($fileNameCmps));
+                    $allowedExtensions = array('jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp', 'pdf');
+                    
+                    // Check extension, size (1MB = 1048576 bytes), and type
+                    $isImage = strpos($fileType, 'image') === 0;
+                    $isPDF = $fileType === 'application/pdf' || $fileExtension === 'pdf';
+
+                    if (in_array($fileExtension, $allowedExtensions) && ($isImage || $isPDF) && $fileSize <= 1048576) {
+                        $newFileName = uniqid('event_', true) . '.' . $fileExtension;
+                        $dest_path = __DIR__ . '/../../../files/' . $newFileName;
+                        if (move_uploaded_file($fileTmpPath, $dest_path)) {
+                            $uploadedFiles[] = 'files/' . $newFileName;
+                        }
+                    }
+                }
+            }
+            if (!empty($uploadedFiles)) {
+                $_POST["eventDetails"]["uploadedImages"] = $uploadedFiles;
+            }
+        }
+
+        $_POST["name"] = "{$userData[0]["firstName"]} {$userData[0]["lastName"]}";
+        $_POST["phone"] = "{$userData[0]["phone"]}";
+        $_POST["email"] = "{$userData[0]["email"]}";
+        $_POST["userId"] = "{$userData[0]["id"]}";
+        $_POST["eventId"] = $event[0]["id"];
+        $_POST["isTournament"] = 2;
+        $_POST["eventDetails"]["enEvent"] = $event[0]["enTitle"];
+        $_POST["eventDetails"]["arEvent"] = $event[0]["arTitle"];
+        $_POST["eventDetails"]["quantity"] = $quantity;
+        if ( $freePayment == 1 ){
+            $_POST["eventDetails"]["price"] = 0;
+            $_POST["eventDetails"]["total"] = 0;
+            $_POST["total"] = 0;
+        }else{
+            $_POST["eventDetails"]["price"] = $price;
+            $_POST["eventDetails"]["total"] = $newTotal;
+            $_POST["total"] = $newTotal;
+        }
+        $_POST["paymentMethod"] = $paymentMethod;
+        $_POST["voucher"] = $data["voucher"];
+        $_POST["eventDetails"] = json_encode($_POST["eventDetails"],JSON_UNESCAPED_UNICODE);
+
+        //calculate totals prices that should be sent to upayments 
+        if( $data["paymentMethod"] == 1 ){
+            $myacadDeposit = ( $event[0]["chargeType"] == "fixed" ) ? $event[0]["charges"] : $newTotal * ( $event[0]["charges"] / 100 );
+            $newTotal = $newTotal - $myacadDeposit;
+            $paymentGateway = "knet";
+        }elseif( $data["paymentMethod"] == 2 ){
+            $myacadDeposit = ( $event[0]["cc_chargetype"] == "fixed" ) ? $event[0]["cc_charge"] : $newTotal * ( $event[0]["cc_charge"] / 100 );
+            $newTotal = $newTotal - $myacadDeposit;
+            $paymentGateway = "cc";
+        }else{
+            $myacadDeposit = 1;
+            $newTotal = $newTotal - $myacadDeposit;
+            $paymentGateway = "knet";
+        }
+
+        //preparing upayment payload and creating order
+        $postBody = array(
+            'language' => 'en',
+            'paymentGateway[src]' => "{$paymentGateway}",
+            'order[id]' => $orderId,
+            'order[currency]' => 'KWD',
+            'order[amount]' => (string)$fullAmount,
+            'order[description]' => "order for {$event[0]["enTitle"]}, {$_POST["name"]}",
+            'reference[id]' => $orderId,
+            'customer[name]' => "{$_POST["name"]}",
+            'customer[email]' => "{$_POST["email"]}",
+            'customer[mobile]' => "{$_POST["phone"]}",
+            'returnUrl' => "{$paymentReturnURL}/index.php",
+            'cancelUrl' => "{$paymentReturnURL}/index.php",
+            'notificationUrl' => "{$paymentReturnURL}/index.php",
+            'extraMerchantData[0][amount]' => (string)($fullAmount),
+            'extraMerchantData[0][knetCharge]' => "{$event[0]["charges"]}",
+            'extraMerchantData[0][knetChargeType]' => "{$event[0]["chargeType"]}",
+            'extraMerchantData[0][ccCharge]' => "{$event[0]["cc_charge"]}",
+            'extraMerchantData[0][ccChargeType]' => "{$event[0]["cc_chargetype"]}",
+            'extraMerchantData[0][ibanNumber]' => "{$event[0]["iban"]}",
+            );
+    }
+    
+    $response = upaymentGateway($postBody);
+    
+    //saving info and redirecting to payment pages
+    if( isset($response["status"]) && $response["status"] == true && isset($response["data"]["link"]) && !empty($response["data"]["link"]) ){
+        $_POST["gatewayId"]     = $orderId;
+        $_POST["gatewayURL"]    = $response["data"]["link"];
+        $_POST["apiPayload"]    = json_encode($postBody);
+        $_POST["apiResponse"]   = json_encode($response);
+        $_POST["paymentMethod"] = ( $wallet == 1 ) ? 3 : $paymentMethod;
+        $_POST["paymentMethod"] = ( $freePayment == 1 ) ? 4 : $_POST["paymentMethod"];
+        $response["data"] = array(
+            "paymentURL" => $response["data"]["link"],
+            "InvoiceId"  => $orderId
+        );
+        insertDB2("orders",$_POST);
+        if( $wallet == 1 || $freePayment == 1){
+            $response["data"] = array(
+                "paymentURL"    => "index.php?v=Success&requested_order_id={$_POST["gatewayId"]}&result=CAPTURED",
+                "InvoiceId"     => $orderId
+            );
+            if( $user = selectDB("users","`id` = {$_POST["userId"]}") ){
+                $newWallet = $user[0]["wallet"] - $newTotal;
+                updateDB2("users",array("wallet" => $newWallet),"`id` = {$_POST["userId"]}");
+            }
+        }
+        echo outputData($response);
+    }else{
+        $response["msg"] = popupMsg($requestLang,'Error while proccessing payment','خطأ في عملية الدفع');
+        echo outputError($response);
+    }
+    
+}
+?>

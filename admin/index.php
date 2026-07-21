@@ -5,13 +5,16 @@ if ( isset($_GET["hide"]) || isset($_GET["show"]) || isset($_GET["delId"]) || is
 	if( strtolower($_GET["v"]) == "areas" ){
 		$table = strtolower("countries");
 	}
-    if( strtolower($_GET["v"]) == "tournamentvouchers" ){
+    if( strtolower($_GET["v"]) == "tournamentvouchers" || strtolower($_GET["v"]) == "tabs_vouchers" ){
 		$table = strtolower("vouchers");
+	}
+	if( strtolower($_GET["v"]) == "feild_bookings" ){
+		$table = "fields_booking";
 	}
 	if( isset($_GET["hide"]) && !empty($_GET["hide"]) && updateDB("{$table}",array('hidden'=> '1'),"`id` = '{$_GET["hide"]}'") ){
 	}elseif( isset($_GET["show"]) && !empty($_GET["show"]) && updateDB("{$table}",array('hidden'=> '0'),"`id` = '{$_GET["show"]}'") ){
 	}elseif( isset($_GET["delId"]) && !empty($_GET["delId"]) ){
-        if( isset($_GET["delStatus"]) && !empty($_GET["delStatus"]) ){
+        if( isset($_GET["delStatus"]) && $_GET["delStatus"] != "" ){
             updateDB("{$table}",array('status'=> "{$_GET["delStatus"]}"),"`id` = '{$_GET["delId"]}'");
         }else{
             updateDB("{$table}",array('status'=> "1"),"`id` = '{$_GET["delId"]}'");
@@ -23,7 +26,32 @@ if ( isset($_GET["hide"]) || isset($_GET["show"]) || isset($_GET["delId"]) || is
         if( isset($_POST["academyIds"]) ){
             $_POST["academyIds"] = json_encode($_POST["academyIds"]);
         }
+        if( isset($_POST["fieldsIds"]) ){
+            $_POST["fieldsIds"] = json_encode($_POST["fieldsIds"]);
+        }
 		if ( $id == 0 ){
+            if( isset($_FILES['icon']) && is_uploaded_file($_FILES['icon']['tmp_name']) ){
+                $directory = "../logos/facilities/";
+                $originalfile = $directory . date("d-m-y") . time() .  round(microtime(true)). "L." . getFileExtension($_FILES["icon"]["name"]);
+                move_uploaded_file($_FILES["icon"]["tmp_name"], $originalfile);
+                $_POST["icon"] = str_replace("../logos/facilities/",'',$originalfile);
+            }else{
+                if ( isset($_FILES['icon']) ){
+                    $_POST["icon"] = "";
+                }
+            }
+
+            if( isset($_FILES['trainerImage']) && is_uploaded_file($_FILES['trainerImage']['tmp_name']) ){
+                $directory = "../logos/trainers/";
+                $originalfile = $directory . date("d-m-y") . time() .  round(microtime(true)). "T." . getFileExtension($_FILES["trainerImage"]["name"]);
+                move_uploaded_file($_FILES["trainerImage"]["tmp_name"], $originalfile);
+                $_POST["trainerImage"] = str_replace("../logos/trainers/",'',$originalfile);
+            }else{
+                if ( isset($_FILES['trainerImage']) ){
+                    $_POST["trainerImage"] = "";
+                }
+            }
+
             if( isset($_FILES['imageurl']) && is_uploaded_file($_FILES['imageurl']['tmp_name']) ){
                 $directory = "../logos/";
                 $originalfile = $directory . date("d-m-y") . time() .  round(microtime(true)). "L." . getFileExtension($_FILES["imageurl"]["name"]);
@@ -48,7 +76,7 @@ if ( isset($_GET["hide"]) || isset($_GET["show"]) || isset($_GET["delId"]) || is
             
             if( isset($_FILES['locationImage']) && is_uploaded_file($_FILES['locationImage']['tmp_name']) ){
                 $directory = "../logos/";
-                $originalfile1 = $directory . date("d-m-y") . time() .  round(microtime(true)). "H." . getFileExtension($_FILES["header"]["name"]);
+                $originalfile1 = $directory . date("d-m-y") . time() .  round(microtime(true)). "M." . getFileExtension($_FILES["locationImage"]["name"]);
                 move_uploaded_file($_FILES["locationImage"]["tmp_name"], $originalfile1);
                 $_POST["locationImage"] = str_replace("../logos/",'',$originalfile1);
             }else{
@@ -82,7 +110,6 @@ if ( isset($_GET["hide"]) || isset($_GET["show"]) || isset($_GET["delId"]) || is
 			if( isset($_POST["password"]) && !empty($_POST["password"]) ){
 				$_POST["password"] = sha1($_POST["password"]);
 			}
-			
 			if( $userType == 0 && insertDB("{$table}", $_POST) ){
 			}elseif( $userType != 0 && insertDB("modifications", array("empId" => $userID, "postId" => $id, "tableTitle" => $table, "contents" => json_encode($_POST)) ) ){
 			}else{
@@ -93,6 +120,30 @@ if ( isset($_GET["hide"]) || isset($_GET["show"]) || isset($_GET["delId"]) || is
             <?php
             }
 		}else{
+            if( isset($_FILES['icon']) && is_uploaded_file($_FILES['icon']['tmp_name']) ){
+                $directory = "../logos/facilities/";
+                $originalfile = $directory . date("d-m-y") . time() .  round(microtime(true)). "L." . getFileExtension($_FILES["icon"]["name"]);
+                move_uploaded_file($_FILES["icon"]["tmp_name"], $originalfile);
+                $_POST["icon"] = str_replace("../logos/facilities/",'',$originalfile);
+            }else{
+                if( isset($_FILES['icon']) ){
+                    $imageurl = selectDB("{$table}","`id` = '{$id}'");
+                    $_POST["icon"] = $imageurl[0]["icon"];
+                }
+            }
+
+            if( isset($_FILES['trainerImage']) && is_uploaded_file($_FILES['trainerImage']['tmp_name']) ){
+                $directory = "../logos/trainers/";
+                $originalfile = $directory . date("d-m-y") . time() .  round(microtime(true)). "T." . getFileExtension($_FILES["trainerImage"]["name"]);
+                move_uploaded_file($_FILES["trainerImage"]["tmp_name"], $originalfile);
+                $_POST["trainerImage"] = str_replace("../logos/trainers/",'',$originalfile);
+            }else{
+                if( isset($_FILES['trainerImage']) ){
+                    $imageurl = selectDB("{$table}","`id` = '{$id}'");
+                    $_POST["trainerImage"] = $imageurl[0]["trainerImage"];
+                }
+            }
+
             if( isset($_FILES['imageurl']) && is_uploaded_file($_FILES['imageurl']['tmp_name']) ){
                 $directory = "../logos/";
                 $originalfile = $directory . date("d-m-y") . time() .  round(microtime(true)). "L." . getFileExtension($_FILES["imageurl"]["name"]);
@@ -119,7 +170,7 @@ if ( isset($_GET["hide"]) || isset($_GET["show"]) || isset($_GET["delId"]) || is
             
             if( isset($_FILES['locationImage']) && is_uploaded_file($_FILES['locationImage']['tmp_name']) ){
                 $directory = "../logos/";
-                $originalfile1 = $directory . date("d-m-y") . time() .  round(microtime(true)). "H." . getFileExtension($_FILES["header"]["name"]);
+                $originalfile1 = $directory . date("d-m-y") . time() .  round(microtime(true)). "M." . getFileExtension($_FILES["locationImage"]["name"]);
                 move_uploaded_file($_FILES["locationImage"]["tmp_name"], $originalfile1);
                 $_POST["locationImage"] = str_replace("../logos/",'',$originalfile1);
             }else{

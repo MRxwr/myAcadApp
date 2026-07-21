@@ -30,6 +30,7 @@ function selectDBNew($table, $placeHolders, $where, $order){
     if(!empty($order)) {
         $sql .= " ORDER BY {$order}";
     }
+
     if( $table == "employees" && strstr($where,"email") ){
         $array = array(
             "userId" => 0,
@@ -40,6 +41,7 @@ function selectDBNew($table, $placeHolders, $where, $order){
         );
         LogsHistory($array);
     }
+    
     if($stmt = $dbconnect->prepare($sql)) {
         $types = str_repeat('s', count($placeHolders));
         $stmt->bind_param($types, ...$placeHolders);
@@ -126,7 +128,8 @@ function selectJoinDB($table, $joinData, $where){
     $sql .=" FROM `$table` as t ";
     for($i = 0 ; $i < sizeof($joinData["join"]) ; $i++ ){
         $counter = $i+1;
-        $sql .= " JOIN `".$joinData["join"][$i]."` as t{$counter} ";
+        $type = (isset($joinData["type"][$i]) && !empty($joinData["type"][$i])) ? strtoupper($joinData["type"][$i]) : "LEFT";
+        $sql .= " {$type} JOIN `".$joinData["join"][$i]."` as t{$counter} ";
         if( isset($joinData["on"][$i]) && !empty($joinData["on"][$i]) ){
             $sql .= " ON ".$joinData["on"][$i]." ";
         }
@@ -173,14 +176,16 @@ function insertDB($table, $data){
     $stmt = $dbconnect->prepare($sql);
     $types = str_repeat('s', count($data));
     $stmt->bind_param($types, ...array_values($data));
-    $array = array(
-        "userId" => "{$userID}",
-        "username" => "{$username}",
-        "module" => "{$_GET["v"]}",
-        "action" => "INSERT",
-        "sqlQuery" => json_encode(array("table"=>$table,"data"=>$sql)),
-    );
-    LogsHistory($array);
+    if( isset($_GET["v"]) && !empty($_GET["v"]) ){
+        $array = array(
+            "userId" => "{$userID}",
+            "username" => "{$username}",
+            "module" => "{$_GET["v"]}",
+            "action" => "INSERT",
+            "sqlQuery" => json_encode(array("table"=>$table,"data"=>$sql)),
+        );
+        LogsHistory($array);
+    }
     if($stmt->execute()){
         return 1;
     }else{
@@ -241,14 +246,16 @@ function updateDB($table, $data, $where) {
     $values = array_values($data);
     $stmt->bind_param($params, ...$values);
     if ($stmt->execute()) {
-        $array = array(
-            "userId" => "{$userID}",
-            "username" => "{$username}",
-            "module" => "{$_GET["v"]}",
-            "action" => "UPDATE",
-            "sqlQuery" => json_encode(array("table"=>$table,"data"=>$sql,"where"=>$values)),
-        );
-        LogsHistory($array);
+        if( isset($_GET["v"]) && !empty($_GET["v"]) ){
+            $array = array(
+                "userId" => "{$userID}",
+                "username" => "{$username}",
+                "module" => "{$_GET["v"]}",
+                "action" => "UPDATE",
+                "sqlQuery" => json_encode(array("table"=>$table,"data"=>$sql,"where"=>$values)),
+            );
+            LogsHistory($array);
+        }
         return 1;
     } else {
         $error = array("msg" => "update table error");

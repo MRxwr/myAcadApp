@@ -4,8 +4,8 @@ header('Content-Type: text/html; charset=utf-8');
 
 require("template/header.php");
 require("template/navbar.php");
-
-if( isset($_GET["s"]) && !empty($_GET["s"]) && $link = selectDB("purchases","`gatewayId` = '{$_GET["s"]}'") ){
+$link = array();
+if( isset($_GET["s"]) && !empty($_GET["s"]) && $link = selectDBNew("purchases", [$_GET["s"]], "`gatewayId` = ?","") ){
     ?>
     <script>
         window.location.href = "<?php echo $link[0]["gatewayURL"] ?>";
@@ -21,9 +21,9 @@ if( isset($_GET["s"]) && !empty($_GET["s"]) && $link = selectDB("purchases","`ga
     die();
 }
 
-if( isset($_GET["result"]) ){
-    $order = selectDB("purchases","`gatewayId` = '{$_GET["requested_order_id"]}'");
-    if( $order[0]["status"] == 0 ){
+if( isset($_GET["result"]) && !empty($_GET["result"]) && isset($_GET["requested_order_id"]) && !empty($_GET["requested_order_id"]) ){
+    $link = selectDBNew("purchases", [$_GET["requested_order_id"]], "`gatewayId` = ?","");
+    if( $link[0]["status"] == 0 ){
         if( $_GET["result"] == "CAPTURED" ){
             $message = direction("Your payment is Confirmed ","تم تأكيد عملية الدفع بنجاح ");
             $icon = "suc";
@@ -33,19 +33,17 @@ if( isset($_GET["result"]) ){
             $icon = "close";
             updateDB("purchases",array("status"=>2,"gatewayResponse"=>json_encode($_GET)),"`gatewayId` = '{$_GET["requested_order_id"]}'");
         }
-    }elseif( $order[0]["status"] == 1 ){
+    }elseif( $link[0]["status"] == 1 ){
         $message = direction("Your payment is Confirmed ","تم تأكيد عملية الدفع بنجاح ");
         $icon = "suc";
-    }elseif( $order[0]["status"] == 2 ){
+    }elseif( $link[0]["status"] == 2 ){
         $message = direction("Your payment has failed","عملية دفع فاشلة");
         $icon = "close";
     }
-}
-
-if( $purchase = selectDB("purchases","`id` = '{$order[0]["id"]}'") ){
+}else{
     $title = "MYACAD";
-    if ( $purchase[0]["isMyacad"] == 1 ) {
-        if( $academyData = selectDB("academies","`id` = '{$purchase[0]["academyId"]}'")){
+    if ( $link[0]["isMyacad"] == 1 ) {
+        if( $academyData = selectDB("academies","`id` = '{$link[0]["academyId"]}'")){
             $title = $academyData[0]["enTitle"];
         }
     }
@@ -60,9 +58,9 @@ if( $purchase = selectDB("purchases","`id` = '{$order[0]["id"]}'") ){
                     <div class="col-lg-5 mt_40">
                         <div class="left_succes">
                             <h2><?php echo $message ?><img src="img/<?php echo $icon ?>.svg" alt=""></h2>
-                            <h3><?php echo direction("Order Id: ","رقم الطلب: ") . " {$order[0]["id"]}" ?></h3>
+                            <h3><?php echo direction("Order Id: ","رقم الطلب: ") . " {$link[0]["id"]}" ?></h3>
                             <div class="wap_date">
-                                <h4><?php echo direction("Date: ","البدايه: ") . substr($order[0]["date"],0,11)?></h4>
+                                <h4><?php echo direction("Date: ","البدايه: ") . substr($link[0]["date"],0,11)?></h4>
                             </div>
                             <a href="?v=Home" class="button"><?php echo direction("HOME","الرئيسية") ?></a>
                         </div>
@@ -73,16 +71,16 @@ if( $purchase = selectDB("purchases","`id` = '{$order[0]["id"]}'") ){
                             <div class="suc_item">
                                 <div class="suc_child">
                                     <span>1</span>
-                                    <h3><?php echo $order[0]["note"] ?></h3>
+                                    <h3><?php echo $link[0]["note"] ?></h3>
                                 </div>
-                                <p><?php echo $order[0]["price"] ?>KD</p>
+                                <p><?php echo $link[0]["price"] ?>KD</p>
                             </div>
                             
                             <h4><?php echo direction("PAYMENT METHOD", "طريقة الدفع" ) ?></h4>
                             <h5><?php echo "KNET" ?></h5>
                             <div class="d-flex justify-content-between">
                                 <h6><strong><?php echo direction("Total", "المجموع") ?></strong></h6>
-                                <p><?php echo $order[0]["price"] ?>KD</p>
+                                <p><?php echo $link[0]["price"] ?>KD</p>
                             </div>
                         </div>
                     </div>

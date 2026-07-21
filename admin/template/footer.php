@@ -9,7 +9,7 @@
 <footer class="footer container-fluid pl-30 pr-30">
 	<div class="row">
 		<div class="col-sm-12">
-			<p>2023 &copy; Createkuwait.com - MYACAD Control Panel</p>
+			<p>2023 &copy; Createkuwait.com - MY ACADEMY Dashboard</p>
 		</div>
 	</div>
 </footer>

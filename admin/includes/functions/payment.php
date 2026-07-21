@@ -339,4 +339,32 @@ function sendOrderToAllowMENA($orderId){
 		curl_close($curl);
 	}
 }
+
+function upaymentGateway($data){
+	$accessToken = "779475522c0938b3c0774da98197e0727fefe464"; //"jtest123";
+	$baseUrl = "https://uapi.upayments.com/api/v1/charge";//"https://sandboxapi.upayments.com/api/v1/charge";
+	// unset last 6 indices from data array
+	for( $i = 0; $i < 6; $i++ ){
+		array_pop($data);
+	}
+	$curl = curl_init();
+    curl_setopt_array($curl, array(
+        CURLOPT_URL => "{$baseUrl}",
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => '',
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => 'POST',
+        CURLOPT_POSTFIELDS => $data,
+        CURLOPT_HTTPHEADER => array(
+            "Authorization: Bearer {$accessToken}",
+        ),
+    ));
+    $response = curl_exec($curl);
+    curl_close($curl);
+    $response = json_decode($response,true);
+    return $response;
+}
 ?>

@@ -41,8 +41,8 @@ require ("includes/checksouthead.php");
 	<!-- Custom CSS -->
 	<link href="dist/css/style.css" rel="stylesheet" type="text/css">
 	<!-- Favicon -->
-	<link rel="shortcut icon" href="../img/logo.png">
-	<link rel="icon" href="../img/logo.png" type="image/x-icon">
+	<link rel="shortcut icon" href="../logos/logoNew.png">
+	<link rel="icon" href="../logos/logoNew.png" type="image/x-icon">
 
 	<!-- Data table CSS -->
 	<link href="../vendors/bower_components/datatables/media/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css"/>
@@ -90,7 +90,7 @@ require ("includes/checksouthead.php");
 			100% { transform: rotate(360deg); }
 		}
 		.activeSidebar{
-			color:#ffa300 !important;
+			color: #f0b93f !important;
 		}
 	</style>
 

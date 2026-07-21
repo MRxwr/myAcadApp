@@ -58,21 +58,22 @@ function expiredSubscription(){
 	*/
 	if ($orders = selectDB("orders", "`status` = '1' AND `isNotified` = '0'")) {
         for ($i = 0; $i < sizeof($orders); $i++) {
-            $subscriptions = selectDB("subscriptions", "`id` = '{$orders[$i]["subscriptionId"]}'");
-			$user = selectDB2("firebase","users","`id` = '{$orders[$i]["userId"]}'");
-            $numberOfDays = ($subscriptions[0]["numberOfDays"]-2);
-            $endDate = date("Y-m-d H:i:s", strtotime($orders[$i]["date"] . " +{$numberOfDays} days"));
-            $endDateTimestamp = strtotime($endDate);
-			$todayDate = date("Y-m-d H:i:s");
-            $todaysDate = strtotime($todayDate);
-            if ($endDateTimestamp <= $todaysDate ) {
-				$data = array(
-					"title" => direction("Subscription End Soon","سينتهي الإشتراك قريبا"),
-					"msg" => direction("Your subscription with {$orders[$i]["enAcademy"]} Will end soon. Please resubscribe and continue the fun.","سينتهي إشتراك قريبا مع {$orders[$i]["arAcademy"]}، الرجاء إعادة الإشتراك لتستمر المتعه."),
-					"firebase" => $user[0]["firebase"]
-				);
-				sendNotification($data);
-                updateDB2("orders", array("isNotified" => 1), "`id` = '{$orders[$i]["id"]}'");
+            if ( $subscriptions = selectDB("subscriptions", "`id` = '{$orders[$i]["subscriptionId"]}'") ) {
+				$user = selectDB2("firebase","users","`id` = '{$orders[$i]["userId"]}'");
+				$numberOfDays = ($subscriptions[0]["numberOfDays"]-2);
+				$endDate = date("Y-m-d H:i:s", strtotime($orders[$i]["date"] . " +{$numberOfDays} days"));
+				$endDateTimestamp = strtotime($endDate);
+				$todayDate = date("Y-m-d H:i:s");
+				$todaysDate = strtotime($todayDate);
+				if ($endDateTimestamp <= $todaysDate ) {
+					$data = array(
+						"title" => direction("Subscription End Soon","سينتهي الإشتراك قريبا"),
+						"msg" => direction("Your subscription with {$orders[$i]["enAcademy"]} Will end soon. Please resubscribe and continue the fun.","سينتهي إشتراك قريبا مع {$orders[$i]["arAcademy"]}، الرجاء إعادة الإشتراك لتستمر المتعه."),
+						"firebase" => $user[0]["firebase"]
+					);
+					sendNotification($data);
+					updateDB2("orders", array("isNotified" => 1), "`id` = '{$orders[$i]["id"]}'");
+				}
             }
         }
     }
@@ -208,5 +209,115 @@ function sendMailsAdmin($orderId, $email){
 		));
 		$response = curl_exec($curl);
 		curl_close($curl);
+}
+
+function getCountryCodeFromNumber($phoneNumber) {
+    // Remove any non-digit characters
+    $phoneNumber = preg_replace('/\D/', '', $phoneNumber);
+    
+    // Common country codes (sorted by length, longest first to match correctly)
+    $codes = [
+        // 4 digits
+        '1246', '1264', '1268', '1284', '1340', '1345', '1441', '1473', '1649', '1664', '1670', '1671', '1684', '1721', '1758', '1767', '1784', '1809', '1829', '1849', '1868', '1869', '1876',
+        // 3 digits - Middle East & Common
+        '971', '973', '974', '968', '967', '966', '965', '964', '963', '962', '961', '960',
+        '998', '996', '995', '994', '993', '992', '977', '976', '975', '972', '970',
+        '387', '386', '385', '383', '382', '381', '380', '378', '377', '376', '375', '374', '373', '372', '371', '370',
+        '359', '358', '357', '356', '355', '354', '353', '352', '351', '350',
+        '423', '421', '420',
+        '389', '388',
+        '298', '297', '291', '290',
+        '269', '268', '267', '266', '265', '264', '263', '262', '261', '260',
+        '258', '257', '256', '255', '254', '253', '252', '251', '250',
+        '249', '248', '246', '245', '244', '243', '242', '241', '240',
+        '239', '238', '237', '236', '235', '234', '233', '232', '231', '230',
+        '229', '228', '227', '226', '225', '224', '223', '222', '221', '220',
+        '218', '216', '213', '212',
+        // 2 digits
+        '98', '95', '94', '93', '92', '91', '90',
+        '86', '84', '82', '81',
+        '77', '76', '75', '74', '73', '72', '70',
+        '69', '68', '66', '65', '64', '63', '62', '61', '60',
+        '58', '57', '56', '55', '54', '53', '52', '51',
+        '49', '48', '47', '46', '45', '44', '43', '41', '40',
+        '39', '36', '34', '33', '32', '31', '30',
+        '27', '20',
+        // 1 digit
+        '7', '1'
+    ];
+    
+    foreach ($codes as $code) {
+        if (strpos($phoneNumber, $code) === 0) {
+            return $code;
+        }
+    }
+    
+    return null; // No country code found
+}
+
+function whatsappUltraMsgVerify($to, $code){
+	if( $whatsappNoti = selectDB("settings","`id` = '1'") ){
+		$data = array(
+			'token' => "{$whatsappNoti[0]["whatsappToken"]}",
+			'to' => "{$to}",
+			'image' => 'https://dev.myacad.app/img/logoNew.png',
+			'caption' => "Hello, your verification code is: {$code}. Please use it to complete your profile verification in My Academy. \n\nThis is an automated message from My Academy.\n\nBest Regards, \nhttps://myacad.app/",
+		);
+		$curl = curl_init();
+		curl_setopt_array($curl, array(
+			CURLOPT_URL => "https://api.ultramsg.com/{$whatsappNoti[0]["InstanceId"]}/messages/image",
+			CURLOPT_RETURNTRANSFER => true,
+			CURLOPT_ENCODING => "",
+			CURLOPT_MAXREDIRS => 10,
+			CURLOPT_TIMEOUT => 30,
+			CURLOPT_SSL_VERIFYHOST => 0,
+			CURLOPT_SSL_VERIFYPEER => 0,
+			CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+			CURLOPT_CUSTOMREQUEST => "POST",
+			CURLOPT_POSTFIELDS => http_build_query($data),
+			CURLOPT_HTTPHEADER => array(
+				"content-type: application/x-www-form-urlencoded"
+			),
+		));
+		$response = curl_exec($curl);
+		curl_close($curl);
+		return $response;
+	}else{
+		$data = array();
+		return $data;
+	}
+}
+
+function whatsappUltraMsg($to, $message){
+	if( $whatsappNoti = selectDB("settings","`id` = '1'") ){
+		$data = array(
+			'token' => "{$whatsappNoti[0]["whatsappToken"]}",
+			'to' => "{$to}",
+			'image' => 'https://dev.myacad.app/img/logoNew.png',
+			'caption' => "{$message} \n\nThis is an automated message from My Academy.\n\nBest Regards, \nhttps://myacad.app/",
+		);
+		$curl = curl_init();
+		curl_setopt_array($curl, array(
+			CURLOPT_URL => "https://api.ultramsg.com/{$whatsappNoti[0]["InstanceId"]}/messages/image",
+			CURLOPT_RETURNTRANSFER => true,
+			CURLOPT_ENCODING => "",
+			CURLOPT_MAXREDIRS => 10,
+			CURLOPT_TIMEOUT => 30,
+			CURLOPT_SSL_VERIFYHOST => 0,
+			CURLOPT_SSL_VERIFYPEER => 0,
+			CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+			CURLOPT_CUSTOMREQUEST => "POST",
+			CURLOPT_POSTFIELDS => http_build_query($data),
+			CURLOPT_HTTPHEADER => array(
+				"content-type: application/x-www-form-urlencoded"
+			),
+		));
+		$response = curl_exec($curl);
+		curl_close($curl);
+		return $response;
+	}else{
+		$data = array();
+		return $data;
+	}
 }
 ?>

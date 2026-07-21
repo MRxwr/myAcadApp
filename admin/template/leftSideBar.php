@@ -1,5 +1,5 @@
 <div class="fixed-sidebar-left">
-	<ul class="nav navbar-nav side-nav nicescroll-bar" style="background-color: #012169 !important;">
+	<ul class="nav navbar-nav side-nav nicescroll-bar" style="background-color: #000d2c !important;">
 		<li class="navigation-header">
 			<span><?php echo direction("Dashboard","لوحة التحكم")?></span> 
 			<i class="zmdi zmdi-more"></i>
@@ -23,10 +23,28 @@ if( $pages = selectDB("pages","`status` = '0' AND `hidden` = '0' AND `section` =
 		$list = array();
 	}
 	for( $i = 0; $i < sizeof($pages); $i++ ){
-		$active = ( isset($_GET["v"]) && strtolower($pages[$i]["enTitle"]) == strtolower(str_replace("_"," ",$_GET["v"])) ) ? "activeSidebar" : "";
+		$currentPage = isset($_GET["v"]) ? strtolower(str_replace(array(" ","_"),"",$_GET["v"])) : "";
+		$pageTitle = strtolower(str_replace(array(" ","_"),"",$pages[$i]["enTitle"]));
+		$active = ( $currentPage && $pageTitle == $currentPage ) ? "activeSidebar" : "";
 		if ( $userType == '0' || in_array($pages[$i]["id"],$list) ){
 			if( $sections = selectDB("pages","`section` = '{$pages[$i]["id"]}' AND `status` != '1'") ){
-				$anchor = "href='javascript:void(0);' data-toggle='collapse' data-target='#".str_replace(" ","_",$pages[$i]["enTitle"])."' class='collapsed {$active}' aria-expanded='false'";
+				// Check if any subsection is currently active OR if parent itself is active
+				$isSubActive = false;
+				foreach($sections as $section){
+					// Check if fileName matches (e.g., ?v=Tournaments)
+					if( isset($_GET["v"]) && $section["fileName"] == "?v={$_GET["v"]}" ){
+						$isSubActive = true;
+						$active = "activeSidebar";
+						break;
+					}
+				}
+				// Also check if the parent page itself is being viewed
+				if( $currentPage && $pageTitle == $currentPage ){
+					$isSubActive = true;
+				}
+				$collapseClass = $isSubActive ? "" : "collapsed";
+				$ariaExpanded = $isSubActive ? "true" : "false";
+				$anchor = "href='javascript:void(0);' data-toggle='collapse' data-target='#".str_replace(" ","_",$pages[$i]["enTitle"])."' class='{$collapseClass} {$active}' aria-expanded='{$ariaExpanded}'";
 				$arrowDown = "<i class='zmdi zmdi-caret-down'></i>";
 			}else{
 				$anchor = "href='{$pages[$i]["fileName"]}' class='{$active}'";
@@ -46,11 +64,25 @@ if( $pages = selectDB("pages","`status` = '0' AND `hidden` = '0' AND `section` =
 				</a>
 			<?php
 			if ( $subSections = selectDB("pages","`section` = '{$pages[$i]["id"]}' AND `status` != '1' ORDER BY `order` ASC") ){
+				// Check if any subsection is active to keep parent expanded
+				$subActive = false;
+				foreach($subSections as $subSection){
+					// Check if fileName matches (e.g., ?v=Tournaments)
+					if( isset($_GET["v"]) && $subSection["fileName"] == "?v={$_GET["v"]}" ){
+						$subActive = true;
+						break;
+					}
+				}
+				$expandClass = $subActive ? "in" : "";
 				?>
-				<ul id="<?php echo str_replace(" ","_",$pages[$i]["enTitle"]) ?>" class="collapse-level-1 collapse" aria-expanded="true">
+				<ul id="<?php echo str_replace(" ","_",$pages[$i]["enTitle"]) ?>" class="collapse-level-1 collapse <?php echo $expandClass ?>" aria-expanded="<?php echo $subActive ? 'true' : 'false' ?>">
 				<?php
 				for( $y = 0; $y < sizeof($subSections); $y++ ){
-					$active = ( isset($_GET["v"]) && strtolower($pages[$i]["enTitle"]) == strtolower(str_replace("_"," ",$_GET["v"])) ) ? "activeSidebar" : "";
+					$active = "";
+					// Check if fileName matches current URL
+					if( isset($_GET["v"]) && $subSections[$y]["fileName"] == "?v={$_GET["v"]}" ){
+						$active = "activeSidebar";
+					}
 					?>
 						<li>
 							<a href="<?php echo $subSections[$y]["fileName"] ?>" class="<?php echo $active ?>">
