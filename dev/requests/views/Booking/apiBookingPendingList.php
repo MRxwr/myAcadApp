@@ -4,6 +4,7 @@ $dataJoin = array(
     "join" => ["fields_list","field_ages","field_levels","countries","sports"],
     "on" => ["t.fieldId = t1.id","t.ages = t2.id","t.levels = t3.id","t1.area = t4.id","t1.sport = t5.id"],
 );
+updateDB("fields_booking", array("status" => 6), "status = '0' AND isTbari = '1' AND date < DATE_SUB(NOW(), INTERVAL 3 HOUR)");
 if( $pendingBookings = selectJoinDB("fields_booking", $dataJoin, "t.hidden = '0' AND t.status = '0' AND t.isTbari = '1' AND t.bookingId = '0'") ){
     $response["pendingBookings"] = $pendingBookings;
 }else{
