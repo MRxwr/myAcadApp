@@ -109,21 +109,21 @@ function generateOrderId(){
 }
 
 // showing the response in a json form \\
-function outputData($data){
+function outputData($data, $msg = ""){
 	$response["ok"] = true;
 	$response["error"] = "0";
 	$response["status"] = "successful";
-	$response["msg"] = "";
+	$response["msg"] = $msg;
 	$response["data"] = $data;
 	return json_encode($response);
 }
 
 // showing erros in json form \\
-function outputError($data){
+function outputError($data, $msg = ""){
 	$response["ok"] = false;
 	$response["error"] = "1";
 	$response["status"] = "Error";
-	$response["msg"] = "";
+	$response["msg"] = $msg;
 	$response["data"] = $data;
 	return json_encode($response);
 }
