@@ -14,6 +14,7 @@ if( $areas = selectDB2("`id`, `areaEnTitle`,`areaArTitle`","countries","`hidden`
     array_unshift($response["areas"], $array1, $array0);
 }else{
     $response["areas"] = array();
+    $response["msg"] = popupMsg($requestLang,"No data found","لا توجد بيانات");
     echo outputError($response);die();
 }
 

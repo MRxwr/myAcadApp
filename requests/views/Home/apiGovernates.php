@@ -46,6 +46,7 @@ if( $academies = selectDB2("`governate`","{$table}","`sport` = '{$_GET["sportId"
     }
 }else{
     $response["governates"] = array();
+    $response["msg"] = popupMsg($requestLang,"No data found","لا توجد بيانات");
     echo outputError($response);die();
 }
 echo outputData($response);
