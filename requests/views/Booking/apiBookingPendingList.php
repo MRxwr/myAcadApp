@@ -1,0 +1,15 @@
+<?php 
+$dataJoin = array(
+    "select" => ["t.id","t.bookingDate","t.startTime","t.endTime","t1.enTitle as fieldEnTitle","t1.arTitle as fieldArTitle","t1.imageurl as fieldLogo","t2.enTitle as ageEnTitle","t2.arTitle as ageArTitle","t3.enTitle as levelEnTitle","t3.arTitle as levelArTitle","t4.areaEnTitle as areaEnTitle","t4.areaArTitle as areaArTitle","t5.enTitle as sportEnTitle","t5.arTitle as sportArTitle", "(CASE WHEN t.status = 0 THEN 'Pending Match' WHEN t.status = 1 THEN 'Partialy Paid' WHEN t.status = 2 THEN 'Fully Paid' WHEN t.status = 5 THEN 'Preparing Match' ELSE '' END) as enStatus", "(CASE WHEN t.status = 0 THEN 'بإنتظار مباراة' WHEN t.status = 1 THEN 'مدفوع نص المبلغ' WHEN t.status = 2 THEN 'مدفوع كامل' WHEN t.status = 5 THEN 'تجهيز المباراة' ELSE '' END) as arStatus", "CAST(t.total AS CHAR) as total", "t.voucher", "(CASE WHEN t.status = 0 THEN '#c29c5a' WHEN t.status = 1 THEN '#FFA500' WHEN t.status = 2 THEN '#008000' WHEN t.status = 5 THEN '#FFA500' ELSE '' END) as statusHexaColors","t.status"],
+    "join" => ["fields_list","field_ages","field_levels","countries","sports"],
+    "on" => ["t.fieldId = t1.id","t.ages = t2.id","t.levels = t3.id","t1.area = t4.id","t1.sport = t5.id"],
+);
+updateDB("fields_booking", array("status" => 6), "status = '0' AND isTbari = '1' AND date < DATE_SUB(NOW(), INTERVAL 3 HOUR)");
+if( $pendingBookings = selectJoinDB("fields_booking", $dataJoin, "t.hidden = '0' AND t.status = '0' AND t.isTbari = '1' AND t.bookingId = '0'") ){
+    $response["pendingBookings"] = $pendingBookings;
+}else{
+    $response["msg"] = popupMsg($requestLang,"No Bookings available","لا يوجد مباريات متاحة");
+    echo outputError($response);die();
+}
+echo outputData($response);
+?>

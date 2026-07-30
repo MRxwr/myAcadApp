@@ -1,0 +1,71 @@
+<?php 
+if( !isset($_GET["sportId"]) || empty($_GET["sportId"]) ){
+	$response = array("msg"=>"Please set sport id");
+	echo outputError($response);die();
+}else{
+	$where = " AND `sport` = '{$_GET["sportId"]}'";
+	if( isset($_GET["genderId"]) && !empty($_GET["genderId"]) ){
+		$where .= " AND `gender` = '{$_GET["genderId"]}'";
+	}
+	if( isset($_GET["governateId"]) && !empty($_GET["governateId"]) ){
+		$where .= " AND `governate` = '{$_GET["governateId"]}'";
+	}
+	if( isset($_GET["areaId"]) && !empty($_GET["areaId"]) ){
+		$where .= " AND `area` = '{$_GET["areaId"]}'";
+	}
+	if( isset($_GET["keyword"]) && !empty($_GET["keyword"]) ){
+		$where .= " AND ( `enTitle` LIKE '%".$_GET["keyword"]."%' OR `arTitle` LIKE '%".$_GET["keyword"]."%')";
+	}
+	if( isset($_GET["countryCode"]) && !empty($_GET["countryCode"]) ){
+		$where .= " AND `country` = '{$_GET["countryCode"]}'";
+	}else{
+		$where .= " AND `country` = 'KW'";
+	}
+	if( $academies = selectDB2("`id`, `imageurl`, `header`, `enTitle`, `arTitle`, `area`, `isPromotion`, `isIndoor`","academies","`hidden` = '0' AND `status` = '0' {$where}") ){
+		for( $i = 0; $i < sizeof($academies); $i++){
+			$response["academies"][$i] = $academies[$i];
+			if( $area = selectDB("countries","`id` = '{$academies[$i]["area"]}'") ){
+				$response["academies"][$i]["enArea"] = $area[0]["areaEnTitle"];
+				$response["academies"][$i]["arArea"] = $area[0]["areaArTitle"];
+			}else{
+				$response["academies"][$i]["enArea"] = "";
+				$response["academies"][$i]["arArea"] = "";
+			}
+$sql = "
+WITH academy_orders AS (
+    SELECT academyId, COUNT(*) AS order_count
+    FROM orders
+    GROUP BY academyId
+),
+max_orders AS (
+    SELECT MAX(order_count) AS max_order_count
+    FROM academy_orders
+)
+SELECT 
+    CASE 
+        WHEN max_orders.max_order_count > 0 THEN 
+            ROUND((COALESCE(ao.order_count, 0) / max_orders.max_order_count) * 5, 2)
+        ELSE 0 
+    END AS rating_out_of_5
+FROM academies a
+LEFT JOIN academy_orders ao ON a.id = ao.academyId
+CROSS JOIN max_orders
+WHERE a.id = {$response["academies"][$i]["id"]};
+";
+$result = $dbconnect->query($sql);
+$row = $result->fetch_assoc();
+			$response["academies"][$i]["rating"] = $row["rating_out_of_5"];
+		}
+		// rearrange the array on the rating desc
+		usort($response["academies"], function($a, $b) {
+			return $b["rating"] <=> $a["rating"];
+		});
+	}else{
+		$response["msg"] = popupMsg($requestLang,"No academies found","لا يوجد أكاديميات");
+		$response["academies"] = array();
+		echo outputError($response);die();
+	}
+}
+
+echo outputData($response);
+?>

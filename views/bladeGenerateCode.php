@@ -1,0 +1,81 @@
+<?php
+$curl = curl_init();
+curl_setopt_array($curl, array(
+  CURLOPT_URL => "{$baseURL}?a=GetQrcode&orderId={$_GET["id"]}",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => '',
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 0,
+  CURLOPT_FOLLOWLOCATION => true,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => 'GET',
+  CURLOPT_HTTPHEADER => array(
+    'myacadheader: myAcadAppCreate'
+  ),
+));
+$response = curl_exec($curl);
+curl_close($curl);
+$response = json_decode($response,true);
+if( $response["error"] == 1 ){
+	?>
+	<script>
+	window.onload = function() {
+		alert("<?php echo direction("Erorr while loading academy data.","حدث خطأ اثناء تحميل بيانات الأكادمية.") ?>");
+		window.history.back();
+	};
+	</script>
+	<?php
+}else{
+    $code = urldecode($response["data"]["data"]);
+    $url = explode("data=", $code);
+    $realURL = $url[1];
+    $fullURL = $url[0] . "data=" . urlencode($realURL);
+    $order = selectDBNew("orders",[$_GET["id"]],"`id` = ?","" );
+    if ( $order[0]["isTournament"] == 1 ){
+        $academy = selectDBNew("tournaments",[$order[0]["tournamentId"]],"`id` = ?","" );
+    }else{
+        $academy = selectDBNew("academies",[$order[0]["academyId"]],"`id` = ?","" );
+    }
+    $area = selectDBNew("countries",[$academy[0]["area"]],"`id` = ?","" );
+}
+?>
+
+<style>
+	input[type="number"]::-webkit-outer-spin-button,
+	input[type="number"]::-webkit-inner-spin-button {
+		-webkit-appearance: none;
+		appearance: none;
+		margin: 0;
+	}
+	input[type="number"] {
+        appearance: textfield;
+		-moz-appearance: textfield; /* Firefox */
+	}
+	input[type="text"],
+	input[type="number"] {
+		text-align: center;
+	}
+</style>
+
+<div class="jersy_area mt_20">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="row justify-content-between">
+                    <div class="col-lg-12 order-lg-1 mt_40">
+                        <div class="text-center">
+                            <h1 style="color: #ffa300;"><?php echo direction("QR CODE","رمز المسح") ?></h2>
+                        </div>
+                        <div class="detail_img_right d-lg-none mt-5 mb-5 text-center">
+                            <img src="<?php echo $fullURL ?>" alt="" style="width:200px;height:200px" >
+                        </div>
+                        <div class="text-center">
+                            <h1 style="color: #ffa300;"><?php echo direction($order[0]["enAcademy"],$order[0]["arAcademy"]) ?></h2>
+                            <h2 class="mt-2"><?php echo direction($area[0]["areaEnTitle"],$area[0]["areaArTitle"]) ?></h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
