@@ -113,6 +113,7 @@ function outputData($data){
 	$response["ok"] = true;
 	$response["error"] = "0";
 	$response["status"] = "successful";
+	$response["msg"] = "";
 	$response["data"] = $data;
 	return json_encode($response);
 }
@@ -122,6 +123,7 @@ function outputError($data){
 	$response["ok"] = false;
 	$response["error"] = "1";
 	$response["status"] = "Error";
+	$response["msg"] = "";
 	$response["data"] = $data;
 	return json_encode($response);
 }

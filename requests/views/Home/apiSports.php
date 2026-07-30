@@ -31,7 +31,7 @@ if( $sports = selectDB2("`sport`","{$table}","`country` LIKE '{$_GET["countryCod
     }
 }else{
     $response["sports"] = array();
-    $response["data"]["msg"] = popupMsg($requestLang,"No data found","لا توجد بيانات");
+    $response["msg"] = popupMsg($requestLang,"No data found","لا توجد بيانات");
     echo outputError($response);die();
 }
 echo outputData($response);
